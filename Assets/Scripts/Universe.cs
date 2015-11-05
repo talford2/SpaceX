@@ -43,17 +43,16 @@ public class Universe : MonoBehaviour
 		// Update cell
 		foreach (var shiftable in ShiftableItems)
 		{
-			var prevCell = shiftable.UniverseCellIndex;
-
 			var delta = (shiftable.transform.position - (Vector3.one * CellSize * 0.5f)) / (CellSize);
+			var deltaCell = new CellIndex(Mathf.CeilToInt(delta.x), Mathf.CeilToInt(delta.y), Mathf.CeilToInt(delta.z));
 
-			//var newCell = 
-			shiftable.UniverseCellIndex += new CellIndex(Mathf.CeilToInt(delta.x), Mathf.CeilToInt(delta.y), Mathf.CeilToInt(delta.z));
-
-			if (prevCell.X != shiftable.UniverseCellIndex.X || prevCell.Y != shiftable.UniverseCellIndex.Y || prevCell.Z != shiftable.UniverseCellIndex.Z)
+			if (deltaCell.X != 0 || deltaCell.Y != 0 || deltaCell.Z != 0)
 			{
-				Debug.LogFormat("Cell change from {0} to {1}", prevCell, shiftable.UniverseCellIndex);
-				Shift();
+				var prevCell = shiftable.UniverseCellIndex;
+				shiftable.UniverseCellIndex += deltaCell;
+
+				//Debug.LogFormat("Cell change from {0} to {1}", prevCell, shiftable.UniverseCellIndex);
+				Shift(deltaCell);
 			}
 
 			//var vDelta = new Vector3(Mathf.CeilToInt())
@@ -61,11 +60,12 @@ public class Universe : MonoBehaviour
 		}
 	}
 
-	public void Shift()
+	public void Shift(CellIndex delta)
 	{
 		foreach (var shiftable in ShiftableItems)
 		{
-			Debug.LogFormat("Shift {0}", shiftable.name);
+			shiftable.transform.position -= delta.ToVector3() * CellSize;
+			Debug.LogFormat("Shift {0} by {1}", shiftable.name, delta);
 		}
 	}
 
