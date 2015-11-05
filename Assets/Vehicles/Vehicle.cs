@@ -38,7 +38,10 @@ public class Vehicle : MonoBehaviour
 	{
 		get
 		{
-			Debug.Log("Get vehicle shiftable..." + _shiftable.name + "!");
+			if (_shiftable == null)
+			{
+				_shiftable = GetComponent<Shiftable>();
+			}
 			return _shiftable;
 		}
 	}
@@ -46,7 +49,6 @@ public class Vehicle : MonoBehaviour
 	void Awake()
 	{
 		_shiftable = GetComponent<Shiftable>();
-		Debug.Log("Set vehicle shiftable = " + _shiftable);
 	}
 
 	void Update()
