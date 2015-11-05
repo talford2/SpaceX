@@ -33,6 +33,20 @@ public class Vehicle : MonoBehaviour
 	[Header("Weapon")]
 	public Weapon CurrentWeapon;
 
+	private Shiftable _shiftable;
+	public Shiftable Shiftable
+	{
+		get
+		{
+			return _shiftable;
+		}
+	}
+
+	void Awake()
+	{
+		_shiftable = GetComponent<Shiftable>();
+	}
+
 	void Update()
 	{
 		// Accelerating

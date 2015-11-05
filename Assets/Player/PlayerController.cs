@@ -5,7 +5,11 @@ public class PlayerController : MonoBehaviour
 {
 	public Vehicle PlayerVehicle;
 
+	public Shiftable Shiftable;
+
 	private Vehicle _playVehicleInstance;
+
+
 
 	public bool InvertY = false;
 
@@ -13,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	{
 		_playVehicleInstance = Instantiate<Vehicle>(PlayerVehicle);
 		_current = this;
+		Shiftable = GetComponent<Shiftable>();
 	}
 
 	void Start()
