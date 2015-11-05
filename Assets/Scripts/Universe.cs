@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Universe : MonoBehaviour
 {
@@ -9,9 +10,22 @@ public class Universe : MonoBehaviour
 
 	public Shiftable PlayerSpawnPosition;
 
+	public static List<Shiftable> ShiftableItems;
+
+	private static Universe _current;
+	public static Universe Current
+	{
+		get
+		{
+			return _current;
+		}
+	}
+
 	public void Awake()
 	{
+		ShiftableItems = new List<Shiftable>();
 		UniverseCells = new CellIndex[100, 100, 100];
+		_current = this;
 	}
 
 	public void Start()
@@ -21,7 +35,15 @@ public class Universe : MonoBehaviour
 
 		//// Move the player to the start position
 		PlayerController.Current.PlayerVehicle.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
-		//PlayerController.Current.PlayerVehicle.Shiftable.CellPosition = PlayerSpawnPosition.CellPosition;
+		PlayerController.Current.PlayerVehicle.Shiftable.CellPosition = PlayerSpawnPosition.CellPosition;
+	}
+
+	public void Shift()
+	{
+		foreach (var shiftable in ShiftableItems)
+		{
+			Debug.LogFormat("Shift {0}", shiftable.name);
+		}
 	}
 
 	public void OnDrawGizmos()
