@@ -16,9 +16,11 @@ public class Universe : MonoBehaviour
 
 	public void Start()
 	{
-		// Move the player to the start position
-		PlayerController.Current.PlayerVehicle.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
-		PlayerController.Current.PlayerVehicle.Shiftable.CellPosition = PlayerSpawnPosition.CellPosition;
+		Debug.Log(PlayerController.Current.PlayerVehicle.Shiftable);
+
+		//// Move the player to the start position
+		//PlayerController.Current.PlayerVehicle.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
+		//PlayerController.Current.PlayerVehicle.Shiftable.CellPosition = PlayerSpawnPosition.CellPosition;
 	}
 
 	public void OnDrawGizmos()

@@ -4,20 +4,15 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
 	public Vehicle PlayerVehicle;
-
-	public Shiftable Shiftable;
-
+	
 	private Vehicle _playVehicleInstance;
-
-
-
+	
 	public bool InvertY = false;
 
 	void Awake()
 	{
 		_playVehicleInstance = Instantiate<Vehicle>(PlayerVehicle);
 		_current = this;
-		Shiftable = GetComponent<Shiftable>();
 	}
 
 	void Start()
