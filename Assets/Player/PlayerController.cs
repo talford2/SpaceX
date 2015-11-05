@@ -40,6 +40,11 @@ public class PlayerController : MonoBehaviour
 		//	Debug.LogFormat("FireTrigger 1 : {0}", Input.GetAxis("FireTrigger"));
 		//	_playVehicleInstance.CurrentWeapon.IsTriggered = true;
 		//}
+
+
+		//var vehicle
+
+		// Check for shifting
 	}
 
 	private static PlayerController _current;

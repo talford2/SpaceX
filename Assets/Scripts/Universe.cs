@@ -35,7 +35,29 @@ public class Universe : MonoBehaviour
 
 		//// Move the player to the start position
 		PlayerController.Current.PlayerVehicle.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
-		PlayerController.Current.PlayerVehicle.Shiftable.CellPosition = PlayerSpawnPosition.CellPosition;
+		PlayerController.Current.PlayerVehicle.transform.position = PlayerSpawnPosition.transform.position;
+	}
+
+	public void Update()
+	{
+		// Update cell
+		foreach (var shiftable in ShiftableItems)
+		{
+			var prevCell = shiftable.UniverseCellIndex;
+			
+			var delta = shiftable.transform.position / CellSize;
+			
+			//var newCell = 
+			shiftable.UniverseCellIndex = new CellIndex(Mathf.CeilToInt(delta.x), Mathf.CeilToInt(delta.y), Mathf.CeilToInt(delta.z));
+
+			if (prevCell.X != shiftable.UniverseCellIndex.X || prevCell.Y != shiftable.UniverseCellIndex.Y || prevCell.Z != shiftable.UniverseCellIndex.Z)
+			{
+				Debug.LogFormat("Cell change from {0} to {1}", prevCell, shiftable.UniverseCellIndex);
+			}
+
+			//var vDelta = new Vector3(Mathf.CeilToInt())
+
+		}
 	}
 
 	public void Shift()
