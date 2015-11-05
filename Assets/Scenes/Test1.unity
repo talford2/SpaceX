@@ -401,6 +401,7 @@ GameObject:
   - 124: {fileID: 2070423335}
   - 81: {fileID: 2070423334}
   - 114: {fileID: 2070423339}
+  - 114: {fileID: 2070423340}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -491,3 +492,18 @@ MonoBehaviour:
   DistanceBehind: 12
   VerticalDistance: 2
   ChaseSpeed: 5
+--- !u!114 &2070423340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2070423333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseCellIndex:
+    X: 100
+    Y: 100
+    Z: 100
