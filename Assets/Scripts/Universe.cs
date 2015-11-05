@@ -51,8 +51,11 @@ public class Universe : MonoBehaviour
 				var prevCell = shiftable.UniverseCellIndex;
 				shiftable.UniverseCellIndex += deltaCell;
 
-				//Debug.LogFormat("Cell change from {0} to {1}", prevCell, shiftable.UniverseCellIndex);
-				Shift(deltaCell);
+				if (shiftable.name == "Fighter1(Clone)")
+				{
+					//Debug.LogFormat("Cell change from {0} to {1}", prevCell, shiftable.UniverseCellIndex);
+					Shift(deltaCell);
+				}
 			}
 
 			//var vDelta = new Vector3(Mathf.CeilToInt())
