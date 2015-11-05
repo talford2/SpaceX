@@ -156,6 +156,7 @@ GameObject:
   - 33: {fileID: 442902295}
   - 64: {fileID: 442902294}
   - 23: {fileID: 442902293}
+  - 114: {fileID: 442902297}
   m_Layer: 0
   m_Name: Nebula
   m_TagString: Untagged
@@ -218,6 +219,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &442902297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 442902292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseCellIndex:
+    X: 100
+    Y: 100
+    Z: 100
 --- !u!1 &624703668
 GameObject:
   m_ObjectHideFlags: 0
