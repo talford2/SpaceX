@@ -44,15 +44,16 @@ public class Universe : MonoBehaviour
 		foreach (var shiftable in ShiftableItems)
 		{
 			var prevCell = shiftable.UniverseCellIndex;
-			
-			var delta = shiftable.transform.position / CellSize;
-			
+
+			var delta = (shiftable.transform.position - (Vector3.one * CellSize * 0.5f)) / (CellSize);
+
 			//var newCell = 
-			shiftable.UniverseCellIndex = new CellIndex(Mathf.CeilToInt(delta.x), Mathf.CeilToInt(delta.y), Mathf.CeilToInt(delta.z));
+			shiftable.UniverseCellIndex += new CellIndex(Mathf.CeilToInt(delta.x), Mathf.CeilToInt(delta.y), Mathf.CeilToInt(delta.z));
 
 			if (prevCell.X != shiftable.UniverseCellIndex.X || prevCell.Y != shiftable.UniverseCellIndex.Y || prevCell.Z != shiftable.UniverseCellIndex.Z)
 			{
 				Debug.LogFormat("Cell change from {0} to {1}", prevCell, shiftable.UniverseCellIndex);
+				Shift();
 			}
 
 			//var vDelta = new Vector3(Mathf.CeilToInt())
