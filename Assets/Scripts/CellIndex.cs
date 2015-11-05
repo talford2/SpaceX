@@ -24,4 +24,13 @@ public class CellIndex
 	{
 		return string.Format("({0},{1},{2})", X, Y, Z);
 	}
+    public static CellIndex operator +(CellIndex c1, CellIndex c2)
+    {
+        return new CellIndex(c1.X + c2.X, c1.Y + c2.Y, c1.Z + c2.Z);
+    }
+
+    public static CellIndex operator -(CellIndex c1, CellIndex c2)
+    {
+        return new CellIndex(c1.X - c2.X, c1.Y - c2.Y, c1.Z - c2.Z);
+    }
 }
