@@ -38,7 +38,7 @@ public class Vehicle : MonoBehaviour
 	{
 		get
 		{
-			Debug.Log("Get vehicle shiftable..." + _shiftable);
+			Debug.Log("Get vehicle shiftable..." + _shiftable.name + "!");
 			return _shiftable;
 		}
 	}
