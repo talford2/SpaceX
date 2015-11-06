@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
-  InvertY: 0
+  InvertY: 1
 --- !u!4 &1064748905
 Transform:
   m_ObjectHideFlags: 0

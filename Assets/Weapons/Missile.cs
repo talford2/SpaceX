@@ -9,21 +9,20 @@ public class Missile : MonoBehaviour
 
 	public float MissileLength = 6f;
 
+	public float MissileSpeed = 150f;
+
 	void Awake()
 	{
 		_lineRenderer = GetComponent<LineRenderer>();
 		_shiftable = GetComponent<Shiftable>();
-		_shiftable.OnShift += _shiftable_OnShift;
 	}
 
-	private void _shiftable_OnShift(CellIndex delta)
+	public void Update()
 	{
-		UpdateLineRenderer();
-		throw new MissingReferenceException("Fucked!");
-
+		transform.position += transform.forward * MissileSpeed * Time.deltaTime;
 	}
 
-	void Update()
+	public void LateUpdate()
 	{
 		UpdateLineRenderer();
 	}
