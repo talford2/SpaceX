@@ -20,7 +20,6 @@ public class Missile : MonoBehaviour
 	{
 		UpdateLineRenderer();
 		throw new MissingReferenceException("Fucked!");
-
 	}
 
 	void Update()
