@@ -53,13 +53,8 @@ public class PlayerController : MonoBehaviour
         get { return _current; }
     }
 
-    public Vehicle PlayerVehicleInstance
+    public Vehicle VehicleInstance
     {
         get { return _playVehicleInstance; }
-    }
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(50f, 50f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", _playVehicleInstance.Shiftable.UniverseCellIndex.X, _playVehicleInstance.Shiftable.UniverseCellIndex.Y, _playVehicleInstance.Shiftable.UniverseCellIndex.Z));
     }
 }

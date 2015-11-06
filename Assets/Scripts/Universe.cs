@@ -9,6 +9,8 @@ public class Universe : MonoBehaviour
 
 	public Shiftable PlayerSpawnPosition;
 
+    private CellIndex playerCellIndex;
+
 	public static List<Shiftable> ShiftableItems;
 
 	private static Universe _current;
@@ -33,15 +35,17 @@ public class Universe : MonoBehaviour
 		//Debug.Log(PlayerController.Current.PlayerVehicle.Shiftable);
 
 		//// Move the player to the start position
-		PlayerController.Current.PlayerVehicleInstance.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
-        PlayerController.Current.PlayerVehicleInstance.transform.position = PlayerSpawnPosition.transform.position;
+		PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
+        PlayerController.Current.VehicleInstance.transform.position = PlayerSpawnPosition.transform.position;
 
-        PlayerController.Current.PlayerVehicleInstance.Shiftable.OnShift += Shift;
+	    playerCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
+        PlayerController.Current.VehicleInstance.Shiftable.OnShift += Shift;
 	}
 
 	public void Shift(CellIndex delta)
 	{
-	    PlayerController.Current.PlayerVehicleInstance.Shiftable.UniverseCellIndex -= delta;
+	    playerCellIndex += delta;
+	    PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex -= delta;
 		foreach (var shiftable in ShiftableItems)
 		{
 			shiftable.transform.position -= delta.ToVector3() * CellSize;
@@ -66,4 +70,9 @@ public class Universe : MonoBehaviour
 		//	}
 		//}
 	}
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(50f, 50f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", playerCellIndex.X, playerCellIndex.Y, playerCellIndex.Z));
+    }
 }
