@@ -25,9 +25,9 @@ public class Vehicle : MonoBehaviour
 
     public bool IsBraking = false;
 
-    public float HorizontalTurn = 0f;
+    public float YawThrottle = 0f;
 
-    public float VerticalTurn = 0f;
+    public float PitchThotttle = 0f;
 
     [Header("Weapon")]
     public Weapon CurrentWeapon;
@@ -84,8 +84,10 @@ public class Vehicle : MonoBehaviour
         }
 
         // Turning
-        transform.rotation *= Quaternion.Euler(0, HorizontalTurn*YawSpeed*Time.deltaTime, 0);
-        transform.rotation *= Quaternion.Euler(VerticalTurn*PitchSpeed*Time.deltaTime, 0, 0);
+        transform.rotation *= Quaternion.AngleAxis(YawThrottle*YawSpeed*Time.deltaTime, Vector3.up);
+            //Quaternion.Euler(0, YawThrottle*YawSpeed*Time.deltaTime, 0);
+        transform.rotation *= Quaternion.AngleAxis(PitchThotttle*PitchSpeed*Time.deltaTime, transform.right);
+            //Quaternion.Euler(PitchThotttle*PitchSpeed*Time.deltaTime, 0, 0);
 
         transform.position += transform.forward*CurrentSpeed*Time.deltaTime;
     }

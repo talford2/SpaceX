@@ -23,13 +23,13 @@ public class PlayerController : MonoBehaviour
     {
         if (InvertY)
         {
-            _playVehicleInstance.VerticalTurn = Input.GetAxis("Vertical")*-1;
+            _playVehicleInstance.PitchThotttle = Input.GetAxis("Vertical")*-1;
         }
         else
         {
-            _playVehicleInstance.VerticalTurn = Input.GetAxis("Vertical");
+            _playVehicleInstance.PitchThotttle = Input.GetAxis("Vertical");
         }
-        _playVehicleInstance.HorizontalTurn = Input.GetAxis("Horizontal");
+        _playVehicleInstance.YawThrottle = Input.GetAxis("Horizontal");
 
         //_playVehicleInstance.CurrentWeapon.IsTriggered = true;
         _playVehicleInstance.CurrentWeapon.IsTriggered = Input.GetAxis("FireTrigger") > 0;
