@@ -64,9 +64,9 @@ public class Universe : MonoBehaviour
 		//}
 	}
 
-    private void OnGUI()
-    {
-        var cellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
-        GUI.Label(new Rect(50f, 50f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", cellIndex.X, cellIndex.Y, cellIndex.Z));
-    }
+	private void OnGUI()
+	{
+		var cellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
+		GUI.Label(new Rect(50f, 50f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", cellIndex.X, cellIndex.Y, cellIndex.Z));
+	}
 }
