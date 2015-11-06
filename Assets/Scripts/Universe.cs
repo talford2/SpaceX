@@ -46,6 +46,26 @@ public class Universe : MonoBehaviour
 		}
 	}
 
+	public void Warp(CellIndex cell, Transform trans)
+	{
+		var diff = cell - PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
+		PlayerController.Current.VehicleInstance.transform.position = trans.position;
+		PlayerController.Current.VehicleInstance.transform.rotation = trans.rotation;
+		Shift(diff);
+	}
+
+	public void Update()
+	{
+		if (Input.GetKeyUp(KeyCode.Q))
+		{
+			//var diff = PlayerSpawnPosition.UniverseCellIndex - PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
+			//PlayerController.Current.VehicleInstance.transform.position = PlayerSpawnPosition.transform.position;
+			//PlayerController.Current.VehicleInstance.transform.rotation = PlayerSpawnPosition.transform.rotation;
+			//Shift(diff);
+			Warp(PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex, PlayerSpawnPosition.transform);
+		}
+	}
+
 	public void OnDrawGizmos()
 	{
 		Gizmos.color = Color.red;
