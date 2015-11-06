@@ -50,7 +50,7 @@ public class Universe : MonoBehaviour
 		{
 			//shiftable.transform.position -= delta.ToVector3() * CellSize;
 			shiftable.Shift(delta.ToVector3() * CellSize);
-			Debug.LogFormat("Shift {0} by {1}", shiftable.name, delta);
+			//Debug.LogFormat("Shift {0} by {1}", shiftable.name, delta);
 		}
 	}
 

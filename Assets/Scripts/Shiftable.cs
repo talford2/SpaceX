@@ -46,7 +46,9 @@ public class Shiftable : MonoBehaviour
 
 	public void Shift(Vector3 shiftAmount)
 	{
+		var diff = lastPosition - transform.position;
+
 		transform.position -= shiftAmount;
-		lastPosition = transform.position;
+		lastPosition = transform.position + diff;
 	}
 }
