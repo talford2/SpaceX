@@ -21,7 +21,7 @@ public class Shiftable : MonoBehaviour
 
         Debug.Log("DELTACELL: " + deltaCell);
 
-        if (deltaCell.X != 0 || deltaCell.Y != 0 || deltaCell.Z != 0)
+        if (!deltaCell.IsZero())
         {
             Debug.Log("SHIFT!!!!!");
             UniverseCellIndex += deltaCell;

@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System;
+using UnityEngine;
 
 [Serializable]
 public class CellIndex
@@ -35,6 +34,11 @@ public class CellIndex
     public bool IsEqualTo(CellIndex other)
     {
         return X == other.X && Y == other.Y && Z == other.Z;
+    }
+
+    public bool IsZero()
+    {
+        return X == 0 && Y == 0 && Z == 0;
     }
 
     public static CellIndex operator +(CellIndex c1, CellIndex c2)
