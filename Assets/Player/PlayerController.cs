@@ -2,7 +2,7 @@
 
 public class PlayerController : MonoBehaviour
 {
-    public Vehicle PlayerVehicle;
+    public Vehicle VehiclePrefab;
 
     private Vehicle _playVehicleInstance;
 
@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _playVehicleInstance = Instantiate<Vehicle>(PlayerVehicle);
+        _playVehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
         _current = this;
     }
 
