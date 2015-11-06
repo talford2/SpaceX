@@ -120,10 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed9b078a58fe604694fff0328ea19ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IdleSpeed: 20
-  MaxSpeed: 20
+  IdleSpeed: 2000
+  MaxSpeed: 2000
   MinSpeed: 3
-  Acceleration: 5
+  Acceleration: 500
   Brake: 7
   CurrentSpeed: 0
   PitchSpeed: 50
@@ -171,7 +171,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: IdleSpeed
-      value: 20
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: PitchSpeed
@@ -186,6 +186,14 @@ Prefab:
       value: 
       objectReference: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: MaxSpeed
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Acceleration
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}
