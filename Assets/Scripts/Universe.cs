@@ -32,7 +32,6 @@ public class Universe : MonoBehaviour
 	public void Start()
 	{
 		Debug.Log("Universe start");
-		//Debug.Log(PlayerController.Current.PlayerVehicle.Shiftable);
 
 		//// Move the player to the start position
 		PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
@@ -44,13 +43,9 @@ public class Universe : MonoBehaviour
 
 	public void Shift(CellIndex delta)
 	{
-		//playerCellIndex += delta;
-		//PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex -= delta;
 		foreach (var shiftable in ShiftableItems)
 		{
-			//shiftable.transform.position -= delta.ToVector3() * CellSize;
 			shiftable.Shift(delta.ToVector3() * CellSize);
-			//Debug.LogFormat("Shift {0} by {1}", shiftable.name, delta);
 		}
 	}
 
