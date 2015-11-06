@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Shiftable : MonoBehaviour
 {
@@ -15,31 +16,28 @@ public class Shiftable : MonoBehaviour
         Universe.ShiftableItems.Add(this);
     }
 
+    private CellIndex CellIndexFromPosition(Vector3 position)
+    {
+        var divided = (position - Vector3.one*Universe.Current.CellSize/2f)/Universe.Current.CellSize;
+        return new CellIndex(Mathf.CeilToInt(divided.x), Mathf.CeilToInt(divided.y), Mathf.CeilToInt(divided.z));
+    }
+
     public void UpdatePosition()
     {
-        var delta = (transform.position - lastPosition);
-        Debug.Log("DELTA: " + delta);
-        Debug.Log("CELLSIZE: " + Universe.Current.CellSize);
-        var deltaCell = new CellIndex(Mathf.FloorToInt(delta.x / Universe.Current.CellSize), Mathf.FloorToInt(delta.y / Universe.Current.CellSize), Mathf.FloorToInt(delta.z / Universe.Current.CellSize));
+        var curCell = CellIndexFromPosition(transform.position);
+        var lastCell = CellIndexFromPosition(lastPosition);
+        var deltaCell = curCell - lastCell;
 
         Debug.Log("DELTACELL: " + deltaCell);
 
         if (!deltaCell.IsZero())
         {
-            //Debug.Log("SHIFT!!!!!");
             UniverseCellIndex += deltaCell;
-
             if (OnShift != null)
-            {
-                //Debug.Log("EXECUTE ASSIGNED EVENT!");
                 OnShift(deltaCell);
-            }
         }
-    }
 
-    public void UpdateLastPosition(Vector3 position)
-    {
-        lastPosition = position;
+        lastPosition = transform.position;
     }
 
     private void OnDestroy()

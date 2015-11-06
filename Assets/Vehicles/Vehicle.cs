@@ -53,8 +53,6 @@ public class Vehicle : MonoBehaviour
 
     private void Update()
     {
-        _shiftable.UpdateLastPosition(transform.position);
-
         // Accelerating
         if (IsAccelerating && CurrentSpeed < MaxSpeed)
         {
