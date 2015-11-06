@@ -121,10 +121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleSpeed: 20
-  MaxSpeed: 40
+  MaxSpeed: 100
   MinSpeed: 3
-  Acceleration: 5
-  Brake: 7
+  Acceleration: 30
+  Brake: 60
   CurrentSpeed: 0
   PitchSpeed: 50
   YawSpeed: 50
@@ -188,11 +188,15 @@ Prefab:
         type: 2}
     - target: {fileID: 0}
       propertyPath: MaxSpeed
-      value: 40
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Acceleration
-      value: 5
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Brake
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
