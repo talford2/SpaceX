@@ -88,7 +88,5 @@ public class Vehicle : MonoBehaviour
         transform.rotation *= Quaternion.Euler(VerticalTurn*PitchSpeed*Time.deltaTime, 0, 0);
 
         transform.position += transform.forward*CurrentSpeed*Time.deltaTime;
-
-        _shiftable.UpdatePosition();
     }
 }

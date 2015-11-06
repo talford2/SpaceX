@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Shiftable : MonoBehaviour
 {
@@ -18,11 +17,11 @@ public class Shiftable : MonoBehaviour
 
     private CellIndex CellIndexFromPosition(Vector3 position)
     {
-        var divided = (position - Vector3.one*Universe.Current.CellSize/2f)/Universe.Current.CellSize;
-        return new CellIndex(Mathf.CeilToInt(divided.x), Mathf.CeilToInt(divided.y), Mathf.CeilToInt(divided.z));
+        var cellZero = (position - Vector3.one*Universe.Current.CellSize/2f)/Universe.Current.CellSize;
+        return new CellIndex(Mathf.CeilToInt(cellZero.x), Mathf.CeilToInt(cellZero.y), Mathf.CeilToInt(cellZero.z));
     }
 
-    public void UpdatePosition()
+    public void Update()
     {
         var curCell = CellIndexFromPosition(transform.position);
         var lastCell = CellIndexFromPosition(lastPosition);
