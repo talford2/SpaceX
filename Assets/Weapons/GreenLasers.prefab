@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Missile: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
-  FireRate: .200000003
+  FireRate: .0799999982
   IsTriggered: 0
 --- !u!1001 &100100000
 Prefab:
@@ -53,6 +53,10 @@ Prefab:
       propertyPath: Missile
       value: 
       objectReference: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: FireRate
+      value: .0799999982
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187448}

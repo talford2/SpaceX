@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleSpeed: 20
-  MaxSpeed: 20
+  MaxSpeed: 40
   MinSpeed: 3
   Acceleration: 5
   Brake: 7
@@ -188,7 +188,7 @@ Prefab:
         type: 2}
     - target: {fileID: 0}
       propertyPath: MaxSpeed
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Acceleration
