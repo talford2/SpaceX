@@ -241,7 +241,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 442902292}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3e8cd16d1c3baa49a46dd9886a0702b, type: 3}
   m_Name: 
@@ -501,9 +501,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   LookAtSpeed: 5
-  DistanceBehind: 8
-  VerticalDistance: 2
-  ChaseSpeed: 5
+  DistanceBehind: 15
+  VerticalDistance: 3
+  ChaseSpeed: 3
 --- !u!114 &2070423340
 MonoBehaviour:
   m_ObjectHideFlags: 0
