@@ -5,8 +5,11 @@ public class Shiftable : MonoBehaviour
 	[Tooltip("Cell the object is contained in")]
 	public CellIndex UniverseCellIndex;
 
-	public delegate void OnShiftEvent(CellIndex delta);
-	public event OnShiftEvent OnShift;
+	public delegate void OnCellIndexChangeEvent(CellIndex delta);
+	public event OnCellIndexChangeEvent OnCellIndexChange;
+
+    public delegate void OnShiftEvent(CellIndex delta);
+    public event OnShiftEvent OnShift;
 
 	private Vector3 lastPosition;
 
@@ -30,8 +33,8 @@ public class Shiftable : MonoBehaviour
 		if (!deltaCell.IsZero())
 		{
 			UniverseCellIndex += deltaCell;
-			if (OnShift != null)
-				OnShift(deltaCell);
+			if (OnCellIndexChange != null)
+				OnCellIndexChange(deltaCell);
 		}
 
 		lastPosition = transform.position;
@@ -48,5 +51,12 @@ public class Shiftable : MonoBehaviour
 
 		transform.position -= shiftAmount;
 		lastPosition = transform.position + diff;
+
+        var curCell = CellIndexFromPosition(transform.position);
+        var lastCell = CellIndexFromPosition(lastPosition);
+        var deltaCell = curCell - lastCell;
+
+        if (OnShift != null)
+            OnShift(deltaCell);
 	}
 }
