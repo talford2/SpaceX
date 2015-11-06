@@ -51,6 +51,7 @@ public class Universe : MonoBehaviour
 		var diff = cell - PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
 		PlayerController.Current.VehicleInstance.transform.position = trans.position;
 		PlayerController.Current.VehicleInstance.transform.rotation = trans.rotation;
+	    FollowCamera.Current.transform.rotation = trans.rotation;
 		Shift(diff);
 	}
 
