@@ -231,9 +231,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UniverseCellIndex:
-    X: 100
-    Y: 100
-    Z: 100
+    X: 0
+    Y: 0
+    Z: 0
 --- !u!1 &624703668
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,9 +274,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UniverseCellIndex:
-    X: 100
-    Y: 100
-    Z: 100
+    X: 0
+    Y: 0
+    Z: 0
 --- !u!1 &702763074
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   LookAtSpeed: 5
-  DistanceBehind: 12
+  DistanceBehind: 8
   VerticalDistance: 2
   ChaseSpeed: 5
 --- !u!114 &2070423340
@@ -504,6 +504,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UniverseCellIndex:
-    X: 100
-    Y: 100
-    Z: 100
+    X: 0
+    Y: 0
+    Z: 0

@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Universe : MonoBehaviour
 {
@@ -34,37 +33,15 @@ public class Universe : MonoBehaviour
 		//Debug.Log(PlayerController.Current.PlayerVehicle.Shiftable);
 
 		//// Move the player to the start position
-		PlayerController.Current.PlayerVehicle.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
-		PlayerController.Current.PlayerVehicle.transform.position = PlayerSpawnPosition.transform.position;
-	}
+		PlayerController.Current.PlayerVehicleInstance.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
+        PlayerController.Current.PlayerVehicleInstance.transform.position = PlayerSpawnPosition.transform.position;
 
-	public void Update()
-	{
-		// Update cell
-		foreach (var shiftable in ShiftableItems)
-		{
-			var delta = (shiftable.transform.position - (Vector3.one * CellSize * 0.5f)) / (CellSize);
-			var deltaCell = new CellIndex(Mathf.CeilToInt(delta.x), Mathf.CeilToInt(delta.y), Mathf.CeilToInt(delta.z));
-
-			if (deltaCell.X != 0 || deltaCell.Y != 0 || deltaCell.Z != 0)
-			{
-				var prevCell = shiftable.UniverseCellIndex;
-				shiftable.UniverseCellIndex += deltaCell;
-
-				if (shiftable.name == "Fighter1(Clone)")
-				{
-					//Debug.LogFormat("Cell change from {0} to {1}", prevCell, shiftable.UniverseCellIndex);
-					Shift(deltaCell);
-				}
-			}
-
-			//var vDelta = new Vector3(Mathf.CeilToInt())
-
-		}
+        PlayerController.Current.PlayerVehicleInstance.Shiftable.OnShift += Shift;
 	}
 
 	public void Shift(CellIndex delta)
 	{
+	    PlayerController.Current.PlayerVehicleInstance.Shiftable.UniverseCellIndex -= delta;
 		foreach (var shiftable in ShiftableItems)
 		{
 			shiftable.transform.position -= delta.ToVector3() * CellSize;
