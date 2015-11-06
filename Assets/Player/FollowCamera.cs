@@ -23,7 +23,7 @@ public class FollowCamera : MonoBehaviour
     {
         //var chasePos = Target.position - (Target.transform.forward * DistanceBehind) + (Target.transform.up * VerticalDistance);
 
-        transform.forward =  Vector3.Lerp(transform.forward, Target.transform.forward, 5f*Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Target.rotation, 5f*Time.deltaTime);
         transform.position = Target.position - (transform.forward * DistanceBehind) + (transform.up * VerticalDistance);
 
         /*
