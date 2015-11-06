@@ -8,30 +8,38 @@ public class Shiftable : MonoBehaviour
     public delegate void OnShiftEvent(CellIndex delta);
     public event OnShiftEvent OnShift;
 
+    private Vector3 lastPosition;
+
     private void Awake()
     {
         Universe.ShiftableItems.Add(this);
     }
 
-    private void Update()
+    public void UpdatePosition()
     {
-        var curCellZero = Universe.Current.CellSize*UniverseCellIndex.ToVector3();
-        var delta = (transform.position - curCellZero - (Vector3.one * Universe.Current.CellSize * 0.5f)) / (Universe.Current.CellSize);
-        var deltaCell = new CellIndex(Mathf.CeilToInt(delta.x), Mathf.CeilToInt(delta.y), Mathf.CeilToInt(delta.z));
+        var delta = (transform.position - lastPosition);
+        Debug.Log("DELTA: " + delta);
+        Debug.Log("CELLSIZE: " + Universe.Current.CellSize);
+        var deltaCell = new CellIndex(Mathf.FloorToInt(delta.x / Universe.Current.CellSize), Mathf.FloorToInt(delta.y / Universe.Current.CellSize), Mathf.FloorToInt(delta.z / Universe.Current.CellSize));
 
         Debug.Log("DELTACELL: " + deltaCell);
 
         if (!deltaCell.IsZero())
         {
-            Debug.Log("SHIFT!!!!!");
+            //Debug.Log("SHIFT!!!!!");
             UniverseCellIndex += deltaCell;
 
             if (OnShift != null)
             {
-                Debug.Log("EXECUTE ASSIGNED EVENT!");
+                //Debug.Log("EXECUTE ASSIGNED EVENT!");
                 OnShift(deltaCell);
             }
         }
+    }
+
+    public void UpdateLastPosition(Vector3 position)
+    {
+        lastPosition = position;
     }
 
     private void OnDestroy()

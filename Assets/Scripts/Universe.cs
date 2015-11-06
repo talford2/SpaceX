@@ -44,8 +44,8 @@ public class Universe : MonoBehaviour
 
 	public void Shift(CellIndex delta)
 	{
-	    playerCellIndex += delta;
-	    PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex -= delta;
+	    //playerCellIndex += delta;
+	    //PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex -= delta;
 		foreach (var shiftable in ShiftableItems)
 		{
 			shiftable.transform.position -= delta.ToVector3() * CellSize;
