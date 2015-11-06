@@ -27,8 +27,6 @@ public class Shiftable : MonoBehaviour
 		var lastCell = CellIndexFromPosition(lastPosition);
 		var deltaCell = curCell - lastCell;
 
-		//Debug.Log("DELTACELL: " + deltaCell);
-
 		if (!deltaCell.IsZero())
 		{
 			UniverseCellIndex += deltaCell;

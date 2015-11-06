@@ -21,6 +21,12 @@ public class FollowCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        //var chasePos = Target.position - (Target.transform.forward * DistanceBehind) + (Target.transform.up * VerticalDistance);
+
+        transform.forward =  Vector3.Lerp(transform.forward, Target.transform.forward, 5f*Time.deltaTime);
+        transform.position = Target.position - (transform.forward * DistanceBehind) + (transform.up * VerticalDistance);
+
+        /*
         // Chase
         var chasePos = Target.position - (Target.transform.forward*DistanceBehind) + (Target.transform.up*VerticalDistance);
         transform.position = Vector3.Slerp(transform.position, chasePos, ChaseSpeed*Time.deltaTime);
@@ -28,5 +34,6 @@ public class FollowCamera : MonoBehaviour
         // Look at
         var targetLookat = Quaternion.LookRotation(Target.position - transform.position, Target.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetLookat, LookAtSpeed*Time.deltaTime);
+        */
     }
 }
