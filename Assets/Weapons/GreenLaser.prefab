@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 418090}
   - 120: {fileID: 12017834}
+  - 114: {fileID: 11443858}
   m_Layer: 0
   m_Name: GreenLaser
   m_TagString: Untagged
@@ -28,6 +29,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11443858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseCellIndex:
+    X: 0
+    Y: 0
+    Z: 0
 --- !u!120 &12017834
 LineRenderer:
   m_ObjectHideFlags: 1
