@@ -5,6 +5,9 @@ public class Killable : MonoBehaviour
     public float Health;
     public float MaxHealth;
 
+    public GameObject DamageEffect;
+    public GameObject DieEffect;
+
     public delegate void OnDamageEvent();
     public event OnDamageEvent OnDamage;
 
@@ -25,6 +28,8 @@ public class Killable : MonoBehaviour
             Health -= damage;
             if (OnDamage != null)
                 OnDamage();
+            if (DamageEffect != null)
+                Instantiate(DamageEffect, transform.position, transform.rotation);
             if (Health < 0f)
                 Die();
         }
@@ -35,5 +40,8 @@ public class Killable : MonoBehaviour
         isAlive = false;
         if (OnDie != null)
             OnDie();
+        if (DieEffect != null)
+            Instantiate(DieEffect, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }
