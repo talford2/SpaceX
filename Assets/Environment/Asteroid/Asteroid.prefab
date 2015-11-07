@@ -102,7 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab3c531b5347da4c955d903f84fb0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwitchComponent: {fileID: 11452444}
+  SwitchOn:
+  - {fileID: 11452444}
+  SwitchOff: []
 --- !u!114 &11442032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,6 +140,14 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: SwitchOn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SwitchOnComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -159,6 +169,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: SwitchComponent
+      value: 
+      objectReference: {fileID: 11452444}
+    - target: {fileID: 0}
+      propertyPath: SwitchOnComponents.Array.data[0]
+      value: 
+      objectReference: {fileID: 11452444}
+    - target: {fileID: 0}
+      propertyPath: SwitchOn.Array.data[0]
       value: 
       objectReference: {fileID: 11452444}
     m_RemovedComponents: []

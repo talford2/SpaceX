@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof (Shiftable))]
 public class ShiftSwitch : MonoBehaviour
 {
-    public MonoBehaviour SwitchComponent;
+    public List<MonoBehaviour> SwitchOn;
+    public List<MonoBehaviour> SwitchOff;
 
     private Shiftable _shiftable;
 
@@ -15,6 +17,13 @@ public class ShiftSwitch : MonoBehaviour
 
     private void Switch(CellIndex delta)
     {
-        SwitchComponent.enabled = PlayerController.Current.InPlayerActiveCells(_shiftable.UniverseCellIndex);
+        foreach (var onComponent in SwitchOn)
+        {
+            onComponent.enabled = PlayerController.Current.InPlayerActiveCells(_shiftable.UniverseCellIndex);
+        }
+        foreach (var offComponent in SwitchOn)
+        {
+            offComponent.enabled = !PlayerController.Current.InPlayerActiveCells(_shiftable.UniverseCellIndex);
+        }
     }
 }
