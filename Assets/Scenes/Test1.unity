@@ -473,8 +473,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AsteroidPrefab: {fileID: 134030, guid: 7bb3efbd2f9980143a444fa52fb18d96, type: 2}
-  ObjectCount: 10000
-  UniverseSize: 2000
+  ObjectCount: 5000
+  UniverseSize: 500
 --- !u!1 &2070423333
 GameObject:
   m_ObjectHideFlags: 0

@@ -294,6 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotationSpeed: 180
+  RotateTransform: {fileID: 416388}
 --- !u!114 &11478668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -568,6 +569,10 @@ Prefab:
       propertyPath: Running
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RotateTransform
+      value: 
+      objectReference: {fileID: 416388}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 134030}
