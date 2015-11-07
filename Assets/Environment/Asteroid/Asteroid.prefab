@@ -330,7 +330,7 @@ MonoBehaviour:
     - {fileID: 109944}
     - {fileID: 155838}
     - {fileID: 181250}
-  Interval: 1
+  Interval: 3
 --- !u!114 &11492116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ac4f1c8dc8d6f45b6384fc898b5b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Interval: 1
+  Interval: .300000012
   Distances:
   - Distance: 0
     Enabled:
@@ -350,24 +350,25 @@ MonoBehaviour:
     Disabled:
     - {fileID: 155838}
     - {fileID: 181250}
-  - Distance: 100
-    Enabled:
-    - {fileID: 109944}
-    Disabled:
-    - {fileID: 155838}
-    - {fileID: 181250}
   - Distance: 200
     Enabled:
+    - {fileID: 155838}
+    Disabled:
+    - {fileID: 109944}
+    - {fileID: 181250}
+  - Distance: 400
+    Enabled:
     - {fileID: 181250}
     Disabled:
     - {fileID: 109944}
     - {fileID: 155838}
-  - Distance: 300
+  - Distance: 1000
     Enabled: []
     Disabled:
     - {fileID: 109944}
     - {fileID: 155838}
     - {fileID: 181250}
+  Running: 1
 --- !u!135 &13525448
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -376,7 +377,7 @@ SphereCollider:
   m_GameObject: {fileID: 109944}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 3.40725732
   m_Center: {x: 0, y: 0, z: 0}
@@ -393,7 +394,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distances.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: SwitchOnComponents.Array.size
@@ -409,7 +410,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[2].Enabled.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[3].Enabled.Array.size
@@ -429,7 +430,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[2].Disabled.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
@@ -493,19 +494,19 @@ Prefab:
       objectReference: {fileID: 155838}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[1].Distance
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[1].Enabled.Array.data[0]
       value: 
-      objectReference: {fileID: 109944}
+      objectReference: {fileID: 155838}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[1].Disabled.Array.data[1]
       value: 
       objectReference: {fileID: 181250}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[2].Distance
-      value: 200
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[2].Enabled.Array.data[0]
@@ -521,7 +522,7 @@ Prefab:
       objectReference: {fileID: 155838}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[3].Distance
-      value: 300
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[3].Disabled.Array.data[2]
@@ -538,7 +539,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[1].Disabled.Array.data[0]
       value: 
-      objectReference: {fileID: 155838}
+      objectReference: {fileID: 109944}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[3].Enabled.Array.data[0]
       value: 
@@ -551,6 +552,22 @@ Prefab:
       propertyPath: Distances.Array.data[3].Disabled.Array.data[1]
       value: 
       objectReference: {fileID: 155838}
+    - target: {fileID: 0}
+      propertyPath: Interval
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Running
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 134030}

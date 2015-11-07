@@ -1,35 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class LevelOfDetail2 : MonoBehaviour
 {
 	public float Interval = 1f;
 	public List<DistanceConfig> Distances;
 
+	public bool Running = true;
+
 	private void Awake()
 	{
-		StartCoroutine(UpdateLod(Random.Range(0f, Interval)));
+		if (Running)
+		{
+			StartCoroutine(UpdateLod(Random.Range(0f, Interval)));
+		}
 	}
 
 	private IEnumerator UpdateLod(float delay)
 	{
 		yield return new WaitForSeconds(delay);
 		var toCamera = transform.position - Camera.main.transform.position;
+
+		var curDisConfig = Distances.First();
+
 		foreach (var distConfig in Distances)
 		{
 			if (toCamera.sqrMagnitude > distConfig.Distance * distConfig.Distance)
 			{
-				foreach (var enableObj in distConfig.Enabled)
-				{
-					enableObj.SetActive(true);
-				}
-				foreach (var disableObj in distConfig.Disabled)
-				{
-					disableObj.SetActive(false);
-				}
+				curDisConfig = distConfig;
 			}
 		}
+
+		foreach (var enableObj in curDisConfig.Enabled)
+		{
+			enableObj.SetActive(true);
+		}
+		foreach (var disableObj in curDisConfig.Disabled)
+		{
+			disableObj.SetActive(false);
+		}
+
 		StartCoroutine(UpdateLod(Interval));
 	}
 }
