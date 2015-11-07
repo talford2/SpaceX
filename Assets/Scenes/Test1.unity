@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AsteroidPrefab: {fileID: 134030, guid: 7bb3efbd2f9980143a444fa52fb18d96, type: 2}
-  ObjectCount: 2000
+  ObjectCount: 500
   UniverseSize: 500
 --- !u!1 &2070423333
 GameObject:
@@ -429,6 +429,7 @@ GameObject:
   - 81: {fileID: 2070423334}
   - 114: {fileID: 2070423339}
   - 114: {fileID: 2070423340}
+  - 114: {fileID: 2070423341}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -534,3 +535,20 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
+--- !u!114 &2070423341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2070423333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: .0799999982
+  intensity: 1.11699998
+  blurSize: 1
+  blurIterations: 1
+  blurType: 0
+  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
