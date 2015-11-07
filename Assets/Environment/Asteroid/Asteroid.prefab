@@ -30,6 +30,7 @@ GameObject:
   - 114: {fileID: 11440818}
   - 114: {fileID: 11442032}
   - 114: {fileID: 11478668}
+  - 114: {fileID: 11492116}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -299,7 +300,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134030}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1394734238f6284eb808c1f84f37118, type: 3}
   m_Name: 
@@ -323,6 +324,50 @@ MonoBehaviour:
     Disabled:
     - {fileID: 109944}
     - {fileID: 155838}
+  - Distance: 300
+    Enabled: []
+    Disabled:
+    - {fileID: 109944}
+    - {fileID: 155838}
+    - {fileID: 181250}
+  Interval: 1
+--- !u!114 &11492116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ac4f1c8dc8d6f45b6384fc898b5b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Interval: 1
+  Distances:
+  - Distance: 0
+    Enabled:
+    - {fileID: 109944}
+    Disabled:
+    - {fileID: 155838}
+    - {fileID: 181250}
+  - Distance: 100
+    Enabled:
+    - {fileID: 109944}
+    Disabled:
+    - {fileID: 155838}
+    - {fileID: 181250}
+  - Distance: 200
+    Enabled:
+    - {fileID: 181250}
+    Disabled:
+    - {fileID: 109944}
+    - {fileID: 155838}
+  - Distance: 300
+    Enabled: []
+    Disabled:
+    - {fileID: 109944}
+    - {fileID: 155838}
+    - {fileID: 181250}
 --- !u!135 &13525448
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -347,8 +392,44 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: Distances.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: SwitchOnComponents.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[0].Enabled.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[1].Enabled.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[2].Enabled.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[3].Enabled.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[3].Disabled.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[0].Disabled.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[1].Disabled.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[2].Disabled.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
@@ -417,7 +498,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[1].Enabled.Array.data[0]
       value: 
-      objectReference: {fileID: 155838}
+      objectReference: {fileID: 109944}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[1].Disabled.Array.data[1]
       value: 
@@ -436,6 +517,38 @@ Prefab:
       objectReference: {fileID: 109944}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[2].Disabled.Array.data[1]
+      value: 
+      objectReference: {fileID: 155838}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[3].Distance
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[3].Disabled.Array.data[2]
+      value: 
+      objectReference: {fileID: 181250}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[0].Disabled.Array.data[1]
+      value: 
+      objectReference: {fileID: 181250}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[1].Disabled.Array.data[0]
+      value: 
+      objectReference: {fileID: 155838}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[3].Enabled.Array.data[0]
+      value: 
+      objectReference: {fileID: 181250}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[3].Disabled.Array.data[0]
+      value: 
+      objectReference: {fileID: 109944}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[3].Disabled.Array.data[1]
       value: 
       objectReference: {fileID: 155838}
     m_RemovedComponents: []
