@@ -21,7 +21,7 @@ public class ShiftSwitch : MonoBehaviour
         {
             onComponent.enabled = PlayerController.Current.InPlayerActiveCells(_shiftable.UniverseCellIndex);
         }
-        foreach (var offComponent in SwitchOn)
+        foreach (var offComponent in SwitchOff)
         {
             offComponent.enabled = !PlayerController.Current.InPlayerActiveCells(_shiftable.UniverseCellIndex);
         }
