@@ -6,37 +6,28 @@ public class LevelOfDetail : MonoBehaviour
 {
 	public List<DistanceConfig> Distances;
 
-	//public float Distance;
-	//public List<MonoBehaviour> SwitchOn;
-	//public List<MonoBehaviour> SwitchOff;
+	private void Awake()
+    {
+	}
 
-	//private float distSquared;
-
-	//private void Awake()
-	//{
-	//	distSquared = Distance * Distance;
-	//}
-
-	//private void Update()
-	//{
-	//	var toCamera = transform.position - Camera.main.transform.position;
-	//	if (toCamera.sqrMagnitude > distSquared)
-	//	{
-	//		Switch();
-	//	}
-	//}
-
-	//private void Switch()
-	//{
-	//	foreach (var onComponent in SwitchOn)
-	//	{
-	//		onComponent.enabled = true;
-	//	}
-	//	foreach (var offComponent in SwitchOff)
-	//	{
-	//		offComponent.enabled = false;
-	//	}
-	//}
+    private void Update()
+    {
+        var toCamera = transform.position - Camera.main.transform.position;
+        foreach (var distConfig in Distances)
+        {
+            if (toCamera.sqrMagnitude > distConfig.Distance*distConfig.Distance)
+            {
+                foreach (var enableObj in distConfig.Enabled)
+                {
+                    enableObj.SetActive(true);
+                }
+                foreach (var disableObj in distConfig.Disabled)
+                {
+                    disableObj.SetActive(false);
+                }
+            }
+        }
+    }
 }
 
 [Serializable]
