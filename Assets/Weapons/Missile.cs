@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Missile : MonoBehaviour
 {
@@ -11,6 +10,8 @@ public class Missile : MonoBehaviour
 
 	public float MissileSpeed = 150f;
 
+    public float MissileDamage = 5f;
+
 	void Awake()
 	{
 		_lineRenderer = GetComponent<LineRenderer>();
@@ -19,7 +20,19 @@ public class Missile : MonoBehaviour
 
 	public void Update()
 	{
-		transform.position += transform.forward * MissileSpeed * Time.deltaTime;
+	    var missileRay = new Ray(transform.position, transform.forward);
+        var displacement = MissileSpeed * Time.deltaTime;
+	    RaycastHit missileHit;
+	    if (Physics.Raycast(missileRay, out missileHit, displacement))
+	    {
+	        var killable = missileHit.collider.GetComponentInParent<Killable>();
+	        if (killable != null)
+	        {
+	            killable.Damage(MissileDamage);
+	            _lineRenderer.enabled = false;
+	        }
+	    }
+        transform.position += transform.forward * displacement;
 	}
 
 	public void LateUpdate()
