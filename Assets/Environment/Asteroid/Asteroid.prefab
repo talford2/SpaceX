@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3345534}
   - 23: {fileID: 2309028}
   - 135: {fileID: 13525448}
+  - 114: {fileID: 11463050}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -28,8 +29,7 @@ GameObject:
   - 4: {fileID: 416388}
   - 114: {fileID: 11440818}
   - 114: {fileID: 11442032}
-  - 114: {fileID: 11452444}
-  - 114: {fileID: 11405830}
+  - 114: {fileID: 11478668}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -251,21 +251,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11405830
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ab3c531b5347da4c955d903f84fb0ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SwitchOn:
-  - {fileID: 11452444}
-  - {fileID: 11452444}
-  SwitchOff: []
 --- !u!114 &11440818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,7 +281,19 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
---- !u!114 &11452444
+--- !u!114 &11463050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa0f02c957a2c764489de091f8efa3bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationSpeed: 180
+--- !u!114 &11478668
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -304,10 +301,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 134030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa0f02c957a2c764489de091f8efa3bf, type: 3}
+  m_Script: {fileID: 11500000, guid: d1394734238f6284eb808c1f84f37118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 180
+  Distances:
+  - Distance: 100
+    Enabled:
+    - {fileID: 155838}
+    Disabled:
+    - {fileID: 109944}
+    - {fileID: 181250}
+  - Distance: 200
+    Enabled:
+    - {fileID: 181250}
+    Disabled:
+    - {fileID: 109944}
+    - {fileID: 155838}
+  - Distance: 0
+    Enabled:
+    - {fileID: 109944}
+    Disabled:
+    - {fileID: 155838}
+    - {fileID: 181250}
 --- !u!135 &13525448
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -358,15 +373,15 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: SwitchComponent
       value: 
-      objectReference: {fileID: 11452444}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: SwitchOnComponents.Array.data[0]
       value: 
-      objectReference: {fileID: 11452444}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: SwitchOn.Array.data[0]
       value: 
-      objectReference: {fileID: 11452444}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Health
       value: 20
