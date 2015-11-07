@@ -305,6 +305,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Distances:
+  - Distance: 0
+    Enabled:
+    - {fileID: 109944}
+    Disabled:
+    - {fileID: 155838}
+    - {fileID: 181250}
   - Distance: 100
     Enabled:
     - {fileID: 155838}
@@ -317,12 +323,6 @@ MonoBehaviour:
     Disabled:
     - {fileID: 109944}
     - {fileID: 155838}
-  - Distance: 0
-    Enabled:
-    - {fileID: 109944}
-    Disabled:
-    - {fileID: 155838}
-    - {fileID: 181250}
 --- !u!135 &13525448
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -398,6 +398,46 @@ Prefab:
       propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[0].Distance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[0].Enabled.Array.data[0]
+      value: 
+      objectReference: {fileID: 109944}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[0].Disabled.Array.data[0]
+      value: 
+      objectReference: {fileID: 155838}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[1].Distance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[1].Enabled.Array.data[0]
+      value: 
+      objectReference: {fileID: 155838}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[1].Disabled.Array.data[1]
+      value: 
+      objectReference: {fileID: 181250}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[2].Distance
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[2].Enabled.Array.data[0]
+      value: 
+      objectReference: {fileID: 181250}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[2].Disabled.Array.data[0]
+      value: 
+      objectReference: {fileID: 109944}
+    - target: {fileID: 0}
+      propertyPath: Distances.Array.data[2].Disabled.Array.data[1]
+      value: 
+      objectReference: {fileID: 155838}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 134030}
