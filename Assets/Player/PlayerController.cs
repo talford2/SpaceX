@@ -41,13 +41,13 @@ public class PlayerController : MonoBehaviour
 		//}
 
 		var roll = Input.GetAxis("Roll");
-		Debug.Log("roll = " + roll);
+		//Debug.Log("roll = " + roll);
 
 
 		_playVehicleInstance.IsAccelerating = false;
 		if (Input.GetButton("Boost"))
 		{
-			Debug.Log("Boost!");
+			//Debug.Log("Boost!");
 			_playVehicleInstance.IsAccelerating = true;
 		}
 

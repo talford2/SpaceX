@@ -39,6 +39,6 @@ public class Weapon : MonoBehaviour
 		//lr.SetPosition(0, transform.position);
 		//lr.SetPosition(1, transform.position + transform.forward * 5);
 
-		Debug.LogFormat(missile.transform.position.ToString());
+		//Debug.LogFormat(missile.transform.position.ToString());
 	}
 }

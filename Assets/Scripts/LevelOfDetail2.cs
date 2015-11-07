@@ -21,25 +21,31 @@ public class LevelOfDetail2 : MonoBehaviour
 	private IEnumerator UpdateLod(float delay)
 	{
 		yield return new WaitForSeconds(delay);
-		var toCamera = transform.position - Camera.main.transform.position;
 
-		var curDisConfig = Distances.First();
-
-		foreach (var distConfig in Distances)
+		var toCamera = transform.position - FollowCamera.Current.transform.position;
+		var dotProd = Vector3.Dot(toCamera, FollowCamera.Current.transform.forward);
+		if (dotProd > 0f)
 		{
-			if (toCamera.sqrMagnitude > distConfig.Distance * distConfig.Distance)
+			//var toCamera = transform.position - Camera.main.transform.position;
+
+			var curDisConfig = Distances[0];
+
+			foreach (var distConfig in Distances)
 			{
-				curDisConfig = distConfig;
+				if (toCamera.sqrMagnitude > distConfig.Distance * distConfig.Distance)
+				{
+					curDisConfig = distConfig;
+				}
 			}
-		}
 
-		foreach (var enableObj in curDisConfig.Enabled)
-		{
-			enableObj.SetActive(true);
-		}
-		foreach (var disableObj in curDisConfig.Disabled)
-		{
-			disableObj.SetActive(false);
+			foreach (var enableObj in curDisConfig.Enabled)
+			{
+				enableObj.SetActive(true);
+			}
+			foreach (var disableObj in curDisConfig.Disabled)
+			{
+				disableObj.SetActive(false);
+			}
 		}
 
 		StartCoroutine(UpdateLod(Interval));

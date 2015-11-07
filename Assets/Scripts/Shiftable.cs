@@ -8,8 +8,8 @@ public class Shiftable : MonoBehaviour
 	public delegate void OnCellIndexChangeEvent(CellIndex delta);
 	public event OnCellIndexChangeEvent OnCellIndexChange;
 
-    public delegate void OnShiftEvent(CellIndex delta);
-    public event OnShiftEvent OnShift;
+	public delegate void OnShiftEvent(CellIndex delta);
+	public event OnShiftEvent OnShift;
 
 	private Vector3 lastPosition;
 
@@ -20,7 +20,7 @@ public class Shiftable : MonoBehaviour
 
 	private CellIndex CellIndexFromPosition(Vector3 position)
 	{
-		var cellZero = (position - Vector3.one * Universe.Current.CellSize / 2f) / Universe.Current.CellSize;
+		var cellZero = (position - Vector3.one * Universe.Current.HalfCellSize) / Universe.Current.CellSize;
 		return new CellIndex(Mathf.CeilToInt(cellZero.x), Mathf.CeilToInt(cellZero.y), Mathf.CeilToInt(cellZero.z));
 	}
 
@@ -52,11 +52,11 @@ public class Shiftable : MonoBehaviour
 		transform.position -= shiftAmount;
 		lastPosition = transform.position + diff;
 
-        var curCell = CellIndexFromPosition(transform.position);
-        var lastCell = CellIndexFromPosition(lastPosition);
-        var deltaCell = curCell - lastCell;
+		var curCell = CellIndexFromPosition(transform.position);
+		var lastCell = CellIndexFromPosition(lastPosition);
+		var deltaCell = curCell - lastCell;
 
-        if (OnShift != null)
-            OnShift(deltaCell);
+		if (OnShift != null)
+			OnShift(deltaCell);
 	}
 }

@@ -154,7 +154,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 442902296}
   - 33: {fileID: 442902295}
-  - 64: {fileID: 442902294}
   - 23: {fileID: 442902293}
   - 114: {fileID: 442902298}
   - 114: {fileID: 442902297}
@@ -163,7 +162,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!23 &442902293
 MeshRenderer:
@@ -189,18 +188,6 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!64 &442902294
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 442902292}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &442902295
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -474,7 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AsteroidPrefab: {fileID: 134030, guid: 7bb3efbd2f9980143a444fa52fb18d96, type: 2}
   ObjectCount: 5000
-  UniverseSize: 500
+  UniverseSize: 1000
 --- !u!1 &2070423333
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class Universe : MonoBehaviour
 
 	public float CellSize = 200f;
 
+	public float HalfCellSize { get; private set; }
+
 	public Shiftable PlayerSpawnPosition;
 
 	public static List<Shiftable> ShiftableItems;
@@ -25,6 +27,7 @@ public class Universe : MonoBehaviour
 		ShiftableItems = new List<Shiftable>();
 		UniverseCells = new CellIndex[100, 100, 100];
 		_current = this;
+		HalfCellSize = CellSize / 2f;
 	}
 
 	public void Start()
@@ -51,7 +54,7 @@ public class Universe : MonoBehaviour
 		var diff = cell - PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
 		PlayerController.Current.VehicleInstance.transform.position = trans.position;
 		PlayerController.Current.VehicleInstance.transform.rotation = trans.rotation;
-	    FollowCamera.Current.transform.rotation = trans.rotation;
+		FollowCamera.Current.transform.rotation = trans.rotation;
 		Shift(diff);
 	}
 
