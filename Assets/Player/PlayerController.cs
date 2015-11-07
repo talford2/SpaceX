@@ -63,6 +63,23 @@ public class PlayerController : MonoBehaviour
 		// Check for shifting
 	}
 
+    public bool InPlayerActiveCells(CellIndex checkCell)
+    {
+        var playerCellIndex = _playVehicleInstance.Shiftable.UniverseCellIndex;
+        for (var x = -1; x < 2; x++)
+        {
+            for (var y = -1; y < 2; y++)
+            {
+                for (var z = -1; z < 2; z++)
+                {
+                    if (checkCell.IsEqualTo(playerCellIndex + new CellIndex(x, y, z)))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
 	private static PlayerController _current;
 
 	public static PlayerController Current

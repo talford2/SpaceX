@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0f02c957a2c764489de091f8efa3bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 45
+  RotationSpeed: 180
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -142,7 +142,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: RotationSpeed
-      value: 45
+      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
