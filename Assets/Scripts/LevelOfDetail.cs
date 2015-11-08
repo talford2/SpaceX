@@ -1,42 +1,55 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelOfDetail : MonoBehaviour
 {
-	public List<DistanceConfig> Distances;
+	public bool Running = true;
 
 	public float Interval = 1f;
-	private float _coolDown = 0f;
+	public List<DistanceConfig> Distances;
+
 
 	private void Awake()
 	{
-		_coolDown = UnityEngine.Random.Range(0, Interval);
+		if (Running)
+		{
+			StartCoroutine(UpdateLod(UnityEngine.Random.Range(0f, Interval)));
+		}
 	}
 
-	private void Update()
+	private IEnumerator UpdateLod(float delay)
 	{
-		_coolDown += Time.deltaTime;
+		yield return new WaitForSeconds(delay);
 
-		if (_coolDown < 0)
+		var toCamera = transform.position - FollowCamera.Current.transform.position;
+		var dotProd = Vector3.Dot(toCamera, FollowCamera.Current.transform.forward);
+		if (dotProd > 0f)
 		{
-			var toCamera = transform.position - Camera.main.transform.position;
+			//var toCamera = transform.position - Camera.main.transform.position;
+
+			var curDisConfig = Distances[0];
+
 			foreach (var distConfig in Distances)
 			{
 				if (toCamera.sqrMagnitude > distConfig.Distance * distConfig.Distance)
 				{
-					foreach (var enableObj in distConfig.Enabled)
-					{
-						enableObj.SetActive(true);
-					}
-					foreach (var disableObj in distConfig.Disabled)
-					{
-						disableObj.SetActive(false);
-					}
+					curDisConfig = distConfig;
 				}
 			}
-			_coolDown = Interval;
+
+			foreach (var enableObj in curDisConfig.Enabled)
+			{
+				enableObj.SetActive(true);
+			}
+			foreach (var disableObj in curDisConfig.Disabled)
+			{
+				disableObj.SetActive(false);
+			}
 		}
+
+		StartCoroutine(UpdateLod(Interval));
 	}
 }
 

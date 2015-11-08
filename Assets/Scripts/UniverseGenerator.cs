@@ -7,7 +7,7 @@ public class UniverseGenerator : MonoBehaviour
 	public int ObjectCount = 200;
 
 	public float UniverseSize = 1000f;
-	
+
 	void Start()
 	{
 		for (var i = 0; i < ObjectCount; i++)
@@ -15,6 +15,7 @@ public class UniverseGenerator : MonoBehaviour
 			var inst = Instantiate(AsteroidPrefab);
 			inst.transform.position = GetRandomPosition();
 			inst.transform.rotation = Random.rotation;
+			inst.transform.localScale = Vector3.one * Random.Range(0.3f, 2.0f);
 		}
 	}
 

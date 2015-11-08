@@ -29,7 +29,6 @@ GameObject:
   - 4: {fileID: 416388}
   - 114: {fileID: 11440818}
   - 114: {fileID: 11442032}
-  - 114: {fileID: 11478668}
   - 114: {fileID: 11492116}
   - 114: {fileID: 11483304}
   m_Layer: 0
@@ -273,43 +272,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotationSpeed: 180
   RotateTransform: {fileID: 416388}
---- !u!114 &11478668
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134030}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1394734238f6284eb808c1f84f37118, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Distances:
-  - Distance: 0
-    Enabled:
-    - {fileID: 109944}
-    Disabled:
-    - {fileID: 155838}
-    - {fileID: 181250}
-  - Distance: 100
-    Enabled:
-    - {fileID: 155838}
-    Disabled:
-    - {fileID: 109944}
-    - {fileID: 181250}
-  - Distance: 200
-    Enabled:
-    - {fileID: 181250}
-    Disabled:
-    - {fileID: 109944}
-    - {fileID: 155838}
-  - Distance: 300
-    Enabled: []
-    Disabled:
-    - {fileID: 109944}
-    - {fileID: 155838}
-    - {fileID: 181250}
-  Interval: 3
 --- !u!114 &11483304
 MonoBehaviour:
   m_ObjectHideFlags: 1
