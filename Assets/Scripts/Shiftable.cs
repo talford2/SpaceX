@@ -8,7 +8,7 @@ public class Shiftable : MonoBehaviour
 	public delegate void OnCellIndexChangeEvent(CellIndex delta);
 	public event OnCellIndexChangeEvent OnCellIndexChange;
 
-	public delegate void OnShiftEvent(CellIndex delta);
+	public delegate void OnShiftEvent(Vector3 delta);
 	public event OnShiftEvent OnShift;
 
 	private Vector3 lastPosition;
@@ -52,11 +52,7 @@ public class Shiftable : MonoBehaviour
 		transform.position -= shiftAmount;
 		lastPosition = transform.position + diff;
 
-		var curCell = CellIndexFromPosition(transform.position);
-		var lastCell = CellIndexFromPosition(lastPosition);
-		var deltaCell = curCell - lastCell;
-
 		if (OnShift != null)
-			OnShift(deltaCell);
+            OnShift(shiftAmount);
 	}
 }

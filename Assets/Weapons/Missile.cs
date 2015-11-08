@@ -2,8 +2,8 @@
 
 public class Missile : MonoBehaviour
 {
-	public float MissileLength = 6f;
-	public float MissileSpeed = 150f;
+    public float MissileLength = 6f;
+    public float MissileSpeed = 150f;
     public float MissileDamage = 5f;
 
     private bool _isLive;
@@ -14,72 +14,73 @@ public class Missile : MonoBehaviour
     private Vector3 _shootFrom;
     private Vector3 _hitPosition;
 
-	void Awake()
-	{
-		_lineRenderer = GetComponent<LineRenderer>();
-		_shiftable = GetComponent<Shiftable>();
+    private void Awake()
+    {
+        _lineRenderer = GetComponent<LineRenderer>();
+        _shiftable = GetComponent<Shiftable>();
+        _shiftable.OnShift += Shift;
         Stop();
-	}
+    }
 
-	public void Update()
-	{
-	    if (_isLive)
-	    {
-            var displacement = MissileSpeed * Time.deltaTime;
-	        if (!_hasHit)
-	        {
-	            var missileRay = new Ray(transform.position, transform.forward);
-	            RaycastHit missileHit;
-	            if (Physics.Raycast(missileRay, out missileHit, displacement))
-	            {
-	                var killable = missileHit.collider.GetComponentInParent<Killable>();
-	                if (killable != null)
-	                {
-	                    killable.Damage(MissileDamage);
-	                    _hasHit = true;
-	                    _hitPosition = missileHit.point;
-	                }
-	            }
-	        }
-	        transform.position += transform.forward*displacement;
-	    }
-	}
+    public void Update()
+    {
+        if (_isLive)
+        {
+            var displacement = MissileSpeed*Time.deltaTime;
+            if (!_hasHit)
+            {
+                var missileRay = new Ray(transform.position, transform.forward);
+                RaycastHit missileHit;
+                if (Physics.Raycast(missileRay, out missileHit, displacement))
+                {
+                    var killable = missileHit.collider.GetComponentInParent<Killable>();
+                    if (killable != null)
+                    {
+                        killable.Damage(MissileDamage);
+                        _hasHit = true;
+                        _hitPosition = missileHit.point;
+                    }
+                }
+            }
+            transform.position += transform.forward*displacement;
+        }
+    }
 
-	public void LateUpdate()
-	{
-	    if (_isLive)
-	    {
-	        UpdateLineRenderer();
-	    }
-	}
+    public void LateUpdate()
+    {
+        if (_isLive)
+        {
+            UpdateLineRenderer();
+        }
+    }
 
-	public void UpdateLineRenderer()
-	{
-	    var headPosition = transform.position;
-	    var tailPosition = transform.position - transform.forward*MissileLength;
+    public void UpdateLineRenderer()
+    {
+        var headPosition = transform.position;
+        var tailPosition = transform.position - transform.forward*MissileLength;
 
         var tailDotProd = Vector3.Dot(tailPosition - _shootFrom, transform.forward);
         var headHitDotProd = Vector3.Dot(headPosition - _hitPosition, transform.forward);
 
-	    if (_hasHit && headHitDotProd > 0f)
-	    {
-	        headPosition = _hitPosition;
-	        var tailHitDotProd = Vector3.Dot(tailPosition - _hitPosition, transform.forward);
-	        if (tailHitDotProd > 0f)
-	        {
-	            Stop();
-	            return;
-	        }
-	    }
+        if (_hasHit && headHitDotProd > 0f)
+        {
+            headPosition = _hitPosition;
+            var tailHitDotProd = Vector3.Dot(tailPosition - _hitPosition, transform.forward);
+            if (tailHitDotProd > 0f)
+            {
+                Stop();
+                return;
+            }
+        }
 
-	    if (tailDotProd < 0f)
-	    {
-	        tailPosition = _shootFrom;
-	    }
+        if (tailDotProd < 0f)
+        {
+            tailPosition = _shootFrom;
+        }
 
-	    _lineRenderer.SetPosition(0, headPosition);
+        _lineRenderer.SetPosition(0, headPosition);
         _lineRenderer.SetPosition(1, tailPosition);
-	}
+    }
 
     public void Stop()
     {
@@ -95,5 +96,11 @@ public class Missile : MonoBehaviour
         _shootFrom = shootFrom;
         _hasHit = false;
         UpdateLineRenderer();
+    }
+
+    private void Shift(Vector3 delta)
+    {
+        _shootFrom -= delta;
+        _hitPosition -= delta;
     }
 }

@@ -15,7 +15,7 @@ public class ShiftSwitch : MonoBehaviour
         _shiftable.OnShift += Switch;
     }
 
-    private void Switch(CellIndex delta)
+    private void Switch(Vector3 delta)
     {
         foreach (var onComponent in SwitchOn)
         {
