@@ -7,5 +7,6 @@
 
     public override void Update()
     {
+        Npc.VehicleInstance.PitchThotttle = 1f;
     }
 }
