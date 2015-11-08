@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class AsteroidField : MonoBehaviour
 {
@@ -12,14 +10,10 @@ public class AsteroidField : MonoBehaviour
 
 	public GameObject AsteroidPrefab;
 
-	private List<GameObject> _usedAsteroids;
-	private List<GameObject> _unusedAsteroids;
 
 	private void Awake()
 	{
 		CentreTransform = PlayerController.Current.transform;
-		_unusedAsteroids = new List<GameObject>();
-		_usedAsteroids = new List<GameObject>();
 		for (var i = 0; i < AsteroidPoolCount; i++)
 		{
 			var inst = Instantiate(AsteroidPrefab);
@@ -33,23 +27,12 @@ public class AsteroidField : MonoBehaviour
 		}
 	}
 
-	private void Update()
+    private void MakeAvailable(GameObject instance)
 	{
-		foreach (var asteroid in _unusedAsteroids)
-		{
-			asteroid.transform.position = Random.onUnitSphere * FieldRadius + CentreTransform.position;
-		}
-	}
-
-	private void MakeAvailable(GameObject instance)
-	{
-		_usedAsteroids.Remove(instance);
-		_unusedAsteroids.Add(instance);
-	}
+        instance.transform.position = Random.onUnitSphere * FieldRadius + CentreTransform.position;
+    }
 
 	private void MakeUnavailable(GameObject instance)
 	{
-		_usedAsteroids.Add(instance);
-		_unusedAsteroids.Remove(instance);
-	}
+    }
 }
