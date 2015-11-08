@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelOfDetail : MonoBehaviour
@@ -10,9 +11,21 @@ public class LevelOfDetail : MonoBehaviour
 	public float Interval = 1f;
 	public List<DistanceConfig> Distances;
 
+    public delegate void OnExitLargestDistanceEvent(GameObject instance);
+    public OnExitLargestDistanceEvent OnExitLargestDistance;
+
+    public delegate void OnEnterLargestDistanceEvent(GameObject instance);
+    public OnEnterLargestDistanceEvent OnEnterLargestDistance;
+
+    private float largestDistanceSquared;
+    private bool pastLargestDistance;
 
 	private void Awake()
 	{
+	    var largestDistance = Distances.OrderByDescending(d => d.Distance).First().Distance;
+	    largestDistanceSquared = largestDistance*largestDistance;
+	    pastLargestDistance = false;
+
 		if (Running)
 		{
 			StartCoroutine(UpdateLod(UnityEngine.Random.Range(0f, Interval)));
@@ -49,6 +62,25 @@ public class LevelOfDetail : MonoBehaviour
 			}
 		}
 
+
+	    if (toCamera.sqrMagnitude > largestDistanceSquared)
+	    {
+	        if (!pastLargestDistance)
+	        {
+	            pastLargestDistance = true;
+	            if (OnExitLargestDistance != null)
+	                OnExitLargestDistance(gameObject);
+	        }
+	    }
+	    else
+	    {
+	        if (pastLargestDistance)
+	        {
+	            pastLargestDistance = false;
+                if (OnEnterLargestDistance != null)
+                    OnEnterLargestDistance(gameObject);
+	        }
+	    }
 		StartCoroutine(UpdateLod(Interval));
 	}
 }
