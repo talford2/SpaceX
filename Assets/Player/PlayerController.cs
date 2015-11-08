@@ -58,6 +58,11 @@ public class PlayerController : MonoBehaviour
 			_playVehicleInstance.IsBraking = true;
 		}
 
+	    if (Input.GetKey(KeyCode.Escape))
+	    {
+	        Application.Quit();
+	    }
+
 		//var vehicle
 
 		// Check for shifting
