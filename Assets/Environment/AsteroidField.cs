@@ -13,7 +13,6 @@ public class AsteroidField : MonoBehaviour
 
 	private void Awake()
 	{
-		CentreTransform = PlayerController.Current.transform;
 		for (var i = 0; i < AsteroidPoolCount; i++)
 		{
 			var inst = Instantiate(AsteroidPrefab);
