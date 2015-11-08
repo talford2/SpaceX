@@ -50,6 +50,7 @@ public class Weapon : MonoBehaviour
         missile.transform.position = transform.position;
         missile.transform.rotation = transform.rotation;
         missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
+        missile.GetComponent<Missile>().Shoot();
 
         // Squirt
         var lr = missile.GetComponent<LineRenderer>();
