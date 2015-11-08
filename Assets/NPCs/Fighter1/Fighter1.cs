@@ -9,7 +9,7 @@
     private void Awake()
     {
         _vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
-        State = new Fighter1Idle(this);
+        State = new Fighter1Chase(this);
     }
 
     private void Update()
