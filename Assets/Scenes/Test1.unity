@@ -425,6 +425,10 @@ Prefab:
       propertyPath: m_Name
       value: Nebula (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
   m_IsPrefabParent: 0
@@ -502,6 +506,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2328446, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a81f5d68d7caecc448bc0cbce119f208, type: 2}
+    - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
   m_IsPrefabParent: 0
@@ -555,6 +575,14 @@ Prefab:
     - target: {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_Name
       value: Nebula (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2328446, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 00aae9bc17bdae54cace74ccbbc939c0, type: 2}
+    - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
@@ -613,6 +641,14 @@ Prefab:
     - target: {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_Name
       value: Nebula (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2328446, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 16ca447269b169b43b56e9a1be48204d, type: 2}
+    - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
@@ -681,7 +717,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: .300000012
-  far clip plane: 1100
+  far clip plane: 3300
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -723,10 +759,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   BackgroundTransform: {fileID: 1212660695}
-  LookAtSpeed: 5
   DistanceBehind: 15
   VerticalDistance: 3
-  ChaseSpeed: 3
+  SpringCompression: .5
+  SpringExpansion: 1.5
+  RotationCatchup: 3
+  SpringCatchup: 2
+  OffsetCatchup: 5
 --- !u!114 &2070423340
 MonoBehaviour:
   m_ObjectHideFlags: 0
