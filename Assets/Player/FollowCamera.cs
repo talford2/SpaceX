@@ -17,6 +17,8 @@ public class FollowCamera : MonoBehaviour
     public float SpringExpansion = 1.5f;
 
     private float springDistance;
+    
+    private Vector3 offset;
 
 	private void Awake()
 	{
@@ -26,7 +28,7 @@ public class FollowCamera : MonoBehaviour
 
 	private void LateUpdate()
 	{
-		transform.rotation = Quaternion.Lerp(transform.rotation, Target.rotation, 5f * Time.deltaTime);
+		transform.rotation = Quaternion.Lerp(transform.rotation, Target.rotation, 3f * Time.deltaTime);
 
 	    var targetSpringDistance = 1f;
 	    if (PlayerController.Current.VehicleInstance.IsAccelerating)
@@ -42,7 +44,9 @@ public class FollowCamera : MonoBehaviour
 	    }
         springDistance = Mathf.Lerp(springDistance, targetSpringDistance, 2f * Time.deltaTime);
 
-        transform.position = Target.position - springDistance*(transform.forward * DistanceBehind) + (transform.up * VerticalDistance);
+	    offset = Vector3.Lerp(offset, -springDistance*(transform.forward*DistanceBehind) + (transform.up*VerticalDistance), 5f*Time.deltaTime);
+
+	    transform.position = Target.position + offset;
 
 		BackgroundTransform.transform.position = transform.position;
 	}
