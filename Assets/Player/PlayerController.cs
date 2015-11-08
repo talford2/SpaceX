@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -6,12 +7,21 @@ public class PlayerController : MonoBehaviour
 
 	private Vehicle _playVehicleInstance;
 
+
+
+	public List<Vehicle> PlayerVehicles;
+	private int _curVehicleIndex = 0;
+
+
 	public bool InvertY = false;
 
 	private void Awake()
 	{
 		_playVehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
 		_current = this;
+
+
+		PlayerVehicles.Insert(0, _playVehicleInstance);
 	}
 
 	private void Start()
@@ -58,32 +68,42 @@ public class PlayerController : MonoBehaviour
 			_playVehicleInstance.IsBraking = true;
 		}
 
-	    if (Input.GetKey(KeyCode.Escape))
-	    {
-	        Application.Quit();
-	    }
+		if (Input.GetKey(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+
+		if (Input.GetKeyUp(KeyCode.A))
+		{
+			_curVehicleIndex++;
+			if (_curVehicleIndex >= PlayerVehicles.Count)
+			{
+				_curVehicleIndex = 0;
+			}
+			_playVehicleInstance = PlayerVehicles[_curVehicleIndex];
+			FollowCamera.Current.Target = _playVehicleInstance.transform;
+		}
 
 		//var vehicle
-
 		// Check for shifting
 	}
 
-    public bool InPlayerActiveCells(CellIndex checkCell)
-    {
-        var playerCellIndex = _playVehicleInstance.Shiftable.UniverseCellIndex;
-        for (var x = -1; x < 2; x++)
-        {
-            for (var y = -1; y < 2; y++)
-            {
-                for (var z = -1; z < 2; z++)
-                {
-                    if (checkCell.IsEqualTo(playerCellIndex + new CellIndex(x, y, z)))
-                        return true;
-                }
-            }
-        }
-        return false;
-    }
+	public bool InPlayerActiveCells(CellIndex checkCell)
+	{
+		var playerCellIndex = _playVehicleInstance.Shiftable.UniverseCellIndex;
+		for (var x = -1; x < 2; x++)
+		{
+			for (var y = -1; y < 2; y++)
+			{
+				for (var z = -1; z < 2; z++)
+				{
+					if (checkCell.IsEqualTo(playerCellIndex + new CellIndex(x, y, z)))
+						return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	private static PlayerController _current;
 
