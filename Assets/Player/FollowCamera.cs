@@ -8,13 +8,18 @@ public class FollowCamera : MonoBehaviour
 
 	public Transform BackgroundTransform;
 
+    [Header("Offset")]
 	public float DistanceBehind = 8f;
-
 	public float VerticalDistance = 2f;
 
+    [Header("Spring")]
     public float SpringCompression = 0.5f;
-
     public float SpringExpansion = 1.5f;
+
+    [Header("Lerp Speeds")]
+    public float RotationCatchup = 3f;
+    public float SpringCatchup = 2f;
+    public float OffsetCatchup = 5f;
 
     private float springDistance;
     
@@ -28,7 +33,7 @@ public class FollowCamera : MonoBehaviour
 
 	private void LateUpdate()
 	{
-		transform.rotation = Quaternion.Lerp(transform.rotation, Target.rotation, 3f * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Target.rotation, RotationCatchup * Time.deltaTime);
 
 	    var targetSpringDistance = 1f;
 	    if (PlayerController.Current.VehicleInstance.IsAccelerating)
@@ -42,9 +47,9 @@ public class FollowCamera : MonoBehaviour
                 targetSpringDistance = SpringCompression;
 	        }
 	    }
-        springDistance = Mathf.Lerp(springDistance, targetSpringDistance, 2f * Time.deltaTime);
+        springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);
 
-	    offset = Vector3.Lerp(offset, -springDistance*(transform.forward*DistanceBehind) + (transform.up*VerticalDistance), 5f*Time.deltaTime);
+	    offset = Vector3.Lerp(offset, -springDistance*(transform.forward*DistanceBehind) + (transform.up*VerticalDistance), OffsetCatchup*Time.deltaTime);
 
 	    transform.position = Target.position + offset;
 
