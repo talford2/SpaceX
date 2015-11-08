@@ -15,9 +15,9 @@ public class Fighter1Chase : NpcState<Fighter1>
 
     private Vector2 GetPitchYawToPoint(Vector3 point)
     {
-        var toPlayer = point - Npc.VehicleInstance.transform.position;
-        var yawDiff = Vector3.Dot(toPlayer, Npc.VehicleInstance.transform.right);
-        var pitchDiff = Vector3.Dot(toPlayer, Npc.VehicleInstance.transform.up);
+        var toPoint = point - Npc.VehicleInstance.transform.position;
+        var yawDiff = Vector3.Dot(toPoint, Npc.VehicleInstance.transform.right);
+        var pitchDiff = Vector3.Dot(toPoint, Npc.VehicleInstance.transform.up);
 
         var yawTolerance = 2f;
         var pitchTolerance = 2f;
