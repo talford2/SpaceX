@@ -8,35 +8,41 @@ public class FollowCamera : MonoBehaviour
 
 	public Transform BackgroundTransform;
 
-	public float LookAtSpeed = 5f;
-
 	public float DistanceBehind = 8f;
 
 	public float VerticalDistance = 2f;
 
-	public float ChaseSpeed = 5f;
+    public float SpringCompression = 0.5f;
+
+    public float SpringExpansion = 1.5f;
+
+    private float springDistance;
 
 	private void Awake()
 	{
 		Current = this;
+	    springDistance = 1f;
 	}
 
 	private void LateUpdate()
 	{
-		//var chasePos = Target.position - (Target.transform.forward * DistanceBehind) + (Target.transform.up * VerticalDistance);
-
 		transform.rotation = Quaternion.Lerp(transform.rotation, Target.rotation, 5f * Time.deltaTime);
-		transform.position = Target.position - (transform.forward * DistanceBehind) + (transform.up * VerticalDistance);
 
-		/*
-        // Chase
-        var chasePos = Target.position - (Target.transform.forward*DistanceBehind) + (Target.transform.up*VerticalDistance);
-        transform.position = Vector3.Slerp(transform.position, chasePos, ChaseSpeed*Time.deltaTime);
+	    var targetSpringDistance = 1f;
+	    if (PlayerController.Current.VehicleInstance.IsAccelerating)
+	    {
+	        targetSpringDistance = SpringExpansion;
+	    }
+	    else
+	    {
+	        if (PlayerController.Current.VehicleInstance.IsBraking)
+	        {
+                targetSpringDistance = SpringCompression;
+	        }
+	    }
+        springDistance = Mathf.Lerp(springDistance, targetSpringDistance, 2f * Time.deltaTime);
 
-        // Look at
-        var targetLookat = Quaternion.LookRotation(Target.position - transform.position, Target.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetLookat, LookAtSpeed*Time.deltaTime);
-        */
+        transform.position = Target.position - springDistance*(transform.forward * DistanceBehind) + (transform.up * VerticalDistance);
 
 		BackgroundTransform.transform.position = transform.position;
 	}
