@@ -415,11 +415,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_Name
@@ -427,7 +427,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_Layer
@@ -582,11 +582,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_Name
@@ -598,7 +598,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 00aae9bc17bdae54cace74ccbbc939c0, type: 2}
     - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_Layer
@@ -656,11 +656,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_Name
@@ -672,7 +672,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 16ca447269b169b43b56e9a1be48204d, type: 2}
     - target: {fileID: 457856, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
       propertyPath: m_Layer
@@ -749,7 +749,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: .300000012
-  far clip plane: 11000
+  far clip plane: 1100
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -828,7 +828,7 @@ MonoBehaviour:
   screenBlendMode: 1
   hdr: 1
   sepBlurSpread: 2.5
-  quality: 1
+  quality: 0
   bloomIntensity: 1
   bloomThreshold: .289999992
   bloomThresholdColor: {r: 1, g: 1, b: 1, a: 1}

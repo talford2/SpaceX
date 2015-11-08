@@ -321,7 +321,7 @@ MonoBehaviour:
     Disabled:
     - {fileID: 109944}
     - {fileID: 181250}
-  - Distance: 400
+  - Distance: 600
     Enabled:
     - {fileID: 181250}
     Disabled:
@@ -471,7 +471,7 @@ Prefab:
       objectReference: {fileID: 181250}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[2].Distance
-      value: 1000
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[2].Enabled.Array.data[0]
