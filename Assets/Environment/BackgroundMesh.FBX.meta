@@ -11,6 +11,8 @@ ModelImporter:
     3300000: //RootNode
     4300000: Sphere001
     4300002: Sphere002
+    4300004: Sphere003
+    4300006: Sphere004
     9500000: //RootNode
   materials:
     importMaterials: 1
