@@ -2,31 +2,33 @@
 
 public class FollowCamera : MonoBehaviour
 {
-    public Transform Target;
+	public Transform Target;
 
-    public static FollowCamera Current;
+	public static FollowCamera Current;
 
-    public float LookAtSpeed = 5f;
+	public Transform BackgroundTransform;
 
-    public float DistanceBehind = 8f;
+	public float LookAtSpeed = 5f;
 
-    public float VerticalDistance = 2f;
+	public float DistanceBehind = 8f;
 
-    public float ChaseSpeed = 5f;
+	public float VerticalDistance = 2f;
 
-    private void Awake()
-    {
-        Current = this;
-    }
+	public float ChaseSpeed = 5f;
 
-    private void LateUpdate()
-    {
-        //var chasePos = Target.position - (Target.transform.forward * DistanceBehind) + (Target.transform.up * VerticalDistance);
+	private void Awake()
+	{
+		Current = this;
+	}
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Target.rotation, 5f*Time.deltaTime);
-        transform.position = Target.position - (transform.forward * DistanceBehind) + (transform.up * VerticalDistance);
+	private void LateUpdate()
+	{
+		//var chasePos = Target.position - (Target.transform.forward * DistanceBehind) + (Target.transform.up * VerticalDistance);
 
-        /*
+		transform.rotation = Quaternion.Lerp(transform.rotation, Target.rotation, 5f * Time.deltaTime);
+		transform.position = Target.position - (transform.forward * DistanceBehind) + (transform.up * VerticalDistance);
+
+		/*
         // Chase
         var chasePos = Target.position - (Target.transform.forward*DistanceBehind) + (Target.transform.up*VerticalDistance);
         transform.position = Vector3.Slerp(transform.position, chasePos, ChaseSpeed*Time.deltaTime);
@@ -35,5 +37,7 @@ public class FollowCamera : MonoBehaviour
         var targetLookat = Quaternion.LookRotation(Target.position - transform.position, Target.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetLookat, LookAtSpeed*Time.deltaTime);
         */
-    }
+
+		BackgroundTransform.transform.position = transform.position;
+	}
 }
