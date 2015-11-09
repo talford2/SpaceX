@@ -13,6 +13,8 @@ public class Shiftable : MonoBehaviour
 
 	private Vector3 _cellLocalPosition;
 
+    public Vector3 CellLocalPosition { get { return _cellLocalPosition; } }
+
 	public void Translate(Vector3 translation)
 	{
 		var destination = (_cellLocalPosition + translation);

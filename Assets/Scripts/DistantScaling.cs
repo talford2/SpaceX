@@ -10,7 +10,7 @@ public class DistantScaling : MonoBehaviour
     private void Awake()
     {
         _shiftable = GetComponent<Shiftable>();
-        //_shiftable.OnShift += Shift;
+        _shiftable.OnShift += Shift;
         _maxDistance = 1000f;
     }
 
@@ -22,7 +22,7 @@ public class DistantScaling : MonoBehaviour
     private void UpdatePositionAndScale()
     {
         // Scaling
-        var toCamera = UniversePosition - GetUniversePosition(FollowCamera.Current.Shiftable.UniverseCellIndex, FollowCamera.Current.transform.position);
+        var toCamera = UniversePosition - GetUniversePosition(FollowCamera.Current.Shiftable.UniverseCellIndex, FollowCamera.Current.Shiftable.CellLocalPosition);
         var distance = toCamera.magnitude;
         var scale = Mathf.Clamp(_maxDistance / distance, 0f, 1f);
         transform.localScale = new Vector3(scale, scale, scale);
@@ -30,7 +30,11 @@ public class DistantScaling : MonoBehaviour
         // Positioning
         if (distance > _maxDistance)
         {
-            transform.position = FollowCamera.Current.transform.position + toCamera.normalized * _maxDistance;
+            transform.position = FollowCamera.Current.transform.position + toCamera.normalized*_maxDistance;
+        }
+        else
+        {
+            // Fix tiny offset here.
         }
     }
 
@@ -41,6 +45,7 @@ public class DistantScaling : MonoBehaviour
     
     private void Shift(Vector3 delta)
     {
+        /*
         var toCamera = UniversePosition - GetUniversePosition(FollowCamera.Current.Shiftable.UniverseCellIndex, FollowCamera.Current.transform.position);
         var distance = toCamera.magnitude;
         var scale = Mathf.Clamp(_maxDistance / distance, 0f, 1f);
@@ -49,5 +54,7 @@ public class DistantScaling : MonoBehaviour
         {
             transform.position = FollowCamera.Current.transform.position + toCamera.normalized * _maxDistance;
         }
+        */
+        UpdatePositionAndScale();
     }
 }

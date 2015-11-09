@@ -55,7 +55,7 @@ public class FollowCamera : MonoBehaviour
 
 	    offset = Vector3.Lerp(offset, -springDistance*(transform.forward*DistanceBehind) + (transform.up*VerticalDistance), OffsetCatchup*Time.deltaTime);
 
-	    transform.position = Target.position + offset;
+        _shiftable.Translate(Target.position + offset - transform.position);
 
 		BackgroundTransform.transform.position = transform.position;
 	}
