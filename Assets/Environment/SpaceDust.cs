@@ -27,13 +27,15 @@ public class SpaceDust : MonoBehaviour
 			inst.transform.position = Random.insideUnitSphere * Radius;
 			inst.transform.rotation = Random.rotation;
 
+			inst.transform.parent = this.transform;
 			_particles.Add(inst);
 		}
 
-		CentreTransform = PlayerController.Current.VehicleInstance.transform;
+		//CentreTransform = PlayerController.Current.VehicleInstance.transform;
+		CentreTransform = FollowCamera.Current.transform;
 	}
 
-	public void Update()
+	public void LateUpdate()
 	{
 		foreach (var dustParticle in _particles)
 		{

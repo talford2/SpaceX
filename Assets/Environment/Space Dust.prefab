@@ -8,8 +8,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 470980}
+  - 114: {fileID: 11427156}
   - 114: {fileID: 11458204}
-  - 114: {fileID: 11485202}
   m_Layer: 0
   m_Name: Space Dust
   m_TagString: Untagged
@@ -29,6 +29,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11427156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseCellIndex:
+    X: 0
+    Y: 0
+    Z: 0
 --- !u!114 &11458204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -44,21 +59,6 @@ MonoBehaviour:
   CentreTransform: {fileID: 0}
   DustParticleCount: 1000
   Radius: 1000
---- !u!114 &11485202
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UniverseCellIndex:
-    X: 0
-    Y: 0
-    Z: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
