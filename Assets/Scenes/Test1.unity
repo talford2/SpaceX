@@ -743,7 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c652a4d5446d845958f2cd40dedd37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CellSize: 500
+  CellSize: 5000
   PlayerSpawnPosition: {fileID: 624703671}
 --- !u!4 &1097665390
 Transform:
