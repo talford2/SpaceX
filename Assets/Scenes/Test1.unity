@@ -623,6 +623,7 @@ Transform:
   - {fileID: 624703669}
   - {fileID: 1097665390}
   - {fileID: 1954057690}
+  - {fileID: 1384198310}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!1001 &755564654
@@ -664,6 +665,56 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &980790649
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 702763075}
+    m_Modifications:
+    - target: {fileID: 400000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 2.18556941e-08
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+      propertyPath: m_Name
+      value: SpaceStation (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8cea5b64ca6f0614ab97bf3370fdae9c, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
   m_IsPrefabParent: 0
@@ -1118,6 +1169,41 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1384198309 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+  m_PrefabInternal: {fileID: 980790649}
+--- !u!4 &1384198310 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+  m_PrefabInternal: {fileID: 980790649}
+--- !u!114 &1384198311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1384198309}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7806c2c78bc2bb444bf4fc12544f4df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniversePosition: {x: 0, y: 0, z: 5000}
+--- !u!114 &1384198312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1384198309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseCellIndex:
+    X: 0
+    Y: 0
+    Z: 0
 --- !u!1001 &1676754899
 Prefab:
   m_ObjectHideFlags: 0
@@ -1479,7 +1565,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: .300000012
-  far clip plane: 1100
+  far clip plane: 10100
   field of view: 60
   orthographic: 0
   orthographic size: 5
