@@ -11,6 +11,7 @@ public class Missile : MonoBehaviour
     private Shiftable _shiftable;
     private bool _hasHit;
 
+    private GameObject _owner;
     private Vector3 _shootFrom;
     private Vector3 _hitPosition;
 
@@ -20,6 +21,11 @@ public class Missile : MonoBehaviour
         _shiftable = GetComponent<Shiftable>();
         _shiftable.OnShift += Shift;
         Stop();
+    }
+
+    public void SetOwner(GameObject owner)
+    {
+        _owner = owner;
     }
 
     public void Update()
@@ -33,12 +39,15 @@ public class Missile : MonoBehaviour
                 RaycastHit missileHit;
                 if (Physics.Raycast(missileRay, out missileHit, displacement))
                 {
-                    var killable = missileHit.collider.GetComponentInParent<Killable>();
-                    if (killable != null)
+                    if (missileHit.collider.gameObject != _owner)
                     {
-                        killable.Damage(MissileDamage);
-                        _hasHit = true;
-                        _hitPosition = missileHit.point;
+                        var killable = missileHit.collider.GetComponentInParent<Killable>();
+                        if (killable != null)
+                        {
+                            killable.Damage(MissileDamage);
+                            _hasHit = true;
+                            _hitPosition = missileHit.point;
+                        }
                     }
                 }
             }

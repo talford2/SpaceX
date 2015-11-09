@@ -20,15 +20,16 @@ public class Weapon : MonoBehaviour
     private int curMissileIndex;
     private List<GameObject> missileInstances;
 
-
-    private void Awake()
+    public void Initialize(GameObject owner)
     {
         curMissileIndex = 0;
         missileInstances = new List<GameObject>();
         var missilesContainer = Utility.FindOrCreateContainer("Missiles");
         for (var i = 0; i < MissilePoolCount; i++)
         {
-            missileInstances.Add(Utility.InstantiateInParent(MissilePrefab, missilesContainer));
+            var missileInstance = Utility.InstantiateInParent(MissilePrefab, missilesContainer);
+            missileInstance.GetComponent<Missile>().SetOwner(owner);
+            missileInstances.Add(missileInstance);
         }
     }
 
@@ -53,8 +54,6 @@ public class Weapon : MonoBehaviour
 
     public void Fire()
     {
-        //Debug.Log("Fire!");
-        //var missile = Instantiate(MissilePrefab);
         var missile = missileInstances[curMissileIndex];
 
         if (OnShoot != null)
@@ -65,13 +64,6 @@ public class Weapon : MonoBehaviour
         missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
         missile.GetComponent<Missile>().Shoot(_shootPoint.position);
 
-        // Squirt
-        var lr = missile.GetComponent<LineRenderer>();
-
-        //lr.SetPosition(0, transform.position);
-        //lr.SetPosition(1, transform.position + transform.forward * 5);
-
-        //Debug.LogFormat(missile.transform.position.ToString());
         curMissileIndex++;
         if (curMissileIndex >= missileInstances.Count)
             curMissileIndex = 0;

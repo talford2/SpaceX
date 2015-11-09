@@ -31,13 +31,17 @@ public class Vehicle : MonoBehaviour
     public float PitchThotttle = 0f;
 
     [Header("Weapon")]
-    public Weapon CurrentWeapon;
+    public Weapon WeaponPrefab;
 
     public List<Transform> ShootPoints;
 
     private Shiftable _shiftable;
 
     private int _shootPointIndex;
+
+    private Weapon _weaponInstance;
+
+    public Weapon CurrentWeapon { get { return _weaponInstance; } }
 
     public Shiftable Shiftable
     {
@@ -55,12 +59,15 @@ public class Vehicle : MonoBehaviour
     {
         _shiftable = GetComponent<Shiftable>();
         _shootPointIndex = 0;
-        CurrentWeapon.OnShoot += OnShoot;
+
+        _weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
+        _weaponInstance.Initialize(gameObject);
+        _weaponInstance.OnShoot += OnShoot;
     }
 
     private void OnShoot()
     {
-        CurrentWeapon.SetShootPoint(ShootPoints[_shootPointIndex]);
+        _weaponInstance.SetShootPoint(ShootPoints[_shootPointIndex]);
         _shootPointIndex++;
         if (_shootPointIndex >= ShootPoints.Count)
             _shootPointIndex = 0;
