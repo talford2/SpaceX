@@ -2,10 +2,12 @@
 
 public class DistantScaling : MonoBehaviour
 {
-    public Vector3 UniversePosition;
+    //public Vector3 UniversePosition;
 
     private Shiftable _shiftable;
     private float _maxDistance;
+
+    
 
     private void Awake()
     {
@@ -22,9 +24,9 @@ public class DistantScaling : MonoBehaviour
     private void UpdatePositionAndScale()
     {
         // Scaling
-        var toCamera = UniversePosition - GetUniversePosition(FollowCamera.Current.Shiftable.UniverseCellIndex, FollowCamera.Current.Shiftable.CellLocalPosition);
+        var toCamera = GetUniversePosition(_shiftable.UniverseCellIndex, _shiftable.CellLocalPosition) - GetUniversePosition(FollowCamera.Current.Shiftable.UniverseCellIndex, FollowCamera.Current.Shiftable.CellLocalPosition);
         var distance = toCamera.magnitude;
-        var scale = Mathf.Clamp(_maxDistance / distance, 0f, 1f);
+        var scale = Mathf.Clamp(_maxDistance/distance, 0f, 1f);
         transform.localScale = new Vector3(scale, scale, scale);
 
         // Positioning
@@ -35,6 +37,7 @@ public class DistantScaling : MonoBehaviour
         else
         {
             // Fix tiny offset here.
+            transform.position = GetUniversePosition(_shiftable.UniverseCellIndex, _shiftable.CellLocalPosition) - GetUniversePosition(FollowCamera.Current.Shiftable.UniverseCellIndex, Vector3.zero);
         }
     }
 
@@ -45,16 +48,6 @@ public class DistantScaling : MonoBehaviour
     
     private void Shift(Vector3 delta)
     {
-        /*
-        var toCamera = UniversePosition - GetUniversePosition(FollowCamera.Current.Shiftable.UniverseCellIndex, FollowCamera.Current.transform.position);
-        var distance = toCamera.magnitude;
-        var scale = Mathf.Clamp(_maxDistance / distance, 0f, 1f);
-        transform.localScale = new Vector3(scale, scale, scale);
-        if (distance > _maxDistance)
-        {
-            transform.position = FollowCamera.Current.transform.position + toCamera.normalized * _maxDistance;
-        }
-        */
         UpdatePositionAndScale();
     }
 }
