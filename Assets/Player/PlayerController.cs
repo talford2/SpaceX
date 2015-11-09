@@ -51,7 +51,9 @@ public class PlayerController : MonoBehaviour
 		//}
 
 		var roll = Input.GetAxis("Roll");
-		//Debug.Log("roll = " + roll);
+		Debug.Log("roll = " + roll);
+		_playVehicleInstance.transform.rotation *= Quaternion.AngleAxis(roll * -100f * Time.deltaTime, Vector3.forward);
+		
 
 
 		_playVehicleInstance.IsAccelerating = false;
