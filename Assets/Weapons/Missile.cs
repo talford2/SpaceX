@@ -112,5 +112,6 @@ public class Missile : MonoBehaviour
 	{
 		_shootFrom -= delta;
 		_hitPosition -= delta;
-	}
+        UpdateLineRenderer();
+    }
 }
