@@ -7,12 +7,9 @@ public class DistantScaling : MonoBehaviour
     private Shiftable _shiftable;
     private float _maxDistance;
 
-    
-
     private void Awake()
     {
         _shiftable = GetComponent<Shiftable>();
-        _shiftable.OnShift += Shift;
         _maxDistance = 1000f;
     }
 
@@ -44,10 +41,5 @@ public class DistantScaling : MonoBehaviour
     private Vector3 GetUniversePosition(CellIndex cellIndex, Vector3 positionInCell)
     {
         return cellIndex.ToVector3()*Universe.Current.CellSize + positionInCell;// + Vector3.one*Universe.Current.HalfCellSize;
-    }
-    
-    private void Shift(Vector3 delta)
-    {
-        UpdatePositionAndScale();
     }
 }
