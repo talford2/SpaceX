@@ -13,7 +13,10 @@ public class SpaceDust : MonoBehaviour
 	public int DustParticleCount = 100;
 
 	public float Radius = 200f;
+
 	private float _radiusSqr;
+
+	public float Opacity = 1;
 
 	public void Start()
 	{
@@ -31,14 +34,16 @@ public class SpaceDust : MonoBehaviour
 			_particles.Add(inst);
 		}
 
-		//CentreTransform = PlayerController.Current.VehicleInstance.transform;
 		CentreTransform = FollowCamera.Current.transform;
 	}
 
 	public void LateUpdate()
 	{
+		//var index = 0;
 		foreach (var dustParticle in _particles)
 		{
+			//dustParticle.GetComponent<Renderer>().material.color = Color.red;
+
 			//var sqrMag = (transform.position - CentreTransform.position).sqrMagnitude;
 			var sqrMag = (CentreTransform.position - dustParticle.transform.position).sqrMagnitude;
 
@@ -47,6 +52,8 @@ public class SpaceDust : MonoBehaviour
 				dustParticle.transform.position = Random.onUnitSphere * Radius + CentreTransform.position;
 				dustParticle.transform.rotation = Random.rotation;
 			}
+			//index++;
+			//Random.seed = index;
 			dustParticle.transform.LookAt(CentreTransform);
 		}
 	}

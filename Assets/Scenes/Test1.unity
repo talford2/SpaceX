@@ -948,6 +948,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1186793844}
   - 114: {fileID: 1186793843}
+  - 114: {fileID: 1186793845}
   m_Layer: 0
   m_Name: Asteroid Field
   m_TagString: Untagged
@@ -982,6 +983,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
+--- !u!114 &1186793845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186793842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseCellIndex:
+    X: 0
+    Y: 0
+    Z: 0
 --- !u!1 &1212660694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,7 +1074,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11458204, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
       propertyPath: DustParticleCount
-      value: 300
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
