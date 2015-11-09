@@ -21,7 +21,8 @@ public class DistantScaling : MonoBehaviour
     private void UpdatePositionAndScale()
     {
         // Scaling
-        var toCamera = GetUniversePosition(_shiftable.UniverseCellIndex, _shiftable.CellLocalPosition) - GetUniversePosition(FollowCamera.Current.Shiftable.UniverseCellIndex, FollowCamera.Current.Shiftable.CellLocalPosition);
+        var cellDifference = _shiftable.UniverseCellIndex - FollowCamera.Current.Shiftable.UniverseCellIndex;
+        var toCamera = GetUniversePosition(cellDifference, _shiftable.CellLocalPosition) - GetUniversePosition(new CellIndex(0, 0, 0), FollowCamera.Current.Shiftable.CellLocalPosition);
         var distance = toCamera.magnitude;
         var scale = Mathf.Clamp(_maxDistance/distance, 0f, 1f);
         transform.localScale = new Vector3(scale, scale, scale);
