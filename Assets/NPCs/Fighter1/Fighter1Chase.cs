@@ -8,9 +8,29 @@ public class Fighter1Chase : NpcState<Fighter1>
 
     public override void Update()
     {
+        var toTarget = PlayerController.Current.VehicleInstance.transform.position - Npc.VehicleInstance.transform.position;
+
         var pitchYaw = GetPitchYawToPoint(PlayerController.Current.VehicleInstance.transform.position);
         Npc.VehicleInstance.YawThrottle = pitchYaw.y;
         Npc.VehicleInstance.PitchThotttle = pitchYaw.x;
+
+        if (toTarget.sqrMagnitude > 50f*50f)
+        {
+            Npc.VehicleInstance.IsAccelerating = true;
+        }
+        else
+        {
+            Npc.VehicleInstance.IsAccelerating = false;
+        }
+
+        if (toTarget.sqrMagnitude < 10f * 10f)
+        {
+            Npc.VehicleInstance.IsBraking = true;
+        }
+        else
+        {
+            Npc.VehicleInstance.IsBraking = false;
+        }
     }
 
     private Vector2 GetPitchYawToPoint(Vector3 point)
