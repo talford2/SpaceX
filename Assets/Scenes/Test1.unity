@@ -1370,7 +1370,7 @@ MonoBehaviour:
   UniverseCellIndex:
     X: 0
     Y: 0
-    Z: 0
+    Z: 10
 --- !u!114 &1954057692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1382,7 +1382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7806c2c78bc2bb444bf4fc12544f4df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UniversePosition: {x: 0, y: 0, z: 5000}
 --- !u!1001 &1974412611
 Prefab:
   m_ObjectHideFlags: 0
