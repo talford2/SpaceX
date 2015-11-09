@@ -48,7 +48,7 @@ public class Universe : MonoBehaviour
 
 	public void Warp(CellIndex cell, Transform trans)
 	{
-		var diff = cell - PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
+		var diff = cell - FollowCamera.Current.Shiftable.UniverseCellIndex;
 		PlayerController.Current.VehicleInstance.transform.position = trans.position;
 		PlayerController.Current.VehicleInstance.transform.rotation = trans.rotation;
 		FollowCamera.Current.transform.rotation = trans.rotation;
