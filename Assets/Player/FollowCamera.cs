@@ -27,6 +27,9 @@ public class FollowCamera : MonoBehaviour
 
     private Shiftable _shiftable;
 
+    public delegate void OnMoveEvent();
+    public event OnMoveEvent OnMove;
+
     public Shiftable Shiftable { get { return _shiftable; } }
 	private void Awake()
 	{
@@ -58,5 +61,8 @@ public class FollowCamera : MonoBehaviour
         _shiftable.Translate(Target.position + offset - transform.position);
 
 		BackgroundTransform.transform.position = transform.position;
+
+	    if (OnMove != null)
+	        OnMove();
 	}
 }
