@@ -8,10 +8,14 @@ public class Weapon : MonoBehaviour
     public float FireRate = 0.2f;
 
     private float _fireCooldown = 0f;
+    private Transform _shootPoint;
 
     public bool IsTriggered;
 
     public int MissilePoolCount = 20;
+
+    public delegate void OnShootEvent();
+    public OnShootEvent OnShoot;
 
     private int curMissileIndex;
     private List<GameObject> missileInstances;
@@ -42,15 +46,24 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public void SetShootPoint(Transform shootPoint)
+    {
+        _shootPoint = shootPoint;
+    }
+
     public void Fire()
     {
         //Debug.Log("Fire!");
         //var missile = Instantiate(MissilePrefab);
         var missile = missileInstances[curMissileIndex];
-        missile.transform.position = transform.position;
-        missile.transform.rotation = transform.rotation;
+
+        if (OnShoot != null)
+            OnShoot();
+
+        missile.transform.position = _shootPoint.position;
+        missile.transform.rotation = _shootPoint.rotation;
         missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
-        missile.GetComponent<Missile>().Shoot(transform.position);
+        missile.GetComponent<Missile>().Shoot(_shootPoint.position);
 
         // Squirt
         var lr = missile.GetComponent<LineRenderer>();

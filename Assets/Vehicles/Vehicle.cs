@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
@@ -32,7 +33,11 @@ public class Vehicle : MonoBehaviour
     [Header("Weapon")]
     public Weapon CurrentWeapon;
 
+    public List<Transform> ShootPoints;
+
     private Shiftable _shiftable;
+
+    private int _shootPointIndex;
 
     public Shiftable Shiftable
     {
@@ -49,6 +54,16 @@ public class Vehicle : MonoBehaviour
     private void Awake()
     {
         _shiftable = GetComponent<Shiftable>();
+        _shootPointIndex = 0;
+        CurrentWeapon.OnShoot += OnShoot;
+    }
+
+    private void OnShoot()
+    {
+        CurrentWeapon.SetShootPoint(ShootPoints[_shootPointIndex]);
+        _shootPointIndex++;
+        if (_shootPointIndex >= ShootPoints.Count)
+            _shootPointIndex = 0;
     }
 
     private void Update()
