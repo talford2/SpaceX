@@ -25,10 +25,14 @@ public class FollowCamera : MonoBehaviour
     
     private Vector3 offset;
 
+    private Shiftable _shiftable;
+
+    public Shiftable Shiftable { get { return _shiftable; } }
 	private void Awake()
 	{
 		Current = this;
 	    springDistance = 1f;
+	    _shiftable = GetComponent<Shiftable>();
 	}
 
 	private void LateUpdate()
