@@ -31,4 +31,13 @@ public class Utility {
     {
         return InstantiateInParent(gameObject, parent.position, parent.rotation, parent, parent.gameObject.layer);
     }
+
+    public static void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform trans in obj.transform)
+        {
+            SetLayerRecursively(trans.gameObject, layer);
+        }
+    }
 }
