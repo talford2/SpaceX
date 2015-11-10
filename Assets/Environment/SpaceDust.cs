@@ -39,25 +39,16 @@ public class SpaceDust : MonoBehaviour
 
 	public void LateUpdate()
 	{
+		var camTrans = FollowCamera.Current.transform;
+
 		foreach (var dustParticle in _particles)
 		{
 			var sqrMag = (CentreTransform.position - dustParticle.transform.position).sqrMagnitude;
-
 			if (sqrMag > _radiusSqr)
 			{
 				dustParticle.transform.position = Random.onUnitSphere * Radius + CentreTransform.position;
-				dustParticle.transform.rotation = Random.rotation;
 			}
-
-			//dustParticle.transform.LookAt(CentreTransform);
-			//dustParticle.transform.Rotate(Vector3.up, 180f);
-
-			//dustParticle.transform.forward = FollowCamera.Current.transform.forward * -1;
-
-			//var camTrans = FollowCamera.Current.transform;
-			//dustParticle.transform.LookAt(transform.position + camTrans.rotation * Vector3.forward, camTrans.rotation * Vector3.up);
-
-			dustParticle.transform.forward = FollowCamera.Current.transform.forward * -1;
+			dustParticle.transform.LookAt(dustParticle.transform.position + camTrans.rotation * Vector3.forward, camTrans.rotation * Vector3.up);
 		}
 	}
 }
