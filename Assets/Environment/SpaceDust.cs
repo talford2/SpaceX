@@ -39,12 +39,8 @@ public class SpaceDust : MonoBehaviour
 
 	public void LateUpdate()
 	{
-		//var index = 0;
 		foreach (var dustParticle in _particles)
 		{
-			//dustParticle.GetComponent<Renderer>().material.color = Color.red;
-
-			//var sqrMag = (transform.position - CentreTransform.position).sqrMagnitude;
 			var sqrMag = (CentreTransform.position - dustParticle.transform.position).sqrMagnitude;
 
 			if (sqrMag > _radiusSqr)
@@ -52,10 +48,16 @@ public class SpaceDust : MonoBehaviour
 				dustParticle.transform.position = Random.onUnitSphere * Radius + CentreTransform.position;
 				dustParticle.transform.rotation = Random.rotation;
 			}
-			//index++;
-			//Random.seed = index;
-			dustParticle.transform.LookAt(CentreTransform);
-			dustParticle.transform.Rotate(Vector3.up, 180f);
+
+			//dustParticle.transform.LookAt(CentreTransform);
+			//dustParticle.transform.Rotate(Vector3.up, 180f);
+
+			//dustParticle.transform.forward = FollowCamera.Current.transform.forward * -1;
+
+			//var camTrans = FollowCamera.Current.transform;
+			//dustParticle.transform.LookAt(transform.position + camTrans.rotation * Vector3.forward, camTrans.rotation * Vector3.up);
+
+			dustParticle.transform.forward = FollowCamera.Current.transform.forward * -1;
 		}
 	}
 }
