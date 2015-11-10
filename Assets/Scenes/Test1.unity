@@ -192,7 +192,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 282404509}
   - 20: {fileID: 282404513}
-  - 124: {fileID: 282404512}
   - 92: {fileID: 282404511}
   m_Layer: 0
   m_Name: BackgroundCamera
@@ -220,13 +219,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 282404508}
   m_Enabled: 1
---- !u!124 &282404512
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 282404508}
-  m_Enabled: 1
 --- !u!20 &282404513
 Camera:
   m_ObjectHideFlags: 0
@@ -243,8 +235,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 1
-  far clip plane: 1000
+  near clip plane: .100000001
+  far clip plane: 10000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -252,7 +244,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 256
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -323,6 +315,10 @@ Prefab:
     - target: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
@@ -517,6 +513,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
   m_IsPrefabParent: 0
@@ -681,6 +681,10 @@ Prefab:
     - target: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
@@ -1269,7 +1273,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1260329707}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 0
+  m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: 06d0b9a2598f93a4d864b71d7eaf3380, type: 2}
   m_SubsetIndices: 
@@ -1531,6 +1535,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
   m_IsPrefabParent: 0
@@ -1547,7 +1555,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1793718002}
   - 20: {fileID: 1793718006}
-  - 124: {fileID: 1793718005}
   - 92: {fileID: 1793718004}
   m_Layer: 0
   m_Name: DistantCamera
@@ -1575,13 +1582,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1793718001}
   m_Enabled: 1
---- !u!124 &1793718005
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1793718001}
-  m_Enabled: 1
 --- !u!20 &1793718006
 Camera:
   m_ObjectHideFlags: 0
@@ -1599,7 +1599,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: .100000001
-  far clip plane: 1000
+  far clip plane: 10000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1724,7 +1724,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1954057687}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 0
+  m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: 06d0b9a2598f93a4d864b71d7eaf3380, type: 2}
   m_SubsetIndices: 
