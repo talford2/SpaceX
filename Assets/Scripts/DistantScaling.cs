@@ -19,9 +19,8 @@ public class DistantScaling : MonoBehaviour
     private void UpdatePositionAndScale()
     {
         // Scaling
-        var cellDifference = _shiftable.UniverseCellIndex - FollowCamera.Current.Shiftable.UniverseCellIndex;
-        var universeDestination = GetUniversePosition(cellDifference, _shiftable.CellLocalPosition);
-        var toCamera = universeDestination - FollowCamera.Current.transform.position;
+        var worldDestination = GetWorldPosition(_shiftable.UniverseCellIndex, _shiftable.CellLocalPosition);
+        var toCamera = worldDestination - FollowCamera.Current.transform.position;
 
         var distance = toCamera.magnitude;
         var scale = Mathf.Clamp(_maxDistance/distance, 0f, 1f);
@@ -34,13 +33,13 @@ public class DistantScaling : MonoBehaviour
         }
         else
         {
-            // Fix tiny offset here.
-            transform.position = universeDestination;
+            transform.position = worldDestination;
         }
     }
 
-    private Vector3 GetUniversePosition(CellIndex cellIndex, Vector3 positionInCell)
+    private Vector3 GetWorldPosition(CellIndex cellIndex, Vector3 positionInCell)
     {
-        return cellIndex.ToVector3()*Universe.Current.CellSize + positionInCell;// + Vector3.one*Universe.Current.HalfCellSize;
+        var cellDiff = cellIndex - FollowCamera.Current.Shiftable.UniverseCellIndex;
+        return cellDiff.ToVector3() * Universe.Current.CellSize + positionInCell;
     }
 }
