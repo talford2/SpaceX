@@ -38,15 +38,15 @@ public class DistantScaling : MonoBehaviour
 
             // This will only be able to scale objects of a radius up to the _thresholdDistance.
             // Keep the scaled object 1 unit in front of the camera!
-            var scaledDistance = Mathf.Abs(distance - _thresholdDistance - 1f) / _distantScale + 1f; // + _thresholdDistance;
+            var scaledDistance = Mathf.Abs(distance - _thresholdDistance - 1f)/_distantScale + 1f; // + _thresholdDistance;
 
-            var scale = Mathf.Clamp(scaledDistance / distance, 0f, 1f);
+            var scale = Mathf.Clamp(scaledDistance/distance, 0f, 1f);
             transform.localScale = new Vector3(scale, scale, scale);
 
             // Positioning
-                transform.position = FollowCamera.Current.transform.position + toCamera.normalized * scaledDistance;
-                if (gameObject.layer != _distantLayer)
-                    Utility.SetLayerRecursively(gameObject, _distantLayer);
+            transform.position = FollowCamera.Current.transform.position + toCamera.normalized*scaledDistance;
+            if (gameObject.layer != _distantLayer)
+                Utility.SetLayerRecursively(gameObject, _distantLayer);
         }
         else
         {
