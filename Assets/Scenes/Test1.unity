@@ -192,7 +192,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 282404509}
   - 20: {fileID: 282404513}
-  - 124: {fileID: 282404512}
   - 92: {fileID: 282404511}
   m_Layer: 0
   m_Name: BackgroundCamera
@@ -214,13 +213,6 @@ Transform:
   m_Father: {fileID: 2070423338}
   m_RootOrder: 1
 --- !u!92 &282404511
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 282404508}
-  m_Enabled: 1
---- !u!124 &282404512
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1547,7 +1539,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1793718002}
   - 20: {fileID: 1793718006}
-  - 124: {fileID: 1793718005}
   - 92: {fileID: 1793718004}
   m_Layer: 0
   m_Name: DistantCamera
@@ -1569,13 +1560,6 @@ Transform:
   m_Father: {fileID: 2070423338}
   m_RootOrder: 0
 --- !u!92 &1793718004
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1793718001}
-  m_Enabled: 1
---- !u!124 &1793718005
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
