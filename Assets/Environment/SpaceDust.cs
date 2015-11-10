@@ -55,6 +55,7 @@ public class SpaceDust : MonoBehaviour
 			//index++;
 			//Random.seed = index;
 			dustParticle.transform.LookAt(CentreTransform);
+			dustParticle.transform.Rotate(Vector3.up, 180f);
 		}
 	}
 }
