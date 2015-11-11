@@ -29,7 +29,7 @@ public class DistantScaling : MonoBehaviour
     private void UpdatePositionAndScale()
     {
         // Scaling
-        var worldDestination = GetWorldPosition(_shiftable.UniverseCellIndex, _shiftable.CellLocalPosition);
+        var worldDestination = Universe.Current.GetWorldPosition(_shiftable.UniverseCellIndex, _shiftable.CellLocalPosition);
         var toCamera = worldDestination - FollowCamera.Current.transform.position;
 
         if (toCamera.sqrMagnitude > _thresholdDistanceSquared)
@@ -55,11 +55,5 @@ public class DistantScaling : MonoBehaviour
             if (gameObject.layer != _defaultLayer)
                 Utility.SetLayerRecursively(gameObject, _defaultLayer);
         }
-    }
-
-    private Vector3 GetWorldPosition(CellIndex cellIndex, Vector3 positionInCell)
-    {
-        var cellDiff = cellIndex - FollowCamera.Current.Shiftable.UniverseCellIndex;
-        return cellDiff.ToVector3()*Universe.Current.CellSize + positionInCell;
     }
 }

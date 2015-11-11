@@ -74,4 +74,10 @@ public class Universe : MonoBehaviour
 		var cellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
 		GUI.Label(new Rect(50f, 50f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", cellIndex.X, cellIndex.Y, cellIndex.Z));
 	}
+
+    public Vector3 GetWorldPosition(CellIndex cellIndex, Vector3 positionInCell)
+    {
+        var cellDiff = cellIndex - FollowCamera.Current.Shiftable.UniverseCellIndex;
+        return cellDiff.ToVector3() * Current.CellSize + positionInCell;
+    }
 }

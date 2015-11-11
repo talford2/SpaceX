@@ -57,4 +57,9 @@ public class Shiftable : MonoBehaviour
 		if (OnShift != null)
 			OnShift(shiftAmount);
 	}
+
+    public Vector3 GetWorldPosition()
+    {
+        return Universe.Current.GetWorldPosition(UniverseCellIndex, CellLocalPosition);
+    }
 }
