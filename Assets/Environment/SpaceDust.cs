@@ -48,7 +48,8 @@ public class SpaceDust : MonoBehaviour
 			{
 				dustParticle.transform.position = Random.onUnitSphere * Radius + CentreTransform.position;
 			}
-			dustParticle.transform.LookAt(dustParticle.transform.position + camTrans.rotation * Vector3.forward, camTrans.rotation * Vector3.up);
+		    var lookAngle = Quaternion.LookRotation(camTrans.forward, camTrans.up);
+            dustParticle.transform.rotation = Quaternion.Euler(lookAngle.eulerAngles.x, lookAngle.eulerAngles.y, 0f);
 		}
 	}
 }
