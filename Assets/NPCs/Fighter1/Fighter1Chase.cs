@@ -8,28 +8,44 @@ public class Fighter1Chase : NpcState<Fighter1>
 
     public override void Update()
     {
-        var toTarget = PlayerController.Current.VehicleInstance.transform.position - Npc.VehicleInstance.transform.position;
+        var toTarget = PlayerController.Current.VehicleInstance.Shiftable.GetWorldPosition() -  Npc.VehicleInstance.Shiftable.GetWorldPosition();
+        var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
         var pitchYaw = GetPitchYawToPoint(PlayerController.Current.VehicleInstance.transform.position);
         Npc.VehicleInstance.YawThrottle = pitchYaw.y;
         Npc.VehicleInstance.PitchThotttle = pitchYaw.x;
 
-        if (toTarget.sqrMagnitude > 50f*50f)
+        if (dotTarget < 0f)
         {
-            Npc.VehicleInstance.IsAccelerating = true;
+            if (toTarget.sqrMagnitude > 50f*50f)
+            {
+                Npc.VehicleInstance.IsAccelerating = true;
+            }
+            else
+            {
+                Npc.VehicleInstance.IsAccelerating = false;
+            }
+
+            if (toTarget.sqrMagnitude < 10f*10f)
+            {
+                Npc.VehicleInstance.IsBraking = true;
+            }
+            else
+            {
+                Npc.VehicleInstance.IsBraking = false;
+            }
         }
         else
         {
             Npc.VehicleInstance.IsAccelerating = false;
-        }
-
-        if (toTarget.sqrMagnitude < 10f * 10f)
-        {
-            Npc.VehicleInstance.IsBraking = true;
-        }
-        else
-        {
-            Npc.VehicleInstance.IsBraking = false;
+            if (toTarget.sqrMagnitude > 10f * 10f)
+            {
+                Npc.VehicleInstance.IsBraking = true;
+            }
+            else
+            {
+                Npc.VehicleInstance.IsBraking = false;
+            }
         }
     }
 
@@ -47,20 +63,20 @@ public class Fighter1Chase : NpcState<Fighter1>
 
         if (yawDiff < -yawTolerance)
         {
-            yawAmount = Mathf.Clamp(Mathf.Abs(yawDiff) / yawTolerance, 0f, 1f);
+            yawAmount = Mathf.Clamp(Mathf.Abs(yawDiff)/yawTolerance, 0f, 1f);
         }
         else if (yawDiff > yawTolerance)
         {
-            yawAmount = -Mathf.Clamp(Mathf.Abs(yawDiff) / yawTolerance, 0f, 1f);
+            yawAmount = -Mathf.Clamp(Mathf.Abs(yawDiff)/yawTolerance, 0f, 1f);
         }
 
         if (pitchDiff < -pitchTolerance)
         {
-            pitchAmount = Mathf.Clamp(Mathf.Abs(pitchDiff) / pitchTolerance, 0f, 1f);
+            pitchAmount = Mathf.Clamp(Mathf.Abs(pitchDiff)/pitchTolerance, 0f, 1f);
         }
         else if (pitchDiff > pitchTolerance)
         {
-            pitchAmount = -Mathf.Clamp(Mathf.Abs(pitchDiff) / pitchTolerance, 0f, 1f);
+            pitchAmount = -Mathf.Clamp(Mathf.Abs(pitchDiff)/pitchTolerance, 0f, 1f);
         }
 
         return new Vector2(pitchAmount, -yawAmount);
