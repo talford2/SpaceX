@@ -803,6 +803,7 @@ MonoBehaviour:
   PlayerVehicles:
   - {fileID: 1832493475}
   InvertY: 1
+  HideMouse: 0
 --- !u!4 &1064748905
 Transform:
   m_ObjectHideFlags: 0

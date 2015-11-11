@@ -20,6 +20,8 @@ public class Vehicle : MonoBehaviour
 
 	public float YawSpeed = 5f;
 
+    public float RollSpeed = 100f;
+
 
 	[Header("Control Settings")]
 	public bool IsAccelerating = false;
@@ -29,6 +31,8 @@ public class Vehicle : MonoBehaviour
 	public float YawThrottle = 0f;
 
 	public float PitchThotttle = 0f;
+
+    public float RollThrottle = 0f;
 
 	[Header("Weapon")]
 	public Weapon WeaponPrefab;
@@ -108,8 +112,9 @@ public class Vehicle : MonoBehaviour
         }
 
         // Turning
-        transform.rotation *= Quaternion.Euler(0, Mathf.Clamp(YawThrottle, -1f, 1f)*YawSpeed*Time.deltaTime, 0);
-        transform.rotation *= Quaternion.Euler(Mathf.Clamp(PitchThotttle, -1f, 1f)*PitchSpeed*Time.deltaTime, 0, 0);
+        transform.rotation *= Quaternion.AngleAxis(Mathf.Clamp(YawThrottle, -1f, 1f)*YawSpeed*Time.deltaTime, Vector3.up);
+        transform.rotation *= Quaternion.AngleAxis(Mathf.Clamp(PitchThotttle, -1f, 1f)*PitchSpeed*Time.deltaTime, Vector3.right);
+        transform.rotation *= Quaternion.AngleAxis(Mathf.Clamp(RollThrottle, -1f, 1f)*-RollSpeed*Time.deltaTime, Vector3.forward);
 
         //transform.position += transform.forward * CurrentSpeed * Time.deltaTime;
         _velocity = transform.forward*CurrentSpeed;

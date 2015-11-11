@@ -11,17 +11,20 @@ public class PlayerController : MonoBehaviour
 	private int _curVehicleIndex = 0;
 
 	public bool InvertY = false;
+    public bool HideMouse = false;
 
-	private void Awake()
-	{
-		_playVehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
-		_current = this;
-	    //Cursor.visible = false;
+    private void Awake()
+    {
+        _playVehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
+        _current = this;
+        Cursor.visible = !HideMouse;
+        if (HideMouse)
+            Cursor.lockState = CursorLockMode.Locked;
 
-		PlayerVehicles.Insert(0, _playVehicleInstance);
-	}
+        PlayerVehicles.Insert(0, _playVehicleInstance);
+    }
 
-	private void Start()
+    private void Start()
 	{
 		FollowCamera.Current.Target = _playVehicleInstance.transform;
 	}
@@ -37,31 +40,20 @@ public class PlayerController : MonoBehaviour
             _playVehicleInstance.PitchThotttle = Input.GetAxis("Vertical") + Input.GetAxis("MouseVertical");
         }
         _playVehicleInstance.YawThrottle = Input.GetAxis("Horizontal") + Input.GetAxis("MouseHorizontal");
-
-        //_playVehicleInstance.CurrentWeapon.IsTriggered = true;
+        _playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
         _playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
-        //Debug.Log(_playVehicleInstance.CurrentWeapon.IsTriggered);
-        //if (Input.GetAxis("FireTrigger") != 0)
-        //{
-        //	Debug.LogFormat("FireTrigger 1 : {0}", Input.GetAxis("FireTrigger"));
-        //	_playVehicleInstance.CurrentWeapon.IsTriggered = true;
-        //}
-
-        var roll = Input.GetAxis("Roll");
-        Debug.Log("roll = " + roll);
-        _playVehicleInstance.transform.rotation *= Quaternion.AngleAxis(roll*-100f*Time.deltaTime, Vector3.forward);
 
         _playVehicleInstance.IsAccelerating = false;
-        if (Input.GetButton("Boost"))
+        if (Input.GetButton("Boost") || Input.GetButton("KeyboardBoost"))
         {
             //Debug.Log("Boost!");
             _playVehicleInstance.IsAccelerating = true;
         }
 
         _playVehicleInstance.IsBraking = false;
-        if (Input.GetButton("Brake"))
+        if (Input.GetButton("Brake") || Input.GetButton("KeyboardBrake"))
         {
-            Debug.Log("Brake!");
+            //Debug.Log("Brake!");
             _playVehicleInstance.IsBraking = true;
         }
 
@@ -70,7 +62,7 @@ public class PlayerController : MonoBehaviour
             Application.Quit();
         }
 
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             _curVehicleIndex++;
             if (_curVehicleIndex >= PlayerVehicles.Count)
