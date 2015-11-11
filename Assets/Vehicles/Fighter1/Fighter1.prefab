@@ -244,7 +244,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182838}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: ee7cb4cbe80480c47860397cf4349e40, type: 2}
@@ -2606,6 +2606,10 @@ Prefab:
       value: 
       objectReference: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}
