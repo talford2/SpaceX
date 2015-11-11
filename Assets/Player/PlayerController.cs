@@ -7,11 +7,8 @@ public class PlayerController : MonoBehaviour
 
 	private Vehicle _playVehicleInstance;
 
-
-
 	public List<Vehicle> PlayerVehicles;
 	private int _curVehicleIndex = 0;
-
 
 	public bool InvertY = false;
 
@@ -19,7 +16,7 @@ public class PlayerController : MonoBehaviour
 	{
 		_playVehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
 		_current = this;
-
+	    Cursor.visible = false;
 
 		PlayerVehicles.Insert(0, _playVehicleInstance);
 	}
