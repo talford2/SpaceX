@@ -47,6 +47,9 @@ public class Vehicle : MonoBehaviour
 
     private Vector3 _velocity;
 
+    private readonly float _yawClamp = 2f;
+    private readonly float _pitchClamp = 2f;
+
 	public Weapon CurrentWeapon { get { return _weaponInstance; } }
 
 	public Shiftable Shiftable
@@ -112,8 +115,8 @@ public class Vehicle : MonoBehaviour
         }
 
         // Turning
-        transform.rotation *= Quaternion.AngleAxis(YawThrottle*YawSpeed*Time.deltaTime, Vector3.up);
-        transform.rotation *= Quaternion.AngleAxis(PitchThotttle*PitchSpeed*Time.deltaTime, Vector3.right);
+        transform.rotation *= Quaternion.AngleAxis(Mathf.Clamp(YawThrottle, -_yawClamp, _yawClamp)*YawSpeed*Time.deltaTime, Vector3.up);
+        transform.rotation *= Quaternion.AngleAxis(Mathf.Clamp(PitchThotttle, -_pitchClamp, _pitchClamp) * PitchSpeed * Time.deltaTime, Vector3.right);
         transform.rotation *= Quaternion.AngleAxis(Mathf.Clamp(RollThrottle, -1f, 1f)*-RollSpeed*Time.deltaTime, Vector3.forward);
 
         //transform.position += transform.forward * CurrentSpeed * Time.deltaTime;
