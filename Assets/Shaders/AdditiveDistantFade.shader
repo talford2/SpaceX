@@ -1,77 +1,93 @@
 Shader "Custom/AdditiveDistantFade" {
 	Properties{
-		_Color("Tint Color", Color) = (0.5,0.5,0.5,0.5)
+		_Bolor("Tint Color", Color) = (0.5,0.5,0.5,0.5)
 		_MainTex("Particle Texture", 2D) = "white" {}
-		_FadeDistance("Fade Start Distance", float) = 0.5
+
+		_A("A", float) = 0
+		_B("B", float) = 30
+		_C("C", float) = 200
+		_D("D", float) = 80
 	}
 
-		SubShader{
-			Tags {"Queue" = "Overlay" "IgnoreProjector" = "True" "RenderType" = "Transparent"}
-			Blend SrcAlpha One
-			AlphaTest Greater .01
-			ColorMask RGB
-			Cull Off Lighting Off ZWrite Off Fog{ Color(0,0,0,0) }
+	SubShader
+	{
+		Tags{ "Queue" = "Overlay" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
+		Blend SrcAlpha One
+		AlphaTest Greater .01
+		ColorMask RGB
+		Cull Off Lighting Off ZWrite Off Fog{ Color(0,0,0,0) }
 
-			//Blend SrcAlpha OneMinusSrcAlpha
-			Pass {
-				CGPROGRAM
-					#pragma vertex vert
-					#pragma fragment frag
-					#pragma target 3.0
-					#include "UnityCG.cginc"
+		Pass
+		{
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#pragma target 3.0
+			#include "UnityCG.cginc"
 
-					sampler2D _MainTex;
-					uniform float _FadeDistance;
-					fixed4 _Color;
+			sampler2D _MainTex;
+			uniform float _A;
+			uniform float _B;
+			uniform float _C;
+			uniform float _D;
 
-					struct vertInput {
-						float4 vertex : POSITION;
-						float4 texcoord : TEXCOORD0;
-						float4 color : COLOR;
-					};
+			fixed4 _Bolor;
 
+			struct vertInput {
+				float4 vertex : POSITION;
+				float4 texcoord : TEXCOORD0;
+				float4 color : COLOR;
+			};
 
+			struct fragInput {
+				float4 pos : SV_POSITION;
+				float2	texcoord : TEXCOORD0;
+				float4 color : COLOR;
+			};
 
-					struct fragInput {
-						float4 pos : SV_POSITION;
-						float2	texcoord : TEXCOORD0;
-						float4 color : COLOR;
-					};
+			float4 _MainTex_ST;
 
-					float4 _MainTex_ST;
+			fragInput vert(vertInput v) {
+				fragInput o;
+				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 
-					fragInput vert(vertInput v) {
-						fragInput o;
-						o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-						//o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
+				o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
 
-						//o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
-						o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+				float4 viewPos = mul(UNITY_MATRIX_MV, v.vertex);
+				float4 vertexPos = mul(UNITY_MATRIX_MV, float4(0,0,0,0));
 
-						float4 viewPos = mul(UNITY_MATRIX_MV, v.vertex);
-						float4 vertexPos = mul(UNITY_MATRIX_MV, float4(0,0,0,0));
+				float dist = distance(viewPos, vertexPos);
 
-						float alpha = 1 - (distance(viewPos, vertexPos) / _FadeDistance);
+				float alpha = 0;
 
-						alpha = min(alpha, 1);
-						alpha = max(alpha, 0);
+				if (dist > _A && dist < _D)
+				{
+					alpha = 1;
 
-						o.color = float4(v.color.rgb, v.color.a * alpha);
-						return o;
+					// Close transition
+					if (dist > _A && dist < _B)
+					{
+						alpha = (dist - _A) / (_B - _A);
 					}
 
-					/*float4 frag(fragInput i) : COLOR {
-						half4 texcol = tex2D(_MainTex, i.texcoord);
-						return texcol * i.color;
-					}*/
-
-					fixed4 frag(fragInput i) : SV_Target {
-						return _Color * tex2D(_MainTex, i.texcoord) * i.color;
-					//return texcol * i.color;
+					// Far transition
+					if (dist > _C && dist < _D)
+					{
+						alpha = 1 - (dist - _C) / (_D - _C);
 					}
+				}
+
+				alpha = clamp(alpha, 0,1);
+
+				o.color = float4(v.color.rgb, v.color.a * alpha);
+				return o;
+			}
+
+			fixed4 frag(fragInput i) : SV_Target{
+				return _Bolor * tex2D(_MainTex, i.texcoord) * i.color;
+			}
 			ENDCG
 		}
-		}
-
-			Fallback "Particles/Alpha Blended"
+	}
+	Fallback "Particles/Alpha Blended"
 }
