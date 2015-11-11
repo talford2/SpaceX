@@ -57,8 +57,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DustParticlePrefab: {fileID: 177002, guid: 76809b467583d6c418af45ba8bfdabc5, type: 2}
   CentreTransform: {fileID: 0}
-  DustParticleCount: 1000
-  Radius: 1000
+  DustParticleCount: 30
+  Radius: 1200
+  Opacity: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

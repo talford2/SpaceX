@@ -1417,10 +1417,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 11458204, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
-      propertyPath: DustParticleCount
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
   m_IsPrefabParent: 0
