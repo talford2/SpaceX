@@ -13,6 +13,8 @@ public class Missile : MonoBehaviour
 
 	private GameObject _owner;
 	private Vector3 _shootFrom;
+    private Vector3 _initVelocity;
+    private float _initSpeed;
 	private Vector3 _hitPosition;
 
 	private void Awake()
@@ -32,7 +34,7 @@ public class Missile : MonoBehaviour
 	{
 		if (_isLive)
 		{
-			var displacement = MissileSpeed * Time.deltaTime;
+			var displacement = (_initSpeed+MissileSpeed) * Time.deltaTime;
 			if (!_hasHit)
 			{
 				var missileRay = new Ray(transform.position, transform.forward);
@@ -99,11 +101,13 @@ public class Missile : MonoBehaviour
 		_hasHit = false;
 	}
 
-	public void Shoot(Vector3 shootFrom)
+	public void Shoot(Vector3 shootFrom, Vector3 initVelocity)
 	{
 		_isLive = true;
 		_lineRenderer.enabled = true;
 		_shootFrom = shootFrom;
+	    _initVelocity = initVelocity;
+	    _initSpeed = _initVelocity.magnitude;
 		_hasHit = false;
 		UpdateLineRenderer();
 	}

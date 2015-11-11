@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
 
     private float _fireCooldown = 0f;
     private Transform _shootPoint;
+    private Vector3 _initVelocity;
 
     public bool IsTriggered;
 
@@ -47,9 +48,10 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void SetShootPoint(Transform shootPoint)
+    public void SetShootPoint(Transform shootPoint, Vector3 initVelocity)
     {
         _shootPoint = shootPoint;
+        _initVelocity = initVelocity;
     }
 
     public void Fire()
@@ -62,7 +64,7 @@ public class Weapon : MonoBehaviour
         missile.transform.position = _shootPoint.position;
         missile.transform.rotation = _shootPoint.rotation;
         missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
-        missile.GetComponent<Missile>().Shoot(_shootPoint.position);
+        missile.GetComponent<Missile>().Shoot(_shootPoint.position, _initVelocity);
 
         curMissileIndex++;
         if (curMissileIndex >= missileInstances.Count)

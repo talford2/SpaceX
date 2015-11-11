@@ -41,6 +41,8 @@ public class Vehicle : MonoBehaviour
 
 	private Weapon _weaponInstance;
 
+    private Vector3 _velocity;
+
 	public Weapon CurrentWeapon { get { return _weaponInstance; } }
 
 	public Shiftable Shiftable
@@ -67,7 +69,7 @@ public class Vehicle : MonoBehaviour
 
 	private void OnShoot()
 	{
-		_weaponInstance.SetShootPoint(ShootPoints[_shootPointIndex]);
+		_weaponInstance.SetShootPoint(ShootPoints[_shootPointIndex], _velocity);
 		_shootPointIndex++;
 		if (_shootPointIndex >= ShootPoints.Count)
 			_shootPointIndex = 0;
@@ -110,6 +112,7 @@ public class Vehicle : MonoBehaviour
 		transform.rotation *= Quaternion.Euler(PitchThotttle * PitchSpeed * Time.deltaTime, 0, 0);
 
 		//transform.position += transform.forward * CurrentSpeed * Time.deltaTime;
-		_shiftable.Translate(transform.forward * CurrentSpeed * Time.deltaTime);
+	    _velocity = transform.forward*CurrentSpeed;
+        _shiftable.Translate(_velocity * Time.deltaTime);
 	}
 }
