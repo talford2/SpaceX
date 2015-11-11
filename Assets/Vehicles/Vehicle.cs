@@ -127,11 +127,12 @@ public class Vehicle : MonoBehaviour
         _velocity = transform.forward*CurrentSpeed;
         _shiftable.Translate(_velocity*Time.deltaTime);
 
+        // Reduce flare brightness over distance from camera
         foreach (var thruster in ThrusterFlares)
         {
-            var toPlayer = PlayerController.Current.VehicleInstance.Shiftable.GetWorldPosition() - Shiftable.GetWorldPosition();
+            var toPlayer = FollowCamera.Current.Shiftable.GetWorldPosition() - Shiftable.GetWorldPosition();
             const float theFactor = 2000f;
-            var capFlareBright = maxFlareBrightness / Mathf.Clamp(toPlayer.sqrMagnitude / theFactor, 1, Mathf.Infinity);
+            var capFlareBright = maxFlareBrightness / Mathf.Clamp(toPlayer.sqrMagnitude / theFactor, 1f, Mathf.Infinity);
             thruster.brightness = 1f * capFlareBright;
         }
     }
