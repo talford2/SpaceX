@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 	{
 		_playVehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
 		_current = this;
-	    Cursor.visible = false;
+	    //Cursor.visible = false;
 
 		PlayerVehicles.Insert(0, _playVehicleInstance);
 	}
@@ -26,68 +26,66 @@ public class PlayerController : MonoBehaviour
 		FollowCamera.Current.Target = _playVehicleInstance.transform;
 	}
 
-	private void Update()
-	{
-		if (InvertY)
-		{
-			_playVehicleInstance.PitchThotttle = Input.GetAxis("Vertical") * -1;
-		}
-		else
-		{
-			_playVehicleInstance.PitchThotttle = Input.GetAxis("Vertical");
-		}
-		_playVehicleInstance.YawThrottle = Input.GetAxis("Horizontal");
+    private void Update()
+    {
+        if (InvertY)
+        {
+            _playVehicleInstance.PitchThotttle = (Input.GetAxis("Vertical") + Input.GetAxis("MouseVertical"))*-1;
+        }
+        else
+        {
+            _playVehicleInstance.PitchThotttle = Input.GetAxis("Vertical") + Input.GetAxis("MouseVertical");
+        }
+        _playVehicleInstance.YawThrottle = Input.GetAxis("Horizontal") + Input.GetAxis("MouseHorizontal");
 
-		//_playVehicleInstance.CurrentWeapon.IsTriggered = true;
-		_playVehicleInstance.CurrentWeapon.IsTriggered = Input.GetAxis("FireTrigger") > 0;
-		//Debug.Log(_playVehicleInstance.CurrentWeapon.IsTriggered);
-		//if (Input.GetAxis("FireTrigger") != 0)
-		//{
-		//	Debug.LogFormat("FireTrigger 1 : {0}", Input.GetAxis("FireTrigger"));
-		//	_playVehicleInstance.CurrentWeapon.IsTriggered = true;
-		//}
+        //_playVehicleInstance.CurrentWeapon.IsTriggered = true;
+        _playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
+        //Debug.Log(_playVehicleInstance.CurrentWeapon.IsTriggered);
+        //if (Input.GetAxis("FireTrigger") != 0)
+        //{
+        //	Debug.LogFormat("FireTrigger 1 : {0}", Input.GetAxis("FireTrigger"));
+        //	_playVehicleInstance.CurrentWeapon.IsTriggered = true;
+        //}
 
-		var roll = Input.GetAxis("Roll");
-		Debug.Log("roll = " + roll);
-		_playVehicleInstance.transform.rotation *= Quaternion.AngleAxis(roll * -100f * Time.deltaTime, Vector3.forward);
-		
+        var roll = Input.GetAxis("Roll");
+        Debug.Log("roll = " + roll);
+        _playVehicleInstance.transform.rotation *= Quaternion.AngleAxis(roll*-100f*Time.deltaTime, Vector3.forward);
 
+        _playVehicleInstance.IsAccelerating = false;
+        if (Input.GetButton("Boost"))
+        {
+            //Debug.Log("Boost!");
+            _playVehicleInstance.IsAccelerating = true;
+        }
 
-		_playVehicleInstance.IsAccelerating = false;
-		if (Input.GetButton("Boost"))
-		{
-			//Debug.Log("Boost!");
-			_playVehicleInstance.IsAccelerating = true;
-		}
+        _playVehicleInstance.IsBraking = false;
+        if (Input.GetButton("Brake"))
+        {
+            Debug.Log("Brake!");
+            _playVehicleInstance.IsBraking = true;
+        }
 
-		_playVehicleInstance.IsBraking = false;
-		if (Input.GetButton("Brake"))
-		{
-			Debug.Log("Brake!");
-			_playVehicleInstance.IsBraking = true;
-		}
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 
-		if (Input.GetKey(KeyCode.Escape))
-		{
-			Application.Quit();
-		}
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            _curVehicleIndex++;
+            if (_curVehicleIndex >= PlayerVehicles.Count)
+            {
+                _curVehicleIndex = 0;
+            }
+            _playVehicleInstance = PlayerVehicles[_curVehicleIndex];
+            FollowCamera.Current.Target = _playVehicleInstance.transform;
+        }
 
-		if (Input.GetKeyUp(KeyCode.A))
-		{
-			_curVehicleIndex++;
-			if (_curVehicleIndex >= PlayerVehicles.Count)
-			{
-				_curVehicleIndex = 0;
-			}
-			_playVehicleInstance = PlayerVehicles[_curVehicleIndex];
-			FollowCamera.Current.Target = _playVehicleInstance.transform;
-		}
+        //var vehicle
+        // Check for shifting
+    }
 
-		//var vehicle
-		// Check for shifting
-	}
-
-	public bool InPlayerActiveCells(CellIndex checkCell)
+    public bool InPlayerActiveCells(CellIndex checkCell)
 	{
 		var playerCellIndex = _playVehicleInstance.Shiftable.UniverseCellIndex;
 		for (var x = -1; x < 2; x++)

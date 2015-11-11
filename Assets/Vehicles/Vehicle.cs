@@ -75,44 +75,44 @@ public class Vehicle : MonoBehaviour
 			_shootPointIndex = 0;
 	}
 
-	private void Update()
-	{
-		// Accelerating
-		if (IsAccelerating && CurrentSpeed < MaxSpeed)
-		{
-			CurrentSpeed += Acceleration * Time.deltaTime;
-			CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
-		}
+    private void Update()
+    {
+        // Accelerating
+        if (IsAccelerating && CurrentSpeed < MaxSpeed)
+        {
+            CurrentSpeed += Acceleration*Time.deltaTime;
+            CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
+        }
 
-		// Braking
-		if (IsBraking && CurrentSpeed > MinSpeed)
-		{
-			CurrentSpeed -= Brake * Time.deltaTime;
-			CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
-		}
+        // Braking
+        if (IsBraking && CurrentSpeed > MinSpeed)
+        {
+            CurrentSpeed -= Brake*Time.deltaTime;
+            CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
+        }
 
-		// Idling
-		if (!IsAccelerating && !IsBraking)
-		{
-			if (CurrentSpeed > IdleSpeed)
-			{
-				CurrentSpeed -= Brake * Time.deltaTime;
-				CurrentSpeed = Mathf.Max(IdleSpeed, CurrentSpeed);
-			}
+        // Idling
+        if (!IsAccelerating && !IsBraking)
+        {
+            if (CurrentSpeed > IdleSpeed)
+            {
+                CurrentSpeed -= Brake*Time.deltaTime;
+                CurrentSpeed = Mathf.Max(IdleSpeed, CurrentSpeed);
+            }
 
-			if (CurrentSpeed < IdleSpeed)
-			{
-				CurrentSpeed += Acceleration * Time.deltaTime;
-				CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
-			}
-		}
+            if (CurrentSpeed < IdleSpeed)
+            {
+                CurrentSpeed += Acceleration*Time.deltaTime;
+                CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
+            }
+        }
 
-		// Turning
-		transform.rotation *= Quaternion.Euler(0, YawThrottle * YawSpeed * Time.deltaTime, 0);
-		transform.rotation *= Quaternion.Euler(PitchThotttle * PitchSpeed * Time.deltaTime, 0, 0);
+        // Turning
+        transform.rotation *= Quaternion.Euler(0, Mathf.Clamp(YawThrottle, -1f, 1f)*YawSpeed*Time.deltaTime, 0);
+        transform.rotation *= Quaternion.Euler(Mathf.Clamp(PitchThotttle, -1f, 1f)*PitchSpeed*Time.deltaTime, 0, 0);
 
-		//transform.position += transform.forward * CurrentSpeed * Time.deltaTime;
-	    _velocity = transform.forward*CurrentSpeed;
-        _shiftable.Translate(_velocity * Time.deltaTime);
-	}
+        //transform.position += transform.forward * CurrentSpeed * Time.deltaTime;
+        _velocity = transform.forward*CurrentSpeed;
+        _shiftable.Translate(_velocity*Time.deltaTime);
+    }
 }
