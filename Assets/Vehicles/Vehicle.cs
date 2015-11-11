@@ -39,6 +39,9 @@ public class Vehicle : MonoBehaviour
 
 	public List<Transform> ShootPoints;
 
+    [Header("Other")]
+    public List<LensFlare> ThrusterFlares;
+
 	private Shiftable _shiftable;
 
 	private int _shootPointIndex;
@@ -50,6 +53,7 @@ public class Vehicle : MonoBehaviour
     private readonly float _yawClamp = 2f;
     private readonly float _pitchClamp = 2f;
 
+    private float maxFlareBrightness = 30f;
 	public Weapon CurrentWeapon { get { return _weaponInstance; } }
 
 	public Shiftable Shiftable
@@ -122,5 +126,13 @@ public class Vehicle : MonoBehaviour
         //transform.position += transform.forward * CurrentSpeed * Time.deltaTime;
         _velocity = transform.forward*CurrentSpeed;
         _shiftable.Translate(_velocity*Time.deltaTime);
+
+        foreach (var thruster in ThrusterFlares)
+        {
+            var toPlayer = PlayerController.Current.VehicleInstance.Shiftable.GetWorldPosition() - Shiftable.GetWorldPosition();
+            const float theFactor = 2000f;
+            var capFlareBright = maxFlareBrightness / Mathf.Clamp(toPlayer.sqrMagnitude / theFactor, 1, Mathf.Infinity);
+            thruster.brightness = 1f * capFlareBright;
+        }
     }
 }
