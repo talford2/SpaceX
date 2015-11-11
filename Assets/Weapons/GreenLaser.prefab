@@ -41,8 +41,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586daa87f055a7b40a956bca24299873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissileLength: 6
+  MissileLength: 12
   MissileSpeed: 400
+  MissileDamage: 5
 --- !u!114 &11443858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,6 +106,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MissileSpeed
       value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MissileLength
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
