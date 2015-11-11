@@ -112,8 +112,8 @@ public class Vehicle : MonoBehaviour
         }
 
         // Turning
-        transform.rotation *= Quaternion.AngleAxis(Mathf.Clamp(YawThrottle, -1f, 1f)*YawSpeed*Time.deltaTime, Vector3.up);
-        transform.rotation *= Quaternion.AngleAxis(Mathf.Clamp(PitchThotttle, -1f, 1f)*PitchSpeed*Time.deltaTime, Vector3.right);
+        transform.rotation *= Quaternion.AngleAxis(YawThrottle*YawSpeed*Time.deltaTime, Vector3.up);
+        transform.rotation *= Quaternion.AngleAxis(PitchThotttle*PitchSpeed*Time.deltaTime, Vector3.right);
         transform.rotation *= Quaternion.AngleAxis(Mathf.Clamp(RollThrottle, -1f, 1f)*-RollSpeed*Time.deltaTime, Vector3.forward);
 
         //transform.position += transform.forward * CurrentSpeed * Time.deltaTime;
