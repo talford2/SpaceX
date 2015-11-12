@@ -23,14 +23,14 @@ public class DistantScaling : MonoBehaviour
 
     private void Start()
     {
-        FollowCamera.Current.OnMove += UpdatePositionAndScale;
+        Universe.Current.ViewPort.OnMove += UpdatePositionAndScale;
     }
 
     private void UpdatePositionAndScale()
     {
         // Scaling
         var worldDestination = Universe.Current.GetWorldPosition(_shiftable.UniverseCellIndex, _shiftable.CellLocalPosition);
-        var toCamera = worldDestination - FollowCamera.Current.transform.position;
+        var toCamera = worldDestination - Universe.Current.ViewPort.transform.position;
 
         if (toCamera.sqrMagnitude > _thresholdDistanceSquared)
         {
@@ -44,7 +44,7 @@ public class DistantScaling : MonoBehaviour
             transform.localScale = new Vector3(scale, scale, scale);
 
             // Positioning
-            transform.position = FollowCamera.Current.transform.position + toCamera.normalized*scaledDistance;
+            transform.position = Universe.Current.ViewPort.transform.position + toCamera.normalized * scaledDistance;
             if (gameObject.layer != _distantLayer)
                 Utility.SetLayerRecursively(gameObject, _distantLayer);
         }

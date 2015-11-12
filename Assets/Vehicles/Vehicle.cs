@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Vehicle : MonoBehaviour
@@ -50,6 +51,7 @@ public class Vehicle : MonoBehaviour
 
     private Vector3 _velocity;
 
+    private readonly float _aimDistance = 1000f;
     private readonly float _yawClamp = 2f;
     private readonly float _pitchClamp = 2f;
 
@@ -67,6 +69,16 @@ public class Vehicle : MonoBehaviour
 			return _shiftable;
 		}
 	}
+
+    public Vector3 GetShootPointCentre()
+    {
+        return ShootPoints.Aggregate(Vector3.zero, (current, shootPoint) => current + shootPoint.position)/ShootPoints.Count;
+    }
+
+    public Vector3 GetAimPosition()
+    {
+        return GetShootPointCentre() + _aimDistance*transform.forward;
+    }
 
 	private void Awake()
 	{
@@ -135,7 +147,7 @@ public class Vehicle : MonoBehaviour
         // Reduce flare brightness over distance from camera
         foreach (var thruster in ThrusterFlares)
         {
-            var toPlayer = FollowCamera.Current.Shiftable.GetWorldPosition() - Shiftable.GetWorldPosition();
+            var toPlayer = Universe.Current.ViewPort.Shiftable.GetWorldPosition() - Shiftable.GetWorldPosition();
             const float theFactor = 2000f;
             var capFlareBright = maxFlareBrightness / Mathf.Clamp(toPlayer.sqrMagnitude / theFactor, 1f, Mathf.Infinity);
             thruster.brightness = 1f * capFlareBright;

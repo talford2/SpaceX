@@ -34,12 +34,12 @@ public class SpaceDust : MonoBehaviour
 			_particles.Add(inst);
 		}
 
-		CentreTransform = FollowCamera.Current.transform;
+	    CentreTransform = Universe.Current.ViewPort.transform;
 	}
 
 	public void LateUpdate()
 	{
-		var camTrans = FollowCamera.Current.transform;
+        var camTrans = Universe.Current.ViewPort.transform;
 
 		foreach (var dustParticle in _particles)
 		{

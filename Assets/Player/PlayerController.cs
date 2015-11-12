@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
 	{
-		FollowCamera.Current.Target = _playVehicleInstance.transform;
+        //Universe.Current.ViewPort.Tar
+		//FollowCamera.Current.Target = _playVehicleInstance.transform;
 	}
 
     private void Update()
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
                 _curVehicleIndex = 0;
             }
             _playVehicleInstance = PlayerVehicles[_curVehicleIndex];
-            FollowCamera.Current.Target = _playVehicleInstance.transform;
+            //FollowCamera.Current.Target = _playVehicleInstance.transform;
         }
 
         //var vehicle

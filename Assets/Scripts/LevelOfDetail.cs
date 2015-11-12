@@ -36,7 +36,7 @@ public class LevelOfDetail : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        var toCamera = transform.position - FollowCamera.Current.transform.position;
+        var toCamera = transform.position - Universe.Current.ViewPort.transform.position;
 
         var curDisConfig = Distances[0];
 

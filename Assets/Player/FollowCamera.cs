@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 
-public class FollowCamera : MonoBehaviour
+public class FollowCamera : UniverseCamera
 {
 	public Transform Target;
-
-	public static FollowCamera Current;
 
 	public Transform BackgroundTransform;
 
@@ -25,20 +23,13 @@ public class FollowCamera : MonoBehaviour
     
     private Vector3 offset;
 
-    private Shiftable _shiftable;
-
-    public delegate void OnMoveEvent();
-    public event OnMoveEvent OnMove;
-
-    public Shiftable Shiftable { get { return _shiftable; } }
-	private void Awake()
+	private void Start()
 	{
-		Current = this;
 	    springDistance = 1f;
-	    _shiftable = GetComponent<Shiftable>();
+	    Target = PlayerController.Current.VehicleInstance.transform;
 	}
 
-	private void LateUpdate()
+	public override void Move()
 	{
         transform.rotation = Quaternion.Lerp(transform.rotation, Target.rotation, RotationCatchup * Time.deltaTime);
 
@@ -61,8 +52,5 @@ public class FollowCamera : MonoBehaviour
         _shiftable.Translate(Target.position + offset - transform.position);
 
 		BackgroundTransform.transform.position = transform.position;
-
-	    if (OnMove != null)
-	        OnMove();
 	}
 }

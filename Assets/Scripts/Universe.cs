@@ -9,6 +9,8 @@ public class Universe : MonoBehaviour
 
 	public Shiftable PlayerSpawnPosition;
 
+    public UniverseCamera ViewPort;
+
 	public static List<Shiftable> ShiftableItems;
 
 	private static Universe _current;
@@ -35,7 +37,7 @@ public class Universe : MonoBehaviour
 		PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
 		PlayerController.Current.VehicleInstance.transform.position = PlayerSpawnPosition.transform.position;
 
-	    FollowCamera.Current.Shiftable.OnCellIndexChange += Shift;
+	    ViewPort.Shiftable.OnCellIndexChange += Shift;
 	}
 
 	public void Shift(CellIndex delta)
@@ -48,10 +50,10 @@ public class Universe : MonoBehaviour
 
 	public void Warp(CellIndex cell, Transform trans)
 	{
-		var diff = cell - FollowCamera.Current.Shiftable.UniverseCellIndex;
+        var diff = cell - ViewPort.Shiftable.UniverseCellIndex;
 		PlayerController.Current.VehicleInstance.transform.position = trans.position;
 		PlayerController.Current.VehicleInstance.transform.rotation = trans.rotation;
-		FollowCamera.Current.transform.rotation = trans.rotation;
+	    ViewPort.transform.rotation = trans.rotation;
 		Shift(diff);
 	}
 
@@ -77,7 +79,7 @@ public class Universe : MonoBehaviour
 
     public Vector3 GetWorldPosition(CellIndex cellIndex, Vector3 positionInCell)
     {
-        var cellDiff = cellIndex - FollowCamera.Current.Shiftable.UniverseCellIndex;
+        var cellDiff = cellIndex - ViewPort.Shiftable.UniverseCellIndex;
         return cellDiff.ToVector3() * Current.CellSize + positionInCell;
     }
 }

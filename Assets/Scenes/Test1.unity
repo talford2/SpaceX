@@ -778,7 +778,7 @@ MonoBehaviour:
   PlayerVehicles:
   - {fileID: 1832493475}
   InvertY: 1
-  HideMouse: 1
+  HideMouse: 0
 --- !u!4 &1064748905
 Transform:
   m_ObjectHideFlags: 0
@@ -821,6 +821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CellSize: 500
   PlayerSpawnPosition: {fileID: 624703671}
+  ViewPort: {fileID: 2070423339}
 --- !u!4 &1097665390
 Transform:
   m_ObjectHideFlags: 0
@@ -1968,7 +1969,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2070423333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2243e5c4af9b47649919a1ff47d39e3e, type: 3}
+  m_Script: {fileID: 11500000, guid: df952a2f27f11914da8afe55bfc0677d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
