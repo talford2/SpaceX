@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        var mouseVertical = 1000f*(Input.GetAxis("MouseVertical")/Screen.width)/screenAspect;
+        var mouseVertical = 1000f*(Input.GetAxis("MouseVertical")/Screen.width)*screenAspect;
         var mouseHorizontal = 1000f*Input.GetAxis("MouseHorizontal")/Screen.height;
 
         if (InvertY)
