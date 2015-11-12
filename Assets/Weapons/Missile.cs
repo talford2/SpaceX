@@ -39,7 +39,7 @@ public class Missile : MonoBehaviour
 			{
 				var missileRay = new Ray(transform.position, transform.forward);
 				RaycastHit missileHit;
-				if (Physics.Raycast(missileRay, out missileHit, displacement))
+				if (Physics.Raycast(missileRay, out missileHit, displacement, ~LayerMask.GetMask("Distant", "Universe Background")))
 				{
 					if (missileHit.collider.gameObject != _owner)
 					{
