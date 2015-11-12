@@ -45,17 +45,21 @@ public class PlayerController : MonoBehaviour
         _playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
 
         _playVehicleInstance.IsAccelerating = false;
-        if (Input.GetButton("Boost") || Input.GetButton("KeyboardBoost"))
+        if (Input.GetButton("Accelerate") || Input.GetButton("KeyboardAccelerate"))
         {
-            //Debug.Log("Boost!");
             _playVehicleInstance.IsAccelerating = true;
         }
 
         _playVehicleInstance.IsBraking = false;
         if (Input.GetButton("Brake") || Input.GetButton("KeyboardBrake"))
         {
-            //Debug.Log("Brake!");
             _playVehicleInstance.IsBraking = true;
+        }
+
+        _playVehicleInstance.IsBoosting = false;
+        if (Input.GetButton("KeyboardBoost"))
+        {
+            _playVehicleInstance.IsBoosting = true;
         }
 
         if (Input.GetKey(KeyCode.Escape))

@@ -15,6 +15,8 @@ public class Vehicle : MonoBehaviour
 
 	public float Brake = 7f;
 
+    public float BoostAcceleration = 500f;
+
 	public float CurrentSpeed = 0f;
 
 	public float PitchSpeed = 5f;
@@ -23,11 +25,23 @@ public class Vehicle : MonoBehaviour
 
     public float RollSpeed = 100f;
 
+    [Header("Boost Energy")]
+    public float MaxBoostEnergy = 100f;
+
+    public float BoostEnergy = 100f;
+
+    public float BoostCost = 50f;
+
+    public float BoostEnergyRegenerateDelay = 5f;
+
+    public float BoostEnergyRegenerateRate = 1f;
 
 	[Header("Control Settings")]
 	public bool IsAccelerating = false;
 
 	public bool IsBraking = false;
+
+    public bool IsBoosting = false;
 
 	public float YawThrottle = 0f;
 
@@ -54,6 +68,10 @@ public class Vehicle : MonoBehaviour
     private readonly float _aimDistance = 1000f;
     private readonly float _yawClamp = 2f;
     private readonly float _pitchClamp = 2f;
+
+    private float boostEnergyCooldown;
+    private bool boostRegenerate;
+    private bool allowBoost;
 
     private float maxFlareBrightness = 30f;
 	public Weapon CurrentWeapon { get { return _weaponInstance; } }
@@ -88,6 +106,8 @@ public class Vehicle : MonoBehaviour
 		_weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
 		_weaponInstance.Initialize(gameObject);
 		_weaponInstance.OnShoot += OnShoot;
+
+	    allowBoost = true;
 	}
 
 	private void OnShoot()
@@ -100,18 +120,63 @@ public class Vehicle : MonoBehaviour
 
     private void Update()
     {
-        // Accelerating
-        if (IsAccelerating && CurrentSpeed < MaxSpeed)
+        if (!IsBoosting)
         {
-            CurrentSpeed += Acceleration*Time.deltaTime;
-            CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
+            // Accelerating
+            if (IsAccelerating && CurrentSpeed < MaxSpeed)
+            {
+                CurrentSpeed += Acceleration*Time.deltaTime;
+                CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
+            }
+
+            // Braking
+            if (IsBraking && CurrentSpeed > MinSpeed)
+            {
+                CurrentSpeed -= Brake*Time.deltaTime;
+                CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
+            }
+
+            if (!allowBoost)
+                allowBoost = true;
         }
 
-        // Braking
-        if (IsBraking && CurrentSpeed > MinSpeed)
+        // Restore boost energy
+        if (boostEnergyCooldown > 0f)
         {
-            CurrentSpeed -= Brake*Time.deltaTime;
-            CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
+            boostEnergyCooldown -= Time.deltaTime;
+            if (boostEnergyCooldown < 0f)
+            {
+                boostRegenerate = true;
+            }
+        }
+
+        if (boostRegenerate)
+        {
+            if (BoostEnergy < MaxBoostEnergy)
+            {
+                BoostEnergy += BoostEnergyRegenerateRate * Time.deltaTime;
+                if (BoostEnergy > MaxBoostEnergy)
+                    BoostEnergy = MaxBoostEnergy;
+            }
+        }
+
+        // Boosting
+        if (IsBoosting && CurrentSpeed < MaxSpeed)
+        {
+            if (allowBoost && BoostEnergy > 0f)
+            {
+                CurrentSpeed += BoostAcceleration * Time.deltaTime;
+                CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
+
+                BoostEnergy -= BoostCost*Time.deltaTime;
+                if (BoostEnergy < 0f)
+                {
+                    BoostEnergy = 0f;
+                    allowBoost = false;
+                }
+                boostRegenerate = false;
+                boostEnergyCooldown = BoostEnergyRegenerateDelay;
+            }
         }
 
         // Idling
@@ -140,7 +205,6 @@ public class Vehicle : MonoBehaviour
         //transform.rotation *= Quaternion.Euler(dPitch*Time.deltaTime, dYaw*Time.deltaTime, dRoll*Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 20f*Time.deltaTime);
 
-        //transform.position += transform.forward * CurrentSpeed * Time.deltaTime;
         _velocity = transform.forward*CurrentSpeed;
         _shiftable.Translate(_velocity*Time.deltaTime);
 

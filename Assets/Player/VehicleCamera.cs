@@ -12,6 +12,7 @@ public class VehicleCamera : UniverseCamera {
     [Header("Spring")]
     public float SpringCompression = 0.5f;
     public float SpringExpansion = 1.5f;
+    public float SpringBoostExpansion = 3f;
 
     [Header("Lerp Speeds")]
     public float RotationCatchup = 3f;
@@ -32,15 +33,22 @@ public class VehicleCamera : UniverseCamera {
     public override void Move()
     {
         var targetSpringDistance = 1f;
-        if (Target.IsAccelerating)
+        if (Target.IsBoosting && Target.BoostEnergy > 0f)
         {
-            targetSpringDistance = SpringExpansion;
+            targetSpringDistance = SpringBoostExpansion;
         }
         else
         {
-            if (Target.IsBraking)
+            if (Target.IsAccelerating)
             {
-                targetSpringDistance = SpringCompression;
+                targetSpringDistance = SpringExpansion;
+            }
+            else
+            {
+                if (Target.IsBraking)
+                {
+                    targetSpringDistance = SpringCompression;
+                }
             }
         }
         springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);

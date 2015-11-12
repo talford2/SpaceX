@@ -313,12 +313,14 @@ MonoBehaviour:
   MinSpeed: 3
   Acceleration: 30
   Brake: 60
+  BoostAcceleration: 500
   CurrentSpeed: 0
   PitchSpeed: 50
   YawSpeed: 50
   RollSpeed: 100
   IsAccelerating: 0
   IsBraking: 0
+  IsBoosting: 0
   YawThrottle: 0
   PitchThotttle: 0
   RollThrottle: 0
@@ -2627,6 +2629,10 @@ Prefab:
       propertyPath: ThrusterFlares.Array.data[1]
       value: 
       objectReference: {fileID: 12394176}
+    - target: {fileID: 0}
+      propertyPath: BoostAcceleration
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}

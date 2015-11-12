@@ -1978,6 +1978,7 @@ MonoBehaviour:
   VerticalDistance: 3
   SpringCompression: .5
   SpringExpansion: 1.5
+  SpringBoostExpansion: 3
   RotationCatchup: 3
   SpringCatchup: 2
   OffsetCatchup: 5
