@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 	public bool InvertY = false;
     public bool HideMouse = false;
 
+    private float screenAspect;
+
     private void Awake()
     {
         _playVehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
@@ -22,6 +24,14 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
 
         PlayerVehicles.Insert(0, _playVehicleInstance);
+
+        screenAspect = (float)Screen.width/(float)Screen.height;
+
+        Debug.Log("WIDTH: " + Screen.width);
+        Debug.Log("HEIGHT: " + Screen.height);
+
+        Debug.Log("ASPECT: " + screenAspect);
+        //Debug.Break();
     }
 
     private void Start()
@@ -32,15 +42,18 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        var mouseVertical = 1000f*(Input.GetAxis("MouseVertical")/Screen.width)/screenAspect;
+        var mouseHorizontal = 1000f*Input.GetAxis("MouseHorizontal")/Screen.height;
+
         if (InvertY)
         {
-            _playVehicleInstance.PitchThotttle = (Input.GetAxis("Vertical") + Input.GetAxis("MouseVertical"))*-1;
+            _playVehicleInstance.PitchThotttle = (Input.GetAxis("Vertical") + mouseVertical) * -1;
         }
         else
         {
-            _playVehicleInstance.PitchThotttle = Input.GetAxis("Vertical") + Input.GetAxis("MouseVertical");
+            _playVehicleInstance.PitchThotttle = Input.GetAxis("Vertical") + mouseVertical;
         }
-        _playVehicleInstance.YawThrottle = Input.GetAxis("Horizontal") + Input.GetAxis("MouseHorizontal");
+        _playVehicleInstance.YawThrottle = Input.GetAxis("Horizontal") + mouseHorizontal;
         _playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
         _playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
 
