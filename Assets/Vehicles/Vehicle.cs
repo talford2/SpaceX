@@ -72,8 +72,8 @@ public class Vehicle : MonoBehaviour
     private Vector3 _velocity;
 
     private readonly float _aimDistance = 1000f;
-    private readonly float _yawClamp = 2f;
-    private readonly float _pitchClamp = 2f;
+    private readonly float _yawClamp = 20f;
+    private readonly float _pitchClamp = 20f;
 
     private float boostEnergyCooldown;
     private bool boostRegenerate;

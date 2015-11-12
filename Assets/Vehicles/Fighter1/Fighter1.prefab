@@ -315,12 +315,17 @@ MonoBehaviour:
   Brake: 60
   BoostAcceleration: 500
   CurrentSpeed: 0
-  PitchSpeed: 50
-  YawSpeed: 50
+  PitchSpeed: 25
+  YawSpeed: 25
   RollSpeed: 100
-  IsAccelerating: 0
-  IsBraking: 0
-  IsBoosting: 0
+  MaxBoostEnergy: 100
+  BoostEnergy: 100
+  BoostCost: 50
+  BoostEnergyRegenerateDelay: 5
+  BoostEnergyRegenerateRate: 1
+  TriggerAccelerate: 0
+  TriggerBrake: 0
+  TriggerBoost: 0
   YawThrottle: 0
   PitchThotttle: 0
   RollThrottle: 0
@@ -2561,11 +2566,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: PitchSpeed
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: YawSpeed
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: CurrentWeapon
