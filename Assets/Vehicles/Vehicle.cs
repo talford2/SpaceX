@@ -142,8 +142,7 @@ public class Vehicle : MonoBehaviour
                 CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
             }
 
-            if (!allowBoost)
-                allowBoost = true;
+            allowBoost = true;
         }
 
         // Restore boost energy
@@ -167,13 +166,15 @@ public class Vehicle : MonoBehaviour
         }
 
         // Boosting
-        if (TriggerBoost && CurrentSpeed < MaxSpeed)
+        if (TriggerBoost)
         {
             if (allowBoost && BoostEnergy > 0f)
             {
-                CurrentSpeed += BoostAcceleration * Time.deltaTime;
-                CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
-
+                if (CurrentSpeed < MaxSpeed)
+                {
+                    CurrentSpeed += BoostAcceleration*Time.deltaTime;
+                    CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
+                }
                 BoostEnergy -= BoostCost*Time.deltaTime;
                 if (BoostEnergy < 0f)
                 {
@@ -186,7 +187,7 @@ public class Vehicle : MonoBehaviour
         }
 
         // Idling
-        if (!TriggerAccelerate && !TriggerBrake)
+        if (!IsAccelerating && !IsBraking && !IsBoosting)
         {
             if (CurrentSpeed > IdleSpeed)
             {

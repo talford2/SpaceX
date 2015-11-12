@@ -33,7 +33,7 @@ public class VehicleCamera : UniverseCamera {
     public override void Move()
     {
         var targetSpringDistance = 1f;
-        if (Target.IsBoosting && Target.BoostEnergy > 0f)
+        if (Target.IsBoosting)
         {
             targetSpringDistance = SpringBoostExpansion;
         }
