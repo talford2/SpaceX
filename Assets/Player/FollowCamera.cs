@@ -45,6 +45,7 @@ public class FollowCamera : UniverseCamera
                 targetSpringDistance = SpringCompression;
 	        }
 	    }
+
         springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);
 
 	    offset = Vector3.Lerp(offset, -springDistance*(transform.forward*DistanceBehind) + (transform.up*VerticalDistance), OffsetCatchup*Time.deltaTime);

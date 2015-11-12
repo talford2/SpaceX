@@ -19,32 +19,32 @@ public class Fighter1Chase : NpcState<Fighter1>
         {
             if (toTarget.sqrMagnitude > 50f*50f)
             {
-                Npc.VehicleInstance.IsAccelerating = true;
+                Npc.VehicleInstance.TriggerAccelerate = true;
             }
             else
             {
-                Npc.VehicleInstance.IsAccelerating = false;
+                Npc.VehicleInstance.TriggerAccelerate = false;
             }
 
             if (toTarget.sqrMagnitude < 10f*10f)
             {
-                Npc.VehicleInstance.IsBraking = true;
+                Npc.VehicleInstance.TriggerBrake = true;
             }
             else
             {
-                Npc.VehicleInstance.IsBraking = false;
+                Npc.VehicleInstance.TriggerBrake = false;
             }
         }
         else
         {
-            Npc.VehicleInstance.IsAccelerating = false;
+            Npc.VehicleInstance.TriggerAccelerate = false;
             if (toTarget.sqrMagnitude > 10f * 10f)
             {
-                Npc.VehicleInstance.IsBraking = true;
+                Npc.VehicleInstance.TriggerBrake = true;
             }
             else
             {
-                Npc.VehicleInstance.IsBraking = false;
+                Npc.VehicleInstance.TriggerBrake = false;
             }
         }
     }

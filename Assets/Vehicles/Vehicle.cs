@@ -37,17 +37,23 @@ public class Vehicle : MonoBehaviour
     public float BoostEnergyRegenerateRate = 1f;
 
 	[Header("Control Settings")]
-	public bool IsAccelerating = false;
+	public bool TriggerAccelerate = false;
 
-	public bool IsBraking = false;
+	public bool TriggerBrake = false;
 
-    public bool IsBoosting = false;
+    public bool TriggerBoost = false;
 
 	public float YawThrottle = 0f;
 
 	public float PitchThotttle = 0f;
 
     public float RollThrottle = 0f;
+
+    public bool IsAccelerating { get {  return TriggerAccelerate;} }
+
+    public bool IsBraking { get { return TriggerBrake;} }
+
+    public bool IsBoosting { get { return TriggerBoost && BoostEnergy > 0f && allowBoost; } }
 
 	[Header("Weapon")]
 	public Weapon WeaponPrefab;
@@ -120,17 +126,17 @@ public class Vehicle : MonoBehaviour
 
     private void Update()
     {
-        if (!IsBoosting)
+        if (!TriggerBoost)
         {
             // Accelerating
-            if (IsAccelerating && CurrentSpeed < MaxSpeed)
+            if (TriggerAccelerate && CurrentSpeed < MaxSpeed)
             {
                 CurrentSpeed += Acceleration*Time.deltaTime;
                 CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
             }
 
             // Braking
-            if (IsBraking && CurrentSpeed > MinSpeed)
+            if (TriggerBrake && CurrentSpeed > MinSpeed)
             {
                 CurrentSpeed -= Brake*Time.deltaTime;
                 CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
@@ -161,7 +167,7 @@ public class Vehicle : MonoBehaviour
         }
 
         // Boosting
-        if (IsBoosting && CurrentSpeed < MaxSpeed)
+        if (TriggerBoost && CurrentSpeed < MaxSpeed)
         {
             if (allowBoost && BoostEnergy > 0f)
             {
@@ -180,7 +186,7 @@ public class Vehicle : MonoBehaviour
         }
 
         // Idling
-        if (!IsAccelerating && !IsBraking)
+        if (!TriggerAccelerate && !TriggerBrake)
         {
             if (CurrentSpeed > IdleSpeed)
             {
