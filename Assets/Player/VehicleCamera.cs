@@ -25,6 +25,7 @@ public class VehicleCamera : UniverseCamera {
     private Camera attachedCamera;
     private float springDistance;
     private Quaternion offsetAngle;
+    private Vector3 offset;
 
     private float targetFov;
 
@@ -64,7 +65,7 @@ public class VehicleCamera : UniverseCamera {
         springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);
 
         offsetAngle = Quaternion.Lerp(offsetAngle, Target.transform.rotation, RotationCatchup * Time.deltaTime);
-        var offset = offsetAngle * new Vector3(0f, VerticalDistance, -DistanceBehind) * springDistance;
+        offset = Vector3.Lerp(offset, offsetAngle * new Vector3(0f, VerticalDistance, -DistanceBehind) * springDistance, 2.5f*Time.deltaTime);
 
         _shiftable.Translate(Target.transform.position + offset - transform.position);
 
