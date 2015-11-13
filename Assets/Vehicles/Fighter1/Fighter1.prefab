@@ -317,7 +317,7 @@ MonoBehaviour:
   CurrentSpeed: 0
   PitchSpeed: 250
   YawSpeed: 250
-  RollSpeed: 100
+  RollSpeed: 10
   MaxBoostEnergy: 100
   BoostEnergy: 100
   BoostCost: 50
@@ -2637,6 +2637,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: BoostAcceleration
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RollSpeed
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

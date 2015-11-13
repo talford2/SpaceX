@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
         PlayerVehicles.Insert(0, _playVehicleInstance);
 
-        screenAspect = (float)Screen.width/(float)Screen.height;
+        screenAspect = (float)Screen.height/(float)Screen.width;
 
         Debug.Log("WIDTH: " + Screen.width);
         Debug.Log("HEIGHT: " + Screen.height);
@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        var mouseVertical = Input.GetAxis("MouseVertical")*Time.deltaTime;
-        var mouseHorizontal = Input.GetAxis("MouseHorizontal") * Time.deltaTime;
+        var mouseHorizontal = 25f * Input.GetAxis("MouseHorizontal") / Screen.width;
+        var mouseVertical = 25f * screenAspect * Input.GetAxis("MouseVertical") / Screen.height;
 
         if (InvertY)
         {
