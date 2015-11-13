@@ -1974,6 +1974,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   BackgroundTransform: {fileID: 1212660695}
+  ChildCameras:
+  - {fileID: 1793718006}
+  - {fileID: 282404513}
   DistanceBehind: 15
   VerticalDistance: 3
   SpringCompression: .5

@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class VehicleCamera : UniverseCamera {
     public Vehicle Target;
 
     public Transform BackgroundTransform;
+
+    public List<Camera> ChildCameras;
 
     [Header("Offset")]
     public float DistanceBehind = 8f;
@@ -19,12 +22,15 @@ public class VehicleCamera : UniverseCamera {
     public float SpringCatchup = 2f;
     public float OffsetCatchup = 5f;
 
+    private Camera attachedCamera;
     private float springDistance;
-
     private Quaternion offsetAngle;
+
+    private float targetFov;
 
     private void Start()
     {
+        attachedCamera = GetComponent<Camera>();
         springDistance = 1f;
         Target = PlayerController.Current.VehicleInstance;
         offsetAngle = Target.transform.rotation;
@@ -33,9 +39,11 @@ public class VehicleCamera : UniverseCamera {
     public override void Move()
     {
         var targetSpringDistance = 1f;
+        targetFov = 60f;
         if (Target.IsBoosting)
         {
             targetSpringDistance = SpringBoostExpansion;
+            targetFov = 100f;
         }
         else
         {
@@ -51,6 +59,8 @@ public class VehicleCamera : UniverseCamera {
                 }
             }
         }
+
+
         springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);
 
         offsetAngle = Quaternion.Lerp(offsetAngle, Target.transform.rotation, RotationCatchup * Time.deltaTime);
@@ -61,5 +71,12 @@ public class VehicleCamera : UniverseCamera {
         transform.LookAt(Target.GetAimPosition(), Target.transform.up);
 
         BackgroundTransform.transform.position = transform.position;
+
+        attachedCamera.fieldOfView = Mathf.Lerp(attachedCamera.fieldOfView, targetFov, Time.deltaTime);
+
+        foreach (var childCam in ChildCameras)
+        {
+            childCam.fieldOfView = attachedCamera.fieldOfView;
+        }
     }
 }
