@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
 	public bool InvertY = false;
     public bool HideMouse = false;
+    public float AimSensitivity;
 
     private float screenAspect;
 
@@ -42,12 +43,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        var mouseHorizontal = 25f * Input.GetAxis("MouseHorizontal") / Screen.width;
-        var mouseVertical = 25f * screenAspect * Input.GetAxis("MouseVertical") / Screen.height;
+        var mouseHorizontal = AimSensitivity*Input.GetAxis("MouseHorizontal")/Screen.width;
+        var mouseVertical = AimSensitivity*screenAspect*Input.GetAxis("MouseVertical")/Screen.height;
 
         if (InvertY)
         {
-            _playVehicleInstance.PitchThotttle = (Input.GetAxis("Vertical") + mouseVertical) * -1;
+            _playVehicleInstance.PitchThotttle = (Input.GetAxis("Vertical") + mouseVertical)*-1;
         }
         else
         {
