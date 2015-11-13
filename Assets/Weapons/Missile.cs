@@ -101,7 +101,7 @@ public class Missile : MonoBehaviour
 		_hasHit = false;
 	}
 
-	public void Shoot(Vector3 shootFrom, Vector3 initVelocity)
+	public void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
 	{
 		_isLive = true;
 		_lineRenderer.enabled = true;
@@ -109,6 +109,7 @@ public class Missile : MonoBehaviour
 	    _initVelocity = initVelocity;
 	    _initSpeed = _initVelocity.magnitude;
 		_hasHit = false;
+	    transform.forward = direction;
 		UpdateLineRenderer();
 	}
 

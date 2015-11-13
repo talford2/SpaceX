@@ -68,6 +68,7 @@ public class Vehicle : MonoBehaviour
 	private Shiftable _shiftable;
 
 	private int _shootPointIndex;
+    private Vector3 _aimAt;
 
 	private Weapon _weaponInstance;
 
@@ -118,13 +119,19 @@ public class Vehicle : MonoBehaviour
 	    allowBoost = true;
 	}
 
-	private void OnShoot()
-	{
-		_weaponInstance.SetShootPoint(ShootPoints[_shootPointIndex], _velocity);
-		_shootPointIndex++;
-		if (_shootPointIndex >= ShootPoints.Count)
-			_shootPointIndex = 0;
-	}
+    public void SetAimAt(Vector3 aimAt)
+    {
+        _aimAt = aimAt;
+    }
+
+    private void OnShoot()
+    {
+        ShootPoints[_shootPointIndex].forward = _aimAt - ShootPoints[_shootPointIndex].position;
+        _weaponInstance.SetShootPoint(ShootPoints[_shootPointIndex], _velocity);
+        _shootPointIndex++;
+        if (_shootPointIndex >= ShootPoints.Count)
+            _shootPointIndex = 0;
+    }
 
     private float rollSpeed;
     private void Update()
@@ -204,6 +211,7 @@ public class Vehicle : MonoBehaviour
                 CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
             }
         }
+
         rollSpeed += RollAcceleration*Mathf.Clamp(RollThrottle, -1, 1) * Time.deltaTime;
 
         if (Mathf.Abs(RollThrottle) < 0.01f)

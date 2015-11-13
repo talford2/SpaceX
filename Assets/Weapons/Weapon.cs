@@ -64,7 +64,7 @@ public class Weapon : MonoBehaviour
         missile.transform.position = _shootPoint.position;
         missile.transform.rotation = _shootPoint.rotation;
         missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
-        missile.GetComponent<Missile>().Shoot(_shootPoint.position, _initVelocity);
+        missile.GetComponent<Missile>().Shoot(_shootPoint.position, _shootPoint.forward, _initVelocity);
 
         curMissileIndex++;
         if (curMissileIndex >= missileInstances.Count)

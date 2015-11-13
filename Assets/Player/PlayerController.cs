@@ -12,13 +12,18 @@ public class PlayerController : MonoBehaviour
 
 	public bool InvertY = false;
     public bool HideMouse = false;
-    public float AimSensitivity;
+
+    [Header("Aiming")]
+    public float AimSensitivity = 10f;
+    public float MinAimDistance = 10f;
+    public float MaxAimDistance = 1000f;
 
     private float screenAspect;
 
     private void Awake()
     {
         _playVehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
+        _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
         _current = this;
         Cursor.visible = !HideMouse;
         if (HideMouse)
@@ -41,6 +46,23 @@ public class PlayerController : MonoBehaviour
 		//FollowCamera.Current.Target = _playVehicleInstance.transform;
 	}
 
+    private Vector3 GetAimAt()
+    {
+        var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        RaycastHit aimHit;
+        var aimAtPosition = _playVehicleInstance.GetShootPointCentre() + _playVehicleInstance.transform.forward * MaxAimDistance;
+        if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player")))
+        {
+            var toAim = aimHit.point - _playVehicleInstance.GetShootPointCentre();
+            var dotProd = Vector3.Dot(toAim, _playVehicleInstance.transform.forward);
+            if (dotProd > MinAimDistance)
+            {
+                aimAtPosition = aimHit.point;
+            }
+        }
+        return aimAtPosition;
+    }
+
     private void Update()
     {
         var mouseHorizontal = AimSensitivity*Input.GetAxis("MouseHorizontal")/Screen.width;
@@ -57,6 +79,8 @@ public class PlayerController : MonoBehaviour
         _playVehicleInstance.YawThrottle = Input.GetAxis("Horizontal") + mouseHorizontal;
         _playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
         _playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
+
+        _playVehicleInstance.SetAimAt(GetAimAt());
 
         _playVehicleInstance.TriggerAccelerate = false;
         if (Input.GetButton("Accelerate") || Input.GetButton("KeyboardAccelerate"))

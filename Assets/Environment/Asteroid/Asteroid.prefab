@@ -11,7 +11,6 @@ GameObject:
   - 33: {fileID: 3345534}
   - 23: {fileID: 2309028}
   - 135: {fileID: 13525448}
-  - 114: {fileID: 11463050}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -47,6 +46,7 @@ GameObject:
   - 4: {fileID: 490360}
   - 33: {fileID: 3380286}
   - 23: {fileID: 2380430}
+  - 135: {fileID: 13506158}
   m_Layer: 0
   m_Name: Asteroid2
   m_TagString: Untagged
@@ -243,19 +243,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AppearTime: 1
---- !u!114 &11463050
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 109944}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa0f02c957a2c764489de091f8efa3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotationSpeed: 180
-  RotateTransform: {fileID: 416388}
 --- !u!114 &11483304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -307,6 +294,18 @@ MonoBehaviour:
     - {fileID: 109944}
     - {fileID: 155838}
     - {fileID: 181250}
+--- !u!135 &13506158
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155838}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.37053537
+  m_Center: {x: .036722064, y: -.0691390038, z: -.104908228}
 --- !u!135 &13525448
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -315,7 +314,7 @@ SphereCollider:
   m_GameObject: {fileID: 109944}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 3.40725732
   m_Center: {x: 0, y: 0, z: 0}
@@ -468,7 +467,7 @@ Prefab:
       objectReference: {fileID: 181250}
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[0].Disabled.Array.data[1]
