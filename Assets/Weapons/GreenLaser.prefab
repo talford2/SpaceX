@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586daa87f055a7b40a956bca24299873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissileLength: 15
+  MissileLength: 30
   MissileSpeed: 400
   MissileDamage: 5
 --- !u!114 &11443858
@@ -87,8 +87,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 6.19000006}
   m_Parameters:
-    startWidth: .5
-    endWidth: .5
+    startWidth: .600000024
+    endWidth: .600000024
     m_StartColor:
       serializedVersion: 2
       rgba: 4294967295
@@ -113,7 +113,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissileLength
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Positions.Array.data[1].z
@@ -121,11 +121,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Parameters.startWidth
-      value: .5
+      value: .600000024
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Parameters.endWidth
-      value: .5
+      value: .600000024
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
