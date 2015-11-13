@@ -23,7 +23,9 @@ public class Vehicle : MonoBehaviour
 
 	public float YawSpeed = 5f;
 
-    public float RollSpeed = 100f;
+    public float RollAcceleration = 640f;
+
+    public float MaxRollSpeed = 100f;
 
     [Header("Boost Energy")]
     public float MaxBoostEnergy = 100f;
@@ -124,6 +126,7 @@ public class Vehicle : MonoBehaviour
 			_shootPointIndex = 0;
 	}
 
+    private float rollSpeed;
     private void Update()
     {
         if (!TriggerBoost)
@@ -201,16 +204,20 @@ public class Vehicle : MonoBehaviour
                 CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
             }
         }
+        rollSpeed += RollAcceleration*Mathf.Clamp(RollThrottle, -1, 1) * Time.deltaTime;
+
+        if (Mathf.Abs(RollThrottle) < 0.01f)
+        {
+            rollSpeed = Mathf.Lerp(rollSpeed, 0f, 5f*Time.deltaTime);
+        }
 
         // Turning
         var dYaw = YawThrottle*YawSpeed;
         var dPitch = PitchThotttle*PitchSpeed;
-        var dRoll = RollThrottle*-RollSpeed;
+        var dRoll = -Mathf.Clamp(rollSpeed, -MaxRollSpeed, MaxRollSpeed) * Time.deltaTime;
 
         var targetRotation = transform.rotation*Quaternion.Euler(dPitch, dYaw, dRoll);
-        //Quaternion.Euler(dPitch*Time.deltaTime, dYaw*Time.deltaTime, dRoll*Time.deltaTime);
 
-        //transform.rotation *= Quaternion.Euler(dPitch*Time.deltaTime, dYaw*Time.deltaTime, dRoll*Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 20f*Time.deltaTime);
 
         _velocity = transform.forward*CurrentSpeed;
