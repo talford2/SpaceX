@@ -90,8 +90,8 @@ public class Missile : MonoBehaviour
 			tailPosition = _shootFrom;
 		}
 
-		_lineRenderer.SetPosition(0, headPosition);
-		_lineRenderer.SetPosition(1, tailPosition);
+		_lineRenderer.SetPosition(0, tailPosition);
+		_lineRenderer.SetPosition(1, headPosition);
 	}
 
 	public void Stop()
