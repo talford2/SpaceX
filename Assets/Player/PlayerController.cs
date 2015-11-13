@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        var mouseVertical = Input.GetAxis("MouseVertical");
-        var mouseHorizontal = Input.GetAxis("MouseHorizontal");
+        var mouseVertical = Input.GetAxis("MouseVertical")*Time.deltaTime;
+        var mouseHorizontal = Input.GetAxis("MouseHorizontal") * Time.deltaTime;
 
         if (InvertY)
         {

@@ -207,7 +207,8 @@ public class Vehicle : MonoBehaviour
         var dPitch = PitchThotttle*PitchSpeed;
         var dRoll = RollThrottle*-RollSpeed;
 
-        var targetRotation = transform.rotation*Quaternion.Euler(dPitch*Time.deltaTime, dYaw*Time.deltaTime, dRoll*Time.deltaTime);
+        var targetRotation = transform.rotation*Quaternion.Euler(dPitch, dYaw, dRoll);
+        //Quaternion.Euler(dPitch*Time.deltaTime, dYaw*Time.deltaTime, dRoll*Time.deltaTime);
 
         //transform.rotation *= Quaternion.Euler(dPitch*Time.deltaTime, dYaw*Time.deltaTime, dRoll*Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 20f*Time.deltaTime);
