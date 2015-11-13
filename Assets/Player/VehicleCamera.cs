@@ -61,7 +61,6 @@ public class VehicleCamera : UniverseCamera {
             }
         }
 
-
         springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);
 
         offsetAngle = Quaternion.Lerp(offsetAngle, Target.transform.rotation, RotationCatchup * Time.deltaTime);
