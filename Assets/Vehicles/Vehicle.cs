@@ -159,7 +159,7 @@ public class Vehicle : MonoBehaviour
         {
             if (BoostEnergy < MaxBoostEnergy)
             {
-                BoostEnergy += BoostEnergyRegenerateRate * Time.deltaTime;
+                BoostEnergy += BoostEnergyRegenerateRate*Time.deltaTime;
                 if (BoostEnergy > MaxBoostEnergy)
                     BoostEnergy = MaxBoostEnergy;
             }
@@ -203,11 +203,11 @@ public class Vehicle : MonoBehaviour
         }
 
         // Turning
-        var dYaw = Mathf.Clamp(YawThrottle, -_yawClamp, _yawClamp)*YawSpeed;
-        var dPitch = Mathf.Clamp(PitchThotttle, -_pitchClamp, _pitchClamp)*PitchSpeed;
-        var dRoll = Mathf.Clamp(RollThrottle, -1f, 1f)*-RollSpeed;
+        var dYaw = YawThrottle*YawSpeed;
+        var dPitch = PitchThotttle*PitchSpeed;
+        var dRoll = RollThrottle*-RollSpeed;
 
-        var targetRotation = transform.rotation * Quaternion.Euler(dPitch * Time.deltaTime, dYaw * Time.deltaTime, dRoll * Time.deltaTime);
+        var targetRotation = transform.rotation*Quaternion.Euler(dPitch*Time.deltaTime, dYaw*Time.deltaTime, dRoll*Time.deltaTime);
 
         //transform.rotation *= Quaternion.Euler(dPitch*Time.deltaTime, dYaw*Time.deltaTime, dRoll*Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 20f*Time.deltaTime);
@@ -220,8 +220,8 @@ public class Vehicle : MonoBehaviour
         {
             var toCamera = Universe.Current.ViewPort.Shiftable.GetWorldPosition() - Shiftable.GetWorldPosition();
             const float theFactor = 2000f;
-            var capFlareBright = maxFlareBrightness / Mathf.Max(toCamera.sqrMagnitude / theFactor, 1f);
-            thruster.brightness = 1f * capFlareBright;
+            var capFlareBright = maxFlareBrightness/Mathf.Max(toCamera.sqrMagnitude/theFactor, 1f);
+            thruster.brightness = 1f*capFlareBright;
         }
     }
 }
