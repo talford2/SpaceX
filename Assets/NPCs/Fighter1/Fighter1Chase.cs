@@ -12,8 +12,8 @@ public class Fighter1Chase : NpcState<Fighter1>
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
         var pitchYaw = GetPitchYawToPoint(PlayerController.Current.VehicleInstance.transform.position);
-        Npc.VehicleInstance.YawThrottle = pitchYaw.y;
-        Npc.VehicleInstance.PitchThotttle = pitchYaw.x;
+        Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
+        Npc.VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
 
         if (dotTarget < 0f)
         {
