@@ -780,6 +780,8 @@ MonoBehaviour:
   InvertY: 1
   HideMouse: 0
   AimSensitivity: 10
+  MinAimDistance: 10
+  MaxAimDistance: 1000
 --- !u!4 &1064748905
 Transform:
   m_ObjectHideFlags: 0
@@ -1983,7 +1985,7 @@ MonoBehaviour:
   SpringCompression: .5
   SpringExpansion: 1.5
   SpringBoostExpansion: 3
-  RotationCatchup: 3
+  RotationCatchup: 5
   SpringCatchup: 2
   OffsetCatchup: 5
 --- !u!114 &2070423340
