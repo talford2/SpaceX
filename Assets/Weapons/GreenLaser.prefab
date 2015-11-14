@@ -44,6 +44,7 @@ MonoBehaviour:
   MissileLength: 30
   MissileSpeed: 400
   MissileDamage: 5
+  HitEffectPrefab: {fileID: 198982, guid: 4bb191ad1a7963849a6c492ebb749803, type: 2}
 --- !u!114 &11443858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,6 +128,10 @@ Prefab:
       propertyPath: m_Parameters.endWidth
       value: .600000024
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: HitEffectPrefab
+      value: 
+      objectReference: {fileID: 198982, guid: 4bb191ad1a7963849a6c492ebb749803, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180512}
