@@ -1870,6 +1870,14 @@ Prefab:
       propertyPath: m_Name
       value: Fighter2
       objectReference: {fileID: 0}
+    - target: {fileID: 12062342, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+      propertyPath: m_Parameters.startWidth
+      value: .699999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 12062342, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+      propertyPath: m_Parameters.endWidth
+      value: .699999988
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
   m_IsPrefabParent: 0

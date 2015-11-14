@@ -52,7 +52,7 @@ Shader "Custom/ThrusterSpin"
 				{
 					vertexOutput o;
 					o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
-					o.color = v.color;
+					o.color = v.color * _Color;
 
 					fixed spin = _SpinSpeed * _Time;
 

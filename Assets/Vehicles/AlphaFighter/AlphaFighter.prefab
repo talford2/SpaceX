@@ -594,7 +594,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: 4}
   m_Parameters:
     startWidth: .5
     endWidth: .5
@@ -631,7 +631,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: 4}
   m_Parameters:
     startWidth: .600000024
     endWidth: .600000024
