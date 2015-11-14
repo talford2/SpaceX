@@ -132,7 +132,7 @@ MonoBehaviour:
   MuzzleBase: {fileID: 127772}
   Line: {fileID: 12068206}
   LineLength: 3
-  EffectTime: .150000006
+  EffectTime: .100000001
   ScaleOverTime:
     serializedVersion: 2
     m_Curve:
@@ -213,7 +213,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: EffectTime
-      value: .150000006
+      value: .100000001
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: AlphaOverTime.m_Curve.Array.data[1].time
