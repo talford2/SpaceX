@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
 			_missileInstances.Add(missileInstance);
 		}
 
-		_muzzleInstance = Instantiate<MuzzleFlash>(MuzzlePrefab);
+	    _muzzleInstance = Utility.InstantiateInParent(MuzzlePrefab.gameObject, transform).GetComponent<MuzzleFlash>();
 	}
 
 	private void Update()
