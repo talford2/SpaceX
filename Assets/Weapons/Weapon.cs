@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
 	public float FireRate = 0.2f;
 
 	private float _fireCooldown = 0f;
-	private Transform _shootPoint;
+	private ShootPoint _shootPoint;
 	private Vector3 _initVelocity;
 
 	public bool IsTriggered;
@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
 	private int _curMissileIndex;
 	private List<GameObject> _missileInstances;
 
-	private MuzzleFlash _muzzleInstance;
+	//private MuzzleFlash _muzzleInstance;
 
 	public void Initialize(GameObject owner)
 	{
@@ -38,8 +38,6 @@ public class Weapon : MonoBehaviour
 			missileInstance.GetComponent<Missile>().SetOwner(owner);
 			_missileInstances.Add(missileInstance);
 		}
-
-	    _muzzleInstance = Utility.InstantiateInParent(MuzzlePrefab.gameObject, transform).GetComponent<MuzzleFlash>();
 	}
 
 	private void Update()
@@ -56,13 +54,10 @@ public class Weapon : MonoBehaviour
 		}
 	}
 
-	public void SetShootPoint(Transform shootPoint, Vector3 initVelocity)
+	public void SetShootPoint(ShootPoint shootPoint, Vector3 initVelocity)
 	{
 		_shootPoint = shootPoint;
 		_initVelocity = initVelocity;
-
-		_muzzleInstance.transform.position = _shootPoint.position;
-		_muzzleInstance.transform.forward = _shootPoint.forward;
 	}
 
 	public void Fire()
@@ -72,12 +67,12 @@ public class Weapon : MonoBehaviour
 		if (OnShoot != null)
 			OnShoot();
 
-		missile.transform.position = _shootPoint.position;
-		missile.transform.rotation = _shootPoint.rotation;
+		missile.transform.position = _shootPoint.transform.position;
+		missile.transform.rotation = _shootPoint.transform.rotation;
 		missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
-		missile.GetComponent<Missile>().Shoot(_shootPoint.position, _shootPoint.forward, _initVelocity);
+		missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, _shootPoint.transform.forward, _initVelocity);
 
-		_muzzleInstance.Flash();
+		_shootPoint.Flash();
 		FireSound.Play();
 
 		_curMissileIndex++;

@@ -58,6 +58,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 438892}
+  - 114: {fileID: 11448042}
   m_Layer: 0
   m_Name: ShootPointRight
   m_TagString: Untagged
@@ -126,6 +127,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 475640}
+  - 114: {fileID: 11475328}
   m_Layer: 0
   m_Name: ShootPointLeft
   m_TagString: Untagged
@@ -314,8 +316,8 @@ MonoBehaviour:
   RollThrottle: 0
   WeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93, type: 2}
   ShootPoints:
-  - {fileID: 475640}
-  - {fileID: 438892}
+  - {fileID: 11475328}
+  - {fileID: 11448042}
   ThrusterFlares:
   - {fileID: 12372590}
   - {fileID: 12394176}
@@ -336,6 +338,18 @@ MonoBehaviour:
   FireRate: .200000003
   IsTriggered: 0
   MissilePoolCount: 20
+--- !u!114 &11448042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd44330a49bb5348bf12e52bb74c3f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
 --- !u!114 &11450004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -351,6 +365,18 @@ MonoBehaviour:
     X: 100
     Y: 100
     Z: 100
+--- !u!114 &11475328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd44330a49bb5348bf12e52bb74c3f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
 --- !u!114 &11481212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -364,8 +390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   MaxHealth: 100
-  DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 0}
+  DamageEffect: {fileID: 183498}
+  DieEffect: {fileID: 154492}
 --- !u!123 &12372590
 LensFlare:
   m_ObjectHideFlags: 1
