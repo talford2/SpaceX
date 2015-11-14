@@ -276,13 +276,13 @@ MonoBehaviour:
     Disabled:
     - {fileID: 155838}
     - {fileID: 181250}
-  - Distance: 200
+  - Distance: 400
     Enabled:
     - {fileID: 155838}
     Disabled:
     - {fileID: 109944}
     - {fileID: 181250}
-  - Distance: 600
+  - Distance: 700
     Enabled:
     - {fileID: 181250}
     Disabled:
@@ -431,7 +431,7 @@ Prefab:
       objectReference: {fileID: 155838}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[1].Distance
-      value: 200
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[1].Enabled.Array.data[0]
@@ -443,7 +443,7 @@ Prefab:
       objectReference: {fileID: 181250}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[2].Distance
-      value: 600
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distances.Array.data[2].Enabled.Array.data[0]

@@ -302,15 +302,15 @@ Prefab:
       objectReference: {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
     - target: {fileID: 400000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 300
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 300
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 300
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
       propertyPath: m_Name
@@ -1051,7 +1051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ccb629d92cb3741ae3731da71d7787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AsteroidPoolCount: 1000
+  AsteroidPoolCount: 50
   CentreTransform: {fileID: 2070423338}
   FieldRadius: 1000
   AsteroidPrefab: {fileID: 134030, guid: 7bb3efbd2f9980143a444fa52fb18d96, type: 2}

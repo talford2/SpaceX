@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Thruster
-  m_Shader: {fileID: 4800000, guid: 74ff5a4a97d309e4595efd28767ab37b, type: 3}
+  m_Name: SpaceDustDark
+  m_Shader: {fileID: 4800000, guid: 808f1013f560c4142bf5c73c10c3e227, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 4000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: abaafdc2836404d4e8dd255d5318d56b, type: 3}
+          m_Texture: {fileID: 2800000, guid: f5760aa7e6e08964eb980b858eb07c5b, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -78,13 +78,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _ThrustTex
-        second:
-          m_Texture: {fileID: 2800000, guid: c43c4258367b8b740be1556d8d74278b, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -137,15 +130,27 @@ Material:
       data:
         first:
           name: _InvFade
-        second: 1
+        second: 3
       data:
         first:
-          name: _ScrollXSpeed
-        second: 0
+          name: _A
+        second: 100
       data:
         first:
-          name: _SpinSpeed
-        second: 40
+          name: _B
+        second: 300
+      data:
+        first:
+          name: _C
+        second: 500
+      data:
+        first:
+          name: _D
+        second: 1000
+      data:
+        first:
+          name: _FadeDistance
+        second: 1000
     m_Colors:
       data:
         first:
@@ -154,8 +159,12 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .313793093, g: .313793093, b: .313793093, a: 1}
+        second: {r: .631034434, g: .631034434, b: .631034434, a: 1}
       data:
         first:
           name: _TintColor
-        second: {r: .548275828, g: .548275828, b: .548275828, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _Bolor
+        second: {r: .155172408, g: .155172408, b: .155172408, a: 1}

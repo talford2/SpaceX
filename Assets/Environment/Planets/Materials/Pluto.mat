@@ -134,23 +134,23 @@ Material:
       data:
         first:
           name: _Size
-        second: .389999986
+        second: .140000001
       data:
         first:
           name: _Falloff
-        second: 5
+        second: 3.43000007
       data:
         first:
           name: _FalloffPlanet
-        second: 3.24000001
+        second: 4.07000017
       data:
         first:
           name: _Transparency
-        second: 14.5299997
+        second: 4.65999985
       data:
         first:
           name: _TransparencyPlanet
-        second: 2.25
+        second: 1.69000006
       data:
         first:
           name: _RimPower
@@ -163,7 +163,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: .621999979, g: .703000009, b: .80344826, a: 1}
       data:
         first:
           name: _EmissionColorUI
@@ -171,7 +171,7 @@ Material:
       data:
         first:
           name: _AtmoColor
-        second: {r: 1, g: .950680017, b: .917647064, a: 1}
+        second: {r: .628000021, g: .680999994, b: .748275876, a: 1}
       data:
         first:
           name: _RimColor
