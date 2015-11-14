@@ -369,8 +369,8 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_Strength: 1
-    m_Bias: .0500000007
-    m_NormalBias: .400000006
+    m_Bias: .226999998
+    m_NormalBias: .49000001
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 12100000, guid: 866a8f6668d5f3349baa3afa9048867f, type: 2}
@@ -778,8 +778,8 @@ MonoBehaviour:
   PlayerVehicles:
   - {fileID: 1832493475}
   InvertY: 1
-  HideMouse: 0
-  AimSensitivity: 10
+  HideMouse: 1
+  AimSensitivity: 20
   MinAimDistance: 10
   MaxAimDistance: 1000
 --- !u!4 &1064748905
@@ -1718,7 +1718,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1954057687}
   m_LocalRotation: {x: 2.18556941e-08, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 702763075}
