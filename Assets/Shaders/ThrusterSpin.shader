@@ -1,11 +1,8 @@
-﻿// Version of the additive shader without soft particles, stops close mesh from being visible through it
-
-Shader "Custom/ThrusterSpin"
+﻿Shader "Custom/ThrusterSpin"
 {
 	Properties{
 		_Color("Tint Color", Color) = (0.5,0.5,0.5,0.5)
 		_MainTex("Particle Texture", 2D) = "white" {}
-
 		_SpinSpeed("Spin Speed", Range(0, 50)) = 0.5
 	}
 	Category
@@ -18,7 +15,6 @@ Shader "Custom/ThrusterSpin"
 
 		SubShader {
 			Pass {
-
 				CGPROGRAM
 				#pragma vertex vert
 				#pragma fragment frag
@@ -27,7 +23,6 @@ Shader "Custom/ThrusterSpin"
 				#include "UnityCG.cginc"
 
 				fixed _SpinSpeed;
-
 				fixed4 _Color;
 				sampler2D _MainTex;
 
