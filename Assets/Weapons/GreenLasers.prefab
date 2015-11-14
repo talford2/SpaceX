@@ -68,14 +68,14 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b982a86e0d360774394704474402bf73, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: .300000012
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 5
+  MinDistance: 25
   MaxDistance: 200
   Pan2D: 0
   rolloffMode: 0
@@ -174,7 +174,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MinDistance
-      value: 5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxDistance
@@ -184,6 +184,10 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: b982a86e0d360774394704474402bf73, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Volume
+      value: .300000012
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187448}
