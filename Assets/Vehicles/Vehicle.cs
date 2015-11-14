@@ -60,7 +60,7 @@ public class Vehicle : MonoBehaviour
 	[Header("Weapon")]
 	public Weapon WeaponPrefab;
 
-	public List<Transform> ShootPoints;
+	public List<ShootPoint> ShootPoints;
 
     [Header("Other")]
     public List<LensFlare> ThrusterFlares;
@@ -99,7 +99,7 @@ public class Vehicle : MonoBehaviour
 
     public Vector3 GetShootPointCentre()
     {
-        return ShootPoints.Aggregate(Vector3.zero, (current, shootPoint) => current + shootPoint.position)/ShootPoints.Count;
+        return ShootPoints.Aggregate(Vector3.zero, (current, shootPoint) => current + shootPoint.transform.position)/ShootPoints.Count;
     }
 
     public Vector3 GetAimPosition()
@@ -111,6 +111,11 @@ public class Vehicle : MonoBehaviour
 	{
 		_shiftable = GetComponent<Shiftable>();
 		_shootPointIndex = 0;
+
+	    foreach (var shootPoint in ShootPoints)
+	    {
+	        shootPoint.Initialize();
+	    }
 
 		_weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
 		_weaponInstance.Initialize(gameObject);
@@ -126,7 +131,7 @@ public class Vehicle : MonoBehaviour
 
     private void OnShoot()
     {
-        ShootPoints[_shootPointIndex].forward = _aimAt - ShootPoints[_shootPointIndex].position;
+        ShootPoints[_shootPointIndex].transform.forward = _aimAt - ShootPoints[_shootPointIndex].transform.position;
         _weaponInstance.SetShootPoint(ShootPoints[_shootPointIndex], _velocity);
         _shootPointIndex++;
         if (_shootPointIndex >= ShootPoints.Count)
