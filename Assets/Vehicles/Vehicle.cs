@@ -63,7 +63,7 @@ public class Vehicle : MonoBehaviour
 	public List<ShootPoint> ShootPoints;
 
     [Header("Other")]
-    public List<LensFlare> ThrusterFlares;
+    public List<Thruster> Thrusters;
 
 	private Shiftable _shiftable;
 
@@ -237,12 +237,11 @@ public class Vehicle : MonoBehaviour
         _shiftable.Translate(_velocity*Time.deltaTime);
 
         // Reduce flare brightness over distance from camera
-        foreach (var thruster in ThrusterFlares)
+        Debug.Log("SPEED FRACTION: " + (CurrentSpeed / MaxSpeed));
+        foreach (var thruster in Thrusters)
         {
-            var toCamera = Universe.Current.ViewPort.Shiftable.GetWorldPosition() - Shiftable.GetWorldPosition();
-            const float theFactor = 2000f;
-            var capFlareBright = maxFlareBrightness/Mathf.Max(toCamera.sqrMagnitude/theFactor, 1f);
-            thruster.brightness = 1f*capFlareBright;
+            thruster.SetAmount(CurrentSpeed / MaxSpeed);
+            thruster.UpdateFlare();
         }
     }
 }
