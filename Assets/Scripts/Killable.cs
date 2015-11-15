@@ -16,16 +16,16 @@ public class Killable : MonoBehaviour
 
 	public bool DestroyOnDie = true;
 
-	private bool isAlive;
+	public bool IsAlive { get; set; }
 
 	private void Awake()
 	{
-		isAlive = true;
+		IsAlive = true;
 	}
 
 	public void Damage(float damage, Vector3 position, Vector3 normal)
 	{
-		if (isAlive)
+		if (IsAlive)
 		{
 			Health -= damage;
 			if (OnDamage != null)
@@ -42,7 +42,7 @@ public class Killable : MonoBehaviour
 		if (DieEffect != null)
 			Instantiate(DieEffect, transform.position, transform.rotation);
 
-		isAlive = false;
+		IsAlive = false;
 		if (OnDie != null)
 			OnDie(this);
 
