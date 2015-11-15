@@ -1268,6 +1268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+  Destination: {x: 0, y: 0, z: 0}
 --- !u!4 &1315452274
 Transform:
   m_ObjectHideFlags: 0
@@ -2019,8 +2020,8 @@ MonoBehaviour:
   SpringCompression: .5
   SpringExpansion: 1.5
   SpringBoostExpansion: 3
-  RotationCatchup: 15
-  SpringCatchup: 20
+  RotationCatchup: 5
+  SpringCatchup: 2
   OffsetCatchup: 5
 --- !u!114 &2070423340
 MonoBehaviour:
