@@ -15,6 +15,8 @@ public class Vehicle : MonoBehaviour
 
 	public float Brake = 7f;
 
+    public float MaxBoostSpeed = 500f;
+
     public float BoostAcceleration = 500f;
 
 	public float CurrentSpeed = 0f;
@@ -193,11 +195,11 @@ public class Vehicle : MonoBehaviour
         {
             if (allowBoost && BoostEnergy > 0f)
             {
-                if (CurrentSpeed < MaxSpeed)
+                if (CurrentSpeed < MaxBoostSpeed)
                 {
                     acceleration = BoostAcceleration;
                     CurrentSpeed += BoostAcceleration*Time.deltaTime;
-                    CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
+                    CurrentSpeed = Mathf.Min(CurrentSpeed, MaxBoostSpeed);
                 }
                 BoostEnergy -= BoostCost*Time.deltaTime;
                 if (BoostEnergy < 0f)
