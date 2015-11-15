@@ -69,7 +69,6 @@ public class Vehicle : MonoBehaviour
 
 	private Shiftable _shiftable;
 
-	private int _shootPointIndex;
     private Vector3 _aimAt;
 
 	private Weapon _weaponInstance;
@@ -115,7 +114,6 @@ public class Vehicle : MonoBehaviour
 	private void Awake()
 	{
 		_shiftable = GetComponent<Shiftable>();
-		_shootPointIndex = 0;
 
 	    foreach (var shootPoint in ShootPoints)
 	    {
@@ -123,7 +121,7 @@ public class Vehicle : MonoBehaviour
 	    }
 
 		_weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
-		_weaponInstance.Initialize(gameObject);
+		_weaponInstance.Initialize(gameObject, ShootPoints);
 		_weaponInstance.OnShoot += OnShoot;
 
 	    allowBoost = true;
@@ -138,11 +136,6 @@ public class Vehicle : MonoBehaviour
 
     private void OnShoot()
     {
-        ShootPoints[_shootPointIndex].transform.forward = _aimAt - ShootPoints[_shootPointIndex].transform.position;
-        _weaponInstance.SetShootPoint(ShootPoints[_shootPointIndex], _velocity);
-        _shootPointIndex++;
-        if (_shootPointIndex >= ShootPoints.Count)
-            _shootPointIndex = 0;
     }
 
     private void Update()

@@ -10,9 +10,12 @@ public class Weapon : MonoBehaviour
 	public AudioSource FireSound;
 
 	public float FireRate = 0.2f;
+    public int MissilesPerShot = 2;
 
 	private float _fireCooldown = 0f;
-	private ShootPoint _shootPoint;
+	private List<ShootPoint> _shootPoints;
+    private int _shootPointIndex;
+
 	private Vector3 _initVelocity;
 
 	public bool IsTriggered;
@@ -25,9 +28,7 @@ public class Weapon : MonoBehaviour
 	private int _curMissileIndex;
 	private List<GameObject> _missileInstances;
 
-	//private MuzzleFlash _muzzleInstance;
-
-	public void Initialize(GameObject owner)
+	public void Initialize(GameObject owner, List<ShootPoint> shootPoints)
 	{
 		_curMissileIndex = 0;
 		_missileInstances = new List<GameObject>();
@@ -38,6 +39,8 @@ public class Weapon : MonoBehaviour
 			missileInstance.GetComponent<Missile>().SetOwner(owner);
 			_missileInstances.Add(missileInstance);
 		}
+	    _shootPoints = shootPoints;
+	    _shootPointIndex = 0;
 	}
 
 	private void Update()
@@ -54,29 +57,32 @@ public class Weapon : MonoBehaviour
 		}
 	}
 
-	public void SetShootPoint(ShootPoint shootPoint, Vector3 initVelocity)
-	{
-		_shootPoint = shootPoint;
-		_initVelocity = initVelocity;
-	}
-
 	public void Fire()
 	{
-		var missile = _missileInstances[_curMissileIndex];
+        for (var i = 0; i < MissilesPerShot; i++)
+	    {
+	        var missile = _missileInstances[_curMissileIndex];
 
-		if (OnShoot != null)
-			OnShoot();
+	        if (OnShoot != null)
+	            OnShoot();
 
-		missile.transform.position = _shootPoint.transform.position;
-		missile.transform.rotation = _shootPoint.transform.rotation;
-		missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
-		missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, _shootPoint.transform.forward, _initVelocity);
+	        var _shootPoint = _shootPoints[_shootPointIndex];
 
-		_shootPoint.Flash();
-		FireSound.Play();
+	        missile.transform.position = _shootPoint.transform.position;
+	        missile.transform.rotation = _shootPoint.transform.rotation;
+	        missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
+	        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, _shootPoint.transform.forward, _initVelocity);
 
-		_curMissileIndex++;
-		if (_curMissileIndex >= _missileInstances.Count)
-			_curMissileIndex = 0;
+	        _shootPoint.Flash();
+	        FireSound.Play();
+
+	        _curMissileIndex++;
+	        if (_curMissileIndex >= _missileInstances.Count)
+	            _curMissileIndex = 0;
+
+	        _shootPointIndex++;
+	        if (_shootPointIndex >= _shootPoints.Count)
+	            _shootPointIndex = 0;
+	    }
 	}
 }
