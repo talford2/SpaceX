@@ -258,6 +258,7 @@ MonoBehaviour:
   MaxHealth: 50
   DamageEffect: {fileID: 112780, guid: 0d899d6cd3e67af44abdb41384ecf4e0, type: 2}
   DieEffect: {fileID: 185508, guid: 338533a70f1971a41b1d3b65d718c783, type: 2}
+  DestroyOnDie: 0
 --- !u!114 &11458936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -542,6 +543,14 @@ Prefab:
       objectReference: {fileID: 112780, guid: 0d899d6cd3e67af44abdb41384ecf4e0, type: 2}
     - target: {fileID: 0}
       propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DisableOnDestroy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DestroyOnDie
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
