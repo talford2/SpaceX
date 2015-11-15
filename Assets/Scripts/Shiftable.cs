@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Shiftable : MonoBehaviour
 {
@@ -11,15 +12,17 @@ public class Shiftable : MonoBehaviour
 	public delegate void OnShiftEvent(Vector3 delta);
 	public event OnShiftEvent OnShift;
 
+	public List<ParticleSystem> ParticleSystems;
+
 	private Vector3 _cellLocalPosition;
 
-    public Vector3 CellLocalPosition { get { return _cellLocalPosition; } }
+	public Vector3 CellLocalPosition { get { return _cellLocalPosition; } }
 
 	public void Translate(Vector3 translation)
 	{
 		var destination = (_cellLocalPosition + translation);
 		var cellDelta = CellIndexFromPosition(destination);
-		
+
 		if (!cellDelta.IsZero())
 		{
 			UniverseCellIndex += cellDelta;
@@ -56,10 +59,16 @@ public class Shiftable : MonoBehaviour
 
 		if (OnShift != null)
 			OnShift(shiftAmount);
+
+		foreach (var ps in ParticleSystems)
+		{
+			var pe = ps.GetComponent<ParticleEmitter>();//.GetComponentInChildren<ParticleEmitter>();
+			Utility.MoveParticles(pe, shiftAmount);
+		}
 	}
 
-    public Vector3 GetWorldPosition()
-    {
-        return Universe.Current.GetWorldPosition(UniverseCellIndex, CellLocalPosition);
-    }
+	public Vector3 GetWorldPosition()
+	{
+		return Universe.Current.GetWorldPosition(UniverseCellIndex, CellLocalPosition);
+	}
 }

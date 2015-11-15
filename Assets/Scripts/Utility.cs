@@ -42,13 +42,36 @@ public class Utility
 		}
 	}
 
-	public static void MoveParticles(ParticleSystem ps, Vector3 moveAmount)
-	{
-		var pe = ps.GetComponent<ParticleEmitter>();
+	//public static void MoveParticles(ParticleSystem ps, Vector3 moveAmount)
+	//{
+	//	var pe = ps.GetComponent<ParticleEmitter>();
 
+	//	if (pe != null)
+	//	{
+	//		var parr = pe.particles;
+
+	//		Debug.Log("Particle Count: " + parr.Length);
+
+	//		for (var i = 0; i < parr.Length; i++)
+	//		{
+	//			parr[i].position += moveAmount;
+	//		}
+
+	//		pe.particles = parr;
+	//	}
+	//	else
+	//	{
+	//		Debug.LogFormat("No particle emitter for {0}", ps.name);
+	//	}
+	//}
+
+	public static void MoveParticles(ParticleEmitter pe, Vector3 moveAmount)
+	{
 		if (pe != null)
 		{
 			var parr = pe.particles;
+
+			Debug.Log("Particle Count: " + parr.Length);
 
 			for (var i = 0; i < parr.Length; i++)
 			{
@@ -56,6 +79,10 @@ public class Utility
 			}
 
 			pe.particles = parr;
+		}
+		else
+		{
+			Debug.Log("No particle emitter.");
 		}
 	}
 }
