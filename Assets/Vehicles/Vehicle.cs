@@ -75,9 +75,12 @@ public class Vehicle : MonoBehaviour
     private Vector3 _velocity;
 
     private readonly float _aimDistance = 1000f;
-    private readonly float _yawClamp = 20f;
-    private readonly float _pitchClamp = 20f;
 
+    // Steering
+    private float rollSpeed;
+    private Quaternion targetRotation;
+
+    // Boost
     private float boostEnergyCooldown;
     private bool boostRegenerate;
     private bool allowBoost;
@@ -122,6 +125,8 @@ public class Vehicle : MonoBehaviour
 		_weaponInstance.OnShoot += OnShoot;
 
 	    allowBoost = true;
+
+	    targetRotation = transform.rotation;
 	}
 
     public void SetAimAt(Vector3 aimAt)
@@ -138,7 +143,6 @@ public class Vehicle : MonoBehaviour
             _shootPointIndex = 0;
     }
 
-    private float rollSpeed;
     private void Update()
     {
         var acceleration = 0f;
@@ -236,7 +240,7 @@ public class Vehicle : MonoBehaviour
         var dPitch = PitchThotttle*PitchSpeed;
         var dRoll = -Mathf.Clamp(rollSpeed, -MaxRollSpeed, MaxRollSpeed) * Time.deltaTime;
 
-        var targetRotation = transform.rotation*Quaternion.Euler(dPitch, dYaw, dRoll);
+        targetRotation *= Quaternion.Euler(dPitch, dYaw, dRoll);
 
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 20f*Time.deltaTime);
 
