@@ -7,9 +7,12 @@ public class HitEffect : MonoBehaviour
 
 	public void Hit(HitEffectParameters hitTransform)
 	{
-		var instance = Instantiate(HitEffectPrefab);
-		instance.transform.position = hitTransform.Position;
-		instance.transform.forward = hitTransform.Normal;
+		if (HitEffectPrefab != null)
+		{
+			var instance = Instantiate(HitEffectPrefab);
+			instance.transform.position = hitTransform.Position;
+			instance.transform.forward = hitTransform.Normal;
+		}
 	}
 }
 
