@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 444346}
   - 33: {fileID: 3345534}
   - 23: {fileID: 2309028}
-  - 135: {fileID: 13525448}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -29,6 +28,9 @@ GameObject:
   - 114: {fileID: 11440818}
   - 114: {fileID: 11492116}
   - 114: {fileID: 11483304}
+  - 114: {fileID: 11458936}
+  - 64: {fileID: 6470430}
+  - 54: {fileID: 5436716}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -46,7 +48,6 @@ GameObject:
   - 4: {fileID: 490360}
   - 33: {fileID: 3380286}
   - 23: {fileID: 2380430}
-  - 135: {fileID: 13506158}
   m_Layer: 0
   m_Name: Asteroid2
   m_TagString: Untagged
@@ -64,7 +65,6 @@ GameObject:
   - 4: {fileID: 425442}
   - 33: {fileID: 3377704}
   - 23: {fileID: 2355452}
-  - 114: {fileID: 11442434}
   m_Layer: 0
   m_Name: Asteroid3
   m_TagString: Untagged
@@ -216,6 +216,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155838}
   m_Mesh: {fileID: 4300000, guid: d84be2b72f0602a4c8770538397e47d2, type: 3}
+--- !u!54 &5436716
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134030}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &6470430
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134030}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: d84be2b72f0602a4c8770538397e47d2, type: 3}
 --- !u!114 &11440818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,12 +258,12 @@ MonoBehaviour:
   MaxHealth: 50
   DamageEffect: {fileID: 112780, guid: 0d899d6cd3e67af44abdb41384ecf4e0, type: 2}
   DieEffect: {fileID: 185508, guid: 338533a70f1971a41b1d3b65d718c783, type: 2}
---- !u!114 &11442434
+--- !u!114 &11458936
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181250}
+  m_GameObject: {fileID: 134030}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b742fa895824afd4bafde164eab23040, type: 3}
@@ -294,30 +321,6 @@ MonoBehaviour:
     - {fileID: 109944}
     - {fileID: 155838}
     - {fileID: 181250}
---- !u!135 &13506158
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155838}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.37053537
-  m_Center: {x: .036722064, y: -.0691390038, z: -.104908228}
---- !u!135 &13525448
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 109944}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.40725732
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -537,6 +540,10 @@ Prefab:
       propertyPath: DamageEffect
       value: 
       objectReference: {fileID: 112780, guid: 0d899d6cd3e67af44abdb41384ecf4e0, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 134030}
