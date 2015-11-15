@@ -52,6 +52,8 @@ public class Missile : MonoBehaviour
 							_hasHit = true;
 							_hitPosition = missileHit.point;
 
+							killable.SendMessageUpwards("Hit", new HitEffectParameters { Position = missileHit.point, Normal = missileHit.normal });
+
 							// TODO: Should pull this effect from a pool or something...
 							if (HitEffectPrefab != null)
 							{
