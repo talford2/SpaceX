@@ -65,6 +65,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+		if (Input.GetKeyDown(KeyCode.LeftControl))
+		{
+			Debug.Break();
+		}
+
         var mouseClamp = 0.003f;
         var mouseHorizontal = AimSensitivity*Mathf.Clamp(Input.GetAxis("MouseHorizontal")/Screen.width, -mouseClamp, mouseClamp);
         var mouseVertical = AimSensitivity*Mathf.Clamp(screenAspect*Input.GetAxis("MouseVertical")/Screen.height, -mouseClamp, mouseClamp);

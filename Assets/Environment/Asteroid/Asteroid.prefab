@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 50
   MaxHealth: 50
-  DamageEffect: {fileID: 0}
+  DamageEffect: {fileID: 112780, guid: 0d899d6cd3e67af44abdb41384ecf4e0, type: 2}
   DieEffect: {fileID: 185508, guid: 338533a70f1971a41b1d3b65d718c783, type: 2}
 --- !u!114 &11442434
 MonoBehaviour:
@@ -533,6 +533,10 @@ Prefab:
       propertyPath: DieEffect
       value: 
       objectReference: {fileID: 185508, guid: 338533a70f1971a41b1d3b65d718c783, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DamageEffect
+      value: 
+      objectReference: {fileID: 112780, guid: 0d899d6cd3e67af44abdb41384ecf4e0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 134030}
