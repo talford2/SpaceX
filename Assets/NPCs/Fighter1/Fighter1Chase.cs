@@ -4,14 +4,17 @@ public class Fighter1Chase : NpcState<Fighter1>
 {
     public Fighter1Chase(Fighter1 npc) : base(npc)
     {
+        Name = "Chase";
     }
 
     public override void Update()
     {
-        var toTarget = PlayerController.Current.VehicleInstance.Shiftable.GetWorldPosition() -  Npc.VehicleInstance.Shiftable.GetWorldPosition();
+        var targetVehicle = PlayerController.Current.VehicleInstance;
+
+        var toTarget = targetVehicle.Shiftable.GetWorldPosition() - Npc.VehicleInstance.Shiftable.GetWorldPosition();
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
-        var pitchYaw = GetPitchYawToPoint(PlayerController.Current.VehicleInstance.transform.position);
+        var pitchYaw = Npc.GetPitchYawToPoint(targetVehicle.transform.position);
         Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
         Npc.VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
 
@@ -37,6 +40,7 @@ public class Fighter1Chase : NpcState<Fighter1>
         }
         else
         {
+            /*
             Npc.VehicleInstance.TriggerAccelerate = false;
             if (toTarget.sqrMagnitude > 10f * 10f)
             {
@@ -46,39 +50,9 @@ public class Fighter1Chase : NpcState<Fighter1>
             {
                 Npc.VehicleInstance.TriggerBrake = false;
             }
+            */
+            Npc.State = new Fighter1Evade(Npc);
         }
     }
-
-    private Vector2 GetPitchYawToPoint(Vector3 point)
-    {
-        var toPoint = point - Npc.VehicleInstance.transform.position;
-        var yawDiff = Vector3.Dot(toPoint, Npc.VehicleInstance.transform.right);
-        var pitchDiff = Vector3.Dot(toPoint, Npc.VehicleInstance.transform.up);
-
-        var yawTolerance = 2f;
-        var pitchTolerance = 2f;
-
-        var yawAmount = 0f;
-        var pitchAmount = 0f;
-
-        if (yawDiff < -yawTolerance)
-        {
-            yawAmount = Mathf.Clamp(Mathf.Abs(yawDiff)/yawTolerance, 0f, 1f);
-        }
-        else if (yawDiff > yawTolerance)
-        {
-            yawAmount = -Mathf.Clamp(Mathf.Abs(yawDiff)/yawTolerance, 0f, 1f);
-        }
-
-        if (pitchDiff < -pitchTolerance)
-        {
-            pitchAmount = Mathf.Clamp(Mathf.Abs(pitchDiff)/pitchTolerance, 0f, 1f);
-        }
-        else if (pitchDiff > pitchTolerance)
-        {
-            pitchAmount = -Mathf.Clamp(Mathf.Abs(pitchDiff)/pitchTolerance, 0f, 1f);
-        }
-
-        return new Vector2(pitchAmount, -yawAmount);
-    }
+    
 }

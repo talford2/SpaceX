@@ -278,4 +278,9 @@ public class Vehicle : MonoBehaviour
             thruster.UpdateFlare();
         }
     }
+
+    public Vector3 GetVelocity()
+    {
+        return _velocity;
+    }
 }
