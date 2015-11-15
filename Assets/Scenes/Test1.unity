@@ -1054,6 +1054,7 @@ MonoBehaviour:
   AsteroidPoolCount: 1000
   CentreTransform: {fileID: 2070423338}
   FieldRadius: 1000
+  FieldOfView: 180
   AsteroidPrefab: {fileID: 134030, guid: 7bb3efbd2f9980143a444fa52fb18d96, type: 2}
 --- !u!4 &1186793844
 Transform:
