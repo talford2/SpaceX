@@ -29,7 +29,7 @@ public class Killable : MonoBehaviour
             if (OnDamage != null)
                 OnDamage(position, normal);
             if (DamageEffect != null)
-                Instantiate(DamageEffect, transform.position, transform.rotation);
+                Instantiate(DamageEffect, position, Quaternion.LookRotation(normal));
             if (Health < 0f)
                 Die();
         }
