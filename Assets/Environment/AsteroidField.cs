@@ -21,9 +21,7 @@ public class AsteroidField : MonoBehaviour
 		{
 			var inst = Instantiate(AsteroidPrefab);
 
-            var randomInFront = Quaternion.Euler(Random.Range(-_halfFov, _halfFov), Random.Range(-_halfFov, _halfFov), Random.Range(-_halfFov, _halfFov)) * Universe.Current.ViewPort.transform.forward;
-
-            inst.transform.position = randomInFront * FieldRadius + CentreTransform.position;
+            inst.transform.position = Random.insideUnitSphere * FieldRadius + CentreTransform.position;
 			inst.transform.rotation = Random.rotation;
 			inst.transform.localScale = Vector3.one * Random.Range(0.3f, 2.3f);
 
