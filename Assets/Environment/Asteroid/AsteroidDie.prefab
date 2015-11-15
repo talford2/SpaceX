@@ -203,6 +203,9 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
+  ParticleSystems:
+  - {fileID: 19810988}
+  - {fileID: 19828514}
 --- !u!114 &11489156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2307,6 +2310,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: ParticleSystems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: MinDistance
       value: 40
       objectReference: {fileID: 0}
@@ -2318,6 +2325,14 @@ Prefab:
       propertyPath: moveWithTransform
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ParticleSystems.Array.data[0]
+      value: 
+      objectReference: {fileID: 19810988}
+    - target: {fileID: 0}
+      propertyPath: ParticleSystems.Array.data[1]
+      value: 
+      objectReference: {fileID: 19828514}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 185508}
