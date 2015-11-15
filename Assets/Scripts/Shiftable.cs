@@ -66,7 +66,6 @@ public class Shiftable : MonoBehaviour
 		foreach (var ps in _particleSystems)
 		{
 			Utility.MoveParticles(ps, Vector3.zero - shiftAmount);
-			//Utility.MoveParticles(ps, shiftAmount);
 		}
 	}
 
