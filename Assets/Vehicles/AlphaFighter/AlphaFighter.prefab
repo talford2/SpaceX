@@ -176,6 +176,7 @@ GameObject:
   - 114: {fileID: 11450004}
   - 114: {fileID: 11481212}
   - 64: {fileID: 6403082}
+  - 54: {fileID: 5444824}
   m_Layer: 0
   m_Name: AlphaFighter
   m_TagString: Untagged
@@ -447,6 +448,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114634}
   m_Mesh: {fileID: 4300000, guid: 8e249181032e10c4a9b96b7f8a7983c9, type: 3}
+--- !u!54 &5444824
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182838}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!64 &6403082
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -586,6 +602,7 @@ MonoBehaviour:
   MaxHealth: 100
   DamageEffect: {fileID: 183498}
   DieEffect: {fileID: 154492}
+  DestroyOnDie: 1
 --- !u!114 &11486206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -808,6 +825,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: BoostEnergyRegenerateRate
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
