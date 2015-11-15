@@ -5,8 +5,6 @@ public class Fighter1Evade : NpcState<Fighter1>
     private float evadeTimeout = 2f;
     private float evadeCooldown;
 
-    private Vector3 destination;
-
     public Fighter1Evade(Fighter1 npc) : base(npc)
     {
         Name = "Evade";
@@ -17,22 +15,22 @@ public class Fighter1Evade : NpcState<Fighter1>
         var targetVehicle = PlayerController.Current.VehicleInstance;
 
         var toTarget = targetVehicle.Shiftable.GetWorldPosition() - Npc.VehicleInstance.Shiftable.GetWorldPosition();
-        var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
+        var dotTarget = Vector3.Dot(toTarget.normalized, Npc.VehicleInstance.transform.forward);
+        Debug.Log("DOT PROD: " + dotTarget);
 
-        var targetDestination = Npc.VehicleInstance.Shiftable.GetWorldPosition() + Npc.VehicleInstance.transform.forward*20f;
+        var targetDestination = targetVehicle.Shiftable.GetWorldPosition() + Npc.VehicleInstance.transform.forward * 20f;
         if (toTarget.sqrMagnitude < 400f)
         {
-            targetDestination = targetVehicle.Shiftable.GetWorldPosition() + targetVehicle.GetVelocity() + targetVehicle.transform.forward * 400f;
+            targetDestination = targetVehicle.Shiftable.GetWorldPosition() + targetVehicle.GetVelocity() + targetVehicle.transform.forward*400f;
         }
-        destination = Vector3.Lerp(destination, targetDestination, Time.deltaTime);
+        Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
 
+        var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
+        Npc.VehicleInstance.YawThrottle = 0.5f*pitchYaw.y*Time.deltaTime;
+        Npc.VehicleInstance.PitchThotttle = 0.5f*pitchYaw.x*Time.deltaTime;
 
-        var pitchYaw = Npc.GetPitchYawToPoint(destination);
-        Npc.VehicleInstance.YawThrottle = 0.5f*pitchYaw.y * Time.deltaTime;
-        Npc.VehicleInstance.PitchThotttle = 0.5f*pitchYaw.x * Time.deltaTime;
-
-        var toDestination = destination - Npc.VehicleInstance.transform.position;
-        if (toDestination.sqrMagnitude > 50f * 50f)
+        var toDestination = Npc.Destination - Npc.VehicleInstance.transform.position;
+        if (toDestination.sqrMagnitude > 50f*50f)
         {
             Npc.VehicleInstance.TriggerAccelerate = true;
         }

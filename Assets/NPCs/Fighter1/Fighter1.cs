@@ -5,6 +5,7 @@ public class Fighter1 : Npc<Fighter1>
     public Vehicle VehiclePrefab;
 
     private Vehicle _vehicleInstance;
+    public Vector3 Destination;
 
     public Vehicle VehicleInstance { get { return _vehicleInstance; } }
 
@@ -56,5 +57,12 @@ public class Fighter1 : Npc<Fighter1>
     {
         GUI.Label(new Rect(Screen.width - 150f, 50f, 100f, 30f), State.Name);
         GUI.Label(new Rect(Screen.width - 150f, 80f, 100f, 30f), string.Format("{0:f2}", VehicleInstance.GetVelocity().magnitude));
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
+        Gizmos.DrawSphere(Destination, 500f);
     }
 }
