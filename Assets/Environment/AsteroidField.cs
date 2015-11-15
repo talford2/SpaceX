@@ -50,5 +50,9 @@ public class AsteroidField : MonoBehaviour
 		var randomInFront = Quaternion.Euler(Random.Range(-_halfFov, _halfFov), Random.Range(-_halfFov, _halfFov), Random.Range(-_halfFov, _halfFov)) * Universe.Current.ViewPort.transform.forward;
 		instance.transform.position = randomInFront * FieldRadius + CentreTransform.position;
 		instance.GetComponent<ScaleOnEnable>().ResetToZero(Random.Range(MinSize, MaxSize));
+
+		var killable = instance.GetComponent<Killable>();
+		killable.IsAlive = true;
+		killable.Health = killable.MaxHealth;
 	}
 }
