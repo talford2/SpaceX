@@ -1433,7 +1433,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     type: 0
-    radius: .00999999978
+    radius: 3.83999991
     angle: 25
     length: 5
     boxX: 1
@@ -1442,7 +1442,7 @@ ParticleSystem:
     arc: 360
     placementMode: 0
     m_Mesh: {fileID: 0}
-    randomDirection: 1
+    randomDirection: 0
   EmissionModule:
     enabled: 1
     m_Type: 0
@@ -1496,14 +1496,14 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .0115702599
-          inSlope: 2.51540995
-          outSlope: 2.51540995
+          value: .222096562
+          inSlope: 2.69541907
+          outSlope: 2.69541907
           tangentMode: 0
         - time: 1
-          value: .752066135
-          inSlope: -1.62964666
-          outSlope: -1.62964666
+          value: .78715384
+          inSlope: -.612831593
+          outSlope: -.612831593
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
