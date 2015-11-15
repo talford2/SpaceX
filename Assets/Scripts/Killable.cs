@@ -8,7 +8,7 @@ public class Killable : MonoBehaviour
     public GameObject DamageEffect;
     public GameObject DieEffect;
 
-    public delegate void OnDamageEvent();
+    public delegate void OnDamageEvent(Vector3 position, Vector3 normal);
     public event OnDamageEvent OnDamage;
 
     public delegate void OnDieEvent();
@@ -21,13 +21,13 @@ public class Killable : MonoBehaviour
         isAlive = true;
     }
 
-    public void Damage(float damage)
+    public void Damage(float damage, Vector3 position, Vector3 normal)
     {
         if (isAlive)
         {
             Health -= damage;
             if (OnDamage != null)
-                OnDamage();
+                OnDamage(position, normal);
             if (DamageEffect != null)
                 Instantiate(DamageEffect, transform.position, transform.rotation);
             if (Health < 0f)

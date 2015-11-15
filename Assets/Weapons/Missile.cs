@@ -48,7 +48,7 @@ public class Missile : MonoBehaviour
 						var killable = missileHit.collider.GetComponentInParent<Killable>();
 						if (killable != null)
 						{
-							killable.Damage(MissileDamage);
+							killable.Damage(MissileDamage, missileHit.point, missileHit.normal);
 							_hasHit = true;
 							_hitPosition = missileHit.point;
 
