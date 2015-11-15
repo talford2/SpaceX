@@ -31,11 +31,18 @@ public class AsteroidField : MonoBehaviour
 
 			inst.transform.parent = transform;
 
-
+			inst.GetComponent<Killable>().OnDie += AsteroidField_OnDie;
 
 			var levelOfDetail = inst.GetComponent<LevelOfDetail>();
 			levelOfDetail.OnExitLargestDistance += MakeAvailable;
 		}
+	}
+
+	private void AsteroidField_OnDie(Killable sender)
+	{
+		// TODO: This isn't perfect, whenever an asteroid is destroyed a new one will be respawned,
+		// really the asteroid should just be hidden and reset when it falls out of the range
+		MakeAvailable(sender.gameObject);
 	}
 
 	private void MakeAvailable(GameObject instance)
