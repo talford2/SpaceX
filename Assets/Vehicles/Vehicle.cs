@@ -141,11 +141,14 @@ public class Vehicle : MonoBehaviour
     private float rollSpeed;
     private void Update()
     {
+        var acceleration = 0f;
+
         if (!TriggerBoost)
         {
             // Accelerating
             if (TriggerAccelerate && CurrentSpeed < MaxSpeed)
             {
+                acceleration = Acceleration;
                 CurrentSpeed += Acceleration*Time.deltaTime;
                 CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
             }
@@ -153,6 +156,7 @@ public class Vehicle : MonoBehaviour
             // Braking
             if (TriggerBrake && CurrentSpeed > MinSpeed)
             {
+                acceleration = -Brake;
                 CurrentSpeed -= Brake*Time.deltaTime;
                 CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
             }
@@ -187,6 +191,7 @@ public class Vehicle : MonoBehaviour
             {
                 if (CurrentSpeed < MaxSpeed)
                 {
+                    acceleration = BoostAcceleration;
                     CurrentSpeed += BoostAcceleration*Time.deltaTime;
                     CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
                 }
@@ -206,12 +211,14 @@ public class Vehicle : MonoBehaviour
         {
             if (CurrentSpeed > IdleSpeed)
             {
+                acceleration = -Brake;
                 CurrentSpeed -= Brake*Time.deltaTime;
                 CurrentSpeed = Mathf.Max(IdleSpeed, CurrentSpeed);
             }
 
             if (CurrentSpeed < IdleSpeed)
             {
+                acceleration = Acceleration;
                 CurrentSpeed += Acceleration*Time.deltaTime;
                 CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
             }
@@ -237,10 +244,9 @@ public class Vehicle : MonoBehaviour
         _shiftable.Translate(_velocity*Time.deltaTime);
 
         // Reduce flare brightness over distance from camera
-        Debug.Log("SPEED FRACTION: " + (CurrentSpeed / MaxSpeed));
         foreach (var thruster in Thrusters)
         {
-            thruster.SetAmount(CurrentSpeed / MaxSpeed);
+            thruster.SetAmount(acceleration / MaxSpeed);
             thruster.UpdateFlare();
         }
     }

@@ -7,13 +7,26 @@ public class Thruster : MonoBehaviour
 
     public LineRenderer Trail;
 
+    private Vector3 tailPoint;
+    private Vector3 targetTail;
+
     public void SetAmount(float amount)
     {
-        Trail.SetPosition(1, amount*new Vector3(0, 0, 4f));
+        if (amount > 0)
+        {
+            targetTail = amount*new Vector3(0, 0, 100f);
+        }
+        else
+        {
+            targetTail = Vector3.zero;
+        }
     }
 
     public void UpdateFlare()
     {
+        tailPoint = Vector3.Lerp(tailPoint, targetTail, Time.deltaTime);
+        Trail.SetPosition(1, tailPoint);
+
         var toCamera = Universe.Current.ViewPort.Shiftable.GetWorldPosition() - transform.position;
         const float theFactor = 2000f;
         var capFlareBright = MaxFlareBrightness / Mathf.Max(toCamera.sqrMagnitude / theFactor, 1f);
