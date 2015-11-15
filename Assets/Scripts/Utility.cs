@@ -65,24 +65,21 @@ public class Utility
 	//	}
 	//}
 
-	public static void MoveParticles(ParticleEmitter pe, Vector3 moveAmount)
+	public static void MoveParticles(ParticleSystem ps, Vector3 moveAmount)
 	{
-		if (pe != null)
+		if (ps != null)
 		{
-			var parr = pe.particles;
-
-			Debug.Log("Particle Count: " + parr.Length);
-
+			var parr = new ParticleSystem.Particle[100];
+			ps.GetParticles(parr);
 			for (var i = 0; i < parr.Length; i++)
 			{
 				parr[i].position += moveAmount;
 			}
-
-			pe.particles = parr;
+			ps.SetParticles(parr, parr.Length);
 		}
 		else
 		{
-			Debug.Log("No particle emitter.");
+			//Debug.Log("No particle emitter.");
 		}
 	}
 }

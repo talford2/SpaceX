@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Shiftable : MonoBehaviour
@@ -12,7 +13,7 @@ public class Shiftable : MonoBehaviour
 	public delegate void OnShiftEvent(Vector3 delta);
 	public event OnShiftEvent OnShift;
 
-	public List<ParticleSystem> ParticleSystems;
+	public ParticleSystem[] _particleSystems;
 
 	private Vector3 _cellLocalPosition;
 
@@ -40,6 +41,8 @@ public class Shiftable : MonoBehaviour
 	private void Awake()
 	{
 		Universe.ShiftableItems.Add(this);
+
+		//_particleSystems = GetComponentsInChildren<ParticleSystem>();
 	}
 
 	private CellIndex CellIndexFromPosition(Vector3 position)
@@ -60,10 +63,10 @@ public class Shiftable : MonoBehaviour
 		if (OnShift != null)
 			OnShift(shiftAmount);
 
-		foreach (var ps in ParticleSystems)
+		foreach (var ps in _particleSystems)
 		{
-			var pe = ps.GetComponent<ParticleEmitter>();//.GetComponentInChildren<ParticleEmitter>();
-			Utility.MoveParticles(pe, shiftAmount);
+			Utility.MoveParticles(ps, Vector3.zero - shiftAmount);
+			//Utility.MoveParticles(ps, shiftAmount);
 		}
 	}
 
