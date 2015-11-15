@@ -243,10 +243,15 @@ public class Vehicle : MonoBehaviour
         _velocity = transform.forward*CurrentSpeed;
         _shiftable.Translate(_velocity*Time.deltaTime);
 
+        var thrustAmount = acceleration/MaxSpeed;
+
+        if (IsBoosting)
+            thrustAmount = 1f;
+
         // Reduce flare brightness over distance from camera
         foreach (var thruster in Thrusters)
         {
-            thruster.SetAmount(acceleration / MaxSpeed);
+            thruster.SetAmount(thrustAmount);
             thruster.UpdateFlare();
         }
     }
