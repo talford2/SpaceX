@@ -230,7 +230,7 @@ MonoBehaviour:
   Health: 100
   MaxHealth: 100
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 0}
+  DieEffect: {fileID: 185508, guid: 338533a70f1971a41b1d3b65d718c783, type: 2}
 --- !u!114 &11442434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -529,6 +529,10 @@ Prefab:
       propertyPath: m_ReflectionProbeUsage
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DieEffect
+      value: 
+      objectReference: {fileID: 185508, guid: 338533a70f1971a41b1d3b65d718c783, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 134030}
