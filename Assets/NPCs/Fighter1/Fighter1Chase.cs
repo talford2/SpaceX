@@ -41,17 +41,6 @@ public class Fighter1Chase : NpcState<Fighter1>
         }
         else
         {
-            /*
-            Npc.VehicleInstance.TriggerAccelerate = false;
-            if (toTarget.sqrMagnitude > 10f * 10f)
-            {
-                Npc.VehicleInstance.TriggerBrake = true;
-            }
-            else
-            {
-                Npc.VehicleInstance.TriggerBrake = false;
-            }
-            */
             Npc.State = new Fighter1Evade(Npc);
         }
     }
