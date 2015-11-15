@@ -61,8 +61,11 @@ public class Fighter1 : Npc<Fighter1>
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
-        Gizmos.DrawSphere(Destination, 500f);
+        if (VehicleInstance != null)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
+            Gizmos.DrawSphere(Destination, 500f);
+        }
     }
 }
