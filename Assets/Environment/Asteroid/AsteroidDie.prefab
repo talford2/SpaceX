@@ -11,7 +11,7 @@ GameObject:
   - 198: {fileID: 19828514}
   - 199: {fileID: 19966040}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Dust Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ GameObject:
   - 198: {fileID: 19810988}
   - 199: {fileID: 19994308}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Rocks Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,7 +256,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
     startSpeed:
-      scalar: 15
+      scalar: 20
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -271,7 +271,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .333333343
+          value: .100000001
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -439,7 +439,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 10
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -492,15 +492,15 @@ ParticleSystem:
           inSlope: 0
           outSlope: 0
           tangentMode: 0
-        - time: .702060223
-          value: 1
-          inSlope: 0
-          outSlope: 0
+        - time: .624405682
+          value: .849624097
+          inSlope: -.691886067
+          outSlope: -.691886067
           tangentMode: 0
         - time: 1
           value: 0
-          inSlope: -9.03910446
-          outSlope: -9.03910446
+          inSlope: -3.74554563
+          outSlope: -3.74554563
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1264,7 +1264,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
     startSpeed:
-      scalar: 2
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1279,7 +1279,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .5
+          value: .333333343
           inSlope: 0
           outSlope: 0
           tangentMode: 0
