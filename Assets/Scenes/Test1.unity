@@ -822,7 +822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c652a4d5446d845958f2cd40dedd37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CellSize: 10
+  CellSize: 1000
   PlayerSpawnPosition: {fileID: 624703671}
   ViewPort: {fileID: 2070423339}
 --- !u!4 &1097665390
@@ -1051,11 +1051,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ccb629d92cb3741ae3731da71d7787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AsteroidPoolCount: 1000
+  AsteroidPoolCount: 300
   CentreTransform: {fileID: 2070423338}
   FieldRadius: 1000
   FieldOfView: 180
   AsteroidPrefab: {fileID: 134030, guid: 7bb3efbd2f9980143a444fa52fb18d96, type: 2}
+  MinSize: .300000012
+  MaxSize: 3
 --- !u!4 &1186793844
 Transform:
   m_ObjectHideFlags: 0
