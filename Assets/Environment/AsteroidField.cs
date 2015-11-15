@@ -8,14 +8,22 @@ public class AsteroidField : MonoBehaviour
 
 	public float FieldRadius = 300f;
 
+    public float FieldOfView = 60f;
+
 	public GameObject AsteroidPrefab;
+
+    private float _halfFov;
 
 	private void Awake()
 	{
+	    _halfFov = FieldOfView/2f;
 		for (var i = 0; i < AsteroidPoolCount; i++)
 		{
 			var inst = Instantiate(AsteroidPrefab);
-			inst.transform.position = Random.insideUnitSphere * FieldRadius + CentreTransform.position;
+
+            var randomInFront = Quaternion.Euler(Random.Range(-_halfFov, _halfFov), Random.Range(-_halfFov, _halfFov), Random.Range(-_halfFov, _halfFov)) * Universe.Current.ViewPort.transform.forward;
+
+            inst.transform.position = randomInFront * FieldRadius + CentreTransform.position;
 			inst.transform.rotation = Random.rotation;
 			inst.transform.localScale = Vector3.one * Random.Range(0.3f, 2.3f);
 
@@ -29,7 +37,8 @@ public class AsteroidField : MonoBehaviour
 
 	private void MakeAvailable(GameObject instance)
 	{
-		instance.transform.position = Random.onUnitSphere * FieldRadius + CentreTransform.position;
+        var randomInFront = Quaternion.Euler(Random.Range(-_halfFov, _halfFov), Random.Range(-_halfFov, _halfFov), Random.Range(-_halfFov, _halfFov)) * Universe.Current.ViewPort.transform.forward;
+        instance.transform.position = randomInFront * FieldRadius + CentreTransform.position;
 	}
 
 	private void MakeUnavailable(GameObject instance)
