@@ -43,6 +43,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 499528}
   - 114: {fileID: 11497292}
+  - 114: {fileID: 11465994}
   m_Layer: 0
   m_Name: LaserHit
   m_TagString: Untagged
@@ -88,6 +89,24 @@ Transform:
   - {fileID: 462080}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11465994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseCellIndex:
+    X: 0
+    Y: 0
+    Z: 0
+  _particleSystems:
+  - {fileID: 19833032}
+  - {fileID: 19843718}
 --- !u!114 &11497292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,7 +133,7 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 1
-  moveWithTransform: 1
+  moveWithTransform: 0
   InitialModule:
     enabled: 1
     startLifetime:
@@ -1167,7 +1186,7 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 1
-  moveWithTransform: 1
+  moveWithTransform: 0
   InitialModule:
     enabled: 1
     startLifetime:
@@ -2257,12 +2276,28 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: _particleSystems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: Cooldown
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: StartOn
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _particleSystems.Array.data[0]
+      value: 
+      objectReference: {fileID: 19833032}
+    - target: {fileID: 0}
+      propertyPath: _particleSystems.Array.data[1]
+      value: 
+      objectReference: {fileID: 19843718}
+    - target: {fileID: 0}
+      propertyPath: moveWithTransform
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
