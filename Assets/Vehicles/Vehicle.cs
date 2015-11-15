@@ -246,7 +246,24 @@ public class Vehicle : MonoBehaviour
         var thrustAmount = acceleration/MaxSpeed;
 
         if (IsBoosting)
+        {
             thrustAmount = 1f;
+        }
+        else
+        {
+            if (IsAccelerating)
+            {
+                thrustAmount = 0.08f;
+            }
+            if (IsBraking)
+            {
+                thrustAmount = 0f;
+            }
+        }
+        if (!IsBoosting && !IsAccelerating && !IsBraking)
+        {
+            thrustAmount = 0.04f;
+        }
 
         // Reduce flare brightness over distance from camera
         foreach (var thruster in Thrusters)

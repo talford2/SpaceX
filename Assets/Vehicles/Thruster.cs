@@ -24,7 +24,7 @@ public class Thruster : MonoBehaviour
 
     public void UpdateFlare()
     {
-        tailPoint = Vector3.Lerp(tailPoint, targetTail, Time.deltaTime);
+        tailPoint = Vector3.Lerp(tailPoint, targetTail, 2f*Time.deltaTime);
         Trail.SetPosition(1, tailPoint);
 
         var toCamera = Universe.Current.ViewPort.Shiftable.GetWorldPosition() - transform.position;
