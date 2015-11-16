@@ -13,7 +13,10 @@ public class FighterChase : NpcState<Fighter>
         var dotTarget = Vector3.Dot(toTarget.normalized, Npc.VehicleInstance.transform.forward);
         Debug.Log("DOT PROD: " + dotTarget);
 
-        var pitchYaw = Npc.GetPitchYawToPoint(Npc.Target.transform.position);
+        var targetDestination = Npc.Target.position;
+        Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
+
+        var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
         Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
         Npc.VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
 
@@ -39,7 +42,7 @@ public class FighterChase : NpcState<Fighter>
         }
         else
         {
-            Npc.State = new FighterEvade(Npc);
+            //Npc.State = new FighterEvade(Npc);
         }
     }
     
