@@ -74,6 +74,7 @@ public class Vehicle : MonoBehaviour
 	private Weapon _weaponInstance;
 
     private Vector3 _velocity;
+    private VelocityReference _velocityReference;
 
     private readonly float _aimDistance = 1000f;
 
@@ -119,9 +120,9 @@ public class Vehicle : MonoBehaviour
 	    {
 	        shootPoint.Initialize();
 	    }
-
+        _velocityReference = new VelocityReference(_velocity);
 		_weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
-		_weaponInstance.Initialize(gameObject, ShootPoints);
+		_weaponInstance.Initialize(gameObject, ShootPoints, _velocityReference);
 		_weaponInstance.OnShoot += OnShoot;
 
 	    allowBoost = true;
@@ -240,6 +241,7 @@ public class Vehicle : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 20f*Time.deltaTime);
 
         _velocity = transform.forward*CurrentSpeed;
+        _velocityReference.Value = _velocity;
         _shiftable.Translate(_velocity*Time.deltaTime);
 
         var thrustAmount = acceleration/MaxSpeed;

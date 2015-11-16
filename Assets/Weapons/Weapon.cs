@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
 	private List<ShootPoint> _shootPoints;
     private int _shootPointIndex;
 
-	private Vector3 _initVelocity;
+    private VelocityReference _velocityReference;
 
 	public bool IsTriggered;
 
@@ -28,7 +28,7 @@ public class Weapon : MonoBehaviour
 	private int _curMissileIndex;
 	private List<GameObject> _missileInstances;
 
-	public void Initialize(GameObject owner, List<ShootPoint> shootPoints)
+	public void Initialize(GameObject owner, List<ShootPoint> shootPoints, VelocityReference velocityReference)
 	{
 		_curMissileIndex = 0;
 		_missileInstances = new List<GameObject>();
@@ -41,6 +41,7 @@ public class Weapon : MonoBehaviour
 		}
 	    _shootPoints = shootPoints;
 	    _shootPointIndex = 0;
+	    _velocityReference = velocityReference;
 	}
 
 	private void Update()
@@ -71,7 +72,7 @@ public class Weapon : MonoBehaviour
 	        missile.transform.position = _shootPoint.transform.position;
 	        missile.transform.rotation = _shootPoint.transform.rotation;
 	        missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
-	        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, _shootPoint.transform.forward, _initVelocity);
+	        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, _shootPoint.transform.forward, _velocityReference.Value);
 
 	        _shootPoint.Flash();
 	        FireSound.Play();
