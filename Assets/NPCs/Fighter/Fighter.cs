@@ -14,6 +14,8 @@ public class Fighter : Npc<Fighter>
 
 	public float AttackRange = 10f;
 
+    public float SteerMultiplier = 0.5f;
+
 
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }
 

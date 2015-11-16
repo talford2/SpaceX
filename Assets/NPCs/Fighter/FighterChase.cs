@@ -16,15 +16,14 @@ public class FighterChase : NpcState<Fighter>
         var targetDestination = Npc.Target.position;
         Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
 
-        var turnSensitivity = 0.5f;
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
-        Npc.VehicleInstance.YawThrottle = turnSensitivity*pitchYaw.y*Time.deltaTime;
-        Npc.VehicleInstance.PitchThotttle = turnSensitivity*pitchYaw.x*Time.deltaTime;
+        Npc.VehicleInstance.YawThrottle = Npc.SteerMultiplier*pitchYaw.y*Time.deltaTime;
+        Npc.VehicleInstance.PitchThotttle = Npc.SteerMultiplier*pitchYaw.x*Time.deltaTime;
 
         Npc.VehicleInstance.TriggerBrake = false;
         Npc.VehicleInstance.TriggerAccelerate = false;
 
-        if (dotTarget < 0f)
+        if (dotTarget > 0f)
         {
             if (toTarget.sqrMagnitude > Npc.SightRange*Npc.SightRange)
             {
