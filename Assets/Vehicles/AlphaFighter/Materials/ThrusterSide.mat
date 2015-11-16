@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: ThrusterSide
-  m_Shader: {fileID: 4800000, guid: ed86a3c6633a5024fa1b061581f76a08, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8af827baa34151c469f76f8c24b6bb45, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 3000
