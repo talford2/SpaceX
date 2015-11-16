@@ -50,10 +50,10 @@ public class PlayerController : MonoBehaviour
     {
         var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit aimHit;
-        var aimAtPosition = _playVehicleInstance.GetShootPointCentre() + _playVehicleInstance.transform.forward * MaxAimDistance;
+        var aimAtPosition = _playVehicleInstance.CurrentWeapon.GetShootPointCentre() + _playVehicleInstance.transform.forward * MaxAimDistance;
         if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player")))
         {
-            var toAim = aimHit.point - _playVehicleInstance.GetShootPointCentre();
+            var toAim = aimHit.point - _playVehicleInstance.CurrentWeapon.GetShootPointCentre();
             var dotProd = Vector3.Dot(toAim, _playVehicleInstance.transform.forward);
             if (dotProd > MinAimDistance)
             {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -60,6 +61,11 @@ public class Weapon : MonoBehaviour
 		}
 	}
 
+    public Vector3 GetShootPointCentre()
+    {
+        return _shootPoints.Aggregate(Vector3.zero, (current, shootPoint) => current + shootPoint.transform.position) / _shootPoints.Count;
+    }
+
     public void SetAimAt(Vector3 aimAt)
     {
         _aimAt = aimAt;
@@ -79,7 +85,7 @@ public class Weapon : MonoBehaviour
 	        missile.transform.position = _shootPoint.transform.position;
 	        var direction = _aimAt - _shootPoint.transform.position;
 	        if (!MissilesConverge)
-	            direction += _shootPoint.Offset;
+	            direction += _shootPoint.transform.position - GetShootPointCentre();
 	        missile.transform.forward = direction;
 	        missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
 	        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, direction, _velocityReference.Value);
