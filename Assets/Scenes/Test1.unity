@@ -909,7 +909,7 @@ MonoBehaviour:
   - {fileID: 1832493475}
   InvertY: 1
   HideMouse: 1
-  AimSensitivity: 20
+  AimSensitivity: 15
   MinAimDistance: 10
   MaxAimDistance: 1000
 --- !u!4 &1064748905
