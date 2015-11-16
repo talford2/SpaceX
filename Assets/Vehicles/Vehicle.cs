@@ -69,8 +69,6 @@ public class Vehicle : MonoBehaviour
 
 	private Shiftable _shiftable;
 
-    private Vector3 _aimAt;
-
 	private Weapon _weaponInstance;
 
     private Vector3 _velocity;
@@ -132,7 +130,7 @@ public class Vehicle : MonoBehaviour
 
     public void SetAimAt(Vector3 aimAt)
     {
-        _aimAt = aimAt;
+        _weaponInstance.SetAimAt(aimAt);
     }
 
     private void OnShoot()

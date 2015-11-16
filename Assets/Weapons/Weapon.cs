@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
 	private float _fireCooldown = 0f;
 	private List<ShootPoint> _shootPoints;
     private int _shootPointIndex;
+    private Vector3 _aimAt;
 
     private VelocityReference _velocityReference;
 
@@ -58,6 +59,11 @@ public class Weapon : MonoBehaviour
 		}
 	}
 
+    public void SetAimAt(Vector3 aimAt)
+    {
+        _aimAt = aimAt;
+    }
+
 	public void Fire()
 	{
         for (var i = 0; i < MissilesPerShot; i++)
@@ -70,9 +76,11 @@ public class Weapon : MonoBehaviour
 	        var _shootPoint = _shootPoints[_shootPointIndex];
 
 	        missile.transform.position = _shootPoint.transform.position;
-	        missile.transform.rotation = _shootPoint.transform.rotation;
+	        var direction = _aimAt - _shootPoint.transform.position;
+	        missile.transform.forward = direction;
+	        //missile.transform.rotation = _shootPoint.transform.rotation;
 	        missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
-	        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, _shootPoint.transform.forward, _velocityReference.Value);
+	        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, direction, _velocityReference.Value);
 
 	        _shootPoint.Flash();
 	        FireSound.Play();
