@@ -12,7 +12,7 @@ public class ShootPoint : MonoBehaviour
     public void Initialize(Vector3 centre)
     {
         _muzzleInstance = Utility.InstantiateInParent(MuzzlePrefab.gameObject, transform).GetComponent<MuzzleFlash>();
-        _offset = transform.position - centre;
+        _offset = centre - transform.position;
     }
 
     public void Flash()
