@@ -288,6 +288,8 @@ MonoBehaviour:
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 358748846}
+  SightRange: 50
+  AttackRange: 10
 --- !u!4 &1294108931
 Transform:
   m_ObjectHideFlags: 0
