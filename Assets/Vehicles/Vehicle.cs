@@ -116,7 +116,7 @@ public class Vehicle : MonoBehaviour
 
 	    foreach (var shootPoint in ShootPoints)
 	    {
-	        shootPoint.Initialize();
+	        shootPoint.Initialize(GetShootPointCentre());
 	    }
         _velocityReference = new VelocityReference(_velocity);
 		_weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
