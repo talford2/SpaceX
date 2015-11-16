@@ -60,6 +60,7 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
+  _particleSystems: []
 --- !u!120 &12017834
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -88,8 +89,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 6.19000006}
   m_Parameters:
-    startWidth: .600000024
-    endWidth: .600000024
+    startWidth: .400000006
+    endWidth: .400000006
     m_StartColor:
       serializedVersion: 2
       rgba: 4294967295
@@ -122,11 +123,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Parameters.startWidth
-      value: .600000024
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Parameters.endWidth
-      value: .600000024
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: HitEffectPrefab
