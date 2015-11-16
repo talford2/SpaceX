@@ -71,7 +71,15 @@ public class Fighter : Npc<Fighter>
     {
         if (VehicleInstance != null)
         {
-            Gizmos.color = Color.magenta;
+            switch (State.Name)
+            {
+                case "Evade":
+                    Gizmos.color = Color.magenta;
+                    break;
+                case "Chase":
+                    Gizmos.color = Color.red;
+                    break;
+            }
             Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
             Gizmos.DrawSphere(Destination, 5f);
         }
