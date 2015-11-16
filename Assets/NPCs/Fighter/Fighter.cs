@@ -16,6 +16,9 @@ public class Fighter : Npc<Fighter>
 
     public float SteerMultiplier = 0.5f;
 
+    [Header("Evade")]
+    public float TurnAroundDistance = 200f;
+
 
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }
 

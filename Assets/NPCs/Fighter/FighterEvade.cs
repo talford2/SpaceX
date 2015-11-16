@@ -13,11 +13,11 @@ public class FighterEvade : NpcState<Fighter>
     public override void Update()
     {
         var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
-        var dotTarget = Vector3.Dot(toTarget.normalized, Npc.VehicleInstance.transform.forward);
+        var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
         Debug.Log("DOT PROD: " + dotTarget);
 
         //var targetDestination = targetVehicle.Shiftable.GetWorldPosition() + targetVehicle.GetVelocity() * Time.deltaTime + targetVehicle.transform.forward * 200f;
-        var targetDestination = Npc.Target.position + Npc.Target.forward * 200f;
+        var targetDestination = Npc.Target.position - toTarget.normalized * Npc.TurnAroundDistance;
         Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
@@ -47,9 +47,16 @@ public class FighterEvade : NpcState<Fighter>
         }
         */
 
-        if (dotTarget > 0f)
+        if (dotTarget < 0f)
         {
-            evadeCooldown = evadeTimeout;
+            if (dotTarget < -Npc.TurnAroundDistance)
+            {
+                Npc.State = new FighterChase(Npc);
+            }
+            else
+            {
+                evadeCooldown = evadeTimeout;
+            }
         }
 
         if (evadeCooldown > 0f)

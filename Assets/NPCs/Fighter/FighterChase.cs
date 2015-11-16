@@ -36,7 +36,7 @@ public class FighterChase : NpcState<Fighter>
         }
         else
         {
-            //Npc.State = new FighterEvade(Npc);
+            Npc.State = new FighterEvade(Npc);
         }
     }
 
