@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
 
 	public float FireRate = 0.2f;
     public int MissilesPerShot = 2;
+    public bool MissilesConverge;
 
 	private float _fireCooldown = 0f;
 	private List<ShootPoint> _shootPoints;
@@ -77,8 +78,9 @@ public class Weapon : MonoBehaviour
 
 	        missile.transform.position = _shootPoint.transform.position;
 	        var direction = _aimAt - _shootPoint.transform.position;
+	        if (!MissilesConverge)
+	            direction += _shootPoint.Offset;
 	        missile.transform.forward = direction;
-	        //missile.transform.rotation = _shootPoint.transform.rotation;
 	        missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
 	        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, direction, _velocityReference.Value);
 
