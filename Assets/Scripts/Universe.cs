@@ -34,9 +34,11 @@ public class Universe : MonoBehaviour
 		Debug.Log("Universe start");
 
 		//// Move the player to the start position
-		PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
-		PlayerController.Current.VehicleInstance.transform.position = PlayerSpawnPosition.transform.position;
-
+	    if (PlayerController.Current != null)
+	    {
+	        PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
+	        PlayerController.Current.VehicleInstance.transform.position = PlayerSpawnPosition.transform.position;
+	    }
 	    ViewPort.Shiftable.OnCellIndexChange += Shift;
 	}
 
@@ -73,10 +75,12 @@ public class Universe : MonoBehaviour
 
 	private void OnGUI()
 	{
+        /*
 		var cellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
 		GUI.Label(new Rect(50f, 50f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", cellIndex.X, cellIndex.Y, cellIndex.Z));
 
         GUI.Label(new Rect(50f, Screen.height - 50f, 100f, 20f), string.Format("ENERGY: {0:f1}", PlayerController.Current.VehicleInstance.BoostEnergy));
+        */
 	}
 
     public Vector3 GetWorldPosition(CellIndex cellIndex, Vector3 positionInCell)

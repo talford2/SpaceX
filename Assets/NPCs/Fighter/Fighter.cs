@@ -7,6 +7,8 @@ public class Fighter : Npc<Fighter>
     private Vehicle _vehicleInstance;
     public Vector3 Destination;
 
+    public Transform Target;
+
     public Vehicle VehicleInstance { get { return _vehicleInstance; } }
 
     private void Awake()

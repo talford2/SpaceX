@@ -9,13 +9,11 @@ public class FighterChase : NpcState<Fighter>
 
     public override void Update()
     {
-        var targetVehicle = PlayerController.Current.VehicleInstance;
-
-        var toTarget = targetVehicle.Shiftable.GetWorldPosition() - Npc.VehicleInstance.Shiftable.GetWorldPosition();
+        var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
         var dotTarget = Vector3.Dot(toTarget.normalized, Npc.VehicleInstance.transform.forward);
         Debug.Log("DOT PROD: " + dotTarget);
 
-        var pitchYaw = Npc.GetPitchYawToPoint(targetVehicle.transform.position);
+        var pitchYaw = Npc.GetPitchYawToPoint(Npc.Target.transform.position);
         Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
         Npc.VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
 

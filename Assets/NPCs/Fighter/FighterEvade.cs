@@ -12,13 +12,12 @@ public class FighterEvade : NpcState<Fighter>
 
     public override void Update()
     {
-        var targetVehicle = PlayerController.Current.VehicleInstance;
-
-        var toTarget = targetVehicle.Shiftable.GetWorldPosition() - Npc.VehicleInstance.Shiftable.GetWorldPosition();
+        var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
         var dotTarget = Vector3.Dot(toTarget.normalized, Npc.VehicleInstance.transform.forward);
         Debug.Log("DOT PROD: " + dotTarget);
 
-        var targetDestination = targetVehicle.Shiftable.GetWorldPosition() + targetVehicle.GetVelocity() * Time.deltaTime + targetVehicle.transform.forward * 200f;
+        //var targetDestination = targetVehicle.Shiftable.GetWorldPosition() + targetVehicle.GetVelocity() * Time.deltaTime + targetVehicle.transform.forward * 200f;
+        var targetDestination = Npc.Target.position + Npc.Target.forward * 200f;
         Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
