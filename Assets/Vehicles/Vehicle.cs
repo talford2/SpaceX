@@ -100,14 +100,9 @@ public class Vehicle : MonoBehaviour
 		}
 	}
 
-    public Vector3 GetShootPointCentre()
-    {
-        return ShootPoints.Aggregate(Vector3.zero, (current, shootPoint) => current + shootPoint.transform.position)/ShootPoints.Count;
-    }
-
     public Vector3 GetAimPosition()
     {
-        return GetShootPointCentre() + _aimDistance*transform.forward;
+        return _weaponInstance.GetShootPointCentre() + _aimDistance*transform.forward;
     }
 
 	private void Awake()
@@ -116,7 +111,7 @@ public class Vehicle : MonoBehaviour
 
 	    foreach (var shootPoint in ShootPoints)
 	    {
-	        shootPoint.Initialize(GetShootPointCentre());
+	        shootPoint.Initialize();
 	    }
         _velocityReference = new VelocityReference(_velocity);
 		_weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
