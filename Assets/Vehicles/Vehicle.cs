@@ -231,7 +231,7 @@ public class Vehicle : MonoBehaviour
 
         targetRotation *= Quaternion.Euler(dPitch, dYaw, dRoll);
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 20f*Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 5f*Time.deltaTime);
 
         _velocity = transform.forward*CurrentSpeed;
         _velocityReference.Value = _velocity;
@@ -256,7 +256,7 @@ public class Vehicle : MonoBehaviour
         }
         if (!IsBoosting && !IsAccelerating && !IsBraking)
         {
-            thrustAmount = 0.04f;
+            thrustAmount = 0.02f;
         }
 
         // Reduce flare brightness over distance from camera

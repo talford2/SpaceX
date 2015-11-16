@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class Fighter1Chase : NpcState<Fighter1>
+public class FighterChase : NpcState<Fighter>
 {
-    public Fighter1Chase(Fighter1 npc) : base(npc)
+    public FighterChase(Fighter npc) : base(npc)
     {
         Name = "Chase";
     }
@@ -41,7 +41,7 @@ public class Fighter1Chase : NpcState<Fighter1>
         }
         else
         {
-            Npc.State = new Fighter1Evade(Npc);
+            Npc.State = new FighterEvade(Npc);
         }
     }
     

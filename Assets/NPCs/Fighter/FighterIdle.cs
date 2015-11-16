@@ -1,6 +1,6 @@
-﻿public class Fighter1Idle : NpcState<Fighter1>
+﻿public class FighterIdle : NpcState<Fighter>
 {
-    public Fighter1Idle(Fighter1 npc) : base(npc)
+    public FighterIdle(Fighter npc) : base(npc)
     {
         Name = "Idle";
     }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Fighter1 : Npc<Fighter1>
+public class Fighter : Npc<Fighter>
 {
     public Vehicle VehiclePrefab;
 
@@ -13,7 +13,7 @@ public class Fighter1 : Npc<Fighter1>
     {
         _vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
         _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
-        State = new Fighter1Chase(this);
+        State = new FighterChase(this);
     }
 
     private void Update()

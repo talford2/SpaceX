@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class Fighter1Evade : NpcState<Fighter1>
+public class FighterEvade : NpcState<Fighter>
 {
     private float evadeTimeout = 2f;
     private float evadeCooldown;
 
-    public Fighter1Evade(Fighter1 npc) : base(npc)
+    public FighterEvade(Fighter npc) : base(npc)
     {
         Name = "Evade";
     }
@@ -58,7 +58,7 @@ public class Fighter1Evade : NpcState<Fighter1>
             evadeCooldown -= Time.deltaTime;
             if (evadeCooldown < 0f)
             {
-                Npc.State = new Fighter1Chase(Npc);
+                Npc.State = new FighterChase(Npc);
             }
         }
     }
