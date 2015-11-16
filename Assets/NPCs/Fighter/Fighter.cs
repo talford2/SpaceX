@@ -9,15 +9,17 @@ public class Fighter : Npc<Fighter>
 
 	public Transform Target;
 
-
 	public float SightRange = 50f;
 
-	public float AttackRange = 10f;
+    public float SteerMultiplier = 0.3f;
 
-    public float SteerMultiplier = 0.5f;
+    [Header("Chase")]
+    public float AttackRange = 10f;
 
     [Header("Evade")]
-    public float TurnAroundDistance = 200f;
+    public float EvadeDistance = 200f;
+    public float TurnAroundDistance = 250f;
+    public float AcclerateDistance = 100f;
 
 
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }

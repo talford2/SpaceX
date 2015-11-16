@@ -490,7 +490,7 @@ MonoBehaviour:
   MaxSpeed: 50
   MinSpeed: 3
   Acceleration: 30
-  Brake: 200
+  Brake: 20
   MaxBoostSpeed: 500
   BoostAcceleration: 500
   CurrentSpeed: 0
@@ -761,7 +761,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Brake
-      value: 200
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Materials.Array.data[0]

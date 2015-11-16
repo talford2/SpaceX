@@ -289,7 +289,11 @@ MonoBehaviour:
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 358748846}
   SightRange: 50
+  SteerMultiplier: .300000012
   AttackRange: 10
+  EvadeDistance: 200
+  TurnAroundDistance: 250
+  AcclerateDistance: 100
 --- !u!4 &1294108931
 Transform:
   m_ObjectHideFlags: 0

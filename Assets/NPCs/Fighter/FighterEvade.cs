@@ -14,7 +14,7 @@ public class FighterEvade : NpcState<Fighter>
     {
         var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
-        Debug.Log("DOT PROD: " + dotTarget);
+        //Debug.Log("DOT PROD: " + dotTarget);
 
         //var targetDestination = targetVehicle.Shiftable.GetWorldPosition() + targetVehicle.GetVelocity() * Time.deltaTime + targetVehicle.transform.forward * 200f;
         var targetDestination = Npc.Target.position - toTarget.normalized * Npc.TurnAroundDistance;
@@ -24,9 +24,9 @@ public class FighterEvade : NpcState<Fighter>
         Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
         Npc.VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
 
-        /*
-        var toDestination = Npc.Destination - Npc.VehicleInstance.transform.position;
-        if (toDestination.sqrMagnitude > 50f*50f)
+        Debug.Log("TT: " + toTarget.sqrMagnitude + " --- " + (Npc.AcclerateDistance * Npc.AcclerateDistance));
+
+        if (toTarget.sqrMagnitude < Npc.AcclerateDistance*Npc.AcclerateDistance)
         {
             Npc.VehicleInstance.TriggerAccelerate = true;
         }
@@ -34,23 +34,13 @@ public class FighterEvade : NpcState<Fighter>
         {
             Npc.VehicleInstance.TriggerAccelerate = false;
         }
-        
-
-        if (targetVehicle.GetVelocity().sqrMagnitude > Npc.VehicleInstance.GetVelocity().sqrMagnitude)
-        {
-            Npc.VehicleInstance.TriggerBrake = false;
-        }
-        else
-        {
-            Npc.VehicleInstance.TriggerBrake = true;
-
-        }
-        */
 
         if (dotTarget < 0f)
         {
             if (dotTarget < -Npc.TurnAroundDistance)
             {
+                Debug.Log("TURN AROUND!");
+                Debug.Log("DOT: " + dotTarget);
                 Npc.State = new FighterChase(Npc);
             }
             else
