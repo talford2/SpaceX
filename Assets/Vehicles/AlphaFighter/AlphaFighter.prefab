@@ -490,14 +490,14 @@ MonoBehaviour:
   MaxSpeed: 50
   MinSpeed: 3
   Acceleration: 30
-  Brake: 60
+  Brake: 200
   MaxBoostSpeed: 500
   BoostAcceleration: 500
   CurrentSpeed: 0
   PitchSpeed: 250
   YawSpeed: 250
   RollAcceleration: 640
-  MaxRollSpeed: 250
+  MaxRollSpeed: 120
   MaxBoostEnergy: 100
   BoostEnergy: 100
   BoostCost: 20
@@ -531,6 +531,8 @@ MonoBehaviour:
   MuzzlePrefab: {fileID: 0}
   FireSound: {fileID: 0}
   FireRate: .200000003
+  MissilesPerShot: 2
+  MissilesConverge: 0
   IsTriggered: 0
   MissilePoolCount: 20
 --- !u!114 &11448042
@@ -759,7 +761,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Brake
-      value: 60
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Materials.Array.data[0]
@@ -816,7 +818,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxRollSpeed
-      value: 250
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BoostCost

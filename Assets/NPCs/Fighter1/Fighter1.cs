@@ -12,6 +12,7 @@ public class Fighter1 : Npc<Fighter1>
     private void Awake()
     {
         _vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
+        _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
         State = new Fighter1Chase(this);
     }
 
@@ -51,6 +52,11 @@ public class Fighter1 : Npc<Fighter1>
         }
 
         return new Vector2(pitchAmount, -yawAmount);
+    }
+
+    private void OnVehicleDestroyed(Killable sender)
+    {
+        Destroy(gameObject);
     }
 
     private void OnGUI()
