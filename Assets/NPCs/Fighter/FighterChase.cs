@@ -7,43 +7,38 @@ public class FighterChase : NpcState<Fighter>
 		Name = "Chase";
 	}
 
-	public override void Update()
-	{
-		var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
-		var dotTarget = Vector3.Dot(toTarget.normalized, Npc.VehicleInstance.transform.forward);
-		Debug.Log("DOT PROD: " + dotTarget);
+    public override void Update()
+    {
+        var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
+        var dotTarget = Vector3.Dot(toTarget.normalized, Npc.VehicleInstance.transform.forward);
+        Debug.Log("DOT PROD: " + dotTarget);
 
-		var targetDestination = Npc.Target.position;
-		Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
+        var targetDestination = Npc.Target.position;
+        Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
 
-		var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
-		Npc.VehicleInstance.YawThrottle = pitchYaw.y * Time.deltaTime;
-		Npc.VehicleInstance.PitchThotttle = pitchYaw.x * Time.deltaTime;
+        var turnSensitivity = 0.5f;
+        var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
+        Npc.VehicleInstance.YawThrottle = turnSensitivity*pitchYaw.y*Time.deltaTime;
+        Npc.VehicleInstance.PitchThotttle = turnSensitivity*pitchYaw.x*Time.deltaTime;
 
-		if (dotTarget < 0f)
-		{
-			if (toTarget.sqrMagnitude > Npc.SightRange * Npc.SightRange)
-			{
-				Npc.VehicleInstance.TriggerAccelerate = true;
-			}
-			else
-			{
-				Npc.VehicleInstance.TriggerAccelerate = false;
-			}
+        Npc.VehicleInstance.TriggerBrake = false;
+        Npc.VehicleInstance.TriggerAccelerate = false;
 
-			if (toTarget.sqrMagnitude < Npc.AttackRange * Npc.AttackRange)
-			{
-				Npc.VehicleInstance.TriggerBrake = true;
-			}
-			else
-			{
-				Npc.VehicleInstance.TriggerBrake = false;
-			}
-		}
-		else
-		{
-			//Npc.State = new FighterEvade(Npc);
-		}
-	}
+        if (dotTarget < 0f)
+        {
+            if (toTarget.sqrMagnitude > Npc.SightRange*Npc.SightRange)
+            {
+                Npc.VehicleInstance.TriggerAccelerate = true;
+            }
+            if (toTarget.sqrMagnitude < Npc.AttackRange*Npc.AttackRange)
+            {
+                Npc.VehicleInstance.TriggerBrake = true;
+            }
+        }
+        else
+        {
+            //Npc.State = new FighterEvade(Npc);
+        }
+    }
 
 }

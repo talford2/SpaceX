@@ -231,7 +231,7 @@ public class Vehicle : MonoBehaviour
 
         targetRotation *= Quaternion.Euler(dPitch, dYaw, dRoll);
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 5f*Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 20f*Time.deltaTime);
 
         _velocity = transform.forward*CurrentSpeed;
         _velocityReference.Value = _velocity;
