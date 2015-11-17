@@ -25,7 +25,8 @@ public class UniverseTrackers : MonoBehaviour
 		var halfWidth = Screen.width / 2f;
 		var halfHeight = Screen.height / 2f;
 
-		var v = new Vector3(r.x - halfWidth, r.y - halfHeight, 0);
+		//var v = new Vector3(r.x - halfWidth, r.y - halfHeight, 0);
+		var v = new Vector3(Mathf.Clamp(r.x - halfWidth, Screen.width / -2f, Screen.width / 2f), Mathf.Clamp(r.y - halfHeight, Screen.height / -2f, Screen.height / 2f), 0);
 
 		Cursor.rectTransform.localPosition = v;
 	}
