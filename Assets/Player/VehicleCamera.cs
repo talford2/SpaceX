@@ -28,6 +28,7 @@ public class VehicleCamera : UniverseCamera {
     private Vector3 offset;
 
     private float targetFov;
+    private Vector3 targetUp;
 
     private void Start()
     {
@@ -35,6 +36,7 @@ public class VehicleCamera : UniverseCamera {
         springDistance = 1f;
         Target = PlayerController.Current.VehicleInstance;
         offsetAngle = Target.transform.rotation;
+        targetUp = Target.transform.up;
     }
 
     public override void Move()
@@ -68,7 +70,9 @@ public class VehicleCamera : UniverseCamera {
 
         _shiftable.Translate(Target.transform.position + offset - transform.position);
 
-        transform.LookAt(Target.GetAimPosition(), Target.transform.up);
+        targetUp = Vector3.Lerp(targetUp, Target.transform.up, 5f*Time.deltaTime);
+
+        transform.LookAt(Target.GetAimPosition(), targetUp);
 
         BackgroundTransform.transform.position = transform.position;
 
