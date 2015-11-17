@@ -9,6 +9,7 @@ public class UniverseTrackers : MonoBehaviour
 
     private Vector3 screenCentre;
     private Rect screenBounds;
+    private float gradient;
 
 	public UnityEngine.UI.Image Cursor;
 
@@ -44,17 +45,19 @@ public class UniverseTrackers : MonoBehaviour
         if (pointAtPos.z < 0f)
             pointAtPos *= -1f;
 
+        var delta = pointAtPos - screenCentre;
+        gradient = -delta.y / delta.x;
+
         if (!screenBounds.Contains(pointAtPos))
         {
-            var delta = pointAtPos - screenCentre;
+            /*
             var angle = Mathf.Atan2(delta.x, -delta.y);
 
             var cos = Mathf.Cos(angle);
             var sin = Mathf.Sin(angle);
+            */
 
-            var gradient = cos/sin;
-
-            if (cos > 0f)
+            if (gradient > 1f)
             {
                 pointAtPos = new Vector2(screenCentre.y/gradient, screenCentre.y);
             }
@@ -83,5 +86,6 @@ public class UniverseTrackers : MonoBehaviour
     private void OnGUI()
     {
         GUI.Label(new Rect(20f, 50f, 100f, 25f), clampPos.ToString());
+        GUI.Label(new Rect(20f, 80f, 100f, 25f), string.Format("{0:f2}", gradient));
     }
 }
