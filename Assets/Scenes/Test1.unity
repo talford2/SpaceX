@@ -2051,7 +2051,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 140e49d363b2df244bf0c5f8ebe6fe04, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3ff4affc978dcee4998bd90d5f9c6896, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2080,7 +2080,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 467, y: -363}
-  m_SizeDelta: {x: 35.9999962, y: 35.9999962}
+  m_SizeDelta: {x: 45, y: 43}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1933363056 stripped
 GameObject:
