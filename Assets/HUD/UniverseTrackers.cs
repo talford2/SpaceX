@@ -46,7 +46,7 @@ public class UniverseTrackers : MonoBehaviour
             pointAtPos *= -1f;
 
         var delta = pointAtPos - screenCentre;
-        gradient = -delta.y / delta.x;
+        gradient = delta.y / delta.x;
 
         if (!screenBounds.Contains(pointAtPos))
         {
@@ -57,28 +57,38 @@ public class UniverseTrackers : MonoBehaviour
             var sin = Mathf.Sin(angle);
             */
 
-            if (gradient > 1f)
+            Vector2 result = pointAtPos - screenCentre;
+
+            if (Mathf.Abs(gradient) < 1f)
             {
-                pointAtPos = new Vector2(screenCentre.y/gradient, screenCentre.y);
+                if (delta.x < screenBounds.x - screenCentre.x)
+                {
+                    result.x = screenBounds.x - screenCentre.x;
+                    result.y = gradient*result.x;
+                }
+                if (delta.x > screenBounds.width - screenCentre.x)
+                {
+                    result.x = screenBounds.width - screenCentre.x;
+                    result.y = gradient*result.x;
+                }
             }
             else
             {
-                pointAtPos = new Vector2(-screenCentre.y/gradient, -screenCentre.y);
+                if (delta.y < screenBounds.y - screenCentre.y)
+                {
+                    result.y = screenBounds.y - screenCentre.y;
+                    result.x = result.y/gradient;
+                }
+                if (delta.y > screenBounds.height - screenCentre.y)
+                {
+                    result.y = screenBounds.height - screenCentre.y;
+                    result.x = result.y/gradient;
+                }
             }
 
-            if (pointAtPos.x > screenCentre.x)
-            {
-                pointAtPos = new Vector2(screenCentre.x, screenCentre.x*gradient);
-            }
-            else if (pointAtPos.x < -screenCentre.x)
-            {
-                pointAtPos = new Vector2(-screenCentre.x, -screenCentre.x*gradient);
-            }
-
-            return new Vector2(
-                Mathf.Clamp(pointAtPos.x , screenBounds.x - screenCentre.x, screenBounds.width - screenCentre.x),
-                Mathf.Clamp(Screen.height - pointAtPos.y, screenBounds.y - screenCentre.y, screenBounds.height - screenCentre.y)
-                );
+            result.x = Mathf.Clamp(result.x, screenBounds.x - screenCentre.x, screenBounds.width - screenCentre.x);
+            result.y = Mathf.Clamp(result.y, screenBounds.y - screenCentre.y, screenBounds.height - screenCentre.y);
+            return result;
         }
         return pointAtPos - screenCentre;
     }
