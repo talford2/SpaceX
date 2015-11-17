@@ -10,29 +10,24 @@ public class UniverseTrackers : MonoBehaviour
     private Vector3 screenCentre;
     private float boundaryPadding = 20f;
     private Rect screenBounds;
-    private float gradient;
 
 	public Image Cursor;
 
     private void Start()
     {
         screenCentre = new Vector3(Screen.width/2f, Screen.height/2f, 0f);
-        screenBounds = new Rect(0 + boundaryPadding, 0 + boundaryPadding, Screen.width - 2f*boundaryPadding, Screen.height - 2f*boundaryPadding);
+        screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f*boundaryPadding, Screen.height - 2f*boundaryPadding);
 
         var ccc = Universe.Current.ViewPort;
         _cam = ccc.GetComponent<Camera>();
         ccc.OnMove += Ccc_OnMove;
     }
 
-    private Vector2 clampPos;
-
 	private void Ccc_OnMove()
 	{
 		var r = _cam.WorldToScreenPoint(Target.position);
-	    var v = ClampToScreen(r);
-	    clampPos = v;
-
-		Cursor.rectTransform.localPosition = v;
+        Cursor.rectTransform.localPosition = ClampToScreen(r);
+	    Cursor.rectTransform.localRotation = Quaternion.AngleAxis(GetScreenAngle(r), Vector3.forward);
 	}
 
     private Vector2 ClampToScreen(Vector3 pointAtPos)
@@ -41,17 +36,10 @@ public class UniverseTrackers : MonoBehaviour
             pointAtPos *= -1f;
 
         var delta = pointAtPos - screenCentre;
-        gradient = delta.y / delta.x;
+        var gradient = delta.y / delta.x;
 
         if (!screenBounds.Contains(pointAtPos))
         {
-            /*
-            var angle = Mathf.Atan2(delta.x, -delta.y);
-
-            var cos = Mathf.Cos(angle);
-            var sin = Mathf.Sin(angle);
-            */
-
             Vector2 result = pointAtPos - screenCentre;
 
             if (result.x < screenBounds.xMin - screenCentre.x)
@@ -82,9 +70,13 @@ public class UniverseTrackers : MonoBehaviour
         return pointAtPos - screenCentre;
     }
 
-    private void OnGUI()
+    private float GetScreenAngle(Vector3 pointAtPos)
     {
-        GUI.Label(new Rect(20f, 50f, 100f, 25f), clampPos.ToString());
-        GUI.Label(new Rect(20f, 80f, 100f, 25f), string.Format("{0:f2}", gradient));
+        if (pointAtPos.z < 0f)
+            pointAtPos *= -1f;
+
+        var delta = pointAtPos - screenCentre;
+        var angle = Mathf.Rad2Deg*Mathf.Atan2(delta.x, -delta.y);
+        return angle;
     }
 }
