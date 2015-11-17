@@ -54,16 +54,16 @@ public class Fighter : Npc<Fighter>
 		}
 		else if (yawDiff > yawTolerance)
 		{
-			yawAmount = -Mathf.Clamp(Mathf.Abs(yawDiff) / yawTolerance, 0f, 1f);
+            yawAmount = -Mathf.Clamp(Mathf.Abs(yawDiff) / yawTolerance, 0f, 1f);
 		}
 
 		if (pitchDiff < -pitchTolerance)
 		{
-			pitchAmount = Mathf.Clamp(Mathf.Abs(pitchDiff) / pitchTolerance, 0f, 1f);
+            pitchAmount = Mathf.Clamp(Mathf.Abs(pitchDiff) / pitchTolerance, 0f, 1f);
 		}
 		else if (pitchDiff > pitchTolerance)
 		{
-			pitchAmount = -Mathf.Clamp(Mathf.Abs(pitchDiff) / pitchTolerance, 0f, 1f);
+            pitchAmount = -Mathf.Clamp(Mathf.Abs(pitchDiff) / pitchTolerance, 0f, 1f);
 		}
 
 		return new Vector2(pitchAmount, -yawAmount);
@@ -102,6 +102,9 @@ public class Fighter : Npc<Fighter>
 
 			Gizmos.color = Color.red;
 			Gizmos.DrawWireSphere(VehicleInstance.transform.position, AttackRange);
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(VehicleInstance.transform.position, VehicleInstance.transform.position + VehicleInstance.transform.forward * 100f);
 		}
 	}
 }
