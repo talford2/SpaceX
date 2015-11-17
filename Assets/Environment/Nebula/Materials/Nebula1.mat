@@ -147,7 +147,7 @@ Material:
       data:
         first:
           name: _TintColor
-        second: {r: .175496951, g: .193171471, b: .217241377, a: 1}
+        second: {r: .242352933, g: .266760647, b: .300000012, a: 1}
       data:
         first:
           name: _EmissionColorUI
