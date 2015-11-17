@@ -59,31 +59,25 @@ public class UniverseTrackers : MonoBehaviour
 
             Vector2 result = pointAtPos - screenCentre;
 
-            if (Mathf.Abs(gradient) < 1f)
+            if (result.x < screenBounds.x - screenCentre.x)
             {
-                if (delta.x < screenBounds.x - screenCentre.x)
-                {
-                    result.x = screenBounds.x - screenCentre.x;
-                    result.y = gradient*result.x;
-                }
-                if (delta.x > screenBounds.width - screenCentre.x)
-                {
-                    result.x = screenBounds.width - screenCentre.x;
-                    result.y = gradient*result.x;
-                }
+                result.x = screenBounds.x - screenCentre.x;
+                result.y = gradient*result.x;
             }
-            else
+            if (result.x > screenBounds.width - screenCentre.x)
             {
-                if (delta.y < screenBounds.y - screenCentre.y)
-                {
-                    result.y = screenBounds.y - screenCentre.y;
-                    result.x = result.y/gradient;
-                }
-                if (delta.y > screenBounds.height - screenCentre.y)
-                {
-                    result.y = screenBounds.height - screenCentre.y;
-                    result.x = result.y/gradient;
-                }
+                result.x = screenBounds.width - screenCentre.x;
+                result.y = gradient*result.x;
+            }
+            if (result.y < screenBounds.y - screenCentre.y)
+            {
+                result.y = screenBounds.y - screenCentre.y;
+                result.x = result.y/gradient;
+            }
+            if (result.y > screenBounds.height - screenCentre.y)
+            {
+                result.y = screenBounds.height - screenCentre.y;
+                result.x = result.y/gradient;
             }
 
             result.x = Mathf.Clamp(result.x, screenBounds.x - screenCentre.x, screenBounds.width - screenCentre.x);
