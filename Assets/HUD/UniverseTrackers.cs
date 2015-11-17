@@ -11,7 +11,9 @@ public class UniverseTrackers : MonoBehaviour
     private float boundaryPadding = 20f;
     private Rect screenBounds;
 
-    public Image Cursor;
+    private Image cursor;
+    public Image ArrowCursor;
+    public Image TrackerCurosr;
 
     private void Start()
     {
@@ -26,17 +28,31 @@ public class UniverseTrackers : MonoBehaviour
     private void Ccc_OnMove()
     {
         var r = _cam.WorldToScreenPoint(Target.position);
-        Cursor.rectTransform.localPosition = ClampToScreen(r);
-
+        var inBounds = screenBounds.Contains(r);
         if (r.z < 0f)
             r *= -1f;
-        if (!screenBounds.Contains(r))
+
+        if (inBounds)
         {
-            Cursor.rectTransform.localRotation = Quaternion.AngleAxis(GetScreenAngle(r - Cursor.rectTransform.localPosition), Vector3.forward);
+            TrackerCurosr.enabled = true;
+            ArrowCursor.enabled = false;
+            cursor = TrackerCurosr;
         }
         else
         {
-            Cursor.rectTransform.localRotation = Quaternion.identity;
+            TrackerCurosr.enabled = false;
+            ArrowCursor.enabled = true;
+            cursor = ArrowCursor;
+        }
+
+        cursor.rectTransform.localPosition = ClampToScreen(r);
+        if (!inBounds)
+        {
+            cursor.rectTransform.localRotation = Quaternion.AngleAxis(GetScreenAngle(r - ArrowCursor.rectTransform.localPosition), Vector3.forward);
+        }
+        else
+        {
+            cursor.rectTransform.localRotation = Quaternion.identity;
         }
     }
 
