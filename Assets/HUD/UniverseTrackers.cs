@@ -26,9 +26,8 @@ public class UniverseTrackers : MonoBehaviour
 	private void Ccc_OnMove()
 	{
 		var r = _cam.WorldToScreenPoint(Target.position);
-	    var v = ClampToScreen(r);
-
-		Cursor.rectTransform.localPosition = v;
+        Cursor.rectTransform.localPosition = ClampToScreen(r);
+	    Cursor.rectTransform.localRotation = Quaternion.AngleAxis(GetScreenAngle(r), Vector3.forward);
 	}
 
     private Vector2 ClampToScreen(Vector3 pointAtPos)
@@ -41,10 +40,6 @@ public class UniverseTrackers : MonoBehaviour
 
         if (!screenBounds.Contains(pointAtPos))
         {
-            /*
-            var angle = Mathf.Atan2(delta.x, -delta.y);
-            */
-
             Vector2 result = pointAtPos - screenCentre;
 
             if (result.x < screenBounds.xMin - screenCentre.x)
@@ -73,5 +68,15 @@ public class UniverseTrackers : MonoBehaviour
             return result;
         }
         return pointAtPos - screenCentre;
+    }
+
+    private float GetScreenAngle(Vector3 pointAtPos)
+    {
+        if (pointAtPos.z < 0f)
+            pointAtPos *= -1f;
+
+        var delta = pointAtPos - screenCentre;
+        var angle = Mathf.Rad2Deg*Mathf.Atan2(delta.x, -delta.y);
+        return angle;
     }
 }
