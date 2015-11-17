@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public class UniverseTrackers : MonoBehaviour
 {
@@ -8,32 +8,27 @@ public class UniverseTrackers : MonoBehaviour
 	private Camera _cam;
 
     private Vector3 screenCentre;
+    private float boundaryPadding = 20f;
     private Rect screenBounds;
     private float gradient;
 
-	public UnityEngine.UI.Image Cursor;
+	public Image Cursor;
 
-	// Use this for initialization
-	void Start()
-	{
+    private void Start()
+    {
         screenCentre = new Vector3(Screen.width/2f, Screen.height/2f, 0f);
-	    var boundaryPadding = 10f;
-        screenBounds = new Rect(0 + boundaryPadding, 0 + boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * +boundaryPadding);
+        screenBounds = new Rect(0 + boundaryPadding, 0 + boundaryPadding, Screen.width - 2f*boundaryPadding, Screen.height - 2f*boundaryPadding);
 
-		var ccc = Universe.Current.ViewPort;
-		_cam = ccc.GetComponent<Camera>();
-		ccc.OnMove += Ccc_OnMove;
-	}
+        var ccc = Universe.Current.ViewPort;
+        _cam = ccc.GetComponent<Camera>();
+        ccc.OnMove += Ccc_OnMove;
+    }
 
     private Vector2 clampPos;
 
 	private void Ccc_OnMove()
 	{
 		var r = _cam.WorldToScreenPoint(Target.position);
-
-		//var v = new Vector3(r.x - screenCentre.x, r.y - screenCentre.y, 0);
-		//var v = new Vector3(Mathf.Clamp(r.x - halfWidth, Screen.width / -2f, Screen.width / 2f), Mathf.Clamp(r.y - halfHeight, Screen.height / -2f, Screen.height / 2f), 0);
-
 	    var v = ClampToScreen(r);
 	    clampPos = v;
 
@@ -59,29 +54,29 @@ public class UniverseTrackers : MonoBehaviour
 
             Vector2 result = pointAtPos - screenCentre;
 
-            if (result.x < screenBounds.x - screenCentre.x)
+            if (result.x < screenBounds.xMin - screenCentre.x)
             {
-                result.x = screenBounds.x - screenCentre.x;
+                result.x = screenBounds.xMin - screenCentre.x;
                 result.y = gradient*result.x;
             }
-            if (result.x > screenBounds.width - screenCentre.x)
+            if (result.x > screenBounds.xMax - screenCentre.x)
             {
-                result.x = screenBounds.width - screenCentre.x;
+                result.x = screenBounds.xMax - screenCentre.x;
                 result.y = gradient*result.x;
             }
-            if (result.y < screenBounds.y - screenCentre.y)
+            if (result.y < screenBounds.yMin - screenCentre.y)
             {
-                result.y = screenBounds.y - screenCentre.y;
+                result.y = screenBounds.yMin - screenCentre.y;
                 result.x = result.y/gradient;
             }
-            if (result.y > screenBounds.height - screenCentre.y)
+            if (result.y > screenBounds.yMax - screenCentre.y)
             {
-                result.y = screenBounds.height - screenCentre.y;
+                result.y = screenBounds.yMax - screenCentre.y;
                 result.x = result.y/gradient;
             }
 
-            result.x = Mathf.Clamp(result.x, screenBounds.x - screenCentre.x, screenBounds.width - screenCentre.x);
-            result.y = Mathf.Clamp(result.y, screenBounds.y - screenCentre.y, screenBounds.height - screenCentre.y);
+            result.x = Mathf.Clamp(result.x, screenBounds.xMin - screenCentre.x, screenBounds.xMax - screenCentre.x);
+            result.y = Mathf.Clamp(result.y, screenBounds.yMin- screenCentre.y, screenBounds.yMax - screenCentre.y);
             return result;
         }
         return pointAtPos - screenCentre;
