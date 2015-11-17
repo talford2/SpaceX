@@ -46,13 +46,13 @@ public class UniverseTrackers : MonoBehaviour
 
         if (!screenBounds.Contains(pointAtPos))
         {
-            var delta = pointAtPos;
+            var delta = pointAtPos - screenCentre;
             var angle = Mathf.Atan2(delta.x, -delta.y);
 
             var cos = Mathf.Cos(angle);
             var sin = Mathf.Sin(angle);
 
-            var gradient = sin/cos;
+            var gradient = cos/sin;
 
             if (cos > 0f)
             {
