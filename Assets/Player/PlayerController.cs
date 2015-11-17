@@ -32,11 +32,6 @@ public class PlayerController : MonoBehaviour
         PlayerVehicles.Insert(0, _playVehicleInstance);
 
         screenAspect = (float)Screen.height/(float)Screen.width;
-
-        Debug.Log("WIDTH: " + Screen.width);
-        Debug.Log("HEIGHT: " + Screen.height);
-
-        Debug.Log("ASPECT: " + screenAspect);
         //Debug.Break();
     }
 

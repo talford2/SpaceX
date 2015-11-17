@@ -221,7 +221,7 @@ public class Vehicle : MonoBehaviour
 
         if (Mathf.Abs(RollThrottle) < 0.01f)
         {
-            rollSpeed = Mathf.Lerp(rollSpeed, 0f, 5f*Time.deltaTime);
+            rollSpeed = Mathf.Lerp(rollSpeed, 0f, 10f*Time.deltaTime);
         }
 
         // Turning
