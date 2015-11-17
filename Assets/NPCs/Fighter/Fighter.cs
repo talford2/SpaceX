@@ -31,6 +31,14 @@ public class Fighter : Npc<Fighter>
 		State = new FighterChase(this);
 	}
 
+    private void Start()
+    {
+        if (Target == null)
+        {
+            Target = PlayerController.Current.VehicleInstance.transform;
+        }
+    }
+
 	private void Update()
 	{
 		UpdateState();
