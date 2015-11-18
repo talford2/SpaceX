@@ -17,11 +17,9 @@ public class FighterChase : NpcState<Fighter>
         Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
-        if (pitchYaw.sqrMagnitude > 0f)
+        if (pitchYaw.sqrMagnitude <= 0f)
         {
-        }
-        else
-        {
+            Debug.Log("THIS DOES HAPPEN!");
             // Give random value to resolve zero pitchYaw issue.
             pitchYaw = Random.insideUnitCircle;
         }
@@ -40,7 +38,7 @@ public class FighterChase : NpcState<Fighter>
             }
             if (toTarget.sqrMagnitude < Npc.AttackRange*Npc.AttackRange)
             {
-                Npc.VehicleInstance.TriggerBrake = true;
+                Npc.State = new FighterAttack(Npc);
             }
         }
         else
