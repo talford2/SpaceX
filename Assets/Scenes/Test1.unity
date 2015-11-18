@@ -1615,12 +1615,18 @@ MonoBehaviour:
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
-  SightRange: 50
   SteerMultiplier: .300000012
-  AttackRange: 10
+  AttackRange: 100
+  ShootAngleTolerance: 5
+  OvertakeDistance: 50
   EvadeDistance: 200
   TurnAroundDistance: 250
   AcclerateDistance: 100
+  MinDodgeIntervalTime: 1
+  MaxDodgeIntervalTime: 6
+  DodgeRadius: 50
+  DodgeArcAngle: 180
+  SightRange: 50
 --- !u!4 &1315452274
 Transform:
   m_ObjectHideFlags: 0
