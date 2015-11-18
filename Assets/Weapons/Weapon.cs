@@ -31,8 +31,11 @@ public class Weapon : MonoBehaviour
 	private int _curMissileIndex;
 	private List<GameObject> _missileInstances;
 
+    private GameObject _owner;
+
 	public void Initialize(GameObject owner, List<ShootPoint> shootPoints, VelocityReference velocityReference)
 	{
+	    _owner = owner;
 		_curMissileIndex = 0;
 		_missileInstances = new List<GameObject>();
 		var missilesContainer = Utility.FindOrCreateContainer("Missiles");
@@ -87,7 +90,7 @@ public class Weapon : MonoBehaviour
 	        if (!MissilesConverge)
 	            direction += _shootPoint.transform.position - GetShootPointCentre();
 	        missile.transform.forward = direction;
-	        missile.GetComponent<Shiftable>().UniverseCellIndex = PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex;
+	        missile.GetComponent<Shiftable>().UniverseCellIndex = _owner.GetComponent<Vehicle>().Shiftable.UniverseCellIndex;
 	        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, direction, _velocityReference.Value);
 
 	        _shootPoint.Flash();
