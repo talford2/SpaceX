@@ -150,4 +150,11 @@ public class PlayerController : MonoBehaviour
 	{
 		get { return _playVehicleInstance; }
 	}
+
+    /*
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(Screen.width - 100f, Screen.height - 100f, 100f, 25), string.Format("{0:f2} m/s", VehicleInstance.GetVelocity().magnitude));
+    }
+    */
 }
