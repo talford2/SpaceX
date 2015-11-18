@@ -9,18 +9,24 @@ public class Fighter : Npc<Fighter>
 
 	public Transform Target;
 
-	public float SightRange = 50f;
-
     public float SteerMultiplier = 0.3f;
 
-    [Header("Chase")]
-    public float AttackRange = 10f;
+    [Header("Attack")]
+    public float AttackRange = 100f;
+    public float ShootAngleTolerance = 5f;
+    public float OvertakeDistance = 50f;
 
     [Header("Evade")]
     public float EvadeDistance = 200f;
     public float TurnAroundDistance = 250f;
     public float AcclerateDistance = 100f;
+    public float MinDodgeIntervalTime = 1f;
+    public float MaxDodgeIntervalTime = 6f;
+    public float DodgeRadius = 50f;
+    public float DodgeArcAngle = 180f;
 
+    [Header("Chase")]
+    public float SightRange = 50f;
 
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }
 
@@ -75,6 +81,9 @@ public class Fighter : Npc<Fighter>
 				case "Chase":
 					Gizmos.color = Color.red;
 					break;
+                case "Attack":
+			        Gizmos.color = Color.yellow;
+			        break;
 			}
 			Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
 			Gizmos.DrawSphere(Destination, 2f);

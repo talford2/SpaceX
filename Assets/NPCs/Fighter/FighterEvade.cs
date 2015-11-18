@@ -5,17 +5,38 @@ public class FighterEvade : NpcState<Fighter>
     private float evadeTimeout = 2f;
     private float evadeCooldown;
 
+    // Dodge
+    private float dodgeCooldown;
+    private Vector3 dodgeOffset;
+
     public FighterEvade(Fighter npc) : base(npc)
     {
         Name = "Evade";
     }
 
+    private Quaternion GetRandomArc(float angle)
+    {
+        var halfAngle = angle*0.5f;
+        return Quaternion.Euler(Random.Range(-halfAngle, halfAngle), Random.Range(-halfAngle, halfAngle), Random.Range(-halfAngle, halfAngle));
+    }
+
     public override void Update()
     {
         var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
+
+        if (dodgeCooldown >= 0f)
+        {
+            dodgeCooldown -= Time.deltaTime;
+            if (dodgeCooldown < 0f)
+            {
+                dodgeOffset =GetRandomArc(Npc.DodgeArcAngle) * -toTarget.normalized * Npc.DodgeRadius;
+                dodgeCooldown = Random.Range(Npc.MinDodgeIntervalTime, Npc.MaxDodgeIntervalTime);
+            }
+        }
+        
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
-        var targetDestination = Npc.Target.position - toTarget.normalized * Npc.TurnAroundDistance;
+        var targetDestination = Npc.Target.position - toTarget.normalized * Npc.TurnAroundDistance + dodgeOffset;
         Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
