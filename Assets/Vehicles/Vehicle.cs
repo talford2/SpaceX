@@ -19,6 +19,8 @@ public class Vehicle : MonoBehaviour
 
     public float BoostAcceleration = 500f;
 
+    public float BoostBrake = 150f;
+
 	public float CurrentSpeed = 0f;
 
 	public float PitchSpeed = 5f;
@@ -202,6 +204,11 @@ public class Vehicle : MonoBehaviour
         // Idling
         if (!IsAccelerating && !IsBraking && !IsBoosting)
         {
+            if (CurrentSpeed > MaxSpeed)
+            {
+                CurrentSpeed -= BoostBrake*Time.deltaTime;
+            }
+
             if (CurrentSpeed > IdleSpeed)
             {
                 acceleration = -Brake;
