@@ -26,8 +26,8 @@ public class FighterChase : NpcState<Fighter>
             pitchYaw = Random.insideUnitCircle;
         }
 
-        Npc.VehicleInstance.YawThrottle = Npc.SteerMultiplier*pitchYaw.y*Time.deltaTime;
-        Npc.VehicleInstance.PitchThotttle = Npc.SteerMultiplier*pitchYaw.x*Time.deltaTime;
+        Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
+        Npc.VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
 
         Npc.VehicleInstance.TriggerBrake = false;
         Npc.VehicleInstance.TriggerAccelerate = false;

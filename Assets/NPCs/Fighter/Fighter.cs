@@ -46,6 +46,7 @@ public class Fighter : Npc<Fighter>
 
 	public Vector2 GetPitchYawToPoint(Vector3 point)
 	{
+        /*
 		var toPoint = point - VehicleInstance.transform.position;
 		var yawDiff = Vector3.Dot(toPoint, VehicleInstance.transform.right);
 		var pitchDiff = Vector3.Dot(toPoint, VehicleInstance.transform.up);
@@ -73,8 +74,11 @@ public class Fighter : Npc<Fighter>
 		{
             pitchAmount = -Mathf.Clamp(Mathf.Abs(pitchDiff) / pitchTolerance, 0f, 1f);
 		}
-
-		return new Vector2(pitchAmount, -yawAmount);
+        */
+        var toPoint = point - VehicleInstance.transform.position;
+	    var yawAmount = Vector3.Dot(toPoint.normalized, VehicleInstance.transform.right);
+        var pitchAmount = Vector3.Dot(-toPoint.normalized, VehicleInstance.transform.up);
+		return new Vector2(pitchAmount, yawAmount);
 	}
 
 	private void OnVehicleDestroyed(Killable sender)
