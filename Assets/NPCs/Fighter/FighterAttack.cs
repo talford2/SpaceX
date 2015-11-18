@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class FighterAttack :NpcState<Fighter>
 {
@@ -27,7 +26,7 @@ public class FighterAttack :NpcState<Fighter>
         if (dotTarget > 10f)
         {
             var angleToTarget = Vector3.Angle(toTarget.normalized, Npc.VehicleInstance.transform.forward.normalized);
-            if (Mathf.Abs(angleToTarget) < 5f)
+            if (Mathf.Abs(angleToTarget) < Npc.ShootAngleTolerance)
             {
                 Npc.VehicleInstance.SetAimAt(Npc.Target.position);
                 Npc.VehicleInstance.CurrentWeapon.IsTriggered = true;
@@ -36,7 +35,6 @@ public class FighterAttack :NpcState<Fighter>
             {
                 Npc.VehicleInstance.CurrentWeapon.IsTriggered = false;
             }
-
         }
         else
         {

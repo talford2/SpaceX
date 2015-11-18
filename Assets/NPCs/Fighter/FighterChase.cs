@@ -36,6 +36,13 @@ public class FighterChase : NpcState<Fighter>
             {
                 Npc.VehicleInstance.TriggerAccelerate = true;
             }
+            else
+            {
+                if (toTarget.sqrMagnitude < Npc.OvertakeDistance * Npc.OvertakeDistance)
+                {
+                    Npc.VehicleInstance.TriggerAccelerate = true;
+                }
+            }
             if (toTarget.sqrMagnitude < Npc.AttackRange*Npc.AttackRange)
             {
                 Npc.State = new FighterAttack(Npc);

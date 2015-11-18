@@ -291,9 +291,15 @@ MonoBehaviour:
   SightRange: 50
   SteerMultiplier: .300000012
   AttackRange: 100
+  ShootAngleTolerance: 5
   EvadeDistance: 200
   TurnAroundDistance: 250
   AcclerateDistance: 100
+  MinDodgeIntervalTime: 1
+  MaxDodgeIntervalTime: 6
+  DodgeRadius: 50
+  DodgeArcAngle: 180
+  OvertakeDistance: 20
 --- !u!4 &1294108931
 Transform:
   m_ObjectHideFlags: 0
