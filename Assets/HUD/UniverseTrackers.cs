@@ -100,9 +100,16 @@ public class UniverseTrackers : MonoBehaviour
 
 	public void RemoveTracker(Tracker tracker)
 	{
-		Destroy(tracker.ArrowCursor);
-		Destroy(tracker.TrackerCurosr);
 		_trackers.Remove(tracker);
+
+		if (tracker.TrackerCurosr != null && tracker.TrackerCurosr.gameObject != null)
+		{
+			Destroy(tracker.TrackerCurosr.gameObject);
+		}
+		if (tracker.ArrowCursor != null && tracker.ArrowCursor.gameObject != null)
+		{
+			Destroy(tracker.ArrowCursor.gameObject);
+		}
 	}
 
 	private float GetScreenAngle(Vector3 point)
