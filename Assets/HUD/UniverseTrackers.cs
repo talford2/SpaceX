@@ -18,7 +18,7 @@ public class UniverseTrackers : MonoBehaviour
 	private static Image _cursorPref;
 
 	private static List<Tracker> _trackers { get; set; }
-	
+
 	private void Awake()
 	{
 		_arrowPref = ArrowCursorPrefab;
@@ -102,6 +102,8 @@ public class UniverseTrackers : MonoBehaviour
 
 	public static void RemoveTracker(Tracker tracker)
 	{
+		Destroy(tracker.ArrowCursor);
+		Destroy(tracker.TrackerCurosr);
 		_trackers.Remove(tracker);
 	}
 
