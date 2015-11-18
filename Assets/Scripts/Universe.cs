@@ -29,21 +29,22 @@ public class Universe : MonoBehaviour
 		HalfCellSize = CellSize / 2f;
 	}
 
-	public void Start()
-	{
-		Debug.Log("Universe start");
+    public void Start()
+    {
+        Debug.Log("Universe start");
 
-		//// Move the player to the start position
-	    if (PlayerController.Current != null)
-	    {
-	        PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
-	        PlayerController.Current.VehicleInstance.transform.position = PlayerSpawnPosition.transform.position;
-	    }
-        Shift(-PlayerSpawnPosition.UniverseCellIndex);
-	    ViewPort.Shiftable.OnCellIndexChange += Shift;
-	}
+        //// Move the player to the start position
+        if (PlayerController.Current != null)
+        {
+            PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
+            PlayerController.Current.VehicleInstance.transform.position = PlayerSpawnPosition.transform.position;
+        }
+        if (PlayerSpawnPosition != null)
+            Shift(-PlayerSpawnPosition.UniverseCellIndex);
+        ViewPort.Shiftable.OnCellIndexChange += Shift;
+    }
 
-	public void Shift(CellIndex delta)
+    public void Shift(CellIndex delta)
 	{
 		foreach (var shiftable in ShiftableItems)
 		{
