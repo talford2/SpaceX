@@ -11,21 +11,14 @@ public class UniverseTrackers : MonoBehaviour
 	private Rect screenBounds;
 
 	private Image cursor;
-	public Image ArrowCursorPrefab;
-	public Image TrackerCurosrPrefab;
-
-	private static Image _arrowPref;
-	private static Image _cursorPref;
 
 	private static List<Tracker> _trackers { get; set; }
 
+	public static UniverseTrackers Current;
+
 	private void Awake()
 	{
-		_arrowPref = ArrowCursorPrefab;
-		_cursorPref = TrackerCurosrPrefab;
-
-		_arrowPref.enabled = false;
-		_cursorPref.enabled = false;
+		Current = this;
 	}
 
 	private void Start()
@@ -42,7 +35,7 @@ public class UniverseTrackers : MonoBehaviour
 	{
 		foreach (var tracker in _trackers)
 		{
-			var r = _cam.WorldToScreenPoint(tracker.transform.position); // Target.position);
+			var r = _cam.WorldToScreenPoint(tracker.transform.position);
 			var boundsPoint = r;
 			if (boundsPoint.z < 0f)
 				boundsPoint *= -1f;
@@ -61,7 +54,7 @@ public class UniverseTrackers : MonoBehaviour
 				cursor = tracker.ArrowCursor;
 			}
 
-			cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(r, screenBounds);//, screenCentre);
+			cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(r, screenBounds);
 
 			if (!inBounds)
 			{
@@ -74,33 +67,38 @@ public class UniverseTrackers : MonoBehaviour
 		}
 	}
 
-	public static void AddTracker(Tracker tracker)
+	public void AddTracker(Tracker tracker)
 	{
 		if (_trackers == null)
 		{
 			_trackers = new List<Tracker>();
 		}
 
-		tracker.ArrowCursor = Instantiate<Image>(_arrowPref);
-		tracker.ArrowCursor.transform.SetParent(_arrowPref.transform.parent, false);
-		if (tracker.ArrowCursorImage != null)
-		{
-			var rec = _arrowPref.GetPixelAdjustedRect();
-			tracker.ArrowCursor.sprite = Sprite.Create(tracker.ArrowCursorImage, new Rect(0, 0, rec.width, rec.height), Vector2.zero);
-		}
+		// Arrow
+		var arrowImg = CreateTracker(tracker.ArrowCursorImage);
+		tracker.ArrowCursor = arrowImg;
+		arrowImg.name = tracker.name + "_Arrow";
 
-		tracker.TrackerCurosr = Instantiate<Image>(_cursorPref);
-		tracker.TrackerCurosr.transform.SetParent(_cursorPref.transform.parent, false);
-		if (tracker.TrackerCurosr != null)
-		{
-			var rec = _cursorPref.GetPixelAdjustedRect();
-			tracker.TrackerCurosr.sprite = Sprite.Create(tracker.TrackerCurosrImage, new Rect(0, 0, rec.width, rec.height), Vector2.zero);
-		}
+		// Tracker
+		var trackerImg = CreateTracker(tracker.TrackerCurosrImage);
+		tracker.TrackerCurosr = trackerImg;
+		trackerImg.name = tracker.name + "_Tracker";
 
 		_trackers.Add(tracker);
 	}
 
-	public static void RemoveTracker(Tracker tracker)
+	private Image CreateTracker(Texture2D tex)
+	{
+		var arrowObj = new GameObject();
+		var arrowImg = arrowObj.AddComponent<Image>();
+		arrowImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+		arrowImg.transform.SetParent(transform);
+		arrowImg.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+		arrowImg.SetNativeSize();
+		return arrowImg;
+	}
+
+	public void RemoveTracker(Tracker tracker)
 	{
 		Destroy(tracker.ArrowCursor);
 		Destroy(tracker.TrackerCurosr);

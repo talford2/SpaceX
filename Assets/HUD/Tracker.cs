@@ -12,11 +12,11 @@ public class Tracker : MonoBehaviour
 
 	void Start()
 	{
-		UniverseTrackers.AddTracker(this);
+		UniverseTrackers.Current.AddTracker(this);
 	}
 
 	void OnDestroy()
 	{
-		UniverseTrackers.RemoveTracker(this);
+		UniverseTrackers.Current.RemoveTracker(this);
 	}
 }
