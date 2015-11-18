@@ -1,70 +1,108 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UniverseTrackers : MonoBehaviour
 {
-    public Transform Target;
+	private Camera _cam;
 
-    private Camera _cam;
+	private Vector3 screenCentre;
+	private float boundaryPadding = 20f;
+	private Rect screenBounds;
 
-    private Vector3 screenCentre;
-    private float boundaryPadding = 20f;
-    private Rect screenBounds;
+	private Image cursor;
+	public Image ArrowCursorPrefab;
+	public Image TrackerCurosrPrefab;
 
-    private Image cursor;
-    public Image ArrowCursor;
-    public Image TrackerCurosr;
+	private static Image _arrowPref;
+	private static Image _cursorPref;
 
-    private void Start()
-    {
-        screenCentre = new Vector3(Screen.width/2f, Screen.height/2f, 0f);
-        screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f*boundaryPadding, Screen.height - 2f*boundaryPadding);
+	private static List<Tracker> _trackers { get; set; }
 
-        var ccc = Universe.Current.ViewPort;
-        _cam = ccc.GetComponent<Camera>();
-        ccc.OnMove += Ccc_OnMove;
-    }
+	private void Awake()
+	{
+		_arrowPref = ArrowCursorPrefab;
+		_cursorPref = TrackerCurosrPrefab;
 
-    private void Ccc_OnMove()
-    {
-        var r = _cam.WorldToScreenPoint(Target.position);
-        var boundsPoint = r;
-        if (boundsPoint.z < 0f)
-            boundsPoint *= -1f;
-        var inBounds = screenBounds.Contains(boundsPoint);
+		_arrowPref.enabled = false;
+		_cursorPref.enabled = false;
+	}
 
-        if (inBounds)
-        {
-            TrackerCurosr.enabled = true;
-            ArrowCursor.enabled = false;
-            cursor = TrackerCurosr;
-        }
-        else
-        {
-            TrackerCurosr.enabled = false;
-            ArrowCursor.enabled = true;
-            cursor = ArrowCursor;
-        }
+	private void Start()
+	{
+		screenCentre = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+		screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
 
-        cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(r, screenBounds);//, screenCentre);
-        
-        if (!inBounds)
-        {
-            cursor.rectTransform.localRotation = Quaternion.AngleAxis(GetScreenAngle(r - ArrowCursor.rectTransform.localPosition), Vector3.forward);
-        }
-        else
-        {
-            cursor.rectTransform.localRotation = Quaternion.identity;
-        }
-    }
+		var viewport = Universe.Current.ViewPort;
+		_cam = viewport.GetComponent<Camera>();
+		viewport.OnMove += ViewPortMove;
+	}
 
-    private float GetScreenAngle(Vector3 point)
-    {
-        if (point.z < 0f)
-            point *= -1f;
+	private void ViewPortMove()
+	{
+		foreach (var tracker in _trackers)
+		{
+			var r = _cam.WorldToScreenPoint(tracker.transform.position); // Target.position);
+			var boundsPoint = r;
+			if (boundsPoint.z < 0f)
+				boundsPoint *= -1f;
+			var inBounds = screenBounds.Contains(boundsPoint);
 
-        var delta = point - screenCentre;
-        var angle = Mathf.Rad2Deg*Mathf.Atan2(delta.x, -delta.y) + 180f;
-        return angle;
-    }
+			if (inBounds)
+			{
+				tracker.TrackerCurosr.enabled = true;
+				tracker.ArrowCursor.enabled = false;
+				cursor = tracker.TrackerCurosr;
+			}
+			else
+			{
+				tracker.TrackerCurosr.enabled = false;
+				tracker.ArrowCursor.enabled = true;
+				cursor = tracker.ArrowCursor;
+			}
+
+			cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(r, screenBounds);//, screenCentre);
+
+			if (!inBounds)
+			{
+				cursor.rectTransform.localRotation = Quaternion.AngleAxis(GetScreenAngle(r - tracker.ArrowCursor.rectTransform.localPosition), Vector3.forward);
+			}
+			else
+			{
+				cursor.rectTransform.localRotation = Quaternion.identity;
+			}
+		}
+	}
+
+	public static void AddTracker(Tracker tracker)
+	{
+		if (_trackers == null)
+		{
+			_trackers = new List<Tracker>();
+		}
+
+		tracker.ArrowCursor = Instantiate<Image>(_arrowPref);
+		tracker.ArrowCursor.transform.parent = _arrowPref.transform.parent;
+		//tracker.ArrowCursor.overrideSprite = tracker.ArrowCursorImage;
+
+		tracker.TrackerCurosr = Instantiate<Image>(_cursorPref);
+		tracker.TrackerCurosr.transform.parent = _cursorPref.transform.parent;
+
+		_trackers.Add(tracker);
+	}
+
+	public static void RemoveTracker(Tracker tracker)
+	{
+		_trackers.Remove(tracker);
+	}
+
+	private float GetScreenAngle(Vector3 point)
+	{
+		if (point.z < 0f)
+			point *= -1f;
+
+		var delta = point - screenCentre;
+		var angle = Mathf.Rad2Deg * Mathf.Atan2(delta.x, -delta.y) + 180f;
+		return angle;
+	}
 }
