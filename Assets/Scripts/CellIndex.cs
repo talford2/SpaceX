@@ -60,4 +60,14 @@ public class CellIndex
 	{
 		return new CellIndex(Mathf.CeilToInt(s * c1.X), Mathf.CeilToInt(s * c1.Y), Mathf.CeilToInt(s * c1.Z));
 	}
+
+    public static CellIndex operator *(CellIndex c1, float s)
+    {
+        return new CellIndex(Mathf.CeilToInt(s * c1.X), Mathf.CeilToInt(s * c1.Y), Mathf.CeilToInt(s * c1.Z));
+    }
+
+    public static CellIndex operator -(CellIndex c1)
+    {
+        return new CellIndex(-c1.X, -c1.Y, -c1.Z);
+    }
 }

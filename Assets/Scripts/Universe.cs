@@ -39,6 +39,7 @@ public class Universe : MonoBehaviour
 	        PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
 	        PlayerController.Current.VehicleInstance.transform.position = PlayerSpawnPosition.transform.position;
 	    }
+        Shift(-PlayerSpawnPosition.UniverseCellIndex);
 	    ViewPort.Shiftable.OnCellIndexChange += Shift;
 	}
 
