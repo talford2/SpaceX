@@ -299,7 +299,7 @@ MonoBehaviour:
   MaxDodgeIntervalTime: 6
   DodgeRadius: 50
   DodgeArcAngle: 180
-  OvertakeDistance: 20
+  OvertakeDistance: 50
 --- !u!4 &1294108931
 Transform:
   m_ObjectHideFlags: 0

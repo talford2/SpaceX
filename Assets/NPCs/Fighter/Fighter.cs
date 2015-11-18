@@ -9,13 +9,12 @@ public class Fighter : Npc<Fighter>
 
 	public Transform Target;
 
-	public float SightRange = 50f;
-
     public float SteerMultiplier = 0.3f;
 
     [Header("Attack")]
     public float AttackRange = 100f;
     public float ShootAngleTolerance = 5f;
+    public float OvertakeDistance = 50f;
 
     [Header("Evade")]
     public float EvadeDistance = 200f;
@@ -27,7 +26,8 @@ public class Fighter : Npc<Fighter>
     public float DodgeArcAngle = 180f;
 
     [Header("Chase")]
-    public float OvertakeDistance = 20f;
+    public float SightRange = 50f;
+
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }
 
 	private void Awake()
