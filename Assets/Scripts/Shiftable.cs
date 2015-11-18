@@ -13,15 +13,13 @@ public class Shiftable : MonoBehaviour
 	public delegate void OnShiftEvent(Vector3 delta);
 	public event OnShiftEvent OnShift;
 
+	public Vector3 CellLocalPosition;
+
 	public ParticleSystem[] _particleSystems;
-
-	private Vector3 _cellLocalPosition;
-
-	public Vector3 CellLocalPosition { get { return _cellLocalPosition; } }
-
+	
 	public void Translate(Vector3 translation)
 	{
-		var destination = (_cellLocalPosition + translation);
+		var destination = (CellLocalPosition + translation);
 		var cellDelta = CellIndexFromPosition(destination);
 
 		if (!cellDelta.IsZero())
@@ -31,10 +29,10 @@ public class Shiftable : MonoBehaviour
 			{
 				OnCellIndexChange(cellDelta);
 			}
-			_cellLocalPosition -= cellDelta.ToVector3() * Universe.Current.CellSize;
+			CellLocalPosition -= cellDelta.ToVector3() * Universe.Current.CellSize;
 		}
 
-		_cellLocalPosition += translation;
+		CellLocalPosition += translation;
 		transform.position += translation;
 	}
 

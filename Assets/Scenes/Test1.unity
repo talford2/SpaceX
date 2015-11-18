@@ -851,6 +851,7 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
+  CellLocalPosition: {x: 0, y: 0, z: 0}
   _particleSystems: []
 --- !u!1001 &641195513
 Prefab:
@@ -1297,6 +1298,7 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
+  CellLocalPosition: {x: 0, y: 0, z: 0}
   _particleSystems: []
 --- !u!1 &1212660694
 GameObject:
@@ -2040,6 +2042,7 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
+  CellLocalPosition: {x: 0, y: 0, z: 0}
   _particleSystems: []
 --- !u!1 &1954057687
 GameObject:
@@ -2125,6 +2128,7 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 7
+  CellLocalPosition: {x: 0, y: 0, z: 0}
   _particleSystems: []
 --- !u!114 &1954057692
 MonoBehaviour:
@@ -2519,6 +2523,7 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
+  CellLocalPosition: {x: 0, y: 0, z: 0}
   _particleSystems: []
 --- !u!114 &2070423341
 MonoBehaviour:
