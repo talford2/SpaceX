@@ -28,9 +28,10 @@ public class UniverseTrackers : MonoBehaviour
     private void Ccc_OnMove()
     {
         var r = _cam.WorldToScreenPoint(Target.position);
-        var inBounds = screenBounds.Contains(r);
-        if (r.z < 0f)
-            r *= -1f;
+        var boundsPoint = r;
+        if (boundsPoint.z < 0f)
+            boundsPoint *= -1f;
+        var inBounds = screenBounds.Contains(boundsPoint);
 
         if (inBounds)
         {
@@ -45,7 +46,8 @@ public class UniverseTrackers : MonoBehaviour
             cursor = ArrowCursor;
         }
 
-        cursor.rectTransform.localPosition = ClampToScreen(r);
+        cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(r, screenBounds);//, screenCentre);
+        
         if (!inBounds)
         {
             cursor.rectTransform.localRotation = Quaternion.AngleAxis(GetScreenAngle(r - ArrowCursor.rectTransform.localPosition), Vector3.forward);
@@ -56,52 +58,12 @@ public class UniverseTrackers : MonoBehaviour
         }
     }
 
-    private Vector2 ClampToScreen(Vector3 pointAtPos)
+    private float GetScreenAngle(Vector3 point)
     {
-        if (pointAtPos.z < 0f)
-            pointAtPos *= -1f;
+        if (point.z < 0f)
+            point *= -1f;
 
-        var delta = pointAtPos - screenCentre;
-        var gradient = delta.y/delta.x;
-
-        if (!screenBounds.Contains(pointAtPos))
-        {
-            Vector2 result = pointAtPos - screenCentre;
-
-            if (result.x < screenBounds.xMin - screenCentre.x)
-            {
-                result.x = screenBounds.xMin - screenCentre.x;
-                result.y = gradient*result.x;
-            }
-            if (result.x > screenBounds.xMax - screenCentre.x)
-            {
-                result.x = screenBounds.xMax - screenCentre.x;
-                result.y = gradient*result.x;
-            }
-            if (result.y < screenBounds.yMin - screenCentre.y)
-            {
-                result.y = screenBounds.yMin - screenCentre.y;
-                result.x = result.y/gradient;
-            }
-            if (result.y > screenBounds.yMax - screenCentre.y)
-            {
-                result.y = screenBounds.yMax - screenCentre.y;
-                result.x = result.y/gradient;
-            }
-
-            result.x = Mathf.Clamp(result.x, screenBounds.xMin - screenCentre.x, screenBounds.xMax - screenCentre.x);
-            result.y = Mathf.Clamp(result.y, screenBounds.yMin - screenCentre.y, screenBounds.yMax - screenCentre.y);
-            return result;
-        }
-        return pointAtPos - screenCentre;
-    }
-
-    private float GetScreenAngle(Vector3 pointAtPos)
-    {
-        if (pointAtPos.z < 0f)
-            pointAtPos *= -1f;
-
-        var delta = pointAtPos - screenCentre;
+        var delta = point - screenCentre;
         var angle = Mathf.Rad2Deg*Mathf.Atan2(delta.x, -delta.y) + 180f;
         return angle;
     }
