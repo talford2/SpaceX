@@ -2282,7 +2282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowCursorImage: {fileID: 2800000, guid: 3ff4affc978dcee4998bd90d5f9c6896, type: 3}
+  ArrowCursorImage: {fileID: 0}
   TrackerCurosrImage: {fileID: 2800000, guid: 140e49d363b2df244bf0c5f8ebe6fe04, type: 3}
 --- !u!1 &1974382651
 GameObject:

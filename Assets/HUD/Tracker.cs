@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class Tracker : MonoBehaviour
 {
-	public Texture ArrowCursorImage;
-	public Texture TrackerCurosrImage;
+	public Texture2D ArrowCursorImage;
+	public Texture2D TrackerCurosrImage;
 
 	public Image ArrowCursor { get; set; }
 	public Image TrackerCurosr { get; set; }

@@ -18,7 +18,7 @@ public class UniverseTrackers : MonoBehaviour
 	private static Image _cursorPref;
 
 	private static List<Tracker> _trackers { get; set; }
-
+	
 	private void Awake()
 	{
 		_arrowPref = ArrowCursorPrefab;
@@ -82,11 +82,20 @@ public class UniverseTrackers : MonoBehaviour
 		}
 
 		tracker.ArrowCursor = Instantiate<Image>(_arrowPref);
-		tracker.ArrowCursor.transform.parent = _arrowPref.transform.parent;
-		//tracker.ArrowCursor.overrideSprite = tracker.ArrowCursorImage;
+		tracker.ArrowCursor.transform.SetParent(_arrowPref.transform.parent, false);
+		if (tracker.ArrowCursorImage != null)
+		{
+			var rec = _arrowPref.GetPixelAdjustedRect();
+			tracker.ArrowCursor.sprite = Sprite.Create(tracker.ArrowCursorImage, new Rect(0, 0, rec.width, rec.height), Vector2.zero);
+		}
 
 		tracker.TrackerCurosr = Instantiate<Image>(_cursorPref);
-		tracker.TrackerCurosr.transform.parent = _cursorPref.transform.parent;
+		tracker.TrackerCurosr.transform.SetParent(_cursorPref.transform.parent, false);
+		if (tracker.TrackerCurosr != null)
+		{
+			var rec = _cursorPref.GetPixelAdjustedRect();
+			tracker.TrackerCurosr.sprite = Sprite.Create(tracker.TrackerCurosrImage, new Rect(0, 0, rec.width, rec.height), Vector2.zero);
+		}
 
 		_trackers.Add(tracker);
 	}
