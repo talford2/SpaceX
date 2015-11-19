@@ -36,11 +36,8 @@ public class Universe : MonoBehaviour
         //// Move the player to the start position
         if (PlayerController.Current != null)
         {
-            PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex = PlayerSpawnPosition.UniverseCellIndex;
-            PlayerController.Current.VehicleInstance.transform.position = PlayerSpawnPosition.transform.position;
+            WarpTo(PlayerSpawnPosition);
         }
-        if (PlayerSpawnPosition != null)
-            Shift(-PlayerSpawnPosition.UniverseCellIndex);
         ViewPort.Shiftable.OnCellIndexChange += Shift;
     }
 
@@ -51,25 +48,6 @@ public class Universe : MonoBehaviour
 			shiftable.Shift(delta.ToVector3() * CellSize);
 		}
 	}
-
-    /*
-	public void Warp(CellIndex cell, Transform trans)
-	{
-        var diff = cell - ViewPort.Shiftable.UniverseCellIndex;
-		PlayerController.Current.VehicleInstance.transform.position = trans.position;
-		PlayerController.Current.VehicleInstance.transform.rotation = trans.rotation;
-	    ViewPort.transform.rotation = trans.rotation;
-		Shift(diff);
-	}
-
-	public void Update()
-	{
-		if (Input.GetKeyUp(KeyCode.Q))
-		{
-			Warp(PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex, PlayerSpawnPosition.transform);
-		}
-	}
-    */
 
     public void WarpTo(Shiftable spawner)
     {
