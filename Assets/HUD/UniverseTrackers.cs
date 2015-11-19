@@ -6,7 +6,7 @@ public class UniverseTrackers : MonoBehaviour
 {
 	private Camera _cam;
 
-	private Vector3 screenCentre;
+	private Vector2 screenCentre;
 	private float boundaryPadding = 20f;
 	private Rect screenBounds;
 
@@ -23,7 +23,7 @@ public class UniverseTrackers : MonoBehaviour
 
 	private void Start()
 	{
-		screenCentre = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+		screenCentre = new Vector2(Screen.width / 2f, Screen.height / 2f);
 		screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
 
 		var viewport = Universe.Current.ViewPort;
@@ -123,7 +123,7 @@ public class UniverseTrackers : MonoBehaviour
 		}
 	}
 
-	private float GetScreenAngle(Vector3 point)
+	private float GetScreenAngle(Vector2 point)
 	{
 		var delta = point - screenCentre;
 		var angle = Mathf.Rad2Deg * Mathf.Atan2(delta.x, -delta.y) + 180f;
