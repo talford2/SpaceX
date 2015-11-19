@@ -112,23 +112,30 @@ public class PlayerController : MonoBehaviour
 	        }
 	    }
 
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            _playVehicleInstance.GetComponent<Killable>().Die();
+	    if (Input.GetKeyUp(KeyCode.R))
+	    {
+	        _playVehicleInstance.GetComponent<Killable>().Die();
 
             Debug.Log("RESTART");
+
+            Universe.Current.ViewPort.Shiftable.UniverseCellIndex = RespawnPosition.UniverseCellIndex;
+            Universe.Current.ViewPort.Shiftable.CellLocalPosition = RespawnPosition.CellLocalPosition;
+
+            //var shiftDelta = RespawnPosition.UniverseCellIndex - Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
+            var shiftDelta = Universe.Current.ViewPort.Shiftable.UniverseCellIndex - RespawnPosition.UniverseCellIndex;
+
+            Universe.Current.Shift(shiftDelta);
+
             SpawnVehicle(VehiclePrefab, RespawnPosition.transform);
 
             _playVehicleInstance.Shiftable.UniverseCellIndex = RespawnPosition.UniverseCellIndex;
             _playVehicleInstance.Shiftable.CellLocalPosition = RespawnPosition.CellLocalPosition;
+	        _playVehicleInstance.transform.position = RespawnPosition.CellLocalPosition;
 
-            var shiftDelta = RespawnPosition.UniverseCellIndex - Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
-
-            Universe.Current.Shift(shiftDelta);
             Universe.Current.ViewPort.GetComponent<VehicleCamera>().Target = _playVehicleInstance;
 
             Debug.Log("NEW PLAYER POS: " + _playVehicleInstance.transform.position);
-        }
+	    }
 
 	    if (Input.GetKey(KeyCode.Escape))
 		{
