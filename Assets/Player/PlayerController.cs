@@ -22,16 +22,11 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
-		_playVehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
-		Destroy(_playVehicleInstance.GetComponent<Tracker>());
-
-		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
+		SpawnVehicle(VehiclePrefab);
 		_current = this;
 		Cursor.visible = !HideMouse;
 		if (HideMouse)
 			Cursor.lockState = CursorLockMode.Locked;
-
-		PlayerVehicles.Insert(0, _playVehicleInstance);
 
 		screenAspect = (float)Screen.height / (float)Screen.width;
 
@@ -43,6 +38,14 @@ public class PlayerController : MonoBehaviour
 		//Universe.Current.ViewPort.Tar
 		//FollowCamera.Current.Target = _playVehicleInstance.transform;
 	}
+
+    private void SpawnVehicle(Vehicle vehiclePRefab)
+    {
+        _playVehicleInstance = Instantiate(vehiclePRefab);
+        Destroy(_playVehicleInstance.GetComponent<Tracker>());
+        _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
+        PlayerVehicles.Insert(0, _playVehicleInstance);
+    }
 
 	private Vector3 GetAimAt()
 	{
@@ -106,6 +109,15 @@ public class PlayerController : MonoBehaviour
 	            _playVehicleInstance.TriggerBoost = true;
 	        }
 	    }
+	    else
+	    {
+	        if (Input.GetKeyUp(KeyCode.R))
+	        {
+	            Debug.Log("RESTART");
+                SpawnVehicle(VehiclePrefab);
+	            Universe.Current.ViewPort.GetComponent<VehicleCamera>().Target = _playVehicleInstance;
+	        }
+	    }
 	    if (Input.GetKey(KeyCode.Escape))
 		{
 			Application.Quit();
@@ -155,10 +167,12 @@ public class PlayerController : MonoBehaviour
 		get { return _playVehicleInstance; }
 	}
 
-	/*
     private void OnGUI()
     {
-        GUI.Label(new Rect(Screen.width - 100f, Screen.height - 100f, 100f, 25), string.Format("{0:f2} m/s", VehicleInstance.GetVelocity().magnitude));
+        //GUI.Label(new Rect(Screen.width - 100f, Screen.height - 100f, 100f, 25), string.Format("{0:f2} m/s", VehicleInstance.GetVelocity().magnitude));
+        if (_playVehicleInstance == null)
+        {
+            GUI.Label(new Rect(Screen.width/2f - 100f, Screen.height/2f + 50f, 200f, 25f), "Press 'R' to respawn.", new GUIStyle {alignment = TextAnchor.MiddleCenter, normal = {textColor = Color.white}});
+        }
     }
-    */
 }
