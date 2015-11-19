@@ -14,7 +14,7 @@ public class Shiftable : MonoBehaviour
 	public Vector3 CellLocalPosition;
 
 	public ParticleSystem[] _particleSystems;
-	
+
 	public void Translate(Vector3 translation)
 	{
 		var destination = (CellLocalPosition + translation);
@@ -37,13 +37,13 @@ public class Shiftable : MonoBehaviour
 	private void Awake()
 	{
 		Universe.ShiftableItems.Add(this);
-	    //_particleSystems = GetComponentsInChildren<ParticleSystem>();
+		//_particleSystems = GetComponentsInChildren<ParticleSystem>();
 	}
 
-    private void Start()
-    {
-        transform.position = GetWorldPosition();
-    }
+	private void Start()
+	{
+		transform.position = GetWorldPosition();
+	}
 
 	private CellIndex CellIndexFromPosition(Vector3 position)
 	{
@@ -67,6 +67,12 @@ public class Shiftable : MonoBehaviour
 		{
 			Utility.MoveParticles(ps, Vector3.zero - shiftAmount);
 		}
+	}
+
+	public void SetShiftPosition(CellIndex cell, Vector3 local)
+	{
+		UniverseCellIndex = cell;
+		CellLocalPosition = local;
 	}
 
 	public Vector3 GetWorldPosition()

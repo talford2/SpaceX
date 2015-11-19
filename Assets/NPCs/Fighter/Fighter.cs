@@ -40,8 +40,7 @@ public class Fighter : Npc<Fighter>
 
 		if (parentShifter != null)
 		{
-			_vehicleInstance.Shiftable.UniverseCellIndex = parentShifter.UniverseCellIndex;
-			_vehicleInstance.Shiftable.CellLocalPosition = parentShifter.CellLocalPosition;
+			_vehicleInstance.Shiftable.SetShiftPosition(parentShifter.UniverseCellIndex, parentShifter.CellLocalPosition);
 		}
 
 		State = new FighterChase(this);

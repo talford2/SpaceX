@@ -44,8 +44,7 @@ public class PlayerController : MonoBehaviour
 	private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
 	{
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, spawner.CellLocalPosition, spawner.transform.rotation)).GetComponent<Vehicle>();
-		_playVehicleInstance.Shiftable.UniverseCellIndex = spawner.UniverseCellIndex;
-		_playVehicleInstance.Shiftable.CellLocalPosition = spawner.CellLocalPosition;
+		_playVehicleInstance.Shiftable.SetShiftPosition(spawner.UniverseCellIndex, spawner.CellLocalPosition);
 		Destroy(_playVehicleInstance.GetComponent<Tracker>());
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
 		PlayerVehicles.Insert(0, _playVehicleInstance);
