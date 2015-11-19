@@ -58,7 +58,17 @@ public class Missile : MonoBehaviour
 							if (HitEffectPrefab != null)
 							{
 								var hitEffectInstance = Instantiate(HitEffectPrefab);
-								hitEffectInstance.transform.position = missileHit.point;
+
+								var hitEffectShiftable = hitEffectInstance.GetComponent<Shiftable>();
+								if (hitEffectShiftable != null)
+								{
+									hitEffectShiftable.SetShiftPosition(_shiftable.UniverseCellIndex, missileHit.point);
+								}
+								else
+								{
+									hitEffectInstance.transform.position = missileHit.point;
+								}
+								
 								hitEffectInstance.transform.forward = missileHit.normal;
 							}
 						}
