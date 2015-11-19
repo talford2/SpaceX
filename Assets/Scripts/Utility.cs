@@ -25,15 +25,19 @@ public class Utility
 
 	public static GameObject InstantiateInParent(GameObject gameObject, Vector3 position, Quaternion rotation, Transform parent)
 	{
-		return InstantiateInParent(gameObject, position, rotation, parent, parent.gameObject.layer);
+        if (parent!=null)
+            return InstantiateInParent(gameObject, position, rotation, parent, parent.gameObject.layer);
+        var instance = (GameObject)Object.Instantiate(gameObject, position, rotation);
+        instance.transform.SetParent(null);
+        return instance;
 	}
 
-	public static GameObject InstantiateInParent(GameObject gameObject, Transform parent)
-	{
-		return InstantiateInParent(gameObject, parent.position, parent.rotation, parent, parent.gameObject.layer);
-	}
+    public static GameObject InstantiateInParent(GameObject gameObject, Transform parent)
+    {
+        return InstantiateInParent(gameObject, parent.position, parent.rotation, parent, parent.gameObject.layer);
+    }
 
-	public static void SetLayerRecursively(GameObject obj, int layer)
+    public static void SetLayerRecursively(GameObject obj, int layer)
 	{
 		obj.layer = layer;
 		foreach (Transform trans in obj.transform)
