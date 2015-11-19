@@ -88,14 +88,14 @@ public class VehicleCamera : UniverseCamera
 		}
 	}
 
-	public void Reset()
-	{
-		offset = Vector3.zero;
-		offsetAngle = Quaternion.identity;
-		springDistance = 0;
+    public void Reset()
+    {
+        offsetAngle = Target.transform.rotation;
+        springDistance = 1f;
+        offset = offsetAngle*new Vector3(0f, VerticalDistance, -DistanceBehind)*springDistance;
 
-		transform.position = Target.transform.position + Target.transform.forward * (0 - DistanceBehind) + Target.transform.up * VerticalDistance;
-		transform.LookAt(Target.transform);
-		//Debug.Break();
-	}
+        transform.position = Target.transform.position + offset;
+        transform.LookAt(Target.transform);
+        //Debug.Break();
+    }
 }
