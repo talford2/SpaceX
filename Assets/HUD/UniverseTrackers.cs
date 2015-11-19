@@ -35,7 +35,8 @@ public class UniverseTrackers : MonoBehaviour
 	{
 		foreach (var tracker in _trackers)
 		{
-			var r = _cam.WorldToScreenPoint(tracker.transform.position);
+            var screenPoint = _cam.WorldToScreenPoint(tracker.transform.position);
+            var r = screenPoint;
             if (r.z < 0f)
                 r *= -1f;
 		    r.z = 0f;
@@ -60,6 +61,7 @@ public class UniverseTrackers : MonoBehaviour
 		        if (inBounds)
 		        {
 		            Debug.Log("BROKEN TRACKER!!!");
+                    Debug.Log("SCREEN POINT: " + screenPoint);
                     Debug.Log("r: " + r);
                     Debug.Break();
 		        }
