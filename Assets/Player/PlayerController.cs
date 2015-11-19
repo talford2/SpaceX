@@ -111,22 +111,25 @@ public class PlayerController : MonoBehaviour
 	            _playVehicleInstance.TriggerBoost = true;
 	        }
 	    }
-	    else
-	    {
-	        if (Input.GetKeyUp(KeyCode.R))
-	        {
-	            Debug.Log("RESTART");
-	            SpawnVehicle(VehiclePrefab, RespawnPosition.transform);
 
-	            _playVehicleInstance.Shiftable.UniverseCellIndex = RespawnPosition.UniverseCellIndex;
-	            _playVehicleInstance.Shiftable.CellLocalPosition = RespawnPosition.CellLocalPosition;
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            _playVehicleInstance.GetComponent<Killable>().Die();
 
-	            Universe.Current.Shift(Universe.Current.ViewPort.Shiftable.UniverseCellIndex - RespawnPosition.UniverseCellIndex);
-	            Universe.Current.ViewPort.GetComponent<VehicleCamera>().Target = _playVehicleInstance;
+            Debug.Log("RESTART");
+            SpawnVehicle(VehiclePrefab, RespawnPosition.transform);
 
-	            Debug.Log("NEW PLAYER POS: " + _playVehicleInstance.transform.position);
-	        }
-	    }
+            _playVehicleInstance.Shiftable.UniverseCellIndex = RespawnPosition.UniverseCellIndex;
+            _playVehicleInstance.Shiftable.CellLocalPosition = RespawnPosition.CellLocalPosition;
+
+            var shiftDelta = RespawnPosition.UniverseCellIndex - Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
+
+            Universe.Current.Shift(shiftDelta);
+            Universe.Current.ViewPort.GetComponent<VehicleCamera>().Target = _playVehicleInstance;
+
+            Debug.Log("NEW PLAYER POS: " + _playVehicleInstance.transform.position);
+        }
+
 	    if (Input.GetKey(KeyCode.Escape))
 		{
 			Application.Quit();
