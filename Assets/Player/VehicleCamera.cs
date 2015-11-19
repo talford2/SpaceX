@@ -93,9 +93,10 @@ public class VehicleCamera : UniverseCamera
         offsetAngle = Target.transform.rotation;
         springDistance = 1f;
         offset = offsetAngle*new Vector3(0f, VerticalDistance, -DistanceBehind)*springDistance;
+        targetUp = Target.transform.up;
 
         transform.position = Target.transform.position + offset;
-        transform.LookAt(Target.transform);
+        transform.LookAt(Target.transform, Target.transform.up);
         //Debug.Break();
     }
 }
