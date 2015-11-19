@@ -956,6 +956,51 @@ Transform:
   - {fileID: 1097665390}
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!1 &761010712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 761010714}
+  - 114: {fileID: 761010713}
+  m_Layer: 0
+  m_Name: PlayerStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &761010713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 761010712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseCellIndex:
+    X: 0
+    Y: 0
+    Z: 7
+  CellLocalPosition: {x: 0, y: -80, z: 110}
+  _particleSystems: []
+--- !u!4 &761010714
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 761010712}
+  m_LocalRotation: {x: -2.18556941e-08, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -80, z: 110}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1954057690}
+  m_RootOrder: 4
 --- !u!1 &1064748903
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,6 +1033,7 @@ MonoBehaviour:
   - {fileID: 1832493475}
   InvertY: 1
   HideMouse: 1
+  RespawnPosition: {fileID: 761010713}
   AimSensitivity: 15
   MinAimDistance: 10
   MaxAimDistance: 1000
@@ -2111,6 +2157,7 @@ Transform:
   - {fileID: 1299636289}
   - {fileID: 1689071276}
   - {fileID: 288474848}
+  - {fileID: 761010714}
   m_Father: {fileID: 0}
   m_RootOrder: 12
 --- !u!114 &1954057691

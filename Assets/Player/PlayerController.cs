@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 	public bool InvertY = false;
 	public bool HideMouse = false;
 
+    public Shiftable RespawnPosition;
+
 	[Header("Aiming")]
 	public float AimSensitivity = 10f;
 	public float MinAimDistance = 10f;
@@ -22,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
-		SpawnVehicle(VehiclePrefab);
+		SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition.transform);
 		_current = this;
 		Cursor.visible = !HideMouse;
 		if (HideMouse)
@@ -39,9 +41,9 @@ public class PlayerController : MonoBehaviour
 		//FollowCamera.Current.Target = _playVehicleInstance.transform;
 	}
 
-    private void SpawnVehicle(Vehicle vehiclePRefab)
+    private void SpawnVehicle(Vehicle vehiclePrefab, Transform atTransform)
     {
-        _playVehicleInstance = Instantiate(vehiclePRefab);
+        _playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, atTransform.position, atTransform.rotation)).GetComponent<Vehicle>();
         Destroy(_playVehicleInstance.GetComponent<Tracker>());
         _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
         PlayerVehicles.Insert(0, _playVehicleInstance);
@@ -114,8 +116,9 @@ public class PlayerController : MonoBehaviour
 	        if (Input.GetKeyUp(KeyCode.R))
 	        {
 	            Debug.Log("RESTART");
-                SpawnVehicle(VehiclePrefab);
+                SpawnVehicle(VehiclePrefab, RespawnPosition.transform);
 	            Universe.Current.ViewPort.GetComponent<VehicleCamera>().Target = _playVehicleInstance;
+                Universe.Current.Shift(-RespawnPosition.UniverseCellIndex);
 	        }
 	    }
 	    if (Input.GetKey(KeyCode.Escape))
