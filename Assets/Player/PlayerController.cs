@@ -116,9 +116,15 @@ public class PlayerController : MonoBehaviour
 	        if (Input.GetKeyUp(KeyCode.R))
 	        {
 	            Debug.Log("RESTART");
-                SpawnVehicle(VehiclePrefab, RespawnPosition.transform);
+	            SpawnVehicle(VehiclePrefab, RespawnPosition.transform);
+
+	            _playVehicleInstance.Shiftable.UniverseCellIndex = RespawnPosition.UniverseCellIndex;
+	            _playVehicleInstance.Shiftable.CellLocalPosition = RespawnPosition.CellLocalPosition;
+
+	            Universe.Current.Shift(Universe.Current.ViewPort.Shiftable.UniverseCellIndex - RespawnPosition.UniverseCellIndex);
 	            Universe.Current.ViewPort.GetComponent<VehicleCamera>().Target = _playVehicleInstance;
-                Universe.Current.Shift(-RespawnPosition.UniverseCellIndex);
+
+	            Debug.Log("NEW PLAYER POS: " + _playVehicleInstance.transform.position);
 	        }
 	    }
 	    if (Input.GetKey(KeyCode.Escape))
