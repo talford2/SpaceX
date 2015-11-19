@@ -57,19 +57,16 @@ public class Utility
 		}
 	}
 
-    public static Vector2 GetBoundsIntersection(Vector3 point, Rect bounds)
+    public static Vector2 GetBoundsIntersection(Vector2 point, Rect bounds)
     {
-        if (point.z < 0f)
-            point *= -1f;
-
-        var anchor = new Vector3(bounds.xMin + (bounds.xMax - bounds.xMin)/2f, bounds.yMin + (bounds.yMax - bounds.yMin)/2f, 0f);
+        var anchor = new Vector2(bounds.xMin + (bounds.xMax - bounds.xMin)/2f, bounds.yMin + (bounds.yMax - bounds.yMin)/2f);
 
         var delta = point - anchor;
         var gradient = delta.y/delta.x;
 
         if (!bounds.Contains(point))
         {
-            Vector2 result = point - anchor;
+            var result = point - anchor;
 
             if (result.x < bounds.xMin - anchor.x)
             {
