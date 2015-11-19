@@ -40,7 +40,10 @@ public class Killable : MonoBehaviour
 	public void Die()
 	{
 		if (DieEffect != null)
-			Instantiate(DieEffect, transform.position, transform.rotation);
+		{
+			Utility.InstantiateInParent(DieEffect, transform.position, transform.rotation, transform.parent);
+			//Instantiate(DieEffect, transform.position, transform.rotation);
+		}
 
 		IsAlive = false;
 		if (OnDie != null)

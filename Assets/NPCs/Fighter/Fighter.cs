@@ -9,41 +9,51 @@ public class Fighter : Npc<Fighter>
 
 	public Transform Target;
 
-    public float SteerMultiplier = 0.3f;
+	public float SteerMultiplier = 0.3f;
 
-    [Header("Attack")]
-    public float AttackRange = 100f;
-    public float ShootAngleTolerance = 5f;
-    public float OvertakeDistance = 50f;
+	[Header("Attack")]
+	public float AttackRange = 100f;
+	public float ShootAngleTolerance = 5f;
+	public float OvertakeDistance = 50f;
 
-    [Header("Evade")]
-    public float EvadeDistance = 200f;
-    public float TurnAroundDistance = 250f;
-    public float AcclerateDistance = 100f;
-    public float MinDodgeIntervalTime = 1f;
-    public float MaxDodgeIntervalTime = 6f;
-    public float DodgeRadius = 50f;
-    public float DodgeArcAngle = 180f;
+	[Header("Evade")]
+	public float EvadeDistance = 200f;
+	public float TurnAroundDistance = 250f;
+	public float AcclerateDistance = 100f;
+	public float MinDodgeIntervalTime = 1f;
+	public float MaxDodgeIntervalTime = 6f;
+	public float DodgeRadius = 50f;
+	public float DodgeArcAngle = 180f;
 
-    [Header("Chase")]
-    public float SightRange = 50f;
+	[Header("Chase")]
+	public float SightRange = 50f;
 
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }
 
 	private void Awake()
 	{
-		_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
+		var parentShifter = transform.GetComponentInParent<Shiftable>();
+
+		//_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
+		_vehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
 		_vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+
+		if (parentShifter != null)
+		{
+			_vehicleInstance.Shiftable.UniverseCellIndex = parentShifter.UniverseCellIndex;
+			_vehicleInstance.Shiftable.CellLocalPosition = parentShifter.CellLocalPosition;
+		}
+
 		State = new FighterChase(this);
 	}
 
-    private void Start()
-    {
-        if (Target == null)
-        {
-            Target = PlayerController.Current.VehicleInstance.transform;
-        }
-    }
+	private void Start()
+	{
+		if (Target == null)
+		{
+			Target = PlayerController.Current.VehicleInstance.transform;
+		}
+	}
 
 	private void Update()
 	{
@@ -52,9 +62,9 @@ public class Fighter : Npc<Fighter>
 
 	public Vector2 GetPitchYawToPoint(Vector3 point)
 	{
-        var toPoint = point - VehicleInstance.transform.position;
-	    var yawAmount = Vector3.Dot(toPoint.normalized, VehicleInstance.transform.right);
-        var pitchAmount = Vector3.Dot(-toPoint.normalized, VehicleInstance.transform.up);
+		var toPoint = point - VehicleInstance.transform.position;
+		var yawAmount = Vector3.Dot(toPoint.normalized, VehicleInstance.transform.right);
+		var pitchAmount = Vector3.Dot(-toPoint.normalized, VehicleInstance.transform.up);
 		return new Vector2(pitchAmount, yawAmount);
 	}
 
@@ -81,9 +91,9 @@ public class Fighter : Npc<Fighter>
 				case "Chase":
 					Gizmos.color = Color.red;
 					break;
-                case "Attack":
-			        Gizmos.color = Color.yellow;
-			        break;
+				case "Attack":
+					Gizmos.color = Color.yellow;
+					break;
 			}
 			Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
 			Gizmos.DrawSphere(Destination, 2f);
@@ -95,8 +105,8 @@ public class Fighter : Npc<Fighter>
 			Gizmos.color = Color.red;
 			Gizmos.DrawWireSphere(VehicleInstance.transform.position, AttackRange);
 
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(VehicleInstance.transform.position, VehicleInstance.transform.position + VehicleInstance.transform.forward * 100f);
+			Gizmos.color = Color.green;
+			Gizmos.DrawLine(VehicleInstance.transform.position, VehicleInstance.transform.position + VehicleInstance.transform.forward * 100f);
 		}
 	}
 }
