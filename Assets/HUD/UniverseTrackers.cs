@@ -6,7 +6,7 @@ public class UniverseTrackers : MonoBehaviour
 {
 	private Camera _cam;
 
-	private Vector3 screenCentre;
+	private Vector2 screenCentre;
 	private float boundaryPadding = 20f;
 	private Rect screenBounds;
 
@@ -23,7 +23,7 @@ public class UniverseTrackers : MonoBehaviour
 
 	private void Start()
 	{
-		screenCentre = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+		screenCentre = new Vector2(Screen.width / 2f, Screen.height / 2f);
 		screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
 
 		var viewport = Universe.Current.ViewPort;
@@ -35,11 +35,12 @@ public class UniverseTrackers : MonoBehaviour
 	{
 		foreach (var tracker in _trackers)
 		{
-			var r = _cam.WorldToScreenPoint(tracker.transform.position);
-			var boundsPoint = r;
-			if (boundsPoint.z < 0f)
-				boundsPoint *= -1f;
-			var inBounds = screenBounds.Contains(boundsPoint);
+            var screenPoint = _cam.WorldToScreenPoint(tracker.transform.position);
+            var r = screenPoint;
+            if (r.z < 0f)
+                r *= -1f;
+		    r.z = 0f;
+			var inBounds = screenBounds.Contains(r);
 
 			if (inBounds)
 			{
@@ -54,7 +55,19 @@ public class UniverseTrackers : MonoBehaviour
 				cursor = tracker.ArrowCursor;
 			}
 
-			cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(r, screenBounds);
+		    var dotThing = Vector3.Dot(tracker.transform.position - Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward);
+		    if (dotThing < 0f)
+		    {
+		        if (inBounds)
+		        {
+		            Debug.Log("BROKEN TRACKER!!!");
+                    Debug.Log("SCREEN POINT: " + screenPoint);
+                    Debug.Log("r: " + r);
+                    Debug.Break();
+		        }
+		    }
+
+			cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(new Vector2(r.x, r.y), screenBounds);
 
 			if (!inBounds)
 			{
@@ -112,11 +125,8 @@ public class UniverseTrackers : MonoBehaviour
 		}
 	}
 
-	private float GetScreenAngle(Vector3 point)
+	private float GetScreenAngle(Vector2 point)
 	{
-		if (point.z < 0f)
-			point *= -1f;
-
 		var delta = point - screenCentre;
 		var angle = Mathf.Rad2Deg * Mathf.Atan2(delta.x, -delta.y) + 180f;
 		return angle;
