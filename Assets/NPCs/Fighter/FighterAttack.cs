@@ -9,6 +9,12 @@ public class FighterAttack :NpcState<Fighter>
 
     public override void Update()
     {
+        if (Npc.Target == null)
+        {
+            Npc.VehicleInstance.CurrentWeapon.IsTriggered = false;
+            Npc.State = new FighterIdle(Npc);
+            return;
+        }
         var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 

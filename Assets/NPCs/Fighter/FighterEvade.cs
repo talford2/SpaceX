@@ -22,6 +22,11 @@ public class FighterEvade : NpcState<Fighter>
 
     public override void Update()
     {
+        if (Npc.Target == null)
+        {
+            Npc.State = new FighterIdle(Npc);
+            return;
+        }
         var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
 
         if (dodgeCooldown >= 0f)

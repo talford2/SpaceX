@@ -41,38 +41,41 @@ public class VehicleCamera : UniverseCamera {
 
     public override void Move()
     {
-        var targetSpringDistance = 1f;
-        targetFov = 60f;
-        if (Target.IsBoosting)
+        if (Target != null)
         {
-            targetSpringDistance = SpringBoostExpansion;
-            targetFov = 100f;
-        }
-        else
-        {
-            if (Target.IsAccelerating)
+            var targetSpringDistance = 1f;
+            targetFov = 60f;
+            if (Target.IsBoosting)
             {
-                targetSpringDistance = SpringExpansion;
+                targetSpringDistance = SpringBoostExpansion;
+                targetFov = 100f;
             }
             else
             {
-                if (Target.IsBraking)
+                if (Target.IsAccelerating)
                 {
-                    targetSpringDistance = SpringCompression;
+                    targetSpringDistance = SpringExpansion;
+                }
+                else
+                {
+                    if (Target.IsBraking)
+                    {
+                        targetSpringDistance = SpringCompression;
+                    }
                 }
             }
+
+            springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup*Time.deltaTime);
+
+            offsetAngle = Quaternion.Lerp(offsetAngle, Target.transform.rotation, RotationCatchup*Time.deltaTime);
+            offset = Vector3.Lerp(offset, offsetAngle*new Vector3(0f, VerticalDistance, -DistanceBehind)*springDistance, OffsetCatchup*Time.deltaTime);
+
+            _shiftable.Translate(Target.transform.position + offset - transform.position);
+
+            targetUp = Vector3.Lerp(targetUp, Target.transform.up, 5f*Time.deltaTime);
+
+            transform.LookAt(Target.GetAimPosition(), targetUp);
         }
-
-        springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);
-
-        offsetAngle = Quaternion.Lerp(offsetAngle, Target.transform.rotation, RotationCatchup * Time.deltaTime);
-        offset = Vector3.Lerp(offset, offsetAngle * new Vector3(0f, VerticalDistance, -DistanceBehind) * springDistance, OffsetCatchup*Time.deltaTime);
-
-        _shiftable.Translate(Target.transform.position + offset - transform.position);
-
-        targetUp = Vector3.Lerp(targetUp, Target.transform.up, 5f*Time.deltaTime);
-
-        transform.LookAt(Target.GetAimPosition(), targetUp);
 
         BackgroundTransform.transform.position = transform.position;
 

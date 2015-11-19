@@ -1,4 +1,6 @@
-﻿public class FighterIdle : NpcState<Fighter>
+﻿using UnityEngine;
+
+public class FighterIdle : NpcState<Fighter>
 {
     public FighterIdle(Fighter npc) : base(npc)
     {
@@ -7,6 +9,6 @@
 
     public override void Update()
     {
-        Npc.VehicleInstance.PitchThotttle = 1f;
+        Npc.VehicleInstance.PitchThotttle = 1f*Time.deltaTime;
     }
 }
