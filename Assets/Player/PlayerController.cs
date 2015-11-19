@@ -114,19 +114,20 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKeyUp(KeyCode.R))
-		{
-			_playVehicleInstance.GetComponent<Killable>().Die();
-			Debug.Log("RESPAWN");
-			Universe.Current.WarpTo(RespawnPosition);
-			SpawnVehicle(VehiclePrefab, RespawnPosition);
+	    if (Input.GetKeyUp(KeyCode.R))
+	    {
+	        if (_playVehicleInstance != null)
+	            _playVehicleInstance.GetComponent<Killable>().Die();
+	        Debug.Log("RESPAWN");
+	        Universe.Current.WarpTo(RespawnPosition);
+	        SpawnVehicle(VehiclePrefab, RespawnPosition);
 
-			var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
-			cam.Target = _playVehicleInstance;
-			cam.Reset();
-		}
+	        var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
+	        cam.Target = _playVehicleInstance;
+	        cam.Reset();
+	    }
 
-		if (Input.GetKey(KeyCode.Escape))
+	    if (Input.GetKey(KeyCode.Escape))
 		{
 			Application.Quit();
 		}
