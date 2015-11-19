@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 	public bool InvertY = false;
 	public bool HideMouse = false;
 
-    public Shiftable RespawnPosition;
+	public Shiftable RespawnPosition;
 
 	[Header("Aiming")]
 	public float AimSensitivity = 10f;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
-        SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
+		SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
 		_current = this;
 		Cursor.visible = !HideMouse;
 		if (HideMouse)
@@ -41,15 +41,15 @@ public class PlayerController : MonoBehaviour
 		//FollowCamera.Current.Target = _playVehicleInstance.transform;
 	}
 
-    private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
-    {
-        _playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, spawner.CellLocalPosition, spawner.transform.rotation)).GetComponent<Vehicle>();
-        _playVehicleInstance.Shiftable.UniverseCellIndex = spawner.UniverseCellIndex;
-        _playVehicleInstance.Shiftable.CellLocalPosition = spawner.CellLocalPosition;
-        Destroy(_playVehicleInstance.GetComponent<Tracker>());
-        _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
-        PlayerVehicles.Insert(0, _playVehicleInstance);
-    }
+	private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
+	{
+		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, spawner.CellLocalPosition, spawner.transform.rotation)).GetComponent<Vehicle>();
+		_playVehicleInstance.Shiftable.UniverseCellIndex = spawner.UniverseCellIndex;
+		_playVehicleInstance.Shiftable.CellLocalPosition = spawner.CellLocalPosition;
+		Destroy(_playVehicleInstance.GetComponent<Tracker>());
+		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
+		PlayerVehicles.Insert(0, _playVehicleInstance);
+	}
 
 	private Vector3 GetAimAt()
 	{
@@ -75,55 +75,58 @@ public class PlayerController : MonoBehaviour
 		{
 			Debug.Break();
 		}
-	    if (_playVehicleInstance != null)
-	    {
-	        var mouseClamp = 0.003f;
-	        var mouseHorizontal = AimSensitivity*Mathf.Clamp(Input.GetAxis("MouseHorizontal")/Screen.width, -mouseClamp, mouseClamp);
-	        var mouseVertical = AimSensitivity*Mathf.Clamp(screenAspect*Input.GetAxis("MouseVertical")/Screen.height, -mouseClamp, mouseClamp);
+		if (_playVehicleInstance != null)
+		{
+			var mouseClamp = 0.003f;
+			var mouseHorizontal = AimSensitivity * Mathf.Clamp(Input.GetAxis("MouseHorizontal") / Screen.width, -mouseClamp, mouseClamp);
+			var mouseVertical = AimSensitivity * Mathf.Clamp(screenAspect * Input.GetAxis("MouseVertical") / Screen.height, -mouseClamp, mouseClamp);
 
-	        if (InvertY)
-	        {
-	            _playVehicleInstance.PitchThotttle = (Input.GetAxis("Vertical") + mouseVertical)*-1;
-	        }
-	        else
-	        {
-	            _playVehicleInstance.PitchThotttle = Input.GetAxis("Vertical") + mouseVertical;
-	        }
-	        _playVehicleInstance.YawThrottle = Input.GetAxis("Horizontal") + mouseHorizontal;
-	        _playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
-	        _playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
+			if (InvertY)
+			{
+				_playVehicleInstance.PitchThotttle = (Input.GetAxis("Vertical") + mouseVertical) * -1;
+			}
+			else
+			{
+				_playVehicleInstance.PitchThotttle = Input.GetAxis("Vertical") + mouseVertical;
+			}
+			_playVehicleInstance.YawThrottle = Input.GetAxis("Horizontal") + mouseHorizontal;
+			_playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
+			_playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
 
-	        _playVehicleInstance.SetAimAt(GetAimAt());
+			_playVehicleInstance.SetAimAt(GetAimAt());
 
-	        _playVehicleInstance.TriggerAccelerate = false;
-	        if (Input.GetButton("Accelerate") || Input.GetButton("KeyboardAccelerate"))
-	        {
-	            _playVehicleInstance.TriggerAccelerate = true;
-	        }
+			_playVehicleInstance.TriggerAccelerate = false;
+			if (Input.GetButton("Accelerate") || Input.GetButton("KeyboardAccelerate"))
+			{
+				_playVehicleInstance.TriggerAccelerate = true;
+			}
 
-	        _playVehicleInstance.TriggerBrake = false;
-	        if (Input.GetButton("Brake") || Input.GetButton("KeyboardBrake"))
-	        {
-	            _playVehicleInstance.TriggerBrake = true;
-	        }
+			_playVehicleInstance.TriggerBrake = false;
+			if (Input.GetButton("Brake") || Input.GetButton("KeyboardBrake"))
+			{
+				_playVehicleInstance.TriggerBrake = true;
+			}
 
-	        _playVehicleInstance.TriggerBoost = false;
-	        if (Input.GetButton("KeyboardBoost"))
-	        {
-	            _playVehicleInstance.TriggerBoost = true;
-	        }
-	    }
+			_playVehicleInstance.TriggerBoost = false;
+			if (Input.GetButton("KeyboardBoost"))
+			{
+				_playVehicleInstance.TriggerBoost = true;
+			}
+		}
 
-	    if (Input.GetKeyUp(KeyCode.R))
-	    {
-	        _playVehicleInstance.GetComponent<Killable>().Die();
-            Debug.Log("RESPAWN");
-            Universe.Current.WarpTo(RespawnPosition);
-            SpawnVehicle(VehiclePrefab, RespawnPosition);
-            Universe.Current.ViewPort.GetComponent<VehicleCamera>().Target = _playVehicleInstance;
-	    }
+		if (Input.GetKeyUp(KeyCode.R))
+		{
+			_playVehicleInstance.GetComponent<Killable>().Die();
+			Debug.Log("RESPAWN");
+			Universe.Current.WarpTo(RespawnPosition);
+			SpawnVehicle(VehiclePrefab, RespawnPosition);
 
-	    if (Input.GetKey(KeyCode.Escape))
+			var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
+			cam.Target = _playVehicleInstance;
+			cam.Reset();
+		}
+
+		if (Input.GetKey(KeyCode.Escape))
 		{
 			Application.Quit();
 		}
@@ -172,12 +175,12 @@ public class PlayerController : MonoBehaviour
 		get { return _playVehicleInstance; }
 	}
 
-    private void OnGUI()
-    {
-        //GUI.Label(new Rect(Screen.width - 100f, Screen.height - 100f, 100f, 25), string.Format("{0:f2} m/s", VehicleInstance.GetVelocity().magnitude));
-        if (_playVehicleInstance == null)
-        {
-            GUI.Label(new Rect(Screen.width/2f - 100f, Screen.height/2f + 50f, 200f, 25f), "Press 'R' to respawn.", new GUIStyle {alignment = TextAnchor.MiddleCenter, normal = {textColor = Color.white}});
-        }
-    }
+	private void OnGUI()
+	{
+		//GUI.Label(new Rect(Screen.width - 100f, Screen.height - 100f, 100f, 25), string.Format("{0:f2} m/s", VehicleInstance.GetVelocity().magnitude));
+		if (_playVehicleInstance == null)
+		{
+			GUI.Label(new Rect(Screen.width / 2f - 100f, Screen.height / 2f + 50f, 200f, 25f), "Press 'R' to respawn.", new GUIStyle { alignment = TextAnchor.MiddleCenter, normal = { textColor = Color.white } });
+		}
+	}
 }
