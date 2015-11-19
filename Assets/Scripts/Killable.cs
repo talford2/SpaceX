@@ -41,8 +41,15 @@ public class Killable : MonoBehaviour
 	{
 		if (DieEffect != null)
 		{
-			Utility.InstantiateInParent(DieEffect, transform.position, transform.rotation, transform.parent);
-			//Instantiate(DieEffect, transform.position, transform.rotation);
+			var dieInst = Utility.InstantiateInParent(DieEffect, transform.position, transform.rotation, transform.parent);
+
+			var dieShiftable = dieInst.GetComponent<Shiftable>();
+			var thisShiftable = GetComponent<Shiftable>();
+
+			if (dieShiftable != null && thisShiftable != null)
+			{
+				dieShiftable.SetShiftPosition(thisShiftable.UniverseCellIndex, thisShiftable.CellLocalPosition);
+			}
 		}
 
 		IsAlive = false;
