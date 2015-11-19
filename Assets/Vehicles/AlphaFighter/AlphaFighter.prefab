@@ -577,6 +577,7 @@ MonoBehaviour:
     X: 100
     Y: 100
     Z: 100
+  CellLocalPosition: {x: 0, y: 0, z: 0}
   _particleSystems: []
 --- !u!114 &11475310
 MonoBehaviour:
@@ -617,8 +618,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   MaxHealth: 100
-  DamageEffect: {fileID: 183498}
-  DieEffect: {fileID: 154492}
+  DamageEffect: {fileID: 0}
+  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   DestroyOnDie: 1
 --- !u!114 &11486206
 MonoBehaviour:
@@ -855,6 +856,14 @@ Prefab:
       propertyPath: TrackerCurosrImage
       value: 
       objectReference: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
+    - target: {fileID: 0}
+      propertyPath: DamageEffect
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DieEffect
+      value: 
+      objectReference: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}
