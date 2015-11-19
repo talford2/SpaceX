@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
-        SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition.CellLocalPosition, Universe.Current.PlayerSpawnPosition.transform.rotation);
+        SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
 		_current = this;
 		Cursor.visible = !HideMouse;
 		if (HideMouse)
@@ -41,9 +41,11 @@ public class PlayerController : MonoBehaviour
 		//FollowCamera.Current.Target = _playVehicleInstance.transform;
 	}
 
-    private void SpawnVehicle(Vehicle vehiclePrefab, Vector3 position, Quaternion rotation)
+    private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
     {
-        _playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, position, rotation)).GetComponent<Vehicle>();
+        _playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, spawner.CellLocalPosition, spawner.transform.rotation)).GetComponent<Vehicle>();
+        _playVehicleInstance.Shiftable.UniverseCellIndex = spawner.UniverseCellIndex;
+        _playVehicleInstance.Shiftable.CellLocalPosition = spawner.CellLocalPosition;
         Destroy(_playVehicleInstance.GetComponent<Tracker>());
         _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
         PlayerVehicles.Insert(0, _playVehicleInstance);
@@ -115,25 +117,10 @@ public class PlayerController : MonoBehaviour
 	    if (Input.GetKeyUp(KeyCode.R))
 	    {
 	        _playVehicleInstance.GetComponent<Killable>().Die();
-
-            Debug.Log("RESTART");
-
-            Universe.Current.ViewPort.Shiftable.UniverseCellIndex = RespawnPosition.UniverseCellIndex;
-            Universe.Current.ViewPort.Shiftable.CellLocalPosition = RespawnPosition.CellLocalPosition;
-
-            //var shiftDelta = RespawnPosition.UniverseCellIndex - Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
-            var shiftDelta = Universe.Current.ViewPort.Shiftable.UniverseCellIndex - RespawnPosition.UniverseCellIndex;
-
-            Universe.Current.Shift(shiftDelta);
-
-            SpawnVehicle(VehiclePrefab, RespawnPosition.CellLocalPosition, RespawnPosition.transform.rotation);
-
-            _playVehicleInstance.Shiftable.UniverseCellIndex = RespawnPosition.UniverseCellIndex;
-            _playVehicleInstance.Shiftable.CellLocalPosition = RespawnPosition.CellLocalPosition;
-
+            Debug.Log("RESPAWN");
+            Universe.Current.WarpTo(RespawnPosition);
+            SpawnVehicle(VehiclePrefab, RespawnPosition);
             Universe.Current.ViewPort.GetComponent<VehicleCamera>().Target = _playVehicleInstance;
-
-            Debug.Log("NEW PLAYER POS: " + _playVehicleInstance.transform.position);
 	    }
 
 	    if (Input.GetKey(KeyCode.Escape))

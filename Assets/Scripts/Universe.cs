@@ -52,6 +52,7 @@ public class Universe : MonoBehaviour
 		}
 	}
 
+    /*
 	public void Warp(CellIndex cell, Transform trans)
 	{
         var diff = cell - ViewPort.Shiftable.UniverseCellIndex;
@@ -68,6 +69,15 @@ public class Universe : MonoBehaviour
 			Warp(PlayerController.Current.VehicleInstance.Shiftable.UniverseCellIndex, PlayerSpawnPosition.transform);
 		}
 	}
+    */
+
+    public void WarpTo(Shiftable spawner)
+    {
+        ViewPort.Shiftable.UniverseCellIndex = spawner.UniverseCellIndex;
+        ViewPort.Shiftable.CellLocalPosition = spawner.CellLocalPosition;
+        var shiftDelta = ViewPort.Shiftable.UniverseCellIndex - spawner.UniverseCellIndex;
+        Shift(shiftDelta);
+    }
 
 	public void OnDrawGizmos()
 	{
