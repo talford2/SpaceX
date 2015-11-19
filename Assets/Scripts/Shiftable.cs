@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Shiftable : MonoBehaviour
 {
@@ -39,9 +37,13 @@ public class Shiftable : MonoBehaviour
 	private void Awake()
 	{
 		Universe.ShiftableItems.Add(this);
-
-		//_particleSystems = GetComponentsInChildren<ParticleSystem>();
+	    //_particleSystems = GetComponentsInChildren<ParticleSystem>();
 	}
+
+    private void Start()
+    {
+        transform.position = GetWorldPosition();
+    }
 
 	private CellIndex CellIndexFromPosition(Vector3 position)
 	{

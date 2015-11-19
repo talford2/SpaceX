@@ -574,9 +574,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UniverseCellIndex:
-    X: 100
-    Y: 100
-    Z: 100
+    X: 0
+    Y: 0
+    Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
   _particleSystems: []
 --- !u!114 &11475310
@@ -864,6 +864,18 @@ Prefab:
       propertyPath: DieEffect
       value: 
       objectReference: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+    - target: {fileID: 0}
+      propertyPath: UniverseCellIndex.X
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: UniverseCellIndex.Y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: UniverseCellIndex.Z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}
