@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 	[Header("Aiming")]
 	public float AimSensitivity = 10f;
 	public float MinAimDistance = 10f;
-	public float MaxAimDistance = 1000f;
+	public float MaxAimDistance = 200f;
 
 	private float screenAspect;
 
