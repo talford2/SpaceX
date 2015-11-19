@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
-		SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition.transform);
+        SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition.CellLocalPosition, Universe.Current.PlayerSpawnPosition.transform.rotation);
 		_current = this;
 		Cursor.visible = !HideMouse;
 		if (HideMouse)
@@ -41,9 +41,9 @@ public class PlayerController : MonoBehaviour
 		//FollowCamera.Current.Target = _playVehicleInstance.transform;
 	}
 
-    private void SpawnVehicle(Vehicle vehiclePrefab, Transform atTransform)
+    private void SpawnVehicle(Vehicle vehiclePrefab, Vector3 position, Quaternion rotation)
     {
-        _playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, atTransform.position, atTransform.rotation)).GetComponent<Vehicle>();
+        _playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, position, rotation)).GetComponent<Vehicle>();
         Destroy(_playVehicleInstance.GetComponent<Tracker>());
         _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
         PlayerVehicles.Insert(0, _playVehicleInstance);
@@ -126,11 +126,10 @@ public class PlayerController : MonoBehaviour
 
             Universe.Current.Shift(shiftDelta);
 
-            SpawnVehicle(VehiclePrefab, RespawnPosition.transform);
+            SpawnVehicle(VehiclePrefab, RespawnPosition.CellLocalPosition, RespawnPosition.transform.rotation);
 
             _playVehicleInstance.Shiftable.UniverseCellIndex = RespawnPosition.UniverseCellIndex;
             _playVehicleInstance.Shiftable.CellLocalPosition = RespawnPosition.CellLocalPosition;
-	        _playVehicleInstance.transform.position = RespawnPosition.CellLocalPosition;
 
             Universe.Current.ViewPort.GetComponent<VehicleCamera>().Target = _playVehicleInstance;
 
