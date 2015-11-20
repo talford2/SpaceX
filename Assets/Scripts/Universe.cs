@@ -80,10 +80,15 @@ public class Universe : MonoBehaviour
         return GetWorldPosition(universePosition.CellIndex, universePosition.CellLocalPosition);
     }
 
+    public UniversePosition GetUniversePosition(Vector3 worldPosition)
+    {
+        return new UniversePosition(CellIndexFromWorldPosition(worldPosition), CellLocalPositionFromWorldPosition(worldPosition));
+    }
+
     private Vector3 GetWorldPosition(CellIndex cellIndex, Vector3 positionInCell)
     {
-        var cellDiff = cellIndex - ViewPort.Shiftable.UniverseCellIndex;
-        return cellDiff.ToVector3()*Current.CellSize + positionInCell;
+        var dCell = cellIndex - ViewPort.Shiftable.UniverseCellIndex;
+        return dCell.ToVector3()*Current.CellSize + positionInCell;
     }
 
     private CellIndex CellIndexFromWorldPosition(Vector3 worldPosition)
@@ -92,14 +97,9 @@ public class Universe : MonoBehaviour
         return new CellIndex(Mathf.CeilToInt(dCell.x), Mathf.CeilToInt(dCell.y), Mathf.CeilToInt(dCell.z)) + ViewPort.Shiftable.UniverseCellIndex;
     }
 
-    public Vector3 CellLocalPositionFromWorldPosition(Vector3 worldPosition)
+    private Vector3 CellLocalPositionFromWorldPosition(Vector3 worldPosition)
     {
         var cell = CellIndexFromWorldPosition(worldPosition);
         return worldPosition - cell.ToVector3()*CellSize + ViewPort.Shiftable.UniverseCellIndex.ToVector3()*CellSize;
-    }
-
-    public UniversePosition GetUniversePosition(Vector3 worldPosition)
-    {
-        return new UniversePosition(CellIndexFromWorldPosition(worldPosition), CellLocalPositionFromWorldPosition(worldPosition));
-    }
+    }    
 }
