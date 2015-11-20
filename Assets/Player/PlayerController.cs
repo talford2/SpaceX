@@ -56,9 +56,7 @@ public class PlayerController : MonoBehaviour
 	    var aimAtPosition = mouseRay.GetPoint(MaxAimDistance);
 		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player")))
 		{
-            var toAim = aimHit.point - _playVehicleInstance.CurrentWeapon.GetShootPointCentre();
-			var dotProd = Vector3.Dot(toAim, _playVehicleInstance.transform.forward);
-			if (dotProd > MinAimDistance)
+			if (aimHit.distance > MinAimDistance)
 			{
 				aimAtPosition = aimHit.point;
 			}
