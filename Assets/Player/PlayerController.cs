@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 	[Header("Aiming")]
 	public float AimSensitivity = 10f;
 	public float MinAimDistance = 10f;
-	public float MaxAimDistance = 200f;
+	public float MaxAimDistance = 1000f;
 
 	private float screenAspect;
 
@@ -53,11 +53,10 @@ public class PlayerController : MonoBehaviour
 	{
 		var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 		RaycastHit aimHit;
-		var weaponShootPointsCentre = _playVehicleInstance.CurrentWeapon.GetShootPointCentre();
-		var aimAtPosition = weaponShootPointsCentre + _playVehicleInstance.transform.forward * MaxAimDistance;
+	    var aimAtPosition = mouseRay.GetPoint(MaxAimDistance);
 		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player")))
 		{
-			var toAim = aimHit.point - weaponShootPointsCentre;
+            var toAim = aimHit.point - _playVehicleInstance.CurrentWeapon.GetShootPointCentre();
 			var dotProd = Vector3.Dot(toAim, _playVehicleInstance.transform.forward);
 			if (dotProd > MinAimDistance)
 			{
@@ -182,4 +181,13 @@ public class PlayerController : MonoBehaviour
 			GUI.Label(new Rect(Screen.width / 2f - 100f, Screen.height / 2f + 50f, 200f, 25f), "Press 'R' to respawn.", new GUIStyle { alignment = TextAnchor.MiddleCenter, normal = { textColor = Color.white } });
 		}
 	}
+
+    private void OnDrawGizmos()
+    {
+        if (_playVehicleInstance != null)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawSphere(GetAimAt(), 1f);
+        }
+    }
 }

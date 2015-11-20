@@ -1109,7 +1109,7 @@ MonoBehaviour:
   RespawnPosition: {fileID: 761010713}
   AimSensitivity: 15
   MinAimDistance: 10
-  MaxAimDistance: 200
+  MaxAimDistance: 1000
 --- !u!4 &1064748905
 Transform:
   m_ObjectHideFlags: 0
