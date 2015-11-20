@@ -201,14 +201,16 @@ public class Vehicle : MonoBehaviour
             }
         }
 
-        // Idling
-        if (!IsAccelerating && !IsBraking && !IsBoosting)
+        if (!IsBoosting)
         {
             if (CurrentSpeed > MaxSpeed)
             {
                 CurrentSpeed -= BoostBrake*Time.deltaTime;
             }
-
+        }
+        // Idling
+        if (!IsAccelerating && !IsBraking && !IsBoosting)
+        {
             if (CurrentSpeed > IdleSpeed)
             {
                 acceleration = -Brake;
