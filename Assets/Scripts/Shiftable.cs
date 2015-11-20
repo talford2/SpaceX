@@ -75,10 +75,10 @@ public class Shiftable : MonoBehaviour
         }
     }
 
-    public void SetShiftPosition(CellIndex cell, Vector3 local)
+    public void SetShiftPosition(UniversePosition position)
     {
-        UniverseCellIndex = cell;
-        CellLocalPosition = local;
+        UniverseCellIndex = position.CellIndex;
+        CellLocalPosition = position.CellLocalPosition;
     }
 
     public Vector3 GetWorldPosition()

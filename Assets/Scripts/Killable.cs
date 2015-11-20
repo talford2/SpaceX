@@ -48,7 +48,9 @@ public class Killable : MonoBehaviour
 
 			if (dieShiftable != null && thisShiftable != null)
 			{
-				dieShiftable.SetShiftPosition(thisShiftable.UniverseCellIndex, thisShiftable.CellLocalPosition);
+				//dieShiftable.SetShiftPosition(thisShiftable.UniverseCellIndex, thisShiftable.CellLocalPosition);
+			    var univPos = Universe.Current.GetUniversePosition(transform.position);
+                dieShiftable.SetShiftPosition(univPos);
 			}
 		}
 

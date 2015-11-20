@@ -49,13 +49,13 @@ public class Universe : MonoBehaviour
 
     public void WarpTo(Shiftable spawner)
     {
-        WarpTo(spawner.UniverseCellIndex, spawner.CellLocalPosition);
+        WarpTo(spawner.UniversePosition);
     }
 
-    public void WarpTo(CellIndex cellIndex, Vector3 cellLocalPosition)
+    public void WarpTo(UniversePosition universePosition)
     {
-        ViewPort.Shiftable.SetShiftPosition(cellIndex, cellLocalPosition);
-        var shiftDelta = ViewPort.Shiftable.UniverseCellIndex - cellIndex;
+        ViewPort.Shiftable.SetShiftPosition(universePosition);
+        var shiftDelta = ViewPort.Shiftable.UniverseCellIndex - universePosition.CellIndex;
         Shift(shiftDelta);
     }
 

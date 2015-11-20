@@ -63,7 +63,7 @@ public class Missile : MonoBehaviour
 								if (hitEffectShiftable != null)
 								{
 								    var univPos = Universe.Current.GetUniversePosition(missileHit.point);
-									hitEffectShiftable.SetShiftPosition(univPos.CellIndex, univPos.CellLocalPosition);
+									hitEffectShiftable.SetShiftPosition(univPos);
 								}
 								else
 								{
