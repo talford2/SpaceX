@@ -72,44 +72,47 @@ public class PlayerController : MonoBehaviour
 		{
 			Debug.Break();
 		}
-		if (_playVehicleInstance != null)
-		{
-			var mouseClamp = 0.003f;
-			var mouseHorizontal = AimSensitivity * Mathf.Clamp(Input.GetAxis("MouseHorizontal") / Screen.width, -mouseClamp, mouseClamp);
-			var mouseVertical = AimSensitivity * Mathf.Clamp(screenAspect * Input.GetAxis("MouseVertical") / Screen.height, -mouseClamp, mouseClamp);
+	    if (_playVehicleInstance != null)
+	    {
+	        var mouseClamp = 0.003f;
+	        var mouseHorizontal = AimSensitivity*Mathf.Clamp(Input.GetAxis("MouseHorizontal")/Screen.width, -mouseClamp, mouseClamp);
+	        var mouseVertical = AimSensitivity*Mathf.Clamp(screenAspect*Input.GetAxis("MouseVertical")/Screen.height, -mouseClamp, mouseClamp);
 
-			if (InvertY)
-			{
-				_playVehicleInstance.PitchThotttle = (Input.GetAxis("Vertical") + mouseVertical) * -1;
-			}
-			else
-			{
-				_playVehicleInstance.PitchThotttle = Input.GetAxis("Vertical") + mouseVertical;
-			}
-			_playVehicleInstance.YawThrottle = Input.GetAxis("Horizontal") + mouseHorizontal;
-			_playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
-			_playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
+	        var controllerHorizontal = AimSensitivity*Input.GetAxis("Horizontal")/Screen.width;
+	        var controllerVertical = AimSensitivity*screenAspect*Input.GetAxis("Vertical")/Screen.height;
 
-			_playVehicleInstance.SetAimAt(GetAimAt());
+	        if (InvertY)
+	        {
+	            _playVehicleInstance.PitchThotttle = (controllerVertical + mouseVertical)*-1;
+	        }
+	        else
+	        {
+	            _playVehicleInstance.PitchThotttle = controllerVertical + mouseVertical;
+	        }
+	        _playVehicleInstance.YawThrottle = controllerHorizontal + mouseHorizontal;
+	        _playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
+	        _playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
 
-			_playVehicleInstance.TriggerAccelerate = false;
-			if (Input.GetButton("Accelerate") || Input.GetButton("KeyboardAccelerate"))
-			{
-				_playVehicleInstance.TriggerAccelerate = true;
-			}
+	        _playVehicleInstance.SetAimAt(GetAimAt());
 
-			_playVehicleInstance.TriggerBrake = false;
-			if (Input.GetButton("Brake") || Input.GetButton("KeyboardBrake"))
-			{
-				_playVehicleInstance.TriggerBrake = true;
-			}
+	        _playVehicleInstance.TriggerAccelerate = false;
+	        if (Input.GetButton("Accelerate") || Input.GetButton("KeyboardAccelerate"))
+	        {
+	            _playVehicleInstance.TriggerAccelerate = true;
+	        }
 
-			_playVehicleInstance.TriggerBoost = false;
-			if (Input.GetButton("KeyboardBoost"))
-			{
-				_playVehicleInstance.TriggerBoost = true;
-			}
-		}
+	        _playVehicleInstance.TriggerBrake = false;
+	        if (Input.GetButton("Brake") || Input.GetButton("KeyboardBrake"))
+	        {
+	            _playVehicleInstance.TriggerBrake = true;
+	        }
+
+	        _playVehicleInstance.TriggerBoost = false;
+	        if (Input.GetButton("Boost") || Input.GetButton("KeyboardBoost"))
+	        {
+	            _playVehicleInstance.TriggerBoost = true;
+	        }
+	    }
 
 	    if (Input.GetKeyUp(KeyCode.R))
 	    {

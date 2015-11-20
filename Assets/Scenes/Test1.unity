@@ -1108,6 +1108,7 @@ MonoBehaviour:
   HideMouse: 1
   RespawnPosition: {fileID: 761010713}
   AimSensitivity: 15
+  DefaultAimDistance: 200
   MinAimDistance: 10
   MaxAimDistance: 1000
 --- !u!4 &1064748905
