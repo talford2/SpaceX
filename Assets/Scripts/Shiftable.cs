@@ -18,9 +18,9 @@ public class Shiftable : MonoBehaviour
 	public delegate void OnShiftEvent(Vector3 delta);
 
 	public event OnShiftEvent OnShift;
-	
+
 	public ParticleSystem[] _particleSystems;
-	
+
 	public void Translate(Vector3 translation)
 	{
 		var destination = (CellLocalPosition + translation);
@@ -69,9 +69,10 @@ public class Shiftable : MonoBehaviour
 		if (OnShift != null)
 			OnShift(shiftAmount);
 
+		var particleShift = Vector3.zero - shiftAmount;
 		foreach (var ps in _particleSystems)
 		{
-			Utility.MoveParticles(ps, Vector3.zero - shiftAmount);
+			Utility.MoveParticles(ps, particleShift);
 		}
 	}
 
