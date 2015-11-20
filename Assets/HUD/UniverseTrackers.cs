@@ -60,9 +60,9 @@ public class UniverseTrackers : MonoBehaviour
 		    {
 		        if (inBounds)
 		        {
-		            Debug.Log("BROKEN TRACKER!!!");
-                    Debug.Log("SCREEN POINT: " + screenPoint);
-                    Debug.Log("r: " + r);
+		            //Debug.Log("BROKEN TRACKER!!!");
+                    //Debug.Log("SCREEN POINT: " + screenPoint);
+                    //Debug.Log("r: " + r);
                     //Debug.Break();
 		        }
 		    }
