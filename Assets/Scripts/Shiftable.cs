@@ -2,81 +2,87 @@
 
 public class Shiftable : MonoBehaviour
 {
-	[Tooltip("Cell the object is contained in")]
-	public CellIndex UniverseCellIndex;
+    [Tooltip("Cell the object is contained in")] public CellIndex UniverseCellIndex;
+    public Vector3 CellLocalPosition;
 
-	public delegate void OnCellIndexChangeEvent(CellIndex delta);
-	public event OnCellIndexChangeEvent OnCellIndexChange;
+    public UniversePosition UniversePosition
+    {
+        get { return new UniversePosition(UniverseCellIndex, CellLocalPosition); }
+    }
 
-	public delegate void OnShiftEvent(Vector3 delta);
-	public event OnShiftEvent OnShift;
+    public delegate void OnCellIndexChangeEvent(CellIndex delta);
 
-	public Vector3 CellLocalPosition;
+    public event OnCellIndexChangeEvent OnCellIndexChange;
 
-	public ParticleSystem[] _particleSystems;
+    public delegate void OnShiftEvent(Vector3 delta);
 
-	public void Translate(Vector3 translation)
-	{
-		var destination = (CellLocalPosition + translation);
-		var cellDelta = CellIndexFromPosition(destination);
+    public event OnShiftEvent OnShift;
 
-		if (!cellDelta.IsZero())
-		{
-			UniverseCellIndex += cellDelta;
-			if (OnCellIndexChange != null)
-			{
-				OnCellIndexChange(cellDelta);
-			}
-			CellLocalPosition -= cellDelta.ToVector3() * Universe.Current.CellSize;
-		}
 
-		CellLocalPosition += translation;
-		transform.position += translation;
-	}
+    public ParticleSystem[] _particleSystems;
 
-	private void Awake()
-	{
-		Universe.ShiftableItems.Add(this);
-		//_particleSystems = GetComponentsInChildren<ParticleSystem>();
-	}
+    public void Translate(Vector3 translation)
+    {
+        var destination = (CellLocalPosition + translation);
+        var cellDelta = CellIndexDeltaFromPosition(destination);
 
-	private void Start()
-	{
-		transform.position = GetWorldPosition();
-	}
+        if (!cellDelta.IsZero())
+        {
+            UniverseCellIndex += cellDelta;
+            if (OnCellIndexChange != null)
+            {
+                OnCellIndexChange(cellDelta);
+            }
+            CellLocalPosition -= cellDelta.ToVector3()*Universe.Current.CellSize;
+        }
 
-	private CellIndex CellIndexFromPosition(Vector3 position)
-	{
-		var cellZero = (position - Vector3.one * Universe.Current.HalfCellSize) / Universe.Current.CellSize;
-		return new CellIndex(Mathf.CeilToInt(cellZero.x), Mathf.CeilToInt(cellZero.y), Mathf.CeilToInt(cellZero.z));
-	}
+        CellLocalPosition += translation;
+        transform.position += translation;
+    }
 
-	private void OnDestroy()
-	{
-		Universe.ShiftableItems.Remove(this);
-	}
+    private void Awake()
+    {
+        Universe.ShiftableItems.Add(this);
+        //_particleSystems = GetComponentsInChildren<ParticleSystem>();
+    }
 
-	public void Shift(Vector3 shiftAmount)
-	{
-		transform.position -= shiftAmount;
+    private void Start()
+    {
+        transform.position = GetWorldPosition();
+    }
 
-		if (OnShift != null)
-			OnShift(shiftAmount);
+    private CellIndex CellIndexDeltaFromPosition(Vector3 position)
+    {
+        var cellZero = (position - Vector3.one*Universe.Current.HalfCellSize)/Universe.Current.CellSize;
+        return new CellIndex(Mathf.CeilToInt(cellZero.x), Mathf.CeilToInt(cellZero.y), Mathf.CeilToInt(cellZero.z));
+    }
 
-		foreach (var ps in _particleSystems)
-		{
-			Utility.MoveParticles(ps, Vector3.zero - shiftAmount);
-		}
-	}
+    private void OnDestroy()
+    {
+        Universe.ShiftableItems.Remove(this);
+    }
 
-	public void SetShiftPosition(CellIndex cell, Vector3 local)
-	{
-		UniverseCellIndex = cell;
-		CellLocalPosition = local;
-	}
+    public void Shift(Vector3 shiftAmount)
+    {
+        transform.position -= shiftAmount;
 
-	public Vector3 GetWorldPosition()
-	{
-		return Universe.Current.GetWorldPosition(UniverseCellIndex, CellLocalPosition);
-	}
+        if (OnShift != null)
+            OnShift(shiftAmount);
+
+        foreach (var ps in _particleSystems)
+        {
+            Utility.MoveParticles(ps, Vector3.zero - shiftAmount);
+        }
+    }
+
+    public void SetShiftPosition(CellIndex cell, Vector3 local)
+    {
+        UniverseCellIndex = cell;
+        CellLocalPosition = local;
+    }
+
+    public Vector3 GetWorldPosition()
+    {
+        return Universe.Current.GetWorldPosition(UniversePosition);
+    }
 }

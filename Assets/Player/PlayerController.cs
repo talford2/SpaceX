@@ -31,9 +31,6 @@ public class PlayerController : MonoBehaviour
 			Cursor.lockState = CursorLockMode.Locked;
 
 		screenAspect = (float)Screen.height / (float)Screen.width;
-
-	    Universe.Current.ViewPort.OnMove += TestUniverse;
-
 	    //Debug.Break();
 	}
 
@@ -177,43 +174,6 @@ public class PlayerController : MonoBehaviour
 		get { return _playVehicleInstance; }
 	}
 
-    private Vector3 testPosition;
-    private CellIndex testCellIndex;
-    private Vector3 testLocalPosition;
-
-    /*
-    public Vector3 GetWorldPosition(CellIndex cellIndex, Vector3 positionInCell)
-    {
-        var cellDiff = cellIndex - ViewPort.Shiftable.UniverseCellIndex;
-        return cellDiff.ToVector3() * Current.CellSize + positionInCell;
-    }
-    */
-
-    private void TestUniverse()
-    {
-        var uniPos = new UniversePosition(new CellIndex(1, 0, 5), new Vector3(50, 20, 10f));
-        var worldPos = Universe.Current.GetWorldPosition(uniPos);
-        testPosition = worldPos;
-
-
-        //var fCell = (worldPos - Vector3.one * Universe.Current.HalfCellSize) / Universe.Current.CellSize;
-        //var dCell = new CellIndex(Mathf.CeilToInt(fCell.x), Mathf.CeilToInt(fCell.y), Mathf.CeilToInt(fCell.z)) + Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
-
-        var univPos = Universe.Current.GetUniversePosition(worldPos);
-
-        //var guessCell = Universe.Current.CellIndexFromWorldPosition(worldPos);
-
-        //var localPos = Universe.Current.CellLocalPositionFromWorldPosition(worldPos);
-            //worldPos - guessCell.ToVector3()*Universe.Current.CellSize + Universe.Current.ViewPort.Shiftable.UniverseCellIndex.ToVector3()*Universe.Current.CellSize;
-
-        //var guessCellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex + new CellIndex(Mathf.CeilToInt(guessCell.x), Mathf.CeilToInt(guessCell.y), Mathf.CeilToInt(guessCell.z));
-
-        testCellIndex = univPos.CellIndex;
-        testLocalPosition = univPos.CellLocalPosition;
-        //guessCellIndex;
-
-    }
-
     private void OnGUI()
 	{
 		//GUI.Label(new Rect(Screen.width - 100f, Screen.height - 100f, 100f, 25), string.Format("{0:f2} m/s", VehicleInstance.GetVelocity().magnitude));
@@ -221,16 +181,5 @@ public class PlayerController : MonoBehaviour
 		{
 			GUI.Label(new Rect(Screen.width / 2f - 100f, Screen.height / 2f + 50f, 200f, 25f), "Press 'R' to respawn.", new GUIStyle { alignment = TextAnchor.MiddleCenter, normal = { textColor = Color.white } });
 		}
-
-        GUI.Label(new Rect(50f, Screen.height - 260f, 200f, 25f), string.Format("({0:f2}, {1:f2}, {2:f2})", testPosition.x, testPosition.y, testPosition.z));
-
-        GUI.Label(new Rect(50f, Screen.height - 200f, 200f, 25f), testCellIndex.ToString());
-        GUI.Label(new Rect(50f, Screen.height - 170f, 200f, 25f), testLocalPosition.ToString());
 	}
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(testPosition, 20f);
-    }
 }

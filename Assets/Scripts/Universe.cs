@@ -80,19 +80,13 @@ public class Universe : MonoBehaviour
         return GetWorldPosition(universePosition.CellIndex, universePosition.CellLocalPosition);
     }
 
-    public Vector3 GetWorldPosition(CellIndex cellIndex, Vector3 positionInCell)
+    private Vector3 GetWorldPosition(CellIndex cellIndex, Vector3 positionInCell)
     {
         var cellDiff = cellIndex - ViewPort.Shiftable.UniverseCellIndex;
         return cellDiff.ToVector3()*Current.CellSize + positionInCell;
     }
 
-    public CellIndex CellIndexFromPosition(Vector3 position)
-    {
-        var cellZero = (position - Vector3.one*Universe.Current.HalfCellSize)/Universe.Current.CellSize;
-        return new CellIndex(Mathf.CeilToInt(cellZero.x), Mathf.CeilToInt(cellZero.y), Mathf.CeilToInt(cellZero.z));
-    }
-
-    public CellIndex CellIndexFromWorldPosition(Vector3 worldPosition)
+    private CellIndex CellIndexFromWorldPosition(Vector3 worldPosition)
     {
         var dCell = (worldPosition - Vector3.one*HalfCellSize)/CellSize;
         return new CellIndex(Mathf.CeilToInt(dCell.x), Mathf.CeilToInt(dCell.y), Mathf.CeilToInt(dCell.z)) + ViewPort.Shiftable.UniverseCellIndex;

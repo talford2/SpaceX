@@ -34,7 +34,7 @@ public class DistantScaling : MonoBehaviour
 	private void UpdatePositionAndScale()
 	{
 		// Scaling
-		var worldDestination = Universe.Current.GetWorldPosition(_shiftable.UniverseCellIndex, _shiftable.CellLocalPosition);
+		var worldDestination = Universe.Current.GetWorldPosition(_shiftable.UniversePosition);
 		var toCamera = worldDestination - Universe.Current.ViewPort.transform.position;
 
 		if (toCamera.sqrMagnitude > _thresholdDistanceSquared)
