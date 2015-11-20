@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
 	[Header("Aiming")]
 	public float AimSensitivity = 10f;
+
+    public float DefaultAimDistance = 200f;
 	public float MinAimDistance = 10f;
 	public float MaxAimDistance = 1000f;
 
@@ -53,7 +55,7 @@ public class PlayerController : MonoBehaviour
 	{
 		var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 		RaycastHit aimHit;
-	    var aimAtPosition = mouseRay.GetPoint(MaxAimDistance);
+        var aimAtPosition = mouseRay.GetPoint(DefaultAimDistance);
 		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player")))
 		{
 			if (aimHit.distance > MinAimDistance)

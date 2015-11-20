@@ -208,6 +208,7 @@ public class Vehicle : MonoBehaviour
                 CurrentSpeed -= BoostBrake*Time.deltaTime;
             }
         }
+
         // Idling
         if (!IsAccelerating && !IsBraking && !IsBoosting)
         {
