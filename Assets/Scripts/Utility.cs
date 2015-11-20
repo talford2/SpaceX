@@ -50,9 +50,12 @@ public class Utility
 	{
 		if (ps != null)
 		{
-			var parr = new ParticleSystem.Particle[100];
+			var parr = new ParticleSystem.Particle[ps.maxParticles];
 			var totalParticles = ps.GetParticles(parr);
+			
 			//Debug.LogFormat("{0}: {1} / {2}", ps.name, totalParticles, parr.Length);
+			//Debug.Break();
+
 			for (var i = 0; i < totalParticles; i++)
 			{
 				parr[i].position += moveAmount;
