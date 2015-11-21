@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class FighterIdle : NpcState<Fighter>
 {
@@ -7,6 +8,8 @@ public class FighterIdle : NpcState<Fighter>
 
     private float neighborDetectInterval = 0.2f;
     private float neighborDetectCooldown;
+
+    private List<Transform> neighbors;
     public FighterIdle(Fighter npc) : base(npc)
     {
         Name = "Idle";
@@ -14,10 +17,9 @@ public class FighterIdle : NpcState<Fighter>
 
     public override void Update()
     {
-        Npc.VehicleInstance.PitchThotttle = 1f*Time.deltaTime;
-
         if (neighborDetectCooldown >= 0f)
         {
+            neighbors = new List<Transform>();
             neighborDetectCooldown -= Time.deltaTime;
             if (neighborDetectCooldown < 0f)
             {
@@ -39,10 +41,35 @@ public class FighterIdle : NpcState<Fighter>
                 }
             }
         }
+
+        // Steering stuff
+        var immediateDestination = Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward*5f;
+        if (neighbors != null)
+        {
+            Debug.Log("NEIGHBORS: " + neighbors.Count);
+            var avoidSum = Vector3.zero;
+            foreach (var neighbor in neighbors)
+            {
+                // Note this doesn't work for neighbors inside your position!
+                var fromNeighbor = Npc.VehicleInstance.transform.position - neighbor.position;
+                avoidSum += fromNeighbor.normalized/Mathf.Max(fromNeighbor.magnitude, 0.1f);
+            }
+            immediateDestination += avoidSum;
+        }
+        Npc.Destination = immediateDestination;
+        var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
+        Npc.VehicleInstance.YawThrottle = pitchYaw.y * Time.deltaTime;
+        Npc.VehicleInstance.PitchThotttle = pitchYaw.x * Time.deltaTime;
     }
 
     private void DetectNeighbor(Transform neighbor)
     {
-        Debug.Log("NEIGHBOR DETECTED!");
+        if (neighbor != Npc.VehicleInstance.transform)
+        {
+            if (!neighbors.Contains(neighbor))
+            {
+                neighbors.Add(neighbor);
+            }
+        }
     }
 }
