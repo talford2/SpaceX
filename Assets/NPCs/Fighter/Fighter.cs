@@ -9,6 +9,7 @@ public class Fighter : Npc<Fighter>
 	public Vector3 Destination;
 
 	public Transform Target;
+    public float MaxTargetDistance = 2000f;
 
 	public float SteerMultiplier = 0.3f;
 
@@ -46,14 +47,6 @@ public class Fighter : Npc<Fighter>
 		}
 
 		State = new FighterChase(this);
-	}
-
-	private void Start()
-	{
-		if (Target == null)
-		{
-			Target = PlayerController.Current.VehicleInstance.transform;
-		}
 	}
 
 	private void Update()

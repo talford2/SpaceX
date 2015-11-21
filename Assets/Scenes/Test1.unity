@@ -1672,6 +1672,7 @@ MonoBehaviour:
   Team: 0
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
+  MaxTargetDistance: 2000
   SteerMultiplier: .300000012
   AttackRange: 100
   ShootAngleTolerance: 5
@@ -2548,6 +2549,14 @@ Prefab:
       propertyPath: Team
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11408530, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+      propertyPath: ArrowCursorImage
+      value: 
+      objectReference: {fileID: 2800000, guid: 3ff4affc978dcee4998bd90d5f9c6896, type: 3}
+    - target: {fileID: 11408530, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+      propertyPath: TrackerCurosrImage
+      value: 
+      objectReference: {fileID: 2800000, guid: 140e49d363b2df244bf0c5f8ebe6fe04, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
   m_IsPrefabParent: 0
