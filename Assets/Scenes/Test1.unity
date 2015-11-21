@@ -734,7 +734,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471066, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
       propertyPath: m_IsActive
@@ -1102,6 +1102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+  Team: 1
   PlayerVehicles:
   - {fileID: 1832493475}
   InvertY: 1
@@ -1668,6 +1669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+  Team: 0
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   SteerMultiplier: .300000012
@@ -2540,6 +2542,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 182838, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425650, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+      propertyPath: Team
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

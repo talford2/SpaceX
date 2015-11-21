@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+  Team: 2
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   SteerMultiplier: .300000012
@@ -258,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+  Team: 2
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   SteerMultiplier: .300000012
@@ -295,6 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+  Team: 2
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   SteerMultiplier: .300000012
@@ -321,6 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+  Team: 2
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   SteerMultiplier: .300000012
@@ -347,6 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+  Team: 2
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   SteerMultiplier: .300000012
@@ -373,6 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+  Team: 2
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   SteerMultiplier: .300000012
@@ -393,7 +399,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Team
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174836}

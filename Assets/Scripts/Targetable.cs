@@ -4,7 +4,7 @@ public class Targetable : MonoBehaviour
 {
     public Team Team;
 
-    private void Awake()
+    private void Start()
     {
         Targeting.AddTargetable(Team, transform);
     }

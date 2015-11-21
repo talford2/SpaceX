@@ -3,6 +3,7 @@
 public class Fighter : Npc<Fighter>
 {
 	public Vehicle VehiclePrefab;
+    public Team Team;
 
 	private Vehicle _vehicleInstance;
 	public Vector3 Destination;
@@ -36,6 +37,7 @@ public class Fighter : Npc<Fighter>
 
 		//_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
 		_vehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
+	    _vehicleInstance.GetComponent<Targetable>().Team = Team;
 		_vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
 
 		if (parentShifter != null)

@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	public Vehicle VehiclePrefab;
+    public Team Team;
 
 	private Vehicle _playVehicleInstance;
 
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, spawner.CellLocalPosition, spawner.transform.rotation)).GetComponent<Vehicle>();
 		_playVehicleInstance.Shiftable.SetShiftPosition(spawner.UniversePosition);
 		Destroy(_playVehicleInstance.GetComponent<Tracker>());
+	    _playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
 		PlayerVehicles.Insert(0, _playVehicleInstance);
 	}
