@@ -13,6 +13,8 @@ public class Fighter : Npc<Fighter>
 
 	public float SteerMultiplier = 0.3f;
 
+    public ProximitySensor ProximitySensor;
+
 	[Header("Attack")]
 	public float AttackRange = 100f;
 	public float ShootAngleTolerance = 5f;
@@ -45,6 +47,8 @@ public class Fighter : Npc<Fighter>
 		{
 			_vehicleInstance.Shiftable.SetShiftPosition(parentShifter.UniversePosition);
 		}
+
+	    ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
 
 		State = new FighterChase(this);
 	}
