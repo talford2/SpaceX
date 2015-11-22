@@ -45,6 +45,7 @@ MonoBehaviour:
   MissileSpeed: 400
   MissileDamage: 5
   HitEffectPrefab: {fileID: 198982, guid: 4bb191ad1a7963849a6c492ebb749803, type: 2}
+  HitDecalPrefab: {fileID: 121998, guid: 5ca4b0ff81cbb7148a77afcf43fcab11, type: 2}
 --- !u!114 &11443858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -60,6 +61,7 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
+  CellLocalPosition: {x: 0, y: 0, z: 0}
   _particleSystems: []
 --- !u!120 &12017834
 LineRenderer:
@@ -133,6 +135,10 @@ Prefab:
       propertyPath: HitEffectPrefab
       value: 
       objectReference: {fileID: 198982, guid: 4bb191ad1a7963849a6c492ebb749803, type: 2}
+    - target: {fileID: 0}
+      propertyPath: HitDecalPrefab
+      value: 
+      objectReference: {fileID: 121998, guid: 5ca4b0ff81cbb7148a77afcf43fcab11, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180512}

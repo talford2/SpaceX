@@ -8,6 +8,8 @@ public class Missile : MonoBehaviour
 
 	public GameObject HitEffectPrefab;
 
+	public GameObject HitDecalPrefab;
+
 	private bool _isLive;
 	private LineRenderer _lineRenderer;
 	private Shiftable _shiftable;
@@ -62,15 +64,23 @@ public class Missile : MonoBehaviour
 								var hitEffectShiftable = hitEffectInstance.GetComponent<Shiftable>();
 								if (hitEffectShiftable != null)
 								{
-								    var univPos = Universe.Current.GetUniversePosition(missileHit.point);
+									var univPos = Universe.Current.GetUniversePosition(missileHit.point);
 									hitEffectShiftable.SetShiftPosition(univPos);
 								}
 								else
 								{
 									hitEffectInstance.transform.position = missileHit.point;
 								}
-								
+
 								hitEffectInstance.transform.forward = missileHit.normal;
+							}
+
+							if (HitDecalPrefab != null)
+							{
+								var hitDecal = Instantiate(HitDecalPrefab);
+								hitDecal.transform.position = missileHit.point;
+								hitDecal.transform.SetParent(missileHit.collider.gameObject.transform);
+								hitDecal.transform.forward = missileHit.normal;
 							}
 						}
 					}
