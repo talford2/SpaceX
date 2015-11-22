@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
 		Destroy(_playVehicleInstance.GetComponent<Tracker>());
 	    _playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
+	    _playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
 	}
 
 	private Vector3 GetAimAt()
@@ -133,33 +134,53 @@ public class PlayerController : MonoBehaviour
 			Menus.Current.ToggleQuitMenu();
 		}
 
+	    if (Input.GetKeyUp(KeyCode.Q))
+	    {
+	        _playVehicleInstance.GetComponent<Killable>().Die();
+	    }
+
 		if (Input.GetKeyUp(KeyCode.E))
 		{
-		    var oldSquadronIndex = _curVehicleIndex+0;
-			_curVehicleIndex++;
-			if (_curVehicleIndex >= Squadron.Count)
-			{
-				_curVehicleIndex = 0;
-			}
-
-		    if (Squadron[_curVehicleIndex] != null)
-		    {
-		        // Set previous controlled vehicle to NPC control
-		        _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
-		        Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
-		        Squadron[oldSquadronIndex].enabled = true;
-
-		        // Disable next vehicle NPC control and apply PlayerController
-		        Squadron[_curVehicleIndex].enabled = false;
-		        _playVehicleInstance = Squadron[_curVehicleIndex].VehicleInstance;
-		        _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
-
-		        var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
-		        cam.Target = _playVehicleInstance;
-		        cam.Reset();
-		    }
+		    CycleSquadron();
 		}
 	}
+
+    private void CycleSquadron()
+    {
+        var oldSquadronIndex = _curVehicleIndex + 0;
+        _curVehicleIndex++;
+        if (_curVehicleIndex >= Squadron.Count)
+        {
+            _curVehicleIndex = 0;
+        }
+        Debug.LogFormat("CYCLE {0} => {1}", oldSquadronIndex, _curVehicleIndex);
+        if (Squadron[_curVehicleIndex] != null)
+        {
+            // Set previous controlled vehicle to NPC control
+            _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
+            _playVehicleInstance.GetComponent<Killable>().OnDie -= OnVehicleDestroyed;
+            Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
+            Squadron[oldSquadronIndex].enabled = true;
+
+            // Disable next vehicle NPC control and apply PlayerController
+            Squadron[_curVehicleIndex].enabled = false;
+            _playVehicleInstance = Squadron[_curVehicleIndex].VehicleInstance;
+            _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
+            _playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+
+            var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
+            cam.Target = _playVehicleInstance;
+            cam.Reset();
+        }
+    }
+
+    private void OnVehicleDestroyed(Killable sender)
+    {
+        Debug.Log("PLAYER VEHICLE DESTROYED");
+        Debug.Log("DESTROY: " + GetComponent<Fighter>().name);
+        Squadron.Remove(GetComponent<Fighter>());
+        //CycleSquadron();
+    }
 
 	public bool InPlayerActiveCells(CellIndex checkCell)
 	{
