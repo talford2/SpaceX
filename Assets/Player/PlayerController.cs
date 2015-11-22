@@ -129,9 +129,9 @@ public class PlayerController : MonoBehaviour
 	        cam.Reset();
 	    }
 
-	    if (Input.GetKey(KeyCode.Escape))
+	    if (Input.GetKeyUp(KeyCode.Escape))
 		{
-			Application.Quit();
+			Menus.Current.ToggleQuitMenu();
 		}
 
 		if (Input.GetKeyUp(KeyCode.E))
