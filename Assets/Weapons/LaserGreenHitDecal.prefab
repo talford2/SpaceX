@@ -23,8 +23,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121998}
-  m_LocalRotation: {x: .707106829, y: 2.84217094e-14, z: 2.84217094e-14, w: .707106709}
-  m_LocalPosition: {x: -2.3900001, y: 36.7999992, z: -78.3199997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,16 +50,16 @@ Projector:
   m_GameObject: {fileID: 121998}
   m_Enabled: 1
   serializedVersion: 2
-  m_NearClipPlane: -.200000003
+  m_NearClipPlane: .200000003
   m_FarClipPlane: 10
   m_FieldOfView: 60
   m_AspectRatio: 1
   m_Orthographic: 1
-  m_OrthographicSize: 1
+  m_OrthographicSize: 3
   m_Material: {fileID: 2100000, guid: 2187ffd02793f734d991d8effe8ec76e, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -73,11 +73,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_NearClipPlane
-      value: -.200000003
+      value: .200000003
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_OrthographicSize
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Cooldown
