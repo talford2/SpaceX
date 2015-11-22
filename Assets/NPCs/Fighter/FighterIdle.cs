@@ -43,19 +43,7 @@ public class FighterIdle : NpcState<Fighter>
         }
 
         // Steering stuff
-        var immediateDestination = Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward*5f;
-        if (neighbors != null)
-        {
-            Debug.Log("NEIGHBORS: " + neighbors.Count);
-            var avoidSum = Vector3.zero;
-            foreach (var neighbor in neighbors)
-            {
-                // Note this doesn't work for neighbors inside your position!
-                var fromNeighbor = Npc.VehicleInstance.transform.position - neighbor.position;
-                avoidSum += fromNeighbor.normalized/Mathf.Max(fromNeighbor.magnitude, 0.1f);
-            }
-            immediateDestination += avoidSum;
-        }
+        var immediateDestination = Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward*5f + Npc.Steering.GetSeparationForce(neighbors);
         Npc.Destination = immediateDestination;
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
         Npc.VehicleInstance.YawThrottle = pitchYaw.y * Time.deltaTime;

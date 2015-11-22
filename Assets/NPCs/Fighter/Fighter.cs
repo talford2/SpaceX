@@ -33,6 +33,7 @@ public class Fighter : Npc<Fighter>
 	public float SightRange = 50f;
 
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }
+    public FighterSteering Steering { get; set; }
 
 	private void Awake()
 	{
@@ -49,6 +50,7 @@ public class Fighter : Npc<Fighter>
 		}
 
 	    ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
+        Steering = new FighterSteering(this);
 
 		State = new FighterChase(this);
 	}
