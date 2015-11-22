@@ -7,8 +7,9 @@ public class PlayerController : MonoBehaviour
     public Team Team;
 
 	private Vehicle _playVehicleInstance;
+    private Fighter _playerNpc;
 
-	public List<Vehicle> PlayerVehicles;
+	public List<Fighter> Squadron;
 	private int _curVehicleIndex = 0;
 
 	public bool InvertY = false;
@@ -27,14 +28,18 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
-		SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
 		_current = this;
 		Cursor.visible = !HideMouse;
 		if (HideMouse)
 			Cursor.lockState = CursorLockMode.Locked;
 
 		screenAspect = (float)Screen.height / (float)Screen.width;
-	    //Debug.Break();
+
+        _playerNpc = gameObject.AddComponent<Fighter>();
+        _playerNpc.Team = Team;
+	    _playerNpc.enabled = false;
+        SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
+        //Debug.Break();
 	}
 
 	private void Start()
@@ -50,7 +55,7 @@ public class PlayerController : MonoBehaviour
 		Destroy(_playVehicleInstance.GetComponent<Tracker>());
 	    _playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
-		PlayerVehicles.Insert(0, _playVehicleInstance);
+        Squadron.Insert(0, _playerNpc);
 	}
 
 	private Vector3 GetAimAt()
@@ -136,12 +141,19 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetKeyUp(KeyCode.E))
 		{
+		    var oldSquadronIndex = _curVehicleIndex+0;
 			_curVehicleIndex++;
-			if (_curVehicleIndex >= PlayerVehicles.Count)
+			if (_curVehicleIndex >= Squadron.Count)
 			{
 				_curVehicleIndex = 0;
 			}
-			_playVehicleInstance = PlayerVehicles[_curVehicleIndex];
+            // Set previous controlled vehicle to NPC control
+            Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
+		    Squadron[oldSquadronIndex].enabled = true;
+
+            // Disable next vehicle NPC control and apply PlayerController
+		    Squadron[_curVehicleIndex].enabled = false;
+			_playVehicleInstance = Squadron[_curVehicleIndex].VehicleInstance;
 
             var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
             cam.Target = _playVehicleInstance;

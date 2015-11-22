@@ -37,21 +37,12 @@ public class Fighter : Npc<Fighter>
 
 	private void Awake()
 	{
-		var parentShifter = transform.GetComponentInParent<Shiftable>();
-
 		//_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
-		_vehicleInstance = Instantiate<Vehicle>(VehiclePrefab);
-	    _vehicleInstance.GetComponent<Targetable>().Team = Team;
-		_vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+		
+        if (VehiclePrefab!=null)
+            SpawnVehicle(VehiclePrefab);
 
-		if (parentShifter != null)
-		{
-			_vehicleInstance.Shiftable.SetShiftPosition(parentShifter.UniversePosition);
-		}
-
-	    ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
         Steering = new FighterSteering(this);
-
 		State = new FighterChase(this);
 	}
 
@@ -59,6 +50,27 @@ public class Fighter : Npc<Fighter>
 	{
 		UpdateState();
 	}
+
+    public void SpawnVehicle(Vehicle vehiclePrefab)
+    {
+        var parentShifter = transform.GetComponentInParent<Shiftable>();
+        _vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
+        _vehicleInstance.GetComponent<Targetable>().Team = Team;
+        _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+        if (parentShifter != null)
+        {
+            _vehicleInstance.Shiftable.SetShiftPosition(parentShifter.UniversePosition);
+        }
+        ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
+    }
+
+    public void SetVehicleInstance(Vehicle vehicleInstance)
+    {
+        _vehicleInstance = vehicleInstance;
+        //_vehicleInstance.GetComponent<Targetable>().Team = Team;
+        _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+        ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
+    }
 
 	public Vector2 GetPitchYawToPoint(Vector3 point)
 	{
