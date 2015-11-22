@@ -142,7 +142,10 @@ public class PlayerController : MonoBehaviour
 				_curVehicleIndex = 0;
 			}
 			_playVehicleInstance = PlayerVehicles[_curVehicleIndex];
-			//FollowCamera.Current.Target = _playVehicleInstance.transform;
+
+            var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
+            cam.Target = _playVehicleInstance;
+            cam.Reset();
 		}
 
 		//var vehicle
