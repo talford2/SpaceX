@@ -1,10 +1,30 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class FighterAttack :NpcState<Fighter>
 {
+    // Neighbors
+    private float neighborDetectInterval = 0.2f;
+    private float neighborDetectCooldown;
+    private List<Transform> neighbors;
+
     public FighterAttack(Fighter npc) : base(npc)
     {
         Name = "Attack";
+    }
+
+    private void CheckSensors()
+    {
+        if (neighborDetectCooldown >= 0f)
+        {
+            neighbors = new List<Transform>();
+            neighborDetectCooldown -= Time.deltaTime;
+            if (neighborDetectCooldown < 0f)
+            {
+                Npc.ProximitySensor.Detect(DetectNeighbor);
+                neighborDetectCooldown = neighborDetectInterval;
+            }
+        }
     }
 
     public override void Update()
@@ -15,11 +35,14 @@ public class FighterAttack :NpcState<Fighter>
             Npc.State = new FighterIdle(Npc);
             return;
         }
+
+        CheckSensors();
+
         var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
         var targetDestination = Npc.Target.position;
-        Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
+        Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime) + Npc.Steering.GetSeparationForce(neighbors);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
 
@@ -53,6 +76,17 @@ public class FighterAttack :NpcState<Fighter>
             Npc.VehicleInstance.CurrentWeapon.IsTriggered = false;
             if (dotTarget < 0f)
                 Npc.State = new FighterEvade(Npc);
+        }
+    }
+
+    private void DetectNeighbor(Transform neighbor)
+    {
+        if (neighbor != Npc.VehicleInstance.transform)
+        {
+            if (!neighbors.Contains(neighbor))
+            {
+                neighbors.Add(neighbor);
+            }
         }
     }
 }

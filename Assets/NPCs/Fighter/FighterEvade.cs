@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class FighterEvade : NpcState<Fighter>
 {
@@ -9,6 +10,11 @@ public class FighterEvade : NpcState<Fighter>
     private float dodgeCooldown;
     private Vector3 dodgeOffset;
 
+    // Neighbors
+    private float neighborDetectInterval = 0.2f;
+    private float neighborDetectCooldown;
+    private List<Transform> neighbors;
+
     public FighterEvade(Fighter npc) : base(npc)
     {
         Name = "Evade";
@@ -18,6 +24,20 @@ public class FighterEvade : NpcState<Fighter>
     {
         var halfAngle = angle*0.5f;
         return Quaternion.Euler(Random.Range(-halfAngle, halfAngle), Random.Range(-halfAngle, halfAngle), Random.Range(-halfAngle, halfAngle));
+    }
+
+    private void CheckSensors()
+    {
+        if (neighborDetectCooldown >= 0f)
+        {
+            neighbors = new List<Transform>();
+            neighborDetectCooldown -= Time.deltaTime;
+            if (neighborDetectCooldown < 0f)
+            {
+                Npc.ProximitySensor.Detect(DetectNeighbor);
+                neighborDetectCooldown = neighborDetectInterval;
+            }
+        }
     }
 
     public override void Update()
@@ -34,15 +54,17 @@ public class FighterEvade : NpcState<Fighter>
             dodgeCooldown -= Time.deltaTime;
             if (dodgeCooldown < 0f)
             {
-                dodgeOffset =GetRandomArc(Npc.DodgeArcAngle) * -toTarget.normalized * Npc.DodgeRadius;
+                dodgeOffset = GetRandomArc(Npc.DodgeArcAngle)*-toTarget.normalized*Npc.DodgeRadius;
                 dodgeCooldown = Random.Range(Npc.MinDodgeIntervalTime, Npc.MaxDodgeIntervalTime);
             }
         }
-        
+
+        CheckSensors();
+
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
-        var targetDestination = Npc.Target.position - toTarget.normalized * Npc.TurnAroundDistance + dodgeOffset;
-        Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
+        var targetDestination = Npc.Target.position - toTarget.normalized*Npc.TurnAroundDistance + dodgeOffset;
+        Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime) + Npc.Steering.GetSeparationForce(neighbors);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
         Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
@@ -77,6 +99,17 @@ public class FighterEvade : NpcState<Fighter>
             if (evadeCooldown < 0f)
             {
                 Npc.State = new FighterChase(Npc);
+            }
+        }
+    }
+
+    private void DetectNeighbor(Transform neighbor)
+    {
+        if (neighbor != Npc.VehicleInstance.transform)
+        {
+            if (!neighbors.Contains(neighbor))
+            {
+                neighbors.Add(neighbor);
             }
         }
     }

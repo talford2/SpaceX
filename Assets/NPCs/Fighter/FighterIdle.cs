@@ -6,16 +6,17 @@ public class FighterIdle : NpcState<Fighter>
     private float targetSearchInterval = 3f;
     private float targetSearchCooldown;
 
+    // Neighbors
     private float neighborDetectInterval = 0.2f;
     private float neighborDetectCooldown;
-
     private List<Transform> neighbors;
+
     public FighterIdle(Fighter npc) : base(npc)
     {
         Name = "Idle";
     }
 
-    public override void Update()
+    private void CheckSensors()
     {
         if (neighborDetectCooldown >= 0f)
         {
@@ -27,6 +28,11 @@ public class FighterIdle : NpcState<Fighter>
                 neighborDetectCooldown = neighborDetectInterval;
             }
         }
+    }
+
+    public override void Update()
+    {
+        CheckSensors();
 
         if (targetSearchCooldown >= 0f)
         {

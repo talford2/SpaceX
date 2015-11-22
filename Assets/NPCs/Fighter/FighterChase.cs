@@ -1,11 +1,31 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class FighterChase : NpcState<Fighter>
 {
+    // Neighbors
+    private float neighborDetectInterval = 0.2f;
+    private float neighborDetectCooldown;
+    private List<Transform> neighbors;
+
 	public FighterChase(Fighter npc) : base(npc)
 	{
 		Name = "Chase";
 	}
+
+    private void CheckSensors()
+    {
+        if (neighborDetectCooldown >= 0f)
+        {
+            neighbors = new List<Transform>();
+            neighborDetectCooldown -= Time.deltaTime;
+            if (neighborDetectCooldown < 0f)
+            {
+                Npc.ProximitySensor.Detect(DetectNeighbor);
+                neighborDetectCooldown = neighborDetectInterval;
+            }
+        }
+    }
 
     public override void Update()
     {
@@ -18,8 +38,10 @@ public class FighterChase : NpcState<Fighter>
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
         //Debug.Log("DOT PROD: " + dotTarget);
 
+        CheckSensors();
+
         var targetDestination = Npc.Target.position;
-        Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime);
+        Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime) + Npc.Steering.GetSeparationForce(neighbors);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
         if (pitchYaw.sqrMagnitude <= 0f)
@@ -55,4 +77,14 @@ public class FighterChase : NpcState<Fighter>
         }
     }
 
+    private void DetectNeighbor(Transform neighbor)
+    {
+        if (neighbor != Npc.VehicleInstance.transform)
+        {
+            if (!neighbors.Contains(neighbor))
+            {
+                neighbors.Add(neighbor);
+            }
+        }
+    }
 }
