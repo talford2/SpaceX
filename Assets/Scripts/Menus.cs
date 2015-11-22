@@ -17,27 +17,30 @@ public class Menus : MonoBehaviour
 
     public void ShowQuitMenu()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        HeadsUpDisplay.Current.HideCrosshair();
         QuitMenu.SetActive(true);
     }
 
     public void HideQuitMenu()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        HeadsUpDisplay.Current.ShowCrosshair();
         QuitMenu.SetActive(false);
     }
 
     public void ToggleQuitMenu()
     {
         var isActive = !QuitMenu.activeSelf;
-        QuitMenu.SetActive(isActive);
         if (isActive)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            ShowQuitMenu();
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            HideQuitMenu();
         }
     }
 
