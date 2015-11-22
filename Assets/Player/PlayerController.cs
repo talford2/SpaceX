@@ -39,14 +39,8 @@ public class PlayerController : MonoBehaviour
         _playerNpc.Team = Team;
 	    _playerNpc.enabled = false;
         SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
-        //Debug.Break();
-	}
-
-	private void Start()
-	{
-		//Universe.Current.ViewPort.Tar
-		//FollowCamera.Current.Target = _playVehicleInstance.transform;
-	}
+        Squadron.Insert(0, _playerNpc);
+    }
 
 	private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
 	{
@@ -55,7 +49,6 @@ public class PlayerController : MonoBehaviour
 		Destroy(_playVehicleInstance.GetComponent<Tracker>());
 	    _playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
-        Squadron.Insert(0, _playerNpc);
 	}
 
 	private Vector3 GetAimAt()

@@ -46,10 +46,11 @@ public class Fighter : Npc<Fighter>
 		State = new FighterChase(this);
 	}
 
-	private void Update()
-	{
-		UpdateState();
-	}
+    private void Update()
+    {
+        if (VehicleInstance != null)
+            UpdateState();
+    }
 
     public void SpawnVehicle(Vehicle vehiclePrefab)
     {
@@ -80,12 +81,14 @@ public class Fighter : Npc<Fighter>
 		return new Vector2(pitchAmount, yawAmount);
 	}
 
-	private void OnVehicleDestroyed(Killable sender)
-	{
-		Destroy(gameObject);
-	}
+    private void OnVehicleDestroyed(Killable sender)
+    {
+        var player = gameObject.GetComponent<PlayerController>();
+        if (player == null)
+            Destroy(gameObject);
+    }
 
-	private void OnGUI()
+    private void OnGUI()
 	{
 		GUI.Label(new Rect(Screen.width - 150f, 50f, 100f, 30f), State.Name);
 		GUI.Label(new Rect(Screen.width - 150f, 80f, 100f, 30f), string.Format("{0:f2}", VehicleInstance.GetVelocity().magnitude));
