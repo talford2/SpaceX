@@ -55,7 +55,7 @@ Projector:
   m_FieldOfView: 60
   m_AspectRatio: 1
   m_Orthographic: 1
-  m_OrthographicSize: 3
+  m_OrthographicSize: 2
   m_Material: {fileID: 2100000, guid: 2187ffd02793f734d991d8effe8ec76e, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -77,7 +77,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_OrthographicSize
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Cooldown
