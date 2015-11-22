@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
 		var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 		RaycastHit aimHit;
         var aimAtPosition = mouseRay.GetPoint(DefaultAimDistance);
-		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player")))
+		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player", "Detectable")))
 		{
 			if (aimHit.distance > MinAimDistance)
 			{
