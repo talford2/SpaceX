@@ -127,6 +127,7 @@ public class PlayerController : MonoBehaviour
 	            _playVehicleInstance.GetComponent<Killable>().Die();
 	        Debug.Log("RESPAWN");
 	        Universe.Current.WarpTo(RespawnPosition);
+	        _curVehicleIndex = 0;
 	        SpawnVehicle(VehiclePrefab, RespawnPosition);
 
 	        var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
@@ -147,21 +148,24 @@ public class PlayerController : MonoBehaviour
 			{
 				_curVehicleIndex = 0;
 			}
-            // Set previous controlled vehicle to NPC control
-            Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
-		    Squadron[oldSquadronIndex].enabled = true;
 
-            // Disable next vehicle NPC control and apply PlayerController
-		    Squadron[_curVehicleIndex].enabled = false;
-			_playVehicleInstance = Squadron[_curVehicleIndex].VehicleInstance;
+		    if (Squadron[_curVehicleIndex] != null)
+		    {
+		        // Set previous controlled vehicle to NPC control
+		        _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
+		        Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
+		        Squadron[oldSquadronIndex].enabled = true;
 
-            var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
-            cam.Target = _playVehicleInstance;
-            cam.Reset();
+		        // Disable next vehicle NPC control and apply PlayerController
+		        Squadron[_curVehicleIndex].enabled = false;
+		        _playVehicleInstance = Squadron[_curVehicleIndex].VehicleInstance;
+		        _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
+
+		        var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
+		        cam.Target = _playVehicleInstance;
+		        cam.Reset();
+		    }
 		}
-
-		//var vehicle
-		// Check for shifting
 	}
 
 	public bool InPlayerActiveCells(CellIndex checkCell)
