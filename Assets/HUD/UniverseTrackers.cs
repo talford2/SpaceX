@@ -33,51 +33,59 @@ public class UniverseTrackers : MonoBehaviour
 
 	private void ViewPortMove()
 	{
-		foreach (var tracker in _trackers)
-		{
-            var screenPoint = _cam.WorldToScreenPoint(tracker.transform.position);
-            var r = screenPoint;
-            if (r.z < 0f)
-                r *= -1f;
-		    r.z = 0f;
-			var inBounds = screenBounds.Contains(r);
+	    foreach (var tracker in _trackers)
+	    {
+	        if (!tracker.IsDisabled)
+	        {
+	            var screenPoint = _cam.WorldToScreenPoint(tracker.transform.position);
+	            var r = screenPoint;
+	            if (r.z < 0f)
+	                r *= -1f;
+	            r.z = 0f;
+	            var inBounds = screenBounds.Contains(r);
 
-			if (inBounds)
-			{
-				tracker.TrackerCurosr.enabled = true;
-				tracker.ArrowCursor.enabled = false;
-				cursor = tracker.TrackerCurosr;
-			}
-			else
-			{
-				tracker.TrackerCurosr.enabled = false;
-				tracker.ArrowCursor.enabled = true;
-				cursor = tracker.ArrowCursor;
-			}
+	            if (inBounds)
+	            {
+	                tracker.TrackerCurosr.enabled = true;
+	                tracker.ArrowCursor.enabled = false;
+	                cursor = tracker.TrackerCurosr;
+	            }
+	            else
+	            {
+	                tracker.TrackerCurosr.enabled = false;
+	                tracker.ArrowCursor.enabled = true;
+	                cursor = tracker.ArrowCursor;
+	            }
 
-		    var dotThing = Vector3.Dot(tracker.transform.position - Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward);
-		    if (dotThing < 0f)
-		    {
-		        if (inBounds)
-		        {
-		            //Debug.Log("BROKEN TRACKER!!!");
-                    //Debug.Log("SCREEN POINT: " + screenPoint);
-                    //Debug.Log("r: " + r);
-                    //Debug.Break();
-		        }
-		    }
+	            var dotThing = Vector3.Dot(tracker.transform.position - Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward);
+	            if (dotThing < 0f)
+	            {
+	                if (inBounds)
+	                {
+	                    //Debug.Log("BROKEN TRACKER!!!");
+	                    //Debug.Log("SCREEN POINT: " + screenPoint);
+	                    //Debug.Log("r: " + r);
+	                    //Debug.Break();
+	                }
+	            }
 
-			cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(new Vector2(r.x, r.y), screenBounds);
+	            cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(new Vector2(r.x, r.y), screenBounds);
 
-			if (!inBounds)
-			{
-				cursor.rectTransform.localRotation = Quaternion.AngleAxis(GetScreenAngle(r - tracker.ArrowCursor.rectTransform.localPosition), Vector3.forward);
-			}
-			else
-			{
-				cursor.rectTransform.localRotation = Quaternion.identity;
-			}
-		}
+	            if (!inBounds)
+	            {
+	                cursor.rectTransform.localRotation = Quaternion.AngleAxis(GetScreenAngle(r - tracker.ArrowCursor.rectTransform.localPosition), Vector3.forward);
+	            }
+	            else
+	            {
+	                cursor.rectTransform.localRotation = Quaternion.identity;
+	            }
+	        }
+	        else
+	        {
+                tracker.TrackerCurosr.enabled = false;
+                tracker.ArrowCursor.enabled = false;
+	        }
+	    }
 	}
 
 	public void AddTracker(Tracker tracker)

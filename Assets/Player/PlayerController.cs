@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 	    var playerTracker = _playVehicleInstance.GetComponent<Tracker>();
 	    playerTracker.ArrowCursorImage = ArrowCursorImage;
 	    playerTracker.TrackerCurosrImage = TrackerCurosrImage;
-        playerTracker.enabled = false;
+	    playerTracker.IsDisabled = true;
 
 	    _playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
@@ -190,14 +190,14 @@ public class PlayerController : MonoBehaviour
                     //_playVehicleInstance.GetComponent<Killable>().OnDie -= OnVehicleDestroyed;
                     Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
                     Squadron[oldSquadronIndex].enabled = true;
-                    Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Tracker>().enabled = true;
+                    Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Tracker>().IsDisabled = false;
                 }
 
                 // Disable next vehicle NPC control and apply PlayerController
                 if (Squadron[_curVehicleIndex] != null)
                 {
                     _playVehicleInstance = Squadron[_curVehicleIndex].VehicleInstance;
-                    _playVehicleInstance.GetComponent<Tracker>().enabled = false;
+                    _playVehicleInstance.GetComponent<Tracker>().IsDisabled = true;
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
                     //_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
 
