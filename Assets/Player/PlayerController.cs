@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
 	public bool HideMouse = false;
 
 	public Shiftable RespawnPosition;
+    [Header("Squadron Trackers")]
+    public Texture2D ArrowCursorImage;
+    public Texture2D TrackerCurosrImage;
 
 	[Header("Aiming")]
 	public float AimSensitivity = 10f;
@@ -43,11 +46,30 @@ public class PlayerController : MonoBehaviour
         Squadron.Insert(0, _playerNpc);
     }
 
+    private void Start()
+    {
+        foreach (var member in Squadron)
+        {
+            if (member != _playerNpc)
+            {
+                var memberTracker = member.VehicleInstance.GetComponent<Tracker>();
+                memberTracker.ArrowCursorImage = ArrowCursorImage;
+                memberTracker.TrackerCurosrImage = TrackerCurosrImage;
+            }
+        }
+    }
+
 	private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
 	{
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, spawner.CellLocalPosition, spawner.transform.rotation)).GetComponent<Vehicle>();
 		_playVehicleInstance.Shiftable.SetShiftPosition(spawner.UniversePosition);
-		Destroy(_playVehicleInstance.GetComponent<Tracker>());
+		//Destroy(_playVehicleInstance.GetComponent<Tracker>());
+
+	    var playerTracker = _playVehicleInstance.GetComponent<Tracker>();
+	    playerTracker.ArrowCursorImage = ArrowCursorImage;
+	    playerTracker.TrackerCurosrImage = TrackerCurosrImage;
+        playerTracker.enabled = false;
+
 	    _playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
 	    //_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
@@ -168,13 +190,14 @@ public class PlayerController : MonoBehaviour
                     //_playVehicleInstance.GetComponent<Killable>().OnDie -= OnVehicleDestroyed;
                     Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
                     Squadron[oldSquadronIndex].enabled = true;
+                    Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Tracker>().enabled = true;
                 }
 
                 // Disable next vehicle NPC control and apply PlayerController
                 if (Squadron[_curVehicleIndex] != null)
                 {
-                    Squadron[_curVehicleIndex].enabled = false;
                     _playVehicleInstance = Squadron[_curVehicleIndex].VehicleInstance;
+                    _playVehicleInstance.GetComponent<Tracker>().enabled = false;
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
                     //_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
 
