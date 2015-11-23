@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 		Destroy(_playVehicleInstance.GetComponent<Tracker>());
 	    _playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
-	    _playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+	    //_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
 	}
 
 	private Vector3 GetAimAt()
@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
                 if (_playVehicleInstance != null && Squadron[oldSquadronIndex] != null)
                 {
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
-                    _playVehicleInstance.GetComponent<Killable>().OnDie -= OnVehicleDestroyed;
+                    //_playVehicleInstance.GetComponent<Killable>().OnDie -= OnVehicleDestroyed;
                     Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
                     Squadron[oldSquadronIndex].enabled = true;
                 }
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
                     Squadron[_curVehicleIndex].enabled = false;
                     _playVehicleInstance = Squadron[_curVehicleIndex].VehicleInstance;
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
-                    _playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+                    //_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
 
                     var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
                     cam.Target = _playVehicleInstance;
@@ -190,12 +190,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /*
     private void OnVehicleDestroyed(Killable sender)
     {
         Debug.Log("PLAYER VEHICLE DESTROYED");
-        Debug.Log("DESTROY: " + GetComponent<Fighter>().name);
-        //Squadron.Remove(GetComponent<Fighter>());
     }
+    */
 
 	public bool InPlayerActiveCells(CellIndex checkCell)
 	{
