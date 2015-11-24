@@ -29,13 +29,14 @@
 			struct vertexInput {
 				float4 vertex : POSITION;
 				float2 uv : TEXCOORD0;
+				float3 normal : NORMAL;
 			};
 
 			struct vertexOutput {
 				float4 pos : SV_POSITION;
 				float2 uv : TEXCOORD0;
 				float fadeFraction : float;
-				float3 normal : TEXCOORD1;
+				float3 normal : NORMAL;
 			};
 
 			vertexOutput vert(vertexInput input)
@@ -44,7 +45,7 @@
 				output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
 				output.uv = TRANSFORM_TEX(input.uv, _MainTex);
 
-				output.normal = mul((float3x3)_Object2World, input.uv);
+				output.normal = input.normal;
 
 				float4 viewPos = mul(UNITY_MATRIX_MV, input.vertex);
 				float4 vertexPos = mul(UNITY_MATRIX_MV, float4(0, 0, 0, 0));
@@ -57,7 +58,12 @@
 			}
 			float4 frag(vertexOutput input) : COLOR
 			{
-				fixed4 color = (tex2D(_MainTex, input.uv) * (1 - input.fadeFraction)) + (_FadeColor * input.fadeFraction);
+				fixed4 litText = tex2D(_MainTex, input.uv);
+				
+				// Applying simple lighting
+				litText *= dot(_WorldSpaceLightPos0, input.normal);
+
+				fixed4 color = litText * (1 - input.fadeFraction) + _FadeColor * input.fadeFraction;
 				return color;
 			}
 			ENDCG
