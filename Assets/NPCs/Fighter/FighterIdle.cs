@@ -49,29 +49,50 @@ public class FighterIdle : NpcState<Fighter>
         }
 
         // Steering stuff
-        var immediateDestination = Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward * 5f + Npc.Steering.GetSeparationForce(neighbors);
+        var immediateDestination = Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward*5f + Npc.Steering.GetSeparationForce(neighbors);
         if (Npc.IsFollowIdleDestination)
         {
-            Debug.Log("FOLLOWING FORMATION!");
-
+            //Debug.Log("FOLLOWING FORMATION!");
             var steeringSeekForce = 5f*Npc.Steering.GetSeekForce(Npc.IdleDestination);
             var seekForce = 5f*(Npc.IdleDestination - Npc.VehicleInstance.transform.position).normalized;
-            Debug.Log("LOCAL CALC POS: " + Npc.VehicleInstance.transform.position);
+            //Debug.Log("LOCAL CALC POS: " + Npc.VehicleInstance.transform.position);
 
             if ((steeringSeekForce - seekForce).sqrMagnitude > 0f)
             {
-                Debug.Log("SCHRODINGER? - " + (steeringSeekForce - seekForce).sqrMagnitude);
+                //Debug.Log("SCHRODINGER? - " + (steeringSeekForce - seekForce).sqrMagnitude);
             }
 
             Debug.DrawLine(Npc.VehicleInstance.transform.position, Npc.IdleDestination, Color.yellow);
-            Debug.DrawLine(Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.position + seekForce.normalized * 50f, new Color(1f, 0.5f, 0f));
+            Debug.DrawLine(Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.position + seekForce.normalized*50f, new Color(1f, 0.5f, 0f));
 
             immediateDestination = Npc.VehicleInstance.transform.position + seekForce; // + Npc.Steering.GetSeparationForce(neighbors);
+
+            // Control brakes, acceleration and boost
+            var dotDestination = Vector3.Dot(Npc.IdleDestination - Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward);
+            Npc.VehicleInstance.TriggerBrake = false;
+            Npc.VehicleInstance.TriggerAccelerate = false;
+            Npc.VehicleInstance.TriggerBoost = false;
+            if (dotDestination < 0f)
+            {
+                // Not facing 
+                Npc.VehicleInstance.TriggerBrake = true;
+            }
+            if (dotDestination > 50f)
+            {
+                //Debug.Log("I SHOULD CATCH UP?");
+                Npc.VehicleInstance.TriggerAccelerate = true;
+
+                if (dotDestination > 200f)
+                {
+                    Npc.VehicleInstance.TriggerBoost = true;
+                    //Debug.Log("BOOST TO CATCH UP!");
+                }
+            }
         }
         Npc.Destination = immediateDestination;
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
-        Npc.VehicleInstance.YawThrottle = pitchYaw.y * Time.deltaTime;
-        Npc.VehicleInstance.PitchThotttle = pitchYaw.x * Time.deltaTime;
+        Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
+        Npc.VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
     }
 
     private void DetectNeighbor(Transform neighbor)
