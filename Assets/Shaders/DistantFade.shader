@@ -1,41 +1,66 @@
 ﻿Shader "Custom/DistantFade" {
-	Properties {
-		_Color ("Color", Color) = (1,1,1,1)
-		_MainTex ("Albedo (RGB)", 2D) = "white" {}
-		_Glossiness ("Smoothness", Range(0,1)) = 0.5
-		_Metallic ("Metallic", Range(0,1)) = 0.0
+	Properties{
+		_Color("Color", Color) = (1,1,1,1)
+		_MainTex("Albedo (RGB)", 2D) = "white" {}
+		_FadeColor("Fade Color", Color) = (0,0,0,0)
+
+		_Near("Near", Float) = 10
+		_Far("Far", Float) = 100
 	}
-	SubShader {
-		Tags { "RenderType"="Opaque" }
-		LOD 200
-		
-		CGPROGRAM
-		// Physically based Standard lighting model, and enable shadows on all light types
-		#pragma surface surf Standard fullforwardshadows
+		SubShader{
+			Tags { "RenderType" = "Opaque" }
+			LOD 200
+			Pass{
+			//Cull Back
 
-		// Use shader model 3.0 target, to get nicer looking lighting
-		#pragma target 3.0
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#include "UnityCG.cginc"
 
-		sampler2D _MainTex;
 
-		struct Input {
-			float2 uv_MainTex;
-		};
+			sampler2D _MainTex;
+			float4 _MainTex_ST;
+			float4 _FadeColor;
 
-		half _Glossiness;
-		half _Metallic;
-		fixed4 _Color;
+			float _Near;
+			float _Far;
 
-		void surf (Input IN, inout SurfaceOutputStandard o) {
-			// Albedo comes from a texture tinted by color
-			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-			o.Albedo = c.rgb;
-			// Metallic and smoothness come from slider variables
-			o.Metallic = _Metallic;
-			o.Smoothness = _Glossiness;
-			o.Alpha = c.a;
+			struct vertexInput {
+				float4 vertex : POSITION;
+				float2 uv : TEXCOORD0;
+			};
+
+			struct vertexOutput {
+				float4 pos : SV_POSITION;
+				float2 uv : TEXCOORD0;
+				float fadeFraction : float;
+				float3 normal : TEXCOORD1;
+			};
+
+			vertexOutput vert(vertexInput input)
+			{
+				vertexOutput output;
+				output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
+				output.uv = TRANSFORM_TEX(input.uv, _MainTex);
+
+				output.normal = mul((float3x3)_Object2World, input.uv);
+
+				float4 viewPos = mul(UNITY_MATRIX_MV, input.vertex);
+				float4 vertexPos = mul(UNITY_MATRIX_MV, float4(0, 0, 0, 0));
+				float dist = distance(viewPos, vertexPos);
+
+				float frac = clamp((dist - _Near) / (_Far - _Near), 0, 1);
+				output.fadeFraction = frac;
+
+				return output;
+			}
+			float4 frag(vertexOutput input) : COLOR
+			{
+				fixed4 color = (tex2D(_MainTex, input.uv) * (1 - input.fadeFraction)) + (_FadeColor * input.fadeFraction);
+				return color;
+			}
+			ENDCG
 		}
-		ENDCG
-	} 
-	FallBack "Diffuse"
+		}
 }
