@@ -9,6 +9,7 @@ public class FighterSteering : NpcSteering<Fighter>
 
     public Vector3 GetSeekForce(Vector3 position)
     {
+        Debug.Log("STEERING POS: " + Npc.VehicleInstance.transform.position);
         if (Npc.VehicleInstance != null)
             return (position - Npc.VehicleInstance.transform.position).normalized;
         return Vector3.zero;
@@ -30,6 +31,6 @@ public class FighterSteering : NpcSteering<Fighter>
                 }
             }
         }
-        return avoidSum;
+        return 10f*avoidSum;
     }
 }

@@ -53,9 +53,18 @@ public class FighterIdle : NpcState<Fighter>
         if (Npc.IsFollowIdleDestination)
         {
             Debug.Log("FOLLOWING FORMATION!");
-            var seekForce = 5f*Npc.Steering.GetSeekForce(Npc.IdleDestination);
+
+            var steeringSeekForce = 5f*Npc.Steering.GetSeekForce(Npc.IdleDestination);
+            var seekForce = 5f*(Npc.IdleDestination - Npc.VehicleInstance.transform.position).normalized;
+            Debug.Log("LOCAL CALC POS: " + Npc.VehicleInstance.transform.position);
+
+            if ((steeringSeekForce - seekForce).sqrMagnitude > 0f)
+            {
+                Debug.Log("SCHRODINGER? - " + (steeringSeekForce - seekForce).sqrMagnitude);
+            }
+
             Debug.DrawLine(Npc.VehicleInstance.transform.position, Npc.IdleDestination, Color.yellow);
-            Debug.DrawLine(Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.position + seekForce.normalized*50f, new Color(1f, 0.5f, 0f));
+            Debug.DrawLine(Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.position + seekForce.normalized * 50f, new Color(1f, 0.5f, 0f));
 
             immediateDestination = Npc.VehicleInstance.transform.position + seekForce; // + Npc.Steering.GetSeparationForce(neighbors);
         }
