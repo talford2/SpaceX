@@ -21,6 +21,7 @@ public class Menus : MonoBehaviour
         Cursor.visible = true;
         HeadsUpDisplay.Current.HideCrosshair();
         QuitMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void HideQuitMenu()
@@ -29,6 +30,7 @@ public class Menus : MonoBehaviour
         Cursor.visible = false;
         HeadsUpDisplay.Current.ShowCrosshair();
         QuitMenu.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void ToggleQuitMenu()

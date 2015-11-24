@@ -49,7 +49,12 @@ public class FighterIdle : NpcState<Fighter>
         }
 
         // Steering stuff
-        var immediateDestination = Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward*5f + Npc.Steering.GetSeparationForce(neighbors);
+        var immediateDestination = Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward * 5f + Npc.Steering.GetSeparationForce(neighbors);
+        if (Npc.IsFollowIdleDestination)
+        {
+            Debug.Log("FOLLOWING FORMATION!");
+            immediateDestination = Npc.Steering.GetSeekForce(Npc.IdleDestination) + Npc.Steering.GetSeparationForce(neighbors);
+        }
         Npc.Destination = immediateDestination;
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
         Npc.VehicleInstance.YawThrottle = pitchYaw.y * Time.deltaTime;

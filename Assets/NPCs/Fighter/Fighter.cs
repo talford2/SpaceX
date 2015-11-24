@@ -15,6 +15,10 @@ public class Fighter : Npc<Fighter>
 
     public ProximitySensor ProximitySensor;
 
+    [Header("Idle Destination")]
+    public bool IsFollowIdleDestination;
+    public Vector3 IdleDestination;
+
 	[Header("Attack")]
 	public float AttackRange = 100f;
 	public float ShootAngleTolerance = 5f;
@@ -35,16 +39,16 @@ public class Fighter : Npc<Fighter>
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }
     public FighterSteering Steering { get; set; }
 
-	private void Awake()
-	{
-		//_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
-		
-        if (VehiclePrefab!=null)
+    private void Awake()
+    {
+        //_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
+
+        if (VehiclePrefab != null)
             SpawnVehicle(VehiclePrefab);
 
         Steering = new FighterSteering(this);
-		State = new FighterChase(this);
-	}
+        State = new FighterIdle(this);
+    }
 
     private void Update()
     {
@@ -100,6 +104,9 @@ public class Fighter : Npc<Fighter>
 		{
 			switch (State.Name)
 			{
+                case "Idle":
+			        Gizmos.color = Color.white;
+			        break;
 				case "Evade":
 					Gizmos.color = Color.magenta;
 					break;
@@ -112,7 +119,6 @@ public class Fighter : Npc<Fighter>
 			}
 			Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
 			Gizmos.DrawSphere(Destination, 2f);
-
 
 			Gizmos.color = Color.blue;
 			Gizmos.DrawWireSphere(VehicleInstance.transform.position, SightRange);

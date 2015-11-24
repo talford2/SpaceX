@@ -45,8 +45,9 @@ public class PlayerController : MonoBehaviour
 	    _playerNpc.enabled = false;
         SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
         _playerNpc.SetVehicleInstance(_playVehicleInstance);
+	    _playerNpc.IsFollowIdleDestination = true;
         Squadron.Insert(0, _playerNpc);
-    }
+	}
 
     private void Start()
     {
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour
                 var memberTracker = member.VehicleInstance.GetComponent<Tracker>();
                 memberTracker.ArrowCursorImage = ArrowCursorImage;
                 memberTracker.TrackerCurosrImage = TrackerCurosrImage;
+                member.IsFollowIdleDestination = true;
             }
         }
     }
@@ -170,7 +172,24 @@ public class PlayerController : MonoBehaviour
 		    CycleSquadron();
 		}
 
-	    squadronLiveCount = Squadron.Count(s => s.VehicleInstance != null);
+        // Update squadron
+        squadronLiveCount = Squadron.Count(s => s.VehicleInstance != null);
+
+	    for (var i = 0; i < squadronLiveCount; i++)
+	    {
+	        if (_playVehicleInstance != null)
+	        {
+	            var formationDestination = _playVehicleInstance.transform.position + _playVehicleInstance.transform.rotation*Formations.GetArrowOffset(i, 10f);
+	            Squadron[i].IdleDestination = formationDestination;
+	            if (i > 0)
+	                Debug.DrawLine(formationDestination, formationDestination + Vector3.up*100f, Color.white);
+	        }
+	    }
+
+	    if (_playVehicleInstance != null)
+        {
+            Debug.DrawLine(_playVehicleInstance.transform.position, _playVehicleInstance.transform.position + Vector3.up * 100f, Color.magenta);
+        }
 	}
 
     private int CycleSquadronIndex()
