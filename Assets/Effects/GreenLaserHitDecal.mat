@@ -148,7 +148,7 @@ Material:
       data:
         first:
           name: _Alpha
-        second: .254453659
+        second: 1
     m_Colors:
       data:
         first:

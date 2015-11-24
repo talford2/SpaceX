@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class AsteroidField : MonoBehaviour
 {
@@ -16,10 +17,20 @@ public class AsteroidField : MonoBehaviour
 
 	public float MaxSize = 3.0f;
 
+	public float MinRotationSpeed = 20f;
+
+	public float MaxRotationSpeed = 60f;
+
 	private float _halfFov;
+
+
+
+	private List<AsteroidObj> _asteroids;
 
 	private void Awake()
 	{
+		_asteroids = new List<AsteroidObj>();
+
 		_halfFov = FieldOfView / 2f;
 		for (var i = 0; i < AsteroidPoolCount; i++)
 		{
@@ -35,6 +46,16 @@ public class AsteroidField : MonoBehaviour
 
 			var levelOfDetail = inst.GetComponent<LevelOfDetail>();
 			levelOfDetail.OnExitLargestDistance += MakeAvailable;
+
+			_asteroids.Add(new AsteroidObj { Asteroid = inst, Rotation = RandomEuler(Random.Range(MinRotationSpeed, MaxRotationSpeed)) });
+		}
+	}
+
+	private void Update()
+	{
+		foreach (var asteroid in _asteroids)
+		{
+			asteroid.Asteroid.transform.rotation *= Quaternion.Euler(asteroid.Rotation * Time.deltaTime);
 		}
 	}
 
@@ -54,5 +75,18 @@ public class AsteroidField : MonoBehaviour
 		var killable = instance.GetComponent<Killable>();
 		killable.IsAlive = true;
 		killable.Health = killable.MaxHealth;
+	}
+
+	private Vector3 RandomEuler(float magnitude)
+	{
+		var halfMagnitude = magnitude / 2f;
+		return new Vector3(Random.Range(-halfMagnitude, halfMagnitude), Random.Range(-halfMagnitude, halfMagnitude), Random.Range(-halfMagnitude, halfMagnitude));
+	}
+
+	public class AsteroidObj
+	{
+		public GameObject Asteroid;
+
+		public Vector3 Rotation;
 	}
 }

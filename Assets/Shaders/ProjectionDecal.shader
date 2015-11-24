@@ -14,7 +14,7 @@
 			//Offset - 1, -1 // avoid depth fighting
 
 			//Blend DstColor One
-			//Offset - 1, -1
+			Offset -1, -1
 
 		CGPROGRAM
 
