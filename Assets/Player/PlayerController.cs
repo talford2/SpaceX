@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
 	public float MaxAimDistance = 1000f;
 
 	private float screenAspect;
+    private int squadronLiveCount;
 
 	private void Awake()
 	{
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
         _playerNpc.Team = Team;
 	    _playerNpc.enabled = false;
         SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
+        _playerNpc.SetVehicleInstance(_playVehicleInstance);
         Squadron.Insert(0, _playerNpc);
     }
 
@@ -167,6 +169,8 @@ public class PlayerController : MonoBehaviour
 		{
 		    CycleSquadron();
 		}
+
+	    squadronLiveCount = Squadron.Count(s => s.VehicleInstance != null);
 	}
 
     private void CycleSquadron()
@@ -250,13 +254,21 @@ public class PlayerController : MonoBehaviour
 	}
 
     private void OnGUI()
-	{
-		//GUI.Label(new Rect(Screen.width - 100f, Screen.height - 100f, 100f, 25), string.Format("{0:f2} m/s", VehicleInstance.GetVelocity().magnitude));
-		if (_playVehicleInstance == null)
-		{
-			GUI.Label(new Rect(Screen.width / 2f - 100f, Screen.height / 2f + 50f, 200f, 25f), "Press 'R' to respawn.", new GUIStyle { alignment = TextAnchor.MiddleCenter, normal = { textColor = Color.white } });
-		}
-	}
+    {
+        //GUI.Label(new Rect(Screen.width - 100f, Screen.height - 100f, 100f, 25), string.Format("{0:f2} m/s", VehicleInstance.GetVelocity().magnitude));
+        if (_playVehicleInstance == null)
+        {
+            if (squadronLiveCount == 0)
+            {
+                GUI.Label(new Rect(Screen.width/2f - 100f, Screen.height/2f + 50f, 200f, 25f), "Press 'R' to respawn.", new GUIStyle {alignment = TextAnchor.MiddleCenter, normal = {textColor = Color.white}});
+            }
+            else
+            {
+                GUI.Label(new Rect(Screen.width/2f - 100f, Screen.height/2f + 50f, 200f, 25f), "Press 'E' to select next Squadron Member.", new GUIStyle {alignment = TextAnchor.MiddleCenter, normal = {textColor = Color.white}});
+            }
+        }
+        GUI.Label(new Rect(50f, 80f, 100f, 25f), string.Format("Squadron: {0:f0}", squadronLiveCount));
+    }
 
     private void OnDrawGizmos()
     {
