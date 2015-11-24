@@ -51,13 +51,17 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void ShowSquadronPrompt(string message)
     {
-        SquadronPrompt.SetActive(true);
+        //SquadronPrompt.SetActive(true);
+        SquadronPrompt.GetComponent<Image>().CrossFadeAlpha(1f, 0.1f, false);
+        SquadronNameText.CrossFadeAlpha(1f, 0.1f, false);
         SquadronNameText.text = message;
         squadronPromptCooldown = SquadronPromptTime;
     }
 
     public void HideSquadronPrompt()
     {
-        SquadronPrompt.SetActive(false);
+        //SquadronPrompt.SetActive(false);
+        SquadronPrompt.GetComponent<Image>().CrossFadeAlpha(0f, 0.5f, false);
+        SquadronNameText.CrossFadeAlpha(0f, 0.5f, false);
     }
 }
