@@ -53,7 +53,10 @@ public class FighterIdle : NpcState<Fighter>
         if (Npc.IsFollowIdleDestination)
         {
             Debug.Log("FOLLOWING FORMATION!");
-            immediateDestination = Npc.Steering.GetSeekForce(Npc.IdleDestination) + Npc.Steering.GetSeparationForce(neighbors);
+            var seekForce = 5f*Npc.Steering.GetSeekForce(Npc.IdleDestination);
+            Debug.DrawLine(Npc.VehicleInstance.transform.position, Npc.IdleDestination, Color.yellow);
+
+            immediateDestination = Npc.VehicleInstance.transform.position + seekForce;// + Npc.Steering.GetSeparationForce(neighbors);
         }
         Npc.Destination = immediateDestination;
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);

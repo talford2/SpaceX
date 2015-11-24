@@ -179,7 +179,9 @@ public class PlayerController : MonoBehaviour
 	    {
 	        if (_playVehicleInstance != null)
 	        {
-	            var formationDestination = _playVehicleInstance.transform.position + _playVehicleInstance.transform.rotation*Formations.GetArrowOffset(i, 10f);
+	            var formationOffset = Formations.GetArrowOffset(i, 10f);
+	            Debug.Log(Squadron[i].name + " FORMATION OFFSET " + i + " : " + formationOffset);
+	            var formationDestination = _playVehicleInstance.transform.position + _playVehicleInstance.transform.rotation*formationOffset;
 	            Squadron[i].IdleDestination = formationDestination;
 	            if (i > 0)
 	                Debug.DrawLine(formationDestination, formationDestination + Vector3.up*100f, Color.white);

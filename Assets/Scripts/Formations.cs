@@ -5,6 +5,7 @@ public class Formations
     public static Vector3 GetArrowOffset(int index, float stepSize)
     {
         var halfStep = stepSize/2f;
+        index++;
         var alternating = Mathf.Sign(-index%2);
         if (alternating < 0)
         {
