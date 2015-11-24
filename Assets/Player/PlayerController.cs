@@ -173,17 +173,28 @@ public class PlayerController : MonoBehaviour
 	    squadronLiveCount = Squadron.Count(s => s.VehicleInstance != null);
 	}
 
+    private int CycleSquadronIndex()
+    {
+        if (Squadron.Any(s => s.VehicleInstance != null))
+        {
+            _curVehicleIndex++;
+            if (_curVehicleIndex >= Squadron.Count)
+                _curVehicleIndex = 0;
+            if (Squadron[_curVehicleIndex].VehicleInstance == null)
+                return CycleSquadronIndex();
+            return _curVehicleIndex;
+        }
+        return -1;
+    }
+
     private void CycleSquadron()
     {
         var oldSquadronIndex = _curVehicleIndex + 0;
-        _curVehicleIndex++;
-        if (_curVehicleIndex >= Squadron.Count)
-        {
-            _curVehicleIndex = 0;
-        }
+        _curVehicleIndex = CycleSquadronIndex();
+
         Debug.LogFormat("CYCLE {0} => {1}", oldSquadronIndex, _curVehicleIndex);
 
-        if (Squadron.Any(s => s.VehicleInstance != null))
+        if (_curVehicleIndex > -1)
         {
             if (Squadron[_curVehicleIndex] != null)
             {
@@ -198,8 +209,10 @@ public class PlayerController : MonoBehaviour
                 }
 
                 // Disable next vehicle NPC control and apply PlayerController
-                if (Squadron[_curVehicleIndex] != null)
+                if (Squadron[_curVehicleIndex].VehicleInstance != null)
                 {
+                    HeadsUpDisplay.Current.ShowSquadronPrompt(string.Format("{0:f0}", _curVehicleIndex));
+
                     _playVehicleInstance = Squadron[_curVehicleIndex].VehicleInstance;
                     _playVehicleInstance.GetComponent<Tracker>().IsDisabled = true;
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
