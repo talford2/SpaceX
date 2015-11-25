@@ -94,6 +94,55 @@ public class PlayerController : MonoBehaviour
 		return aimAtPosition;
 	}
 
+    private Transform lockingTarget;
+    private Transform lastLockingTarget;
+    private Transform lockedTarget;
+    private float lockingTime;
+    private float lockTime = 1.5f;
+    private bool isLocked;
+
+    private void TagetLocking()
+    {
+        if (!isLocked)
+        {
+            lockingTarget = null;
+            if (Input.GetMouseButton(1))
+            {
+                lockingTarget = Targeting.FindFacingAngle(Targeting.GetEnemyTeam(Team), VehicleInstance.transform.position, VehicleInstance.transform.forward, 1000f);
+                if (lastLockingTarget == null)
+                    lastLockingTarget = lockingTarget;
+            }
+            else
+            {
+                lastLockingTarget = null;
+            }
+
+            if (lastLockingTarget != null && lastLockingTarget == lockingTarget)
+            {
+                lockingTime += Time.deltaTime;
+                if (lockingTime > lockTime)
+                {
+                    lockedTarget = lockingTarget;
+                    isLocked = true;
+                }
+            }
+            else
+            {
+                lockingTime = 0f;
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonUp(1))
+            {
+                Debug.Log("RELEASE!");
+                isLocked = false;
+                lastLockingTarget = null;
+                lockedTarget = null;
+            }
+        }
+    }
+
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -120,6 +169,8 @@ public class PlayerController : MonoBehaviour
 	        _playVehicleInstance.YawThrottle = controllerHorizontal + mouseHorizontal;
 	        _playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
 	        _playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
+
+	        TagetLocking();
 
 	        _playVehicleInstance.SetAimAt(GetAimAt());
 
@@ -180,7 +231,7 @@ public class PlayerController : MonoBehaviour
 	        if (_playVehicleInstance != null)
 	        {
 	            var formationOffset = Formations.GetArrowOffset(i, 10f);
-	            Debug.Log(Squadron[i].name + " FORMATION OFFSET " + i + " : " + formationOffset);
+	            //Debug.Log(Squadron[i].name + " FORMATION OFFSET " + i + " : " + formationOffset);
 	            var formationDestination = _playVehicleInstance.transform.position + _playVehicleInstance.transform.rotation*formationOffset;
 	            Squadron[i].IdleDestination = formationDestination;
 	            if (i > 0)
@@ -302,6 +353,8 @@ public class PlayerController : MonoBehaviour
             }
         }
         GUI.Label(new Rect(50f, 80f, 100f, 25f), string.Format("Squadron: {0:f0}", squadronLiveCount));
+        GUI.Label(new Rect(50f, 110f, 200f, 25f), string.Format("LOCK: {0} ({1:f2})", lockingTarget != null ? lockingTarget.name : string.Empty, lockingTime));
+        GUI.Label(new Rect(50f, 140f, 200f, 25f), string.Format("LOCKED: {0}", lockedTarget != null ? lockedTarget.name : string.Empty));
     }
 
     private void OnDrawGizmos()
