@@ -77,7 +77,7 @@ public class FighterIdle : NpcState<Fighter>
                 // Not facing 
                 Npc.VehicleInstance.TriggerBrake = true;
             }
-            if (dotDestination > 50f)
+            if (dotDestination > 15f)
             {
                 //Debug.Log("I SHOULD CATCH UP?");
                 Npc.VehicleInstance.TriggerAccelerate = true;
