@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Nebula1
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: PlanetFog
+  m_Shader: {fileID: 4800000, guid: 36808d62c94e9e049bd6d90bab4bb727, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: f5760aa7e6e08964eb980b858eb07c5b, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -97,8 +97,12 @@ Material:
         second: 0.02
       data:
         first:
-          name: _InvFade
-        second: 0.01
+          name: _Near
+        second: 0
+      data:
+        first:
+          name: _Far
+        second: 1000
       data:
         first:
           name: _ZWrite
@@ -131,10 +135,6 @@ Material:
         first:
           name: _Metallic
         second: 0
-      data:
-        first:
-          name: _EmissionScaleUI
-        second: 0
     m_Colors:
       data:
         first:
@@ -143,12 +143,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.19215687, g: 0.19215687, b: 0.19215687, a: 1}
-      data:
-        first:
-          name: _TintColor
-        second: {r: 0.24235293, g: 0.26676065, b: 0.3, a: 1}
-      data:
-        first:
-          name: _EmissionColorUI
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 0.05897741, g: 0.033174805, b: 0.10689656, a: 1}
