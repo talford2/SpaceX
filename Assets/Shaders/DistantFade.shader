@@ -36,7 +36,7 @@
 				float4 pos : SV_POSITION;
 				float2 uv : TEXCOORD0;
 				float fadeFraction : float;
-				float3 normal : NORMAL;
+				//float3 normal : NORMAL;
 			};
 
 			vertexOutput vert(vertexInput input)
@@ -45,7 +45,7 @@
 				output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
 				output.uv = TRANSFORM_TEX(input.uv, _MainTex);
 
-				output.normal = input.normal;
+				//output.normal = input.normal;
 
 				float4 viewPos = mul(UNITY_MATRIX_MV, input.vertex);
 				float4 vertexPos = mul(UNITY_MATRIX_MV, float4(0, 0, 0, 0));
@@ -61,7 +61,7 @@
 				fixed4 litText = tex2D(_MainTex, input.uv);
 				
 				// Applying simple lighting
-				litText *= dot(_WorldSpaceLightPos0, input.normal);
+				//litText *= dot(_WorldSpaceLightPos0, input.normal);
 
 				fixed4 color = litText * (1 - input.fadeFraction) + _FadeColor * input.fadeFraction;
 				return color;

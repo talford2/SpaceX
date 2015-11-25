@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SpaceDust
-  m_Shader: {fileID: 4800000, guid: 808f1013f560c4142bf5c73c10c3e227, type: 3}
+  m_Name: AddFog
+  m_Shader: {fileID: 4800000, guid: 36808d62c94e9e049bd6d90bab4bb727, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 4000
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: f5760aa7e6e08964eb980b858eb07c5b, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -90,11 +90,19 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
+      data:
+        first:
+          name: _Near
+        second: 5
+      data:
+        first:
+          name: _Far
+        second: 10
       data:
         first:
           name: _ZWrite
@@ -102,7 +110,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .5
+        second: 0.5
       data:
         first:
           name: _BumpScale
@@ -127,30 +135,6 @@ Material:
         first:
           name: _Metallic
         second: 0
-      data:
-        first:
-          name: _InvFade
-        second: 3
-      data:
-        first:
-          name: _A
-        second: 100
-      data:
-        first:
-          name: _B
-        second: 300
-      data:
-        first:
-          name: _C
-        second: 500
-      data:
-        first:
-          name: _D
-        second: 1000
-      data:
-        first:
-          name: _FadeDistance
-        second: 1000
     m_Colors:
       data:
         first:
@@ -159,12 +143,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .631034434, g: .631034434, b: .631034434, a: 1}
+        second: {r: 1, g: 0, b: 0, a: 1}
       data:
         first:
-          name: _TintColor
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _Bolor
-        second: {r: .120689653, g: .120689653, b: .120689653, a: 1}
+          name: _FadeColor
+        second: {r: 0, g: 0, b: 0, a: 0}
