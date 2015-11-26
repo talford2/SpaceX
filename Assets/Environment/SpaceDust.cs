@@ -47,7 +47,8 @@ public class SpaceDust : MonoBehaviour
 			{
 				dustParticle.transform.position = Random.onUnitSphere * Radius + CentreTransform.position;
 			}
-			dustParticle.transform.LookAt(dustParticle.transform.position + camTrans.forward, camTrans.up);
+			//dustParticle.transform.LookAt(dustParticle.transform.position + camTrans.forward, camTrans.up);
+			dustParticle.transform.LookAt(dustParticle.transform.position + camTrans.forward, dustParticle.transform.up);
 		}
 	}
 }
