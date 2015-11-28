@@ -44,7 +44,18 @@ public class Fighter : Npc<Fighter>
         //_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
 
         if (VehiclePrefab != null)
-            SpawnVehicle(VehiclePrefab);
+        {
+            var parentShifter = transform.GetComponentInParent<Shiftable>();
+            if (parentShifter != null)
+            {
+                SpawnVehicle(VehiclePrefab, parentShifter.UniversePosition);
+            }
+            else
+            {
+                // This isn't right!
+                SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0,0,0), new Vector3()));
+            }
+        }
 
         Steering = new FighterSteering(this);
         State = new FighterIdle(this);
@@ -56,16 +67,12 @@ public class Fighter : Npc<Fighter>
             UpdateState();
     }
 
-    public void SpawnVehicle(Vehicle vehiclePrefab)
+    public void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition)
     {
-        var parentShifter = transform.GetComponentInParent<Shiftable>();
         _vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
         _vehicleInstance.GetComponent<Targetable>().Team = Team;
         _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
-        if (parentShifter != null)
-        {
-            _vehicleInstance.Shiftable.SetShiftPosition(parentShifter.UniversePosition);
-        }
+        _vehicleInstance.Shiftable.SetShiftPosition(universePosition);
         ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
     }
 

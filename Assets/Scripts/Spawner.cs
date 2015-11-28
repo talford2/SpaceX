@@ -35,10 +35,8 @@ public class Spawner : MonoBehaviour
 		{
 			_fighterInst = Instantiate<Fighter>(FighterPrefab);
 
-			_fighterInst.SpawnVehicle(_fighterInst.VehiclePrefab);
-
-			_fighterInst.VehicleInstance.Shiftable.CellLocalPosition = Shifter.CellLocalPosition + transform.position;
-			_fighterInst.VehicleInstance.Shiftable.UniverseCellIndex = Shifter.UniverseCellIndex;
+		    var universePosition = new UniversePosition(Shifter.UniverseCellIndex, Shifter.CellLocalPosition + transform.position);
+			_fighterInst.SpawnVehicle(_fighterInst.VehiclePrefab, universePosition);
 
 			HasSpawned = true;
 		}
