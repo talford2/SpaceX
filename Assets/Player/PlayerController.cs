@@ -295,6 +295,8 @@ public class PlayerController : MonoBehaviour
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
                     //_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
 
+                    Squadron[_curVehicleIndex].enabled = false;
+
                     var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
                     cam.Target = _playVehicleInstance;
                     cam.Reset();
