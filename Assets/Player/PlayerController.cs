@@ -51,10 +51,15 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        foreach (var member in Squadron)
+        //foreach (var member in Squadron)
+        for (var i = 0; i < Squadron.Count; i++)
         {
+            var member = Squadron[i];
             if (member != _playerNpc)
             {
+                var univPos = _playVehicleInstance.Shiftable.UniversePosition;
+                univPos.CellLocalPosition += Formations.GetArrowOffset(i, 10f);
+                member.SpawnVehicle(member.VehiclePrefab, univPos);
                 var memberTracker = member.VehicleInstance.GetComponent<Tracker>();
                 memberTracker.ArrowCursorImage = ArrowCursorImage;
                 memberTracker.TrackerCurosrImage = TrackerCurosrImage;
@@ -63,7 +68,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-	private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
+    private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
 	{
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, spawner.CellLocalPosition, spawner.transform.rotation)).GetComponent<Vehicle>();
 		_playVehicleInstance.Shiftable.SetShiftPosition(spawner.UniversePosition);

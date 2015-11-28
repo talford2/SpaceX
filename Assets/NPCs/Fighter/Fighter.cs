@@ -53,7 +53,7 @@ public class Fighter : Npc<Fighter>
             else
             {
                 // This isn't right!
-                SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0,0,0), new Vector3()));
+                //SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0,0,0), new Vector3()));
             }
         }
 
