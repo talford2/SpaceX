@@ -97,14 +97,6 @@ Material:
         second: 0.02
       data:
         first:
-          name: _Near
-        second: 200
-      data:
-        first:
-          name: _Far
-        second: 1000
-      data:
-        first:
           name: _ZWrite
         second: 1
       data:
@@ -135,6 +127,14 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _Near
+        second: 200
+      data:
+        first:
+          name: _Far
+        second: 1000
     m_Colors:
       data:
         first:
@@ -143,4 +143,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.098557375, g: 0.11603997, b: 0.18045183, a: 1}
+        second: {r: 0.10990465, g: 0.167442, b: 0.17447089, a: 1}

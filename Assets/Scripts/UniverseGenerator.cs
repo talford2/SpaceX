@@ -39,8 +39,17 @@ public class UniverseGenerator : MonoBehaviour
 	{
 		if (USeRandomColours)
 		{
-			PrimaryColor = Random.ColorHSV(0f, 1f, 0.5f, 0.95f, 0.4f, 0.7f, 1f, 1f);
-			SecondaryColor = Random.ColorHSV(0f, 1f, 0.5f, 0.95f, 0.4f, 0.8f, 1f, 1f);
+			var h = HSVColor.FromColor(Random.ColorHSV(0f, 1f, 0.5f, 0.95f, 0.4f, 0.7f, 1f, 1f));
+			PrimaryColor = h.GetColor();
+
+			var h2 = HSVColor.FromColor(Random.ColorHSV(0f, 1f, 0.5f, 0.95f, 0.4f, 0.7f, 1f, 1f));
+			h2.H = h.H + Random.Range(0.25f, 0.75f);
+			while (h2.H > 1)
+			{
+				h2.H -= 1;
+			}
+
+			SecondaryColor = h2.GetColor(); //Random.ColorHSV(0f, 1f, 0.5f, 0.95f, 0.4f, 0.8f, 1f, 1f);
 		}
 
 		var bgColor = Utility.GetRandomColor(PrimaryColor, SecondaryColor);
@@ -76,7 +85,7 @@ public class UniverseGenerator : MonoBehaviour
 
 		var sunColor = HSVColor.FromColor(bgColor);
 		sunColor.V = 1f;
-		sunColor.S *= Random.Range(0.5f, 1f);
+		sunColor.S *= Random.Range(0.1f, 1f);
 		SunLight.color = sunColor.GetColor();
 	}
 }
