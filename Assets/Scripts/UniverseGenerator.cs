@@ -1,26 +1,39 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class UniverseGenerator : MonoBehaviour
 {
-	public GameObject AsteroidPrefab;
+	public GameObject BackgroundContainer;
 
-	public int ObjectCount = 200;
+	public List<GameObject> BackgroundObject;
 
-	public float UniverseSize = 1000f;
+	public Color PrimaryColor = Color.red;
+
+	public Color SecondaryColor = Color.yellow;
+
+	public ReflectionProbe SceneRelfectionProbe;
+
+	public Light Sun;
 
 	void Start()
 	{
-		for (var i = 0; i < ObjectCount; i++)
-		{
-			var inst = Instantiate(AsteroidPrefab);
-			inst.transform.position = GetRandomPosition();
-			inst.transform.rotation = Random.rotation;
-			inst.transform.localScale = Vector3.one * Random.Range(0.3f, 2.0f);
-		}
-	}
+		PrimaryColor = Random.ColorHSV();
+		SecondaryColor = Random.ColorHSV();
 
-	private Vector3 GetRandomPosition()
-	{
-		return Random.insideUnitSphere * UniverseSize;
+
+		int totalNebula = Random.Range(8, 12);
+
+		for (var i = 0; i < totalNebula; i++)
+		{
+			var gm = Instantiate<GameObject>(BackgroundObject[Random.Range(0, BackgroundObject.Count)]);
+			gm.transform.rotation = Random.rotationUniform;
+			gm.transform.SetParent(BackgroundContainer.transform);
+
+			gm.GetComponent<Renderer>().material.SetColor("_Color", Utility.GetRandomColor(PrimaryColor, SecondaryColor));
+		}
+
+		Sun.color = Utility.GetRandomColor(PrimaryColor, SecondaryColor);
+
+		SceneRelfectionProbe.RenderProbe();
 	}
 }
