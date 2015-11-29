@@ -106,49 +106,50 @@ public class Utility
 
 	public static Color GetRandomColor(Color c1, Color c2)
 	{
-		var c1Hsv = HSVColor.FromColor(c1);
-		var c2Hsv = HSVColor.FromColor(c2);
+		return Color.red;
+		//var c1Hsv = HSVColor.FromColor(c1);
+		//var c2Hsv = HSVColor.FromColor(c2);
 
-		return Random.ColorHSV(
-			Mathf.Min(c1Hsv.H, c2Hsv.H),
-			Mathf.Max(c1Hsv.H, c2Hsv.H),
-			Mathf.Min(c1Hsv.S, c2Hsv.S),
-			Mathf.Max(c1Hsv.S, c2Hsv.S),
-			Mathf.Min(c1Hsv.V, c2Hsv.V),
-			Mathf.Max(c1Hsv.V, c2Hsv.V),
-			Mathf.Min(c1.a, c2.a),
-			Mathf.Max(c1.a, c2.a)
-		);
+		//return Random.ColorHSV(
+		//	Mathf.Min(c1Hsv.H, c2Hsv.H),
+		//	Mathf.Max(c1Hsv.H, c2Hsv.H),
+		//	Mathf.Min(c1Hsv.S, c2Hsv.S),
+		//	Mathf.Max(c1Hsv.S, c2Hsv.S),
+		//	Mathf.Min(c1Hsv.V, c2Hsv.V),
+		//	Mathf.Max(c1Hsv.V, c2Hsv.V),
+		//	Mathf.Min(c1.a, c2.a),
+		//	Mathf.Max(c1.a, c2.a)
+		//);
 	}
 
-	private class HSVColor
-	{
-		public float H { get; set; }
+	//private class HSVColor
+	//{
+	//	public float H { get; set; }
 
-		public float S { get; set; }
+	//	public float S { get; set; }
 
-		public float V { get; set; }
+	//	public float V { get; set; }
 
-		public HSVColor() { }
+	//	public HSVColor() { }
 
-		public HSVColor(Color c)
-		{
-			var h = 0f;
-			var s = 0f;
-			var v = 0f;
+	//	public HSVColor(Color c)
+	//	{
+	//		var h = 0f;
+	//		var s = 0f;
+	//		var v = 0f;
 
-			Color.RGBToHSV(c, out h, out s, out v);
+	//		Color.RGBToHSV(c, out h, out s, out v);
 
-			H = h;
-			S = s;
-			V = v;
-		}
+	//		H = h;
+	//		S = s;
+	//		V = v;
+	//	}
 
-		public static HSVColor FromColor(Color c)
-		{
-			return new HSVColor(c);
-		}
-	}
+	//	public static HSVColor FromColor(Color c)
+	//	{
+	//		return new HSVColor(c);
+	//	}
+	//}
 	
 	public static Texture2D ColouredTexture(int width, int height, Color color)
 	{
