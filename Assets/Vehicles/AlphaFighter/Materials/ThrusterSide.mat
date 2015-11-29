@@ -104,11 +104,11 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
       data:
         first:
           name: _ZWrite
@@ -116,7 +116,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .5
+        second: 0.5
       data:
         first:
           name: _BumpScale
@@ -147,6 +147,10 @@ Material:
         second: 1
       data:
         first:
+          name: _ScrollXSpeed
+        second: 50
+      data:
+        first:
           name: _A
         second: 0
       data:
@@ -163,12 +167,8 @@ Material:
         second: 80
       data:
         first:
-          name: _ScrollXSpeed
-        second: 50
-      data:
-        first:
           name: _ScrollYSpeed
-        second: -9.39999962
+        second: -9.4
     m_Colors:
       data:
         first:
@@ -177,12 +177,12 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .403448284, g: .403448284, b: .403448284, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 0.516}
       data:
         first:
           name: _TintColor
-        second: {r: .548275828, g: .548275828, b: .548275828, a: 1}
+        second: {r: 0.5482758, g: 0.5482758, b: 0.5482758, a: 1}
       data:
         first:
           name: _Bolor
-        second: {r: .5, g: .5, b: .5, a: .5}
+        second: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
