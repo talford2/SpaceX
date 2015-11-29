@@ -63,7 +63,7 @@ public class Utility
 			ps.SetParticles(parr, parr.Length);
 		}
 	}
-	
+
 	public static Vector2 GetBoundsIntersection(Vector2 point, Rect bounds)
 	{
 		var anchor = new Vector2(bounds.xMin + (bounds.xMax - bounds.xMin) / 2f, bounds.yMin + (bounds.yMax - bounds.yMin) / 2f);
@@ -103,6 +103,11 @@ public class Utility
 		return point - anchor;
 	}
 
+	public static Color GetRandomColor()
+	{
+		return Color.red;
+		//return Random.ColorHSV();
+	}
 
 	public static Color GetRandomColor(Color c1, Color c2)
 	{
@@ -150,7 +155,7 @@ public class Utility
 	//		return new HSVColor(c);
 	//	}
 	//}
-	
+
 	public static Texture2D ColouredTexture(int width, int height, Color color)
 	{
 		var texture = new Texture2D(width, height);
