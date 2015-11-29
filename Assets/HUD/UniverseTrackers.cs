@@ -137,6 +137,8 @@ public class UniverseTrackers : MonoBehaviour
 	        else
 	        {
                 tracker.TrackerCurosr.enabled = false;
+                tracker.FarTrackerCursor.enabled = false;
+                tracker.VeryFarTrackerCursor.enabled = false;
                 tracker.ArrowCursor.enabled = false;
 	            tracker.HealthBar.enabled = false;
 	            tracker.HealthBarBackground.enabled = false;
