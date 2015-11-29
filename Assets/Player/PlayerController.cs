@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
                 var memberTracker = member.VehicleInstance.GetComponent<Tracker>();
                 memberTracker.ArrowCursorImage = ArrowCursorImage;
                 memberTracker.TrackerCurosrImage = TrackerCurosrImage;
-                memberTracker.VeryFarTrackerCursorImage = FarTrackerCursorImage;
+                memberTracker.FarTrackerCursorImage = FarTrackerCursorImage;
                 memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
                 member.IsFollowIdleDestination = true;
             }

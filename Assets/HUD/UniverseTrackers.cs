@@ -57,41 +57,11 @@ public class UniverseTrackers : MonoBehaviour
                     tracker.HealthBar.enabled = true;
 
 	                var toCamera = tracker.gameObject.transform.position - Universe.Current.ViewPort.transform.position;
-	                if (toCamera.sqrMagnitude > 1000f*1000f)
-	                {
-	                    if (toCamera.sqrMagnitude > 2000f*2000f)
-	                    {
-                            tracker.TrackerCurosr.enabled = false;
-                            tracker.FarTrackerCursor.enabled = false;
-                            tracker.VeryFarTrackerCursor.enabled = true;
-	                        cursor = tracker.VeryFarTrackerCursor;
-	                    }
-	                    else
-	                    {
-                            tracker.TrackerCurosr.enabled = false;
-                            tracker.FarTrackerCursor.enabled = true;
-                            tracker.VeryFarTrackerCursor.enabled = false;
-                            cursor = tracker.FarTrackerCursor;
-                        }
-	                }
-	                else
-	                {
-                        tracker.TrackerCurosr.enabled = true;
-	                    tracker.FarTrackerCursor.enabled = false;
-	                    tracker.VeryFarTrackerCursor.enabled = false;
-	                    cursor = tracker.TrackerCurosr;
-	                }
+	                cursor = tracker.SwitchCursor(toCamera.sqrMagnitude);
 	            }
 	            else
 	            {
-	                tracker.TrackerCurosr.enabled = false;
-                    tracker.FarTrackerCursor.enabled = false;
-                    tracker.VeryFarTrackerCursor.enabled = false;
-
-	                tracker.ArrowCursor.enabled = true;
-                    tracker.HealthBarBackground.enabled = false;
-                    tracker.HealthBar.enabled = false;
-	                cursor = tracker.ArrowCursor;
+	                cursor = tracker.SwitchToArrow();
 	            }
 
 	            var dotThing = Vector3.Dot(tracker.transform.position - Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward);
@@ -136,12 +106,7 @@ public class UniverseTrackers : MonoBehaviour
 	        }
 	        else
 	        {
-                tracker.TrackerCurosr.enabled = false;
-                tracker.FarTrackerCursor.enabled = false;
-                tracker.VeryFarTrackerCursor.enabled = false;
-                tracker.ArrowCursor.enabled = false;
-	            tracker.HealthBar.enabled = false;
-	            tracker.HealthBarBackground.enabled = false;
+                tracker.HideAllCursors();
 	        }
 	    }
 	}
