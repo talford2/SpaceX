@@ -1948,12 +1948,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundContainer: {fileID: 1212660694}
-  BackgroundObject:
+  Nebulas:
   - {fileID: 193446, guid: 0d1dd67455f4f8e4c8da9a866642f314, type: 2}
   PrimaryColor: {r: 1, g: 0, b: 0, a: 1}
   SecondaryColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   SceneRelfectionProbe: {fileID: 536532124}
   BackgroundMaterial: {fileID: 2100000, guid: 1761f17781c5bdf4286cd812492e0c4b, type: 2}
+  DustMaterial: {fileID: 2100000, guid: 15eb02f086d59eb4aaf195e454e929de, type: 2}
   SunLight: {fileID: 402258277}
   SunObject: {fileID: 2034981263}
 --- !u!1 &1123654777

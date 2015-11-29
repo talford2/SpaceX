@@ -7,10 +7,10 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Nebula2
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -90,11 +90,15 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
+      data:
+        first:
+          name: _InvFade
+        second: 3
       data:
         first:
           name: _ZWrite
@@ -102,7 +106,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .5
+        second: 0.5
       data:
         first:
           name: _BumpScale
@@ -129,10 +133,6 @@ Material:
         second: 0
       data:
         first:
-          name: _InvFade
-        second: .00999999978
-      data:
-        first:
           name: _EmissionScaleUI
         second: 0
     m_Colors:
@@ -143,11 +143,11 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .192156866, g: .192156866, b: .192156866, a: 1}
+        second: {r: 0.19215687, g: 0.19215687, b: 0.19215687, a: 1}
       data:
         first:
           name: _TintColor
-        second: {r: .286206901, g: .198823839, b: .140297487, a: 1}
+        second: {r: 0.34137934, g: 0.34137934, b: 0.34137934, a: 1}
       data:
         first:
           name: _EmissionColorUI
