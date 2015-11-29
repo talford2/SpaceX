@@ -23,24 +23,38 @@ public class UniverseGenerator : MonoBehaviour
 
 	public GameObject SunObject;
 
+	public bool USeRandomColours = false;
+
 	void Awake()
 	{
-		PrimaryColor = Random.ColorHSV(0f, 1f, 0.5f, 0.9f, 0.4f, 0.6f, 1f, 1f);
-		SecondaryColor = Random.ColorHSV(0f, 1f, 0.5f, 0.9f, 0.4f, 0.6f, 1f, 1f);
+		RandomiseUniverse();
+	}
+
+	void Start()
+	{
+		SceneRelfectionProbe.RenderProbe();
+	}
+
+	private void RandomiseUniverse()
+	{
+		if (USeRandomColours)
+		{
+			PrimaryColor = Random.ColorHSV(0f, 1f, 0.5f, 0.95f, 0.4f, 0.7f, 1f, 1f);
+			SecondaryColor = Random.ColorHSV(0f, 1f, 0.5f, 0.95f, 0.4f, 0.8f, 1f, 1f);
+		}
 
 		var bgColor = Utility.GetRandomColor(PrimaryColor, SecondaryColor);
-		var ccc = HSVColor.FromColor(bgColor);
 		BackgroundMaterial.SetColor("_Tint", bgColor);
 
-		var yyy = HSVColor.FromColor(bgColor);
-		yyy.V *= 0.5f;
-		yyy.S *= 0.5f;
-		DustMaterial.SetColor("_Color", yyy.GetColor());
+		var dustColor = HSVColor.FromColor(bgColor);
+		dustColor.V *= 0.5f;
+		dustColor.S *= 0.5f;
+		DustMaterial.SetColor("_Color", dustColor.GetColor());
 
-		var kkk = HSVColor.FromColor(bgColor);
-		kkk.S *= 0.5f;
-		kkk.V *= 0.4f;
-		AddFogMaterial.SetColor("_Color", kkk.GetColor());
+		var fogColor = HSVColor.FromColor(bgColor);
+		fogColor.S *= 0.5f;
+		fogColor.V *= 0.4f;
+		AddFogMaterial.SetColor("_Color", fogColor.GetColor());
 
 		int totalNebula = Random.Range(30, 40);
 
@@ -50,23 +64,19 @@ public class UniverseGenerator : MonoBehaviour
 			gm.transform.rotation = Random.rotationUniform;
 			gm.transform.SetParent(BackgroundContainer.transform);
 
-			gm.GetComponent<Renderer>().material.SetColor("_Color", Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.1f, 0.5f));
-
-
+			var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.2f));
+			randC.V *= 0.1f;
+			randC.S *= 1.3f;
+			gm.GetComponent<Renderer>().material.SetColor("_Color", randC.GetColor());
 			//gm.GetComponent<Renderer>().material.SetColor("_TintColor", Utility.GetRandomColor(PrimaryColor, SecondaryColor, 1f, 255f));
 		}
 
 		SunObject.transform.position = Random.onUnitSphere * 1000f;
 		SunLight.transform.rotation = Quaternion.LookRotation(SunObject.transform.position * -1);
 
-		ccc.V = 1;
-		ccc.S = Mathf.Min(ccc.S, 0.2f);
-		SunLight.color = ccc.GetColor();
-
-	}
-
-	void Start()
-	{
-		SceneRelfectionProbe.RenderProbe();
+		var sunColor = HSVColor.FromColor(bgColor);
+		sunColor.V = 1f;
+		sunColor.S *= Random.Range(0.5f, 1f);
+		SunLight.color = sunColor.GetColor();
 	}
 }

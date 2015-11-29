@@ -114,6 +114,9 @@ public class Utility
 
 	public static Color GetRandomColor(Color c1, Color c2, float? alpha = null)
 	{
+		// This isn't perfect because it will tend towards the middle of the colour
+		// wheel, need to make hues wrap
+
 		var c1Hsv = HSVColor.FromColor(c1);
 		var c2Hsv = HSVColor.FromColor(c2);
 
@@ -175,13 +178,26 @@ public class Utility
 
 public class HSVColor
 {
+	#region Public Properties
+
 	public float H { get; set; }
 
 	public float S { get; set; }
 
 	public float V { get; set; }
 
+	#endregion
+
+	#region Constructors
+
 	public HSVColor() { }
+
+	public HSVColor(float h, float s, float v)
+	{
+		H = h;
+		S = s;
+		V = v;
+	}
 
 	public HSVColor(Color c)
 	{
@@ -195,6 +211,8 @@ public class HSVColor
 		S = s;
 		V = v;
 	}
+
+	#endregion
 
 	public Color GetColor()
 	{
