@@ -1955,6 +1955,7 @@ MonoBehaviour:
   SceneRelfectionProbe: {fileID: 536532124}
   BackgroundMaterial: {fileID: 2100000, guid: 1761f17781c5bdf4286cd812492e0c4b, type: 2}
   DustMaterial: {fileID: 2100000, guid: 15eb02f086d59eb4aaf195e454e929de, type: 2}
+  AddFogMaterial: {fileID: 2100000, guid: b64faedd36e5bd14eadd5d1f68328f73, type: 2}
   SunLight: {fileID: 402258277}
   SunObject: {fileID: 2034981263}
 --- !u!1 &1123654777

@@ -127,9 +127,9 @@ public class Utility
 			Mathf.Min(c1Hsv.V, c2Hsv.V),
 			Mathf.Max(c1Hsv.V, c2Hsv.V),
 			alpha.Value,
-			alpha.Value
-		);
+			alpha.Value);
 		}
+
 		return Random.ColorHSV(
 			Mathf.Min(c1Hsv.H, c2Hsv.H),
 			Mathf.Max(c1Hsv.H, c2Hsv.H),
@@ -142,6 +142,21 @@ public class Utility
 		);
 	}
 
+	public static Color GetRandomColor(Color c1, Color c2, float alpha, float saturation)
+	{
+		var c1Hsv = HSVColor.FromColor(c1);
+		var c2Hsv = HSVColor.FromColor(c2);
+
+		return Random.ColorHSV(
+		Mathf.Min(c1Hsv.H, c2Hsv.H),
+		Mathf.Max(c1Hsv.H, c2Hsv.H),
+		saturation,
+		saturation,
+		Mathf.Min(c1Hsv.V, c2Hsv.V),
+		Mathf.Max(c1Hsv.V, c2Hsv.V),
+		alpha,
+		alpha);
+	}
 
 	public static Texture2D ColouredTexture(int width, int height, Color color)
 	{
@@ -179,6 +194,11 @@ public class HSVColor
 		H = h;
 		S = s;
 		V = v;
+	}
+
+	public Color GetColor()
+	{
+		return Color.HSVToRGB(H, S, V);
 	}
 
 	public static HSVColor FromColor(Color c)

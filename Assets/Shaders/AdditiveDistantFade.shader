@@ -1,6 +1,6 @@
 Shader "Custom/AdditiveDistantFade" {
 	Properties{
-		_Bolor("Tint Color", Color) = (0.5,0.5,0.5,0.5)
+		_Color("Tint Color", Color) = (0.5,0.5,0.5,0.5)
 		_MainTex("Particle Texture", 2D) = "white" {}
 
 		_A("A", float) = 0
@@ -31,7 +31,7 @@ Shader "Custom/AdditiveDistantFade" {
 			uniform float _C;
 			uniform float _D;
 
-			fixed4 _Bolor;
+			fixed4 _Color;
 
 			struct vertInput {
 				float4 vertex : POSITION;
@@ -84,7 +84,7 @@ Shader "Custom/AdditiveDistantFade" {
 			}
 
 			fixed4 frag(fragInput i) : SV_Target{
-				return _Bolor * tex2D(_MainTex, i.texcoord) * i.color;
+				return _Color * tex2D(_MainTex, i.texcoord) * i.color;
 			}
 			ENDCG
 		}
