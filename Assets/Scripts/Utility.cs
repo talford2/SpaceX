@@ -103,16 +103,33 @@ public class Utility
 		return point - anchor;
 	}
 
-	public static Color GetRandomColor()
+	public static Color GetRandomColor(float? setAlpha = null)
 	{
+		if (setAlpha.HasValue)
+		{
+			return Random.ColorHSV(0, 1, 0, 1, 0, 1, setAlpha.Value, setAlpha.Value);
+		}
 		return Random.ColorHSV();
 	}
 
-	public static Color GetRandomColor(Color c1, Color c2)
+	public static Color GetRandomColor(Color c1, Color c2, float? alpha = null)
 	{
 		var c1Hsv = HSVColor.FromColor(c1);
 		var c2Hsv = HSVColor.FromColor(c2);
 
+		if (alpha.HasValue)
+		{
+			return Random.ColorHSV(
+			Mathf.Min(c1Hsv.H, c2Hsv.H),
+			Mathf.Max(c1Hsv.H, c2Hsv.H),
+			Mathf.Min(c1Hsv.S, c2Hsv.S),
+			Mathf.Max(c1Hsv.S, c2Hsv.S),
+			Mathf.Min(c1Hsv.V, c2Hsv.V),
+			Mathf.Max(c1Hsv.V, c2Hsv.V),
+			alpha.Value,
+			alpha.Value
+		);
+		}
 		return Random.ColorHSV(
 			Mathf.Min(c1Hsv.H, c2Hsv.H),
 			Mathf.Max(c1Hsv.H, c2Hsv.H),

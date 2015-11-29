@@ -1953,6 +1953,7 @@ MonoBehaviour:
   PrimaryColor: {r: 1, g: 0, b: 0, a: 1}
   SecondaryColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   SceneRelfectionProbe: {fileID: 536532124}
+  BackgroundMaterial: {fileID: 2100000, guid: 1761f17781c5bdf4286cd812492e0c4b, type: 2}
   Sun: {fileID: 402258277}
 --- !u!1 &1123654777
 GameObject:

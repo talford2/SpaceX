@@ -13,14 +13,18 @@ public class UniverseGenerator : MonoBehaviour
 
 	public ReflectionProbe SceneRelfectionProbe;
 
+	public Material BackgroundMaterial;
+
 	public Light Sun;
 
 	void Start()
 	{
-		PrimaryColor = Utility.GetRandomColor();
-		SecondaryColor = Utility.GetRandomColor();
-		
-		int totalNebula = Random.Range(15, 20);
+		PrimaryColor = Utility.GetRandomColor(0.3f);
+		SecondaryColor = Utility.GetRandomColor(0.7f);
+
+		BackgroundMaterial.SetColor("_Tint", Utility.GetRandomColor(PrimaryColor, SecondaryColor, 1f));
+
+		int totalNebula = Random.Range(10, 15);
 
 		for (var i = 0; i < totalNebula; i++)
 		{
@@ -31,7 +35,7 @@ public class UniverseGenerator : MonoBehaviour
 			gm.GetComponent<Renderer>().material.SetColor("_Color", Utility.GetRandomColor(PrimaryColor, SecondaryColor));
 		}
 
-		Sun.color = Utility.GetRandomColor(PrimaryColor, SecondaryColor);
+		Sun.color = Utility.GetRandomColor(PrimaryColor, SecondaryColor, 1f);
 
 		SceneRelfectionProbe.RenderProbe();
 	}
