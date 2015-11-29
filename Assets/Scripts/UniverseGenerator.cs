@@ -66,7 +66,7 @@ public class UniverseGenerator : MonoBehaviour
 
 			var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.2f));
 			randC.V *= 0.1f;
-			randC.S *= 1.3f;
+			//randC.S *= 1.3f;
 			gm.GetComponent<Renderer>().material.SetColor("_Color", randC.GetColor());
 			//gm.GetComponent<Renderer>().material.SetColor("_TintColor", Utility.GetRandomColor(PrimaryColor, SecondaryColor, 1f, 255f));
 		}

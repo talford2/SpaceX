@@ -1958,7 +1958,7 @@ MonoBehaviour:
   AddFogMaterial: {fileID: 2100000, guid: b64faedd36e5bd14eadd5d1f68328f73, type: 2}
   SunLight: {fileID: 402258277}
   SunObject: {fileID: 2034981263}
-  USeRandomColours: 0
+  USeRandomColours: 1
 --- !u!1 &1123654777
 GameObject:
   m_ObjectHideFlags: 0

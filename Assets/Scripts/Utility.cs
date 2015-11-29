@@ -120,6 +120,15 @@ public class Utility
 		var c1Hsv = HSVColor.FromColor(c1);
 		var c2Hsv = HSVColor.FromColor(c2);
 
+
+		float hue = Random.Range(c1Hsv.H, c2Hsv.H);
+
+		if (Mathf.Abs(c1Hsv.H - c2Hsv.H) > 0.5f)
+		{
+			// we're wrapping around.
+
+		}
+
 		if (alpha.HasValue)
 		{
 			return Random.ColorHSV(
