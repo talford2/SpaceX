@@ -53,12 +53,16 @@ public class UniverseTrackers : MonoBehaviour
 	            {
 	                tracker.TrackerCurosr.enabled = true;
 	                tracker.ArrowCursor.enabled = false;
+                    tracker.HealthBarBackground.enabled = true;
+                    tracker.HealthBar.enabled = true;
 	                cursor = tracker.TrackerCurosr;
 	            }
 	            else
 	            {
 	                tracker.TrackerCurosr.enabled = false;
 	                tracker.ArrowCursor.enabled = true;
+                    tracker.HealthBarBackground.enabled = false;
+                    tracker.HealthBar.enabled = false;
 	                cursor = tracker.ArrowCursor;
 	            }
 
@@ -81,7 +85,16 @@ public class UniverseTrackers : MonoBehaviour
 	            var ownerKillable = tracker.gameObject.GetComponent<Killable>();
 	            if (ownerKillable != null)
 	            {
-	                tracker.HealthBar.fillAmount = ownerKillable.Health/ownerKillable.MaxHealth;
+                    var healthFraction = Mathf.Clamp01(ownerKillable.Health / ownerKillable.MaxHealth);
+	                if (healthFraction < 1f)
+	                {
+	                    tracker.HealthBar.fillAmount = healthFraction;
+	                }
+	                else
+	                {
+	                    tracker.HealthBar.enabled = false;
+	                    tracker.HealthBarBackground.enabled = false;
+	                }
 	            }
 
 	            if (!inBounds)
