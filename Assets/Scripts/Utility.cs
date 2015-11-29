@@ -102,4 +102,17 @@ public class Utility
         }
         return point - anchor;
     }
+
+    public static Texture2D ColouredTexture(int width, int height, Color color)
+    {
+        var texture = new Texture2D(width, height);
+        for (var i = 0; i < width; i++)
+        {
+            for (var j = 0; j < height; j++)
+            {
+                texture.SetPixel(i,j,color);
+            }
+        }
+        return texture;
+    }
 }
