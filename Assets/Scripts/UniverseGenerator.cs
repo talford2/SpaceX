@@ -15,7 +15,9 @@ public class UniverseGenerator : MonoBehaviour
 
 	public Material BackgroundMaterial;
 
-	public Light Sun;
+	public Light SunLight;
+
+	public GameObject SunObject;
 
 	void Start()
 	{
@@ -35,7 +37,10 @@ public class UniverseGenerator : MonoBehaviour
 			gm.GetComponent<Renderer>().material.SetColor("_Color", Utility.GetRandomColor(PrimaryColor, SecondaryColor));
 		}
 
-		Sun.color = Utility.GetRandomColor(PrimaryColor, SecondaryColor, 1f);
+		SunObject.transform.position = Random.onUnitSphere * 1000f;
+		SunLight.transform.rotation = Quaternion.LookRotation(SunObject.transform.position * -1);
+
+		SunLight.color = Utility.GetRandomColor(PrimaryColor, SecondaryColor, 1f);
 
 		SceneRelfectionProbe.RenderProbe();
 	}
