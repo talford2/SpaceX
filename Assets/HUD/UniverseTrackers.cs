@@ -76,7 +76,7 @@ public class UniverseTrackers : MonoBehaviour
 
 	            cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(new Vector2(r.x, r.y), screenBounds);
                 tracker.HealthBar.rectTransform.localPosition = cursor.rectTransform.localPosition;
-	            tracker.HealthBarBackground.rectTransform.localPosition = tracker.HealthBar.rectTransform.localPosition;
+                tracker.HealthBarBackground.rectTransform.localPosition = cursor.rectTransform.localPosition;
 
 	            var ownerKillable = tracker.gameObject.GetComponent<Killable>();
 	            if (ownerKillable != null)
@@ -98,6 +98,7 @@ public class UniverseTrackers : MonoBehaviour
                 tracker.TrackerCurosr.enabled = false;
                 tracker.ArrowCursor.enabled = false;
 	            tracker.HealthBar.enabled = false;
+	            tracker.HealthBarBackground.enabled = false;
 	        }
 	    }
 	}
@@ -130,7 +131,7 @@ public class UniverseTrackers : MonoBehaviour
         tracker.HealthBar.type = Image.Type.Filled;
         tracker.HealthBar.fillMethod = Image.FillMethod.Horizontal;
 	    tracker.HealthBar.fillAmount = 1f;
-	    healthBarBack.name = tracker.name + "_Health";
+	    healthBar.name = tracker.name + "_Health";
 
 		_trackers.Add(tracker);
 	}
@@ -163,6 +164,14 @@ public class UniverseTrackers : MonoBehaviour
 		{
 			Destroy(tracker.ArrowCursor.gameObject);
 		}
+        if (tracker.HealthBarBackground != null && tracker.HealthBarBackground.gameObject != null)
+        {
+            Destroy(tracker.HealthBarBackground.gameObject);
+        }
+        if (tracker.HealthBar != null && tracker.HealthBar.gameObject != null)
+        {
+            Destroy(tracker.HealthBar.gameObject);
+        }
 	}
 
 	private float GetScreenAngle(Vector2 point)

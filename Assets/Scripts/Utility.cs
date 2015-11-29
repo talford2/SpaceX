@@ -113,6 +113,7 @@ public class Utility
                 texture.SetPixel(i,j,color);
             }
         }
+        texture.Apply();
         return texture;
     }
 }
