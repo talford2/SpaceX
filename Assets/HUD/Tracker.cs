@@ -9,6 +9,8 @@ public class Tracker : MonoBehaviour
 
 	public Image ArrowCursor { get; set; }
 	public Image TrackerCurosr { get; set; }
+    public Image HealthBarBackground { get; set; }
+    public Image HealthBar { get; set; }
 
 	void Start()
 	{

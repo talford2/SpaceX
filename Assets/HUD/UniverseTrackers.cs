@@ -12,6 +12,9 @@ public class UniverseTrackers : MonoBehaviour
 
 	private Image cursor;
 
+    private Texture2D healthBarBackgroundTexture;
+    private Texture2D healthBarTexture;
+
 	private static List<Tracker> _trackers { get; set; }
 
 	public static UniverseTrackers Current;
@@ -19,6 +22,8 @@ public class UniverseTrackers : MonoBehaviour
 	private void Awake()
 	{
 		Current = this;
+	    healthBarBackgroundTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 0.3f));
+	    healthBarTexture = Utility.ColouredTexture(48, 2, Color.white);
 	}
 
 	private void Start()
@@ -48,12 +53,16 @@ public class UniverseTrackers : MonoBehaviour
 	            {
 	                tracker.TrackerCurosr.enabled = true;
 	                tracker.ArrowCursor.enabled = false;
+                    tracker.HealthBarBackground.enabled = true;
+                    tracker.HealthBar.enabled = true;
 	                cursor = tracker.TrackerCurosr;
 	            }
 	            else
 	            {
 	                tracker.TrackerCurosr.enabled = false;
 	                tracker.ArrowCursor.enabled = true;
+                    tracker.HealthBarBackground.enabled = false;
+                    tracker.HealthBar.enabled = false;
 	                cursor = tracker.ArrowCursor;
 	            }
 
@@ -70,6 +79,23 @@ public class UniverseTrackers : MonoBehaviour
 	            }
 
 	            cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(new Vector2(r.x, r.y), screenBounds);
+                tracker.HealthBar.rectTransform.localPosition = cursor.rectTransform.localPosition;
+                tracker.HealthBarBackground.rectTransform.localPosition = cursor.rectTransform.localPosition;
+
+	            var ownerKillable = tracker.gameObject.GetComponent<Killable>();
+	            if (ownerKillable != null)
+	            {
+                    var healthFraction = Mathf.Clamp01(ownerKillable.Health / ownerKillable.MaxHealth);
+	                if (healthFraction < 1f)
+	                {
+	                    tracker.HealthBar.fillAmount = healthFraction;
+	                }
+	                else
+	                {
+	                    tracker.HealthBar.enabled = false;
+	                    tracker.HealthBarBackground.enabled = false;
+	                }
+	            }
 
 	            if (!inBounds)
 	            {
@@ -84,6 +110,8 @@ public class UniverseTrackers : MonoBehaviour
 	        {
                 tracker.TrackerCurosr.enabled = false;
                 tracker.ArrowCursor.enabled = false;
+	            tracker.HealthBar.enabled = false;
+	            tracker.HealthBarBackground.enabled = false;
 	        }
 	    }
 	}
@@ -105,19 +133,37 @@ public class UniverseTrackers : MonoBehaviour
 		tracker.TrackerCurosr = trackerImg;
 		trackerImg.name = tracker.name + "_Tracker";
 
+        // Health Bar Backgorund
+        var healthBarBack = CreateTracker(healthBarBackgroundTexture, new Vector2(0.5f, -15f));
+        tracker.HealthBarBackground = healthBarBack;
+        healthBarBack.name = tracker.name + "_HealthBack";
+
+        // Health Bar
+	    var healthBar = CreateTracker(healthBarTexture, new Vector2(0.5f, -15f));
+        tracker.HealthBar = healthBar;
+        tracker.HealthBar.type = Image.Type.Filled;
+        tracker.HealthBar.fillMethod = Image.FillMethod.Horizontal;
+	    tracker.HealthBar.fillAmount = 1f;
+	    healthBar.name = tracker.name + "_Health";
+
 		_trackers.Add(tracker);
 	}
 
 	private Image CreateTracker(Texture2D tex)
 	{
-		var arrowObj = new GameObject();
-		var arrowImg = arrowObj.AddComponent<Image>();
-		arrowImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
-		arrowImg.transform.SetParent(transform);
-		arrowImg.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
-		arrowImg.SetNativeSize();
-		return arrowImg;
+		return CreateTracker(tex, new Vector2(0.5f, 0.5f));
 	}
+
+    private Image CreateTracker(Texture2D tex, Vector2 pivot)
+    {
+        var arrowObj = new GameObject();
+        var arrowImg = arrowObj.AddComponent<Image>();
+        arrowImg.rectTransform.pivot = pivot;
+        arrowImg.transform.SetParent(transform);
+        arrowImg.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        arrowImg.SetNativeSize();
+        return arrowImg;
+    }
 
 	public void RemoveTracker(Tracker tracker)
 	{
@@ -131,6 +177,14 @@ public class UniverseTrackers : MonoBehaviour
 		{
 			Destroy(tracker.ArrowCursor.gameObject);
 		}
+        if (tracker.HealthBarBackground != null && tracker.HealthBarBackground.gameObject != null)
+        {
+            Destroy(tracker.HealthBarBackground.gameObject);
+        }
+        if (tracker.HealthBar != null && tracker.HealthBar.gameObject != null)
+        {
+            Destroy(tracker.HealthBar.gameObject);
+        }
 	}
 
 	private float GetScreenAngle(Vector2 point)
