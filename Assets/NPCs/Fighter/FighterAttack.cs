@@ -8,9 +8,14 @@ public class FighterAttack :NpcState<Fighter>
     private float neighborDetectCooldown;
     private List<Transform> neighbors;
 
+    private bool allowShoot;
+    private float burstCooldown;
+    private float burstAmount;
+
     public FighterAttack(Fighter npc) : base(npc)
     {
         Name = "Attack";
+        allowShoot = true;
     }
 
     private void CheckSensors()
@@ -52,13 +57,36 @@ public class FighterAttack :NpcState<Fighter>
         Npc.VehicleInstance.TriggerBrake = false;
         Npc.VehicleInstance.TriggerAccelerate = false;
 
+        if (burstCooldown >= 0f)
+        {
+            burstCooldown -= Time.deltaTime;
+            if (burstCooldown < 0f)
+            {
+                allowShoot = true;
+                burstAmount = 0f;
+            }
+        }
+
         if (dotTarget > 10f)
         {
-            var angleToTarget = Vector3.Angle(toTarget.normalized, Npc.VehicleInstance.transform.forward.normalized);
-            if (Mathf.Abs(angleToTarget) < Npc.ShootAngleTolerance)
+            if (allowShoot)
             {
-                Npc.VehicleInstance.SetAimAt(Npc.Target.position);
-                Npc.VehicleInstance.CurrentWeapon.IsTriggered = true;
+                var angleToTarget = Vector3.Angle(toTarget.normalized, Npc.VehicleInstance.transform.forward.normalized);
+                if (Mathf.Abs(angleToTarget) < Npc.ShootAngleTolerance)
+                {
+                    Npc.VehicleInstance.SetAimAt(Npc.Target.position);
+                    Npc.VehicleInstance.CurrentWeapon.IsTriggered = true;
+                    burstAmount += Time.deltaTime;
+                    if (burstAmount > Npc.BurstTime)
+                    {
+                        burstCooldown = Npc.BurstWaitTime;
+                        allowShoot = false;
+                    }
+                }
+                else
+                {
+                    Npc.VehicleInstance.CurrentWeapon.IsTriggered = false;
+                }
             }
             else
             {

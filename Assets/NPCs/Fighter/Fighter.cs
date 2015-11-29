@@ -23,6 +23,8 @@ public class Fighter : Npc<Fighter>
 	public float AttackRange = 100f;
 	public float ShootAngleTolerance = 5f;
 	public float OvertakeDistance = 50f;
+    public float BurstTime = 0.5f;
+    public float BurstWaitTime = 0.7f;
 
 	[Header("Evade")]
 	public float EvadeDistance = 200f;
