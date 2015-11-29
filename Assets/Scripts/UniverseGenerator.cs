@@ -17,8 +17,8 @@ public class UniverseGenerator : MonoBehaviour
 
 	void Start()
 	{
-		PrimaryColor = Random.ColorHSV();
-		SecondaryColor = Random.ColorHSV();
+		PrimaryColor = Utility.GetRandomColor();
+		SecondaryColor = Utility.GetRandomColor();
 
 
 		int totalNebula = Random.Range(15, 20);
