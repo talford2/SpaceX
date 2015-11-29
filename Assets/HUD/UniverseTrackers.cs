@@ -51,11 +51,36 @@ public class UniverseTrackers : MonoBehaviour
 
 	            if (inBounds)
 	            {
-	                tracker.TrackerCurosr.enabled = true;
+	                
 	                tracker.ArrowCursor.enabled = false;
                     tracker.HealthBarBackground.enabled = true;
                     tracker.HealthBar.enabled = true;
-	                cursor = tracker.TrackerCurosr;
+
+	                var toCamera = tracker.gameObject.transform.position - Universe.Current.ViewPort.transform.position;
+	                if (toCamera.sqrMagnitude > 1000f*1000f)
+	                {
+	                    if (toCamera.sqrMagnitude > 2000f*2000f)
+	                    {
+                            tracker.TrackerCurosr.enabled = false;
+                            tracker.FarTrackerCursor.enabled = false;
+                            tracker.VeryFarTrackerCursor.enabled = true;
+	                        cursor = tracker.VeryFarTrackerCursor;
+	                    }
+	                    else
+	                    {
+                            tracker.TrackerCurosr.enabled = false;
+                            tracker.FarTrackerCursor.enabled = true;
+                            tracker.VeryFarTrackerCursor.enabled = false;
+                            cursor = tracker.FarTrackerCursor;
+                        }
+	                }
+	                else
+	                {
+                        tracker.TrackerCurosr.enabled = true;
+	                    tracker.FarTrackerCursor.enabled = false;
+	                    tracker.VeryFarTrackerCursor.enabled = false;
+	                    cursor = tracker.TrackerCurosr;
+	                }
 	            }
 	            else
 	            {
@@ -132,6 +157,16 @@ public class UniverseTrackers : MonoBehaviour
 		var trackerImg = CreateTracker(tracker.TrackerCurosrImage);
 		tracker.TrackerCurosr = trackerImg;
 		trackerImg.name = tracker.name + "_Tracker";
+
+        // Far Tracker
+        var farTrackerImg = CreateTracker(tracker.FarTrackerCursorImage);
+        tracker.FarTrackerCursor = farTrackerImg;
+        farTrackerImg.name = tracker.name + "_FarTracker";
+
+        // Very Far Tracker
+        var veryFarTrackerImg = CreateTracker(tracker.VeryFarTrackerCursorImage);
+        tracker.VeryFarTrackerCursor = veryFarTrackerImg;
+        veryFarTrackerImg.name = tracker.name + "_VeryFarTracker";
 
         // Health Bar Backgorund
         var healthBarBack = CreateTracker(healthBarBackgroundTexture, new Vector2(0.5f, -15f));

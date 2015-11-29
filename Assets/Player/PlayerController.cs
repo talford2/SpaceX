@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [Header("Squadron Trackers")]
     public Texture2D ArrowCursorImage;
     public Texture2D TrackerCurosrImage;
+    public Texture2D FarTrackerCursorImage;
+    public Texture2D VeryFarTrackerCursorImage;
 
 	[Header("Aiming")]
 	public float AimSensitivity = 10f;
@@ -63,6 +65,8 @@ public class PlayerController : MonoBehaviour
                 var memberTracker = member.VehicleInstance.GetComponent<Tracker>();
                 memberTracker.ArrowCursorImage = ArrowCursorImage;
                 memberTracker.TrackerCurosrImage = TrackerCurosrImage;
+                memberTracker.VeryFarTrackerCursorImage = FarTrackerCursorImage;
+                memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
                 member.IsFollowIdleDestination = true;
             }
         }
@@ -77,6 +81,8 @@ public class PlayerController : MonoBehaviour
 	    var playerTracker = _playVehicleInstance.GetComponent<Tracker>();
 	    playerTracker.ArrowCursorImage = ArrowCursorImage;
 	    playerTracker.TrackerCurosrImage = TrackerCurosrImage;
+        playerTracker.FarTrackerCursorImage = FarTrackerCursorImage;
+        playerTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
 	    playerTracker.IsDisabled = true;
 
 	    _playVehicleInstance.GetComponent<Targetable>().Team = Team;
