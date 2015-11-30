@@ -4,6 +4,7 @@ public class Fighter : Npc<Fighter>
 {
 	public Vehicle VehiclePrefab;
     public Team Team;
+    public bool IsSquadronMember;
 
 	private Vehicle _vehicleInstance;
 	public Vector3 Destination;
@@ -96,8 +97,7 @@ public class Fighter : Npc<Fighter>
 
     private void OnVehicleDestroyed(Killable sender)
     {
-        var player = gameObject.GetComponent<PlayerController>();
-        if (player == null)
+        if (!IsSquadronMember)
             Destroy(gameObject);
     }
 

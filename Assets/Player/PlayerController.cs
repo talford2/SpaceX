@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
         _playerNpc = gameObject.AddComponent<Fighter>();
         _playerNpc.Team = Team;
+	    _playerNpc.IsSquadronMember = true;
 	    _playerNpc.enabled = false;
         SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
         _playerNpc.SetVehicleInstance(_playVehicleInstance);
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour
             {
                 var univPos = _playVehicleInstance.Shiftable.UniversePosition;
                 univPos.CellLocalPosition += Formations.GetArrowOffset(i, 10f);
+                member.IsSquadronMember = true;
                 SpawnSquadronVehicle(member, univPos);
                 /*
                 member.SpawnVehicle(member.VehiclePrefab, univPos);
