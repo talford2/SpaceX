@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
 	private float screenAspect;
     private int squadronLiveCount;
+    private float replenishInterval = 2f;
+    private float replenishSquadronCooldown;
 
 	private void Awake()
 	{
@@ -61,6 +63,8 @@ public class PlayerController : MonoBehaviour
             {
                 var univPos = _playVehicleInstance.Shiftable.UniversePosition;
                 univPos.CellLocalPosition += Formations.GetArrowOffset(i, 10f);
+                SpawnSquadronVehicle(member, univPos);
+                /*
                 member.SpawnVehicle(member.VehiclePrefab, univPos);
                 var memberTracker = member.VehicleInstance.GetComponent<Tracker>();
                 memberTracker.ArrowCursorImage = ArrowCursorImage;
@@ -68,8 +72,20 @@ public class PlayerController : MonoBehaviour
                 memberTracker.FarTrackerCursorImage = FarTrackerCursorImage;
                 memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
                 member.IsFollowIdleDestination = true;
+                */
             }
         }
+    }
+
+    private void SpawnSquadronVehicle(Fighter member, UniversePosition position)
+    {
+        member.SpawnVehicle(member.VehiclePrefab, position);
+        var memberTracker = member.VehicleInstance.GetComponent<Tracker>();
+        memberTracker.ArrowCursorImage = ArrowCursorImage;
+        memberTracker.TrackerCurosrImage = TrackerCurosrImage;
+        memberTracker.FarTrackerCursorImage = FarTrackerCursorImage;
+        memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
+        member.IsFollowIdleDestination = true;
     }
 
     private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
@@ -247,6 +263,40 @@ public class PlayerController : MonoBehaviour
 	            Squadron[i].IdleDestination = formationDestination;
 	            if (i > 0)
 	                Debug.DrawLine(formationDestination, formationDestination + Vector3.up*100f, Color.white);
+	        }
+	    }
+
+	    if (_playVehicleInstance != null)
+	    {
+	        if (squadronLiveCount < Squadron.Count)
+	        {
+	            if (replenishSquadronCooldown >= 0f)
+	            {
+	                replenishSquadronCooldown -= Time.deltaTime;
+	                if (replenishSquadronCooldown < 0)
+	                {
+                        Debug.Log("REPLENISH CHECK!");
+	                    var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, 2000f, LayerMask.GetMask("Detectable"));
+	                    if (detected.Any(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team)))
+	                    {
+
+	                    }
+	                    else
+	                    {
+	                        Debug.Log("REPLENISH!!!");
+	                        for (var i = 0; i < Squadron.Count; i++)
+	                        {
+	                            if (Squadron[i].VehicleInstance == null)
+	                            {
+                                    var spawnPos = Universe.Current.GetUniversePosition(Utility.GetRandomDirection(-Universe.Current.ViewPort.transform.forward, 80f) * 2000f);
+                                    SpawnSquadronVehicle(Squadron[i], spawnPos);
+	                                //Squadron[i].SpawnVehicle(Squadron[i].VehiclePrefab, spawnPos);
+	                            }
+	                        }
+	                    }
+	                    replenishSquadronCooldown = replenishInterval;
+	                }
+	            }
 	        }
 	    }
 

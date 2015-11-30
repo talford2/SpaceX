@@ -183,6 +183,11 @@ public class Utility
 		texture.Apply();
 		return texture;
 	}
+
+    public static Vector3 GetRandomDirection(Vector3 direction, float angle)
+    {
+        return Quaternion.Euler(Random.Range(-angle, angle), Random.Range(-angle, angle), Random.Range(-angle, angle))*-direction;
+    }
 }
 
 public class HSVColor
