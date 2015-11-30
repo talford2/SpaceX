@@ -17,6 +17,8 @@ public class HeadsUpDisplay : MonoBehaviour
 
 	private static HeadsUpDisplay _current;
 
+	public float HitFadeSpeed = 0.5f;
+
 	private float _hitCooldown = 0;
 
 	public static HeadsUpDisplay Current { get { return _current; } }
@@ -42,9 +44,9 @@ public class HeadsUpDisplay : MonoBehaviour
 				HideSquadronPrompt();
 			}
 		}
-		
+
 		HitImage.color = new Color(1, 1, 1, _hitCooldown);
-		_hitCooldown -= Time.deltaTime;
+		_hitCooldown -= Time.deltaTime * HitFadeSpeed;
 		_hitCooldown = Mathf.Max(0, _hitCooldown);
 	}
 

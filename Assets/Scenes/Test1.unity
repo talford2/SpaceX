@@ -3025,6 +3025,7 @@ MonoBehaviour:
   SquadronNameText: {fileID: 1434290581}
   SquadronPromptTime: 1.5
   HitImage: {fileID: 474899235}
+  HitFadeSpeed: 0.5
 --- !u!1 &2139494455 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 118032, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
