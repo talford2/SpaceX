@@ -99,7 +99,7 @@ public class VehicleCamera : UniverseCamera
 	            if (shakeFrequencyCooldown < 0f)
 	            {
                     offsetDestination = Random.onUnitSphere * shakeAmplitude * shakeFraction;
-                    angleDestination = Quaternion.AngleAxis(Random.Range(-10f, 10f), AttachedCamera.transform.forward);
+                    angleDestination = Quaternion.AngleAxis(Random.Range(-20f, 20f), AttachedCamera.transform.forward);
 	                shakeFrequencyCooldown = shakeFrequency;
 	            }
 	            if (shakeCooldown < 0f)

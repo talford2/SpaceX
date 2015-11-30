@@ -253,7 +253,7 @@ public class PlayerController : MonoBehaviour
 
 	    if (Input.GetKeyUp(KeyCode.M))
 	    {
-            Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(5f, 5f, 0.05f);
+            Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(10f, 1f, 0.05f);
 	    }
 
 		// Update squadron
