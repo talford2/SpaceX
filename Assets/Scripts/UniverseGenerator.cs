@@ -29,7 +29,7 @@ public class UniverseGenerator : MonoBehaviour
 
 	public int MaxNubulas = 40;
 
-	public bool USeRandomColours = false;
+	public bool UseRandomColours = false;
 
 	public Camera BackgroundCamera;
 
@@ -76,7 +76,7 @@ public class UniverseGenerator : MonoBehaviour
 		_sunLight = _sunObj.GetComponentInChildren<Light>();
 		_sunObj.transform.SetParent(BackgroundContainer.transform);
 
-		if (USeRandomColours)
+		if (UseRandomColours)
 		{
 			var h = HSVColor.FromColor(Random.ColorHSV(0f, 1f, 0.5f, 0.9f, 0.4f, 0.7f, 1f, 1f));
 			PrimaryColor = h.GetColor();
@@ -128,15 +128,15 @@ public class UniverseGenerator : MonoBehaviour
 		{
 			var pl = Instantiate<GameObject>(Planets[Random.Range(0, Planets.Count)]);
 			pl.transform.SetParent(BackgroundContainer.transform);
-			pl.transform.position = Random.onUnitSphere * 800f;
+			pl.transform.localPosition = Random.onUnitSphere * 800f;
 			pl.transform.rotation = Random.rotation;
 			pl.layer = LayerMask.NameToLayer("Universe Background");
 			pl.transform.localScale = Random.Range(20f, 100f) * Vector3.one;
 		}
-		
-		_sunObj.transform.position = Random.onUnitSphere * 1000f;
-		_sunObj.transform.forward = Vector3.zero - _sunObj.transform.position;
-		
+
+		_sunObj.transform.localPosition = Random.onUnitSphere * 1000f;
+		_sunObj.transform.forward = Vector3.zero - _sunObj.transform.localPosition;
+
 		var sunColor = HSVColor.FromColor(bgColor);
 		sunColor.V = 1f;
 		sunColor.S *= Random.Range(0.1f, 1f);
@@ -151,6 +151,8 @@ public class UniverseGenerator : MonoBehaviour
 			star.transform.localScale = Vector3.one * Random.Range(MinSize, MaxSize);
 			star.transform.LookAt(Camera.main.transform, transform.up);
 			star.transform.SetParent(BackgroundContainer.transform);
+
+			star.transform.rotation *= Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward);
 		}
 
 		SceneRelfectionProbe.backgroundColor = bg.GetColor();
