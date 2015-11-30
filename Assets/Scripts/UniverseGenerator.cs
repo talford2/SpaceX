@@ -29,6 +29,8 @@ public class UniverseGenerator : MonoBehaviour
 
 	public bool USeRandomColours = false;
 
+	public Camera BackgroundCamera;
+
 	void Awake()
 	{
 		RandomiseUniverse();
@@ -43,11 +45,11 @@ public class UniverseGenerator : MonoBehaviour
 	{
 		if (USeRandomColours)
 		{
-			var h = HSVColor.FromColor(Random.ColorHSV(0f, 1f, 0.5f, 0.95f, 0.4f, 0.7f, 1f, 1f));
+			var h = HSVColor.FromColor(Random.ColorHSV(0f, 1f, 0.5f, 0.9f, 0.4f, 0.7f, 1f, 1f));
 			PrimaryColor = h.GetColor();
 
-			var h2 = HSVColor.FromColor(Random.ColorHSV(0f, 1f, 0.5f, 0.95f, 0.4f, 0.7f, 1f, 1f));
-			h2.H = h.H + Random.Range(0.25f, 0.75f);
+			var h2 = HSVColor.FromColor(Random.ColorHSV(0f, 1f, 0.5f, 0.9f, 0.4f, 0.7f, 1f, 1f));
+			h2.H = h.H + Random.Range(0.2f, 0.8f);
 			while (h2.H > 1)
 			{
 				h2.H -= 1;
@@ -59,15 +61,20 @@ public class UniverseGenerator : MonoBehaviour
 		var bgColor = Utility.GetRandomColor(PrimaryColor, SecondaryColor);
 		BackgroundMaterial.SetColor("_Tint", bgColor);
 
+		var bg = HSVColor.FromColor(bgColor);
+		bg.V *= Random.Range(0.05f, 0.2f);
+		BackgroundCamera.backgroundColor = bg.GetColor();
+
+		var fogColor = HSVColor.FromColor(bgColor);
+		fogColor.S *= 0.5f;
+		fogColor.V *= 0.3f;
+		AddFogMaterial.SetColor("_Color", fogColor.GetColor());
+
 		var dustColor = HSVColor.FromColor(bgColor);
 		dustColor.V *= 0.5f;
 		dustColor.S *= 0.5f;
 		DustMaterial.SetColor("_Color", dustColor.GetColor());
 
-		var fogColor = HSVColor.FromColor(bgColor);
-		fogColor.S *= 0.5f;
-		fogColor.V *= 0.4f;
-		AddFogMaterial.SetColor("_Color", fogColor.GetColor());
 
 		int totalNebula = Random.Range(MinNebulas, MaxNubulas);
 
