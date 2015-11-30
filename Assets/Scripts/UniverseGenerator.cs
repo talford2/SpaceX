@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UniverseGenerator : MonoBehaviour
@@ -19,9 +20,10 @@ public class UniverseGenerator : MonoBehaviour
 
 	public Material AddFogMaterial;
 
-	public Light SunLight;
+	private Light _sunLight;
 
 	public GameObject SunObject;
+	private GameObject _sunObj;
 
 	public int MinNebulas = 30;
 
@@ -38,6 +40,12 @@ public class UniverseGenerator : MonoBehaviour
 
 	public List<GameObject> Planets;
 
+	// Starfield
+	public List<GameObject> StarPrefabs;
+	public float MinSize;
+	public float MaxSize;
+	public float Radius;
+	public int Count;
 
 	void Awake()
 	{
@@ -46,11 +54,28 @@ public class UniverseGenerator : MonoBehaviour
 
 	void Start()
 	{
-		SceneRelfectionProbe.RenderProbe();
+
+	}
+
+	public void Update()
+	{
+		if (Input.GetKeyUp(KeyCode.U))
+		{
+			RandomiseUniverse();
+		}
 	}
 
 	private void RandomiseUniverse()
 	{
+		foreach (Transform trans in BackgroundContainer.transform)
+		{
+			Destroy(trans.gameObject);
+		}
+
+		_sunObj = Instantiate<GameObject>(SunObject);
+		_sunLight = _sunObj.GetComponentInChildren<Light>();
+		_sunObj.transform.SetParent(BackgroundContainer.transform);
+
 		if (USeRandomColours)
 		{
 			var h = HSVColor.FromColor(Random.ColorHSV(0f, 1f, 0.5f, 0.9f, 0.4f, 0.7f, 1f, 1f));
@@ -109,12 +134,27 @@ public class UniverseGenerator : MonoBehaviour
 			pl.transform.localScale = Random.Range(20f, 100f) * Vector3.one;
 		}
 
-		SunObject.transform.position = Random.onUnitSphere * 1000f;
-		SunLight.transform.rotation = Quaternion.LookRotation(SunObject.transform.position * -1);
+		_sunObj.transform.position = Random.onUnitSphere * 1000f;
+		_sunLight.transform.rotation = Quaternion.LookRotation(_sunObj.transform.position * -1);
+		//_sunLight.transform.rotation = Quaternion.FromToRotation(Vector3.zero, _sunObj.transform.position);
 
 		var sunColor = HSVColor.FromColor(bgColor);
 		sunColor.V = 1f;
 		sunColor.S *= Random.Range(0.1f, 1f);
-		SunLight.color = sunColor.GetColor();
+		_sunLight.color = sunColor.GetColor();
+
+		// Stars
+		for (var i = 0; i < Count; i++)
+		{
+			var position = Radius * Random.onUnitSphere;
+			var star = Utility.InstantiateInParent(StarPrefabs[Random.Range(0, StarPrefabs.Count)], position, Quaternion.identity, transform);
+			Utility.SetLayerRecursively(star, LayerMask.NameToLayer("Universe Background"));
+			star.transform.localScale = Vector3.one * Random.Range(MinSize, MaxSize);
+			star.transform.LookAt(Camera.main.transform, transform.up);
+			star.transform.SetParent(BackgroundContainer.transform);
+		}
+
+		SceneRelfectionProbe.backgroundColor = bg.GetColor();
+		SceneRelfectionProbe.RenderProbe();
 	}
 }
