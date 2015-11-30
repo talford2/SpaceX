@@ -133,11 +133,10 @@ public class UniverseGenerator : MonoBehaviour
 			pl.layer = LayerMask.NameToLayer("Universe Background");
 			pl.transform.localScale = Random.Range(20f, 100f) * Vector3.one;
 		}
-
+		
 		_sunObj.transform.position = Random.onUnitSphere * 1000f;
-		_sunLight.transform.rotation = Quaternion.LookRotation(_sunObj.transform.position * -1);
-		//_sunLight.transform.rotation = Quaternion.FromToRotation(Vector3.zero, _sunObj.transform.position);
-
+		_sunObj.transform.forward = Vector3.zero - _sunObj.transform.position;
+		
 		var sunColor = HSVColor.FromColor(bgColor);
 		sunColor.V = 1f;
 		sunColor.S *= Random.Range(0.1f, 1f);
