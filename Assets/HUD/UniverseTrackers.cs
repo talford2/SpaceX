@@ -32,7 +32,7 @@ public class UniverseTrackers : MonoBehaviour
 		screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
 
 		var viewport = Universe.Current.ViewPort;
-		_cam = viewport.GetComponent<Camera>();
+	    _cam = viewport.AttachedCamera;
 		viewport.OnMove += ViewPortMove;
 	}
 

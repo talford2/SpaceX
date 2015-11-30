@@ -23,7 +23,7 @@ public class VehicleCamera : UniverseCamera
 	public float SpringCatchup = 2f;
 	public float OffsetCatchup = 5f;
 
-	private Camera attachedCamera;
+	//private Camera attachedCamera;
 	private float springDistance;
 	private Quaternion offsetAngle;
 	private Vector3 offset;
@@ -33,7 +33,6 @@ public class VehicleCamera : UniverseCamera
 
 	private void Start()
 	{
-		attachedCamera = GetComponent<Camera>();
 		springDistance = 1f;
 		Target = PlayerController.Current.VehicleInstance;
 		offsetAngle = Target.transform.rotation;
@@ -80,11 +79,11 @@ public class VehicleCamera : UniverseCamera
 
 		BackgroundTransform.transform.position = transform.position;
 
-		attachedCamera.fieldOfView = Mathf.Lerp(attachedCamera.fieldOfView, targetFov, Time.deltaTime);
+        AttachedCamera.fieldOfView = Mathf.Lerp(AttachedCamera.fieldOfView, targetFov, Time.deltaTime);
 
 		foreach (var childCam in ChildCameras)
 		{
-			childCam.fieldOfView = attachedCamera.fieldOfView;
+            childCam.fieldOfView = AttachedCamera.fieldOfView;
 		}
 	}
 
