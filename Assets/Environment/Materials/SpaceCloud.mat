@@ -97,26 +97,6 @@ Material:
         second: 0.02
       data:
         first:
-          name: _A
-        second: 50
-      data:
-        first:
-          name: _B
-        second: 150
-      data:
-        first:
-          name: _C
-        second: 200
-      data:
-        first:
-          name: _D
-        second: 500
-      data:
-        first:
-          name: _InvFade
-        second: 3
-      data:
-        first:
           name: _ZWrite
         second: 1
       data:
@@ -149,6 +129,26 @@ Material:
         second: 0
       data:
         first:
+          name: _A
+        second: 50
+      data:
+        first:
+          name: _B
+        second: 150
+      data:
+        first:
+          name: _C
+        second: 200
+      data:
+        first:
+          name: _D
+        second: 500
+      data:
+        first:
+          name: _InvFade
+        second: 3
+      data:
+        first:
           name: _FadeDistance
         second: 1000
     m_Colors:
@@ -159,7 +159,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.13738081, g: 0.20930248, b: 0.21808861, a: 1}
+        second: {r: 0.28370523, g: 0.32278797, b: 0.23551211, a: 1}
       data:
         first:
           name: _Bolor

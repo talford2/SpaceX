@@ -23,6 +23,10 @@ public class UniverseGenerator : MonoBehaviour
 
 	public GameObject SunObject;
 
+	public int MinNebulas = 30;
+
+	public int MaxNubulas = 40;
+
 	public bool USeRandomColours = false;
 
 	void Awake()
@@ -65,7 +69,7 @@ public class UniverseGenerator : MonoBehaviour
 		fogColor.V *= 0.4f;
 		AddFogMaterial.SetColor("_Color", fogColor.GetColor());
 
-		int totalNebula = Random.Range(30, 40);
+		int totalNebula = Random.Range(MinNebulas, MaxNubulas);
 
 		for (var i = 0; i < totalNebula; i++)
 		{

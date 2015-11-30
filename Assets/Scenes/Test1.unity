@@ -1061,10 +1061,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StarPrefabs:
   - {fileID: 195272, guid: 56244559b697dbc42a4333351bf4c7ed, type: 2}
-  MinSize: 1000
-  MaxSize: 1000
+  MinSize: 2000
+  MaxSize: 2000
   Radius: 1200
-  Count: 50
+  Count: 20
 --- !u!1 &482252190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2003,6 +2003,8 @@ MonoBehaviour:
   AddFogMaterial: {fileID: 2100000, guid: b64faedd36e5bd14eadd5d1f68328f73, type: 2}
   SunLight: {fileID: 402258277}
   SunObject: {fileID: 2034981263}
+  MinNebulas: 50
+  MaxNubulas: 60
   USeRandomColours: 1
 --- !u!1 &1123654777
 GameObject:
