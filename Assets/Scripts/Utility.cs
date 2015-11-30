@@ -112,6 +112,20 @@ public class Utility
 		return Random.ColorHSV();
 	}
 
+	public static float WrapFloat(float a, float b)
+	{
+		float result;
+		if (Mathf.Abs(a - b) > 0.5f)
+		{
+			result = a + (b - a + 1f) * Random.Range(0f, 1f);
+		}
+		else
+		{
+			result = b + (a - b) * Random.Range(0f, 1f);
+		}
+		return result % 1f;
+	}
+
 	public static Color GetRandomColor(Color c1, Color c2, float? alpha = null)
 	{
 		// This isn't perfect because it will tend towards the middle of the colour
@@ -120,20 +134,13 @@ public class Utility
 		var c1Hsv = HSVColor.FromColor(c1);
 		var c2Hsv = HSVColor.FromColor(c2);
 
-
-		float hue = Random.Range(c1Hsv.H, c2Hsv.H);
-
-		if (Mathf.Abs(c1Hsv.H - c2Hsv.H) > 0.5f)
-		{
-			// we're wrapping around.
-
-		}
-
+		float hue = WrapFloat(c1Hsv.H, c2Hsv.H);
+		
 		if (alpha.HasValue)
 		{
 			return Random.ColorHSV(
-			Mathf.Min(c1Hsv.H, c2Hsv.H),
-			Mathf.Max(c1Hsv.H, c2Hsv.H),
+			hue,
+			hue,
 			Mathf.Min(c1Hsv.S, c2Hsv.S),
 			Mathf.Max(c1Hsv.S, c2Hsv.S),
 			Mathf.Min(c1Hsv.V, c2Hsv.V),
@@ -143,8 +150,8 @@ public class Utility
 		}
 
 		return Random.ColorHSV(
-			Mathf.Min(c1Hsv.H, c2Hsv.H),
-			Mathf.Max(c1Hsv.H, c2Hsv.H),
+			hue,
+			hue,
 			Mathf.Min(c1Hsv.S, c2Hsv.S),
 			Mathf.Max(c1Hsv.S, c2Hsv.S),
 			Mathf.Min(c1Hsv.V, c2Hsv.V),
@@ -159,9 +166,11 @@ public class Utility
 		var c1Hsv = HSVColor.FromColor(c1);
 		var c2Hsv = HSVColor.FromColor(c2);
 
+		float hue = WrapFloat(c1Hsv.H, c2Hsv.H);
+
 		return Random.ColorHSV(
-		Mathf.Min(c1Hsv.H, c2Hsv.H),
-		Mathf.Max(c1Hsv.H, c2Hsv.H),
+		hue,
+		hue,
 		saturation,
 		saturation,
 		Mathf.Min(c1Hsv.V, c2Hsv.V),
@@ -184,10 +193,10 @@ public class Utility
 		return texture;
 	}
 
-    public static Vector3 GetRandomDirection(Vector3 direction, float angle)
-    {
-        return Quaternion.Euler(Random.Range(-angle, angle), Random.Range(-angle, angle), Random.Range(-angle, angle))*-direction;
-    }
+	public static Vector3 GetRandomDirection(Vector3 direction, float angle)
+	{
+		return Quaternion.Euler(Random.Range(-angle, angle), Random.Range(-angle, angle), Random.Range(-angle, angle)) * -direction;
+	}
 }
 
 public class HSVColor
