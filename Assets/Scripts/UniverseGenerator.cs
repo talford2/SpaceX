@@ -31,6 +31,14 @@ public class UniverseGenerator : MonoBehaviour
 
 	public Camera BackgroundCamera;
 
+	// Planets
+	public int MinPlanets = 4;
+
+	public int MaxPlanets = 10;
+
+	public List<GameObject> Planets;
+
+
 	void Awake()
 	{
 		RandomiseUniverse();
@@ -54,8 +62,7 @@ public class UniverseGenerator : MonoBehaviour
 			{
 				h2.H -= 1;
 			}
-
-			SecondaryColor = h2.GetColor(); //Random.ColorHSV(0f, 1f, 0.5f, 0.95f, 0.4f, 0.8f, 1f, 1f);
+			SecondaryColor = h2.GetColor();
 		}
 
 		var bgColor = Utility.GetRandomColor(PrimaryColor, SecondaryColor);
@@ -75,20 +82,31 @@ public class UniverseGenerator : MonoBehaviour
 		dustColor.S *= 0.5f;
 		DustMaterial.SetColor("_Color", dustColor.GetColor());
 
-
+		// Nebula
 		int totalNebula = Random.Range(MinNebulas, MaxNubulas);
-
 		for (var i = 0; i < totalNebula; i++)
 		{
 			var gm = Instantiate<GameObject>(Nebulas[Random.Range(0, Nebulas.Count)]);
 			gm.transform.rotation = Random.rotationUniform;
 			gm.transform.SetParent(BackgroundContainer.transform);
+			gm.layer = LayerMask.NameToLayer("Universe Background");
 
 			var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.2f));
 			randC.V *= 0.1f;
-			//randC.S *= 1.3f;
 			gm.GetComponent<Renderer>().material.SetColor("_Color", randC.GetColor());
 			//gm.GetComponent<Renderer>().material.SetColor("_TintColor", Utility.GetRandomColor(PrimaryColor, SecondaryColor, 1f, 255f));
+		}
+
+		// Planets
+		int totalPlanets = Random.Range(MinPlanets, MaxPlanets);
+		for (var i = 0; i < totalPlanets; i++)
+		{
+			var pl = Instantiate<GameObject>(Planets[Random.Range(0, Planets.Count)]);
+			pl.transform.SetParent(BackgroundContainer.transform);
+			pl.transform.position = Random.onUnitSphere * 800f;
+			pl.transform.rotation = Random.rotation;
+			pl.layer = LayerMask.NameToLayer("Universe Background");
+			pl.transform.localScale = Random.Range(20f, 100f) * Vector3.one;
 		}
 
 		SunObject.transform.position = Random.onUnitSphere * 1000f;
