@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour
 	private void PlayerController_OnDamage(Vector3 position, Vector3 normal)
 	{
 		HeadsUpDisplay.Current.Hit();
+        Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(5f, 0.5f, 0.05f);
 	}
 
 	private Vector3 GetAimAt()
