@@ -35,7 +35,7 @@ public class DistantScaling : MonoBehaviour
 	{
 		// Scaling
 		var worldDestination = Universe.Current.GetWorldPosition(_shiftable.UniversePosition);
-		var toCamera = worldDestination - Universe.Current.ViewPort.transform.position;
+        var toCamera = worldDestination - Universe.Current.ViewPort.AttachedCamera.transform.position;
 
 		if (toCamera.sqrMagnitude > _thresholdDistanceSquared)
 		{
@@ -56,7 +56,7 @@ public class DistantScaling : MonoBehaviour
 			}
 
 			// Positioning
-			transform.position = Universe.Current.ViewPort.transform.position + toCamera.normalized * scaledDistance;
+            transform.position = Universe.Current.ViewPort.AttachedCamera.transform.position + toCamera.normalized * scaledDistance;
 			if (gameObject.layer != _distantLayer)
 				Utility.SetLayerRecursively(gameObject, _distantLayer);
 		}
