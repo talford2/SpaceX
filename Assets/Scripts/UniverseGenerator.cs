@@ -150,9 +150,9 @@ public class UniverseGenerator : MonoBehaviour
 			var star = Utility.InstantiateInParent(StarPrefabs[Random.Range(0, StarPrefabs.Count)], transform);
 			Utility.SetLayerRecursively(star, LayerMask.NameToLayer("Universe Background"));
 			star.transform.localScale = Vector3.one * Random.Range(MinSize, MaxSize);
-			star.transform.LookAt(Camera.main.transform, transform.up);
 			star.transform.SetParent(BackgroundContainer.transform);
 		    star.transform.localPosition = position;
+            star.transform.LookAt(Camera.main.transform, transform.up);
 			star.transform.rotation *= Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward);
 		}
 
