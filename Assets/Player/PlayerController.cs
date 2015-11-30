@@ -251,6 +251,11 @@ public class PlayerController : MonoBehaviour
 			CycleSquadron();
 		}
 
+	    if (Input.GetKeyUp(KeyCode.M))
+	    {
+            Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(5f, 5f, 0.05f);
+	    }
+
 		// Update squadron
 		squadronLiveCount = Squadron.Count(s => s.VehicleInstance != null);
 
