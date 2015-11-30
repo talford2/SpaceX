@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
 	private void PlayerController_OnDamage(Vector3 position, Vector3 normal)
 	{
 		HeadsUpDisplay.Current.Hit();
-        Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(5f, 0.5f, 0.05f);
+        Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(25f, 0.5f, 0.05f);
 	}
 
 	private Vector3 GetAimAt()
@@ -254,7 +254,7 @@ public class PlayerController : MonoBehaviour
 
 	    if (Input.GetKeyUp(KeyCode.M))
 	    {
-            Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(10f, 1f, 0.05f);
+            Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(25f, 1f, 0.05f);
 	    }
 
 		// Update squadron
@@ -348,6 +348,7 @@ public class PlayerController : MonoBehaviour
 					Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
 					Squadron[oldSquadronIndex].enabled = true;
 					Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Tracker>().IsDisabled = false;
+                    Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDamage -= PlayerController_OnDamage;
 				}
 
 				// Disable next vehicle NPC control and apply PlayerController
@@ -359,6 +360,7 @@ public class PlayerController : MonoBehaviour
 					_playVehicleInstance.GetComponent<Tracker>().IsDisabled = true;
 					_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
 					//_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+                    _playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;
 
 					Squadron[_curSquadronIndex].enabled = false;
 
