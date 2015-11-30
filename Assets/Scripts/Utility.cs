@@ -115,15 +115,29 @@ public class Utility
 	public static float WrapFloat(float a, float b)
 	{
 		float result;
-		if (Mathf.Abs(a - b) > 0.5f)
-		{
-			result = a + (b - a + 1f) * Random.Range(0f, 1f);
-		}
-		else
-		{
-			result = b + (a - b) * Random.Range(0f, 1f);
-		}
-		return result % 1f;
+	    if (a > b)
+	    {
+	        if (a - b > 0.5f)
+	        {
+	            result = a + (b - a + 1f)*Random.Range(0f, 1f);
+	        }
+	        else
+	        {
+	            result = b + (a - b)*Random.Range(0f, 1f);
+	        }
+	    }
+	    else
+	    {
+	        if (b - a > 0.5f)
+	        {
+	            result = b + (a + 1 - b)*Random.Range(0f, 1f);
+	        }
+	        else
+	        {
+	            result = a + (b - a)*Random.Range(0f, 1f);
+	        }
+	    }
+	    return result % 1f;
 	}
 
 	public static Color GetRandomColor(Color c1, Color c2, float? alpha = null)
