@@ -113,6 +113,7 @@ public class UniverseGenerator : MonoBehaviour
 		{
 			var gm = Instantiate<GameObject>(Nebulas[Random.Range(0, Nebulas.Count)]);
 			gm.transform.rotation = Random.rotationUniform;
+		    gm.transform.localPosition = Vector3.zero;
 			gm.transform.SetParent(BackgroundContainer.transform);
 			gm.layer = LayerMask.NameToLayer("Universe Background");
 
