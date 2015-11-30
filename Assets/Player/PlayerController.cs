@@ -417,7 +417,7 @@ public class PlayerController : MonoBehaviour
                 GUI.Label(new Rect(Screen.width/2f - 100f, Screen.height/2f + 50f, 200f, 25f), "Press 'E' to select next Squadron Member.", new GUIStyle {alignment = TextAnchor.MiddleCenter, normal = {textColor = Color.white}});
             }
         }
-        GUI.Label(new Rect(50f, 80f, 100f, 25f), string.Format("Squadron: {0:f0}", squadronLiveCount));
+        GUI.Label(new Rect(50f, 80f, 100f, 25f), string.Format("Squadron: {0:f0}/{1:f0}", squadronLiveCount, Squadron.Count));
         GUI.Label(new Rect(50f, 110f, 200f, 25f), string.Format("LOCK: {0} ({1:f2})", lockingTarget != null ? lockingTarget.name : string.Empty, lockingTime));
         GUI.Label(new Rect(50f, 140f, 200f, 25f), string.Format("LOCKED: {0}", lockedTarget != null ? lockedTarget.name : string.Empty));
     }

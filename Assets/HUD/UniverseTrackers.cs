@@ -178,6 +178,14 @@ public class UniverseTrackers : MonoBehaviour
 		{
 			Destroy(tracker.TrackerCurosr.gameObject);
 		}
+        if (tracker.FarTrackerCursor != null && tracker.FarTrackerCursor.gameObject != null)
+        {
+            Destroy(tracker.FarTrackerCursor.gameObject);
+        }
+        if (tracker.VeryFarTrackerCursor != null && tracker.VeryFarTrackerCursor.gameObject != null)
+        {
+            Destroy(tracker.VeryFarTrackerCursor.gameObject);
+        }
 		if (tracker.ArrowCursor != null && tracker.ArrowCursor.gameObject != null)
 		{
 			Destroy(tracker.ArrowCursor.gameObject);
