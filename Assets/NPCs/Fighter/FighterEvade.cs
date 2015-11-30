@@ -83,8 +83,8 @@ public class FighterEvade : NpcState<Fighter>
         {
             if (dotTarget < -Npc.TurnAroundDistance)
             {
-                Debug.Log("TURN AROUND!");
-                Debug.Log("DOT: " + dotTarget);
+                //Debug.Log("TURN AROUND!");
+                //Debug.Log("DOT: " + dotTarget);
                 Npc.State = new FighterChase(Npc);
             }
             else

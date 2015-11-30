@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private Fighter _playerNpc;
 
 	public List<Fighter> Squadron;
-	private int _curVehicleIndex = 0;
+	private int _curSquadronIndex = 0;
 
 	public bool InvertY = false;
 	public bool HideMouse = false;
@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
         _playerNpc = gameObject.AddComponent<Fighter>();
         _playerNpc.Team = Team;
 	    _playerNpc.IsSquadronMember = true;
+	    _playerNpc.VehiclePrefab = VehiclePrefab;
 	    _playerNpc.enabled = false;
         SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
         _playerNpc.SetVehicleInstance(_playVehicleInstance);
@@ -66,15 +67,6 @@ public class PlayerController : MonoBehaviour
                 univPos.CellLocalPosition += Formations.GetArrowOffset(i, 10f);
                 member.IsSquadronMember = true;
                 SpawnSquadronVehicle(member, univPos);
-                /*
-                member.SpawnVehicle(member.VehiclePrefab, univPos);
-                var memberTracker = member.VehicleInstance.GetComponent<Tracker>();
-                memberTracker.ArrowCursorImage = ArrowCursorImage;
-                memberTracker.TrackerCurosrImage = TrackerCurosrImage;
-                memberTracker.FarTrackerCursorImage = FarTrackerCursorImage;
-                memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
-                member.IsFollowIdleDestination = true;
-                */
             }
         }
     }
@@ -228,7 +220,7 @@ public class PlayerController : MonoBehaviour
 	            _playVehicleInstance.GetComponent<Killable>().Die();
 	        Debug.Log("RESPAWN");
 	        Universe.Current.WarpTo(RespawnPosition);
-	        _curVehicleIndex = 0;
+	        _curSquadronIndex = 0;
 	        SpawnVehicle(VehiclePrefab, RespawnPosition);
 
 	        var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
@@ -288,11 +280,13 @@ public class PlayerController : MonoBehaviour
 	                        Debug.Log("REPLENISH!!!");
 	                        for (var i = 0; i < Squadron.Count; i++)
 	                        {
-	                            if (Squadron[i].VehicleInstance == null)
+	                            if (i != _curSquadronIndex)
 	                            {
-                                    var spawnPos = Universe.Current.GetUniversePosition(Utility.GetRandomDirection(-Universe.Current.ViewPort.transform.forward, 80f) * 2000f);
-                                    SpawnSquadronVehicle(Squadron[i], spawnPos);
-	                                //Squadron[i].SpawnVehicle(Squadron[i].VehiclePrefab, spawnPos);
+	                                if (Squadron[i].VehicleInstance == null)
+	                                {
+	                                    var spawnPos = Universe.Current.GetUniversePosition(Utility.GetRandomDirection(-Universe.Current.ViewPort.transform.forward, 80f)*2000f);
+	                                    SpawnSquadronVehicle(Squadron[i], spawnPos);
+	                                }
 	                            }
 	                        }
 	                    }
@@ -312,26 +306,26 @@ public class PlayerController : MonoBehaviour
     {
         if (Squadron.Any(s => s.VehicleInstance != null))
         {
-            _curVehicleIndex++;
-            if (_curVehicleIndex >= Squadron.Count)
-                _curVehicleIndex = 0;
-            if (Squadron[_curVehicleIndex].VehicleInstance == null)
+            _curSquadronIndex++;
+            if (_curSquadronIndex >= Squadron.Count)
+                _curSquadronIndex = 0;
+            if (Squadron[_curSquadronIndex].VehicleInstance == null)
                 return CycleSquadronIndex();
-            return _curVehicleIndex;
+            return _curSquadronIndex;
         }
         return -1;
     }
 
     private void CycleSquadron()
     {
-        var oldSquadronIndex = _curVehicleIndex + 0;
-        _curVehicleIndex = CycleSquadronIndex();
+        var oldSquadronIndex = _curSquadronIndex + 0;
+        _curSquadronIndex = CycleSquadronIndex();
 
-        Debug.LogFormat("CYCLE {0} => {1}", oldSquadronIndex, _curVehicleIndex);
+        Debug.LogFormat("CYCLE {0} => {1}", oldSquadronIndex, _curSquadronIndex);
 
-        if (_curVehicleIndex > -1)
+        if (_curSquadronIndex > -1)
         {
-            if (Squadron[_curVehicleIndex] != null)
+            if (Squadron[_curSquadronIndex] != null)
             {
                 // Set previous controlled vehicle to NPC control
                 if (_playVehicleInstance != null && Squadron[oldSquadronIndex] != null)
@@ -344,16 +338,16 @@ public class PlayerController : MonoBehaviour
                 }
 
                 // Disable next vehicle NPC control and apply PlayerController
-                if (Squadron[_curVehicleIndex].VehicleInstance != null)
+                if (Squadron[_curSquadronIndex].VehicleInstance != null)
                 {
-                    HeadsUpDisplay.Current.ShowSquadronPrompt(string.Format("{0:f0}", _curVehicleIndex));
+                    HeadsUpDisplay.Current.ShowSquadronPrompt(string.Format("{0:f0}", _curSquadronIndex));
 
-                    _playVehicleInstance = Squadron[_curVehicleIndex].VehicleInstance;
+                    _playVehicleInstance = Squadron[_curSquadronIndex].VehicleInstance;
                     _playVehicleInstance.GetComponent<Tracker>().IsDisabled = true;
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
                     //_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
 
-                    Squadron[_curVehicleIndex].enabled = false;
+                    Squadron[_curSquadronIndex].enabled = false;
 
                     var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
                     cam.Target = _playVehicleInstance;
