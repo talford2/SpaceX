@@ -113,9 +113,9 @@ public class UniverseGenerator : MonoBehaviour
 		{
 			var gm = Instantiate<GameObject>(Nebulas[Random.Range(0, Nebulas.Count)]);
 			gm.transform.rotation = Random.rotationUniform;
-		    gm.transform.localPosition = Vector3.zero;
 			gm.transform.SetParent(BackgroundContainer.transform);
 			gm.layer = LayerMask.NameToLayer("Universe Background");
+            gm.transform.localPosition = Vector3.zero;
 
 			var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.2f));
 			randC.V *= 0.1f;
@@ -147,12 +147,12 @@ public class UniverseGenerator : MonoBehaviour
 		for (var i = 0; i < Count; i++)
 		{
 			var position = Radius * Random.onUnitSphere;
-			var star = Utility.InstantiateInParent(StarPrefabs[Random.Range(0, StarPrefabs.Count)], position, Quaternion.identity, transform);
+			var star = Utility.InstantiateInParent(StarPrefabs[Random.Range(0, StarPrefabs.Count)], transform);
 			Utility.SetLayerRecursively(star, LayerMask.NameToLayer("Universe Background"));
 			star.transform.localScale = Vector3.one * Random.Range(MinSize, MaxSize);
 			star.transform.LookAt(Camera.main.transform, transform.up);
 			star.transform.SetParent(BackgroundContainer.transform);
-
+		    star.transform.localPosition = position;
 			star.transform.rotation *= Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward);
 		}
 
