@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
 public class UniverseGenerator : MonoBehaviour
 {
 	public GameObject BackgroundContainer;
