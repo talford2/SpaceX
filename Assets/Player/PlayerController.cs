@@ -81,6 +81,9 @@ public class PlayerController : MonoBehaviour
 		memberTracker.FarTrackerCursorImage = FarTrackerCursorImage;
 		memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
 		member.IsFollowIdleDestination = true;
+	    var squadronHealthRegenerator = member.VehicleInstance.gameObject.AddComponent<HealthRegenerator>();
+	    squadronHealthRegenerator.RegenerationDelay = 5f;
+	    squadronHealthRegenerator.RegenerationRate = 5f;
 	    member.enabled = true;
 	}
 
@@ -102,6 +105,10 @@ public class PlayerController : MonoBehaviour
 		//_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
 
 		_playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;
+
+        var healthRegenerator = _playVehicleInstance.gameObject.AddComponent<HealthRegenerator>();
+        healthRegenerator.RegenerationDelay = 5f;
+        healthRegenerator.RegenerationRate = 5f;
 	}
 
     public int GetSquadronSelectedIndex()
