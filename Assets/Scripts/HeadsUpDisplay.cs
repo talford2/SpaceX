@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class HeadsUpDisplay : MonoBehaviour
@@ -10,6 +11,8 @@ public class HeadsUpDisplay : MonoBehaviour
 	public GameObject SquadronPrompt;
 	public Text SquadronNameText;
 	public float SquadronPromptTime = 1.5f;
+    public GameObject SquadronIconContainer;
+    public Image SquadronIcon;
 
 	public Image HitImage;
 
@@ -21,12 +24,15 @@ public class HeadsUpDisplay : MonoBehaviour
 
 	private float _hitCooldown = 0;
 
+    private List<Image> squadronIcons;
+
 	public static HeadsUpDisplay Current { get { return _current; } }
 
 	private void Awake()
 	{
 		_current = this;
 		HitImage.color = new Color(1, 1, 1, 0);
+        squadronIcons = new List<Image>();
 	}
 
 	private void Update()
@@ -44,6 +50,14 @@ public class HeadsUpDisplay : MonoBehaviour
 				HideSquadronPrompt();
 			}
 		}
+
+	    while (squadronIcons.Count < PlayerController.Current.Squadron.Count)
+	    {
+            var icon = Instantiate(SquadronIcon);
+            icon.transform.SetParent(SquadronIconContainer.transform);
+	        icon.rectTransform.localScale = Vector3.one;
+            squadronIcons.Add(icon);
+	    }
 
 		HitImage.color = new Color(1, 1, 1, _hitCooldown);
 		_hitCooldown -= Time.deltaTime * HitFadeSpeed;
