@@ -10,12 +10,12 @@ public class Targeting
     public static void AddTargetable(Team team, Transform transform)
     {
         if (targetables == null)
-            targetables = new Dictionary<Team, List<Transform>>();
-        if (!targetables.ContainsKey(team))
         {
-            targetables.Add(team, new List<Transform>());
+            targetables = new Dictionary<Team, List<Transform>>();
             allTargetables = new List<Transform>();
         }
+        if (!targetables.ContainsKey(team))
+            targetables.Add(team, new List<Transform>());
         targetables[team].Add(transform);
         allTargetables.Add(transform);
     }
