@@ -61,7 +61,9 @@ public class HeadsUpDisplay : MonoBehaviour
 
 	    for (var i = 0; i < PlayerController.Current.Squadron.Count; i++)
 	    {
-	        var squadronVehicle = PlayerController.Current.Squadron[i].VehicleInstance;
+	        var squadronVehicle = !PlayerController.Current.Squadron[i].enabled
+                ? PlayerController.Current.VehicleInstance
+                : PlayerController.Current.Squadron[i].VehicleInstance;
 	        if (squadronVehicle != null)
 	        {
 	            squadronIcons[i].SetSelected(PlayerController.Current.GetSquadronSelectedIndex() == i);
