@@ -125,11 +125,11 @@ public class PlayerController : MonoBehaviour
 		    {
 		        //var vehicleRay = new Ray(VehicleInstance.CurrentWeapon.GetShootPointCentre(), VehicleInstance.transform.forward);
 		        //aimAtPosition = vehicleRay.GetPoint(aimHit.distance);
-		        aimAtPosition = aimHit.point;
+		        aimAtPosition = mouseRay.GetPoint(aimHit.distance);
 		    }
 		    else
 		    {
-		        mouseRay.GetPoint(MinAimDistance);
+                aimAtPosition = mouseRay.GetPoint(MinAimDistance);
 		    }
 		}
 		return aimAtPosition;
