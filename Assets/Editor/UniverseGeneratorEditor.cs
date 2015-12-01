@@ -32,7 +32,7 @@ public class UniverseGeneratorEditor : Editor
 		universeGen.MinNebulas = EditorGUILayout.IntField(universeGen.MinNebulas);
 		universeGen.MaxNubulas = EditorGUILayout.IntField(universeGen.MaxNubulas);
 		EditorGUILayout.EndHorizontal();
-		universeGen.Nebulas = EditorExtensions.GameObjectList("Prefabs", universeGen.Nebulas);
+		universeGen.Nebulas = EditorExtensions.GameObjectList("Prefabs", universeGen.Nebulas, false);
 		EditorGUILayout.Separator();
 
 		EditorGUILayout.LabelField("Planets", EditorStyles.boldLabel);
@@ -41,7 +41,7 @@ public class UniverseGeneratorEditor : Editor
 		universeGen.MinPlanets = EditorGUILayout.IntField(universeGen.MinPlanets);
 		universeGen.MaxPlanets = EditorGUILayout.IntField(universeGen.MaxPlanets);
 		EditorGUILayout.EndHorizontal();
-		universeGen.Planets = EditorExtensions.GameObjectList("Prefabs", universeGen.Planets);
+		universeGen.Planets = EditorExtensions.GameObjectList("Prefabs", universeGen.Planets, false);
 
 		EditorGUILayout.Separator();
 		EditorGUILayout.LabelField("Star Field", EditorStyles.boldLabel);

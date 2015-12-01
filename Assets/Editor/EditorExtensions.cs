@@ -5,11 +5,11 @@ using UnityEngine;
 
 public static class EditorExtensions
 {
-	public static List<GameObject> GameObjectList(string label, List<GameObject> objs)
+	public static List<T> GameObjectList<T>(string label, List<T> objs, bool allowSceneObjects = true) where T : Object
 	{
 		if (objs == null)
 		{
-			objs = new List<GameObject>();
+			objs = new List<T>();
 		}
 		GUILayout.BeginHorizontal();
 		EditorGUILayout.PrefixLabel(label);
@@ -19,7 +19,7 @@ public static class EditorExtensions
 			for (var i = 0; i < objs.Count; i++)
 			{
 				GUILayout.BeginHorizontal();
-				objs[i] = ObjectField<GameObject>(objs[i], true);
+				objs[i] = ObjectField<T>(objs[i], allowSceneObjects);
 				if (GUILayout.Button("Remove", GUILayout.Width(60)))
 				{
 					objs.RemoveAt(i);
