@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
 		memberTracker.FarTrackerCursorImage = FarTrackerCursorImage;
 		memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
 		member.IsFollowIdleDestination = true;
+	    member.enabled = true;
 	}
 
 	private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
