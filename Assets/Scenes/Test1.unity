@@ -1648,7 +1648,7 @@ MonoBehaviour:
     type: 3}
   AimSensitivity: 15
   DefaultAimDistance: 200
-  MinAimDistance: 10
+  MinAimDistance: 50
   MaxAimDistance: 1000
 --- !u!4 &1064748905
 Transform:
