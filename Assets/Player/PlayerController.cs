@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 	public float MinAimDistance = 10f;
 	public float MaxAimDistance = 1000f;
 
+    private float aimDistance;
 	private float screenAspect;
 	private int squadronLiveCount;
 	private float replenishInterval = 2f;
@@ -118,6 +119,7 @@ public class PlayerController : MonoBehaviour
 	{
 		var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 		RaycastHit aimHit;
+	    aimDistance = Mathf.Lerp(aimDistance, DefaultAimDistance, Time.deltaTime);
 		var aimAtPosition = mouseRay.GetPoint(DefaultAimDistance);
 
         // Fancy System.
@@ -128,23 +130,18 @@ public class PlayerController : MonoBehaviour
 	    if (guessTarget != null)
 	    {
 	        var toGuessTarget = guessTarget.position - viewPortPos;
-	        return mouseRay.GetPoint(Mathf.Clamp(toGuessTarget.magnitude, MinAimDistance, MaxAimDistance));
+            aimDistance = Mathf.Clamp(toGuessTarget.magnitude, MinAimDistance, MaxAimDistance);
+            return mouseRay.GetPoint(aimDistance);
 	    }
 
 	    if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player", "Detectable")))
-		{
-		    if (aimHit.distance > MinAimDistance)
-		    {
-		        //var vehicleRay = new Ray(VehicleInstance.CurrentWeapon.GetShootPointCentre(), VehicleInstance.transform.forward);
-		        //aimAtPosition = vehicleRay.GetPoint(aimHit.distance);
-		        aimAtPosition = mouseRay.GetPoint(aimHit.distance);
-		    }
-		    else
-		    {
-                aimAtPosition = mouseRay.GetPoint(MinAimDistance);
-		    }
-		}
-		return aimAtPosition;
+	    {
+	        //var vehicleRay = new Ray(VehicleInstance.CurrentWeapon.GetShootPointCentre(), VehicleInstance.transform.forward);
+	        //aimAtPosition = vehicleRay.GetPoint(aimHit.distance);
+	        aimDistance = Mathf.Clamp(aimHit.distance, MinAimDistance, MaxAimDistance);
+            aimAtPosition = mouseRay.GetPoint(aimDistance);
+	    }
+	    return aimAtPosition;
 	}
 
 	private Transform lockingTarget;
@@ -452,6 +449,7 @@ public class PlayerController : MonoBehaviour
 		GUI.Label(new Rect(50f, 80f, 100f, 25f), string.Format("Squadron: {0:f0}/{1:f0}", squadronLiveCount, Squadron.Count));
 		GUI.Label(new Rect(50f, 110f, 200f, 25f), string.Format("LOCK: {0} ({1:f2})", lockingTarget != null ? lockingTarget.name : string.Empty, lockingTime));
 		GUI.Label(new Rect(50f, 140f, 200f, 25f), string.Format("LOCKED: {0}", lockedTarget != null ? lockedTarget.name : string.Empty));
+        GUI.Label(new Rect(50f, 170f, 200f, 25f), string.Format("AIM DIST: {0:f2}", aimDistance));
 	}
 
 	private void OnDrawGizmos()
