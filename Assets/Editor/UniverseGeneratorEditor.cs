@@ -56,9 +56,4 @@ public class UniverseGeneratorEditor : Editor
 		universeGen.MaxSize = EditorGUILayout.FloatField(universeGen.MaxSize);
 		EditorGUILayout.EndHorizontal();
 	}
-
-	public override void DrawPreview(Rect previewArea)
-	{
-		base.DrawPreview(previewArea);
-	}
 }

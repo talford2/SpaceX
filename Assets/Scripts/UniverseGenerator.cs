@@ -116,7 +116,7 @@ public class UniverseGenerator : MonoBehaviour
 			gm.transform.rotation = Random.rotationUniform;
 			gm.transform.SetParent(BackgroundContainer.transform);
 			gm.layer = LayerMask.NameToLayer("Universe Background");
-            gm.transform.localPosition = Vector3.zero;
+			gm.transform.localPosition = Vector3.zero;
 
 			var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.2f));
 			randC.V *= 0.1f;
@@ -144,16 +144,23 @@ public class UniverseGenerator : MonoBehaviour
 		sunColor.S *= Random.Range(0.1f, 1f);
 		_sunLight.color = sunColor.GetColor();
 
+		if (StarPrefabs.Count > 0)
+		{
+			var c = new Color(1f, 1f, 1f, Random.Range(0.2f, 1f));
+			StarPrefabs.First().GetComponentInChildren<Renderer>().sharedMaterial.SetColor("_Color", c);
+		}
+
 		// Stars
 		for (var i = 0; i < Count; i++)
 		{
 			var position = Radius * Random.onUnitSphere;
 			var star = Utility.InstantiateInParent(StarPrefabs[Random.Range(0, StarPrefabs.Count)], transform);
+			
 			Utility.SetLayerRecursively(star, LayerMask.NameToLayer("Universe Background"));
 			star.transform.localScale = Vector3.one * Random.Range(MinSize, MaxSize);
 			star.transform.SetParent(BackgroundContainer.transform);
-		    star.transform.localPosition = position;
-            star.transform.LookAt(Camera.main.transform, transform.up);
+			star.transform.localPosition = position;
+			star.transform.LookAt(Camera.main.transform, transform.up);
 			star.transform.rotation *= Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward);
 		}
 
