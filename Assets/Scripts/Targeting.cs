@@ -5,6 +5,7 @@ using UnityEngine;
 public class Targeting
 {
     private static Dictionary<Team, List<Transform>> targetables;
+    private static List<Transform> allTargetables;
 
     public static void AddTargetable(Team team, Transform transform)
     {
@@ -13,12 +14,16 @@ public class Targeting
         if (!targetables.ContainsKey(team))
             targetables.Add(team, new List<Transform>());
         targetables[team].Add(transform);
+        allTargetables.Add(transform);
     }
 
     public static void RemoveTargetable(Team team, Transform transform)
     {
         if (targetables.ContainsKey(team))
+        {
             targetables[team].Remove(transform);
+            allTargetables.Remove(transform);
+        }
     }
 
     public static Team GetEnemyTeam(Team team)
@@ -36,11 +41,7 @@ public class Targeting
 
     public static Transform FindFacingAngleAny(Vector3 fromPosition, Vector3 facing, float maxDistance, float angleTolerance)
     {
-        var targetCandidates = new List<Transform>();
-        foreach (var team in targetables.Keys)
-        {
-            targetCandidates.AddRange(targetables[team]);
-        }
+        var targetCandidates = allTargetables;
         return FindFacingAngleTarget(targetCandidates, fromPosition, facing, maxDistance, angleTolerance);
     }
 
