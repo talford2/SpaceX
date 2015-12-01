@@ -119,6 +119,15 @@ public class PlayerController : MonoBehaviour
 		var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 		RaycastHit aimHit;
 		var aimAtPosition = mouseRay.GetPoint(DefaultAimDistance);
+
+        // Fancy System.
+	    var guessTarget = Targeting.FindFacingAngleAny(Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward, MaxAimDistance);
+	    if (guessTarget != null)
+	    {
+	        var toGuessTarget = guessTarget.position - Universe.Current.ViewPort.transform.position;
+	        return mouseRay.GetPoint(toGuessTarget.magnitude);
+	    }
+
 		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player", "Detectable")))
 		{
 		    if (aimHit.distance > MinAimDistance)
@@ -149,7 +158,7 @@ public class PlayerController : MonoBehaviour
 			lockingTarget = null;
 			if (Input.GetMouseButton(1))
 			{
-				lockingTarget = Targeting.FindFacingAngle(Targeting.GetEnemyTeam(Team), VehicleInstance.transform.position, VehicleInstance.transform.forward, 1000f);
+				lockingTarget = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Team), VehicleInstance.transform.position, VehicleInstance.transform.forward, 1000f);
 				if (lastLockingTarget == null)
 					lastLockingTarget = lockingTarget;
 			}

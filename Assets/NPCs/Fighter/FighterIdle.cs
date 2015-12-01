@@ -39,7 +39,7 @@ public class FighterIdle : NpcState<Fighter>
             targetSearchCooldown -= Time.deltaTime;
             if (targetSearchCooldown < 0f)
             {
-                Npc.Target = Targeting.FindFacingAngle(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
+                Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
                 targetSearchCooldown = targetSearchInterval;
                 if (Npc.Target != null)
                 {
@@ -47,7 +47,7 @@ public class FighterIdle : NpcState<Fighter>
                 }
                 else
                 {
-                    Npc.Target = Targeting.FindFacingAngle(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, -Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
+                    Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, -Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
                     if (Npc.Target != null)
                     {
                         Npc.State = new FighterEvade(Npc);
