@@ -123,7 +123,9 @@ public class PlayerController : MonoBehaviour
 		{
 			if (aimHit.distance > MinAimDistance)
 			{
-				aimAtPosition = aimHit.point;
+			    //var vehicleRay = new Ray(VehicleInstance.CurrentWeapon.GetShootPointCentre(), VehicleInstance.transform.forward);
+			    //aimAtPosition = vehicleRay.GetPoint(aimHit.distance);
+			    aimAtPosition = aimHit.point;
 			}
 		}
 		return aimAtPosition;
