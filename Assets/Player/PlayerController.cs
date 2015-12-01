@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
 		var aimAtPosition = mouseRay.GetPoint(DefaultAimDistance);
 
         // Fancy System.
-	    var guessTarget = Targeting.FindFacingAngleAny(Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward, MaxAimDistance);
+	    var guessTarget = Targeting.FindFacingAngleAny(Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward, MaxAimDistance, 5f);
 	    if (guessTarget != null)
 	    {
 	        var toGuessTarget = guessTarget.position - Universe.Current.ViewPort.transform.position;

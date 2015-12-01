@@ -31,25 +31,25 @@ public class Targeting
     public static Transform FindFacingAngleTeam(Team team, Vector3 fromPosition, Vector3 facing, float maxDistance)
     {
         var targetCandidates = targetables[team];
-        return FindFacingAngleTarget(targetCandidates, fromPosition, facing, maxDistance);
+        return FindFacingAngleTarget(targetCandidates, fromPosition, facing, maxDistance, 90f);
     }
 
-    public static Transform FindFacingAngleAny(Vector3 fromPosition, Vector3 facing, float maxDistance)
+    public static Transform FindFacingAngleAny(Vector3 fromPosition, Vector3 facing, float maxDistance, float angleTolerance)
     {
         var targetCandidates = new List<Transform>();
         foreach (var team in targetables.Keys)
         {
             targetCandidates.AddRange(targetables[team]);
         }
-        return FindFacingAngleTarget(targetCandidates, fromPosition, facing, maxDistance);
+        return FindFacingAngleTarget(targetCandidates, fromPosition, facing, maxDistance, angleTolerance);
     }
 
-    private static Transform FindFacingAngleTarget(List<Transform> targetCandidates, Vector3 fromPosition, Vector3 facing, float maxDistance)
+    private static Transform FindFacingAngleTarget(List<Transform> targetCandidates, Vector3 fromPosition, Vector3 facing, float maxDistance, float angleTolerance)
     {
         Transform target = null;
         if (targetCandidates.Any())
         {
-            var smallestAngle = float.PositiveInfinity;
+            var smallestAngle = angleTolerance;
             foreach (var candidate in targetCandidates)
             {
                 var toTarget = candidate.position - fromPosition;
