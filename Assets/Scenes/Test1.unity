@@ -1647,7 +1647,8 @@ MonoBehaviour:
   VeryFarTrackerCursorImage: {fileID: 2800000, guid: 56d69d70aa96a294a8990d0c1384da0f,
     type: 3}
   AimSensitivity: 15
-  DefaultAimDistance: 200
+  MouseMoveClamp: 0.015
+  DefaultAimDistance: 500
   MinAimDistance: 50
   MaxAimDistance: 1000
 --- !u!4 &1064748905

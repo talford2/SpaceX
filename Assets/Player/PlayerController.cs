@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
 	[Header("Aiming")]
 	public float AimSensitivity = 10f;
+    public float MouseMoveClamp = 0.02f; 
 
 	public float DefaultAimDistance = 200f;
 	public float MinAimDistance = 10f;
@@ -208,22 +210,23 @@ public class PlayerController : MonoBehaviour
 		}
 		if (_playVehicleInstance != null)
 		{
-			var mouseClamp = 0.003f;
-			var mouseHorizontal = AimSensitivity * Mathf.Clamp(Input.GetAxis("MouseHorizontal") / Screen.width, -mouseClamp, mouseClamp);
-			var mouseVertical = AimSensitivity * Mathf.Clamp(screenAspect * Input.GetAxis("MouseVertical") / Screen.height, -mouseClamp, mouseClamp);
+			var mouseHorizontal = AimSensitivity * Input.GetAxis("MouseHorizontal") / Screen.width;
+		    var mouseVertical = AimSensitivity*screenAspect*Input.GetAxis("MouseVertical")/Screen.height;
 
 			var controllerHorizontal = AimSensitivity * Input.GetAxis("Horizontal") / Screen.width;
 			var controllerVertical = AimSensitivity * screenAspect * Input.GetAxis("Vertical") / Screen.height;
 
+		    var pitchYaw = Vector2.ClampMagnitude(new Vector2(controllerVertical + mouseVertical, controllerHorizontal + mouseHorizontal), MouseMoveClamp);
+
 			if (InvertY)
 			{
-				_playVehicleInstance.PitchThotttle = (controllerVertical + mouseVertical) * -1;
+                _playVehicleInstance.PitchThotttle = pitchYaw.x * -1;
 			}
 			else
 			{
-				_playVehicleInstance.PitchThotttle = controllerVertical + mouseVertical;
+                _playVehicleInstance.PitchThotttle = pitchYaw.x;
 			}
-			_playVehicleInstance.YawThrottle = controllerHorizontal + mouseHorizontal;
+            _playVehicleInstance.YawThrottle = pitchYaw.y;
 			_playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
 			_playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
 
