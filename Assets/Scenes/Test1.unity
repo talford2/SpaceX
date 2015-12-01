@@ -118,6 +118,7 @@ RectTransform:
   - {fileID: 1123654778}
   - {fileID: 1285689577}
   - {fileID: 474899234}
+  - {fileID: 1109137750}
   m_Father: {fileID: 2108019518}
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
@@ -172,7 +173,7 @@ Canvas:
   serializedVersion: 2
   m_RenderMode: 1
   m_Camera: {fileID: 663547984}
-  m_PlaneDistance: 0.1
+  m_PlaneDistance: 5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -239,7 +240,7 @@ GameObject:
   - 114: {fileID: 128853637}
   - 114: {fileID: 128853636}
   m_Layer: 0
-  m_Name: CameraContainer
+  m_Name: Camera Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,6 +464,10 @@ Prefab:
       propertyPath: m_Text
       value: Are you sure you want to quit?
       objectReference: {fileID: 0}
+    - target: {fileID: 106712, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
+      propertyPath: m_Name
+      value: Event System
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11408380, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
@@ -508,65 +513,40 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 470980, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
+    - target: {fileID: 473466, guid: a15f18d58ab755947982fc9f568e6c2f, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 470980, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
+    - target: {fileID: 473466, guid: a15f18d58ab755947982fc9f568e6c2f, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 470980, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
+    - target: {fileID: 473466, guid: a15f18d58ab755947982fc9f568e6c2f, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 470980, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
+    - target: {fileID: 473466, guid: a15f18d58ab755947982fc9f568e6c2f, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 470980, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
+    - target: {fileID: 473466, guid: a15f18d58ab755947982fc9f568e6c2f, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 470980, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
+    - target: {fileID: 473466, guid: a15f18d58ab755947982fc9f568e6c2f, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 470980, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
+    - target: {fileID: 473466, guid: a15f18d58ab755947982fc9f568e6c2f, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 470980, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
+    - target: {fileID: 473466, guid: a15f18d58ab755947982fc9f568e6c2f, type: 2}
       propertyPath: m_RootOrder
-      value: 18
+      value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 11458204, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
-      propertyPath: DustParticleCount
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 11458204, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
-      propertyPath: Radius
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 118032, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
-      propertyPath: m_Name
-      value: Space Cloud
-      objectReference: {fileID: 0}
-    - target: {fileID: 11458204, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
-      propertyPath: DustParticlePrefab
-      value: 
-      objectReference: {fileID: 177002, guid: 2331ff85dc46ab44c83bee3a382e038d, type: 2}
-    - target: {fileID: 11458204, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
-      propertyPath: Opacity
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 118032, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11427156, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
-  m_ParentPrefab: {fileID: 100100000, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a15f18d58ab755947982fc9f568e6c2f, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &282404508
 GameObject:
@@ -579,7 +559,7 @@ GameObject:
   - 20: {fileID: 282404513}
   - 92: {fileID: 282404511}
   m_Layer: 0
-  m_Name: BackgroundCamera
+  m_Name: Background Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -946,7 +926,7 @@ GameObject:
   - 222: {fileID: 474899236}
   - 114: {fileID: 474899235}
   m_Layer: 5
-  m_Name: HitGlow
+  m_Name: Hit Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1155,7 +1135,7 @@ GameObject:
   - 4: {fileID: 624703669}
   - 114: {fileID: 624703671}
   m_Layer: 0
-  m_Name: PlayerStart
+  m_Name: Player Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1263,7 +1243,7 @@ GameObject:
   - 4: {fileID: 663547980}
   - 20: {fileID: 663547984}
   m_Layer: 0
-  m_Name: UiCamera
+  m_Name: UI Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1354,7 +1334,7 @@ GameObject:
   - 4: {fileID: 761010714}
   - 114: {fileID: 761010713}
   m_Layer: 0
-  m_Name: RespawnPlayerStart
+  m_Name: Respawn Player Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1400,7 +1380,7 @@ GameObject:
   - 114: {fileID: 864972685}
   - 114: {fileID: 864972684}
   m_Layer: 0
-  m_Name: PirateSquad
+  m_Name: Pirate Squad
   m_TagString: Untagged
   m_Icon: {fileID: -3545028842045912814, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1809,6 +1789,74 @@ MonoBehaviour:
   MaxSize: 2000
   Radius: 1200
   Count: 20
+--- !u!1 &1109137749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1109137750}
+  - 222: {fileID: 1109137752}
+  - 114: {fileID: 1109137751}
+  m_Layer: 5
+  m_Name: Squad Vehicles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1109137750
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1109137749}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1890907806}
+  m_Father: {fileID: 24270302}
+  m_RootOrder: 5
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 30, y: -30}
+  m_SizeDelta: {x: -60, y: 70}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1109137751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1109137749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1109137752
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1109137749}
 --- !u!1 &1123654777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,7 +2180,7 @@ GameObject:
   - 114: {fileID: 1285689581}
   - 114: {fileID: 1285689580}
   m_Layer: 5
-  m_Name: SquadronPrompt
+  m_Name: Squadron Prompt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2533,7 +2581,7 @@ GameObject:
   - 20: {fileID: 1793718006}
   - 92: {fileID: 1793718004}
   m_Layer: 0
-  m_Name: DistantCamera
+  m_Name: Distant Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2634,6 +2682,73 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Shifter: {fileID: 864972685}
   SpawnOnAwake: 1
+--- !u!1 &1890907805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1890907806}
+  - 222: {fileID: 1890907808}
+  - 114: {fileID: 1890907807}
+  m_Layer: 5
+  m_Name: Squad Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1890907806
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1890907805}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1109137750}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 70, y: 70}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1890907807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1890907805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 0f35329b9f2d6544a8ad52a1fc7fe556, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1890907808
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1890907805}
 --- !u!1 &1933363056 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 118032, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
@@ -2669,7 +2784,7 @@ GameObject:
   - 114: {fileID: 1954057691}
   - 114: {fileID: 1954057693}
   m_Layer: 0
-  m_Name: SpaceStation
+  m_Name: Space Station
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3016,7 +3131,7 @@ GameObject:
   - 4: {fileID: 2108019518}
   - 114: {fileID: 2108019519}
   m_Layer: 0
-  m_Name: HeadsUpDisplay
+  m_Name: Heads Up Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3055,24 +3170,3 @@ MonoBehaviour:
   SquadronPromptTime: 1.5
   HitImage: {fileID: 474899235}
   HitFadeSpeed: 0.5
---- !u!1 &2139494455 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 118032, guid: 763e3812b299ee64ba072f5e5f19cb8e, type: 2}
-  m_PrefabInternal: {fileID: 204637654}
---- !u!114 &2139494456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2139494455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UniverseCellIndex:
-    X: 0
-    Y: 0
-    Z: 0
-  CellLocalPosition: {x: 0, y: 0, z: 0}
-  _particleSystems: []
