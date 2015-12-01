@@ -102,6 +102,11 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;
 	}
 
+    public int GetSquadronSelectedIndex()
+    {
+        return _curSquadronIndex;
+    }
+
 	private void PlayerController_OnDamage(Vector3 position, Vector3 normal)
 	{
 		HeadsUpDisplay.Current.Hit();
