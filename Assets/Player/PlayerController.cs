@@ -121,14 +121,17 @@ public class PlayerController : MonoBehaviour
 		var aimAtPosition = mouseRay.GetPoint(DefaultAimDistance);
 
         // Fancy System.
-	    var guessTarget = Targeting.FindFacingAngleAny(Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward, MaxAimDistance, 5f);
+	    var viewPortPos = Universe.Current.ViewPort.transform.position;
+        var viewPortForward = Universe.Current.ViewPort.transform.forward;
+        var dotViewPort = Vector3.Dot(VehicleInstance.CurrentWeapon.GetShootPointCentre() - viewPortPos, viewPortForward);
+        var guessTarget = Targeting.FindFacingAngleAny(viewPortPos + dotViewPort * viewPortForward, viewPortForward, MaxAimDistance, 5f);
 	    if (guessTarget != null)
 	    {
-	        var toGuessTarget = guessTarget.position - Universe.Current.ViewPort.transform.position;
-	        return mouseRay.GetPoint(toGuessTarget.magnitude);
+	        var toGuessTarget = guessTarget.position - viewPortPos;
+	        return mouseRay.GetPoint(Mathf.Clamp(toGuessTarget.magnitude, MinAimDistance, MaxAimDistance));
 	    }
 
-		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player", "Detectable")))
+	    if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player", "Detectable")))
 		{
 		    if (aimHit.distance > MinAimDistance)
 		    {

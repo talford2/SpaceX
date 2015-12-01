@@ -56,7 +56,7 @@ public class Targeting
                 if (toTarget.sqrMagnitude < maxDistance * maxDistance)
                 {
                     // Exclude targets that are behind the missile
-                    if (Vector3.Dot(candidate.position - fromPosition, facing) > 0f)
+                    if (Vector3.Dot(toTarget, facing) > 0f)
                     {
                         // Choose target based smallest angle to
                         var angleTo = Mathf.Abs(Vector3.Angle(facing, candidate.position - fromPosition));
