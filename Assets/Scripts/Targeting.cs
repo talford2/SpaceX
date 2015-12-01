@@ -12,7 +12,10 @@ public class Targeting
         if (targetables == null)
             targetables = new Dictionary<Team, List<Transform>>();
         if (!targetables.ContainsKey(team))
+        {
             targetables.Add(team, new List<Transform>());
+            allTargetables = new List<Transform>();
+        }
         targetables[team].Add(transform);
         allTargetables.Add(transform);
     }
