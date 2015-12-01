@@ -117,8 +117,9 @@ public class PlayerController : MonoBehaviour
 	private Vector3 GetAimAt()
 	{
 		var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-		RaycastHit aimHit;
+		//RaycastHit aimHit;
 		var aimAtPosition = mouseRay.GetPoint(DefaultAimDistance);
+        /*
 		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player", "Detectable")))
 		{
 			if (aimHit.distance > MinAimDistance)
@@ -126,6 +127,7 @@ public class PlayerController : MonoBehaviour
 				aimAtPosition = aimHit.point;
 			}
 		}
+        */
 		return aimAtPosition;
 	}
 
@@ -292,7 +294,6 @@ public class PlayerController : MonoBehaviour
 						var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, 2000f, LayerMask.GetMask("Detectable"));
 						if (detected.Any(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team)))
 						{
-
 						}
 						else
 						{
