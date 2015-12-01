@@ -346,51 +346,51 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -24
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -24
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 22424454, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchorMin.y
@@ -1647,7 +1647,7 @@ MonoBehaviour:
   VeryFarTrackerCursorImage: {fileID: 2800000, guid: 56d69d70aa96a294a8990d0c1384da0f,
     type: 3}
   AimSensitivity: 15
-  MouseMoveClamp: 0.015
+  MouseMoveClamp: 0.02
   DefaultAimDistance: 500
   MinAimDistance: 50
   MaxAimDistance: 1000

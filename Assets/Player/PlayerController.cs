@@ -145,8 +145,6 @@ public class PlayerController : MonoBehaviour
 
 	    if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player", "Detectable")))
 	    {
-	        //var vehicleRay = new Ray(VehicleInstance.CurrentWeapon.GetShootPointCentre(), VehicleInstance.transform.forward);
-	        //aimAtPosition = vehicleRay.GetPoint(aimHit.distance);
 	        aimDistance = Mathf.Clamp(aimHit.distance, MinAimDistance, MaxAimDistance);
             aimAtPosition = mouseRay.GetPoint(aimDistance);
 	    }
@@ -456,10 +454,12 @@ public class PlayerController : MonoBehaviour
 				GUI.Label(new Rect(Screen.width / 2f - 100f, Screen.height / 2f + 50f, 200f, 25f), "Press 'E' to select next Squadron Member.", new GUIStyle { alignment = TextAnchor.MiddleCenter, normal = { textColor = Color.white } });
 			}
 		}
-		GUI.Label(new Rect(50f, 80f, 100f, 25f), string.Format("Squadron: {0:f0}/{1:f0}", squadronLiveCount, Squadron.Count));
-		GUI.Label(new Rect(50f, 110f, 200f, 25f), string.Format("LOCK: {0} ({1:f2})", lockingTarget != null ? lockingTarget.name : string.Empty, lockingTime));
-		GUI.Label(new Rect(50f, 140f, 200f, 25f), string.Format("LOCKED: {0}", lockedTarget != null ? lockedTarget.name : string.Empty));
-        GUI.Label(new Rect(50f, 170f, 200f, 25f), string.Format("AIM DIST: {0:f2}", aimDistance));
+        var cellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
+        GUI.Label(new Rect(30f, 120f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", cellIndex.X, cellIndex.Y, cellIndex.Z));
+		GUI.Label(new Rect(30f, 150f, 100f, 25f), string.Format("SQUADRON: {0:f0}/{1:f0}", squadronLiveCount, Squadron.Count));
+		GUI.Label(new Rect(30f, 180f, 200f, 25f), string.Format("LOCK: {0} ({1:f2})", lockingTarget != null ? lockingTarget.name : string.Empty, lockingTime));
+		GUI.Label(new Rect(30f, 210f, 200f, 25f), string.Format("LOCKED: {0}", lockedTarget != null ? lockedTarget.name : string.Empty));
+        GUI.Label(new Rect(30f, 240f, 200f, 25f), string.Format("AIM DIST: {0:f2}", aimDistance));
 	}
 
 	private void OnDrawGizmos()

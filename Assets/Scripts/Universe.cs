@@ -65,16 +65,6 @@ public class Universe : MonoBehaviour
 		Gizmos.DrawWireCube(Vector3.zero, Vector3.one * CellSize);
 	}
 
-	private void OnGUI()
-	{
-
-		var cellIndex = ViewPort.Shiftable.UniverseCellIndex;
-		GUI.Label(new Rect(50f, 50f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", cellIndex.X, cellIndex.Y, cellIndex.Z));
-		/*
-        GUI.Label(new Rect(50f, Screen.height - 50f, 100f, 20f), string.Format("ENERGY: {0:f1}", PlayerController.Current.VehicleInstance.BoostEnergy));
-        */
-	}
-
 	public Vector3 GetWorldPosition(UniversePosition universePosition)
 	{
 		return GetWorldPosition(universePosition.CellIndex, universePosition.CellLocalPosition);
