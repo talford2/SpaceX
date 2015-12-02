@@ -408,6 +408,8 @@ public class PlayerController : MonoBehaviour
 
                     Squadron[_curSquadronIndex].enabled = false;
 
+                    Universe.Current.WarpTo(_playVehicleInstance.Shiftable);
+
                     var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
                     cam.Target = _playVehicleInstance;
                     cam.Reset();
