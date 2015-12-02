@@ -44,28 +44,28 @@ public class Universe : MonoBehaviour
 		Shift(delta);
 	}
 
-	public void Shift(CellIndex delta)
-	{
-        for (var i=0; i< ShiftableItems.Count; i++)
+    public void Shift(CellIndex delta)
+    {
+        for (var i = 0; i < ShiftableItems.Count; i++)
         {
             var shiftableItem = ShiftableItems[i];
-			shiftableItem.Shift(delta.ToVector3() * CellSize);
-		}
-	}
+            shiftableItem.Shift(delta.ToVector3()*CellSize);
+        }
+    }
 
-	public void WarpTo(Shiftable spawner)
+    public void WarpTo(Shiftable spawner)
 	{
 		WarpTo(spawner.UniversePosition);
 	}
 
-	public void WarpTo(UniversePosition universePosition)
-	{
+    public void WarpTo(UniversePosition universePosition)
+    {
         var shiftDelta = ViewPort.Shiftable.UniverseCellIndex - universePosition.CellIndex;
         ViewPort.Shiftable.SetShiftPosition(universePosition);
-		Shift(shiftDelta);
-	}
+        Shift(shiftDelta);
+    }
 
-	public void OnDrawGizmos()
+    public void OnDrawGizmos()
 	{
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireCube(Vector3.zero, Vector3.one * CellSize);
