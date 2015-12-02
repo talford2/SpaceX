@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SpaceCloud
-  m_Shader: {fileID: 4800000, guid: 808f1013f560c4142bf5c73c10c3e227, type: 3}
+  m_Name: Nebula 3
+  m_Shader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 4000
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: f5760aa7e6e08964eb980b858eb07c5b, type: 3}
+          m_Texture: {fileID: 2800000, guid: 028c34018f655b143b2c41563ee2b405, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -129,28 +129,12 @@ Material:
         second: 0
       data:
         first:
-          name: _A
-        second: 50
-      data:
-        first:
-          name: _B
-        second: 150
-      data:
-        first:
-          name: _C
-        second: 200
-      data:
-        first:
-          name: _D
-        second: 500
-      data:
-        first:
           name: _InvFade
-        second: 3
+        second: 0.01
       data:
         first:
-          name: _FadeDistance
-        second: 1000
+          name: _EmissionScaleUI
+        second: 0
     m_Colors:
       data:
         first:
@@ -159,12 +143,12 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.2480303, g: 0.32662895, b: 0.19020689, a: 1}
-      data:
-        first:
-          name: _Bolor
-        second: {r: 0.2586207, g: 0.2586207, b: 0.2586207, a: 1}
+        second: {r: 0.19215687, g: 0.19215687, b: 0.19215687, a: 1}
       data:
         first:
           name: _TintColor
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _EmissionColorUI
         second: {r: 1, g: 1, b: 1, a: 1}
