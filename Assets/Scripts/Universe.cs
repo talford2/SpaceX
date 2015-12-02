@@ -36,14 +36,19 @@ public class Universe : MonoBehaviour
 		{
 			WarpTo(PlayerSpawnPosition);
 		}
-		ViewPort.Shiftable.OnCellIndexChange += Shift;
+		ViewPort.Shiftable.OnCellIndexChange += Shiftable_OnCellIndexChange;
+	}
+
+	private void Shiftable_OnCellIndexChange(Shiftable sender, CellIndex delta)
+	{
+		Shift(delta);
 	}
 
 	public void Shift(CellIndex delta)
 	{
-		foreach (var shiftable in ShiftableItems)
+		foreach (var shiftableItem in ShiftableItems)
 		{
-			shiftable.Shift(delta.ToVector3() * CellSize);
+			shiftableItem.Shift(delta.ToVector3() * CellSize);
 		}
 	}
 

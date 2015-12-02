@@ -11,7 +11,7 @@ public class Shiftable : MonoBehaviour
 		get { return new UniversePosition(UniverseCellIndex, CellLocalPosition); }
 	}
 
-	public delegate void OnCellIndexChangeEvent(CellIndex delta);
+	public delegate void OnCellIndexChangeEvent(Shiftable sender, CellIndex delta);
 
 	public event OnCellIndexChangeEvent OnCellIndexChange;
 
@@ -31,7 +31,7 @@ public class Shiftable : MonoBehaviour
 			UniverseCellIndex += cellDelta;
 			if (OnCellIndexChange != null)
 			{
-				OnCellIndexChange(cellDelta);
+				OnCellIndexChange(this, cellDelta);
 			}
 			CellLocalPosition -= cellDelta.ToVector3() * Universe.Current.CellSize;
 		}

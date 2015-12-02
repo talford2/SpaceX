@@ -5,40 +5,27 @@ using UnityEngine;
 [System.Serializable]
 public class UniverseGenerator : MonoBehaviour
 {
-	public GameObject BackgroundContainer;
-
-	public List<GameObject> Nebulas;
-
 	public Color PrimaryColor = Color.red;
-
 	public Color SecondaryColor = Color.yellow;
-
+	public GameObject BackgroundContainer;
 	public ReflectionProbe SceneRelfectionProbe;
+	public GameObject SunObject;
+	public bool UseRandomColours = false;
+	public Camera BackgroundCamera;
 
+	// Materials
 	public Material BackgroundMaterial;
-
 	public Material DustMaterial;
-
 	public Material AddFogMaterial;
 
-	private Light _sunLight;
-
-	public GameObject SunObject;
-	private GameObject _sunObj;
-
+	// Nebulas
 	public int MinNebulas = 30;
-
 	public int MaxNubulas = 40;
-
-	public bool UseRandomColours = false;
-
-	public Camera BackgroundCamera;
+	public List<GameObject> Nebulas;
 
 	// Planets
 	public int MinPlanets = 4;
-
 	public int MaxPlanets = 10;
-
 	public List<GameObject> Planets;
 
 	// Starfield
@@ -48,14 +35,17 @@ public class UniverseGenerator : MonoBehaviour
 	public float Radius;
 	public int Count;
 
+	// Universe Events
+	public int CellRadius = 10;
+	public List<GameObject> UniverseEventPrefabs;
+
+	private Light _sunLight;
+	private GameObject _sunObj;
+
 	void Awake()
 	{
 		RandomiseUniverse();
-	}
-
-	void Start()
-	{
-
+		RandomiseUniverseEvents();
 	}
 
 	public void Update()
@@ -155,7 +145,7 @@ public class UniverseGenerator : MonoBehaviour
 		{
 			var position = Radius * Random.onUnitSphere;
 			var star = Utility.InstantiateInParent(StarPrefabs[Random.Range(0, StarPrefabs.Count)], transform);
-			
+
 			Utility.SetLayerRecursively(star, LayerMask.NameToLayer("Universe Background"));
 			star.transform.localScale = Vector3.one * Random.Range(MinSize, MaxSize);
 			star.transform.SetParent(BackgroundContainer.transform);
@@ -166,5 +156,18 @@ public class UniverseGenerator : MonoBehaviour
 
 		SceneRelfectionProbe.backgroundColor = bg.GetColor();
 		SceneRelfectionProbe.RenderProbe();
+	}
+
+	private void RandomiseUniverseEvents()
+	{
+		var count = 100;
+
+		for (int i = 0; i < count; i++)
+		{
+			var eventObj = Instantiate<GameObject>(UniverseEventPrefabs[Random.Range(0, UniverseEventPrefabs.Count)]);
+
+			var shifter = eventObj.GetComponent<Shiftable>();
+			shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * CellRadius);
+		}
 	}
 }

@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
 		}
 	}
 
-	private void Shifter_OnCellIndexChange(CellIndex delta)
+	private void Shifter_OnCellIndexChange(Shiftable shiftable, CellIndex delta)
 	{
 		//(Universe.Current.ViewPort.Shiftable.UniverseCellIndex - Shifter.UniverseCellIndex).
 		//throw new System.NotImplementedException();
@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
 		{
 			_fighterInst = Instantiate<Fighter>(FighterPrefab);
 
-		    var universePosition = new UniversePosition(Shifter.UniverseCellIndex, Shifter.CellLocalPosition + transform.position);
+			var universePosition = new UniversePosition(Shifter.UniverseCellIndex, Shifter.CellLocalPosition + transform.position);
 			_fighterInst.SpawnVehicle(_fighterInst.VehiclePrefab, universePosition);
 
 			HasSpawned = true;

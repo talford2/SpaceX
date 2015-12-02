@@ -55,5 +55,10 @@ public class UniverseGeneratorEditor : Editor
 		universeGen.MinSize = EditorGUILayout.FloatField(universeGen.MinSize);
 		universeGen.MaxSize = EditorGUILayout.FloatField(universeGen.MaxSize);
 		EditorGUILayout.EndHorizontal();
+		EditorGUILayout.Separator();
+
+		EditorGUILayout.LabelField("Universe Events", EditorStyles.boldLabel);
+		universeGen.UniverseEventPrefabs = EditorExtensions.GameObjectList("Prefabs", universeGen.UniverseEventPrefabs, false);
+		universeGen.CellRadius = EditorGUILayout.IntField("Cell Radius", universeGen.CellRadius);
 	}
 }
