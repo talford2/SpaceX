@@ -9,7 +9,7 @@ public class UniverseEvent : MonoBehaviour
 
 	public Shiftable Shiftable { get; set; }
 
-	private void Awake()
+	public virtual void Awake()
 	{
 		if (UniverseEvents == null)
 		{

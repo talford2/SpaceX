@@ -214,7 +214,7 @@ MeshRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6b0f836f11b6f294f8239432975ef697, type: 2}
+  - {fileID: 2100000, guid: e66dc8b07076e174a99d53147d839882, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5cff5111ffb08f44957c7968bff34ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sphere: {fileID: 2337064}
   Spawners:
   - {fileID: 11499648}
   - {fileID: 11456104}
@@ -420,6 +421,18 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e66dc8b07076e174a99d53147d839882, type: 2}
+    - target: {fileID: 0}
+      propertyPath: TestMat
+      value: 
+      objectReference: {fileID: 2100000, guid: e66dc8b07076e174a99d53147d839882, type: 2}
+    - target: {fileID: 0}
+      propertyPath: Sphere
+      value: 
+      objectReference: {fileID: 2337064}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174836}

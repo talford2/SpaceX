@@ -58,7 +58,7 @@ public class UniverseGeneratorEditor : Editor
 		EditorGUILayout.Separator();
 
 		EditorGUILayout.LabelField("Universe Events", EditorStyles.boldLabel);
-		universeGen.CellRadius = EditorGUILayout.IntField(universeGen.CellRadius);
+		universeGen.CellRadius = EditorGUILayout.IntField("Cell Radius", universeGen.CellRadius);
 		for (var i = 0; i < universeGen.UniverseEvents.Count; i++)
 		{
 			var ue = universeGen.UniverseEvents[i];
