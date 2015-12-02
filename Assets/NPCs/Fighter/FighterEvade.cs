@@ -15,9 +15,14 @@ public class FighterEvade : NpcState<Fighter>
     private float neighborDetectCooldown;
     private List<Transform> neighbors;
 
+    // Target Reconsider
+    private float reconsiderTargetCooldown;
+    private float reconsiderTargetInterval = 3f;
+
     public FighterEvade(Fighter npc) : base(npc)
     {
         Name = "Evade";
+        reconsiderTargetCooldown = reconsiderTargetInterval;
     }
 
     private Quaternion GetRandomArc(float angle)
@@ -99,6 +104,29 @@ public class FighterEvade : NpcState<Fighter>
             if (evadeCooldown < 0f)
             {
                 Npc.State = new FighterChase(Npc);
+            }
+        }
+
+        // Reconsider Target
+        if (reconsiderTargetCooldown >= 0f)
+        {
+            reconsiderTargetCooldown -= Time.deltaTime;
+            if (reconsiderTargetCooldown < 0f)
+            {
+                Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
+                reconsiderTargetCooldown = reconsiderTargetInterval;
+                if (Npc.Target != null)
+                {
+                    Npc.State = new FighterChase(Npc);
+                }
+                else
+                {
+                    Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, -Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
+                    if (Npc.Target != null)
+                    {
+                        Npc.State = new FighterEvade(Npc);
+                    }
+                }
             }
         }
     }

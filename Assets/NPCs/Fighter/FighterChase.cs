@@ -8,9 +8,14 @@ public class FighterChase : NpcState<Fighter>
     private float neighborDetectCooldown;
     private List<Transform> neighbors;
 
+    // Target Reconsider
+    private float reconsiderTargetCooldown;
+    private float reconsiderTargetInterval = 3f;
+
 	public FighterChase(Fighter npc) : base(npc)
 	{
 		Name = "Chase";
+        reconsiderTargetCooldown = reconsiderTargetInterval;
 	}
 
     private void CheckSensors()
@@ -73,6 +78,29 @@ public class FighterChase : NpcState<Fighter>
             if (toTarget.sqrMagnitude < Npc.EvadeDistance*Npc.EvadeDistance)
             {
                 Npc.State = new FighterEvade(Npc);
+            }
+        }
+
+        // Reconsider Target
+        if (reconsiderTargetCooldown >= 0f)
+        {
+            reconsiderTargetCooldown -= Time.deltaTime;
+            if (reconsiderTargetCooldown < 0f)
+            {
+                Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
+                reconsiderTargetCooldown = reconsiderTargetInterval;
+                if (Npc.Target != null)
+                {
+                    Npc.State = new FighterChase(Npc);
+                }
+                else
+                {
+                    Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, -Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
+                    if (Npc.Target != null)
+                    {
+                        Npc.State = new FighterEvade(Npc);
+                    }
+                }
             }
         }
     }
