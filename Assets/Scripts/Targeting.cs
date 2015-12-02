@@ -38,8 +38,12 @@ public class Targeting
 
     public static Transform FindFacingAngleTeam(Team team, Vector3 fromPosition, Vector3 facing, float maxDistance)
     {
-        var targetCandidates = targetables[team];
-        return FindFacingAngleTarget(targetCandidates, fromPosition, facing, maxDistance, 90f);
+        if (targetables.ContainsKey(team))
+        {
+            var targetCandidates = targetables[team];
+            return FindFacingAngleTarget(targetCandidates, fromPosition, facing, maxDistance, 90f);
+        }
+        return null;
     }
 
     public static Transform FindFacingAngleAny(Vector3 fromPosition, Vector3 facing, float maxDistance, float angleTolerance)
