@@ -97,6 +97,7 @@ public class Fighter : Npc<Fighter>
 
     private void OnVehicleDestroyed(Killable sender)
     {
+        Target = null;
         if (!IsSquadronMember)
             Destroy(gameObject);
     }
