@@ -357,54 +357,56 @@ public class PlayerController : MonoBehaviour
 		return -1;
 	}
 
-	private void CycleSquadron()
-	{
-		var oldSquadronIndex = _curSquadronIndex + 0;
-		_curSquadronIndex = CycleSquadronIndex();
+    private void CycleSquadron()
+    {
+        var oldSquadronIndex = _curSquadronIndex + 0;
+        var cycleResult = CycleSquadronIndex();
+        if (cycleResult > -1)
+            _curSquadronIndex = cycleResult;
 
-		Debug.LogFormat("CYCLE {0} => {1}", oldSquadronIndex, _curSquadronIndex);
+        Debug.LogFormat("CYCLE {0} => {1}", oldSquadronIndex, _curSquadronIndex);
 
-		if (_curSquadronIndex > -1)
-		{
-			if (Squadron[_curSquadronIndex] != null)
-			{
-				// Set previous controlled vehicle to NPC control
-				if (_playVehicleInstance != null && Squadron[oldSquadronIndex] != null)
-				{
-					_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
-					//_playVehicleInstance.GetComponent<Killable>().OnDie -= OnVehicleDestroyed;
-					Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
-					Squadron[oldSquadronIndex].enabled = true;
-					Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Tracker>().IsDisabled = false;
+        if (cycleResult > -1)
+        {
+            if (Squadron[_curSquadronIndex] != null)
+            {
+                // Set previous controlled vehicle to NPC control
+                if (_playVehicleInstance != null && Squadron[oldSquadronIndex] != null)
+                {
+                    _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
+                    //_playVehicleInstance.GetComponent<Killable>().OnDie -= OnVehicleDestroyed;
+                    Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
+                    Squadron[oldSquadronIndex].enabled = true;
+                    Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Tracker>().IsDisabled = false;
                     Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDamage -= PlayerController_OnDamage;
-				}
+                }
 
-				// Disable next vehicle NPC control and apply PlayerController
-				if (Squadron[_curSquadronIndex].VehicleInstance != null)
-				{
-					HeadsUpDisplay.Current.ShowSquadronPrompt(string.Format("{0:f0}", _curSquadronIndex));
+                // Disable next vehicle NPC control and apply PlayerController
+                if (Squadron[_curSquadronIndex].VehicleInstance != null)
+                {
+                    HeadsUpDisplay.Current.ShowSquadronPrompt(string.Format("{0:f0}", _curSquadronIndex));
 
-					_playVehicleInstance = Squadron[_curSquadronIndex].VehicleInstance;
-					_playVehicleInstance.GetComponent<Tracker>().IsDisabled = true;
-					_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
-					//_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+                    _playVehicleInstance = Squadron[_curSquadronIndex].VehicleInstance;
+                    _playVehicleInstance.GetComponent<Tracker>().IsDisabled = true;
+                    _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
+                    //_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
                     _playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;
 
-					Squadron[_curSquadronIndex].enabled = false;
+                    Squadron[_curSquadronIndex].enabled = false;
 
-					var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
-					cam.Target = _playVehicleInstance;
-					cam.Reset();
-				}
-			}
-		}
-		else
-		{
-			Debug.Log("ALL DEAD!");
-		}
-	}
+                    var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
+                    cam.Target = _playVehicleInstance;
+                    cam.Reset();
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("ALL DEAD!");
+        }
+    }
 
-	/*
+    /*
     private void OnVehicleDestroyed(Killable sender)
     {
         Debug.Log("PLAYER VEHICLE DESTROYED");
