@@ -160,7 +160,7 @@ public class UniverseGenerator : MonoBehaviour
 
 	private void RandomiseUniverseEvents()
 	{
-		var count = 30;
+		var count = 50;
 
 		for (int i = 0; i < count; i++)
 		{
@@ -168,6 +168,7 @@ public class UniverseGenerator : MonoBehaviour
 
 			var shifter = eventObj.GetComponent<Shiftable>();
 			shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * CellRadius);
+			shifter.CellLocalPosition = Utility.RandomInsideCube * Universe.Current.CellSize;
 		}
 	}
 }

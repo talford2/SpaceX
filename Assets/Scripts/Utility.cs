@@ -115,29 +115,29 @@ public class Utility
 	public static float WrapFloat(float a, float b)
 	{
 		float result;
-	    float large;
-	    float small;
+		float large;
+		float small;
 
-	    if (a > b)
-	    {
-	        large = a;
-	        small = b;
-	    }
-	    else
-	    {
-	        large = b;
-	        small = a;
-	    }
+		if (a > b)
+		{
+			large = a;
+			small = b;
+		}
+		else
+		{
+			large = b;
+			small = a;
+		}
 
-        if (large - small > 0.5f)
-        {
-            result = large + (small - large + 1f) * Random.Range(0f, 1f);
-        }
-        else
-        {
-            result = small + (large - small) * Random.Range(0f, 1f);
-        }
-	    return result % 1f;
+		if (large - small > 0.5f)
+		{
+			result = large + (small - large + 1f) * Random.Range(0f, 1f);
+		}
+		else
+		{
+			result = small + (large - small) * Random.Range(0f, 1f);
+		}
+		return result % 1f;
 	}
 
 	public static Color GetRandomColor(Color c1, Color c2, float? alpha = null)
@@ -149,7 +149,7 @@ public class Utility
 		var c2Hsv = HSVColor.FromColor(c2);
 
 		float hue = WrapFloat(c1Hsv.H, c2Hsv.H);
-		
+
 		if (alpha.HasValue)
 		{
 			return Random.ColorHSV(
@@ -210,6 +210,14 @@ public class Utility
 	public static Vector3 GetRandomDirection(Vector3 direction, float angle)
 	{
 		return Quaternion.Euler(Random.Range(-angle, angle), Random.Range(-angle, angle), Random.Range(-angle, angle)) * -direction;
+	}
+
+	public static Vector3 RandomInsideCube
+	{
+		get
+		{
+			return new Vector3(Random.Range(0, 1), Random.Range(0, 1), Random.Range(0, 1));
+		}
 	}
 }
 
