@@ -165,8 +165,8 @@ public class UniverseGenerator : MonoBehaviour
 			for (var i = 0; i < ue.Count; i++)
 			{
 				var eventObj = Instantiate<GameObject>(ue.Prefab);
-
 				var shifter = eventObj.GetComponent<Shiftable>();
+				eventObj.transform.rotation = Random.rotation;
 				shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * CellRadius);
 				shifter.CellLocalPosition = Utility.RandomInsideCube * Universe.Current.CellSize;
 			}
