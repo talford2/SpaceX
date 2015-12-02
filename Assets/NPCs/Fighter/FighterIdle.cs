@@ -76,6 +76,18 @@ public class FighterIdle : NpcState<Fighter>
             immediateDestination = Npc.VehicleInstance.transform.position + seekForce; // + Npc.Steering.GetSeparationForce(neighbors);
 
             // Control brakes, acceleration and boost
+
+            // Roll to maintain orientation
+            var dotUpRightDestination = Vector3.Dot(Npc.IdleUpDestination, Npc.VehicleInstance.transform.right);
+            if (Mathf.Abs(dotUpRightDestination) > 0.1f)
+            {
+                Npc.VehicleInstance.RollThrottle = dotUpRightDestination;
+            }
+            else
+            {
+                Npc.VehicleInstance.RollThrottle = 0f;
+            }
+
             var dotDestination = Vector3.Dot(Npc.IdleDestination - Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward);
             Npc.VehicleInstance.TriggerBrake = false;
             Npc.VehicleInstance.TriggerAccelerate = false;

@@ -19,6 +19,7 @@ public class Fighter : Npc<Fighter>
     [Header("Idle Destination")]
     public bool IsFollowIdleDestination;
     public Vector3 IdleDestination;
+    public Vector3 IdleUpDestination;
 
 	[Header("Attack")]
 	public float AttackRange = 100f;

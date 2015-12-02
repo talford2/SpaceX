@@ -300,10 +300,12 @@ public class PlayerController : MonoBehaviour
 	        {
 	            leaderVehicle = Squadron[0].VehicleInstance;
 	            Squadron[0].IdleDestination = leaderVehicle.transform.position + leaderVehicle.transform.forward*10f;
+	            Squadron[0].IdleUpDestination = leaderVehicle.transform.up;
 	        }
 	        var formationOffset = Formations.GetArrowOffset(i, 10f);
 	        var formationDestination = leaderVehicle.transform.position + leaderVehicle.transform.rotation*formationOffset;
 	        Squadron[i].IdleDestination = formationDestination;
+	        Squadron[i].IdleUpDestination = leaderVehicle.transform.up;
 	        //Debug.DrawLine(formationDestination, formationDestination + Vector3.up*100f, Color.white);
 	    }
 
