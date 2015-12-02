@@ -120,13 +120,12 @@ public class VehicleCamera : UniverseCamera
 
     public void TriggerShake(float amplitude, float duration, float frequency)
     {
-        isShaking = true;
+        //isShaking = true;
         shakeAmplitude = amplitude;
         shakeDuration = duration;
         shakeCooldown = shakeDuration;
         shakeFrequency = frequency;
         shakeFrequencyCooldown = shakeFrequency;
-
     }
 
     public void Reset()
