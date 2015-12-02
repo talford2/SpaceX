@@ -289,24 +289,31 @@ public class PlayerController : MonoBehaviour
 		// Update squadron
 		squadronLiveCount = Squadron.Count(s => s.VehicleInstance != null);
 
-	    for (var i = 1; i < squadronLiveCount; i++)
+        Vehicle leaderVehicle;
+        if (_curSquadronIndex == 0)
+        {
+            leaderVehicle = VehicleInstance;
+        }
+        else
+        {
+            leaderVehicle = Squadron[0].VehicleInstance;
+            if (leaderVehicle != null)
+            {
+                Squadron[0].IdleDestination = leaderVehicle.transform.position + leaderVehicle.transform.forward * 10f;
+                Squadron[0].IdleUpDestination = leaderVehicle.transform.up;
+            }
+        }
+
+	    if (leaderVehicle != null)
 	    {
-	        Vehicle leaderVehicle;
-	        if (_curSquadronIndex == 0)
+	        for (var i = 1; i < squadronLiveCount; i++)
 	        {
-	            leaderVehicle = VehicleInstance;
+	            var formationOffset = Formations.GetArrowOffset(i, 10f);
+	            var formationDestination = leaderVehicle.transform.position + leaderVehicle.transform.rotation*formationOffset;
+	            Squadron[i].IdleDestination = formationDestination;
+	            Squadron[i].IdleUpDestination = leaderVehicle.transform.up;
+	            //Debug.DrawLine(formationDestination, formationDestination + Vector3.up*100f, Color.white);
 	        }
-	        else
-	        {
-	            leaderVehicle = Squadron[0].VehicleInstance;
-	            Squadron[0].IdleDestination = leaderVehicle.transform.position + leaderVehicle.transform.forward*10f;
-	            Squadron[0].IdleUpDestination = leaderVehicle.transform.up;
-	        }
-	        var formationOffset = Formations.GetArrowOffset(i, 10f);
-	        var formationDestination = leaderVehicle.transform.position + leaderVehicle.transform.rotation*formationOffset;
-	        Squadron[i].IdleDestination = formationDestination;
-	        Squadron[i].IdleUpDestination = leaderVehicle.transform.up;
-	        //Debug.DrawLine(formationDestination, formationDestination + Vector3.up*100f, Color.white);
 	    }
 
 	    if (_playVehicleInstance != null)
