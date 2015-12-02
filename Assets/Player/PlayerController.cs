@@ -289,20 +289,25 @@ public class PlayerController : MonoBehaviour
 		// Update squadron
 		squadronLiveCount = Squadron.Count(s => s.VehicleInstance != null);
 
-		for (var i = 0; i < squadronLiveCount; i++)
-		{
-			if (_playVehicleInstance != null)
-			{
-				var formationOffset = Formations.GetArrowOffset(i, 10f);
-				//Debug.Log(Squadron[i].name + " FORMATION OFFSET " + i + " : " + formationOffset);
-				var formationDestination = _playVehicleInstance.transform.position + _playVehicleInstance.transform.rotation * formationOffset;
-				Squadron[i].IdleDestination = formationDestination;
-				if (i > 0)
-					Debug.DrawLine(formationDestination, formationDestination + Vector3.up * 100f, Color.white);
-			}
-		}
+	    for (var i = 1; i < squadronLiveCount; i++)
+	    {
+	        Vehicle leaderVehicle;
+	        if (_curSquadronIndex == 0)
+	        {
+	            leaderVehicle = VehicleInstance;
+	        }
+	        else
+	        {
+	            leaderVehicle = Squadron[0].VehicleInstance;
+	            Squadron[0].IdleDestination = leaderVehicle.transform.position + leaderVehicle.transform.forward*10f;
+	        }
+	        var formationOffset = Formations.GetArrowOffset(i, 10f);
+	        var formationDestination = leaderVehicle.transform.position + leaderVehicle.transform.rotation*formationOffset;
+	        Squadron[i].IdleDestination = formationDestination;
+	        //Debug.DrawLine(formationDestination, formationDestination + Vector3.up*100f, Color.white);
+	    }
 
-		if (_playVehicleInstance != null)
+	    if (_playVehicleInstance != null)
 		{
 			if (squadronLiveCount < Squadron.Count)
 			{
