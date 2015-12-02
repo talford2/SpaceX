@@ -47,6 +47,8 @@ public class Tracker : MonoBehaviour
     {
         if (distanceSquared > 1000f*1000f)
         {
+            HealthBarBackground.enabled = false;
+            HealthBar.enabled = false;
             if (distanceSquared > 2000f*2000f)
             {
                 TrackerCurosr.enabled = false;
@@ -59,6 +61,8 @@ public class Tracker : MonoBehaviour
             VeryFarTrackerCursor.enabled = false;
             return FarTrackerCursor;
         }
+        HealthBarBackground.enabled = true;
+        HealthBar.enabled = true;
         TrackerCurosr.enabled = true;
         FarTrackerCursor.enabled = false;
         VeryFarTrackerCursor.enabled = false;
