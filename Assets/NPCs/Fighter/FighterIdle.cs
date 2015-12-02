@@ -93,12 +93,13 @@ public class FighterIdle : NpcState<Fighter>
             Npc.VehicleInstance.TriggerAccelerate = false;
             Npc.VehicleInstance.TriggerBoost = false;
 
-            if (dotDestination < 0f)
+            var brakeToIdleDistance = GetSlowdownDistance2(Npc.VehicleInstance.GetVelocity().sqrMagnitude, Npc.VehicleInstance.IdleSpeed, Npc.VehicleInstance.Brake);
+            if (dotDestination < brakeToIdleDistance)
             {
                 // Not facing 
                 Npc.VehicleInstance.TriggerBrake = true;
             }
-            if (dotDestination > 15f)
+            if (dotDestination > brakeToIdleDistance + 15f)
             {
                 //Debug.Log("I SHOULD CATCH UP?");
                 Npc.VehicleInstance.TriggerAccelerate = true;
@@ -122,7 +123,12 @@ public class FighterIdle : NpcState<Fighter>
 
     private float GetSlowdownDistance(float currentSpeed, float destinationSpeed, float deceleration)
     {
-        return (currentSpeed*currentSpeed - destinationSpeed*destinationSpeed)/(2f*deceleration);
+        return GetSlowdownDistance2(currentSpeed*currentSpeed, destinationSpeed, deceleration);
+    }
+
+    private float GetSlowdownDistance2(float currentSpeedSquared, float destinationSpeed, float deceleration)
+    {
+        return (currentSpeedSquared - destinationSpeed*destinationSpeed)/(2f*deceleration);
     }
 
     private void DetectNeighbor(Transform neighbor)
