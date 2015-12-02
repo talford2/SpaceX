@@ -14,6 +14,6 @@ public class PirateSquad : UniverseEvent
 		}
 
 		base.Initialise();
-		Debug.Log("Pop!");
+		//Debug.Log("Pop!");
 	}
 }

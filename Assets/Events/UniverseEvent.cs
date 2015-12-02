@@ -24,9 +24,11 @@ public class UniverseEvent : MonoBehaviour
 
 	private void Shiftable_OnShift(Shiftable sender, Vector3 delta)
 	{
-		Debug.Log(sender.UniverseCellIndex + " ==? " + Shiftable);
-		if (sender.UniverseCellIndex.IsEqualTo(Shiftable.UniverseCellIndex))
+		//Debug.Log(sender.UniverseCellIndex + " ==? " + Universe.Current.ViewPort.Shiftable.UniverseCellIndex);
+		if (sender.UniverseCellIndex.IsEqualTo(Universe.Current.ViewPort.Shiftable.UniverseCellIndex))
 		{
+			//Debug.Log("Go!");
+
 			Initialise();
 		}
 	}

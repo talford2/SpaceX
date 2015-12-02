@@ -160,7 +160,7 @@ public class UniverseGenerator : MonoBehaviour
 
 	private void RandomiseUniverseEvents()
 	{
-		var count = 100;
+		var count = 30;
 
 		for (int i = 0; i < count; i++)
 		{
