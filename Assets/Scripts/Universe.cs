@@ -60,8 +60,8 @@ public class Universe : MonoBehaviour
 
 	public void WarpTo(UniversePosition universePosition)
 	{
-		ViewPort.Shiftable.SetShiftPosition(universePosition);
-		var shiftDelta = ViewPort.Shiftable.UniverseCellIndex - universePosition.CellIndex;
+        var shiftDelta = ViewPort.Shiftable.UniverseCellIndex - universePosition.CellIndex;
+        ViewPort.Shiftable.SetShiftPosition(universePosition);
 		Shift(shiftDelta);
 	}
 
