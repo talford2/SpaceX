@@ -17,15 +17,15 @@ public class UniverseEvent : MonoBehaviour
 		}
 
 		Shiftable = GetComponent<Shiftable>();
-		Shiftable.OnCellIndexChange += Shiftable_OnCellIndexChange;
+		Shiftable.OnShift += Shiftable_OnShift;
 
 		UniverseEvents.Add(this);
 	}
 
-	private void Shiftable_OnCellIndexChange(Shiftable sender, CellIndex delta)
+	private void Shiftable_OnShift(Shiftable sender, Vector3 delta)
 	{
-		Debug.Log(sender.UniverseCellIndex + " ==? " + Universe.Current.ViewPort.Shiftable.UniverseCellIndex);
-		if (sender.UniverseCellIndex.IsEqualTo(Universe.Current.ViewPort.Shiftable.UniverseCellIndex))
+		Debug.Log(sender.UniverseCellIndex + " ==? " + Shiftable);
+		if (sender.UniverseCellIndex.IsEqualTo(Shiftable.UniverseCellIndex))
 		{
 			Initialise();
 		}
@@ -39,7 +39,6 @@ public class UniverseEvent : MonoBehaviour
 		{
 			Gizmos.DrawLine(transform.position, child.position);
 		}
-		//gameObject.SetActive(false);
 	}
 
 	public virtual void Initialise()

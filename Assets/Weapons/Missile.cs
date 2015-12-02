@@ -147,7 +147,7 @@ public class Missile : MonoBehaviour
 		UpdateLineRenderer();
 	}
 
-	private void Shift(Vector3 delta)
+	private void Shift(Shiftable sender, Vector3 delta)
 	{
 		_shootFrom -= delta;
 		_hitPosition -= delta;

@@ -15,7 +15,7 @@ public class Shiftable : MonoBehaviour
 
 	public event OnCellIndexChangeEvent OnCellIndexChange;
 
-	public delegate void OnShiftEvent(Vector3 delta);
+	public delegate void OnShiftEvent(Shiftable sender, Vector3 delta);
 
 	public event OnShiftEvent OnShift;
 
@@ -67,7 +67,7 @@ public class Shiftable : MonoBehaviour
 		transform.position -= shiftAmount;
 
 		if (OnShift != null)
-			OnShift(shiftAmount);
+			OnShift(this, shiftAmount);
 
 		var particleShift = Vector3.zero - shiftAmount;
 		foreach (var ps in _particleSystems)
