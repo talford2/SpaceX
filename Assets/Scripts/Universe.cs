@@ -46,8 +46,9 @@ public class Universe : MonoBehaviour
 
 	public void Shift(CellIndex delta)
 	{
-		foreach (var shiftableItem in ShiftableItems)
-		{
+        for (var i=0; i< ShiftableItems.Count; i++)
+        {
+            var shiftableItem = ShiftableItems[i];
 			shiftableItem.Shift(delta.ToVector3() * CellSize);
 		}
 	}
