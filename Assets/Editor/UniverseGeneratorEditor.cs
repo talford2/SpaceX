@@ -58,7 +58,22 @@ public class UniverseGeneratorEditor : Editor
 		EditorGUILayout.Separator();
 
 		EditorGUILayout.LabelField("Universe Events", EditorStyles.boldLabel);
-		universeGen.UniverseEventPrefabs = EditorExtensions.GameObjectList("Prefabs", universeGen.UniverseEventPrefabs, false);
-		universeGen.CellRadius = EditorGUILayout.IntField("Cell Radius", universeGen.CellRadius);
+		for (var i = 0; i < universeGen.UniverseEvents.Count; i++)
+		{
+			var ue = universeGen.UniverseEvents[i];
+
+			EditorGUILayout.BeginHorizontal();
+			ue.Prefab = EditorExtensions.ObjectField<GameObject>(ue.Prefab, false); //("Prefabe", ue..Prefab, false);
+			ue.Count = EditorGUILayout.IntField(ue.Count);
+			if (GUILayout.Button("X"))
+			{
+				universeGen.UniverseEvents.RemoveAt(i);
+			}
+			EditorGUILayout.EndHorizontal();
+		}
+		if (GUILayout.Button("Add"))
+		{
+			universeGen.UniverseEvents.Add(null);
+		}
 	}
 }

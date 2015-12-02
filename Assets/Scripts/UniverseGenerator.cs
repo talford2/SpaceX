@@ -37,7 +37,7 @@ public class UniverseGenerator : MonoBehaviour
 
 	// Universe Events
 	public int CellRadius = 10;
-	public List<GameObject> UniverseEventPrefabs;
+	public List<UniverseEventCount> UniverseEvents;
 
 	private Light _sunLight;
 	private GameObject _sunObj;
@@ -160,15 +160,24 @@ public class UniverseGenerator : MonoBehaviour
 
 	private void RandomiseUniverseEvents()
 	{
-		var count = 50;
-
-		for (int i = 0; i < count; i++)
+		foreach (var ue in UniverseEvents)
 		{
-			var eventObj = Instantiate<GameObject>(UniverseEventPrefabs[Random.Range(0, UniverseEventPrefabs.Count)]);
+			for (var i = 0; i < ue.Count; i++)
+			{
+				var eventObj = Instantiate<GameObject>(ue.Prefab);
 
-			var shifter = eventObj.GetComponent<Shiftable>();
-			shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * CellRadius);
-			shifter.CellLocalPosition = Utility.RandomInsideCube * Universe.Current.CellSize;
+				var shifter = eventObj.GetComponent<Shiftable>();
+				shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * CellRadius);
+				shifter.CellLocalPosition = Utility.RandomInsideCube * Universe.Current.CellSize;
+			}
 		}
 	}
+}
+
+[System.Serializable]
+public class UniverseEventCount
+{
+	public GameObject Prefab;
+
+	public int Count;
 }
