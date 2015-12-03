@@ -304,51 +304,51 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22435516, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 170
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22479392, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22424454, guid: 47ca6ad8b83df74499d8653dd7a7ecfb, type: 2}
       propertyPath: m_AnchorMin.y
@@ -671,6 +671,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MapSystemText: {fileID: 598008071}
+  PlayerPinPrefab: {fileID: 133228, guid: 4537303a7240d1d49a3e4dcf875bc48a, type: 2}
+  SquadronPinPrefab: {fileID: 133228, guid: f081ff83f0cde7943b6660d2161432f8, type: 2}
   PinPrefab: {fileID: 133228, guid: 04a933840e88bec44867eb87c3bd0066, type: 2}
 --- !u!4 &361315066
 Transform:
