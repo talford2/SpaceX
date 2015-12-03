@@ -43,8 +43,8 @@ public class Map : MonoBehaviour
     public void RemovePin(MapPin pin)
     {
         _pins.Remove(pin);
-        if (pin.gameObject != null)
-            Destroy(pin.gameObject);
+        if (pin.PinInstance != null)
+            Destroy(pin.PinInstance);
     }
 
     private void Update()
@@ -80,13 +80,6 @@ public class Map : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        if (_pins != null)
-        {
-            for (var i = 0; i < _pins.Count; i++)
-            {
-                Destroy(_pins[i].gameObject);
-            }
-        }
         _mapCamera.enabled = false;
         PlayerController.Current.SetControlEnabled(true);
     }
