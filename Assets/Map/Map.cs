@@ -35,6 +35,7 @@ public class Map : MonoBehaviour
     public void Show()
     {
         _mapCamera.enabled = true;
+        Cursor.visible = true;
         PlayerController.Current.SetControlEnabled(false);
         Populate();
     }
@@ -42,6 +43,7 @@ public class Map : MonoBehaviour
     public void Hide()
     {
         _mapCamera.enabled = false;
+        Cursor.visible = false;
         PlayerController.Current.SetControlEnabled(true);
     }
 
@@ -55,5 +57,10 @@ public class Map : MonoBehaviour
         {
             Show();
         }
+    }
+
+    public bool IsShown()
+    {
+        return _mapCamera.enabled;
     }
 }
