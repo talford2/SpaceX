@@ -37,6 +37,7 @@ public class Tracker : MonoBehaviour
         VeryFarTrackerCursor.enabled = false;
         HealthBarBackground.enabled = false;
         HealthBar.enabled = false;
+        LockingCursor.enabled = false;
         LockedCursor.enabled = false;
     }
 
