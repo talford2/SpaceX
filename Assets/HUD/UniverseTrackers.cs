@@ -121,19 +121,10 @@ public class UniverseTrackers : MonoBehaviour
 			_trackers = new List<Tracker>();
 		}
 
-		// Arrow
         tracker.ArrowCursor = CreateTracker(tracker.ArrowCursorImage, tracker.name + "_Arrow");
-
-		// Tracker
 		tracker.TrackerCurosr = CreateTracker(tracker.TrackerCurosrImage, tracker.name + "_Tracker");
-
-        // Far Tracker
         tracker.FarTrackerCursor = CreateTracker(tracker.FarTrackerCursorImage, tracker.name + "_FarTracker");
-
-        // Very Far Tracker
         tracker.VeryFarTrackerCursor = CreateTracker(tracker.VeryFarTrackerCursorImage, tracker.name + "_VeryFarTracker");
-
-        // Health Bar Backgorund
         tracker.HealthBarBackground = CreateTracker(healthBarBackgroundTexture, new Vector2(0.5f, -15f), tracker.name + "_HealthBack");
 
         // Health Bar
@@ -142,10 +133,7 @@ public class UniverseTrackers : MonoBehaviour
         tracker.HealthBar.fillMethod = Image.FillMethod.Horizontal;
 	    tracker.HealthBar.fillAmount = 1f;
 
-        // Locking Tracker
         tracker.LockingCursor = CreateTracker(tracker.LockingCursorImage, tracker.name + "_Locking");
-
-        // Locked Tracker
         tracker.LockedCursor = CreateTracker(tracker.LockedCursorImage, tracker.name + "_Locked");
 
 		_trackers.Add(tracker);
@@ -171,32 +159,23 @@ public class UniverseTrackers : MonoBehaviour
 	public void RemoveTracker(Tracker tracker)
 	{
 		_trackers.Remove(tracker);
-
-		if (tracker.TrackerCurosr != null && tracker.TrackerCurosr.gameObject != null)
-		{
-			Destroy(tracker.TrackerCurosr.gameObject);
-		}
-        if (tracker.FarTrackerCursor != null && tracker.FarTrackerCursor.gameObject != null)
-        {
-            Destroy(tracker.FarTrackerCursor.gameObject);
-        }
-        if (tracker.VeryFarTrackerCursor != null && tracker.VeryFarTrackerCursor.gameObject != null)
-        {
-            Destroy(tracker.VeryFarTrackerCursor.gameObject);
-        }
-		if (tracker.ArrowCursor != null && tracker.ArrowCursor.gameObject != null)
-		{
-			Destroy(tracker.ArrowCursor.gameObject);
-		}
-        if (tracker.HealthBarBackground != null && tracker.HealthBarBackground.gameObject != null)
-        {
-            Destroy(tracker.HealthBarBackground.gameObject);
-        }
-        if (tracker.HealthBar != null && tracker.HealthBar.gameObject != null)
-        {
-            Destroy(tracker.HealthBar.gameObject);
-        }
+        DestroyTrackerCursor(tracker.ArrowCursor);
+        DestroyTrackerCursor(tracker.TrackerCurosr);
+        DestroyTrackerCursor(tracker.FarTrackerCursor);
+        DestroyTrackerCursor(tracker.VeryFarTrackerCursor);
+        DestroyTrackerCursor(tracker.HealthBarBackground);
+        DestroyTrackerCursor(tracker.HealthBar);
+        DestroyTrackerCursor(tracker.LockingCursor);
+        DestroyTrackerCursor(tracker.LockedCursor);
 	}
+
+    private void DestroyTrackerCursor(Image cursor)
+    {
+        if (cursor != null && cursor.gameObject != null)
+        {
+            Destroy(cursor.gameObject);
+        }
+    }
 
 	private float GetScreenAngle(Vector2 point)
 	{
