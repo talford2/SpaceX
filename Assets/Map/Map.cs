@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
+    public Text MapSystemText;
+
     private Camera _mapCamera;
     private static Map _current;
 
