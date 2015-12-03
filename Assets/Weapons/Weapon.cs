@@ -126,18 +126,31 @@ public class Weapon : MonoBehaviour
 	    }
 	}
 
-
+    private void ClearTargetLock()
+    {
+        isLocked = false;
+        lastLockingTarget = null;
+        lockedTarget = null;
+    }
 
     private void TargetLocking()
     {
         var shootPointsCentre = GetShootPointCentre();
-        var toLockingTarget = lockingTarget.position - shootPointsCentre;
-        var toLockedTarget = lockedTarget.position - shootPointsCentre;
-        if (toLockingTarget.sqrMagnitude > TargetLockingMaxDistance*TargetLockingMaxDistance || toLockedTarget.sqrMagnitude > TargetLockingMaxDistance*TargetLockingMaxDistance)
+        if (lockingTarget != null)
         {
-            isLocked = false;
-            lastLockingTarget = null;
-            lockedTarget = null;
+            var toLockingTarget = lockingTarget.position - shootPointsCentre;
+            if (toLockingTarget.sqrMagnitude > TargetLockingMaxDistance*TargetLockingMaxDistance)
+            {
+                ClearTargetLock();
+            }
+        }
+        if (lockedTarget != null)
+        {
+            var toLockedTarget = lockedTarget.position - shootPointsCentre;
+            if (toLockedTarget.sqrMagnitude > TargetLockingMaxDistance*TargetLockingMaxDistance)
+            {
+                ClearTargetLock();
+            }
         }
 
         if (!isLocked)
@@ -173,12 +186,9 @@ public class Weapon : MonoBehaviour
         {
             if (!IsTriggered)
             {
-                Debug.Log("RELEASE!");
-                isLocked = false;
-                lastLockingTarget = null;
                 SetAimAt(lockedTarget.position);
                 Fire();
-                lockedTarget = null;
+                ClearTargetLock();
             }
         }
     }
