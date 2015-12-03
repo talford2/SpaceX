@@ -36,7 +36,7 @@ public class FighterAttack :NpcState<Fighter>
     {
         if (Npc.Target == null)
         {
-            Npc.VehicleInstance.CurrentWeapon.IsTriggered = false;
+            Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
             Npc.State = new FighterIdle(Npc);
             return;
         }
@@ -75,7 +75,7 @@ public class FighterAttack :NpcState<Fighter>
                 if (Mathf.Abs(angleToTarget) < Npc.ShootAngleTolerance)
                 {
                     Npc.VehicleInstance.SetAimAt(Npc.Target.position);
-                    Npc.VehicleInstance.CurrentWeapon.IsTriggered = true;
+                    Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = true;
                     burstAmount += Time.deltaTime;
                     if (burstAmount > Npc.BurstTime)
                     {
@@ -85,12 +85,12 @@ public class FighterAttack :NpcState<Fighter>
                 }
                 else
                 {
-                    Npc.VehicleInstance.CurrentWeapon.IsTriggered = false;
+                    Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
                 }
             }
             else
             {
-                Npc.VehicleInstance.CurrentWeapon.IsTriggered = false;
+                Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
             }
 
             if (toTarget.sqrMagnitude < Npc.OvertakeDistance * Npc.OvertakeDistance)
@@ -101,7 +101,7 @@ public class FighterAttack :NpcState<Fighter>
         }
         else
         {
-            Npc.VehicleInstance.CurrentWeapon.IsTriggered = false;
+            Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
             if (dotTarget < 0f)
                 Npc.State = new FighterEvade(Npc);
         }

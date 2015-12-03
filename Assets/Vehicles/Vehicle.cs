@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Vehicle : MonoBehaviour
@@ -61,17 +60,23 @@ public class Vehicle : MonoBehaviour
 
     public bool IsBoosting { get { return TriggerBoost && BoostEnergy > 0f && allowBoost; } }
 
-	[Header("Weapon")]
-	public Weapon WeaponPrefab;
+	[Header("Primary Weapon")]
+	public Weapon PrimaryWeaponPrefab;
 
-	public List<ShootPoint> ShootPoints;
+	public List<ShootPoint> PrimaryShootPoints;
 
+    [Header("Secondary Weapon")]
+    public Weapon SecondaryWeaponPrefab;
+
+    public List<ShootPoint> SecondaryShootPoints;
+        
     [Header("Other")]
     public List<Thruster> Thrusters;
 
 	private Shiftable _shiftable;
 
-	private Weapon _weaponInstance;
+	private Weapon _primaryWeaponInstance;
+    private Weapon _secondaryWeaponInstance;
 
     private Vector3 _velocity;
     private VelocityReference _velocityReference;
@@ -88,7 +93,8 @@ public class Vehicle : MonoBehaviour
     private bool allowBoost;
 
     private float maxFlareBrightness = 30f;
-	public Weapon CurrentWeapon { get { return _weaponInstance; } }
+	public Weapon PrimaryWeaponInstance { get { return _primaryWeaponInstance; } }
+    public Weapon SecondaryWeaponInstance { get {  return _secondaryWeaponInstance;} }
 
 	public Shiftable Shiftable
 	{
@@ -104,30 +110,40 @@ public class Vehicle : MonoBehaviour
 
     public Vector3 GetAimPosition()
     {
-        return _weaponInstance.GetShootPointCentre() + _aimDistance*transform.forward;
+        return _primaryWeaponInstance.GetShootPointCentre() + _aimDistance*transform.forward;
     }
 
-	private void Awake()
-	{
-		_shiftable = GetComponent<Shiftable>();
+    private void Awake()
+    {
+        _shiftable = GetComponent<Shiftable>();
 
-	    foreach (var shootPoint in ShootPoints)
-	    {
-	        shootPoint.Initialize();
-	    }
+        foreach (var shootPoint in PrimaryShootPoints)
+        {
+            shootPoint.Initialize();
+        }
+        foreach (var shootPoint in SecondaryShootPoints)
+        {
+            shootPoint.Initialize();
+        }
         _velocityReference = new VelocityReference(_velocity);
-		_weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
-		_weaponInstance.Initialize(gameObject, ShootPoints, _velocityReference);
-		_weaponInstance.OnShoot += OnShoot;
 
-	    allowBoost = true;
+        _primaryWeaponInstance = Utility.InstantiateInParent(PrimaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
+        _primaryWeaponInstance.Initialize(gameObject, PrimaryShootPoints, _velocityReference);
+        _primaryWeaponInstance.OnShoot += OnShoot;
 
-	    targetRotation = transform.rotation;
-	}
+        _secondaryWeaponInstance = Utility.InstantiateInParent(SecondaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
+        _secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference);
+        _secondaryWeaponInstance.OnShoot += OnShoot;
+
+        allowBoost = true;
+
+        targetRotation = transform.rotation;
+    }
 
     public void SetAimAt(Vector3 aimAt)
     {
-        _weaponInstance.SetAimAt(aimAt);
+        _primaryWeaponInstance.SetAimAt(aimAt);
+        _secondaryWeaponInstance.SetAimAt(aimAt);
     }
 
     private void OnShoot()

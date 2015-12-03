@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
         // Fancy System.
 	    var viewPortPos = Universe.Current.ViewPort.transform.position;
         var viewPortForward = Universe.Current.ViewPort.transform.forward;
-        var dotViewPort = Vector3.Dot(VehicleInstance.CurrentWeapon.GetShootPointCentre() - viewPortPos, viewPortForward);
+        var dotViewPort = Vector3.Dot(VehicleInstance.PrimaryWeaponInstance.GetShootPointCentre() - viewPortPos, viewPortForward);
         var guessTarget = Targeting.FindFacingAngleAny(viewPortPos + dotViewPort * viewPortForward, viewPortForward, MaxAimDistance, 5f);
 	    if (guessTarget != null)
 	    {
@@ -226,7 +226,8 @@ public class PlayerController : MonoBehaviour
 			}
             _playVehicleInstance.YawThrottle = pitchYaw.y;
 			_playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
-			_playVehicleInstance.CurrentWeapon.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
+            _playVehicleInstance.PrimaryWeaponInstance.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
+            _playVehicleInstance.SecondaryWeaponInstance.IsTriggered = (Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0;
 
 			TagetLocking();
 
