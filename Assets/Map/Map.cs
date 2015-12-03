@@ -5,13 +5,16 @@ using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
+    public float MapScale = 0.01f;
     public Text MapSystemText;
     public GameObject PlayerPinPrefab;
     public GameObject SquadronPinPrefab;
     public GameObject PinPrefab;
     public GameObject DestinationPrefab;
+    public Image DestinationImage;
 
     private Camera _mapCamera;
+    private Canvas _mapCanvas;
     private static Map _current;
 
     private GameObject _playerPin;
@@ -30,6 +33,7 @@ public class Map : MonoBehaviour
     private void Awake()
     {
         _mapCamera = GetComponentInChildren<Camera>();
+        _mapCanvas = GetComponentInChildren<Canvas>();
         _current = this;
         _playerPin = CreatePin(PlayerController.Current.PlayerPinPrefab);
         _destination = Instantiate(DestinationPrefab);
@@ -57,14 +61,13 @@ public class Map : MonoBehaviour
 
     private void Update()
     {
-        var mapScale = 0.01f;
         if (IsShown())
         {
             if (PlayerController.Current.VehicleInstance != null)
-                _playerPin.transform.position = mapScale*PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
+                _playerPin.transform.position = MapScale*PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
             foreach (var pin in _pins)
             {
-                pin.PinInstance.transform.position = mapScale*pin.Shiftable.GetAbsoluteUniversePosition();
+                pin.PinInstance.transform.position = MapScale*pin.Shiftable.GetAbsoluteUniversePosition();
             }
 
             var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
@@ -84,6 +87,11 @@ public class Map : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        DestinationImage.rectTransform.localPosition = _mapCamera.WorldToScreenPoint(MapScale * _destination.GetComponent<Shiftable>().GetAbsoluteUniversePosition()) - new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
+    }
+
     private GameObject CreatePin(GameObject prefab)
     {
         var pin = Utility.InstantiateInParent(prefab, transform);
@@ -97,6 +105,9 @@ public class Map : MonoBehaviour
         _mapCamera.enabled = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        if (UniverseTrackers.Current != null)
+            UniverseTrackers.Current.gameObject.SetActive(false);
+        _mapCanvas.enabled = true;
     }
 
     public void Hide()
@@ -105,6 +116,9 @@ public class Map : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _mapCamera.enabled = false;
         PlayerController.Current.SetControlEnabled(true);
+        if (UniverseTrackers.Current != null)
+            UniverseTrackers.Current.gameObject.SetActive(true);
+        _mapCanvas.enabled = false;
     }
 
     public void Toggle()
