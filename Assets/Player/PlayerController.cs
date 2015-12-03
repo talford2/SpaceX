@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -21,6 +19,10 @@ public class PlayerController : MonoBehaviour
 	public bool HideMouse = false;
 
 	public Shiftable RespawnPosition;
+
+    public GameObject PlayerPinPrefab;
+    public GameObject SquadronPinPrefab;
+
 	[Header("Squadron Trackers")]
 	public Texture2D ArrowCursorImage;
 	public Texture2D TrackerCurosrImage;
@@ -92,6 +94,8 @@ public class PlayerController : MonoBehaviour
 	    memberTracker.LockingCursorImage = LockingTrackerCursorImage;
 	    memberTracker.LockedCursorImage = LockedTrackerCursorImage;
 		member.IsFollowIdleDestination = true;
+	    var mapPin = member.VehicleInstance.gameObject.AddComponent<MapPin>();
+	    mapPin.ActivePin = SquadronPinPrefab;
 	    var squadronHealthRegenerator = member.VehicleInstance.gameObject.AddComponent<HealthRegenerator>();
 	    squadronHealthRegenerator.RegenerationDelay = 5f;
 	    squadronHealthRegenerator.RegenerationRate = 5f;

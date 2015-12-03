@@ -12,6 +12,8 @@ public class Map : MonoBehaviour
     private Camera _mapCamera;
     private static Map _current;
 
+    private GameObject _playerPin;
+    private List<GameObject> _squadronPins;
     private List<MapPin> _pins;
 
     private List<Transform> _pinTransforms;
@@ -25,6 +27,7 @@ public class Map : MonoBehaviour
     {
         _mapCamera = GetComponentInChildren<Camera>();
         _current = this;
+        _playerPin = CreatePin(PlayerController.Current.PlayerPinPrefab);
         Hide();
     }
 
@@ -49,6 +52,8 @@ public class Map : MonoBehaviour
         var mapScale = 0.01f;
         if (IsShown())
         {
+            if (PlayerController.Current.VehicleInstance != null)
+                _playerPin.transform.position = mapScale*PlayerController.Current.VehicleInstance.transform.position;
             foreach (var pin in _pins)
             {
                 pin.PinInstance.transform.position = mapScale*pin.transform.position;

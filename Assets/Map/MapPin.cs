@@ -17,6 +17,10 @@ public class MapPin : MonoBehaviour
     private void Awake()
     {
         _shiftable = GetComponent<Shiftable>();
+    }
+
+    private void Start()
+    {
         Map.Current.AddPin(this);
     }
 
