@@ -36,6 +36,8 @@ public class Map : MonoBehaviour
         if (_pins == null)
             _pins = new List<MapPin>();
         pin.PinInstance = CreatePin(pin.ActivePin);
+        if (pin.PinInstance.GetComponentInChildren<Billboard>())
+            pin.PinInstance.GetComponentInChildren<Billboard>().UseCamera = _mapCamera;
         _pins.Add(pin);
         
     }
@@ -58,13 +60,20 @@ public class Map : MonoBehaviour
             {
                 pin.PinInstance.transform.position = mapScale*pin.Shiftable.GetAbsoluteUniversePosition();
             }
+
+            var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit mouseHit;
+            if (Physics.Raycast(mouseRay, out mouseHit, Mathf.Infinity, LayerMask.GetMask("Map")))
+            {
+                Debug.Log("MOUSEOVER: " + mouseHit.collider.name);
+            }
         }
     }
 
     private GameObject CreatePin(GameObject prefab)
     {
         var pin = Utility.InstantiateInParent(prefab, transform);
-        pin.layer = LayerMask.NameToLayer("Map");
+        Utility.SetLayerRecursively(pin, LayerMask.NameToLayer("Map"));
         return pin;
     }
 
