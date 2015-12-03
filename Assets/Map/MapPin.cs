@@ -5,6 +5,7 @@ public class MapPin : MonoBehaviour
 {
     public GameObject ActivePin;
 
+    [HideInInspector]
     public GameObject PinInstance;
 
     private Shiftable _shiftable;

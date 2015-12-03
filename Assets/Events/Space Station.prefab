@@ -30,6 +30,7 @@ GameObject:
   - 114: {fileID: 11429468}
   - 114: {fileID: 11485238}
   - 114: {fileID: 11482882}
+  - 114: {fileID: 11462916}
   m_Layer: 0
   m_Name: Space Station
   m_TagString: Untagged
@@ -227,6 +228,19 @@ MonoBehaviour:
     Z: 7
   CellLocalPosition: {x: 0, y: 0, z: 0}
   _particleSystems: []
+--- !u!114 &11462916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c4ddec4abcfd448bf35628836b2578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActivePin: {fileID: 133228, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
+  PinInstance: {fileID: 0}
 --- !u!114 &11482882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,6 +267,8 @@ MonoBehaviour:
   TrackerCurosrImage: {fileID: 2800000, guid: 140e49d363b2df244bf0c5f8ebe6fe04, type: 3}
   FarTrackerCursorImage: {fileID: 0}
   VeryFarTrackerCursorImage: {fileID: 0}
+  LockingCursorImage: {fileID: 0}
+  LockedCursorImage: {fileID: 0}
   IsDisabled: 0
 --- !u!114 &11492316
 MonoBehaviour:
@@ -433,7 +449,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: ActivePin
+      value: 
+      objectReference: {fileID: 133228, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106982}
