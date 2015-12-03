@@ -59,6 +59,7 @@ public class Map : MonoBehaviour
     {
         _mapCamera.enabled = true;
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         PlayerController.Current.SetControlEnabled(false);
         Populate();
     }
@@ -67,6 +68,7 @@ public class Map : MonoBehaviour
     {
         _mapCamera.enabled = false;
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         PlayerController.Current.SetControlEnabled(true);
     }
 
