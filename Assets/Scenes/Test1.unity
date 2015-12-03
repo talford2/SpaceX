@@ -1207,6 +1207,10 @@ MonoBehaviour:
     type: 3}
   VeryFarTrackerCursorImage: {fileID: 2800000, guid: 56d69d70aa96a294a8990d0c1384da0f,
     type: 3}
+  LockingTrackerCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b,
+    type: 3}
+  LockedTrackerCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2,
+    type: 3}
   AimSensitivity: 15
   MouseMoveClamp: 0.02
   DefaultAimDistance: 500

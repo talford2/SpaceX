@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
 	public Texture2D TrackerCurosrImage;
 	public Texture2D FarTrackerCursorImage;
 	public Texture2D VeryFarTrackerCursorImage;
+    public Texture2D LockingTrackerCursorImage;
+    public Texture2D LockedTrackerCursorImage;
 
 	[Header("Aiming")]
 	public float AimSensitivity = 10f;
@@ -82,6 +84,8 @@ public class PlayerController : MonoBehaviour
 		memberTracker.TrackerCurosrImage = TrackerCurosrImage;
 		memberTracker.FarTrackerCursorImage = FarTrackerCursorImage;
 		memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
+	    memberTracker.LockingCursorImage = LockingTrackerCursorImage;
+	    memberTracker.LockedCursorImage = LockedTrackerCursorImage;
 		member.IsFollowIdleDestination = true;
 	    var squadronHealthRegenerator = member.VehicleInstance.gameObject.AddComponent<HealthRegenerator>();
 	    squadronHealthRegenerator.RegenerationDelay = 5f;

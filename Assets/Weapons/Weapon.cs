@@ -174,6 +174,11 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public Transform GetLockingOnTarget()
+    {
+        return lockingTarget;
+    }
+
     public Transform GetLockedOnTarget()
     {
         return lockedTarget;

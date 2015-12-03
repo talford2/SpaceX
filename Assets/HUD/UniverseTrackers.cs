@@ -76,9 +76,12 @@ public class UniverseTrackers : MonoBehaviour
 	                }
 	            }
 
-	            cursor.rectTransform.localPosition = Utility.GetBoundsIntersection(new Vector2(r.x, r.y), screenBounds);
-                tracker.HealthBar.rectTransform.localPosition = cursor.rectTransform.localPosition;
-                tracker.HealthBarBackground.rectTransform.localPosition = cursor.rectTransform.localPosition;
+                var cursorPosition = Utility.GetBoundsIntersection(new Vector2(r.x, r.y), screenBounds);
+	            cursor.rectTransform.localPosition = cursorPosition;
+                tracker.HealthBar.rectTransform.localPosition = cursorPosition;
+                tracker.HealthBarBackground.rectTransform.localPosition = cursorPosition;
+                tracker.LockingCursor.rectTransform.localPosition = cursorPosition;
+                tracker.LockedCursor.rectTransform.localPosition = cursorPosition;
 
 	            var ownerKillable = tracker.gameObject.GetComponent<Killable>();
 	            if (ownerKillable != null)
@@ -119,47 +122,41 @@ public class UniverseTrackers : MonoBehaviour
 		}
 
 		// Arrow
-		var arrowImg = CreateTracker(tracker.ArrowCursorImage);
-		tracker.ArrowCursor = arrowImg;
-		arrowImg.name = tracker.name + "_Arrow";
+        tracker.ArrowCursor = CreateTracker(tracker.ArrowCursorImage, tracker.name + "_Arrow");
 
 		// Tracker
-		var trackerImg = CreateTracker(tracker.TrackerCurosrImage);
-		tracker.TrackerCurosr = trackerImg;
-		trackerImg.name = tracker.name + "_Tracker";
+		tracker.TrackerCurosr = CreateTracker(tracker.TrackerCurosrImage, tracker.name + "_Tracker");
 
         // Far Tracker
-        var farTrackerImg = CreateTracker(tracker.FarTrackerCursorImage);
-        tracker.FarTrackerCursor = farTrackerImg;
-        farTrackerImg.name = tracker.name + "_FarTracker";
+        tracker.FarTrackerCursor = CreateTracker(tracker.FarTrackerCursorImage, tracker.name + "_FarTracker");
 
         // Very Far Tracker
-        var veryFarTrackerImg = CreateTracker(tracker.VeryFarTrackerCursorImage);
-        tracker.VeryFarTrackerCursor = veryFarTrackerImg;
-        veryFarTrackerImg.name = tracker.name + "_VeryFarTracker";
+        tracker.VeryFarTrackerCursor = CreateTracker(tracker.VeryFarTrackerCursorImage, tracker.name + "_VeryFarTracker");
 
         // Health Bar Backgorund
-        var healthBarBack = CreateTracker(healthBarBackgroundTexture, new Vector2(0.5f, -15f));
-        tracker.HealthBarBackground = healthBarBack;
-        healthBarBack.name = tracker.name + "_HealthBack";
+        tracker.HealthBarBackground = CreateTracker(healthBarBackgroundTexture, new Vector2(0.5f, -15f), tracker.name + "_HealthBack");
 
         // Health Bar
-	    var healthBar = CreateTracker(healthBarTexture, new Vector2(0.5f, -15f));
-        tracker.HealthBar = healthBar;
+        tracker.HealthBar = CreateTracker(healthBarTexture, new Vector2(0.5f, -15f), tracker.name + "_Health");
         tracker.HealthBar.type = Image.Type.Filled;
         tracker.HealthBar.fillMethod = Image.FillMethod.Horizontal;
 	    tracker.HealthBar.fillAmount = 1f;
-	    healthBar.name = tracker.name + "_Health";
+
+        // Locking Tracker
+        tracker.LockingCursor = CreateTracker(tracker.LockingCursorImage, tracker.name + "_Locking");
+
+        // Locked Tracker
+        tracker.LockedCursor = CreateTracker(tracker.LockedCursorImage, tracker.name + "_Locked");
 
 		_trackers.Add(tracker);
 	}
 
-	private Image CreateTracker(Texture2D tex)
+	private Image CreateTracker(Texture2D tex, string instanceName)
 	{
-		return CreateTracker(tex, new Vector2(0.5f, 0.5f));
+		return CreateTracker(tex, new Vector2(0.5f, 0.5f), instanceName);
 	}
 
-    private Image CreateTracker(Texture2D tex, Vector2 pivot)
+    private Image CreateTracker(Texture2D tex, Vector2 pivot, string instanceName)
     {
         var arrowObj = new GameObject();
         var arrowImg = arrowObj.AddComponent<Image>();
@@ -167,6 +164,7 @@ public class UniverseTrackers : MonoBehaviour
         arrowImg.transform.SetParent(transform);
         arrowImg.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
         arrowImg.SetNativeSize();
+        arrowImg.name = instanceName;
         return arrowImg;
     }
 

@@ -7,6 +7,8 @@ public class Tracker : MonoBehaviour
     public Texture2D TrackerCurosrImage;
     public Texture2D FarTrackerCursorImage;
     public Texture2D VeryFarTrackerCursorImage;
+    public Texture2D LockingCursorImage;
+    public Texture2D LockedCursorImage;
     public bool IsDisabled;
 
     public Image ArrowCursor { get; set; }
@@ -15,7 +17,8 @@ public class Tracker : MonoBehaviour
     public Image VeryFarTrackerCursor { get; set; }
     public Image HealthBarBackground { get; set; }
     public Image HealthBar { get; set; }
-
+    public Image LockingCursor { get; set; }
+    public Image LockedCursor { get; set; }
     private void Start()
     {
         UniverseTrackers.Current.AddTracker(this);
@@ -34,6 +37,7 @@ public class Tracker : MonoBehaviour
         VeryFarTrackerCursor.enabled = false;
         HealthBarBackground.enabled = false;
         HealthBar.enabled = false;
+        LockedCursor.enabled = false;
     }
 
     public Image SwitchToArrow()
@@ -60,6 +64,22 @@ public class Tracker : MonoBehaviour
             FarTrackerCursor.enabled = true;
             VeryFarTrackerCursor.enabled = false;
             return FarTrackerCursor;
+        }
+        LockingCursor.enabled = false;
+        LockedCursor.enabled = false;
+        if (PlayerController.Current.VehicleInstance != null)
+        {
+            if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
+            {
+                LockedCursor.enabled = true;
+            }
+            else
+            {
+                if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockingOnTarget() == transform)
+                {
+                    LockingCursor.enabled = true;
+                }
+            }
         }
         HealthBarBackground.enabled = true;
         HealthBar.enabled = true;
