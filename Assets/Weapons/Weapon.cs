@@ -126,16 +126,25 @@ public class Weapon : MonoBehaviour
 	    }
 	}
 
-    
+
 
     private void TargetLocking()
     {
+        var shootPointsCentre = GetShootPointCentre();
+        var toLockingTarget = lockingTarget.position - shootPointsCentre;
+        var toLockedTarget = lockedTarget.position - shootPointsCentre;
+        if (toLockingTarget.sqrMagnitude > TargetLockingMaxDistance*TargetLockingMaxDistance || toLockedTarget.sqrMagnitude > TargetLockingMaxDistance*TargetLockingMaxDistance)
+        {
+            isLocked = false;
+            lastLockingTarget = null;
+            lockedTarget = null;
+        }
+
         if (!isLocked)
         {
             lockingTarget = null;
             if (IsTriggered)
             {
-                var shootPointsCentre = GetShootPointCentre();
                 var direction = _aimAt - shootPointsCentre;
                 lockingTarget = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(_targetTeam), shootPointsCentre, direction, TargetLockingMaxDistance);
                 if (lastLockingTarget == null)

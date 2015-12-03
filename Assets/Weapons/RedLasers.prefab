@@ -149,7 +149,7 @@ MonoBehaviour:
   MissilesPerShot: 2
   MissilesConverge: 1
   IsTargetLocking: 1
-  TargetLockTime: 1.5
+  TargetLockTime: 0.5
   TargetLockingMaxDistance: 2000
   IsTriggered: 0
   MissilePoolCount: 50
@@ -212,6 +212,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: IsTargetLocking
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TargetLockTime
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
