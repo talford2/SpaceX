@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class Map : MonoBehaviour
     public GameObject PlayerPinPrefab;
     public GameObject SquadronPinPrefab;
     public GameObject PinPrefab;
+    public GameObject DestinationPrefab;
 
     private Camera _mapCamera;
     private static Map _current;
@@ -15,6 +17,8 @@ public class Map : MonoBehaviour
     private GameObject _playerPin;
     private List<GameObject> _squadronPins;
     private List<MapPin> _pins;
+
+    private GameObject _destination;
 
     private List<Transform> _pinTransforms;
 
@@ -28,6 +32,8 @@ public class Map : MonoBehaviour
         _mapCamera = GetComponentInChildren<Camera>();
         _current = this;
         _playerPin = CreatePin(PlayerController.Current.PlayerPinPrefab);
+        _destination = Instantiate(DestinationPrefab);
+        _destination.SetActive(false);
         Hide();
     }
 
@@ -66,6 +72,12 @@ public class Map : MonoBehaviour
             if (Physics.Raycast(mouseRay, out mouseHit, Mathf.Infinity, LayerMask.GetMask("Map")))
             {
                 Debug.Log("MOUSEOVER: " + mouseHit.collider.name);
+                if (Input.GetMouseButtonUp(0))
+                {
+                    var clickedPin = _pins.First(p => p.PinInstance.transform == mouseHit.collider.transform.parent.transform);
+                    _destination.SetActive(true);
+                    _destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);
+                }
             }
         }
     }
