@@ -148,6 +148,7 @@ MonoBehaviour:
   FireRate: 0.1
   MissilesPerShot: 2
   MissilesConverge: 0
+  TargetLocking: 1
   IsTriggered: 0
   MissilePoolCount: 50
 --- !u!1001 &100100000
@@ -197,6 +198,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MissilePoolCount
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TargetLocking
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -127,12 +127,14 @@ public class Vehicle : MonoBehaviour
         }
         _velocityReference = new VelocityReference(_velocity);
 
+        var targetable = GetComponent<Targetable>();
+
         _primaryWeaponInstance = Utility.InstantiateInParent(PrimaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
-        _primaryWeaponInstance.Initialize(gameObject, PrimaryShootPoints, _velocityReference);
+        _primaryWeaponInstance.Initialize(gameObject, PrimaryShootPoints, _velocityReference, targetable.Team);
         _primaryWeaponInstance.OnShoot += OnShoot;
 
         _secondaryWeaponInstance = Utility.InstantiateInParent(SecondaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
-        _secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference);
+        _secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference, targetable.Team);
         _secondaryWeaponInstance.OnShoot += OnShoot;
 
         allowBoost = true;

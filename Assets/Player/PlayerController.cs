@@ -151,55 +151,6 @@ public class PlayerController : MonoBehaviour
 	    return aimAtPosition;
 	}
 
-	private Transform lockingTarget;
-	private Transform lastLockingTarget;
-	private Transform lockedTarget;
-	private float lockingTime;
-	private float lockTime = 1.5f;
-	private bool isLocked;
-
-	private void TagetLocking()
-	{
-		if (!isLocked)
-		{
-			lockingTarget = null;
-			if (Input.GetMouseButton(1))
-			{
-				lockingTarget = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Team), VehicleInstance.transform.position, VehicleInstance.transform.forward, 1000f);
-				if (lastLockingTarget == null)
-					lastLockingTarget = lockingTarget;
-			}
-			else
-			{
-				lastLockingTarget = null;
-			}
-
-			if (lastLockingTarget != null && lastLockingTarget == lockingTarget)
-			{
-				lockingTime += Time.deltaTime;
-				if (lockingTime > lockTime)
-				{
-					lockedTarget = lockingTarget;
-					isLocked = true;
-				}
-			}
-			else
-			{
-				lockingTime = 0f;
-			}
-		}
-		else
-		{
-			if (Input.GetMouseButtonUp(1))
-			{
-				Debug.Log("RELEASE!");
-				isLocked = false;
-				lastLockingTarget = null;
-				lockedTarget = null;
-			}
-		}
-	}
-
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -228,8 +179,6 @@ public class PlayerController : MonoBehaviour
 			_playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
             _playVehicleInstance.PrimaryWeaponInstance.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
             _playVehicleInstance.SecondaryWeaponInstance.IsTriggered = (Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0;
-
-			TagetLocking();
 
 			_playVehicleInstance.SetAimAt(GetAimAt());
 
@@ -476,8 +425,8 @@ public class PlayerController : MonoBehaviour
         var cellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
         GUI.Label(new Rect(30f, 120f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", cellIndex.X, cellIndex.Y, cellIndex.Z));
 		GUI.Label(new Rect(30f, 150f, 100f, 25f), string.Format("SQUADRON: {0:f0}/{1:f0}", squadronLiveCount, Squadron.Count));
-		GUI.Label(new Rect(30f, 180f, 200f, 25f), string.Format("LOCK: {0} ({1:f2})", lockingTarget != null ? lockingTarget.name : string.Empty, lockingTime));
-		GUI.Label(new Rect(30f, 210f, 200f, 25f), string.Format("LOCKED: {0}", lockedTarget != null ? lockedTarget.name : string.Empty));
+		//GUI.Label(new Rect(30f, 180f, 200f, 25f), string.Format("LOCK: {0} ({1:f2})", lockingTarget != null ? lockingTarget.name : string.Empty, lockingTime));
+        GUI.Label(new Rect(30f, 210f, 200f, 25f), string.Format("LOCKED: {0}", VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() != null ? VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget().name : string.Empty));
         GUI.Label(new Rect(30f, 240f, 200f, 25f), string.Format("AIM DIST: {0:f2}", aimDistance));
 	}
 

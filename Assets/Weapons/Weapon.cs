@@ -13,6 +13,9 @@ public class Weapon : MonoBehaviour
 	public float FireRate = 0.2f;
     public int MissilesPerShot = 2;
     public bool MissilesConverge;
+    public bool IsTargetLocking;
+    public float TargetLockTime = 1.5f;
+    public float TargetLockingMaxDistance = 2000f;
 
 	private float _fireCooldown = 0f;
 	private List<ShootPoint> _shootPoints;
@@ -32,8 +35,17 @@ public class Weapon : MonoBehaviour
 	private List<GameObject> _missileInstances;
 
     private GameObject _owner;
+    private Team _ownerTeam;
 
-	public void Initialize(GameObject owner, List<ShootPoint> shootPoints, VelocityReference velocityReference)
+    private Team _targetTeam;
+
+    private Transform lockingTarget;
+    private Transform lastLockingTarget;
+    private Transform lockedTarget;
+    private float lockingCooldown;
+    private bool isLocked;
+
+	public void Initialize(GameObject owner, List<ShootPoint> shootPoints, VelocityReference velocityReference, Team ownerTeam)
 	{
 	    _owner = owner;
 		_curMissileIndex = 0;
@@ -48,20 +60,28 @@ public class Weapon : MonoBehaviour
 	    _shootPoints = shootPoints;
 	    _shootPointIndex = 0;
 	    _velocityReference = velocityReference;
+	    _ownerTeam = ownerTeam;
+	    _targetTeam = Targeting.GetEnemyTeam(_ownerTeam);
 	}
 
 	private void Update()
 	{
-		_fireCooldown -= Time.deltaTime;
-
 		//Debug.LogFormat("{0} ===", IsTriggered);
 
-		if (IsTriggered && _fireCooldown < 0)
-		{
-			//Debug.Log("Shoot!");
-			_fireCooldown = FireRate;
-			Fire();
-		}
+	    if (!IsTargetLocking)
+	    {
+	        _fireCooldown -= Time.deltaTime;
+	        if (IsTriggered && _fireCooldown < 0)
+	        {
+	            //Debug.Log("Shoot!");
+	            _fireCooldown = FireRate;
+	            Fire();
+	        }
+	    }
+	    else
+	    {
+	        TargetLocking();
+	    }
 	}
 
     public Vector3 GetShootPointCentre()
@@ -105,4 +125,57 @@ public class Weapon : MonoBehaviour
 	            _shootPointIndex = 0;
 	    }
 	}
+
+    
+
+    private void TargetLocking()
+    {
+        if (!isLocked)
+        {
+            lockingTarget = null;
+            if (IsTriggered)
+            {
+                var shootPointsCentre = GetShootPointCentre();
+                var direction = _aimAt - shootPointsCentre;
+                lockingTarget = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(_targetTeam), shootPointsCentre, direction, TargetLockingMaxDistance);
+                if (lastLockingTarget == null)
+                    lastLockingTarget = lockingTarget;
+            }
+            else
+            {
+                lastLockingTarget = null;
+            }
+
+            if (lastLockingTarget != null && lastLockingTarget == lockingTarget)
+            {
+                lockingCooldown -= Time.deltaTime;
+                if (lockingCooldown < 0f)
+                {
+                    lockedTarget = lockingTarget;
+                    isLocked = true;
+                }
+            }
+            else
+            {
+                lockingCooldown = TargetLockTime;
+            }
+        }
+        else
+        {
+            if (!IsTriggered)
+            {
+                Debug.Log("RELEASE!");
+                isLocked = false;
+                lastLockingTarget = null;
+                SetAimAt(lockedTarget.position);
+                Fire();
+                lockedTarget = null;
+            }
+        }
+    }
+
+    public Transform GetLockedOnTarget()
+    {
+        return lockedTarget;
+    }
 }
