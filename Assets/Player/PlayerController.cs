@@ -224,6 +224,11 @@ public class PlayerController : MonoBehaviour
 			Menus.Current.ToggleQuitMenu();
 		}
 
+	    if (Input.GetKeyUp(KeyCode.Tab))
+	    {
+	        Map.Current.Toggle();
+	    }
+
 		if (Input.GetKeyUp(KeyCode.Q))
 		{
 			if (_playVehicleInstance != null)
