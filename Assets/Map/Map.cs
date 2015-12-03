@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Map : MonoBehaviour
@@ -11,6 +12,8 @@ public class Map : MonoBehaviour
     private Camera _mapCamera;
     private MapCamera _mapCameraController;
     private static Map _current;
+
+    private List<Transform> _pins;
 
     public static Map Current
     {
@@ -27,26 +30,29 @@ public class Map : MonoBehaviour
 
     private void Populate()
     {
-        var playerPin = AddPin(PlayerPinPrefab, PlayerController.Current.VehicleInstance.Shiftable.GetWorldPosition());
+        _pins = new List<Transform>();
+
+        var playerPin = CreatePin(PlayerPinPrefab, PlayerController.Current.VehicleInstance.Shiftable.GetWorldPosition());
         _mapCameraController.SetLookAt(playerPin.position);
+        _pins.Add(playerPin);
 
         foreach (var squadronMember in PlayerController.Current.Squadron)
         {
             var squadronVehicle = squadronMember.VehicleInstance;
             if (squadronVehicle != null && squadronVehicle != PlayerController.Current.VehicleInstance)
             {
-                AddPin(SquadronPinPrefab, squadronVehicle.Shiftable.GetWorldPosition());
+                _pins.Add(CreatePin(SquadronPinPrefab, squadronVehicle.Shiftable.GetWorldPosition()));
             }
         }
 
         var universeEvents = Universe.Current.UniverseEvents;
         foreach (var universeEvent in universeEvents)
         {
-            AddPin(PinPrefab, universeEvent.Shiftable.GetWorldPosition());
+            _pins.Add(CreatePin(PinPrefab, universeEvent.Shiftable.GetWorldPosition()));
         }
     }
 
-    private Transform AddPin(GameObject prefab, Vector3 worldPosition)
+    private Transform CreatePin(GameObject prefab, Vector3 worldPosition)
     {
         var mapScale = 0.01f;
         var pin = Utility.InstantiateInParent(prefab, transform);
@@ -57,18 +63,25 @@ public class Map : MonoBehaviour
 
     public void Show()
     {
+        PlayerController.Current.SetControlEnabled(false);
+        Populate();
         _mapCamera.enabled = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        PlayerController.Current.SetControlEnabled(false);
-        Populate();
     }
 
     public void Hide()
     {
-        _mapCamera.enabled = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        if (_pins != null)
+        {
+            for (var i = 0; i < _pins.Count; i++)
+            {
+                Destroy(_pins[i].gameObject);
+            }
+        }
+        _mapCamera.enabled = false;
         PlayerController.Current.SetControlEnabled(true);
     }
 
