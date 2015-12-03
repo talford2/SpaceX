@@ -75,8 +75,10 @@ public class Map : MonoBehaviour
                 if (Input.GetMouseButtonUp(0))
                 {
                     var clickedPin = _pins.First(p => p.PinInstance.transform == mouseHit.collider.transform.parent.transform);
+                    Debug.Log("CLICKED: " + clickedPin.name);
                     _destination.SetActive(true);
                     _destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);
+                    _destination.transform.position = clickedPin.Shiftable.GetWorldPosition();
                 }
             }
         }
