@@ -15,12 +15,24 @@ public class Universe : MonoBehaviour
 
 	private static Universe _current;
 
+    private List<UniverseEvent> _universeEvents;
+
 	public static Universe Current
 	{
 		get { return _current; }
 	}
 
-	public void Awake()
+    public List<UniverseEvent> UniverseEvents
+    {
+        get
+        {
+            if (_universeEvents == null)
+                _universeEvents = new List<UniverseEvent>();
+            return _universeEvents;
+        }
+    }
+
+    public void Awake()
 	{
 		ShiftableItems = new List<Shiftable>();
 		_current = this;

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Map : MonoBehaviour
 {
     public Text MapSystemText;
+    public GameObject PinPrefab;
 
     private Camera _mapCamera;
     private static Map _current;
@@ -20,18 +21,39 @@ public class Map : MonoBehaviour
         Hide();
     }
 
+    private void Populate()
+    {
+        var universeEvents = Universe.Current.UniverseEvents;
+        foreach (var universeEvent in universeEvents)
+        {
+            var pin = Utility.InstantiateInParent(PinPrefab, transform);
+            pin.layer = LayerMask.NameToLayer("Map");
+            pin.transform.position = 0.01f*universeEvent.Shiftable.GetWorldPosition();
+        }
+    }
+
     public void Show()
     {
         _mapCamera.enabled = true;
+        PlayerController.Current.SetControlEnabled(false);
+        Populate();
     }
 
     public void Hide()
     {
         _mapCamera.enabled = false;
+        PlayerController.Current.SetControlEnabled(true);
     }
 
     public void Toggle()
     {
-        _mapCamera.enabled = !_mapCamera.enabled;
+        if (_mapCamera.enabled)
+        {
+            Hide();
+        }
+        else
+        {
+            Show();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
 	public List<Fighter> Squadron;
 	private int _curSquadronIndex = 0;
+
+    private bool _controlEnabled;
 
 	public bool InvertY = false;
 	public bool HideMouse = false;
@@ -58,6 +61,8 @@ public class PlayerController : MonoBehaviour
 		_playerNpc.SetVehicleInstance(_playVehicleInstance);
 		_playerNpc.IsFollowIdleDestination = true;
 		Squadron.Insert(0, _playerNpc);
+
+        SetControlEnabled(true);
 	}
 
 	private void Start()
@@ -155,94 +160,102 @@ public class PlayerController : MonoBehaviour
 	    return aimAtPosition;
 	}
 
+    public void SetControlEnabled(bool value)
+    {
+        _controlEnabled = value;
+    }
+
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.LeftControl))
 		{
 			Debug.Break();
 		}
-		if (_playVehicleInstance != null)
-		{
-			var mouseHorizontal = AimSensitivity * Input.GetAxis("MouseHorizontal") / Screen.width;
-		    var mouseVertical = AimSensitivity*screenAspect*Input.GetAxis("MouseVertical")/Screen.height;
+	    if (_controlEnabled)
+	    {
+	        if (_playVehicleInstance != null)
+	        {
+	            var mouseHorizontal = AimSensitivity*Input.GetAxis("MouseHorizontal")/Screen.width;
+	            var mouseVertical = AimSensitivity*screenAspect*Input.GetAxis("MouseVertical")/Screen.height;
 
-			var controllerHorizontal = AimSensitivity * Input.GetAxis("Horizontal") / Screen.width;
-			var controllerVertical = AimSensitivity * screenAspect * Input.GetAxis("Vertical") / Screen.height;
+	            var controllerHorizontal = AimSensitivity*Input.GetAxis("Horizontal")/Screen.width;
+	            var controllerVertical = AimSensitivity*screenAspect*Input.GetAxis("Vertical")/Screen.height;
 
-		    var pitchYaw = Vector2.ClampMagnitude(new Vector2(controllerVertical + mouseVertical, controllerHorizontal + mouseHorizontal), MouseMoveClamp);
+	            var pitchYaw = Vector2.ClampMagnitude(new Vector2(controllerVertical + mouseVertical, controllerHorizontal + mouseHorizontal), MouseMoveClamp);
 
-			if (InvertY)
-			{
-                _playVehicleInstance.PitchThotttle = pitchYaw.x * -1;
-			}
-			else
-			{
-                _playVehicleInstance.PitchThotttle = pitchYaw.x;
-			}
-            _playVehicleInstance.YawThrottle = pitchYaw.y;
-			_playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
-            _playVehicleInstance.PrimaryWeaponInstance.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
-            _playVehicleInstance.SecondaryWeaponInstance.IsTriggered = (Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0;
+	            if (InvertY)
+	            {
+	                _playVehicleInstance.PitchThotttle = pitchYaw.x*-1;
+	            }
+	            else
+	            {
+	                _playVehicleInstance.PitchThotttle = pitchYaw.x;
+	            }
+	            _playVehicleInstance.YawThrottle = pitchYaw.y;
+	            _playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
+	            _playVehicleInstance.PrimaryWeaponInstance.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
+	            _playVehicleInstance.SecondaryWeaponInstance.IsTriggered = (Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0;
 
-			_playVehicleInstance.SetAimAt(GetAimAt());
+	            _playVehicleInstance.SetAimAt(GetAimAt());
 
-			_playVehicleInstance.TriggerAccelerate = false;
-			if (Input.GetButton("Accelerate") || Input.GetButton("KeyboardAccelerate"))
-			{
-				_playVehicleInstance.TriggerAccelerate = true;
-			}
+	            _playVehicleInstance.TriggerAccelerate = false;
+	            if (Input.GetButton("Accelerate") || Input.GetButton("KeyboardAccelerate"))
+	            {
+	                _playVehicleInstance.TriggerAccelerate = true;
+	            }
 
-			_playVehicleInstance.TriggerBrake = false;
-			if (Input.GetButton("Brake") || Input.GetButton("KeyboardBrake"))
-			{
-				_playVehicleInstance.TriggerBrake = true;
-			}
+	            _playVehicleInstance.TriggerBrake = false;
+	            if (Input.GetButton("Brake") || Input.GetButton("KeyboardBrake"))
+	            {
+	                _playVehicleInstance.TriggerBrake = true;
+	            }
 
-			_playVehicleInstance.TriggerBoost = false;
-			if (Input.GetButton("Boost") || Input.GetButton("KeyboardBoost"))
-			{
-				_playVehicleInstance.TriggerBoost = true;
-			}
-		}
+	            _playVehicleInstance.TriggerBoost = false;
+	            if (Input.GetButton("Boost") || Input.GetButton("KeyboardBoost"))
+	            {
+	                _playVehicleInstance.TriggerBoost = true;
+	            }
+	        }
 
-		if (Input.GetKeyUp(KeyCode.R))
-		{
-			if (_playVehicleInstance != null)
-				_playVehicleInstance.GetComponent<Killable>().Die();
-			Debug.Log("RESPAWN");
-			Universe.Current.WarpTo(RespawnPosition);
-			_curSquadronIndex = 0;
-			SpawnVehicle(VehiclePrefab, RespawnPosition);
+	        if (Input.GetKeyUp(KeyCode.R))
+	        {
+	            if (_playVehicleInstance != null)
+	                _playVehicleInstance.GetComponent<Killable>().Die();
+	            Debug.Log("RESPAWN");
+	            Universe.Current.WarpTo(RespawnPosition);
+	            _curSquadronIndex = 0;
+	            SpawnVehicle(VehiclePrefab, RespawnPosition);
 
-			var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
-			cam.Target = _playVehicleInstance;
-			cam.Reset();
-		}
+	            var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
+	            cam.Target = _playVehicleInstance;
+	            cam.Reset();
+	        }
 
-		if (Input.GetKeyUp(KeyCode.Escape))
-		{
-			Menus.Current.ToggleQuitMenu();
-		}
+	        if (Input.GetKeyUp(KeyCode.Escape))
+	        {
+	            Menus.Current.ToggleQuitMenu();
+	        }
+
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                if (_playVehicleInstance != null)
+                    _playVehicleInstance.GetComponent<Killable>().Die();
+            }
+
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                CycleSquadron();
+            }
+
+            if (Input.GetKeyUp(KeyCode.M))
+            {
+                Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(25f, 1f, 0.05f);
+            }
+	    }
 
 	    if (Input.GetKeyUp(KeyCode.Tab))
 	    {
 	        Map.Current.Toggle();
-	    }
-
-		if (Input.GetKeyUp(KeyCode.Q))
-		{
-			if (_playVehicleInstance != null)
-				_playVehicleInstance.GetComponent<Killable>().Die();
-		}
-
-		if (Input.GetKeyUp(KeyCode.E))
-		{
-			CycleSquadron();
-		}
-
-	    if (Input.GetKeyUp(KeyCode.M))
-	    {
-            Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(25f, 1f, 0.05f);
 	    }
 
 		// Update squadron
