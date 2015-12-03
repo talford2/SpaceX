@@ -53,10 +53,10 @@ public class Map : MonoBehaviour
         if (IsShown())
         {
             if (PlayerController.Current.VehicleInstance != null)
-                _playerPin.transform.position = mapScale*PlayerController.Current.VehicleInstance.transform.position;
+                _playerPin.transform.position = mapScale*PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
             foreach (var pin in _pins)
             {
-                pin.PinInstance.transform.position = mapScale*pin.transform.position;
+                pin.PinInstance.transform.position = mapScale*pin.Shiftable.GetAbsoluteUniversePosition();
             }
         }
     }
