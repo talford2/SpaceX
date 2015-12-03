@@ -10,10 +10,11 @@ public class Map : MonoBehaviour
     public GameObject PinPrefab;
 
     private Camera _mapCamera;
-    private MapCamera _mapCameraController;
     private static Map _current;
 
-    private List<Transform> _pins;
+    private List<MapPin> _pins;
+
+    private List<Transform> _pinTransforms;
 
     public static Map Current
     {
@@ -23,48 +24,48 @@ public class Map : MonoBehaviour
     private void Awake()
     {
         _mapCamera = GetComponentInChildren<Camera>();
-        _mapCameraController = _mapCamera.GetComponent<MapCamera>();
         _current = this;
         Hide();
     }
 
-    private void Populate()
+    public void AddPin(MapPin pin)
     {
-        _pins = new List<Transform>();
+        if (_pins == null)
+            _pins = new List<MapPin>();
+        pin.PinInstance = CreatePin(pin.ActivePin);
+        _pins.Add(pin);
+        
+    }
 
-        var playerPin = CreatePin(PlayerPinPrefab, PlayerController.Current.VehicleInstance.Shiftable.GetWorldPosition());
-        _mapCameraController.SetLookAt(playerPin.position);
-        _pins.Add(playerPin);
+    public void RemovePin(MapPin pin)
+    {
+        _pins.Remove(pin);
+        if (pin.gameObject != null)
+            Destroy(pin.gameObject);
+    }
 
-        foreach (var squadronMember in PlayerController.Current.Squadron)
+    private void Update()
+    {
+        var mapScale = 0.01f;
+        if (IsShown())
         {
-            var squadronVehicle = squadronMember.VehicleInstance;
-            if (squadronVehicle != null && squadronVehicle != PlayerController.Current.VehicleInstance)
+            foreach (var pin in _pins)
             {
-                _pins.Add(CreatePin(SquadronPinPrefab, squadronVehicle.Shiftable.GetWorldPosition()));
+                pin.PinInstance.transform.position = mapScale*pin.transform.position;
             }
-        }
-
-        var universeEvents = Universe.Current.UniverseEvents;
-        foreach (var universeEvent in universeEvents)
-        {
-            _pins.Add(CreatePin(PinPrefab, universeEvent.Shiftable.GetWorldPosition()));
         }
     }
 
-    private Transform CreatePin(GameObject prefab, Vector3 worldPosition)
+    private GameObject CreatePin(GameObject prefab)
     {
-        var mapScale = 0.01f;
         var pin = Utility.InstantiateInParent(prefab, transform);
         pin.layer = LayerMask.NameToLayer("Map");
-        pin.transform.position = mapScale * worldPosition;
-        return pin.transform;
+        return pin;
     }
 
     public void Show()
     {
         PlayerController.Current.SetControlEnabled(false);
-        Populate();
         _mapCamera.enabled = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
