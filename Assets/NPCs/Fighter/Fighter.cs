@@ -77,6 +77,7 @@ public class Fighter : Npc<Fighter>
         _vehicleInstance.GetComponent<Targetable>().Team = Team;
         _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
         _vehicleInstance.Shiftable.SetShiftPosition(universePosition);
+        _vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();
         ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
     }
 
