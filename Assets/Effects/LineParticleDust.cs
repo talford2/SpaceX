@@ -94,9 +94,9 @@ public class LineParticleDust : MonoBehaviour
 			if ((particle.Object.transform.position - Target.transform.position).sqrMagnitude > (Radius * Radius))
 			{
 				particle.Object.transform.position = Target.transform.position + Random.onUnitSphere * Radius;
+
 			}
 			particle.LineRenderer.SetPosition(1, Velocity.normalized * ParticleLength + SpeedMultiplier * Velocity);
-
 		}
 	}
 

@@ -97,26 +97,6 @@ Material:
         second: 0.02
       data:
         first:
-          name: _A
-        second: 2
-      data:
-        first:
-          name: _B
-        second: 10
-      data:
-        first:
-          name: _C
-        second: 50
-      data:
-        first:
-          name: _D
-        second: 100
-      data:
-        first:
-          name: _InvFade
-        second: 3
-      data:
-        first:
           name: _ZWrite
         second: 1
       data:
@@ -147,6 +127,26 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _A
+        second: 2
+      data:
+        first:
+          name: _B
+        second: 10
+      data:
+        first:
+          name: _C
+        second: 20
+      data:
+        first:
+          name: _D
+        second: 50
+      data:
+        first:
+          name: _InvFade
+        second: 3
       data:
         first:
           name: _FadeDistance
