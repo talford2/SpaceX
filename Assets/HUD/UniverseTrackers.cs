@@ -40,7 +40,16 @@ public class UniverseTrackers : MonoBehaviour
 	{
 	    foreach (var tracker in _trackers)
 	    {
-	        if (!tracker.IsDisabled)
+	        if (tracker.DelayCooldown >= 0f)
+	        {
+	            tracker.DelayCooldown -= Time.deltaTime;
+	            if (tracker.DelayCooldown < 0f)
+	            {
+	                tracker.IsDelayComplete = true;
+	            }
+	        }
+
+	        if (tracker.IsDelayComplete && !tracker.IsDisabled)
 	        {
 	            var screenPoint = _cam.WorldToScreenPoint(tracker.transform.position);
 	            var r = screenPoint;
@@ -135,6 +144,9 @@ public class UniverseTrackers : MonoBehaviour
 
         tracker.LockingCursor = CreateTracker(tracker.LockingCursorImage, tracker.name + "_Locking");
         tracker.LockedCursor = CreateTracker(tracker.LockedCursorImage, tracker.name + "_Locked");
+
+	    tracker.DelayCooldown = 1f;
+	    tracker.IsDelayComplete = false;
 
 		_trackers.Add(tracker);
 	}
