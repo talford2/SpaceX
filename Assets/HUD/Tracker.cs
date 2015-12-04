@@ -11,6 +11,9 @@ public class Tracker : MonoBehaviour
     public Texture2D LockedCursorImage;
     public bool IsDisabled;
 
+    public bool IsDelayComplete;
+    public float DelayCooldown;
+
     public Image ArrowCursor { get; set; }
     public Image TrackerCurosr { get; set; }
     public Image FarTrackerCursor { get; set; }
@@ -19,6 +22,7 @@ public class Tracker : MonoBehaviour
     public Image HealthBar { get; set; }
     public Image LockingCursor { get; set; }
     public Image LockedCursor { get; set; }
+
     private void Start()
     {
         UniverseTrackers.Current.AddTracker(this);
