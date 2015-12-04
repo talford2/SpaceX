@@ -18,6 +18,7 @@ public class Map : MonoBehaviour
     private List<GameObject> _squadronPins;
     private List<MapPin> _pins;
 
+    private bool isDestinationSet;
     private GameObject _destination;
 
     private List<Transform> _pinTransforms;
@@ -35,6 +36,7 @@ public class Map : MonoBehaviour
         _playerPin = CreatePin(PlayerController.Current.PlayerPinPrefab);
         _destination = Instantiate(DestinationPrefab);
         _destination.SetActive(false);
+        isDestinationSet = false;
         Hide();
     }
 
@@ -85,6 +87,7 @@ public class Map : MonoBehaviour
                     var clickedPin = _pins.First(p => p.CurrentInstance.transform == mouseHit.collider.transform.parent.transform);
                     Debug.Log("CLICKED: " + clickedPin.name);
                     _destination.SetActive(true);
+                    isDestinationSet = true;
                     _destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);
                     _destination.transform.position = clickedPin.Shiftable.GetWorldPosition();
                 }
@@ -94,7 +97,8 @@ public class Map : MonoBehaviour
 
     private void LateUpdate()
     {
-        DestinationImage.rectTransform.localPosition = _mapCamera.WorldToScreenPoint(MapScale * _destination.GetComponent<Shiftable>().GetAbsoluteUniversePosition()) - new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
+        if (isDestinationSet)
+            DestinationImage.rectTransform.localPosition = _mapCamera.WorldToScreenPoint(MapScale*_destination.GetComponent<Shiftable>().GetAbsoluteUniversePosition()) - new Vector3(Screen.width/2f, Screen.height/2f, 0);
     }
 
     private GameObject CreatePin(GameObject prefab)
