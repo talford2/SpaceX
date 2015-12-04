@@ -7,9 +7,6 @@ public class Map : MonoBehaviour
 {
     public float MapScale = 0.01f;
     public Text MapSystemText;
-    public GameObject PlayerPinPrefab;
-    public GameObject SquadronPinPrefab;
-    public GameObject PinPrefab;
     public GameObject DestinationPrefab;
     public Image DestinationImage;
 
@@ -45,9 +42,17 @@ public class Map : MonoBehaviour
     {
         if (_pins == null)
             _pins = new List<MapPin>();
-        pin.PinInstance = CreatePin(pin.ActivePin);
-        if (pin.PinInstance.GetComponentInChildren<Billboard>())
-            pin.PinInstance.GetComponentInChildren<Billboard>().UseCamera = _mapCamera;
+
+        pin.ActiveInstance = CreatePin(pin.ActivePin);
+        if (pin.ActiveInstance.GetComponentInChildren<Billboard>())
+            pin.ActiveInstance.GetComponentInChildren<Billboard>().UseCamera = _mapCamera;
+
+        pin.InactiveInstance = CreatePin(pin.InactivePin);
+        if (pin.InactiveInstance.GetComponentInChildren<Billboard>())
+            pin.InactiveInstance.GetComponentInChildren<Billboard>().UseCamera = _mapCamera;
+
+        pin.SetPinState(MapPin.MapPinState.Active);
+
         _pins.Add(pin);
         
     }
@@ -55,8 +60,8 @@ public class Map : MonoBehaviour
     public void RemovePin(MapPin pin)
     {
         _pins.Remove(pin);
-        if (pin.PinInstance != null)
-            Destroy(pin.PinInstance);
+        if (pin.ActiveInstance != null)
+            Destroy(pin.ActiveInstance);
     }
 
     private void Update()
@@ -67,7 +72,7 @@ public class Map : MonoBehaviour
                 _playerPin.transform.position = MapScale*PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
             foreach (var pin in _pins)
             {
-                pin.PinInstance.transform.position = MapScale*pin.Shiftable.GetAbsoluteUniversePosition();
+                pin.CurrentInstance.transform.position = MapScale*pin.Shiftable.GetAbsoluteUniversePosition();
             }
 
             var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
@@ -77,7 +82,7 @@ public class Map : MonoBehaviour
                 Debug.Log("MOUSEOVER: " + mouseHit.collider.name);
                 if (Input.GetMouseButtonUp(0))
                 {
-                    var clickedPin = _pins.First(p => p.PinInstance.transform == mouseHit.collider.transform.parent.transform);
+                    var clickedPin = _pins.First(p => p.CurrentInstance.transform == mouseHit.collider.transform.parent.transform);
                     Debug.Log("CLICKED: " + clickedPin.name);
                     _destination.SetActive(true);
                     _destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);

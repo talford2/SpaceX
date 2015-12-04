@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
 		member.IsFollowIdleDestination = true;
 	    var mapPin = member.VehicleInstance.gameObject.AddComponent<MapPin>();
 	    mapPin.ActivePin = SquadronPinPrefab;
+	    mapPin.InactivePin = SquadronPinPrefab;
 	    var squadronHealthRegenerator = member.VehicleInstance.gameObject.AddComponent<HealthRegenerator>();
 	    squadronHealthRegenerator.RegenerationDelay = 5f;
 	    squadronHealthRegenerator.RegenerationRate = 5f;

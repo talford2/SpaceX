@@ -240,7 +240,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActivePin: {fileID: 133228, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
-  PinInstance: {fileID: 0}
+  InactivePin: {fileID: 133228, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
+  ActiveInstance: {fileID: 0}
+  InactiveInstance: {fileID: 0}
 --- !u!114 &11482882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -452,6 +454,10 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: ActivePin
+      value: 
+      objectReference: {fileID: 133228, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: InactivePin
       value: 
       objectReference: {fileID: 133228, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
     m_RemovedComponents: []
