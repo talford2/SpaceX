@@ -25,7 +25,7 @@ public class WarpDistortion : MonoBehaviour
 	{
 		_cooldown -= Time.deltaTime;
 
-		var frac = Mathf.Max(1f - _cooldown / WarpTime, 0);
+		var frac = Mathf.Clamp(1f - _cooldown / WarpTime, 0, 1);
 
 		_warpMat.SetFloat("_BumpAmt", Mathf.Sin(Mathf.Deg2Rad * 180 * frac) * WarpBumpAmount);
 

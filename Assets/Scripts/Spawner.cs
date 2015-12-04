@@ -46,8 +46,8 @@ public class Spawner : MonoBehaviour
 			s.transform.forward = transform.forward;
 
 			s.WarpEffectPrefab = SpawnEffect;
-			s.Timeout = 1f;
-			s.Distance = 10f;
+			s.Timeout = 0.4f;
+			s.Distance = 20f;
 
 			HasSpawned = true;
 		}

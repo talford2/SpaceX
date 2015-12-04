@@ -17,6 +17,8 @@ public class WarpEffect : MonoBehaviour
 
 	private Vector3 _warpPos;
 
+	private Rigidbody _rigidBody;
+
 	void Awake()
 	{
 		_naturalScale = transform.localScale.x;
@@ -26,7 +28,8 @@ public class WarpEffect : MonoBehaviour
 
 		_cooldown = Timeout;
 
-
+		//_rigidBody = GetComponent<Rigidbody>();
+		//_rigidBody.isKinematic = true;
 	}
 
 	void Start()
@@ -41,10 +44,11 @@ public class WarpEffect : MonoBehaviour
 		var frac = 1 - _cooldown / Timeout;
 
 		transform.position = Vector3.Lerp(_warpPos, _finalDestination, frac);
-		transform.localScale = _naturalScale * Vector3.one * frac;
+		//transform.localScale = _naturalScale * Vector3.one * frac;
 		_cooldown -= Time.deltaTime;
 		if (_cooldown < 0)
 		{
+			//_rigidBody.isKinematic = false;
 			Destroy(this);
 		}
 	}
