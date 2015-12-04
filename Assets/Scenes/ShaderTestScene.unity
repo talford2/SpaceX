@@ -422,7 +422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1341341349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7eda42c17f8dbb4086614d076e7f6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 0}
   ParticleCount: 100
   Radius: 30
   Velocity: {x: 0, y: 0, z: -50}
@@ -660,3 +661,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!1 &1925098645 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 4f9117d9d60f68643a019dbd86a4195e, type: 3}
+  m_PrefabInternal: {fileID: 750044489}
+--- !u!114 &1925098646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1925098645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555d7075f76f84a4b91f1b1ce249e638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timeout: 1
+  Distance: 20
