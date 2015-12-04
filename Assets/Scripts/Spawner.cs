@@ -13,30 +13,34 @@ public class Spawner : MonoBehaviour
 
 	private bool HasSpawned = false;
 
+	private float _delayTime = 0f;
+
 	private void Awake()
 	{
-		Shifter.OnCellIndexChange += Shifter_OnCellIndexChange;
-
 		if (SpawnOnAwake)
 		{
 			Spawn();
 		}
 	}
 
-	private void Shifter_OnCellIndexChange(Shiftable shiftable, CellIndex delta)
+	public void Spawn(float delay = 0)
 	{
-		//(Universe.Current.ViewPort.Shiftable.UniverseCellIndex - Shifter.UniverseCellIndex).
-		//throw new System.NotImplementedException();
+		StartCoroutine(DoSpawn(delay));
 	}
 
-	public void Spawn()
+	private IEnumerator DoSpawn(float delay)
 	{
+		yield return new WaitForSeconds(delay);
+
 		if (!HasSpawned)
 		{
 			_fighterInst = Instantiate<Fighter>(FighterPrefab);
 
 			var universePosition = new UniversePosition(Shifter.UniverseCellIndex, Shifter.CellLocalPosition + transform.position);
 			_fighterInst.SpawnVehicle(_fighterInst.VehiclePrefab, universePosition);
+
+			var s = _fighterInst.VehicleInstance.gameObject.AddComponent<ScaleToSize>();
+			s.Timeout = 1f;
 
 			HasSpawned = true;
 		}
