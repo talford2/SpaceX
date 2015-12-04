@@ -10,7 +10,7 @@ public class WarpEffect : MonoBehaviour
 	public float Distance = 20f;
 
 	public GameObject WarpEffectPrefab;
-	
+
 	private float _cooldown = 0;
 
 	private Vector3 _finalDestination;
@@ -25,6 +25,14 @@ public class WarpEffect : MonoBehaviour
 		_warpPos = transform.position - (transform.forward * Distance);
 
 		_cooldown = Timeout;
+
+
+	}
+
+	void Start()
+	{
+		var effect = Instantiate<GameObject>(WarpEffectPrefab);
+		effect.transform.position = _warpPos;
 	}
 
 	void Update()

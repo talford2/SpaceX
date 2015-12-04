@@ -251,6 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Shifter: {fileID: 11422108}
+  SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
 --- !u!114 &11422108
 MonoBehaviour:
@@ -284,6 +285,7 @@ MonoBehaviour:
   InactivePin: {fileID: 133228, guid: e60460a5db76a7842a14febd8542e701, type: 2}
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
+  CurrentInstance: {fileID: 0}
 --- !u!114 &11456104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Shifter: {fileID: 11422108}
+  SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
 --- !u!114 &11462202
 MonoBehaviour:
@@ -329,6 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Shifter: {fileID: 11422108}
+  SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
 --- !u!114 &11493508
 MonoBehaviour:
@@ -343,6 +347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Shifter: {fileID: 11422108}
+  SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
 --- !u!114 &11499648
 MonoBehaviour:
@@ -357,6 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Shifter: {fileID: 11422108}
+  SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
 --- !u!1001 &100100000
 Prefab:

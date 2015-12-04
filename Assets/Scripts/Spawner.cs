@@ -9,6 +9,8 @@ public class Spawner : MonoBehaviour
 
 	public Shiftable Shifter;
 
+	public GameObject SpawnEffect;
+
 	public bool SpawnOnAwake = false;
 
 	private bool HasSpawned = false;
@@ -40,8 +42,9 @@ public class Spawner : MonoBehaviour
 			_fighterInst.SpawnVehicle(_fighterInst.VehiclePrefab, universePosition);
 
 			var s = _fighterInst.VehicleInstance.gameObject.AddComponent<WarpEffect>();
+			s.WarpEffectPrefab = SpawnEffect;
 			s.Timeout = 1f;
-			s.Distance = 30f;
+			s.Distance = 10f;
 
 			HasSpawned = true;
 		}
