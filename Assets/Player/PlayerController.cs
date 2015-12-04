@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
 	private float replenishInterval = 2f;
 	private float replenishSquadronCooldown;
 
+    private UniversePosition lastDeathUniversePosition;
+
 	private void Awake()
 	{
 		_current = this;
@@ -103,7 +105,7 @@ public class PlayerController : MonoBehaviour
 	    member.enabled = true;
 	}
 
-	private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
+	public void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
 	{
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, spawner.CellLocalPosition, spawner.transform.rotation)).GetComponent<Vehicle>();
 		_playVehicleInstance.Shiftable.SetShiftPosition(spawner.UniversePosition);
@@ -118,9 +120,9 @@ public class PlayerController : MonoBehaviour
 
 		_playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
-		//_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
 
 		_playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;
+        _playVehicleInstance.GetComponent<Killable>().OnDie += PlayerController_OnDie;
 
         var healthRegenerator = _playVehicleInstance.gameObject.AddComponent<HealthRegenerator>();
         healthRegenerator.RegenerationDelay = 5f;
@@ -227,6 +229,10 @@ public class PlayerController : MonoBehaviour
 	            if (_playVehicleInstance != null)
 	                _playVehicleInstance.GetComponent<Killable>().Die();
 	            Debug.Log("RESPAWN");
+                /*
+	            var respawnAt = SpawnManager.FindNearest(lastDeathUniversePosition);
+                respawnAt.Spawn();
+	            */
 	            Universe.Current.WarpTo(RespawnPosition);
 	            _curSquadronIndex = 0;
 	            SpawnVehicle(VehiclePrefab, RespawnPosition);
@@ -370,6 +376,7 @@ public class PlayerController : MonoBehaviour
                     Squadron[oldSquadronIndex].enabled = true;
                     Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Tracker>().IsDisabled = false;
                     Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDamage -= PlayerController_OnDamage;
+                    Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDie -= PlayerController_OnDie;
                 }
 
                 // Disable next vehicle NPC control and apply PlayerController
@@ -382,6 +389,7 @@ public class PlayerController : MonoBehaviour
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
                     //_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
                     _playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;
+                    _playVehicleInstance.GetComponent<Killable>().OnDie += PlayerController_OnDie;
 
                     Squadron[_curSquadronIndex].enabled = false;
 
@@ -399,12 +407,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*
-    private void OnVehicleDestroyed(Killable sender)
+    private void PlayerController_OnDie(Killable sender)
     {
+        lastDeathUniversePosition = new UniversePosition(_playVehicleInstance.Shiftable.UniversePosition.CellIndex, _playVehicleInstance.Shiftable.UniversePosition.CellLocalPosition);
         Debug.Log("PLAYER VEHICLE DESTROYED");
     }
-    */
 
 	public bool InPlayerActiveCells(CellIndex checkCell)
 	{

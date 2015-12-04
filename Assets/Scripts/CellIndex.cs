@@ -46,7 +46,12 @@ public class CellIndex
 		return X == 0 && Y == 0 && Z == 0;
 	}
 
-	public static CellIndex operator +(CellIndex c1, CellIndex c2)
+    public int SquareMagnitude()
+    {
+        return X*X + Y*Y;
+    }
+
+    public static CellIndex operator +(CellIndex c1, CellIndex c2)
 	{
 		return new CellIndex(c1.X + c2.X, c1.Y + c2.Y, c1.Z + c2.Z);
 	}
