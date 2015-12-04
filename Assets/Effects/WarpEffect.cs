@@ -9,6 +9,8 @@ public class WarpEffect : MonoBehaviour
 
 	public float Distance = 20f;
 
+	public GameObject WarpEffectPrefab;
+	
 	private float _cooldown = 0;
 
 	private Vector3 _finalDestination;
@@ -29,7 +31,7 @@ public class WarpEffect : MonoBehaviour
 	{
 		// 0 to 1
 		var frac = 1 - _cooldown / Timeout;
-		
+
 		transform.position = Vector3.Lerp(_warpPos, _finalDestination, frac);
 		transform.localScale = _naturalScale * Vector3.one * frac;
 		_cooldown -= Time.deltaTime;
