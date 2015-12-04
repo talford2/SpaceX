@@ -39,8 +39,9 @@ public class Spawner : MonoBehaviour
 			var universePosition = new UniversePosition(Shifter.UniverseCellIndex, Shifter.CellLocalPosition + transform.position);
 			_fighterInst.SpawnVehicle(_fighterInst.VehiclePrefab, universePosition);
 
-			var s = _fighterInst.VehicleInstance.gameObject.AddComponent<ScaleToSize>();
+			var s = _fighterInst.VehicleInstance.gameObject.AddComponent<WarpEffect>();
 			s.Timeout = 1f;
+			s.Distance = 30f;
 
 			HasSpawned = true;
 		}
