@@ -42,6 +42,9 @@ public class Spawner : MonoBehaviour
 			_fighterInst.SpawnVehicle(_fighterInst.VehiclePrefab, universePosition);
 
 			var s = _fighterInst.VehicleInstance.gameObject.AddComponent<WarpEffect>();
+			s.transform.position = transform.position;
+			s.transform.forward = transform.forward;
+
 			s.WarpEffectPrefab = SpawnEffect;
 			s.Timeout = 1f;
 			s.Distance = 10f;
