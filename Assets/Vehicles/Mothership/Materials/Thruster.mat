@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SpacePanel
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _DETAIL_MULX2 _EMISSION _NORMALMAP
-  m_LightmapFlags: 1
-  m_CustomRenderQueue: -1
+  m_Name: Thruster
+  m_Shader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,21 +19,21 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 99d07a2679d19cd4b97b1ded7ef56054, type: 3}
+          m_Texture: {fileID: 2800000, guid: b7b02e7139743c9449535d1f5beaf06e, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 2800000, guid: 63718f30f1912bd4bb182e584cfe7923, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _DetailNormalMap
         second:
-          m_Texture: {fileID: 2800000, guid: c3fbb8a43246de543a4df419d2a911c1, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -47,14 +47,14 @@ Material:
         first:
           name: _OcclusionMap
         second:
-          m_Texture: {fileID: 2800000, guid: 32b475310af2df447a757b1151364912, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _EmissionMap
         second:
-          m_Texture: {fileID: 2800000, guid: dede9c6f164706f4a821503c7bed180d, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -68,12 +68,19 @@ Material:
         first:
           name: _DetailAlbedoMap
         second:
-          m_Texture: {fileID: 2800000, guid: d732c54a13f0f174db2017b385146990, type: 3}
-          m_Scale: {x: 10, y: 10}
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SpecGlossMap
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -102,11 +109,11 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0.625
+        second: 0.5
       data:
         first:
           name: _BumpScale
-        second: 0
+        second: 1
       data:
         first:
           name: _OcclusionStrength
@@ -114,7 +121,7 @@ Material:
       data:
         first:
           name: _DetailNormalMapScale
-        second: 0.1
+        second: 1
       data:
         first:
           name: _UVSec
@@ -126,20 +133,24 @@ Material:
       data:
         first:
           name: _Metallic
-        second: 0.916
+        second: 0
       data:
         first:
           name: _EmissionScaleUI
-        second: 1
+        second: 0
     m_Colors:
       data:
         first:
           name: _EmissionColor
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _Color
-        second: {r: 0.71323526, g: 0.71323526, b: 0.71323526, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 0.42745098}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 0.2, g: 0.2, b: 0.2, a: 1}
       data:
         first:
           name: _EmissionColorUI
