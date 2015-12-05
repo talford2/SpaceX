@@ -388,15 +388,7 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  _particleSystems:
-  - {fileID: 19871808}
-  - {fileID: 19844770}
-  - {fileID: 19881622}
-  - {fileID: 19809798}
-  - {fileID: 19892340}
-  - {fileID: 19824484}
-  - {fileID: 19845260}
-  - {fileID: 19872994}
+  ShiftParticleSystems: []
 --- !u!114 &11450094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -944,10 +936,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4287532686
         key1:
           serializedVersion: 2
-          rgba: 16777215
+          rgba: 5395026
         key2:
           serializedVersion: 2
           rgba: 0
@@ -975,7 +967,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 63608
+        atime1: 65535
         atime2: 65535
         atime3: 0
         atime4: 0
@@ -2393,10 +2385,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 16777215
+          rgba: 9342606
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4283585106
         key2:
           serializedVersion: 2
           rgba: 0
@@ -12183,7 +12175,7 @@ ParticleSystemRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: 742d49840beef2f4b86ec833642d38c8, type: 2}
+  - {fileID: 2100000, guid: 318327010832c1e4a973a02b7ed1fb20, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -12429,7 +12421,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 742d49840beef2f4b86ec833642d38c8, type: 2}
+  - {fileID: 2100000, guid: 318327010832c1e4a973a02b7ed1fb20, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -12553,11 +12545,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ColorModule.gradient.maxGradient.key0.rgba
-      value: 4294967295
+      value: 4287532686
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ColorModule.gradient.maxGradient.key1.rgba
-      value: 16777215
+      value: 5395026
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 318327010832c1e4a973a02b7ed1fb20, type: 2}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.atime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.atime0
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -563,10 +563,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 16777215
+          rgba: 7829367
         key1:
           serializedVersion: 2
-          rgba: 4287401100
+          rgba: 4283716692
         key2:
           serializedVersion: 2
           rgba: 0
@@ -586,7 +586,7 @@ ParticleSystem:
           serializedVersion: 2
           rgba: 0
         ctime0: 0
-        ctime1: 65535
+        ctime1: 65342
         ctime2: 0
         ctime3: 0
         ctime4: 0
@@ -1488,7 +1488,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 742d49840beef2f4b86ec833642d38c8, type: 2}
+  - {fileID: 2100000, guid: 318327010832c1e4a973a02b7ed1fb20, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1633,7 +1633,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 742d49840beef2f4b86ec833642d38c8, type: 2}
+      objectReference: {fileID: 2100000, guid: 318327010832c1e4a973a02b7ed1fb20, type: 2}
     - target: {fileID: 0}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
       value: 1.9865117
@@ -1644,7 +1644,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ColorModule.gradient.maxGradient.key1.rgba
-      value: 4287401100
+      value: 4283716692
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.key0.rgba
+      value: 7829367
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.ctime1
+      value: 65342
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
