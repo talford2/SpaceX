@@ -81,11 +81,9 @@ public class Map : MonoBehaviour
             RaycastHit mouseHit;
             if (Physics.Raycast(mouseRay, out mouseHit, Mathf.Infinity, LayerMask.GetMask("Map")))
             {
-                Debug.Log("MOUSEOVER: " + mouseHit.collider.name);
                 if (Input.GetMouseButtonUp(0))
                 {
                     var clickedPin = _pins.First(p => p.CurrentInstance.transform == mouseHit.collider.transform.parent.transform);
-                    Debug.Log("CLICKED: " + clickedPin.name);
                     _destination.SetActive(true);
                     isDestinationSet = true;
                     _destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);

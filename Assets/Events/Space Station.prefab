@@ -78,8 +78,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 414198}
+  - 114: {fileID: 11483114}
   m_Layer: 0
-  m_Name: TheWouldBeRespawn
+  m_Name: PlayerSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +226,7 @@ MonoBehaviour:
   UniverseCellIndex:
     X: 0
     Y: 0
-    Z: 7
+    Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
   _particleSystems: []
 --- !u!114 &11462916
@@ -243,6 +244,7 @@ MonoBehaviour:
   InactivePin: {fileID: 133228, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
+  CurrentInstance: {fileID: 0}
 --- !u!114 &11482882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,6 +256,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c0e240e5c41af49bae7e5465494283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11483114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 156482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e850c08cfddc31345b4bf1cb04b113cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shiftable: {fileID: 11429468}
 --- !u!114 &11485238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,6 +286,8 @@ MonoBehaviour:
   LockingCursorImage: {fileID: 0}
   LockedCursorImage: {fileID: 0}
   IsDisabled: 0
+  IsDelayComplete: 0
+  DelayCooldown: 0
 --- !u!114 &11492316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -460,6 +476,26 @@ Prefab:
       propertyPath: InactivePin
       value: 
       objectReference: {fileID: 133228, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: UniverseCellIndex.Z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Shiftable
+      value: 
+      objectReference: {fileID: 11429468}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106982}

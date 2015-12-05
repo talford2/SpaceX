@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
 	private float replenishInterval = 2f;
 	private float replenishSquadronCooldown;
 
+    private UniversePosition lastDeathUniversePosition;
+
 	private void Awake()
 	{
 		_current = this;
@@ -103,29 +105,34 @@ public class PlayerController : MonoBehaviour
 	    member.enabled = true;
 	}
 
-	private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
+	public void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
 	{
-		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, spawner.CellLocalPosition, spawner.transform.rotation)).GetComponent<Vehicle>();
-		_playVehicleInstance.Shiftable.SetShiftPosition(spawner.UniversePosition);
-		//Destroy(_playVehicleInstance.GetComponent<Tracker>());
+		SpawnVehicle(vehiclePrefab, spawner.UniversePosition, spawner.transform.rotation);
+	}
 
-		var playerTracker = _playVehicleInstance.GetComponent<Tracker>();
-		playerTracker.ArrowCursorImage = ArrowCursorImage;
-		playerTracker.TrackerCurosrImage = TrackerCurosrImage;
-		playerTracker.FarTrackerCursorImage = FarTrackerCursorImage;
-		playerTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
-		playerTracker.IsDisabled = true;
+    public void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition, Quaternion rotation)
+    {
+        _playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, universePosition.CellLocalPosition, rotation)).GetComponent<Vehicle>();
+        _playVehicleInstance.Shiftable.SetShiftPosition(universePosition);
+        //Destroy(_playVehicleInstance.GetComponent<Tracker>());
 
-		_playVehicleInstance.GetComponent<Targetable>().Team = Team;
-		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
-		//_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+        var playerTracker = _playVehicleInstance.GetComponent<Tracker>();
+        playerTracker.ArrowCursorImage = ArrowCursorImage;
+        playerTracker.TrackerCurosrImage = TrackerCurosrImage;
+        playerTracker.FarTrackerCursorImage = FarTrackerCursorImage;
+        playerTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
+        playerTracker.IsDisabled = true;
 
-		_playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;
+        _playVehicleInstance.GetComponent<Targetable>().Team = Team;
+        _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
+
+        _playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;
+        _playVehicleInstance.GetComponent<Killable>().OnDie += PlayerController_OnDie;
 
         var healthRegenerator = _playVehicleInstance.gameObject.AddComponent<HealthRegenerator>();
         healthRegenerator.RegenerationDelay = 5f;
         healthRegenerator.RegenerationRate = 5f;
-	}
+    }
 
     public int GetSquadronSelectedIndex()
     {
@@ -227,6 +234,10 @@ public class PlayerController : MonoBehaviour
 	            if (_playVehicleInstance != null)
 	                _playVehicleInstance.GetComponent<Killable>().Die();
 	            Debug.Log("RESPAWN");
+                
+	            var respawnAt = SpawnManager.FindNearest(lastDeathUniversePosition);
+                respawnAt.Spawn();
+	            /*
 	            Universe.Current.WarpTo(RespawnPosition);
 	            _curSquadronIndex = 0;
 	            SpawnVehicle(VehiclePrefab, RespawnPosition);
@@ -234,6 +245,7 @@ public class PlayerController : MonoBehaviour
 	            var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
 	            cam.Target = _playVehicleInstance;
 	            cam.Reset();
+                */
 	        }
 
 	        if (Input.GetKeyUp(KeyCode.Escape))
@@ -302,14 +314,14 @@ public class PlayerController : MonoBehaviour
 					replenishSquadronCooldown -= Time.deltaTime;
 					if (replenishSquadronCooldown < 0)
 					{
-						Debug.Log("REPLENISH CHECK!");
+						//Debug.Log("REPLENISH CHECK!");
 						var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, 2000f, LayerMask.GetMask("Detectable"));
 						if (detected.Any(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team)))
 						{
 						}
 						else
 						{
-							Debug.Log("REPLENISH!!!");
+							//Debug.Log("REPLENISH!!!");
 							for (var i = 0; i < Squadron.Count; i++)
 							{
 								if (i != _curSquadronIndex)
@@ -370,6 +382,7 @@ public class PlayerController : MonoBehaviour
                     Squadron[oldSquadronIndex].enabled = true;
                     Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Tracker>().IsDisabled = false;
                     Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDamage -= PlayerController_OnDamage;
+                    Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDie -= PlayerController_OnDie;
                 }
 
                 // Disable next vehicle NPC control and apply PlayerController
@@ -382,6 +395,7 @@ public class PlayerController : MonoBehaviour
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
                     //_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
                     _playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;
+                    _playVehicleInstance.GetComponent<Killable>().OnDie += PlayerController_OnDie;
 
                     Squadron[_curSquadronIndex].enabled = false;
 
@@ -399,12 +413,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*
-    private void OnVehicleDestroyed(Killable sender)
+    private void PlayerController_OnDie(Killable sender)
     {
-        Debug.Log("PLAYER VEHICLE DESTROYED");
+        lastDeathUniversePosition = new UniversePosition(_playVehicleInstance.Shiftable.UniversePosition.CellIndex, _playVehicleInstance.Shiftable.UniversePosition.CellLocalPosition);
+        Debug.Log("PLAYER VEHICLE DESTROYED AT: " + lastDeathUniversePosition.CellIndex);
     }
-    */
 
 	public bool InPlayerActiveCells(CellIndex checkCell)
 	{
