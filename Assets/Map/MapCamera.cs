@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(Camera))]
 public class MapCamera : MonoBehaviour
@@ -25,7 +24,7 @@ public class MapCamera : MonoBehaviour
         controlCamera = GetComponent<Camera>();
         controlCamera.transform.forward = -Vector3.one;
 
-        cameraDistance = 50f;
+        cameraDistance = 100f;
         CameraRotateSpace();
 
         pan = Vector2.zero;
