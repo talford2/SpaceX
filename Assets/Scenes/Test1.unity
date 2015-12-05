@@ -1505,12 +1505,13 @@ MonoBehaviour:
   BackgroundGenCubmap: {fileID: 8400000, guid: 24b4b8a12c7ca564096450660b79d32f, type: 2}
   BackgroundGenMaterial: {fileID: 2100000, guid: 168d5e35cf9d7b24988cbf1cd12b9d25,
     type: 2}
+  FlatResolution: 4096
   BackgroundMaterial: {fileID: 2100000, guid: 1761f17781c5bdf4286cd812492e0c4b, type: 2}
   DustMaterial: {fileID: 2100000, guid: 15eb02f086d59eb4aaf195e454e929de, type: 2}
   AddFogMaterial: {fileID: 2100000, guid: b64faedd36e5bd14eadd5d1f68328f73, type: 2}
-  MinNebulas: 10
-  MaxNubulas: 50
-  NebulaBrightnessMultiplier: 0.1
+  MinNebulas: 50
+  MaxNubulas: 80
+  NebulaBrightnessMultiplier: 0.05
   Nebulas:
   - {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
   - {fileID: 131988, guid: 363ac4f1964fd1740b35b1ea64580238, type: 2}

@@ -17,6 +17,7 @@ public class UniverseGenerator : MonoBehaviour
 	// Cube map stuff
 	public RenderTexture BackgroundGenCubmap;
 	public Material BackgroundGenMaterial;
+	public int FlatResolution = 4096;
 
 	// Materials
 	public Material BackgroundMaterial;
@@ -93,6 +94,10 @@ public class UniverseGenerator : MonoBehaviour
 			Destroy(trans.gameObject);
 		}
 
+		if (_sunObj != null)
+		{
+			Destroy(_sunObj);
+		}
 		_sunObj = Instantiate<GameObject>(SunObject);
 		_sunLight = _sunObj.GetComponentInChildren<Light>();
 		_sunObj.transform.SetParent(BackgroundContainer.transform);
@@ -220,33 +225,21 @@ public class UniverseGenerator : MonoBehaviour
 
 	private void BackgroundSnapshop()
 	{
-		//BackgroundGenMaterial.SetColor("_Tint", Color.green);
-
-		//var renText = new RenderTexture(8192, 8192, 8);
-		var renText = new RenderTexture(4096, 4096, 24);
+		var renText = new RenderTexture(FlatResolution, FlatResolution, 24);
 		renText.wrapMode = TextureWrapMode.Repeat;
-		//var renText = new RenderTexture(1024, 1024, 16);
-		//var renText = new RenderTexture(128, 128, 8);
-
 		renText.antiAliasing = 2;
 		renText.anisoLevel = 9;
 		renText.filterMode = FilterMode.Trilinear;
 		renText.generateMips = false;
-		//renText.isVolume = true;
 		renText.isCubemap = true;
 
-		//renText.name = "Hello?";
-
-		//BackgroundCamera.RenderToCubemap(new RenderTexture(100, 100, 1));// BackgroundGenCubmap);
-
 		BackgroundGenMaterial.SetTexture("_Tex", renText);
-		//BackgroundGenMaterial.SetColor("_TintColor", Color.green);
 
 		RenderSettings.skybox = BackgroundGenMaterial;
 
-
-		//BackgroundCamera.RenderToCubemap(renText, 63);
+		_sunObj.SetActive(false);
 		BackgroundCamera.RenderToCubemap(renText, 63);
+		_sunObj.SetActive(true);
 
 		foreach (var destroyerable in _destroyAfterGeneration)
 		{
