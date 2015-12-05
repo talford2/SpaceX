@@ -1501,7 +1501,7 @@ MonoBehaviour:
   SunObject: {fileID: 165314, guid: 7732131fba4ca9245bddffa9af11d543, type: 2}
   UseRandomColours: 1
   BackgroundCamera: {fileID: 282404513}
-  FlattenToTexture: 1
+  FlattenToTexture: 0
   BackgroundGenCubmap: {fileID: 8400000, guid: 24b4b8a12c7ca564096450660b79d32f, type: 2}
   BackgroundGenMaterial: {fileID: 2100000, guid: 168d5e35cf9d7b24988cbf1cd12b9d25,
     type: 2}
