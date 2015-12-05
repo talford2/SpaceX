@@ -53,8 +53,6 @@ public class Map : MonoBehaviour
         if (pin.InactiveInstance.GetComponentInChildren<Billboard>())
             pin.InactiveInstance.GetComponentInChildren<Billboard>().UseCamera = _mapCamera;
 
-        pin.SetPinState(MapPin.MapPinState.Active);
-
         _pins.Add(pin);
         
     }
@@ -74,6 +72,7 @@ public class Map : MonoBehaviour
                 _playerPin.transform.position = MapScale*PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
             foreach (var pin in _pins)
             {
+                pin.RenderState();
                 pin.CurrentInstance.transform.position = MapScale*pin.Shiftable.GetAbsoluteUniversePosition();
             }
 

@@ -15,6 +15,7 @@ public class MapPin : MonoBehaviour
     public GameObject CurrentInstance;
 
     private Shiftable _shiftable;
+    private MapPinState _state;
 
     public Shiftable Shiftable
     {
@@ -24,6 +25,7 @@ public class MapPin : MonoBehaviour
     private void Awake()
     {
         _shiftable = GetComponent<Shiftable>();
+        _state = MapPinState.Active;
     }
 
     private void Start()
@@ -38,19 +40,28 @@ public class MapPin : MonoBehaviour
 
     public void SetPinState(MapPinState state)
     {
-        if (state == MapPinState.Active)
-        {
-            ActiveInstance.SetActive(true);
-            InactiveInstance.SetActive(false);
+        _state = state;
+        RenderState();
+    }
 
-            CurrentInstance = ActiveInstance;
-        }
-        if (state == MapPinState.Inactive)
+    public void RenderState()
+    {
+        if (ActiveInstance != null && InactiveInstance != null)
         {
-            ActiveInstance.SetActive(false);
-            InactiveInstance.SetActive(true);
+            if (_state == MapPinState.Active)
+            {
+                ActiveInstance.SetActive(true);
+                InactiveInstance.SetActive(false);
 
-            CurrentInstance = InactiveInstance;
+                CurrentInstance = ActiveInstance;
+            }
+            if (_state == MapPinState.Inactive)
+            {
+                ActiveInstance.SetActive(false);
+                InactiveInstance.SetActive(true);
+
+                CurrentInstance = InactiveInstance;
+            }
         }
     }
 
