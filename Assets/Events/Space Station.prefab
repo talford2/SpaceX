@@ -31,6 +31,7 @@ GameObject:
   - 114: {fileID: 11485238}
   - 114: {fileID: 11482882}
   - 114: {fileID: 11462916}
+  - 64: {fileID: 6468710}
   m_Layer: 0
   m_Name: Space Station
   m_TagString: Untagged
@@ -168,7 +169,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106982}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -211,6 +212,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106982}
+  m_Mesh: {fileID: 4300000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
+--- !u!64 &6468710
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106982}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
 --- !u!114 &11429468
 MonoBehaviour:
