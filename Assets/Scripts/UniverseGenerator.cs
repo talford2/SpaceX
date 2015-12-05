@@ -237,15 +237,17 @@ public class UniverseGenerator : MonoBehaviour
 
 		RenderSettings.skybox = BackgroundGenMaterial;
 
-		_sunObj.SetActive(false);
+		//_sunObj.SetActive(false);
+		//Destroy(_sunObj);
 		BackgroundCamera.RenderToCubemap(renText, 63);
-		_sunObj.SetActive(true);
+		//_sunObj.SetActive(true);
 
 		foreach (var destroyerable in _destroyAfterGeneration)
 		{
 			Destroy(destroyerable);
 		}
 		BackgroundCamera.clearFlags = CameraClearFlags.Skybox;
+		SceneRelfectionProbe.RenderProbe();
 	}
 }
 

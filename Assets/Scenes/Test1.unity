@@ -1509,8 +1509,8 @@ MonoBehaviour:
   BackgroundMaterial: {fileID: 2100000, guid: 1761f17781c5bdf4286cd812492e0c4b, type: 2}
   DustMaterial: {fileID: 2100000, guid: 15eb02f086d59eb4aaf195e454e929de, type: 2}
   AddFogMaterial: {fileID: 2100000, guid: b64faedd36e5bd14eadd5d1f68328f73, type: 2}
-  MinNebulas: 50
-  MaxNubulas: 80
+  MinNebulas: 40
+  MaxNubulas: 60
   NebulaBrightnessMultiplier: 0.05
   Nebulas:
   - {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
