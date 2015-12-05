@@ -186,7 +186,19 @@ public class Weapon : MonoBehaviour
         {
             if (!IsTriggered)
             {
-                SetAimAt(lockedTarget.position);
+                var lockedVehicle = lockedTarget.GetComponent<Vehicle>();
+                if (lockedVehicle != null)
+                {
+                    // Rough Extrapolation
+                    var distance = (lockingTarget.position - shootPointsCentre).magnitude;
+                    var timeToHit = distance/MissilePrefab.GetComponent<Missile>().MissileSpeed;
+                    var extrapolatePosition = lockedTarget.position + lockedVehicle.GetVelocity()*timeToHit;
+                    SetAimAt(extrapolatePosition);
+                }
+                else
+                {
+                    SetAimAt(lockedTarget.position);
+                }
                 Fire();
                 ClearTargetLock();
             }
