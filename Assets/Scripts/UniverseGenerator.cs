@@ -70,7 +70,10 @@ public class UniverseGenerator : MonoBehaviour
 			SceneRelfectionProbe.timeSlicingMode = UnityEngine.Rendering.ReflectionProbeTimeSlicingMode.AllFacesAtOnce;
 			SceneRelfectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
 		}
+	}
 
+	public void Start()
+	{
 		RandomiseUniverse();
 		RandomiseUniverseEvents();
 	}
@@ -113,6 +116,7 @@ public class UniverseGenerator : MonoBehaviour
 
 		var bg = HSVColor.FromColor(bgColor);
 		bg.V *= Random.Range(0.05f, 0.2f);
+		BackgroundCamera.clearFlags = CameraClearFlags.Color;
 		BackgroundCamera.backgroundColor = bg.GetColor();
 
 		var fogColor = HSVColor.FromColor(bgColor);
