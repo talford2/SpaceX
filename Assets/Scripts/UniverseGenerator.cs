@@ -56,6 +56,8 @@ public class UniverseGenerator : MonoBehaviour
 			reflectionProbe.name = "Reflection Probe";
 			SceneRelfectionProbe = reflectionProbe.AddComponent<ReflectionProbe>();
 			SceneRelfectionProbe.size = Vector3.one * 1500f;
+			SceneRelfectionProbe.mode = UnityEngine.Rendering.ReflectionProbeMode.Realtime;
+			SceneRelfectionProbe.timeSlicingMode = UnityEngine.Rendering.ReflectionProbeTimeSlicingMode.AllFacesAtOnce;
 			SceneRelfectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
 		}
 
