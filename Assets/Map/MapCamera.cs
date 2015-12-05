@@ -14,7 +14,6 @@ public class MapCamera : MonoBehaviour
     private float cameraDistance;
     private float yawRotate;
     private float pitchRotate;
-    private Vector3 initDirection;
 
     private Vector3 lookAt = Vector3.zero;
     private const float MaxTurnRotate = Mathf.PI;
@@ -24,9 +23,9 @@ public class MapCamera : MonoBehaviour
     private void Awake()
     {
         controlCamera = GetComponent<Camera>();
-        initDirection = controlCamera.transform.forward;
-        //cameraDistance = controlCamera.transform.position.magnitude;
-        cameraDistance = 3f;
+        controlCamera.transform.forward = -Vector3.one;
+
+        cameraDistance = 50f;
         CameraRotateSpace();
 
         pan = Vector2.zero;
