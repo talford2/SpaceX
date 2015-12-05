@@ -388,7 +388,15 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  ShiftParticleSystems: []
+  ShiftParticleSystems:
+  - {fileID: 19809798}
+  - {fileID: 19871808}
+  - {fileID: 19844770}
+  - {fileID: 19881622}
+  - {fileID: 19892340}
+  - {fileID: 19845260}
+  - {fileID: 19872994}
+  - {fileID: 19824484}
 --- !u!114 &11450094
 MonoBehaviour:
   m_ObjectHideFlags: 1

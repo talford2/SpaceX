@@ -95,7 +95,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112780}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
   m_Name: 
@@ -105,7 +105,7 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  _particleSystems:
+  ShiftParticleSystems:
   - {fileID: 19812082}
   - {fileID: 19850984}
 --- !u!114 &11412022
@@ -3118,6 +3118,10 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: ShiftParticleSystems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: InitialModule.startSize.minCurve.m_Curve.Array.data[0].value
       value: .199999988
       objectReference: {fileID: 0}
@@ -3155,7 +3159,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_MaxParticleSize
@@ -3173,6 +3177,14 @@ Prefab:
       propertyPath: InitialModule.maxNumParticles
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ShiftParticleSystems.Array.data[0]
+      value: 
+      objectReference: {fileID: 19812082}
+    - target: {fileID: 0}
+      propertyPath: ShiftParticleSystems.Array.data[1]
+      value: 
+      objectReference: {fileID: 19850984}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 112780}

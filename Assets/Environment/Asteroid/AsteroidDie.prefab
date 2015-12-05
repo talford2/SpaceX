@@ -208,7 +208,7 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  _particleSystems:
+  ShiftParticleSystems:
   - {fileID: 19810988}
   - {fileID: 19828514}
 --- !u!114 &11489156
@@ -3225,6 +3225,10 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: ShiftParticleSystems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: MinDistance
       value: 40
       objectReference: {fileID: 0}
@@ -3296,6 +3300,14 @@ Prefab:
       propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ShiftParticleSystems.Array.data[0]
+      value: 
+      objectReference: {fileID: 19810988}
+    - target: {fileID: 0}
+      propertyPath: ShiftParticleSystems.Array.data[1]
+      value: 
+      objectReference: {fileID: 19828514}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 185508}
