@@ -89,7 +89,6 @@ public class Shiftable : MonoBehaviour
 
     public Vector3 GetAbsoluteUniversePosition()
     {
-        var dCell = UniversePosition.CellIndex;
-        return dCell.ToVector3() * Universe.Current.CellSize + UniversePosition.CellLocalPosition;
+        return Universe.Current.GetAbsoluteUniversePosition(UniversePosition);
     }
 }
