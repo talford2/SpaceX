@@ -44,6 +44,21 @@ public class UniverseGenerator : MonoBehaviour
 
 	void Awake()
 	{
+		if (BackgroundContainer == null)
+		{
+			BackgroundContainer = new GameObject();
+			BackgroundContainer.name = "Universe Container";
+		}
+
+		if (SceneRelfectionProbe == null)
+		{
+			var reflectionProbe = new GameObject();
+			reflectionProbe.name = "Reflection Probe";
+			SceneRelfectionProbe = reflectionProbe.AddComponent<ReflectionProbe>();
+			SceneRelfectionProbe.size = Vector3.one * 1500f;
+			SceneRelfectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
+		}
+
 		RandomiseUniverse();
 		RandomiseUniverseEvents();
 	}
@@ -165,11 +180,11 @@ public class UniverseGenerator : MonoBehaviour
 			for (var i = 0; i < ue.Count; i++)
 			{
 				var eventObj = Instantiate(ue.Prefab).GetComponent<UniverseEvent>();
-			    var shifter = eventObj.Shiftable;
+				var shifter = eventObj.Shiftable;
 				eventObj.transform.rotation = Random.rotation;
 				shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * CellRadius);
 				shifter.CellLocalPosition = Utility.RandomInsideCube * Universe.Current.CellSize;
-                Universe.Current.UniverseEvents.Add(eventObj);
+				Universe.Current.UniverseEvents.Add(eventObj);
 			}
 		}
 	}
