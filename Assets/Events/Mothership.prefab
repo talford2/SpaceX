@@ -196,6 +196,7 @@ GameObject:
   - 114: {fileID: 11402434}
   - 114: {fileID: 11429504}
   - 114: {fileID: 11458716}
+  - 114: {fileID: 11430234}
   m_Layer: 0
   m_Name: Mothership
   m_TagString: Untagged
@@ -1031,6 +1032,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c0e240e5c41af49bae7e5465494283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11430234
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7806c2c78bc2bb444bf4fc12544f4df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LineRendererWidth: 35
+  LineRenderers: []
 --- !u!114 &11458716
 MonoBehaviour:
   m_ObjectHideFlags: 1

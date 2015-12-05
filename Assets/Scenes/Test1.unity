@@ -1532,14 +1532,14 @@ MonoBehaviour:
   MaxSize: 2000
   Radius: 1200
   Count: 20
-  CellRadius: 10
+  CellRadius: 20
   UniverseEvents:
   - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
-    Count: 50
+    Count: 100
   - Prefab: {fileID: 106982, guid: 5a884d383dd2b9a499efaa7d524b6e27, type: 2}
-    Count: 5
+    Count: 3
   - Prefab: {fileID: 181516, guid: 82b42ea3f6ffc8842b8664eecc7502c4, type: 2}
-    Count: 20
+    Count: 10
 --- !u!1 &1109137749
 GameObject:
   m_ObjectHideFlags: 0
