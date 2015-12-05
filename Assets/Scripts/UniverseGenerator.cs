@@ -71,7 +71,7 @@ public class UniverseGenerator : MonoBehaviour
 			SceneRelfectionProbe.timeSlicingMode = UnityEngine.Rendering.ReflectionProbeTimeSlicingMode.AllFacesAtOnce;
 			SceneRelfectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
 		}
-	}
+    }
 
 	public void Start()
 	{
@@ -91,16 +91,13 @@ public class UniverseGenerator : MonoBehaviour
 	{
 		foreach (Transform trans in BackgroundContainer.transform)
 		{
-			Destroy(trans.gameObject);
+			DestroyImmediate(trans.gameObject);
 		}
 
-		if (_sunObj != null)
-		{
-			Destroy(_sunObj);
-		}
-		_sunObj = Instantiate<GameObject>(SunObject);
+        _sunObj = Instantiate<GameObject>(SunObject);
+        _sunObj.transform.SetParent(BackgroundContainer.transform);
+
 		_sunLight = _sunObj.GetComponentInChildren<Light>();
-		_sunObj.transform.SetParent(BackgroundContainer.transform);
 
 		if (UseRandomColours)
 		{
