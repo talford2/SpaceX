@@ -3,18 +3,13 @@ using UnityEngine;
 
 public class PirateSquad : UniverseEvent
 {
-	private Material _testMat;
 	private MapPin _mapPin;
-
-	public Renderer Sphere;
-
+	
 	public List<Spawner> Spawners;
 
 	public override void Awake()
 	{
 		base.Awake();
-		_testMat = Sphere.material;
-		_testMat.SetColor("_Color", Color.yellow);
 		_mapPin = GetComponent<MapPin>();
 	}
 
@@ -24,8 +19,7 @@ public class PirateSquad : UniverseEvent
 		{
 			spawner.Spawn(Random.Range(0f, 1f));
 		}
-
-		_testMat.SetColor("_Color", Color.red);
+		
 		if (_mapPin != null)
 			_mapPin.SetPinState(MapPin.MapPinState.Inactive);
 		base.Initialise();
