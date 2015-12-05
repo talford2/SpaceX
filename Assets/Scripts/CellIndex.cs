@@ -48,7 +48,7 @@ public class CellIndex
 
     public int SquareMagnitude()
     {
-        return X*X + Y*Y;
+        return X*X + Y*Y + Z*Z;
     }
 
     public static CellIndex operator +(CellIndex c1, CellIndex c2)
