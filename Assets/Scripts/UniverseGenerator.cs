@@ -12,6 +12,11 @@ public class UniverseGenerator : MonoBehaviour
 	public GameObject SunObject;
 	public bool UseRandomColours = false;
 	public Camera BackgroundCamera;
+	public bool FlattenToTexture = false;
+
+	// Cube map stuff
+	public RenderTexture BackgroundGenCubmap;
+	public Material BackgroundGenMaterial;
 
 	// Materials
 	public Material BackgroundMaterial;
@@ -21,6 +26,7 @@ public class UniverseGenerator : MonoBehaviour
 	// Nebulas
 	public int MinNebulas = 30;
 	public int MaxNubulas = 40;
+	public float NebulaBrightnessMultiplier = 0.1f;
 	public List<GameObject> Nebulas;
 
 	// Planets
@@ -42,8 +48,29 @@ public class UniverseGenerator : MonoBehaviour
 	private Light _sunLight;
 	private GameObject _sunObj;
 
+	private List<GameObject> _destroyAfterGeneration;
+
 	void Awake()
 	{
+		_destroyAfterGeneration = new List<GameObject>();
+
+		if (BackgroundContainer == null)
+		{
+			BackgroundContainer = new GameObject();
+			BackgroundContainer.name = "Universe Container";
+		}
+
+		if (SceneRelfectionProbe == null)
+		{
+			var reflectionProbe = new GameObject();
+			reflectionProbe.name = "Reflection Probe";
+			SceneRelfectionProbe = reflectionProbe.AddComponent<ReflectionProbe>();
+			SceneRelfectionProbe.size = Vector3.one * 1500f;
+			SceneRelfectionProbe.mode = UnityEngine.Rendering.ReflectionProbeMode.Realtime;
+			SceneRelfectionProbe.timeSlicingMode = UnityEngine.Rendering.ReflectionProbeTimeSlicingMode.AllFacesAtOnce;
+			SceneRelfectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
+		}
+
 		RandomiseUniverse();
 		RandomiseUniverseEvents();
 	}
@@ -109,8 +136,11 @@ public class UniverseGenerator : MonoBehaviour
 			gm.transform.localPosition = Vector3.zero;
 
 			var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.2f));
-			randC.V *= 0.1f;
+			randC.V *= NebulaBrightnessMultiplier;
+
 			gm.GetComponent<Renderer>().material.SetColor("_Color", randC.GetColor());
+
+			_destroyAfterGeneration.Add(gm);
 			//gm.GetComponent<Renderer>().material.SetColor("_TintColor", Utility.GetRandomColor(PrimaryColor, SecondaryColor, 1f, 255f));
 		}
 
@@ -124,6 +154,8 @@ public class UniverseGenerator : MonoBehaviour
 			pl.transform.rotation = Random.rotation;
 			pl.layer = LayerMask.NameToLayer("Universe Background");
 			pl.transform.localScale = Random.Range(20f, 100f) * Vector3.one;
+
+			_destroyAfterGeneration.Add(pl);
 		}
 
 		_sunObj.transform.localPosition = Random.onUnitSphere * 1000f;
@@ -152,10 +184,17 @@ public class UniverseGenerator : MonoBehaviour
 			star.transform.localPosition = position;
 			star.transform.LookAt(Camera.main.transform, transform.up);
 			star.transform.rotation *= Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward);
+
+			_destroyAfterGeneration.Add(star);
 		}
 
 		SceneRelfectionProbe.backgroundColor = bg.GetColor();
 		SceneRelfectionProbe.RenderProbe();
+
+		if (FlattenToTexture)
+		{
+			BackgroundSnapshop();
+		}
 	}
 
 	private void RandomiseUniverseEvents()
@@ -165,13 +204,51 @@ public class UniverseGenerator : MonoBehaviour
 			for (var i = 0; i < ue.Count; i++)
 			{
 				var eventObj = Instantiate(ue.Prefab).GetComponent<UniverseEvent>();
-			    var shifter = eventObj.Shiftable;
+				var shifter = eventObj.Shiftable;
 				eventObj.transform.rotation = Random.rotation;
 				shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * CellRadius);
 				shifter.CellLocalPosition = Utility.RandomInsideCube * Universe.Current.CellSize;
-                Universe.Current.UniverseEvents.Add(eventObj);
+				Universe.Current.UniverseEvents.Add(eventObj);
 			}
 		}
+	}
+
+
+	private void BackgroundSnapshop()
+	{
+		//BackgroundGenMaterial.SetColor("_Tint", Color.green);
+
+		//var renText = new RenderTexture(8192, 8192, 8);
+		var renText = new RenderTexture(4096, 4096, 24);
+		renText.wrapMode = TextureWrapMode.Repeat;
+		//var renText = new RenderTexture(1024, 1024, 16);
+		//var renText = new RenderTexture(128, 128, 8);
+
+		renText.antiAliasing = 2;
+		renText.anisoLevel = 9;
+		renText.filterMode = FilterMode.Trilinear;
+		renText.generateMips = false;
+		//renText.isVolume = true;
+		renText.isCubemap = true;
+
+		//renText.name = "Hello?";
+
+		//BackgroundCamera.RenderToCubemap(new RenderTexture(100, 100, 1));// BackgroundGenCubmap);
+
+		BackgroundGenMaterial.SetTexture("_Tex", renText);
+		//BackgroundGenMaterial.SetColor("_TintColor", Color.green);
+
+		RenderSettings.skybox = BackgroundGenMaterial;
+
+
+		//BackgroundCamera.RenderToCubemap(renText, 63);
+		BackgroundCamera.RenderToCubemap(renText, 63);
+
+		foreach (var destroyerable in _destroyAfterGeneration)
+		{
+			Destroy(destroyerable);
+		}
+		BackgroundCamera.clearFlags = CameraClearFlags.Skybox;
 	}
 }
 
