@@ -1,0 +1,148 @@
+fileFormatVersion: 2
+guid: 7c9a65709755757479627dd814d14bf4
+timeCreated: 1449325223
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bay1
+    100002: Bay2
+    100004: BayFrontLeft
+    100006: BayFrontRight
+    100008: BayMidLeft
+    100010: BayMidRight
+    100012: Blasters
+    100014: CentreDeck
+    100016: CentreShip
+    100018: FrontCells
+    100020: Mothership
+    100022: //RootNode
+    100024: PanelMetal
+    100026: Rear
+    100028: Thrusters
+    100030: WindowIndent
+    400000: Bay1
+    400002: Bay2
+    400004: BayFrontLeft
+    400006: BayFrontRight
+    400008: BayMidLeft
+    400010: BayMidRight
+    400012: Blasters
+    400014: CentreDeck
+    400016: CentreShip
+    400018: FrontCells
+    400020: Mothership
+    400022: //RootNode
+    400024: PanelMetal
+    400026: Rear
+    400028: Thrusters
+    400030: WindowIndent
+    2300000: Bay1
+    2300002: Bay2
+    2300004: BayFrontLeft
+    2300006: BayFrontRight
+    2300008: BayMidLeft
+    2300010: BayMidRight
+    2300012: Blasters
+    2300014: CentreDeck
+    2300016: CentreShip
+    2300018: FrontCells
+    2300020: Mothership
+    2300022: PanelMetal
+    2300024: Rear
+    2300026: Thrusters
+    2300028: WindowIndent
+    3300000: Bay1
+    3300002: Bay2
+    3300004: BayFrontLeft
+    3300006: BayFrontRight
+    3300008: BayMidLeft
+    3300010: BayMidRight
+    3300012: Blasters
+    3300014: CentreDeck
+    3300016: CentreShip
+    3300018: FrontCells
+    3300020: Mothership
+    3300022: PanelMetal
+    3300024: Rear
+    3300026: Thrusters
+    3300028: WindowIndent
+    4300000: Mothership
+    4300002: Blasters
+    4300004: BayMidRight
+    4300006: BayMidLeft
+    4300008: BayFrontLeft
+    4300010: BayFrontRight
+    4300012: PanelMetal
+    4300014: WindowIndent
+    4300016: Thrusters
+    4300018: CentreDeck
+    4300020: CentreShip
+    4300022: Rear
+    4300024: FrontCells
+    4300026: Bay1
+    4300028: Bay2
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
