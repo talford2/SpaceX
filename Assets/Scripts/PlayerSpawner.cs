@@ -11,8 +11,12 @@ public class PlayerSpawner : MonoBehaviour
 
     public void Spawn()
     {
-        Universe.Current.WarpTo(Shiftable.UniversePosition);
-        PlayerController.Current.SpawnVehicle(PlayerController.Current.VehiclePrefab, Shiftable);
+        var localOffset = transform.position - Universe.Current.GetWorldPosition(Shiftable.UniversePosition);
+        Debug.Log("LOCAL OFFSET: " + localOffset);
+        var universePosition = new UniversePosition(Shiftable.UniversePosition.CellIndex, Shiftable.UniversePosition.CellLocalPosition);
+        Universe.Current.WarpTo(universePosition);
+        PlayerController.Current.SpawnVehicle(PlayerController.Current.VehiclePrefab, universePosition, transform.rotation);
+        PlayerController.Current.VehicleInstance.transform.position = Universe.Current.GetWorldPosition(universePosition);
         var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
         cam.Target = PlayerController.Current.VehicleInstance;
         cam.Reset();
