@@ -152,7 +152,7 @@ MonoBehaviour:
   TargetLockTime: 0.5
   TargetLockingMaxDistance: 2000
   IsTriggered: 0
-  MissilePoolCount: 50
+  MissilePoolCount: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -199,7 +199,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissilePoolCount
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TargetLocking
