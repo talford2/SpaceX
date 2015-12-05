@@ -133,8 +133,8 @@ Camera:
   m_GameObject: {fileID: 786920759}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0.019607844}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -150,12 +150,12 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
-  m_OcclusionCulling: 1
+  m_HDR: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
@@ -203,13 +203,18 @@ MonoBehaviour:
   BackgroundContainer: {fileID: 0}
   SceneRelfectionProbe: {fileID: 0}
   SunObject: {fileID: 165314, guid: 7732131fba4ca9245bddffa9af11d543, type: 2}
-  UseRandomColours: 0
+  UseRandomColours: 1
   BackgroundCamera: {fileID: 786920763}
+  FlattenToTexture: 1
+  BackgroundGenCubmap: {fileID: 8400000, guid: 24b4b8a12c7ca564096450660b79d32f, type: 2}
+  BackgroundGenMaterial: {fileID: 2100000, guid: 168d5e35cf9d7b24988cbf1cd12b9d25,
+    type: 2}
   BackgroundMaterial: {fileID: 2100000, guid: 1761f17781c5bdf4286cd812492e0c4b, type: 2}
   DustMaterial: {fileID: 2100000, guid: 15eb02f086d59eb4aaf195e454e929de, type: 2}
   AddFogMaterial: {fileID: 2100000, guid: b64faedd36e5bd14eadd5d1f68328f73, type: 2}
-  MinNebulas: 30
-  MaxNubulas: 40
+  MinNebulas: 100
+  MaxNubulas: 150
+  NebulaBrightnessMultiplier: 0.1
   Nebulas:
   - {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
   - {fileID: 131988, guid: 363ac4f1964fd1740b35b1ea64580238, type: 2}

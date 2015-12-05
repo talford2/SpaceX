@@ -9,6 +9,8 @@ public class UniverseGeneratorEditor : Editor
 	{
 		var universeGen = (UniverseGenerator)target;
 
+		universeGen.FlattenToTexture = EditorGUILayout.Toggle("Flatten", universeGen.FlattenToTexture);
+		universeGen.UseRandomColours = EditorGUILayout.Toggle("Use Random Colours", universeGen.UseRandomColours);
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.PrefixLabel("Colour Range");
 		universeGen.PrimaryColor = EditorGUILayout.ColorField(universeGen.PrimaryColor);
@@ -26,12 +28,19 @@ public class UniverseGeneratorEditor : Editor
 		universeGen.AddFogMaterial = EditorExtensions.ObjectField<Material>("Fog", universeGen.AddFogMaterial, false);
 		EditorGUILayout.Separator();
 
+		// Cubemap stuff
+		universeGen.BackgroundGenCubmap = EditorExtensions.ObjectField<RenderTexture>("Cube Map", universeGen.BackgroundGenCubmap, false);
+		universeGen.BackgroundGenMaterial = EditorExtensions.ObjectField<Material>("Gen Material", universeGen.BackgroundGenMaterial, false);
+		EditorGUILayout.Separator();
+
+
 		EditorGUILayout.LabelField("Nebulae", EditorStyles.boldLabel);
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.PrefixLabel("Count");
 		universeGen.MinNebulas = EditorGUILayout.IntField(universeGen.MinNebulas);
 		universeGen.MaxNubulas = EditorGUILayout.IntField(universeGen.MaxNubulas);
 		EditorGUILayout.EndHorizontal();
+		universeGen.NebulaBrightnessMultiplier = EditorGUILayout.Slider("Brightness Multiplier", universeGen.NebulaBrightnessMultiplier, 0, 1);
 		universeGen.Nebulas = EditorExtensions.GameObjectList("Prefabs", universeGen.Nebulas, false);
 		EditorGUILayout.Separator();
 
