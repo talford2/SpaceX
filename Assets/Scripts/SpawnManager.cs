@@ -24,7 +24,8 @@ public class SpawnManager
         Debug.Log("FIND SPAWNER NEAR: " + universePosition.CellIndex);
         var nearestSpawner = _spawners
             .OrderBy(s => (s.Shiftable.CellLocalPosition - universePosition.CellLocalPosition).sqrMagnitude)
-            .OrderBy(s => (s.Shiftable.UniverseCellIndex - universePosition.CellIndex).SquareMagnitude()).FirstOrDefault();
+            .ThenBy(s => (s.Shiftable.UniverseCellIndex - universePosition.CellIndex).SquareMagnitude())
+            .FirstOrDefault();
 
         Debug.Log("NEAREST SPAWNER AT: " + nearestSpawner.Shiftable.UniverseCellIndex);
         return nearestSpawner;
