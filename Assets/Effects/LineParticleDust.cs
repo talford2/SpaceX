@@ -46,7 +46,7 @@ public class LineParticleDust : MonoBehaviour
 		var particlePrefab = new GameObject();
 		particlePrefab.transform.SetParent(transform);
 		particlePrefab.transform.position = transform.position;
-		var lineRender = (LineRenderer)particlePrefab.AddComponent(typeof(LineRenderer));
+	    var lineRender = particlePrefab.AddComponent<LineRenderer>();
 		lineRender.useWorldSpace = false;
 		particlePrefab.hideFlags = HideFlags.HideInHierarchy;
 
@@ -75,6 +75,8 @@ public class LineParticleDust : MonoBehaviour
 				LineRenderer = lineRenderer
 			});
 		}
+
+        Destroy(lineRender);
 	}
 
 	private void _shiftable_OnShift(Shiftable sender, Vector3 delta)
