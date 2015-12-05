@@ -233,7 +233,7 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  _particleSystems: []
+  ShiftParticleSystems: []
 --- !u!114 &128853637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,7 +1016,7 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  _particleSystems: []
+  ShiftParticleSystems: []
 --- !u!1 &663547979
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,7 +1140,7 @@ MonoBehaviour:
     Y: 0
     Z: 7
   CellLocalPosition: {x: 0, y: -80, z: 110}
-  _particleSystems: []
+  ShiftParticleSystems: []
 --- !u!4 &761010714
 Transform:
   m_ObjectHideFlags: 0
@@ -1217,7 +1217,7 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  _particleSystems: []
+  ShiftParticleSystems: []
 --- !u!1 &989789833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,7 +1849,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!114 &1186793845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1866,7 +1866,7 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  _particleSystems: []
+  ShiftParticleSystems: []
 --- !u!1 &1212660694
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,7 +2353,7 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  _particleSystems: []
+  ShiftParticleSystems: []
 --- !u!1 &1974382651
 GameObject:
   m_ObjectHideFlags: 0

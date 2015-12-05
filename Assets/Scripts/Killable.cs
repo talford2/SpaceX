@@ -8,6 +8,9 @@ public class Killable : MonoBehaviour
 	public GameObject DamageEffect;
 	public GameObject DieEffect;
 
+	public GameObject WoundEffect;
+	private GameObject _woundObj;
+
 	public delegate void OnDamageEvent(Vector3 position, Vector3 normal);
 	public event OnDamageEvent OnDamage;
 
@@ -34,6 +37,14 @@ public class Killable : MonoBehaviour
 				Instantiate(DamageEffect, position, Quaternion.LookRotation(normal));
 			if (Health <= 0f)
 				Die();
+
+			if (_woundObj == null && WoundEffect != null && Health / MaxHealth < 0.5f)
+			{
+				_woundObj = Instantiate(WoundEffect);
+				_woundObj.transform.parent = transform;
+				_woundObj.transform.localPosition = Vector3.zero;
+				GetComponent<Shiftable>().ShiftParticleSystems.Add(_woundObj.GetComponent<ParticleSystem>());
+			}
 		}
 	}
 
