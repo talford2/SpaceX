@@ -110,7 +110,7 @@ public class Weapon : MonoBehaviour
 	        if (!MissilesConverge)
 	            direction += _shootPoint.transform.position - GetShootPointCentre();
 	        missile.transform.forward = direction;
-	        missile.GetComponent<Shiftable>().UniverseCellIndex = _owner.GetComponent<Vehicle>().Shiftable.UniverseCellIndex;
+	        //missile.GetComponent<Shiftable>().UniverseCellIndex = _owner.GetComponent<Vehicle>().Shiftable.UniverseCellIndex;
 	        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, direction, _velocityReference.Value);
 
 	        _shootPoint.Flash();

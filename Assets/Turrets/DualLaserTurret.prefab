@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &106240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 469836}
+  - 135: {fileID: 13547558}
+  - 114: {fileID: 11443048}
+  m_Layer: 11
+  m_Name: Detectable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &120598
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,6 +56,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 402084}
+  - 114: {fileID: 11440442}
   m_Layer: 0
   m_Name: ShootPointRight
   m_TagString: Untagged
@@ -69,6 +87,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 458172}
+  - 114: {fileID: 11404266}
   m_Layer: 0
   m_Name: ShootPointLeft
   m_TagString: Untagged
@@ -93,7 +112,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &175338
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -132,6 +151,8 @@ GameObject:
   - 4: {fileID: 405736}
   - 95: {fileID: 9518466}
   - 114: {fileID: 11472348}
+  - 114: {fileID: 11454552}
+  - 114: {fileID: 11459764}
   m_Layer: 0
   m_Name: DualLaserTurret
   m_TagString: Untagged
@@ -179,7 +200,7 @@ Transform:
   - {fileID: 439012}
   - {fileID: 466886}
   m_Father: {fileID: 407434}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &405736
 Transform:
   m_ObjectHideFlags: 1
@@ -192,7 +213,7 @@ Transform:
   m_Children:
   - {fileID: 464986}
   - {fileID: 467760}
-  - {fileID: 452172}
+  - {fileID: 469836}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &407434
@@ -205,6 +226,7 @@ Transform:
   m_LocalPosition: {x: -0.0000000021855686, y: 0.9, z: -0.000000019073486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 452172}
   - {fileID: 404694}
   m_Father: {fileID: 464986}
   m_RootOrder: 0
@@ -227,12 +249,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175338}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 2.5, z: 0.8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.00000005760116, y: 0.00000005760117, z: 0.7071068, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.0055182576, z: -0.02912956}
+  m_LocalScale: {x: 0.3622073, y: 0.3622073, z: 0.3622073}
   m_Children: []
-  m_Father: {fileID: 405736}
-  m_RootOrder: 2
+  m_Father: {fileID: 407434}
+  m_RootOrder: 0
 --- !u!4 &458172
 Transform:
   m_ObjectHideFlags: 1
@@ -283,6 +305,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 405736}
   m_RootOrder: 1
+--- !u!4 &469836
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106240}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0.8}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 405736}
+  m_RootOrder: 2
 --- !u!95 &9518466
 Animator:
   serializedVersion: 3
@@ -300,6 +334,71 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11404266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd44330a49bb5348bf12e52bb74c3f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
+--- !u!114 &11440442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd44330a49bb5348bf12e52bb74c3f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
+--- !u!114 &11443048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c500da126aa939c429ebf252cb7c9d0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetTransform: {fileID: 407434}
+--- !u!114 &11454552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 50
+  MaxHealth: 50
+  DamageEffect: {fileID: 0}
+  DieEffect: {fileID: 0}
+  WoundEffect: {fileID: 0}
+  DestroyOnDie: 1
+--- !u!114 &11459764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Team: 2
 --- !u!114 &11472348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -311,6 +410,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8446123da9e83ef4bb11729d8d637ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Head: {fileID: 173074}
+  Guns: {fileID: 136792}
+  WeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93, type: 2}
+  ShootPoints:
+  - {fileID: 11404266}
+  - {fileID: 11440442}
+  MaxTargetDistance: 1000
+  MinPitch: 25
+  MaxPitch: 300
+--- !u!135 &13547558
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106240}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13670502
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -384,6 +504,26 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Health
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxTargetDistance
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MinPitch
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxPitch
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
