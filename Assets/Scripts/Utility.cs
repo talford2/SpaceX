@@ -219,6 +219,13 @@ public class Utility
 			return new Vector3(Random.Range(0, 1), Random.Range(0, 1), Random.Range(0, 1));
 		}
 	}
+
+    public static Vector3 GetVehicleExtrapolatedPosition(Vehicle vehicle, Weapon shootWeapon)
+    {
+        var distance = (vehicle.transform.position - shootWeapon.GetShootPointCentre()).magnitude;
+        var timeToHit = distance / shootWeapon.MissilePrefab.GetComponent<Missile>().MissileSpeed;
+        return vehicle.transform.position + vehicle.GetVelocity() * timeToHit;
+    }
 }
 
 public class HSVColor

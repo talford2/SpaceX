@@ -74,7 +74,17 @@ public class FighterAttack :NpcState<Fighter>
                 var angleToTarget = Vector3.Angle(toTarget.normalized, Npc.VehicleInstance.transform.forward.normalized);
                 if (Mathf.Abs(angleToTarget) < Npc.ShootAngleTolerance)
                 {
-                    Npc.VehicleInstance.SetAimAt(Npc.Target.position);
+                    // Rough Extrapolation
+                    var targetVehicle = Npc.Target.GetComponent<Vehicle>();
+                    if (targetVehicle != null)
+                    {
+                        var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(Npc.Target.GetComponent<Vehicle>(), Npc.VehicleInstance.PrimaryWeaponInstance);
+                        Npc.VehicleInstance.SetAimAt(extrapolatePosition);
+                    }
+                    else
+                    {
+                        Npc.VehicleInstance.SetAimAt(Npc.Target.position);
+                    }
                     Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = true;
                     burstAmount += Time.deltaTime;
                     if (burstAmount > Npc.BurstTime)

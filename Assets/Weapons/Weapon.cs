@@ -190,9 +190,7 @@ public class Weapon : MonoBehaviour
                 if (lockedVehicle != null)
                 {
                     // Rough Extrapolation
-                    var distance = (lockingTarget.position - shootPointsCentre).magnitude;
-                    var timeToHit = distance/MissilePrefab.GetComponent<Missile>().MissileSpeed;
-                    var extrapolatePosition = lockedTarget.position + lockedVehicle.GetVelocity()*timeToHit;
+                    var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(lockedVehicle, this);
                     SetAimAt(extrapolatePosition);
                 }
                 else
