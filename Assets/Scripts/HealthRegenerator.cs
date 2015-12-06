@@ -27,6 +27,8 @@ public class HealthRegenerator : MonoBehaviour
             if (killable.Health < killable.MaxHealth)
             {
                 killable.Health += RegenerationRate*Time.deltaTime;
+                if (killable.Health/killable.MaxHealth > 0.5f)
+                    killable.StopWoundEffect();
                 if (killable.Health > killable.MaxHealth)
                     killable.Health = killable.MaxHealth;
             }

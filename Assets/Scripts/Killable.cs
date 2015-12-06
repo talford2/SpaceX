@@ -38,15 +38,31 @@ public class Killable : MonoBehaviour
 			if (Health <= 0f)
 				Die();
 
-			if (_woundObj == null && WoundEffect != null && Health / MaxHealth < 0.5f)
+			if (Health / MaxHealth < 0.5f)
 			{
-				_woundObj = Instantiate(WoundEffect);
-				_woundObj.transform.parent = transform;
-				_woundObj.transform.localPosition = Vector3.zero;
-				GetComponent<Shiftable>().ShiftParticleSystems.Add(_woundObj.GetComponent<ParticleSystem>());
+				StartWoundEffect();
 			}
 		}
 	}
+
+    private void StartWoundEffect()
+    {
+        if (_woundObj == null && WoundEffect != null)
+        {
+            _woundObj = Instantiate(WoundEffect);
+            _woundObj.transform.parent = transform;
+            _woundObj.transform.localPosition = Vector3.zero;
+            GetComponent<Shiftable>().ShiftParticleSystems.Add(_woundObj.GetComponent<ParticleSystem>());
+        }
+    }
+
+    public void StopWoundEffect()
+    {
+        if (_woundObj != null)
+        {
+            Destroy(_woundObj);
+        }
+    }
 
 	public void Die()
 	{
