@@ -18,7 +18,7 @@ public class Turret : MonoBehaviour
     private Weapon _weaponInstance;
 
     private Transform _target;
-    private float targetSearchInterval = 3f;
+    private float targetSearchInterval = 2f;
     private float targetSearchCooldown;
 
     private float _yaw;

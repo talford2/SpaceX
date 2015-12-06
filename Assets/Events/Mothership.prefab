@@ -1715,13 +1715,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head: {fileID: 196358}
   Guns: {fileID: 169940}
-  WeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93, type: 2}
+  WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
   ShootPoints:
   - {fileID: 11476396}
   - {fileID: 11416056}
   MaxTargetDistance: 1000
   MinPitch: 25
   MaxPitch: 300
+  AimTolerance: 5
 --- !u!114 &11402434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1799,6 +1800,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LineRendererWidth: 35
   LineRenderers: []
+  TargetableObjects:
+  - {fileID: 11473724}
+  - {fileID: 11423400}
 --- !u!114 &11442332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1922,13 +1926,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head: {fileID: 160426}
   Guns: {fileID: 148174}
-  WeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93, type: 2}
+  WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
   ShootPoints:
   - {fileID: 11484668}
   - {fileID: 11495474}
   MaxTargetDistance: 1000
   MinPitch: 25
   MaxPitch: 300
+  AimTolerance: 5
 --- !u!135 &13547422
 SphereCollider:
   m_ObjectHideFlags: 1

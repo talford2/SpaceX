@@ -15,6 +15,11 @@ public class DistantScaling : MonoBehaviour
 	public float LineRendererWidth = 35f;
 	public List<LineRenderer> LineRenderers;
 
+    private bool isDistant;
+    private bool lastIsDistant;
+
+    public List<Targetable> TargetableObjects;
+
 	private void Awake()
 	{
 		_shiftable = GetComponent<Shiftable>();
@@ -39,6 +44,7 @@ public class DistantScaling : MonoBehaviour
 
 		if (toCamera.sqrMagnitude > _thresholdDistanceSquared)
 		{
+		    isDistant = true;
 			var distance = toCamera.magnitude;
 
 			// This will only be able to scale objects of a radius up to the _thresholdDistance.
@@ -62,6 +68,7 @@ public class DistantScaling : MonoBehaviour
 		}
 		else
 		{
+		    isDistant = false;
 			transform.localScale = new Vector3(1f, 1f, 1f);
 
 			// Crappy solution
@@ -74,5 +81,41 @@ public class DistantScaling : MonoBehaviour
 			if (gameObject.layer != _defaultLayer)
 				Utility.SetLayerRecursively(gameObject, _defaultLayer);
 		}
+
+	    if (isDistant != lastIsDistant)
+	    {
+	        if (isDistant)
+	        {
+	            ManageTargtables();
+	        }
+	        else
+	        {
+	            ManageTargtables();
+	        }
+	    }
+	    lastIsDistant = isDistant;
+
+        ManageTargtables();
 	}
+
+    private void ManageTargtables()
+    {
+        if (isDistant)
+        {
+            foreach (var targetable in TargetableObjects)
+            {
+
+                targetable.SetEnabled(false);
+                targetable.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            foreach (var targetable in TargetableObjects)
+            {
+                targetable.gameObject.SetActive(true);
+                targetable.SetEnabled(true);
+            }
+        }
+    }
 }

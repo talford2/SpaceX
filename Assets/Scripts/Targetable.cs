@@ -13,4 +13,16 @@ public class Targetable : MonoBehaviour
     {
         Targeting.RemoveTargetable(Team, transform);
     }
+
+    public void SetEnabled(bool value)
+    {
+        if (value)
+        {
+            Targeting.AddTargetable(Team, transform);
+        }
+        else
+        {
+            Targeting.RemoveTargetable(Team, transform);
+        }
+    }
 }

@@ -412,13 +412,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head: {fileID: 173074}
   Guns: {fileID: 136792}
-  WeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93, type: 2}
+  WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
   ShootPoints:
   - {fileID: 11404266}
   - {fileID: 11440442}
   MaxTargetDistance: 1000
   MinPitch: 25
   MaxPitch: 300
+  AimTolerance: 5
 --- !u!135 &13547558
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -525,6 +526,11 @@ Prefab:
       propertyPath: MaxPitch
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: WeaponPrefab
+      value: 
+      objectReference: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 178200}
