@@ -289,6 +289,9 @@ public class PlayerController : MonoBehaviour
             if (leaderVehicle != null)
             {
                 Squadron[0].IdleDestination = leaderVehicle.transform.position + leaderVehicle.transform.forward * 10f;
+                var leaderToPlayer = leaderVehicle.Shiftable.transform.position - _playVehicleInstance.transform.position;
+                if (leaderToPlayer.sqrMagnitude > 1000f*1000f)
+                    Squadron[0].IdleDestination = _playVehicleInstance.transform.position;
                 Squadron[0].IdleUpDestination = leaderVehicle.transform.up;
             }
         }
