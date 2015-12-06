@@ -96,6 +96,13 @@ public class FighterEvade : NpcState<Fighter>
             {
                 evadeCooldown = evadeTimeout;
             }
+
+            var dotTargetFacing = Vector3.Dot(toTarget, Npc.Target.forward);
+            if (dotTargetFacing > 0f)
+            {
+                // Target isn't looking at me!
+                Npc.State = new FighterChase(Npc);
+            }
         }
 
         if (evadeCooldown > 0f)
