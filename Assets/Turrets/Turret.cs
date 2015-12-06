@@ -41,21 +41,15 @@ public class Turret : MonoBehaviour
     private void Update()
     {
         var shootPointsCentre = _weaponInstance.GetShootPointCentre();
-        if (_target != null)
-        {
-            var toTarget = _target.position - shootPointsCentre;
-            if (toTarget.sqrMagnitude > MaxTargetDistance*MaxTargetDistance)
-            {
-                _target = null;
-            }
-        }
 
         if (targetSearchCooldown >= 0f)
         {
             targetSearchCooldown -= Time.deltaTime;
             if (targetSearchCooldown < 0f)
             {
-                _target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(_targetable.Team), transform.position, transform.forward, MaxTargetDistance);
+                _target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(_targetable.Team), transform.position, Guns.transform.forward, MaxTargetDistance);
+                if (_target == null)
+                    _target = Targeting.FindNearestTeam(Targeting.GetEnemyTeam(_targetable.Team), transform.position, MaxTargetDistance);
                 targetSearchCooldown = targetSearchInterval;
             }
         }

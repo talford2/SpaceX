@@ -36,6 +36,36 @@ public class Targeting
         return Team.Good;
     }
 
+    public static Transform FindNearestTeam(Team team, Vector3 fromPosition, float maxDistance)
+    {
+        Transform target = null;
+        if (targetables.ContainsKey(team))
+        {
+            var targetCandidates = targetables[team];
+            var smallestDistanceSquared = Mathf.Infinity;
+            if (targetCandidates.Any())
+            {
+                foreach (var candidate in targetCandidates)
+                {
+                    if (candidate != null)
+                    {
+                        var toTarget = candidate.position - fromPosition;
+                        if (toTarget.sqrMagnitude < maxDistance*maxDistance)
+                        {
+                            if (toTarget.sqrMagnitude < smallestDistanceSquared)
+                            {
+                                smallestDistanceSquared = toTarget.sqrMagnitude;
+                                target = candidate;
+                            }
+                        }
+                    }
+                }
+            }
+            return target;
+        }
+        return null;
+    }
+
     public static Transform FindFacingAngleTeam(Team team, Vector3 fromPosition, Vector3 facing, float maxDistance)
     {
         if (targetables.ContainsKey(team))
