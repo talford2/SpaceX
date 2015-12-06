@@ -104,17 +104,22 @@ public class DistantScaling : MonoBehaviour
         {
             foreach (var targetable in TargetableObjects)
             {
-
-                targetable.SetEnabled(false);
-                targetable.gameObject.SetActive(false);
+                if (targetable != null)
+                {
+                    targetable.SetEnabled(false);
+                    targetable.gameObject.SetActive(false);
+                }
             }
         }
         else
         {
             foreach (var targetable in TargetableObjects)
             {
-                targetable.gameObject.SetActive(true);
-                targetable.SetEnabled(true);
+                if (targetable != null)
+                {
+                    targetable.gameObject.SetActive(true);
+                    targetable.SetEnabled(true);
+                }
             }
         }
     }
