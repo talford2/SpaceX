@@ -1542,6 +1542,8 @@ MonoBehaviour:
     Count: 5
   - Prefab: {fileID: 181516, guid: 82b42ea3f6ffc8842b8664eecc7502c4, type: 2}
     Count: 15
+  - Prefab: {fileID: 165154, guid: 41b92538d3829bf458b16c1a01d0c9ff, type: 2}
+    Count: 500
 --- !u!1 &1109137749
 GameObject:
   m_ObjectHideFlags: 0
