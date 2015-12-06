@@ -60,18 +60,21 @@ public class Targeting
             var smallestAngle = angleTolerance;
             foreach (var candidate in targetCandidates)
             {
-                var toTarget = candidate.position - fromPosition;
-                if (toTarget.sqrMagnitude < maxDistance * maxDistance)
+                if (candidate != null)
                 {
-                    // Exclude targets that are behind the missile
-                    if (Vector3.Dot(toTarget, facing) > 0f)
+                    var toTarget = candidate.position - fromPosition;
+                    if (toTarget.sqrMagnitude < maxDistance*maxDistance)
                     {
-                        // Choose target based smallest angle to
-                        var angleTo = Mathf.Abs(Vector3.Angle(facing, candidate.position - fromPosition));
-                        if (angleTo < smallestAngle)
+                        // Exclude targets that are behind the missile
+                        if (Vector3.Dot(toTarget, facing) > 0f)
                         {
-                            smallestAngle = Mathf.Abs(angleTo);
-                            target = candidate;
+                            // Choose target based smallest angle to
+                            var angleTo = Mathf.Abs(Vector3.Angle(facing, candidate.position - fromPosition));
+                            if (angleTo < smallestAngle)
+                            {
+                                smallestAngle = Mathf.Abs(angleTo);
+                                target = candidate;
+                            }
                         }
                     }
                 }
