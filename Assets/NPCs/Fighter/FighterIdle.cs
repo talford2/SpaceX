@@ -87,33 +87,38 @@ public class FighterIdle : NpcState<Fighter>
             {
                 Npc.VehicleInstance.RollThrottle = 0f;
             }
+        }
+        else
+        {
+            immediateDestination = Universe.Current.ViewPort.Shiftable.GetWorldPosition();
+        }
 
-            var dotDestination = Vector3.Dot(Npc.IdleDestination - Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward);
-            Npc.VehicleInstance.TriggerBrake = false;
-            Npc.VehicleInstance.TriggerAccelerate = false;
-            Npc.VehicleInstance.TriggerBoost = false;
+        var dotDestination = Vector3.Dot(Npc.IdleDestination - Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward);
+        Npc.VehicleInstance.TriggerBrake = false;
+        Npc.VehicleInstance.TriggerAccelerate = false;
+        Npc.VehicleInstance.TriggerBoost = false;
 
-            var brakeToIdleDistance = GetSlowdownDistance2(Npc.VehicleInstance.GetVelocity().sqrMagnitude, Npc.VehicleInstance.IdleSpeed, Npc.VehicleInstance.Brake);
-            if (dotDestination < brakeToIdleDistance)
+        var brakeToIdleDistance = GetSlowdownDistance2(Npc.VehicleInstance.GetVelocity().sqrMagnitude, Npc.VehicleInstance.IdleSpeed, Npc.VehicleInstance.Brake);
+        if (dotDestination < brakeToIdleDistance)
+        {
+            // Not facing 
+            Npc.VehicleInstance.TriggerBrake = true;
+        }
+        if (dotDestination > brakeToIdleDistance + 15f)
+        {
+            //Debug.Log("I SHOULD CATCH UP?");
+            Npc.VehicleInstance.TriggerAccelerate = true;
+
+            // Slow down Distance
+            var boostBrakingToIdleDistance = GetSlowdownDistance(Npc.VehicleInstance.MaxBoostSpeed, Npc.VehicleInstance.IdleSpeed, Npc.VehicleInstance.BoostBrake);
+
+            if (dotDestination > boostBrakingToIdleDistance)
             {
-                // Not facing 
-                Npc.VehicleInstance.TriggerBrake = true;
-            }
-            if (dotDestination > brakeToIdleDistance + 15f)
-            {
-                //Debug.Log("I SHOULD CATCH UP?");
-                Npc.VehicleInstance.TriggerAccelerate = true;
-
-                // Slow down Distance
-                var boostBrakingToIdleDistance = GetSlowdownDistance(Npc.VehicleInstance.MaxBoostSpeed, Npc.VehicleInstance.IdleSpeed, Npc.VehicleInstance.BoostBrake);
-
-                if (dotDestination > boostBrakingToIdleDistance)
-                {
-                    Npc.VehicleInstance.TriggerBoost = true;
-                    //Debug.Log("BOOST TO CATCH UP!");
-                }
+                Npc.VehicleInstance.TriggerBoost = true;
+                //Debug.Log("BOOST TO CATCH UP!");
             }
         }
+
         Npc.Destination = immediateDestination;
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
         Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
