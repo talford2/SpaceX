@@ -34,6 +34,8 @@ public class FighterIdle : NpcState<Fighter>
     {
         CheckSensors();
 
+        Npc.VehicleInstance.RollThrottle = 0f;
+
         if (targetSearchCooldown >= 0f)
         {
             targetSearchCooldown -= Time.deltaTime;
