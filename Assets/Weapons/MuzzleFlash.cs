@@ -14,6 +14,8 @@ public class MuzzleFlash : MonoBehaviour
 
 	public AnimationCurve AlphaOverTime;
 
+    public Light FlashLight;
+
 	private Renderer _muzzleBaseRenderer;
 
 	private float _effectCooldown;
@@ -23,6 +25,7 @@ public class MuzzleFlash : MonoBehaviour
 		_muzzleBaseRenderer = MuzzleBase.GetComponent<Renderer>();
 		_muzzleBaseRenderer.enabled = false;
 		Line.enabled = false;
+	    FlashLight.enabled = false;
 	}
 
 	void Update()
@@ -41,11 +44,14 @@ public class MuzzleFlash : MonoBehaviour
 			Line.material.color = color;
 
 			Line.SetPosition(1, Vector3.forward * scale * LineLength);
+
+		    FlashLight.intensity = 5f*frac;
 		}
 		else
 		{
 			_muzzleBaseRenderer.enabled = false;
 			Line.enabled = false;
+		    FlashLight.enabled = false;
 		}
 	}
 
@@ -62,6 +68,8 @@ public class MuzzleFlash : MonoBehaviour
 		Line.SetPosition(0, Vector3.zero);
 		Line.SetPosition(1, Vector3.forward * scale * LineLength);
 		Line.material.color = color;
+
+	    FlashLight.enabled = true;
 
 		_effectCooldown = EffectTime;
 		MuzzleBase.transform.rotation *= Quaternion.AngleAxis(Random.Range(-180, 180f), Vector3.forward);
