@@ -71,13 +71,23 @@ public class FighterChase : NpcState<Fighter>
             if (toTarget.sqrMagnitude < Npc.AttackRange*Npc.AttackRange)
             {
                 Npc.State = new FighterAttack(Npc);
+                return;
             }
         }
         else
         {
             if (toTarget.sqrMagnitude < Npc.EvadeDistance*Npc.EvadeDistance)
             {
+                var dotTargetFacing = Vector3.Dot(toTarget, Npc.Target.forward);
+                if (dotTargetFacing > 0f)
+                {
+                    // Target isn't looking at me!
+                    Npc.State = new FighterChase(Npc);
+                    return;
+                }
+
                 Npc.State = new FighterEvade(Npc);
+                return;
             }
         }
 

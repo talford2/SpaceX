@@ -91,17 +91,16 @@ public class FighterEvade : NpcState<Fighter>
                 //Debug.Log("TURN AROUND!");
                 //Debug.Log("DOT: " + dotTarget);
                 Npc.State = new FighterChase(Npc);
+                return;
             }
-            else
-            {
-                evadeCooldown = evadeTimeout;
-            }
+            evadeCooldown = evadeTimeout;
 
             var dotTargetFacing = Vector3.Dot(toTarget, Npc.Target.forward);
             if (dotTargetFacing > 0f)
             {
                 // Target isn't looking at me!
                 Npc.State = new FighterChase(Npc);
+                return;
             }
         }
 
@@ -111,6 +110,7 @@ public class FighterEvade : NpcState<Fighter>
             if (evadeCooldown < 0f)
             {
                 Npc.State = new FighterChase(Npc);
+                return;
             }
         }
 

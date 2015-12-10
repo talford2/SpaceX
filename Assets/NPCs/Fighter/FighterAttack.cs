@@ -114,6 +114,15 @@ public class FighterAttack :NpcState<Fighter>
         else
         {
             Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
+
+            var dotTargetFacing = Vector3.Dot(toTarget, Npc.Target.forward);
+            if (dotTargetFacing > 0f)
+            {
+                // Target isn't looking at me!
+                Npc.State = new FighterChase(Npc);
+                return;
+            }
+            
             if (dotTarget < 0f)
                 Npc.State = new FighterEvade(Npc);
         }
