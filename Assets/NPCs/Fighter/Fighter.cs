@@ -104,12 +104,6 @@ public class Fighter : Npc<Fighter>
             Destroy(gameObject);
     }
 
-    private void OnGUI()
-	{
-		GUI.Label(new Rect(Screen.width - 150f, 50f, 100f, 30f), State.Name);
-		GUI.Label(new Rect(Screen.width - 150f, 80f, 100f, 30f), string.Format("{0:f2}", VehicleInstance.GetVelocity().magnitude));
-	}
-
 	private void OnDrawGizmos()
 	{
 		if (VehicleInstance != null)
