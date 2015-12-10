@@ -46,14 +46,22 @@ public class FighterIdle : NpcState<Fighter>
                 if (Npc.Target != null)
                 {
                     Npc.State = new FighterChase(Npc);
+                    return;
                 }
-                else
+                Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, -Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
+                if (Npc.Target != null)
                 {
-                    Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, -Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
-                    if (Npc.Target != null)
+                    var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
+                    var dotTargetFacing = Vector3.Dot(toTarget, Npc.Target.forward);
+                    if (dotTargetFacing > 0f)
                     {
-                        Npc.State = new FighterEvade(Npc);
+                        // Target isn't looking at me!
+                        Npc.State = new FighterChase(Npc);
+                        return;
                     }
+
+                    Npc.State = new FighterEvade(Npc);
+                    return;
                 }
             }
         }
