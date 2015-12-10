@@ -124,14 +124,19 @@ public class VehicleCamera : UniverseCamera
 
 				var frac = 1f - shakeCooldown / shakeDuration;
 
-				var amplitude = 0.5f * ShakeAmplitude.Evaluate(frac);
+				var amplitude = ShakeAmplitude.Evaluate(frac);
 				var freq = shakeCooldown * Mathf.Rad2Deg * 0.7f;
 
-				var x = Mathf.Sin(freq) * amplitude;
-				var y = Mathf.Sin(freq * 1.2f) * amplitude;
-				var z = Mathf.Sin(freq * 1.4f) * amplitude;
+				var x = Mathf.Sin(freq);
+				var y = Mathf.Sin(freq * 1.2f);
+				var z = Mathf.Sin(freq * 1.4f);
 
-				AttachedCamera.transform.localPosition = new Vector3(z, y, z);
+				var fracVec = new Vector3(x, y, z) * amplitude;
+
+				var positionMax = 0.3f;
+
+				AttachedCamera.transform.localPosition = fracVec * positionMax;
+				AttachedCamera.transform.localRotation = Quaternion.Euler(fracVec * 1f);
 			}
 			else
 			{
