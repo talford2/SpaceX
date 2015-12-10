@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
             return mouseRay.GetPoint(aimDistance);
 	    }
 
-	    if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player", "Detectable")))
+	    if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player", "Detectable", "Distant")))
 	    {
 	        aimDistance = Mathf.Clamp(aimHit.distance, MinAimDistance, MaxAimDistance);
             aimAtPosition = mouseRay.GetPoint(aimDistance);
