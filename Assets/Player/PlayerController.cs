@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
 	private void PlayerController_OnDamage(Vector3 position, Vector3 normal)
 	{
 		HeadsUpDisplay.Current.Hit();
-        Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(25f, 0.5f, 0.05f);
+        Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(25f, 0.1f, 0.05f);
 	}
 
 	private Vector3 GetAimAt()
@@ -267,6 +267,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.M))
             {
                 Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(25f, 1f, 0.05f);
+                //_playVehicleInstance.GetComponent<Killable>().Damage(5f, Vector3.zero, Vector3.forward);
             }
 	    }
 

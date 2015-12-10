@@ -88,24 +88,29 @@ public class VehicleCamera : UniverseCamera
 
 		// Shake
 		var offsetDestination = Vector3.zero;
-		var angleDestination = Quaternion.identity;
-		if (isShaking)
-		{
-			if (shakeCooldown >= 0f)
-			{
-				shakeCooldown -= Time.deltaTime;
-				shakeFrequencyCooldown -= Time.deltaTime;
-				var shakeFraction = Mathf.Clamp01(shakeCooldown / shakeDuration);
-				if (shakeFrequencyCooldown < 0f)
-				{
-					offsetDestination = Random.onUnitSphere * shakeAmplitude * shakeFraction;
-					angleDestination = Quaternion.AngleAxis(Random.Range(-40f, 40f), AttachedCamera.transform.forward);
-					shakeFrequencyCooldown = shakeFrequency;
-				}
-				if (shakeCooldown < 0f)
-					isShaking = false;
-			}
-		}
+	    if (isShaking)
+	    {
+	        if (shakeCooldown >= 0f)
+	        {
+	            shakeCooldown -= Time.deltaTime;
+	            shakeFrequencyCooldown -= Time.deltaTime;
+	            var shakeFraction = Mathf.Clamp01(shakeCooldown/shakeDuration);
+	            if (shakeFrequencyCooldown < 0f)
+	            {
+	                //offsetDestination = Random.onUnitSphere*shakeAmplitude*shakeFraction;
+	                angleDir *= -1f;
+	                angleDestination = Quaternion.AngleAxis(80f*shakeFraction*Mathf.Sign(Random.Range(-1f, 1f)), AttachedCamera.transform.up);
+	                angleDestination *= Quaternion.AngleAxis(80f*shakeFraction*Mathf.Sign(Random.Range(-1f, 1f)), AttachedCamera.transform.right);
+	                shakeFrequencyCooldown = shakeFrequency;
+	            }
+	            if (shakeCooldown < 0f)
+	                isShaking = false;
+	        }
+	    }
+	    else
+	    {
+            angleDestination = Quaternion.identity;
+	    }
 
 		AttachedCamera.transform.localPosition = Vector3.Lerp(AttachedCamera.transform.localPosition, offsetDestination, 2f * Time.deltaTime);
 		AttachedCamera.transform.localRotation = Quaternion.Lerp(AttachedCamera.transform.localRotation, angleDestination, 2f * Time.deltaTime);
@@ -117,15 +122,21 @@ public class VehicleCamera : UniverseCamera
 	private float shakeCooldown;
 	private float shakeFrequency;
 	private float shakeFrequencyCooldown;
+    private Quaternion angleDestination;
+    private float angleDir;
 
 	public void TriggerShake(float amplitude, float duration, float frequency)
 	{
-		//isShaking = true;
+		isShaking = true;
 		shakeAmplitude = amplitude;
 		shakeDuration = duration;
 		shakeCooldown = shakeDuration;
 		shakeFrequency = frequency;
-		shakeFrequencyCooldown = shakeFrequency;
+	    shakeFrequencyCooldown = shakeFrequency;
+
+	    angleDir = 1f;
+        angleDestination = Quaternion.AngleAxis(80f * angleDir, AttachedCamera.transform.up);
+        angleDestination *= Quaternion.AngleAxis(80f * angleDir, AttachedCamera.transform.right);
 	}
 
 	public void Reset()
