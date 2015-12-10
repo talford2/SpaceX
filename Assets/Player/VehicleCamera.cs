@@ -99,8 +99,8 @@ public class VehicleCamera : UniverseCamera
 	            {
 	                //offsetDestination = Random.onUnitSphere*shakeAmplitude*shakeFraction;
 	                angleDir *= -1f;
-	                angleDestination = Quaternion.AngleAxis(80f*shakeFraction*Mathf.Sign(Random.Range(-1f, 1f)), AttachedCamera.transform.up);
-	                angleDestination *= Quaternion.AngleAxis(80f*shakeFraction*Mathf.Sign(Random.Range(-1f, 1f)), AttachedCamera.transform.right);
+	                angleDestination = Quaternion.AngleAxis(20f*shakeFraction*Mathf.Sign(Random.Range(-1f, 1f)), AttachedCamera.transform.up);
+	                angleDestination *= Quaternion.AngleAxis(20f*shakeFraction*Mathf.Sign(Random.Range(-1f, 1f)), AttachedCamera.transform.right);
 	                shakeFrequencyCooldown = shakeFrequency;
 	            }
 	            if (shakeCooldown < 0f)
@@ -113,7 +113,7 @@ public class VehicleCamera : UniverseCamera
 	    }
 
 		AttachedCamera.transform.localPosition = Vector3.Lerp(AttachedCamera.transform.localPosition, offsetDestination, 2f * Time.deltaTime);
-		AttachedCamera.transform.localRotation = Quaternion.Lerp(AttachedCamera.transform.localRotation, angleDestination, 2f * Time.deltaTime);
+		AttachedCamera.transform.localRotation = Quaternion.Lerp(AttachedCamera.transform.localRotation, angleDestination, 4f * Time.deltaTime);
 	}
 
 	private bool isShaking;
@@ -135,8 +135,8 @@ public class VehicleCamera : UniverseCamera
 	    shakeFrequencyCooldown = shakeFrequency;
 
 	    angleDir = 1f;
-        angleDestination = Quaternion.AngleAxis(80f * angleDir, AttachedCamera.transform.up);
-        angleDestination *= Quaternion.AngleAxis(80f * angleDir, AttachedCamera.transform.right);
+        angleDestination = Quaternion.AngleAxis(20f * angleDir, AttachedCamera.transform.up);
+        angleDestination *= Quaternion.AngleAxis(20f * angleDir, AttachedCamera.transform.right);
 	}
 
 	public void Reset()
