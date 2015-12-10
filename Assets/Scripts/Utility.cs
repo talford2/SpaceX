@@ -220,11 +220,11 @@ public class Utility
 		}
 	}
 
-    public static Vector3 GetVehicleExtrapolatedPosition(Vehicle vehicle, Weapon shootWeapon)
+    public static Vector3 GetVehicleExtrapolatedPosition(Vehicle vehicle, Weapon shootWeapon, float timeError)
     {
         var distance = (vehicle.transform.position - shootWeapon.GetShootPointCentre()).magnitude;
-        var timeToHit = distance / shootWeapon.MissilePrefab.GetComponent<Missile>().MissileSpeed;
-        return vehicle.transform.position + vehicle.GetVelocity() * timeToHit;
+        var timeToHit = distance/shootWeapon.MissilePrefab.GetComponent<Missile>().MissileSpeed;
+        return vehicle.transform.position + vehicle.GetVelocity()*(timeToHit + timeError);
     }
 }
 

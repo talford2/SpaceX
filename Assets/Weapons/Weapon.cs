@@ -190,7 +190,7 @@ public class Weapon : MonoBehaviour
                 if (lockedVehicle != null)
                 {
                     // Rough Extrapolation
-                    var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(lockedVehicle, this);
+                    var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(lockedVehicle, this, 0f);
                     SetAimAt(extrapolatePosition);
                 }
                 else

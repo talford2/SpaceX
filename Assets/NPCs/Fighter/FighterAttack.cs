@@ -11,6 +11,7 @@ public class FighterAttack :NpcState<Fighter>
     private bool allowShoot;
     private float burstCooldown;
     private float burstAmount;
+    private float burstTimeoffset;
 
     public FighterAttack(Fighter npc) : base(npc)
     {
@@ -64,6 +65,7 @@ public class FighterAttack :NpcState<Fighter>
             {
                 allowShoot = true;
                 burstAmount = 0f;
+                burstTimeoffset = Random.Range(-0.2f, 0.2f);
             }
         }
 
@@ -78,7 +80,7 @@ public class FighterAttack :NpcState<Fighter>
                     var targetVehicle = Npc.Target.GetComponent<Vehicle>();
                     if (targetVehicle != null)
                     {
-                        var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(Npc.Target.GetComponent<Vehicle>(), Npc.VehicleInstance.PrimaryWeaponInstance);
+                        var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(Npc.Target.GetComponent<Vehicle>(), Npc.VehicleInstance.PrimaryWeaponInstance, burstTimeoffset);
                         Npc.VehicleInstance.SetAimAt(extrapolatePosition);
                     }
                     else
