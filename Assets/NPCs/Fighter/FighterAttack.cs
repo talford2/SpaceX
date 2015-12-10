@@ -42,8 +42,6 @@ public class FighterAttack :NpcState<Fighter>
             return;
         }
 
-        CheckSensors();
-
         var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
 
         if (toTarget.sqrMagnitude > Npc.AttackRange * Npc.AttackRange)
@@ -52,6 +50,8 @@ public class FighterAttack :NpcState<Fighter>
             Npc.State = new FighterChase(Npc);
             return;
         }
+
+        CheckSensors();
 
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
