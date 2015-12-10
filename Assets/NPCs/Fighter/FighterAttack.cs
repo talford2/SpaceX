@@ -48,6 +48,7 @@ public class FighterAttack :NpcState<Fighter>
 
         if (toTarget.sqrMagnitude > Npc.AttackRange * Npc.AttackRange)
         {
+            Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
             Npc.State = new FighterChase(Npc);
             return;
         }
