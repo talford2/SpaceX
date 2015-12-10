@@ -125,15 +125,9 @@ public class FighterEvade : NpcState<Fighter>
                 if (Npc.Target != null)
                 {
                     Npc.State = new FighterChase(Npc);
+                    return;
                 }
-                else
-                {
-                    Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, -Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
-                    if (Npc.Target != null)
-                    {
-                        Npc.State = new FighterEvade(Npc);
-                    }
-                }
+                Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, -Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
             }
         }
     }
