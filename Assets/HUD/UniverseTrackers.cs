@@ -214,7 +214,7 @@ public class UniverseTrackers : MonoBehaviour
     {
         if (label != null && label.gameObject != null)
         {
-            Destroy(cursor.gameObject);
+            Destroy(label.gameObject);
         }
     }
 
