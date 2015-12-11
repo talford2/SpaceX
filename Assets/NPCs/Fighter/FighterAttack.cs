@@ -55,7 +55,18 @@ public class FighterAttack :NpcState<Fighter>
 
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
-        var targetDestination = Npc.Target.position;
+        Vector3 targetDestination;
+        var targetVehicle = Npc.Target.GetComponent<Vehicle>();
+        if (targetVehicle != null)
+        {
+            var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(Npc.Target.GetComponent<Vehicle>(), Npc.VehicleInstance.PrimaryWeaponInstance, burstTimeoffset);
+            targetDestination = extrapolatePosition;
+        }
+        else
+        {
+            targetDestination = Npc.Target.position;
+        }
+
         Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime) + Npc.Steering.GetSeparationForce(neighbors);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
@@ -84,17 +95,8 @@ public class FighterAttack :NpcState<Fighter>
                 var angleToTarget = Vector3.Angle(toTarget.normalized, Npc.VehicleInstance.transform.forward.normalized);
                 if (Mathf.Abs(angleToTarget) < Npc.ShootAngleTolerance)
                 {
-                    // Rough Extrapolation
-                    var targetVehicle = Npc.Target.GetComponent<Vehicle>();
-                    if (targetVehicle != null)
-                    {
-                        var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(Npc.Target.GetComponent<Vehicle>(), Npc.VehicleInstance.PrimaryWeaponInstance, burstTimeoffset);
-                        Npc.VehicleInstance.SetAimAt(extrapolatePosition);
-                    }
-                    else
-                    {
-                        Npc.VehicleInstance.SetAimAt(Npc.Target.position);
-                    }
+                    Npc.VehicleInstance.SetAimAt(Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward*100f);
+                    
                     Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = true;
                     burstAmount += Time.deltaTime;
                     if (burstAmount > Npc.BurstTime)
