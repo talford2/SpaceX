@@ -27,6 +27,7 @@ public class Fighter : Npc<Fighter>
 	public float OvertakeDistance = 50f;
     public float BurstTime = 0.5f;
     public float BurstWaitTime = 0.7f;
+    public float ExrapolationTimeError = 0.5f;
 
 	[Header("Evade")]
 	public float EvadeDistance = 200f;

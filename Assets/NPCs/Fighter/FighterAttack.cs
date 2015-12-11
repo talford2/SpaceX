@@ -73,7 +73,7 @@ public class FighterAttack :NpcState<Fighter>
             {
                 allowShoot = true;
                 burstAmount = 0f;
-                burstTimeoffset = Random.Range(-0.2f, 0.2f);
+                burstTimeoffset = Random.Range(-Npc.ExrapolationTimeError, Npc.ExrapolationTimeError);
             }
         }
 
