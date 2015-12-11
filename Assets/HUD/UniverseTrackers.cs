@@ -199,11 +199,20 @@ public class UniverseTrackers : MonoBehaviour
         DestroyTrackerCursor(tracker.HealthBar);
         DestroyTrackerCursor(tracker.LockingCursor);
         DestroyTrackerCursor(tracker.LockedCursor);
+        DestroyTrackerLabel(tracker.CallSignText);
 	}
 
     private void DestroyTrackerCursor(Image cursor)
     {
         if (cursor != null && cursor.gameObject != null)
+        {
+            Destroy(cursor.gameObject);
+        }
+    }
+
+    private void DestroyTrackerLabel(Text label)
+    {
+        if (label != null && label.gameObject != null)
         {
             Destroy(cursor.gameObject);
         }
