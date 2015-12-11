@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Menus : MonoBehaviour
 {
@@ -44,6 +45,17 @@ public class Menus : MonoBehaviour
         {
             HideQuitMenu();
         }
+    }
+
+    public void Resume()
+    {
+        HideQuitMenu();
+    }
+
+    public void Restart()
+    {
+        HideQuitMenu();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Quit()
