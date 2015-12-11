@@ -313,18 +313,6 @@ public class PlayerController : MonoBehaviour
 	        }
 	    }
 
-
-        if (threatCheckCooldown >= 0f)
-        {
-            threatCheckCooldown -= Time.deltaTime;
-            if (threatCheckCooldown < 0f)
-            {
-                var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, 2000f, LayerMask.GetMask("Detectable"));
-                threatCount = detected.Count(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team));
-                threatCheckCooldown = 0f;
-            }
-        }
-
 	    if (_playVehicleInstance != null)
 		{
             if (threatCheckCooldown >= 0f)
