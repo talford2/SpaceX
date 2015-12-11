@@ -42,8 +42,9 @@ public class PlayerController : MonoBehaviour
     private float aimDistance;
 	private float screenAspect;
 	private int squadronLiveCount;
-	private float replenishInterval = 2f;
-	private float replenishSquadronCooldown;
+    private int threatCount;
+    private float threatCheckInterval = 2f;
+    private float threatCheckCooldown;
 
     private UniversePosition lastDeathUniversePosition;
 
@@ -309,39 +310,50 @@ public class PlayerController : MonoBehaviour
 	        }
 	    }
 
+
+        if (threatCheckCooldown >= 0f)
+        {
+            threatCheckCooldown -= Time.deltaTime;
+            if (threatCheckCooldown < 0f)
+            {
+                var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, 2000f, LayerMask.GetMask("Detectable"));
+                threatCount = detected.Count(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team));
+                threatCheckCooldown = 0f;
+            }
+        }
+
 	    if (_playVehicleInstance != null)
 		{
-			if (squadronLiveCount < Squadron.Count)
-			{
-				if (replenishSquadronCooldown >= 0f)
-				{
-					replenishSquadronCooldown -= Time.deltaTime;
-					if (replenishSquadronCooldown < 0)
-					{
-						//Debug.Log("REPLENISH CHECK!");
-						var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, 2000f, LayerMask.GetMask("Detectable"));
-						if (detected.Any(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team)))
-						{
-						}
-						else
-						{
-							//Debug.Log("REPLENISH!!!");
-							for (var i = 0; i < Squadron.Count; i++)
-							{
-								if (i != _curSquadronIndex)
-								{
-									if (Squadron[i].VehicleInstance == null)
-									{
-										var spawnPos = Universe.Current.GetUniversePosition(Utility.GetRandomDirection(-Universe.Current.ViewPort.transform.forward, 80f) * 2000f);
-										SpawnSquadronVehicle(Squadron[i], spawnPos);
-									}
-								}
-							}
-						}
-						replenishSquadronCooldown = replenishInterval;
-					}
-				}
-			}
+            if (threatCheckCooldown >= 0f)
+            {
+                threatCheckCooldown -= Time.deltaTime;
+                if (threatCheckCooldown < 0f)
+                {
+                    var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, 2000f, LayerMask.GetMask("Detectable"));
+                    threatCount = detected.Count(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team));
+                    threatCheckCooldown = 0f;
+                }
+            }
+
+		    if (squadronLiveCount < Squadron.Count)
+		    {
+		        //Debug.Log("REPLENISH CHECK!");
+		        if (threatCount == 0)
+		        {
+		            //Debug.Log("REPLENISH!!!");
+		            for (var i = 0; i < Squadron.Count; i++)
+		            {
+		                if (i != _curSquadronIndex)
+		                {
+		                    if (Squadron[i].VehicleInstance == null)
+		                    {
+		                        var spawnPos = Universe.Current.GetUniversePosition(Utility.GetRandomDirection(-Universe.Current.ViewPort.transform.forward, 80f)*2000f);
+		                        SpawnSquadronVehicle(Squadron[i], spawnPos);
+		                    }
+		                }
+		            }
+		        }
+		    }
 		}
 
 		if (_playVehicleInstance != null)
@@ -468,7 +480,8 @@ public class PlayerController : MonoBehaviour
 		}
         var cellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
         GUI.Label(new Rect(30f, 120f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", cellIndex.X, cellIndex.Y, cellIndex.Z));
-		GUI.Label(new Rect(30f, 150f, 100f, 25f), string.Format("SQUADRON: {0:f0}/{1:f0}", squadronLiveCount, Squadron.Count));
+        GUI.Label(new Rect(30f, 150f, 100f, 25f), string.Format("SQUADRON: {0:f0}/{1:f0}", squadronLiveCount, Squadron.Count));
+        GUI.Label(new Rect(30f, 180f, 100f, 25f), string.Format("THREATS: {0}", threatCount));
 		//GUI.Label(new Rect(30f, 180f, 200f, 25f), string.Format("LOCK: {0} ({1:f2})", lockingTarget != null ? lockingTarget.name : string.Empty, lockingTime));
         GUI.Label(new Rect(30f, 210f, 200f, 25f), string.Format("LOCKED: {0}", VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() != null ? VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget().name : string.Empty));
         GUI.Label(new Rect(30f, 240f, 200f, 25f), string.Format("AIM DIST: {0:f2}", aimDistance));
