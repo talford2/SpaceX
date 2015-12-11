@@ -144,6 +144,10 @@ public class Weapon : MonoBehaviour
                 ClearTargetLock();
             }
         }
+        else
+        {
+            ClearTargetLock();
+        }
         if (lockedTarget != null)
         {
             var toLockedTarget = lockedTarget.position - shootPointsCentre;
@@ -151,6 +155,10 @@ public class Weapon : MonoBehaviour
             {
                 ClearTargetLock();
             }
+        }
+        else
+        {
+            ClearTargetLock();
         }
 
         if (!isLocked)
