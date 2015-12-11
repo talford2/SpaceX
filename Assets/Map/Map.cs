@@ -132,11 +132,13 @@ public class Map : MonoBehaviour
         if (_mapCamera.enabled)
         {
             Hide();
+			gameObject.SetActive(false);
         }
         else
         {
             Show();
-        }
+			gameObject.SetActive(true);
+		}
     }
 
     public bool IsShown()
