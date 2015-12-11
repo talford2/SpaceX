@@ -12,6 +12,7 @@ public class Turret : MonoBehaviour
     public float MinPitch;
     public float MaxPitch;
     public float AimTolerance = 5f;
+    public float ExtrapolationTimeError = 0.5f;
 
     private Targetable _targetable;
     private VelocityReference _velocityReference;
@@ -60,7 +61,7 @@ public class Turret : MonoBehaviour
 
             var targetVehicle = _target.GetComponent<Vehicle>();
             if (targetVehicle != null)
-                targetPos = Utility.GetVehicleExtrapolatedPosition(targetVehicle, _weaponInstance, Random.Range(-0.2f, 0.2f));
+                targetPos = Utility.GetVehicleExtrapolatedPosition(targetVehicle, _weaponInstance, Random.Range(-ExtrapolationTimeError, ExtrapolationTimeError));
 
             Head.transform.LookAt(targetPos, Vector3.up);
             _yaw = Mathf.LerpAngle(_yaw, Head.transform.localEulerAngles.y, 5f*Time.deltaTime);
