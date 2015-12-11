@@ -9,6 +9,7 @@ public class Tracker : MonoBehaviour
     public Texture2D VeryFarTrackerCursorImage;
     public Texture2D LockingCursorImage;
     public Texture2D LockedCursorImage;
+    public string CallSign;
     public bool IsDisabled;
 
     public bool IsDelayComplete;
@@ -22,6 +23,7 @@ public class Tracker : MonoBehaviour
     public Image HealthBar { get; set; }
     public Image LockingCursor { get; set; }
     public Image LockedCursor { get; set; }
+    public Text CallSignText { get; set; }
 
     private void Start()
     {
@@ -43,6 +45,7 @@ public class Tracker : MonoBehaviour
         HealthBar.enabled = false;
         LockingCursor.enabled = false;
         LockedCursor.enabled = false;
+        CallSignText.enabled = false;
     }
 
     public Image SwitchToArrow()
@@ -58,7 +61,8 @@ public class Tracker : MonoBehaviour
         {
             HealthBarBackground.enabled = false;
             HealthBar.enabled = false;
-            if (distanceSquared > 2000f*2000f)
+            CallSignText.enabled = false;
+            if (distanceSquared > 2000f * 2000f)
             {
                 TrackerCurosr.enabled = false;
                 FarTrackerCursor.enabled = false;
@@ -91,6 +95,8 @@ public class Tracker : MonoBehaviour
         TrackerCurosr.enabled = true;
         FarTrackerCursor.enabled = false;
         VeryFarTrackerCursor.enabled = false;
+        CallSignText.text = CallSign;
+        CallSignText.enabled = true;
         return TrackerCurosr;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UniverseTrackers : MonoBehaviour
 {
+    public Font CallSignFont;
 	private Camera _cam;
 
 	private Vector2 screenCentre;
@@ -91,6 +92,7 @@ public class UniverseTrackers : MonoBehaviour
                 tracker.HealthBarBackground.rectTransform.localPosition = cursorPosition;
                 tracker.LockingCursor.rectTransform.localPosition = cursorPosition;
                 tracker.LockedCursor.rectTransform.localPosition = cursorPosition;
+	            tracker.CallSignText.rectTransform.localPosition = cursorPosition;
 
 	            var ownerKillable = tracker.gameObject.GetComponent<Killable>();
 	            if (ownerKillable != null)
@@ -142,8 +144,12 @@ public class UniverseTrackers : MonoBehaviour
         tracker.HealthBar.fillMethod = Image.FillMethod.Horizontal;
 	    tracker.HealthBar.fillAmount = 1f;
 
+        // Locking
         tracker.LockingCursor = CreateTracker(tracker.LockingCursorImage, tracker.name + "_Locking");
         tracker.LockedCursor = CreateTracker(tracker.LockedCursorImage, tracker.name + "_Locked");
+
+        // Call Sign
+	    tracker.CallSignText = CreatTrackerLabel(new Vector2(0.5f, 0.5f), tracker.name + "_CallSign");
 
 	    tracker.DelayCooldown = 1f;
 	    tracker.IsDelayComplete = false;
@@ -166,6 +172,20 @@ public class UniverseTrackers : MonoBehaviour
         arrowImg.SetNativeSize();
         arrowImg.name = instanceName;
         return arrowImg;
+    }
+
+    private Text CreatTrackerLabel(Vector2 pivot, string instanceName)
+    {
+        var obj = new GameObject();
+        var txt = obj.AddComponent<Text>();
+        txt.rectTransform.pivot = pivot;
+        txt.transform.SetParent(transform);
+        txt.color = Color.white;
+        txt.font = CallSignFont;
+        txt.alignment = TextAnchor.UpperCenter;
+        txt.SetNativeSize();
+        txt.name = instanceName;
+        return txt;
     }
 
 	public void RemoveTracker(Tracker tracker)

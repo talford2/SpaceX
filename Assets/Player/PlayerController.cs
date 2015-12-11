@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
 		memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
 	    memberTracker.LockingCursorImage = LockingTrackerCursorImage;
 	    memberTracker.LockedCursorImage = LockedTrackerCursorImage;
+	    memberTracker.CallSign = member.CallSign;
 		member.IsFollowIdleDestination = true;
 	    var mapPin = member.VehicleInstance.gameObject.AddComponent<MapPin>();
 	    mapPin.ActivePin = SquadronPinPrefab;

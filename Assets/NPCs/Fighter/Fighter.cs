@@ -5,6 +5,7 @@ public class Fighter : Npc<Fighter>
 	public Vehicle VehiclePrefab;
     public Team Team;
     public bool IsSquadronMember;
+    public string CallSign;
 
 	private Vehicle _vehicleInstance;
 	public Vector3 Destination;

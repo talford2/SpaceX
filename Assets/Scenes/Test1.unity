@@ -798,6 +798,7 @@ MonoBehaviour:
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
   Team: 1
   IsSquadronMember: 0
+  CallSign: Bilbo
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   MaxTargetDistance: 2000
@@ -1716,6 +1717,7 @@ MonoBehaviour:
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
   Team: 1
   IsSquadronMember: 0
+  CallSign: Frodo
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   MaxTargetDistance: 2000
@@ -2006,13 +2008,13 @@ MonoBehaviour:
   CellRadius: 20
   UniverseEvents:
   - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
-    Count: 1000
+    Count: 10
   - Prefab: {fileID: 106982, guid: 5a884d383dd2b9a499efaa7d524b6e27, type: 2}
     Count: 5
   - Prefab: {fileID: 181516, guid: 82b42ea3f6ffc8842b8664eecc7502c4, type: 2}
     Count: 15
   - Prefab: {fileID: 165154, guid: 41b92538d3829bf458b16c1a01d0c9ff, type: 2}
-    Count: 500
+    Count: 5
 --- !u!1 &1109137749
 GameObject:
   m_ObjectHideFlags: 0
@@ -3030,6 +3032,7 @@ MonoBehaviour:
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
   Team: 1
   IsSquadronMember: 0
+  CallSign: Sam
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   MaxTargetDistance: 2000
@@ -3256,6 +3259,7 @@ MonoBehaviour:
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
   Team: 1
   IsSquadronMember: 0
+  CallSign: Merry
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   MaxTargetDistance: 2000
@@ -3567,6 +3571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b225474607c8f489e0e42cb6c2cd9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CallSignFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba, type: 3}
 --- !u!1 &2068133630
 GameObject:
   m_ObjectHideFlags: 0
