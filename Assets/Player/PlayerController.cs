@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 	public Vehicle VehiclePrefab;
 	public Team Team;
+    public string CallSign;
 
 	private Vehicle _playVehicleInstance;
 	private Fighter _playerNpc;
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
 		_playerNpc = gameObject.AddComponent<Fighter>();
 		_playerNpc.Team = Team;
 		_playerNpc.IsSquadronMember = true;
+	    _playerNpc.CallSign = CallSign;
 		_playerNpc.VehiclePrefab = VehiclePrefab;
 		_playerNpc.enabled = false;
 		SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
@@ -405,7 +407,7 @@ public class PlayerController : MonoBehaviour
                 // Disable next vehicle NPC control and apply PlayerController
                 if (Squadron[_curSquadronIndex].VehicleInstance != null)
                 {
-                    HeadsUpDisplay.Current.ShowSquadronPrompt(string.Format("{0:f0}", _curSquadronIndex));
+                    HeadsUpDisplay.Current.ShowSquadronPrompt(Squadron[_curSquadronIndex].CallSign);
 
                     _playVehicleInstance = Squadron[_curSquadronIndex].VehicleInstance;
                     _playVehicleInstance.GetComponent<Tracker>().IsDisabled = true;
