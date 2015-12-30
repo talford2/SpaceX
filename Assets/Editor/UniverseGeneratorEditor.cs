@@ -10,6 +10,7 @@ public class UniverseGeneratorEditor : Editor
 		var universeGen = (UniverseGenerator)target;
 
 		universeGen.FlattenToTexture = EditorGUILayout.Toggle("Flatten", universeGen.FlattenToTexture);
+		universeGen.FlatResolution = EditorGUILayout.IntField("Flatten Resolution", universeGen.FlatResolution);
 		universeGen.UseRandomColours = EditorGUILayout.Toggle("Use Random Colours", universeGen.UseRandomColours);
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.PrefixLabel("Colour Range");
