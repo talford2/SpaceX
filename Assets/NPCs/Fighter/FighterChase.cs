@@ -46,7 +46,7 @@ public class FighterChase : NpcState<Fighter>
         CheckSensors();
 
         var targetDestination = Npc.Target.position;
-        Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime) + Npc.Steering.GetSeparationForce(neighbors);
+        Npc.Destination = Npc.Steering.GetSeekForce(targetDestination) + Npc.Steering.GetSeparationForce(neighbors);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
         if (pitchYaw.sqrMagnitude <= 0f)
