@@ -69,7 +69,7 @@ public class FighterEvade : NpcState<Fighter>
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
         var targetDestination = Npc.Target.position - toTarget.normalized*Npc.TurnAroundDistance + dodgeOffset;
-        Npc.Destination = Vector3.Lerp(Npc.Destination, targetDestination, Time.deltaTime) + Npc.Steering.GetSeparationForce(neighbors);
+        Npc.Destination = Npc.Steering.GetSeekForce(targetDestination) + Npc.Steering.GetSeparationForce(neighbors);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
         Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
