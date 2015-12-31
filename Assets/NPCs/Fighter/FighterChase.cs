@@ -32,6 +32,21 @@ public class FighterChase : NpcState<Fighter>
         }
     }
 
+    public Vector3 GetSteerForce(Vector3 targetDestination)
+    {
+        var steerForce = Vector3.zero;
+
+        steerForce += 0.8f*Npc.Steering.GetSeparationForce(neighbors);
+        if (steerForce.sqrMagnitude > 1f)
+            return steerForce.normalized;
+
+        steerForce += 0.2f*Npc.Steering.GetSeekForce(targetDestination);
+        if (steerForce.sqrMagnitude > 1f)
+            return steerForce.normalized;
+
+        return steerForce.normalized;
+    }
+
     public override void Update()
     {
         if (Npc.Target == null)
@@ -45,8 +60,7 @@ public class FighterChase : NpcState<Fighter>
 
         CheckSensors();
 
-        var targetDestination = Npc.Target.position;
-        Npc.Destination = Npc.Steering.GetSeekForce(targetDestination) + Npc.Steering.GetSeparationForce(neighbors);
+        Npc.Destination = GetSteerForce(Npc.Target.position);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
         if (pitchYaw.sqrMagnitude <= 0f)

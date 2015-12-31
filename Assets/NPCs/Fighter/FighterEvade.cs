@@ -45,6 +45,21 @@ public class FighterEvade : NpcState<Fighter>
         }
     }
 
+    public Vector3 GetSteerForce(Vector3 targetDestination)
+    {
+        var steerForce = Vector3.zero;
+
+        steerForce += 0.8f * Npc.Steering.GetSeparationForce(neighbors);
+        if (steerForce.sqrMagnitude > 1f)
+            return steerForce.normalized;
+
+        steerForce += 0.2f * Npc.Steering.GetSeekForce(targetDestination);
+        if (steerForce.sqrMagnitude > 1f)
+            return steerForce.normalized;
+
+        return steerForce.normalized;
+    }
+
     public override void Update()
     {
         if (Npc.Target == null)
@@ -69,7 +84,7 @@ public class FighterEvade : NpcState<Fighter>
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
         var targetDestination = Npc.Target.position - toTarget.normalized*Npc.TurnAroundDistance + dodgeOffset;
-        Npc.Destination = Npc.Steering.GetSeekForce(targetDestination) + Npc.Steering.GetSeparationForce(neighbors);
+        Npc.Destination = GetSteerForce(targetDestination);
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
         Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;

@@ -15,6 +15,13 @@ public class FighterSteering : NpcSteering<Fighter>
         return Vector3.zero;
     }
 
+    public Vector3 GetFleeForce(Vector3 position)
+    {
+        if (Npc.VehicleInstance != null)
+            return (Npc.VehicleInstance.transform.position - position).normalized;
+        return Vector3.zero;
+    }
+
     public Vector3 GetSeparationForce(List<Transform> neighbors)
     {
         var avoidSum = Vector3.zero;
