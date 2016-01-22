@@ -45,6 +45,13 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _ThrustTex
+        second:
+          m_Texture: {fileID: 2800000, guid: c43c4258367b8b740be1556d8d74278b, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _OcclusionMap
         second:
           m_Texture: {fileID: 0}
@@ -78,13 +85,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _ThrustTex
-        second:
-          m_Texture: {fileID: 2800000, guid: c43c4258367b8b740be1556d8d74278b, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -97,11 +97,23 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
+      data:
+        first:
+          name: _SpinSpeed
+        second: 40
+      data:
+        first:
+          name: _ScrollXSpeed
+        second: 0
+      data:
+        first:
+          name: _InvFade
+        second: 1
       data:
         first:
           name: _ZWrite
@@ -109,7 +121,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .5
+        second: 0.5
       data:
         first:
           name: _BumpScale
@@ -134,18 +146,6 @@ Material:
         first:
           name: _Metallic
         second: 0
-      data:
-        first:
-          name: _InvFade
-        second: 1
-      data:
-        first:
-          name: _ScrollXSpeed
-        second: 0
-      data:
-        first:
-          name: _SpinSpeed
-        second: 40
     m_Colors:
       data:
         first:
@@ -154,8 +154,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .562068999, g: .562068999, b: .562068999, a: 1}
+        second: {r: 0.647, g: 0.647, b: 0.647, a: 0.741}
       data:
         first:
           name: _TintColor
-        second: {r: .548275828, g: .548275828, b: .548275828, a: 1}
+        second: {r: 0.5482758, g: 0.5482758, b: 0.5482758, a: 1}

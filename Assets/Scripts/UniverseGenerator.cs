@@ -71,7 +71,7 @@ public class UniverseGenerator : MonoBehaviour
 			SceneRelfectionProbe.timeSlicingMode = UnityEngine.Rendering.ReflectionProbeTimeSlicingMode.AllFacesAtOnce;
 			SceneRelfectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
 		}
-    }
+	}
 
 	public void Start()
 	{
@@ -94,8 +94,8 @@ public class UniverseGenerator : MonoBehaviour
 			DestroyImmediate(trans.gameObject);
 		}
 
-        _sunObj = Instantiate<GameObject>(SunObject);
-        _sunObj.transform.SetParent(BackgroundContainer.transform);
+		_sunObj = Instantiate<GameObject>(SunObject);
+		_sunObj.transform.SetParent(BackgroundContainer.transform);
 
 		_sunLight = _sunObj.GetComponentInChildren<Light>();
 
@@ -161,6 +161,16 @@ public class UniverseGenerator : MonoBehaviour
 			pl.layer = LayerMask.NameToLayer("Universe Background");
 			pl.transform.localScale = Random.Range(20f, 100f) * Vector3.one;
 
+			var mat = pl.GetComponent<Renderer>().material;
+			bg.V = 0.2f;
+
+			mat.EnableKeyword("_EMISSION");
+			mat.SetColor("_EmissionColor", bg.GetColor());
+
+			mat.SetColor("_EnvironmentColor", bg.GetColor());
+
+			pl.GetComponent<Renderer>().material = mat;
+
 			_destroyAfterGeneration.Add(pl);
 		}
 
@@ -169,7 +179,7 @@ public class UniverseGenerator : MonoBehaviour
 
 		var sunColor = HSVColor.FromColor(bgColor);
 		sunColor.V = 1f;
-		sunColor.S *= Random.Range(0.1f, 1f);
+		sunColor.S *= Random.Range(0.1f, 0.5f);
 		_sunLight.color = sunColor.GetColor();
 
 		if (StarPrefabs.Count > 0)

@@ -33,8 +33,7 @@ public class UniverseGeneratorEditor : Editor
 		universeGen.BackgroundGenCubmap = EditorExtensions.ObjectField<RenderTexture>("Cube Map", universeGen.BackgroundGenCubmap, false);
 		universeGen.BackgroundGenMaterial = EditorExtensions.ObjectField<Material>("Gen Material", universeGen.BackgroundGenMaterial, false);
 		EditorGUILayout.Separator();
-
-
+		
 		EditorGUILayout.LabelField("Nebulae", EditorStyles.boldLabel);
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.PrefixLabel("Count");
