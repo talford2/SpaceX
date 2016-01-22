@@ -6,7 +6,7 @@
 
     public T Npc
     {
-        get { return return; }
+        get { return _npc; }
     }
 
     protected NpcState(T npc)

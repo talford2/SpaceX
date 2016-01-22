@@ -3,7 +3,7 @@
 
     public static T Npc
     {
-        get { return null; }
+        get { return default(T); }
     }
 
     protected NpcSteering(T npc)
