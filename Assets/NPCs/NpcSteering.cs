@@ -3,11 +3,11 @@
 
     public static T Npc
     {
-        get { return _npc; }
+        get { return default(T); }
     }
 
     protected NpcSteering(T npc)
     {
-        _npc = npc;
+        _npc = default(T);
     }
 }

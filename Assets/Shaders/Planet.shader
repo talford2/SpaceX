@@ -9,6 +9,8 @@
         _FalloffPlanet("Falloff Planet", Float) = 5
         _Transparency("Transparency", Float) = 15
         _TransparencyPlanet("Transparency Planet", Float) = 1
+
+		_EnvironmentColor("Environment Color", Color) = (0, 0, 0, 1)
     }
  
 	SubShader
@@ -34,7 +36,8 @@
                 uniform float4 _AtmoColor;
                 uniform float _FalloffPlanet;
                 uniform float _TransparencyPlanet;
- 
+				uniform float4 _EnvironmentColor;
+				 
                 struct v2f
                 {
                     float4 pos : SV_POSITION;
@@ -67,7 +70,10 @@
                     float4 color = tex2D(_MainTex, i.texcoord)*_Color;
                     color.rgb = lerp(color.rgb, atmo.rgb, atmo.a);
  
-                    return color*dot(_WorldSpaceLightPos0, i.normal);
+					//return color*dot(_WorldSpaceLightPos0, i.normal) + _EnvironmentColor;
+
+					return (color * dot(_WorldSpaceLightPos0, i.normal))  * (1- _EnvironmentColor.a) + _EnvironmentColor * _EnvironmentColor.a;
+					//return _EnvironmentColor;
                 }
             ENDCG
         }
@@ -94,7 +100,8 @@
                 uniform float _Size;
                 uniform float _Falloff;
                 uniform float _Transparency;
- 
+				uniform float4 _EnvironmentColor;
+				 
                 struct v2f
                 {
                     float4 pos : SV_POSITION;
@@ -125,7 +132,7 @@
 					color.a = saturate(color.a);
 					color.a = pow(color.a, _Falloff);
 					color.a *= _Transparency;
-                    return color;
+					return color;
                 }
             ENDCG
         }

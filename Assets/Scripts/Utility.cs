@@ -220,12 +220,12 @@ public class Utility
 		}
 	}
 
-    public static Vector3 GetVehicleExtrapolatedPosition(Vehicle vehicle, Weapon shootWeapon, float timeError)
-    {
-        var distance = (vehicle.transform.position - shootWeapon.GetShootPointCentre()).magnitude;
-        var timeToHit = distance/shootWeapon.MissilePrefab.GetComponent<Missile>().MissileSpeed;
-        return vehicle.transform.position + vehicle.GetVelocity()*(timeToHit + timeError);
-    }
+	public static Vector3 GetVehicleExtrapolatedPosition(Vehicle vehicle, Weapon shootWeapon, float timeError)
+	{
+		var distance = (vehicle.transform.position - shootWeapon.GetShootPointCentre()).magnitude;
+		var timeToHit = distance / shootWeapon.MissilePrefab.GetComponent<Missile>().MissileSpeed;
+		return vehicle.transform.position + vehicle.GetVelocity() * (timeToHit + timeError);
+	}
 }
 
 public class HSVColor
@@ -238,17 +238,20 @@ public class HSVColor
 
 	public float V { get; set; }
 
+	public float A { get; set; }
+
 	#endregion
 
 	#region Constructors
 
 	public HSVColor() { }
 
-	public HSVColor(float h, float s, float v)
+	public HSVColor(float h, float s, float v, float a = 255)
 	{
 		H = h;
 		S = s;
 		V = v;
+		A = a;
 	}
 
 	public HSVColor(Color c)
@@ -262,13 +265,16 @@ public class HSVColor
 		H = h;
 		S = s;
 		V = v;
+		A = c.a;
 	}
 
 	#endregion
 
 	public Color GetColor()
 	{
-		return Color.HSVToRGB(H, S, V);
+		var c = Color.HSVToRGB(H, S, V);
+		c.a = A;
+		return c;
 	}
 
 	public static HSVColor FromColor(Color c)

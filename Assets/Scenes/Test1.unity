@@ -403,7 +403,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 173512, guid: a15f18d58ab755947982fc9f568e6c2f, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a15f18d58ab755947982fc9f568e6c2f, type: 2}
@@ -618,7 +618,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -804,6 +804,7 @@ MonoBehaviour:
   MaxTargetDistance: 2000
   SteerMultiplier: 0.3
   ProximitySensor: {fileID: 0}
+  IsDebugSpawn: 0
   IsFollowIdleDestination: 0
   IdleDestination: {x: 0, y: 0, z: 0}
   IdleUpDestination: {x: 0, y: 0, z: 0}
@@ -1723,6 +1724,7 @@ MonoBehaviour:
   MaxTargetDistance: 2000
   SteerMultiplier: 0.3
   ProximitySensor: {fileID: 0}
+  IsDebugSpawn: 0
   IsFollowIdleDestination: 0
   IdleDestination: {x: 0, y: 0, z: 0}
   IdleUpDestination: {x: 0, y: 0, z: 0}
@@ -1968,8 +1970,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fcc537c0b90f2a4496ecf8f4abcc37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrimaryColor: {r: 1, g: 0.22058824, b: 0, a: 1}
-  SecondaryColor: {r: 1, g: 0, b: 0.57352924, a: 1}
+  PrimaryColor: {r: 0, g: 0.5034485, b: 1, a: 1}
+  SecondaryColor: {r: 0.8885398, g: 0, b: 1, a: 1}
   BackgroundContainer: {fileID: 1212660694}
   SceneRelfectionProbe: {fileID: 0}
   SunObject: {fileID: 165314, guid: 7732131fba4ca9245bddffa9af11d543, type: 2}
@@ -3039,6 +3041,7 @@ MonoBehaviour:
   MaxTargetDistance: 2000
   SteerMultiplier: 0.3
   ProximitySensor: {fileID: 0}
+  IsDebugSpawn: 0
   IsFollowIdleDestination: 0
   IdleDestination: {x: 0, y: 0, z: 0}
   IdleUpDestination: {x: 0, y: 0, z: 0}
@@ -3225,7 +3228,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -3266,6 +3269,7 @@ MonoBehaviour:
   MaxTargetDistance: 2000
   SteerMultiplier: 0.3
   ProximitySensor: {fileID: 0}
+  IsDebugSpawn: 0
   IsFollowIdleDestination: 0
   IdleDestination: {x: 0, y: 0, z: 0}
   IdleUpDestination: {x: 0, y: 0, z: 0}
@@ -3294,7 +3298,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
 --- !u!1 &1833712404
 GameObject:
   m_ObjectHideFlags: 0
@@ -3628,7 +3632,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -3653,7 +3657,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2070423333}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60e318a6043c1cb4a8ce1c8805bab930, type: 3}
   m_Name: 
@@ -3686,7 +3690,7 @@ MonoBehaviour:
   hdr: 1
   sepBlurSpread: 2.5
   quality: 0
-  bloomIntensity: 1
+  bloomIntensity: 0.5
   bloomThreshold: 0.2
   bloomThresholdColor: {r: 1, g: 1, b: 1, a: 1}
   bloomBlurIterations: 2

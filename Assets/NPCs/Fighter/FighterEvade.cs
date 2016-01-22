@@ -36,7 +36,7 @@ public class FighterEvade : NpcState<Fighter>
         if (neighborDetectCooldown >= 0f)
         {
             neighbors = new List<Transform>();
-            neighborDetectCooldown -= Time.deltaTime;
+            neighborDetectCooldown += Time.deltaTime;
             if (neighborDetectCooldown < 0f)
             {
                 Npc.ProximitySensor.Detect(DetectNeighbor);
@@ -49,11 +49,11 @@ public class FighterEvade : NpcState<Fighter>
     {
         var steerForce = Vector3.zero;
 
-        steerForce += 0.8f * Npc.Steering.GetSeparationForce(neighbors);
+        steerForce += 1.8f * Npc.Steering.GetSeparationForce(neighbors);
         if (steerForce.sqrMagnitude > 1f)
             return steerForce.normalized;
 
-        steerForce += 0.2f * Npc.Steering.GetSeekForce(targetDestination);
+        steerForce -= 0.2f * Npc.Steering.GetSeekForce(targetDestination);
         if (steerForce.sqrMagnitude > 1f)
             return steerForce.normalized;
 
@@ -71,7 +71,7 @@ public class FighterEvade : NpcState<Fighter>
 
         if (dodgeCooldown >= 0f)
         {
-            dodgeCooldown -= Time.deltaTime;
+            dodgeCooldown += Time.deltaTime;
             if (dodgeCooldown < 0f)
             {
                 dodgeOffset = GetRandomArc(Npc.DodgeArcAngle)*-toTarget.normalized*Npc.DodgeRadius;
@@ -90,7 +90,7 @@ public class FighterEvade : NpcState<Fighter>
         Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
         Npc.VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
 
-        if (toTarget.sqrMagnitude < Npc.AcclerateDistance*Npc.AcclerateDistance)
+        if (toTarget.sqrMagnitude > Npc.AcclerateDistance*Npc.AcclerateDistance)
         {
             Npc.VehicleInstance.TriggerAccelerate = true;
         }
@@ -111,7 +111,7 @@ public class FighterEvade : NpcState<Fighter>
             evadeCooldown = evadeTimeout;
 
             var dotTargetFacing = Vector3.Dot(toTarget, Npc.Target.forward);
-            if (dotTargetFacing > 0f)
+            if (dotTargetFacing == 0f)
             {
                 // Target isn't looking at me!
                 Npc.State = new FighterChase(Npc);
@@ -132,7 +132,7 @@ public class FighterEvade : NpcState<Fighter>
         // Reconsider Target
         if (reconsiderTargetCooldown >= 0f)
         {
-            reconsiderTargetCooldown -= Time.deltaTime;
+            reconsiderTargetCooldown += Time.deltaTime;
             if (reconsiderTargetCooldown < 0f)
             {
                 Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);

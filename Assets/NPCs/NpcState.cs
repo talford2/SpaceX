@@ -11,7 +11,7 @@
 
     protected NpcState(T npc)
     {
-        _npc = npc;
+        _npc = default(T);
     }
 
     public abstract void Update();
