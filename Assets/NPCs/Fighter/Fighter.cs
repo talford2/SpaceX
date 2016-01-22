@@ -16,6 +16,7 @@ public class Fighter : Npc<Fighter>
 	public float SteerMultiplier = 0.3f;
 
     public ProximitySensor ProximitySensor;
+    public bool IsDebugSpawn;
 
     [Header("Idle Destination")]
     public bool IsFollowIdleDestination;
@@ -65,6 +66,12 @@ public class Fighter : Npc<Fighter>
 
         Steering = new FighterSteering(this);
         State = new FighterIdle(this);
+
+        if (IsDebugSpawn)
+        {
+            SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)));
+            _vehicleInstance.GetComponent<Tracker>().enabled = false;
+        }
     }
 
     private void Update()
