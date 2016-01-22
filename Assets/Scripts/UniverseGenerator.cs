@@ -162,7 +162,8 @@ public class UniverseGenerator : MonoBehaviour
 			pl.transform.localScale = Random.Range(20f, 100f) * Vector3.one;
 
 			var mat = pl.GetComponent<Renderer>().material;
-			bg.V = 0.2f;
+			bg.V = 0.15f;
+			bg.A = 0.5f;
 
 			mat.EnableKeyword("_EMISSION");
 			mat.SetColor("_EmissionColor", bg.GetColor());

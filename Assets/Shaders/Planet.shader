@@ -70,7 +70,9 @@
                     float4 color = tex2D(_MainTex, i.texcoord)*_Color;
                     color.rgb = lerp(color.rgb, atmo.rgb, atmo.a);
  
-					return color*dot(_WorldSpaceLightPos0, i.normal) + _EnvironmentColor;
+					//return color*dot(_WorldSpaceLightPos0, i.normal) + _EnvironmentColor;
+
+					return (color * dot(_WorldSpaceLightPos0, i.normal))  * (1- _EnvironmentColor.a) + _EnvironmentColor * _EnvironmentColor.a;
 					//return _EnvironmentColor;
                 }
             ENDCG
