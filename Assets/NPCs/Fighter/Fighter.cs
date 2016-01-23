@@ -3,33 +3,33 @@
 public class Fighter : Npc<Fighter>
 {
 	public Vehicle VehiclePrefab;
-	public Team Team;
-	public bool IsSquadronMember;
-	public string CallSign;
+    public Team Team;
+    public bool IsSquadronMember;
+    public string CallSign;
 
 	private Vehicle _vehicleInstance;
 	public Vector3 Destination;
 
 	public Transform Target;
-	public float MaxTargetDistance = 200000f;
+    public float MaxTargetDistance = 2000f;
 
-	public float SteerMultiplier = 1.3f;
+	public float SteerMultiplier = 0.3f;
 
-	public ProximitySensor ProximitySensor;
-	public bool IsDebugSpawn;
+    public ProximitySensor ProximitySensor;
+    public bool IsDebugSpawn;
 
-	[Header("Idle Destination")]
-	public bool IsFollowIdleDestination;
-	public Vector3 IdleDestination;
-	public Vector3 IdleUpDestination;
+    [Header("Idle Destination")]
+    public bool IsFollowIdleDestination;
+    public Vector3 IdleDestination;
+    public Vector3 IdleUpDestination;
 
 	[Header("Attack")]
 	public float AttackRange = 100f;
 	public float ShootAngleTolerance = 5f;
 	public float OvertakeDistance = 50f;
-	public float BurstTime = 0.5f;
-	public float BurstWaitTime = 0.7f;
-	public float ExrapolationTimeError = 0.5f;
+    public float BurstTime = 0.5f;
+    public float BurstWaitTime = 0.7f;
+    public float ExrapolationTimeError = 0.5f;
 
 	[Header("Evade")]
 	public float EvadeDistance = 200f;
@@ -44,72 +44,74 @@ public class Fighter : Npc<Fighter>
 	public float SightRange = 50f;
 
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }
-	public FighterSteering Steering { get; set; }
+    public FighterSteering Steering { get; set; }
 
-	private void Awake()
-	{
-		//_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
+    private void Awake()
+    {
+        //_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
 
-		if (VehiclePrefab != null)
-		{
-			var parentShifter = transform.GetComponentInParent<Shiftable>();
-			if (parentShifter != null)
-			{
-				SpawnVehicle(VehiclePrefab, parentShifter.UniversePosition);
-			}
-			else
-			{
-				// This isn't right!
-				//SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0,0,0), new Vector3()));
-			}
-		}
+        if (VehiclePrefab != null)
+        {
+            var parentShifter = transform.GetComponentInParent<Shiftable>();
+            if (parentShifter != null)
+            {
+                SpawnVehicle(VehiclePrefab, parentShifter.UniversePosition);
+            }
+            else
+            {
+                // This isn't right!
+                //SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0,0,0), new Vector3()));
+            }
+        }
 
-		Steering = new FighterSteering(this);
-		State = new FighterIdle(this);
+        Steering = new FighterSteering(this);
+        State = new FighterIdle(this);
 
-		if (IsDebugSpawn)
-		{
-			SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0, 1, 0), new Vector3(0, 0, 1)));
-			_vehicleInstance.GetComponent<Tracker>().enabled = true;
-		}
-	}
+        if (IsDebugSpawn)
+        {
+            SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)));
+            _vehicleInstance.GetComponent<Tracker>().enabled = false;
+        }
+    }
 
-	private void Update()
-	{
-		if (VehicleInstance != null)
-			UpdateState();
-	}
+    private void Update()
+    {
+        if (VehicleInstance != null)
+            UpdateState();
+    }
 
-	public void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition)
-	{
-		_vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
-		_vehicleInstance.GetComponent<Targetable>().Team = new Team();
-		_vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
-		_vehicleInstance.Shiftable.SetShiftPosition(universePosition);
-		_vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();
-		ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
-	}
+    public void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition)
+    {
+        _vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
+        _vehicleInstance.GetComponent<Targetable>().Team = Team;
+        _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+        _vehicleInstance.Shiftable.SetShiftPosition(universePosition);
+        _vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();
+        ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
+    }
 
-	public void SetVehicleInstance(Vehicle vehicleInstance)
-	{
-		_vehicleInstance = vehicleInstance;
-		//_vehicleInstance.GetComponent<Targetable>().Team = Team;
-		_vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
-		ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
-	}
+    public void SetVehicleInstance(Vehicle vehicleInstance)
+    {
+        _vehicleInstance = vehicleInstance;
+        //_vehicleInstance.GetComponent<Targetable>().Team = Team;
+        _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+        ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
+    }
 
 	public Vector2 GetPitchYawToPoint(Vector3 point)
 	{
-		var toPoint = point;
+		var toPoint = point - VehicleInstance.transform.position;
 		var yawAmount = Vector3.Dot(toPoint.normalized, VehicleInstance.transform.right);
 		var pitchAmount = Vector3.Dot(-toPoint.normalized, VehicleInstance.transform.up);
-		return new Vector2(pitchAmount, yawAmount * 6);
+		return new Vector2(pitchAmount, yawAmount);
 	}
 
-	private void OnVehicleDestroyed(Killable sender)
-	{
-		Target = this.transform;
-	}
+    private void OnVehicleDestroyed(Killable sender)
+    {
+        Target = null;
+        if (!IsSquadronMember)
+            Destroy(gameObject);
+    }
 
 	private void OnDrawGizmos()
 	{
@@ -117,9 +119,9 @@ public class Fighter : Npc<Fighter>
 		{
 			switch (State.Name)
 			{
-				case "Idle":
-					Gizmos.color = Color.white;
-					break;
+                case "Idle":
+			        Gizmos.color = Color.white;
+			        break;
 				case "Evade":
 					Gizmos.color = Color.magenta;
 					break;
@@ -132,7 +134,7 @@ public class Fighter : Npc<Fighter>
 			}
 			//Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
 			//Gizmos.DrawSphere(Destination, 2f);
-			/*
+            /*
 			Gizmos.color = Color.blue;
 			Gizmos.DrawWireSphere(VehicleInstance.transform.position, SightRange);
 

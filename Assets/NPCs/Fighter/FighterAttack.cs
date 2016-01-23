@@ -24,8 +24,8 @@ public class FighterAttack :NpcState<Fighter>
         if (neighborDetectCooldown >= 0f)
         {
             neighbors = new List<Transform>();
-            neighborDetectCooldown += Time.deltaTime;
-            if (neighborDetectCooldown <= 0f)
+            neighborDetectCooldown -= Time.deltaTime;
+            if (neighborDetectCooldown < 0f)
             {
                 Npc.ProximitySensor.Detect(DetectNeighbor);
                 neighborDetectCooldown = neighborDetectInterval;
@@ -38,7 +38,7 @@ public class FighterAttack :NpcState<Fighter>
         var steerForce = Vector3.zero;
 
         steerForce += 0.8f * Npc.Steering.GetSeparationForce(neighbors);
-        if (steerForce.sqrMagnitude < 1f)
+        if (steerForce.sqrMagnitude > 1f)
             return steerForce.normalized;
 
         steerForce += 0.2f * Npc.Steering.GetSeekForce(targetDestination);
@@ -86,7 +86,7 @@ public class FighterAttack :NpcState<Fighter>
 
         var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
 
-        Npc.VehicleInstance.YawThrottle = pitchYaw.y / Time.deltaTime;
+        Npc.VehicleInstance.YawThrottle = pitchYaw.y * Time.deltaTime;
         Npc.VehicleInstance.PitchThotttle = pitchYaw.x * Time.deltaTime;
 
         Npc.VehicleInstance.TriggerBrake = false;
@@ -94,7 +94,7 @@ public class FighterAttack :NpcState<Fighter>
 
         if (burstCooldown >= 0f)
         {
-            burstCooldown += Time.deltaTime;
+            burstCooldown -= Time.deltaTime;
             if (burstCooldown < 0f)
             {
                 allowShoot = true;
@@ -113,7 +113,7 @@ public class FighterAttack :NpcState<Fighter>
                     Npc.VehicleInstance.SetAimAt(Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward*100f);
                     
                     Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = true;
-                    burstAmount -= Time.deltaTime;
+                    burstAmount += Time.deltaTime;
                     if (burstAmount > Npc.BurstTime)
                     {
                         burstCooldown = Npc.BurstWaitTime;
@@ -148,7 +148,7 @@ public class FighterAttack :NpcState<Fighter>
                 return;
             }
             
-            if (dotTarget > 0f)
+            if (dotTarget < 0f)
                 Npc.State = new FighterEvade(Npc);
         }
     }
