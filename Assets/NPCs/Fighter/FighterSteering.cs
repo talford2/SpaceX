@@ -11,14 +11,14 @@ public class FighterSteering : NpcSteering<Fighter>
     {
         //Debug.Log("STEERING POS: " + Npc.VehicleInstance.transform.position);
         if (Npc.VehicleInstance != null)
-            return (position + Npc.VehicleInstance.transform.position).normalized;
+            return (position - Npc.VehicleInstance.transform.position).normalized;
         return Vector3.zero;
     }
 
     public Vector3 GetFleeForce(Vector3 position)
     {
         if (Npc.VehicleInstance != null)
-            return (Npc.VehicleInstance.transform.position + position).normalized;
+            return (Npc.VehicleInstance.transform.position - position).normalized;
         return Vector3.zero;
     }
 
@@ -34,7 +34,7 @@ public class FighterSteering : NpcSteering<Fighter>
                 if (neighbor != null)
                 {
                     var fromNeighbor = Npc.VehicleInstance.transform.position - neighbor.position;
-                    avoidSum += fromNeighbor.normalized*Mathf.Max(fromNeighbor.magnitude, 0.1f);
+                    avoidSum += fromNeighbor.normalized/Mathf.Max(fromNeighbor.magnitude, 0.1f);
                 }
             }
         }
