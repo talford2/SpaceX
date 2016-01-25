@@ -1,7 +1,7 @@
 ﻿public class NpcSteering<T> {
-    private static T _npc;
+    private T _npc;
 
-    public static T Npc
+    public T Npc
     {
         get { return _npc; }
     }
