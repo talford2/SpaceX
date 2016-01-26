@@ -132,8 +132,8 @@ public class Fighter : Npc<Fighter>
 					Gizmos.color = Color.yellow;
 					break;
 			}
-			//Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
-			//Gizmos.DrawSphere(Destination, 2f);
+			Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
+			Gizmos.DrawSphere(Destination, 2f);
             /*
 			Gizmos.color = Color.blue;
 			Gizmos.DrawWireSphere(VehicleInstance.transform.position, SightRange);
