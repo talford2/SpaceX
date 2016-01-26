@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
 	private void PlayerController_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
 	{
 		HeadsUpDisplay.Current.Hit();
-		Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.1f, 0.05f);
+		Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.05f, 0.1f);
 	}
 
 	private Vector3 GetAimAt()
@@ -231,6 +231,11 @@ public class PlayerController : MonoBehaviour
 				{
 					_playVehicleInstance.TriggerBoost = true;
 				}
+
+			    if (_playVehicleInstance.IsBoosting)
+			    {
+                    Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f);
+                }
 			}
 
 			if (Input.GetKeyUp(KeyCode.R))
@@ -270,8 +275,8 @@ public class PlayerController : MonoBehaviour
 
 			if (Input.GetKey(KeyCode.M))
 			{
-				Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 1f, 0.7f);
-				//_playVehicleInstance.GetComponent<Killable>().Damage(5f, Vector3.zero, Vector3.forward);
+			    Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f);
+			    //_playVehicleInstance.GetComponent<Killable>().Damage(5f, Vector3.zero, Vector3.forward);
 			}
 		}
 
