@@ -157,9 +157,4 @@ public class Fighter : Npc<Fighter>
 			Gizmos.DrawLine(VehicleInstance.transform.position, VehicleInstance.transform.position + VehicleInstance.transform.forward * 100f);
         }
 	}
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(30f, 30f, 100f, 30f), State.Name);
-    }
 }
