@@ -34,10 +34,15 @@ public class VehicleCamera : UniverseCamera
 
     // Shake Params
     private bool isShaking;
+    private bool isContinuous;
+    private bool isShakingTriggered;
     private float shakeAmplitude;
     private float shakeDuration;
     private float shakeCooldown;
     private float shakeFrequency;
+
+    private float amplitudeFrac;
+    private float shakeTime;
 
     private void Start()
 	{
@@ -45,6 +50,7 @@ public class VehicleCamera : UniverseCamera
 		Target = PlayerController.Current.VehicleInstance;
 		offsetAngle = Target.transform.rotation;
 		targetUp = Target.transform.up;
+        isShakingTriggered = false;
 	}
 
 	public override void Move()
@@ -96,38 +102,79 @@ public class VehicleCamera : UniverseCamera
 
 		if (isShaking)
 		{
-			if (shakeCooldown >= 0f)
-			{
-				shakeCooldown -= Time.deltaTime;
+		    if (!isContinuous)
+		    {
+		        if (shakeCooldown >= 0f)
+		        {
+		            shakeCooldown -= Time.deltaTime;
 
-				var frac = 1f - shakeCooldown / shakeDuration;
-				var freq = shakeCooldown * Mathf.Rad2Deg * shakeFrequency;
+		            var frac = 1f - shakeCooldown/shakeDuration;
+		            var freq = shakeCooldown*Mathf.Rad2Deg*shakeFrequency;
 
-				var x = Mathf.Sin(freq);
-				var y = Mathf.Sin(freq * 1.2f);
-				var z = Mathf.Sin(freq * 1.4f);
+		            var x = Mathf.Sin(freq);
+		            var y = Mathf.Sin(freq*1.2f);
+		            var z = Mathf.Sin(freq*1.4f);
 
-				var fracVec = new Vector3(x, y, z) * ShakeAmplitude.Evaluate(frac);
+		            var fracVec = new Vector3(x, y, z)*ShakeAmplitude.Evaluate(frac);
 
-			    AttachedCamera.transform.localPosition = shakeAmplitude*fracVec;
-				AttachedCamera.transform.localRotation = Quaternion.Euler(fracVec * 1f);
-			}
-			else
-			{
-				AttachedCamera.transform.localPosition = Vector3.zero;
-			    isShaking = true;
-			}
+		            AttachedCamera.transform.localPosition = shakeAmplitude*fracVec;
+		            AttachedCamera.transform.localRotation = Quaternion.Euler(fracVec*1f);
+		        }
+		        else
+		        {
+		            AttachedCamera.transform.localPosition = Vector3.zero;
+		            isShaking = true;
+		        }
+		    }
+            else
+		    {
+		        if (isShakingTriggered)
+		        {
+		            amplitudeFrac = Mathf.Lerp(amplitudeFrac, 1f, 5f*Time.deltaTime);
+		        }
+		        else
+		        {
+                    amplitudeFrac = Mathf.Lerp(amplitudeFrac, 0f, 5f * Time.deltaTime);
+                }
+
+		        shakeTime += Time.deltaTime;
+		        shakeTime -= Mathf.Floor(shakeTime);
+                var freq = shakeTime * Mathf.Rad2Deg * shakeFrequency;
+
+                var x = Mathf.Sin(freq);
+                var y = Mathf.Sin(freq * 1.2f);
+                var z = Mathf.Sin(freq * 1.4f);
+
+                var fracVec = new Vector3(x, y, z) * amplitudeFrac;
+
+                AttachedCamera.transform.localPosition = shakeAmplitude * fracVec;
+                AttachedCamera.transform.localRotation = Quaternion.Euler(fracVec * 1f);
+
+		        isShakingTriggered = false;
+                if (amplitudeFrac < 0.0001f)
+                    isShaking = false;
+            }
 		}
 	}
 
-	public void TriggerShake(float amplitude, float duration, float frequency)
+	public void TriggerShake(float amplitude, float frequency, float duration)
 	{
 		isShaking = true;
+	    isContinuous = false;
 		shakeAmplitude = amplitude;
 		shakeDuration = duration;
 		shakeCooldown = shakeDuration;
 		shakeFrequency = frequency;
 	}
+
+    public void TriggerShake(float amplitude, float frequency)
+    {
+        isShaking = true;
+        isContinuous = true;
+        isShakingTriggered = true;
+        shakeAmplitude = amplitude;
+        shakeFrequency = frequency;
+    }
 
 	public void Reset()
 	{
