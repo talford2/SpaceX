@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &108620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 498982}
+  - 82: {fileID: 8260914}
+  m_Layer: 0
+  m_Name: BoostSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &114634
 GameObject:
   m_ObjectHideFlags: 1
@@ -243,7 +259,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 474404}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &413396
 Transform:
   m_ObjectHideFlags: 1
@@ -270,7 +286,7 @@ Transform:
   - {fileID: 460784}
   - {fileID: 447296}
   m_Father: {fileID: 474404}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &438892
 Transform:
   m_ObjectHideFlags: 1
@@ -282,7 +298,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 474404}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &447296
 Transform:
   m_ObjectHideFlags: 1
@@ -321,7 +337,7 @@ Transform:
   - {fileID: 413396}
   - {fileID: 450416}
   m_Father: {fileID: 474404}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &460784
 Transform:
   m_ObjectHideFlags: 1
@@ -344,6 +360,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 498982}
   - {fileID: 485528}
   - {fileID: 458250}
   - {fileID: 406838}
@@ -363,7 +380,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 474404}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &485528
 Transform:
   m_ObjectHideFlags: 1
@@ -375,7 +392,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 474404}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &497732
 Transform:
   m_ObjectHideFlags: 1
@@ -387,6 +404,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 422464}
+  m_RootOrder: 0
+--- !u!4 &498982
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108620}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 474404}
   m_RootOrder: 0
 --- !u!23 &2338064
 MeshRenderer:
@@ -514,6 +543,80 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: 4f9117d9d60f68643a019dbd86a4195e, type: 3}
+--- !u!82 &8260914
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108620}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 95a6792b036ecd442bccc3779418a0ac, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 0.2
+  MinDistance: 10
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &11408530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -533,6 +636,7 @@ MonoBehaviour:
     type: 3}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  CallSign: 
   IsDisabled: 0
   IsDelayComplete: 0
   DelayCooldown: 0
@@ -608,6 +712,7 @@ MonoBehaviour:
   Thrusters:
   - {fileID: 11486206}
   - {fileID: 11475310}
+  BoostSound: {fileID: 8260914}
 --- !u!114 &11442730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -658,7 +763,7 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  _particleSystems: []
+  ShiftParticleSystems: []
 --- !u!114 &11475310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1013,6 +1118,18 @@ Prefab:
       propertyPath: WoundEffect
       value: 
       objectReference: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BoostSound
+      value: 
+      objectReference: {fileID: 8260914}
+    - target: {fileID: 0}
+      propertyPath: DopplerLevel
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}
