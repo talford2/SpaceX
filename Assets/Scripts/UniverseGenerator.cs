@@ -25,6 +25,8 @@ public class UniverseGenerator : MonoBehaviour
 	public Material DustMaterial;
 	public Material AddFogMaterial;
 
+	public GameObject UniverseRing;
+
 	// Nebulas
 	public int MinNebulas = 30;
 	public int MaxNubulas = 40;
@@ -121,9 +123,19 @@ public class UniverseGenerator : MonoBehaviour
 		//bg.V *= Random.Range(0.05f, 0.2f);
 		//bg.V *= Random.Range(0.05f, 0.5f);
 		bg.V = 0.2f;
+		bg.V = Random.Range(0.05f, 0.2f);
 
 		BackgroundCamera.clearFlags = CameraClearFlags.Color;
 		BackgroundCamera.backgroundColor = bg.GetColor();
+
+
+		// Draw universe ring
+		var ring = Instantiate<GameObject>(UniverseRing);
+		ring.transform.localScale *= 800F;
+		ring.transform.position = Vector3.zero;
+		ring.transform.rotation = Random.rotation;
+		ring.GetComponent<Renderer>().material.SetColor("_Color", bg.GetColor());
+		_destroyAfterGeneration.Add(ring);
 
 		var fogColor = HSVColor.FromColor(bgColor);
 		fogColor.S *= 0.5f;
@@ -263,7 +275,7 @@ public class UniverseGenerator : MonoBehaviour
 		//_sunObj.SetActive(false);
 		//Destroy(_sunObj);
 		BackgroundCamera.RenderToCubemap(renText, 63);
-		
+
 		//_sunObj.SetActive(true);
 
 		// Save to file

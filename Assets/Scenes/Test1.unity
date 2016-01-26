@@ -1985,6 +1985,7 @@ MonoBehaviour:
   BackgroundMaterial: {fileID: 2100000, guid: 1761f17781c5bdf4286cd812492e0c4b, type: 2}
   DustMaterial: {fileID: 2100000, guid: 15eb02f086d59eb4aaf195e454e929de, type: 2}
   AddFogMaterial: {fileID: 2100000, guid: b64faedd36e5bd14eadd5d1f68328f73, type: 2}
+  UniverseRing: {fileID: 172754, guid: 7dfcc6337169ad243899238f29b702ea, type: 2}
   MinNebulas: 40
   MaxNubulas: 60
   NebulaBrightnessMultiplier: 0.05

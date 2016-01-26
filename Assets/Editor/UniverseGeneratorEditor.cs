@@ -23,7 +23,7 @@ public class UniverseGeneratorEditor : Editor
 		universeGen.SunObject = EditorExtensions.ObjectField<GameObject>("Sun", universeGen.SunObject, false);
 
 		EditorGUILayout.PrefixLabel("Sun Colour");
-		
+
 		EditorGUILayout.Separator();
 
 		EditorGUILayout.LabelField("Materials", EditorStyles.boldLabel);
@@ -36,7 +36,9 @@ public class UniverseGeneratorEditor : Editor
 		universeGen.BackgroundGenCubmap = EditorExtensions.ObjectField<RenderTexture>("Cube Map", universeGen.BackgroundGenCubmap, false);
 		universeGen.BackgroundGenMaterial = EditorExtensions.ObjectField<Material>("Gen Material", universeGen.BackgroundGenMaterial, false);
 		EditorGUILayout.Separator();
-		
+
+		universeGen.UniverseRing = EditorExtensions.ObjectField<GameObject>("Ring", universeGen.UniverseRing, false);
+
 		EditorGUILayout.LabelField("Nebulae", EditorStyles.boldLabel);
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.PrefixLabel("Count");
