@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(Killable))]
 public class HealthRegenerator : MonoBehaviour
@@ -35,7 +34,7 @@ public class HealthRegenerator : MonoBehaviour
         }
     }
 
-    private void HealthRegenerator_OnDamage(Vector3 position, Vector3 normal)
+    private void HealthRegenerator_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
     {
         delayCooldown = RegenerationDelay;
     }

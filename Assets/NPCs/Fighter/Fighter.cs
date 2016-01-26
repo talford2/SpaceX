@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Fighter : Npc<Fighter>
 {
@@ -45,6 +47,7 @@ public class Fighter : Npc<Fighter>
 
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }
     public FighterSteering Steering { get; set; }
+    public Action<Transform> OnVehicleDamage;
 
     private void Awake()
     {
@@ -96,6 +99,7 @@ public class Fighter : Npc<Fighter>
     {
         _vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
         _vehicleInstance.GetComponent<Targetable>().Team = Team;
+        _vehicleInstance.GetComponent<Killable>().OnDamage += OnVehicleDamaged;
         _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
         _vehicleInstance.Shiftable.SetShiftPosition(universePosition);
         _vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();
@@ -117,6 +121,20 @@ public class Fighter : Npc<Fighter>
 		var pitchAmount = Vector3.Dot(-toPoint.normalized, VehicleInstance.transform.up);
 		return new Vector2(pitchAmount, yawAmount);
 	}
+
+    private void OnVehicleDamaged(Vector3 position, Vector3 normal, GameObject attacker)
+    {
+        if (attacker != null)
+        {
+            if (attacker.transform != null)
+            {
+                if (Target == null)
+                    Target = attacker.transform;
+                if (OnVehicleDamage != null)
+                    OnVehicleDamage(attacker.transform);
+            }
+        }
+    }
 
     private void OnVehicleDestroyed(Killable sender)
     {
@@ -157,9 +175,4 @@ public class Fighter : Npc<Fighter>
 			Gizmos.DrawLine(VehicleInstance.transform.position, VehicleInstance.transform.position + VehicleInstance.transform.forward * 100f);
         }
 	}
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(30f, 30f, 100f, 30f), State.Name);
-    }
 }

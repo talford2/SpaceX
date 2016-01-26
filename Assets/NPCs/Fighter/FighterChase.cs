@@ -16,6 +16,7 @@ public class FighterChase : NpcState<Fighter>
 	{
 		Name = "Chase";
         reconsiderTargetCooldown = reconsiderTargetInterval;
+	    Npc.OnVehicleDamage = OnVehicleDamage;
 	}
 
     private void CheckSensors()
@@ -126,5 +127,10 @@ public class FighterChase : NpcState<Fighter>
                 neighbors.Add(neighbor);
             }
         }
+    }
+
+    private void OnVehicleDamage(Transform attacker)
+    {
+        Npc.Target = attacker;
     }
 }
