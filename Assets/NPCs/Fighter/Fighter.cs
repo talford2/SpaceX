@@ -32,6 +32,7 @@ public class Fighter : Npc<Fighter>
     public float BurstTime = 0.5f;
     public float BurstWaitTime = 0.7f;
     public float ExrapolationTimeError = 0.5f;
+    public float AimOffsetRadius = 5f;
 
 	[Header("Evade")]
 	public float EvadeDistance = 200f;
@@ -74,6 +75,12 @@ public class Fighter : Npc<Fighter>
         {
             SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)));
             _vehicleInstance.GetComponent<Tracker>().enabled = false;
+        }
+
+        // Give squadron members better aiming!
+        if (IsSquadronMember)
+        {
+            AimOffsetRadius = 1.5f;
         }
     }
 
