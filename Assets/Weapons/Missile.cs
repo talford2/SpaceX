@@ -22,8 +22,11 @@ public class Missile : MonoBehaviour
 	private Vector3 _hitPosition;
 
     private Vector3 observationPosition;
+    private float rayCheckMaxDistSquared = 25000000f;
+    private float stopDistanceSquared = 100000000f;
 
-	private void Awake()
+
+    private void Awake()
 	{
 		_lineRenderer = GetComponent<LineRenderer>();
 		_shiftable = GetComponent<Shiftable>();
@@ -43,7 +46,7 @@ public class Missile : MonoBehaviour
             var displacement = (_initSpeed + MissileSpeed)*Time.deltaTime;
             observationPosition = Universe.Current.ViewPort.transform.position;
             var toOberverSquared = (transform.position - observationPosition).sqrMagnitude;
-            if (toOberverSquared < 25000000f)
+            if (toOberverSquared < rayCheckMaxDistSquared)
             {
                 if (!_hasHit)
                 {
@@ -95,7 +98,7 @@ public class Missile : MonoBehaviour
             }
             else
             {
-                if (toOberverSquared > 100000000f)
+                if (toOberverSquared > stopDistanceSquared)
                 {
                     Stop();
                 }
