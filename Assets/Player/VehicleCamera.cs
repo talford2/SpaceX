@@ -115,6 +115,7 @@ public class VehicleCamera : UniverseCamera
 			else
 			{
 				AttachedCamera.transform.localPosition = Vector3.zero;
+			    isShaking = true;
 			}
 		}
 	}

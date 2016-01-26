@@ -268,7 +268,7 @@ public class PlayerController : MonoBehaviour
 				CycleSquadron();
 			}
 
-			if (Input.GetKeyUp(KeyCode.M))
+			if (Input.GetKey(KeyCode.M))
 			{
 				Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 1f, 0.7f);
 				//_playVehicleInstance.GetComponent<Killable>().Damage(5f, Vector3.zero, Vector3.forward);
