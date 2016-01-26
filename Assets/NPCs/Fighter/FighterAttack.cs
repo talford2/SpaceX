@@ -13,6 +13,8 @@ public class FighterAttack :NpcState<Fighter>
     private float burstAmount;
     private float burstTimeoffset;
 
+    private Vector3 targetOffset;
+
     public FighterAttack(Fighter npc) : base(npc)
     {
         Name = "Attack";
@@ -82,11 +84,6 @@ public class FighterAttack :NpcState<Fighter>
             targetDestination = Npc.Target.position;
         }
 
-        Npc.Destination = Npc.VehicleInstance.transform.position + GetSteerForce(targetDestination);
-
-        Npc.VehicleInstance.TriggerBrake = false;
-        Npc.VehicleInstance.TriggerAccelerate = false;
-
         if (burstCooldown >= 0f)
         {
             burstCooldown -= Time.deltaTime;
@@ -95,8 +92,14 @@ public class FighterAttack :NpcState<Fighter>
                 allowShoot = true;
                 burstAmount = 0f;
                 burstTimeoffset = Random.Range(-Npc.ExrapolationTimeError, Npc.ExrapolationTimeError);
+                targetOffset = Random.insideUnitSphere*3f;
             }
         }
+
+        Npc.Destination = Npc.VehicleInstance.transform.position + GetSteerForce(targetDestination + targetOffset);
+
+        Npc.VehicleInstance.TriggerBrake = false;
+        Npc.VehicleInstance.TriggerAccelerate = false;
 
         if (dotTarget > 10f)
         {

@@ -99,7 +99,7 @@ public class FighterChase : NpcState<Fighter>
             reconsiderTargetCooldown -= Time.deltaTime;
             if (reconsiderTargetCooldown < 0f)
             {
-                Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
+                Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward, 500f);
                 reconsiderTargetCooldown = reconsiderTargetInterval;
                 if (Npc.Target != null)
                 {
