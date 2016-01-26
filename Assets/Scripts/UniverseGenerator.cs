@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -117,7 +118,10 @@ public class UniverseGenerator : MonoBehaviour
 		BackgroundMaterial.SetColor("_Tint", bgColor);
 
 		var bg = HSVColor.FromColor(bgColor);
-		bg.V *= Random.Range(0.05f, 0.2f);
+		//bg.V *= Random.Range(0.05f, 0.2f);
+		//bg.V *= Random.Range(0.05f, 0.5f);
+		bg.V = 0.2f;
+
 		BackgroundCamera.clearFlags = CameraClearFlags.Color;
 		BackgroundCamera.backgroundColor = bg.GetColor();
 
@@ -151,29 +155,7 @@ public class UniverseGenerator : MonoBehaviour
 		}
 
 		// Planets
-		int totalPlanets = Random.Range(MinPlanets, MaxPlanets);
-		for (var i = 0; i < totalPlanets; i++)
-		{
-			var pl = Instantiate<GameObject>(Planets[Random.Range(0, Planets.Count)]);
-			pl.transform.SetParent(BackgroundContainer.transform);
-			pl.transform.localPosition = Random.onUnitSphere * 800f;
-			pl.transform.rotation = Random.rotation;
-			pl.layer = LayerMask.NameToLayer("Universe Background");
-			pl.transform.localScale = Random.Range(20f, 100f) * Vector3.one;
-
-			var mat = pl.GetComponent<Renderer>().material;
-			bg.V = 0.15f;
-			bg.A = 0.5f;
-
-			mat.EnableKeyword("_EMISSION");
-			mat.SetColor("_EmissionColor", bg.GetColor());
-
-			mat.SetColor("_EnvironmentColor", bg.GetColor());
-
-			pl.GetComponent<Renderer>().material = mat;
-
-			_destroyAfterGeneration.Add(pl);
-		}
+		GeneratePlanets(bg);
 
 		_sunObj.transform.localPosition = Random.onUnitSphere * 1000f;
 		_sunObj.transform.forward = Vector3.zero - _sunObj.transform.localPosition;
@@ -214,6 +196,39 @@ public class UniverseGenerator : MonoBehaviour
 		}
 	}
 
+	private void GeneratePlanets(HSVColor backgroundColor)
+	{
+		// Planets
+		int totalPlanets = Random.Range(MinPlanets, MaxPlanets);
+		for (var i = 0; i < totalPlanets; i++)
+		{
+			var pl = Instantiate<GameObject>(Planets[Random.Range(0, Planets.Count)]);
+			pl.transform.SetParent(BackgroundContainer.transform);
+
+			pl.transform.localScale = Random.Range(5f, 100f) * Vector3.one;
+			//var planetPos = Random.onUnitSphere * Random.Range(400f, 800f);
+			var planetPos = Random.onUnitSphere * Random.Range(200f, 800f);
+
+			pl.transform.localPosition = planetPos;
+
+			pl.transform.rotation = Random.rotation;
+			pl.layer = LayerMask.NameToLayer("Universe Background");
+
+			var mat = pl.GetComponent<Renderer>().material;
+			backgroundColor.V = 0.15f;
+			backgroundColor.A = 0.5f;
+
+			mat.EnableKeyword("_EMISSION");
+			mat.SetColor("_EmissionColor", backgroundColor.GetColor());
+
+			mat.SetColor("_EnvironmentColor", backgroundColor.GetColor());
+
+			pl.GetComponent<Renderer>().material = mat;
+
+			_destroyAfterGeneration.Add(pl);
+		}
+	}
+
 	private void RandomiseUniverseEvents()
 	{
 		foreach (var ue in UniverseEvents)
@@ -230,10 +245,10 @@ public class UniverseGenerator : MonoBehaviour
 		}
 	}
 
-
 	private void BackgroundSnapshop()
 	{
 		var renText = new RenderTexture(FlatResolution, FlatResolution, 24);
+
 		renText.wrapMode = TextureWrapMode.Repeat;
 		renText.antiAliasing = 2;
 		renText.anisoLevel = 9;
@@ -248,7 +263,15 @@ public class UniverseGenerator : MonoBehaviour
 		//_sunObj.SetActive(false);
 		//Destroy(_sunObj);
 		BackgroundCamera.RenderToCubemap(renText, 63);
+		
 		//_sunObj.SetActive(true);
+
+		// Save to file
+		//RenderTexture.active = renText;
+		//var new2dTex = new Texture2D(FlatResolution * 1, FlatResolution * 1);
+		//new2dTex.ReadPixels(new Rect(0, 0, FlatResolution * 1, FlatResolution * 1), 0, 0);
+		//var bytesCode = new2dTex.EncodeToPNG();
+		//File.WriteAllBytes(@"C:\Test\test.png", bytesCode);
 
 		foreach (var destroyerable in _destroyAfterGeneration)
 		{

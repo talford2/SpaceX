@@ -21,6 +21,9 @@ public class UniverseGeneratorEditor : Editor
 		universeGen.SceneRelfectionProbe = EditorExtensions.ObjectField<ReflectionProbe>("Reflection Probe", universeGen.SceneRelfectionProbe, true);
 		universeGen.BackgroundCamera = EditorExtensions.ObjectField<Camera>("Camera", universeGen.BackgroundCamera, true);
 		universeGen.SunObject = EditorExtensions.ObjectField<GameObject>("Sun", universeGen.SunObject, false);
+
+		EditorGUILayout.PrefixLabel("Sun Colour");
+		
 		EditorGUILayout.Separator();
 
 		EditorGUILayout.LabelField("Materials", EditorStyles.boldLabel);
