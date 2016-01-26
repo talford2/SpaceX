@@ -262,18 +262,23 @@ public class PlayerController : MonoBehaviour
 				Menus.Current.ToggleQuitMenu();
 			}
 
-			if (Input.GetKeyUp(KeyCode.Q))
+            if (Input.GetKeyUp(KeyCode.Z))
+            {
+                if (_playVehicleInstance != null)
+                    _playVehicleInstance.GetComponent<Killable>().Die();
+            }
+
+            if (Input.GetKeyUp(KeyCode.E))
 			{
-				if (_playVehicleInstance != null)
-					_playVehicleInstance.GetComponent<Killable>().Die();
+				CycleSquadron(1);
 			}
 
-			if (Input.GetKeyUp(KeyCode.E))
-			{
-				CycleSquadron();
-			}
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+				CycleSquadron(-1);
+            }
 
-			if (Input.GetKey(KeyCode.M))
+            if (Input.GetKey(KeyCode.M))
 			{
 			    Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f);
 			    //_playVehicleInstance.GetComponent<Killable>().Damage(5f, Vector3.zero, Vector3.forward);
@@ -358,24 +363,26 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private int CycleSquadronIndex()
-	{
-		if (Squadron.Any(s => s.VehicleInstance != null))
-		{
-			_curSquadronIndex++;
-			if (_curSquadronIndex >= Squadron.Count)
-				_curSquadronIndex = 0;
-			if (Squadron[_curSquadronIndex].VehicleInstance == null)
-				return CycleSquadronIndex();
-			return _curSquadronIndex;
-		}
-		return -1;
-	}
+    private int CycleSquadronIndex(int dir)
+    {
+        if (Squadron.Any(s => s.VehicleInstance != null))
+        {
+            _curSquadronIndex += dir;
+            if (_curSquadronIndex >= Squadron.Count)
+                _curSquadronIndex = 0;
+            if (_curSquadronIndex < 0)
+                _curSquadronIndex = Squadron.Count - 1;
+            if (Squadron[_curSquadronIndex].VehicleInstance == null)
+                return CycleSquadronIndex(dir);
+            return _curSquadronIndex;
+        }
+        return -1;
+    }
 
-	private void CycleSquadron()
+    private void CycleSquadron(int dir)
 	{
 		var oldSquadronIndex = _curSquadronIndex + 0;
-		var cycleResult = CycleSquadronIndex();
+		var cycleResult = CycleSquadronIndex(dir);
 		if (cycleResult > -1)
 			_curSquadronIndex = cycleResult;
 
