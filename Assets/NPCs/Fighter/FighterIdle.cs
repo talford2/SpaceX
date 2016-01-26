@@ -130,11 +130,7 @@ public class FighterIdle : NpcState<Fighter>
         }
 
         Npc.Destination = immediateDestination;
-        var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
-        Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
-        Npc.VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
     }
-
 
     private float GetSlowdownDistance(float currentSpeed, float destinationSpeed, float deceleration)
     {

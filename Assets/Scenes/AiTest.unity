@@ -110,7 +110,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: b6b5135e3989c9140b29e3a109c30ba2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b6b5135e3989c9140b29e3a109c30ba2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -242,7 +242,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1240898255}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -50}
+  m_LocalPosition: {x: 0, y: 1, z: -500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1240898255}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e44016d73b9b394781b282553ee8672, type: 3}
   m_Name: 
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1240898255}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
   m_Name: 
@@ -330,6 +330,7 @@ MonoBehaviour:
   DodgeRadius: 50
   DodgeArcAngle: 180
   SightRange: 50
+  PitchYaw: {x: 0, y: 0}
 --- !u!4 &1294108931
 Transform:
   m_ObjectHideFlags: 0

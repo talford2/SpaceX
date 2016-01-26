@@ -82,12 +82,7 @@ public class FighterAttack :NpcState<Fighter>
             targetDestination = Npc.Target.position;
         }
 
-        Npc.Destination = GetSteerForce(targetDestination);
-
-        var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
-
-        Npc.VehicleInstance.YawThrottle = pitchYaw.y * Time.deltaTime;
-        Npc.VehicleInstance.PitchThotttle = pitchYaw.x * Time.deltaTime;
+        Npc.Destination = Npc.VehicleInstance.transform.position + GetSteerForce(targetDestination);
 
         Npc.VehicleInstance.TriggerBrake = false;
         Npc.VehicleInstance.TriggerAccelerate = false;

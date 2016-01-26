@@ -54,35 +54,23 @@ public class FighterChase : NpcState<Fighter>
             Npc.State = new FighterIdle(Npc);
             return;
         }
-        var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
-        var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
-        //Debug.Log("DOT PROD: " + dotTarget);
-
         CheckSensors();
 
-        Npc.Destination = GetSteerForce(Npc.Target.position);
+        var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
+        var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
-        var pitchYaw = Npc.GetPitchYawToPoint(Npc.Destination);
-        if (pitchYaw.sqrMagnitude <= 0f)
-        {
-            Debug.Log("THIS DOES HAPPEN!");
-            // Give random value to resolve zero pitchYaw issue.
-            pitchYaw = Random.insideUnitCircle;
-        }
-
-        Npc.VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
-        Npc.VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
+        Npc.Destination = Npc.VehicleInstance.transform.position + GetSteerForce(Npc.Target.position);
 
         Npc.VehicleInstance.TriggerBrake = false;
         Npc.VehicleInstance.TriggerAccelerate = false;
 
         if (dotTarget > 0f)
         {
-            if (toTarget.sqrMagnitude > Npc.SightRange*Npc.SightRange)
+            if (toTarget.sqrMagnitude > Npc.SightRange * Npc.SightRange)
             {
                 Npc.VehicleInstance.TriggerAccelerate = true;
             }
-            if (toTarget.sqrMagnitude < Npc.AttackRange*Npc.AttackRange)
+            if (toTarget.sqrMagnitude < Npc.AttackRange * Npc.AttackRange)
             {
                 Npc.State = new FighterAttack(Npc);
                 return;
@@ -90,7 +78,7 @@ public class FighterChase : NpcState<Fighter>
         }
         else
         {
-            if (toTarget.sqrMagnitude < Npc.EvadeDistance*Npc.EvadeDistance)
+            if (toTarget.sqrMagnitude < Npc.EvadeDistance * Npc.EvadeDistance)
             {
                 var dotTargetFacing = Vector3.Dot(toTarget, Npc.Target.forward);
                 if (dotTargetFacing > 0f)
