@@ -26,15 +26,15 @@ public class Missile : MonoBehaviour
 		_lineRenderer = GetComponent<LineRenderer>();
 		_shiftable = GetComponent<Shiftable>();
 		_shiftable.OnShift += Shift;
-		Stop();
 	}
 
 	public void SetOwner(GameObject owner)
 	{
 		_owner = owner;
-	}
+		Stop();
+    }
 
-	public void Update()
+    public void Update()
 	{
 		if (_isLive)
 		{
@@ -86,17 +86,21 @@ public class Missile : MonoBehaviour
 					}
 				}
 			}
-
 			_shiftable.Translate(transform.forward * displacement);
 		}
 	}
 
 	public void LateUpdate()
 	{
-		if (_isLive)
-		{
-			UpdateLineRenderer();
-		}
+	    if (_isLive)
+	    {
+	        UpdateLineRenderer();
+	    }
+	    else
+	    {
+            if (_owner == null)
+                Destroy(gameObject);
+        }
 	}
 
 	public void UpdateLineRenderer()
@@ -132,6 +136,8 @@ public class Missile : MonoBehaviour
 		_isLive = false;
 		_lineRenderer.enabled = false;
 		_hasHit = false;
+	    if (_owner == null)
+	        Destroy(gameObject);
 	}
 
 	public void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
