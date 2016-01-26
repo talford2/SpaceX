@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour
 
 			    if (_playVehicleInstance.IsBoosting)
 			    {
-                    Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f);
+                    Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.2f, 1f);
                 }
 			}
 

@@ -150,16 +150,16 @@ public class VehicleCamera : UniverseCamera
     private void Shake(float amplitudeFraction, float frequency)
     {
         var x = Mathf.Sin(frequency);
-        var y = Mathf.Sin(frequency * 1.2f);
-        var z = Mathf.Sin(frequency * 1.4f);
+        var y = Mathf.Sin(frequency*1.2f);
+        var z = Mathf.Sin(frequency*1.4f);
 
-        var fracVec = new Vector3(x, y, z) * amplitudeFraction;
+        var fracVec = new Vector3(x, y, z)*amplitudeFraction;
 
-        AttachedCamera.transform.localPosition = shakeAmplitude * fracVec;
-        AttachedCamera.transform.localRotation = Quaternion.Euler(fracVec * 1f);
+        AttachedCamera.transform.localPosition = shakeAmplitude*fracVec;
+        AttachedCamera.transform.localRotation = Quaternion.Euler(2f*Mathf.PI*shakeAmplitude*fracVec);
     }
 
-	public void TriggerShake(float amplitude, float frequency, float duration)
+    public void TriggerShake(float amplitude, float frequency, float duration)
 	{
 		isShaking = true;
 	    isContinuous = false;
