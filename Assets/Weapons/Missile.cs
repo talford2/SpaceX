@@ -42,7 +42,7 @@ public class Missile : MonoBehaviour
 		{
 			var displacement = (_initSpeed + MissileSpeed) * Time.deltaTime;
 		    observationPosition = Universe.Current.ViewPort.transform.position;
-		    if ((transform.position - observationPosition).sqrMagnitude < 5000f)
+		    if ((transform.position - observationPosition).sqrMagnitude < 25000000f)
 		    {
 		        if (!_hasHit)
 		        {
