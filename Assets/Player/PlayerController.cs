@@ -83,7 +83,9 @@ public class PlayerController : MonoBehaviour
 				var univPos = _playVehicleInstance.Shiftable.UniversePosition;
 				univPos.CellLocalPosition += Formations.GetArrowOffset(i, 10f);
 				member.IsSquadronMember = true;
-				SpawnSquadronVehicle(member, univPos);
+                // Give squadron members better aiming!
+                member.AimOffsetRadius = 1.5f;
+                SpawnSquadronVehicle(member, univPos);
 			}
 		}
 	}

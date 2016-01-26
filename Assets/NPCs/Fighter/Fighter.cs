@@ -76,12 +76,6 @@ public class Fighter : Npc<Fighter>
             SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)));
             _vehicleInstance.GetComponent<Tracker>().enabled = false;
         }
-
-        // Give squadron members better aiming!
-        if (IsSquadronMember)
-        {
-            AimOffsetRadius = 1.5f;
-        }
     }
 
     private void Update()
