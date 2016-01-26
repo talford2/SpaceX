@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Fighter : Npc<Fighter>
 {
@@ -45,6 +47,7 @@ public class Fighter : Npc<Fighter>
 
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }
     public FighterSteering Steering { get; set; }
+    public Action<Transform> OnVehicleDamage;
 
     private void Awake()
     {
@@ -121,10 +124,15 @@ public class Fighter : Npc<Fighter>
 
     private void OnVehicleDamaged(Vector3 position, Vector3 normal, GameObject attacker)
     {
-        if (Target == null)
+        if (attacker != null)
         {
             if (attacker.transform != null)
-                Target = attacker.transform;
+            {
+                if (Target == null)
+                    Target = attacker.transform;
+                if (OnVehicleDamage != null)
+                    OnVehicleDamage(attacker.transform);
+            }
         }
     }
 

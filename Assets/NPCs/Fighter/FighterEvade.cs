@@ -23,6 +23,7 @@ public class FighterEvade : NpcState<Fighter>
     {
         Name = "Evade";
         reconsiderTargetCooldown = reconsiderTargetInterval;
+        Npc.OnVehicleDamage = OnVehicleDamage;
     }
 
     private Quaternion GetRandomArc(float angle)
@@ -152,5 +153,10 @@ public class FighterEvade : NpcState<Fighter>
                 neighbors.Add(neighbor);
             }
         }
+    }
+
+    private void OnVehicleDamage(Transform attacker)
+    {
+        Npc.Target = attacker;
     }
 }

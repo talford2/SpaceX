@@ -14,6 +14,7 @@ public class FighterIdle : NpcState<Fighter>
     public FighterIdle(Fighter npc) : base(npc)
     {
         Name = "Idle";
+        Npc.OnVehicleDamage = OnVehicleDamage;
     }
 
     private void CheckSensors()
@@ -151,5 +152,10 @@ public class FighterIdle : NpcState<Fighter>
                 neighbors.Add(neighbor);
             }
         }
+    }
+
+    private void OnVehicleDamage(Transform attacker)
+    {
+        Npc.Target = attacker;
     }
 }
