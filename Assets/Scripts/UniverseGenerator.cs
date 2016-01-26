@@ -164,7 +164,8 @@ public class UniverseGenerator : MonoBehaviour
 			//var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.3f));
 			var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.8f));
 			//randC.V *= NebulaBrightnessMultiplier;
-			randC.V = 0.05f;
+			//randC.V = 0.05f;
+			randC.V = Random.Range(0.01f, 0.05f);
 			randC.S = 0.9f;
 
 			gm.GetComponent<Renderer>().material.SetColor("_Color", randC.GetColor());
@@ -224,9 +225,9 @@ public class UniverseGenerator : MonoBehaviour
 			var pl = Instantiate<GameObject>(Planets[Random.Range(0, Planets.Count)]);
 			pl.transform.SetParent(BackgroundContainer.transform);
 
-			pl.transform.localScale = Random.Range(5f, 100f) * Vector3.one;
+			pl.transform.localScale = Random.Range(0.1f, 50f) * Vector3.one;
 			//var planetPos = Random.onUnitSphere * Random.Range(400f, 800f);
-			var planetPos = Random.onUnitSphere * Random.Range(200f, 800f);
+			var planetPos = Random.onUnitSphere * Random.Range(200f, 400f);
 
 			pl.transform.localPosition = planetPos;
 
