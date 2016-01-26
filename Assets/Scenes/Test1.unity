@@ -1993,7 +1993,7 @@ MonoBehaviour:
   - {fileID: 197668, guid: 8231e31d8cd6674418e826e55d10bdf1, type: 2}
   - {fileID: 131988, guid: 363ac4f1964fd1740b35b1ea64580238, type: 2}
   - {fileID: 131988, guid: f4d3f482ffc39ab44bfe6a426584c049, type: 2}
-  MinPlanets: 2
+  MinPlanets: 5
   MaxPlanets: 5
   Planets:
   - {fileID: 149720, guid: b7d68a8d12d24ab4fbb947fce837c799, type: 2}

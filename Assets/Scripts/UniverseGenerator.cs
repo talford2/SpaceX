@@ -174,9 +174,6 @@ public class UniverseGenerator : MonoBehaviour
 			//gm.GetComponent<Renderer>().material.SetColor("_TintColor", Utility.GetRandomColor(PrimaryColor, SecondaryColor, 1f, 255f));
 		}
 
-		// Planets
-		GeneratePlanets(bg);
-
 		_sunObj.transform.localPosition = Random.onUnitSphere * 1000f;
 		_sunObj.transform.forward = Vector3.zero - _sunObj.transform.localPosition;
 
@@ -184,6 +181,9 @@ public class UniverseGenerator : MonoBehaviour
 		sunColor.V = 1f;
 		sunColor.S *= Random.Range(0.1f, 0.5f);
 		_sunLight.color = sunColor.GetColor();
+
+		// Planets
+		GeneratePlanets(bg);
 
 		if (StarPrefabs.Count > 0)
 		{
@@ -202,6 +202,7 @@ public class UniverseGenerator : MonoBehaviour
 			star.transform.SetParent(BackgroundContainer.transform);
 			star.transform.localPosition = position;
 			star.transform.LookAt(Camera.main.transform, transform.up);
+
 			star.transform.rotation *= Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward);
 
 			_destroyAfterGeneration.Add(star);
@@ -226,12 +227,15 @@ public class UniverseGenerator : MonoBehaviour
 			pl.transform.SetParent(BackgroundContainer.transform);
 
 			pl.transform.localScale = Random.Range(0.1f, 50f) * Vector3.one;
+
 			//var planetPos = Random.onUnitSphere * Random.Range(400f, 800f);
 			var planetPos = Random.onUnitSphere * Random.Range(200f, 400f);
 
 			pl.transform.localPosition = planetPos;
 
-			pl.transform.rotation = Random.rotation;
+			//pl.transform.rotation = Random.rotation;
+			pl.transform.forward = _sunLight.transform.right;
+
 			pl.layer = LayerMask.NameToLayer("Universe Background");
 
 			var mat = pl.GetComponent<Renderer>().material;
