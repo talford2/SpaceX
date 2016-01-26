@@ -122,8 +122,7 @@ public class UniverseGenerator : MonoBehaviour
 		var bg = HSVColor.FromColor(bgColor);
 		//bg.V *= Random.Range(0.05f, 0.2f);
 		//bg.V *= Random.Range(0.05f, 0.5f);
-		bg.V = 0.2f;
-		bg.V = Random.Range(0.05f, 0.2f);
+		bg.V = Random.Range(0.02f, 0.15f);
 
 		BackgroundCamera.clearFlags = CameraClearFlags.Color;
 		BackgroundCamera.backgroundColor = bg.GetColor();
@@ -131,10 +130,14 @@ public class UniverseGenerator : MonoBehaviour
 
 		// Draw universe ring
 		var ring = Instantiate<GameObject>(UniverseRing);
-		ring.transform.localScale *= 800F;
+		ring.transform.localScale *= 1000F;
 		ring.transform.position = Vector3.zero;
 		ring.transform.rotation = Random.rotation;
-		ring.GetComponent<Renderer>().material.SetColor("_Color", bg.GetColor());
+		//ring.GetComponent<Renderer>().material.SetColor("_Color", bg.GetColor());
+
+		var ringColor = new HSVColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor));
+		ringColor.A = Random.Range(0.03f, 0.15f);
+		ring.GetComponent<Renderer>().material.SetColor("_Color", ringColor.GetColor());
 		_destroyAfterGeneration.Add(ring);
 
 		var fogColor = HSVColor.FromColor(bgColor);
@@ -153,12 +156,16 @@ public class UniverseGenerator : MonoBehaviour
 		{
 			var gm = Instantiate<GameObject>(Nebulas[Random.Range(0, Nebulas.Count)]);
 			gm.transform.rotation = Random.rotationUniform;
+			gm.transform.localScale = Vector3.one * Random.Range(0.6f, 1.3f);
 			gm.transform.SetParent(BackgroundContainer.transform);
 			gm.layer = LayerMask.NameToLayer("Universe Background");
 			gm.transform.localPosition = Vector3.zero;
 
-			var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.2f));
-			randC.V *= NebulaBrightnessMultiplier;
+			//var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.3f));
+			var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.8f));
+			//randC.V *= NebulaBrightnessMultiplier;
+			randC.V = 0.05f;
+			randC.S = 0.9f;
 
 			gm.GetComponent<Renderer>().material.SetColor("_Color", randC.GetColor());
 
