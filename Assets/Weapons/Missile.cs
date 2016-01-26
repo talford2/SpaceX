@@ -21,6 +21,8 @@ public class Missile : MonoBehaviour
 	private float _initSpeed;
 	private Vector3 _hitPosition;
 
+    private Vector3 observationPosition;
+
 	private void Awake()
 	{
 		_lineRenderer = GetComponent<LineRenderer>();
@@ -39,54 +41,58 @@ public class Missile : MonoBehaviour
 		if (_isLive)
 		{
 			var displacement = (_initSpeed + MissileSpeed) * Time.deltaTime;
-			if (!_hasHit)
-			{
-				var missileRay = new Ray(transform.position, transform.forward);
-				RaycastHit missileHit;
-				if (Physics.Raycast(missileRay, out missileHit, displacement, ~LayerMask.GetMask("Distant", "Universe Background")))
-				{
-					if (missileHit.collider.gameObject != _owner)
-					{
-						var killable = missileHit.collider.GetComponentInParent<Killable>();
-						if (killable != null)
-						{
-							killable.Damage(MissileDamage, missileHit.point, missileHit.normal, _owner);
-							_hasHit = true;
-							_hitPosition = missileHit.point;
+		    observationPosition = Universe.Current.ViewPort.transform.position;
+		    if ((transform.position - observationPosition).sqrMagnitude < 5000f)
+		    {
+		        if (!_hasHit)
+		        {
+		            var missileRay = new Ray(transform.position, transform.forward);
+		            RaycastHit missileHit;
+		            if (Physics.Raycast(missileRay, out missileHit, displacement, ~LayerMask.GetMask("Distant", "Universe Background")))
+		            {
+		                if (missileHit.collider.gameObject != _owner)
+		                {
+		                    var killable = missileHit.collider.GetComponentInParent<Killable>();
+		                    if (killable != null)
+		                    {
+		                        killable.Damage(MissileDamage, missileHit.point, missileHit.normal, _owner);
+		                        _hasHit = true;
+		                        _hitPosition = missileHit.point;
 
-							//killable.SendMessageUpwards("Hit", new HitEffectParameters { Position = missileHit.point, Normal = missileHit.normal });
+		                        //killable.SendMessageUpwards("Hit", new HitEffectParameters { Position = missileHit.point, Normal = missileHit.normal });
 
-							// TODO: Should pull this effect from a pool or something...
-							if (HitEffectPrefab != null)
-							{
-								var hitEffectInstance = Instantiate(HitEffectPrefab);
+		                        // TODO: Should pull this effect from a pool or something...
+		                        if (HitEffectPrefab != null)
+		                        {
+		                            var hitEffectInstance = Instantiate(HitEffectPrefab);
 
-								var hitEffectShiftable = hitEffectInstance.GetComponent<Shiftable>();
-								if (hitEffectShiftable != null)
-								{
-									var univPos = Universe.Current.GetUniversePosition(missileHit.point);
-									hitEffectShiftable.SetShiftPosition(univPos);
-								}
-								else
-								{
-									hitEffectInstance.transform.position = missileHit.point;
-								}
+		                            var hitEffectShiftable = hitEffectInstance.GetComponent<Shiftable>();
+		                            if (hitEffectShiftable != null)
+		                            {
+		                                var univPos = Universe.Current.GetUniversePosition(missileHit.point);
+		                                hitEffectShiftable.SetShiftPosition(univPos);
+		                            }
+		                            else
+		                            {
+		                                hitEffectInstance.transform.position = missileHit.point;
+		                            }
 
-								hitEffectInstance.transform.forward = missileHit.normal;
-							}
+		                            hitEffectInstance.transform.forward = missileHit.normal;
+		                        }
 
-							if (HitDecalPrefab != null)
-							{
-								var hitDecal = Instantiate(HitDecalPrefab);
-								hitDecal.transform.position = missileHit.point;
-								hitDecal.transform.SetParent(missileHit.collider.gameObject.transform);
-								hitDecal.transform.forward = missileHit.normal;
-							}
-						}
-					}
-				}
-			}
-			_shiftable.Translate(transform.forward * displacement);
+		                        if (HitDecalPrefab != null)
+		                        {
+		                            var hitDecal = Instantiate(HitDecalPrefab);
+		                            hitDecal.transform.position = missileHit.point;
+		                            hitDecal.transform.SetParent(missileHit.collider.gameObject.transform);
+		                            hitDecal.transform.forward = missileHit.normal;
+		                        }
+		                    }
+		                }
+		            }
+		        }
+		    }
+		    _shiftable.Translate(transform.forward * displacement);
 		}
 	}
 
