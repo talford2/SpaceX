@@ -25,7 +25,6 @@ public class VehicleCamera : UniverseCamera
 
 	public AnimationCurve ShakeAmplitude = AnimationCurve.Linear(0, 0, 1, 1);
 
-	//private Camera attachedCamera;
 	private float springDistance;
 	private Quaternion offsetAngle;
 	private Vector3 offset;
@@ -33,7 +32,14 @@ public class VehicleCamera : UniverseCamera
 	private float targetFov;
 	private Vector3 targetUp;
 
-	private void Start()
+    // Shake Params
+    private bool isShaking;
+    private float shakeAmplitude;
+    private float shakeDuration;
+    private float shakeCooldown;
+    private float shakeFrequency;
+
+    private void Start()
 	{
 		springDistance = 1f;
 		Target = PlayerController.Current.VehicleInstance;
@@ -88,34 +94,6 @@ public class VehicleCamera : UniverseCamera
 			childCam.fieldOfView = AttachedCamera.fieldOfView;
 		}
 
-		// Shake
-		var offsetDestination = Vector3.zero;
-		//if (isShaking)
-		//{
-		//    if (shakeCooldown >= 0f)
-		//    {
-		//        shakeCooldown -= Time.deltaTime;
-		//        shakeFrequencyCooldown -= Time.deltaTime;
-		//        var shakeFraction = Mathf.Clamp01(shakeCooldown/shakeDuration);
-		//        if (shakeFrequencyCooldown < 0f)
-		//        {
-		//            //offsetDestination = Random.onUnitSphere*shakeAmplitude*shakeFraction;
-		//            angleDir *= -1f;
-		//            angleDestination = Quaternion.AngleAxis(20f*shakeFraction*Mathf.Sign(Random.Range(-1f, 1f)), AttachedCamera.transform.up);
-		//            angleDestination *= Quaternion.AngleAxis(20f*shakeFraction*Mathf.Sign(Random.Range(-1f, 1f)), AttachedCamera.transform.right);
-		//            shakeFrequencyCooldown = shakeFrequency;
-		//        }
-		//        if (shakeCooldown < 0f)
-		//            isShaking = false;
-		//    }
-		//}
-		//else
-		//{
-		//       angleDestination = Quaternion.identity;
-		//}
-		//AttachedCamera.transform.localPosition = Vector3.Lerp(AttachedCamera.transform.localPosition, offsetDestination, 2f * Time.deltaTime);
-		//AttachedCamera.transform.localRotation = Quaternion.Lerp(AttachedCamera.transform.localRotation, angleDestination, 4f * Time.deltaTime);
-
 		if (isShaking)
 		{
 			if (shakeCooldown >= 0f)
@@ -123,19 +101,15 @@ public class VehicleCamera : UniverseCamera
 				shakeCooldown -= Time.deltaTime;
 
 				var frac = 1f - shakeCooldown / shakeDuration;
-
-				var amplitude = ShakeAmplitude.Evaluate(frac);
-				var freq = shakeCooldown * Mathf.Rad2Deg * 0.7f;
+				var freq = shakeCooldown * Mathf.Rad2Deg * shakeFrequency;
 
 				var x = Mathf.Sin(freq);
 				var y = Mathf.Sin(freq * 1.2f);
 				var z = Mathf.Sin(freq * 1.4f);
 
-				var fracVec = new Vector3(x, y, z) * amplitude;
+				var fracVec = new Vector3(x, y, z) * ShakeAmplitude.Evaluate(frac);
 
-				var positionMax = 0.3f;
-
-				AttachedCamera.transform.localPosition = fracVec * positionMax;
+			    AttachedCamera.transform.localPosition = shakeAmplitude*fracVec;
 				AttachedCamera.transform.localRotation = Quaternion.Euler(fracVec * 1f);
 			}
 			else
@@ -145,15 +119,6 @@ public class VehicleCamera : UniverseCamera
 		}
 	}
 
-	private bool isShaking;
-	private float shakeAmplitude;
-	private float shakeDuration;
-	private float shakeCooldown;
-	private float shakeFrequency;
-	private float shakeFrequencyCooldown;
-	private Quaternion angleDestination;
-	private float angleDir;
-
 	public void TriggerShake(float amplitude, float duration, float frequency)
 	{
 		isShaking = true;
@@ -161,11 +126,6 @@ public class VehicleCamera : UniverseCamera
 		shakeDuration = duration;
 		shakeCooldown = shakeDuration;
 		shakeFrequency = frequency;
-		shakeFrequencyCooldown = shakeFrequency;
-
-		angleDir = 1f;
-		angleDestination = Quaternion.AngleAxis(20f * angleDir, AttachedCamera.transform.up);
-		angleDestination *= Quaternion.AngleAxis(20f * angleDir, AttachedCamera.transform.right);
 	}
 
 	public void Reset()
