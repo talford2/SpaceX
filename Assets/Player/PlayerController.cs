@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
         return _curSquadronIndex;
     }
 
-	private void PlayerController_OnDamage(Vector3 position, Vector3 normal)
+	private void PlayerController_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
 	{
 		HeadsUpDisplay.Current.Hit();
         Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(25f, 0.1f, 0.05f);

@@ -96,6 +96,7 @@ public class Fighter : Npc<Fighter>
     {
         _vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
         _vehicleInstance.GetComponent<Targetable>().Team = Team;
+        _vehicleInstance.GetComponent<Killable>().OnDamage += OnVehicleDamaged;
         _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
         _vehicleInstance.Shiftable.SetShiftPosition(universePosition);
         _vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();
@@ -117,6 +118,15 @@ public class Fighter : Npc<Fighter>
 		var pitchAmount = Vector3.Dot(-toPoint.normalized, VehicleInstance.transform.up);
 		return new Vector2(pitchAmount, yawAmount);
 	}
+
+    private void OnVehicleDamaged(Vector3 position, Vector3 normal, GameObject attacker)
+    {
+        if (Target == null)
+        {
+            if (attacker.transform != null)
+                Target = attacker.transform;
+        }
+    }
 
     private void OnVehicleDestroyed(Killable sender)
     {
