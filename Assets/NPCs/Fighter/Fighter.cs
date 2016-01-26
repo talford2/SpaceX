@@ -79,14 +79,17 @@ public class Fighter : Npc<Fighter>
         if (VehicleInstance != null)
             UpdateState();
 
-        var pitchYaw = GetPitchYawToPoint(Destination);
-        if (pitchYaw.sqrMagnitude <= 0f)
+        if (VehicleInstance != null)
         {
-            // Give random value to resolve zero pitchYaw issue.
-            pitchYaw = Random.insideUnitCircle;
+            var pitchYaw = GetPitchYawToPoint(Destination);
+            if (pitchYaw.sqrMagnitude <= 0f)
+            {
+                // Give random value to resolve zero pitchYaw issue.
+                pitchYaw = Random.insideUnitCircle;
+            }
+            VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
+            VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
         }
-        VehicleInstance.YawThrottle = pitchYaw.y * Time.deltaTime;
-        VehicleInstance.PitchThotttle = pitchYaw.x * Time.deltaTime;
     }
 
     public void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition)
