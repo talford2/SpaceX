@@ -132,6 +132,7 @@ public class FighterAttack :NpcState<Fighter>
             {
                 Debug.Log("OVERTAKE!");
                 Npc.VehicleInstance.TriggerAccelerate = true;
+                Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
                 Npc.State = new FighterEvade(Npc);
             }
         }
