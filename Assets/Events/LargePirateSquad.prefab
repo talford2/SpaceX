@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -520,7 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -535,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -550,7 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -565,7 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -625,7 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -640,7 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -761,7 +761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -776,7 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -791,7 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33593c36a3d257f408be196f29efca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
@@ -801,7 +801,12 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: FighterPrefab
+      value: 
+      objectReference: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 165154}
