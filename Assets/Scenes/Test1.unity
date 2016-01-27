@@ -814,6 +814,7 @@ MonoBehaviour:
   BurstTime: 0.5
   BurstWaitTime: 0.7
   ExrapolationTimeError: 0.5
+  AimOffsetRadius: 5
   EvadeDistance: 200
   TurnAroundDistance: 250
   AcclerateDistance: 100
@@ -1734,6 +1735,7 @@ MonoBehaviour:
   BurstTime: 0.5
   BurstWaitTime: 0.7
   ExrapolationTimeError: 0.5
+  AimOffsetRadius: 5
   EvadeDistance: 200
   TurnAroundDistance: 250
   AcclerateDistance: 100
@@ -3052,6 +3054,7 @@ MonoBehaviour:
   BurstTime: 0.5
   BurstWaitTime: 0.7
   ExrapolationTimeError: 0.5
+  AimOffsetRadius: 5
   EvadeDistance: 200
   TurnAroundDistance: 250
   AcclerateDistance: 100
@@ -3280,6 +3283,7 @@ MonoBehaviour:
   BurstTime: 0.5
   BurstWaitTime: 0.7
   ExrapolationTimeError: 0.5
+  AimOffsetRadius: 5
   EvadeDistance: 200
   TurnAroundDistance: 250
   AcclerateDistance: 100
