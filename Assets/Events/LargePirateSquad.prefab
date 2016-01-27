@@ -673,7 +673,7 @@ MonoBehaviour:
   UniverseCellIndex:
     X: 0
     Y: 0
-    Z: 3
+    Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
   ShiftParticleSystems: []
 --- !u!114 &11465624
@@ -807,6 +807,10 @@ Prefab:
       value: 
       objectReference: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: UniverseCellIndex.Z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 165154}

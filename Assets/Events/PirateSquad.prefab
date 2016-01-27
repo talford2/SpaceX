@@ -204,9 +204,9 @@ MonoBehaviour:
   UniverseCellIndex:
     X: 0
     Y: 0
-    Z: 3
+    Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  _particleSystems: []
+  ShiftParticleSystems: []
 --- !u!114 &11423108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,7 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5cff5111ffb08f44957c7968bff34ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sphere: {fileID: 0}
   Spawners:
   - {fileID: 11499648}
   - {fileID: 11456104}
@@ -400,6 +399,10 @@ Prefab:
       propertyPath: InactivePin
       value: 
       objectReference: {fileID: 133228, guid: e60460a5db76a7842a14febd8542e701, type: 2}
+    - target: {fileID: 0}
+      propertyPath: UniverseCellIndex.Z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174836}
