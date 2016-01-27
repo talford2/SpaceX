@@ -496,13 +496,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed9b078a58fe604694fff0328ea19ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IdleSpeed: 20
-  MaxSpeed: 50
+  IdleSpeed: 10
+  MaxSpeed: 30
   MinSpeed: 3
   Acceleration: 30
   Brake: 20
-  MaxBoostSpeed: 500
-  BoostAcceleration: 500
+  MaxBoostSpeed: 100
+  BoostAcceleration: 200
   BoostBrake: 150
   CurrentSpeed: 0
   PitchSpeed: 250
@@ -520,11 +520,11 @@ MonoBehaviour:
   YawThrottle: 0
   PitchThotttle: 0
   RollThrottle: 0
-  PrimaryWeaponPrefab: {fileID: 11492802, guid: 8d1335b2fcad39d469234af6d4b7f5f2,
+  PrimaryWeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa,
     type: 2}
   PrimaryShootPoints:
   - {fileID: 11475328}
-  SecondaryWeaponPrefab: {fileID: 11492802, guid: 8d1335b2fcad39d469234af6d4b7f5f2,
+  SecondaryWeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa,
     type: 2}
   SecondaryShootPoints:
   - {fileID: 11475328}
@@ -593,8 +593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
-  MaxHealth: 100
+  Health: 4
+  MaxHealth: 4
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
@@ -704,7 +704,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: IdleSpeed
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: PitchSpeed
@@ -721,7 +721,7 @@ Prefab:
         type: 2}
     - target: {fileID: 0}
       propertyPath: MaxSpeed
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Acceleration
@@ -741,11 +741,11 @@ Prefab:
       objectReference: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
     - target: {fileID: 0}
       propertyPath: Health
-      value: 100
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxHealth
-      value: 100
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
@@ -778,7 +778,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BoostAcceleration
-      value: 500
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: RollSpeed
@@ -872,6 +872,20 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300000, guid: 9ffb8b32b9c329b43a5cb79f1f4cea83, type: 3}
+    - target: {fileID: 0}
+      propertyPath: MaxBoostSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SecondaryWeaponPrefab
+      value: 
+      objectReference: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: PrimaryWeaponPrefab
+      value: 
+      objectReference: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}
