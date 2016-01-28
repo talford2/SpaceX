@@ -110,12 +110,12 @@ public class Vehicle : MonoBehaviour
 		}
 	}
 
-	public Vector3 GetAimPosition()
-	{
-		return _primaryWeaponInstance.GetShootPointCentre() + _aimDistance * transform.forward;
-	}
+    public Vector3 GetAimPosition()
+    {
+        return _primaryWeaponInstance.GetShootPointCentre() + _aimDistance*(_primaryWeaponInstance.GetShootPointCentre() - transform.position).normalized;
+    }
 
-	private void Awake()
+    private void Awake()
 	{
 		_shiftable = GetComponent<Shiftable>();
 

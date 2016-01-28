@@ -259,7 +259,7 @@ MonoBehaviour:
   - {fileID: 1793718006}
   - {fileID: 282404513}
   DistanceBehind: 15
-  VerticalDistance: 3
+  VerticalDistance: 7
   SpringCompression: 0.5
   SpringExpansion: 1.5
   SpringBoostExpansion: 3

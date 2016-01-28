@@ -55,43 +55,43 @@ public class VehicleCamera : UniverseCamera
 
 	public override void Move()
 	{
-		if (Target != null)
-		{
-			var targetSpringDistance = 1f;
-			targetFov = 60f;
-			if (Target.IsBoosting)
-			{
-				targetSpringDistance = SpringBoostExpansion;
-				targetFov = 100f;
-			}
-			else
-			{
-				if (Target.IsAccelerating)
-				{
-					targetSpringDistance = SpringExpansion;
-				}
-				else
-				{
-					if (Target.IsBraking)
-					{
-						targetSpringDistance = SpringCompression;
-					}
-				}
-			}
+	    if (Target != null)
+	    {
+	        var targetSpringDistance = 1f;
+	        targetFov = 60f;
+	        if (Target.IsBoosting)
+	        {
+	            targetSpringDistance = SpringBoostExpansion;
+	            targetFov = 100f;
+	        }
+	        else
+	        {
+	            if (Target.IsAccelerating)
+	            {
+	                targetSpringDistance = SpringExpansion;
+	            }
+	            else
+	            {
+	                if (Target.IsBraking)
+	                {
+	                    targetSpringDistance = SpringCompression;
+	                }
+	            }
+	        }
 
-			springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);
+	        springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup*Time.deltaTime);
 
-			offsetAngle = Quaternion.Lerp(offsetAngle, Target.transform.rotation, RotationCatchup * Time.deltaTime);
-			offset = Vector3.Lerp(offset, offsetAngle * new Vector3(0f, VerticalDistance, -DistanceBehind) * springDistance, OffsetCatchup * Time.deltaTime);
+	        offsetAngle = Quaternion.Lerp(offsetAngle, Target.transform.rotation, RotationCatchup*Time.deltaTime);
+	        offset = Vector3.Lerp(offset, offsetAngle*new Vector3(0f, VerticalDistance, -DistanceBehind)*springDistance, OffsetCatchup*Time.deltaTime);
 
-			_shiftable.Translate(Target.transform.position + offset - transform.position);
+	        _shiftable.Translate(Target.transform.position + offset - transform.position);
 
-			targetUp = Vector3.Lerp(targetUp, Target.transform.up, 5f * Time.deltaTime);
+	        targetUp = Vector3.Lerp(targetUp, Target.transform.up, 5f*Time.deltaTime);
 
-			transform.LookAt(Target.GetAimPosition(), targetUp);
-		}
+            transform.LookAt(Target.GetAimPosition(), targetUp);
+	    }
 
-		BackgroundTransform.transform.position = transform.position;
+	    BackgroundTransform.transform.position = transform.position;
 
 		AttachedCamera.fieldOfView = Mathf.Lerp(AttachedCamera.fieldOfView, targetFov, Time.deltaTime);
 
