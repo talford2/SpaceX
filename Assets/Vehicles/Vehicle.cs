@@ -112,7 +112,7 @@ public class Vehicle : MonoBehaviour
 
     public Vector3 GetAimPosition()
     {
-        return _primaryWeaponInstance.GetShootPointCentre() + _aimDistance*(_primaryWeaponInstance.GetShootPointCentre() - transform.position).normalized;
+        return _primaryWeaponInstance.GetShootPointCentre() + _aimDistance*transform.forward;
     }
 
     private void Awake()
