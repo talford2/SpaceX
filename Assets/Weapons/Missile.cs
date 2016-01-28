@@ -4,7 +4,6 @@ public class Missile : MonoBehaviour
 {
 	public float MissileLength = 6f;
 	public float MissileSpeed = 150f;
-	public float MissileDamage = 5f;
 
 	public GameObject HitEffectPrefab;
 
@@ -16,6 +15,7 @@ public class Missile : MonoBehaviour
 	private bool _hasHit;
 
 	private GameObject _owner;
+    private float _damage;
 	private Vector3 _shootFrom;
 	private Vector3 _initVelocity;
 	private float _initSpeed;
@@ -33,10 +33,11 @@ public class Missile : MonoBehaviour
 		_shiftable.OnShift += Shift;
 	}
 
-	public void SetOwner(GameObject owner)
-	{
-		_owner = owner;
-		Stop();
+    public void Initialize(GameObject owner, float damage)
+    {
+        _owner = owner;
+        _damage = damage;
+        Stop();
     }
 
     public void Update()
@@ -59,7 +60,7 @@ public class Missile : MonoBehaviour
                             var killable = missileHit.collider.GetComponentInParent<Killable>();
                             if (killable != null)
                             {
-                                killable.Damage(MissileDamage, missileHit.point, missileHit.normal, _owner);
+                                killable.Damage(_damage, missileHit.point, missileHit.normal, _owner);
                                 _hasHit = true;
                                 _hitPosition = missileHit.point;
 

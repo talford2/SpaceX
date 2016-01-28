@@ -147,7 +147,11 @@ MonoBehaviour:
   FireSound: {fileID: 8259540}
   FireRate: 0.1
   MissilesPerShot: 2
+  MissileDamage: 5
   MissilesConverge: 0
+  IsTargetLocking: 0
+  TargetLockTime: 1.5
+  TargetLockingMaxDistance: 2000
   IsTriggered: 0
   MissilePoolCount: 50
 --- !u!1001 &100100000
@@ -197,6 +201,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MissilePoolCount
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MissileDamage
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
