@@ -524,7 +524,7 @@ MonoBehaviour:
     type: 2}
   PrimaryShootPoints:
   - {fileID: 11475328}
-  SecondaryWeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa,
+  SecondaryWeaponPrefab: {fileID: 11492802, guid: 971fff9679fe78849859df2f0a199222,
     type: 2}
   SecondaryShootPoints:
   - {fileID: 11475328}
@@ -547,6 +547,7 @@ MonoBehaviour:
   FireSound: {fileID: 0}
   FireRate: 0.2
   MissilesPerShot: 2
+  MissileDamage: 0
   MissilesConverge: 0
   IsTargetLocking: 0
   TargetLockTime: 1.5
@@ -879,7 +880,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: SecondaryWeaponPrefab
       value: 
-      objectReference: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa,
+      objectReference: {fileID: 11492802, guid: 971fff9679fe78849859df2f0a199222,
         type: 2}
     - target: {fileID: 0}
       propertyPath: PrimaryWeaponPrefab

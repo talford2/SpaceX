@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 490488}
   - 114: {fileID: 11492802}
   m_Layer: 0
-  m_Name: RedLasers
+  m_Name: DroneLasers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,18 +142,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissilePrefab: {fileID: 180512, guid: 39a77c32b5194a6459af7f3fcd94f8af, type: 2}
+  MissilePrefab: {fileID: 180512, guid: adb276e13f8472b4ab9d9878efaa0049, type: 2}
   MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
   FireSound: {fileID: 8259540}
-  FireRate: 0.1
-  MissilesPerShot: 2
-  MissileDamage: 50
-  MissilesConverge: 1
-  IsTargetLocking: 1
-  TargetLockTime: 0.5
+  FireRate: 0.5
+  MissilesPerShot: 1
+  MissileDamage: 5
+  MissilesConverge: 0
+  IsTargetLocking: 0
+  TargetLockTime: 1.5
   TargetLockingMaxDistance: 2000
   IsTriggered: 0
-  MissilePoolCount: 10
+  MissilePoolCount: 50
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -167,12 +167,12 @@ Prefab:
       objectReference: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
     - target: {fileID: 0}
       propertyPath: FireRate
-      value: .100000001
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissilePrefab
       value: 
-      objectReference: {fileID: 180512, guid: 39a77c32b5194a6459af7f3fcd94f8af, type: 2}
+      objectReference: {fileID: 180512, guid: adb276e13f8472b4ab9d9878efaa0049, type: 2}
     - target: {fileID: 0}
       propertyPath: MuzzlePrefab
       value: 
@@ -200,27 +200,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissilePoolCount
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: TargetLocking
+      propertyPath: MissilesPerShot
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: MissilesConverge
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: IsTargetLocking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: TargetLockTime
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissileDamage
-      value: 50
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

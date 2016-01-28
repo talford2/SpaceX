@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
 
 	public float FireRate = 0.2f;
     public int MissilesPerShot = 2;
+    public float MissileDamage;
     public bool MissilesConverge;
     public bool IsTargetLocking;
     public float TargetLockTime = 1.5f;
@@ -54,7 +55,7 @@ public class Weapon : MonoBehaviour
 		for (var i = 0; i < MissilePoolCount; i++)
 		{
 			var missileInstance = Utility.InstantiateInParent(MissilePrefab, missilesContainer);
-			missileInstance.GetComponent<Missile>().SetOwner(owner);
+			missileInstance.GetComponent<Missile>().Initialize(owner, MissileDamage);
 			_missileInstances.Add(missileInstance);
 		}
 	    _shootPoints = shootPoints;
