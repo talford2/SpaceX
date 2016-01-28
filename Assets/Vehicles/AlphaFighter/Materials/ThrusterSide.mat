@@ -45,20 +45,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Flames
-        second:
-          m_Texture: {fileID: 2800000, guid: 206b0ac501c505b46b8e981ec357895e, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _ThrustTex
-        second:
-          m_Texture: {fileID: 2800000, guid: e945809859d9d7643a06361236846150, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _OcclusionMap
         second:
           m_Texture: {fileID: 0}
@@ -92,6 +78,20 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Flames
+        second:
+          m_Texture: {fileID: 2800000, guid: 206b0ac501c505b46b8e981ec357895e, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ThrustTex
+        second:
+          m_Texture: {fileID: 2800000, guid: e945809859d9d7643a06361236846150, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -109,34 +109,6 @@ Material:
         first:
           name: _Parallax
         second: 0.02
-      data:
-        first:
-          name: _ScrollXSpeed
-        second: 50
-      data:
-        first:
-          name: _ScrollYSpeed
-        second: -9.4
-      data:
-        first:
-          name: _A
-        second: 0
-      data:
-        first:
-          name: _B
-        second: 30
-      data:
-        first:
-          name: _C
-        second: 200
-      data:
-        first:
-          name: _D
-        second: 80
-      data:
-        first:
-          name: _InvFade
-        second: 1
       data:
         first:
           name: _ZWrite
@@ -169,6 +141,34 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _A
+        second: 0
+      data:
+        first:
+          name: _B
+        second: 30
+      data:
+        first:
+          name: _C
+        second: 200
+      data:
+        first:
+          name: _D
+        second: 80
+      data:
+        first:
+          name: _InvFade
+        second: 1
+      data:
+        first:
+          name: _ScrollXSpeed
+        second: 50
+      data:
+        first:
+          name: _ScrollYSpeed
+        second: -9.4
     m_Colors:
       data:
         first:
@@ -177,12 +177,12 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.122, g: 0.122, b: 0.122, a: 0.584}
-      data:
-        first:
-          name: _TintColor
-        second: {r: 0.5482758, g: 0.5482758, b: 0.5482758, a: 1}
+        second: {r: 0.928, g: 0.928, b: 0.928, a: 0.716}
       data:
         first:
           name: _Bolor
         second: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+      data:
+        first:
+          name: _TintColor
+        second: {r: 0.5482758, g: 0.5482758, b: 0.5482758, a: 1}

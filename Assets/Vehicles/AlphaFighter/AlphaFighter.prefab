@@ -729,6 +729,7 @@ MonoBehaviour:
   FireSound: {fileID: 0}
   FireRate: 0.2
   MissilesPerShot: 2
+  MissileDamage: 0
   MissilesConverge: 0
   IsTargetLocking: 0
   TargetLockTime: 1.5
@@ -919,8 +920,8 @@ LensFlare:
   m_GameObject: {fileID: 117936}
   m_Enabled: 1
   m_Flare: {fileID: 12100000, guid: 8da445bf74761974ebf3d534c3b519b7, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_Brightness: 30
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Brightness: 60
   m_FadeSpeed: 3
   m_IgnoreLayers:
     serializedVersion: 2
@@ -934,8 +935,8 @@ LensFlare:
   m_GameObject: {fileID: 160146}
   m_Enabled: 1
   m_Flare: {fileID: 12100000, guid: 8da445bf74761974ebf3d534c3b519b7, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_Brightness: 30
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Brightness: 60
   m_FadeSpeed: 3
   m_IgnoreLayers:
     serializedVersion: 2
