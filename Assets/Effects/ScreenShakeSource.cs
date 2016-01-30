@@ -20,7 +20,7 @@ public class ScreenShakeSource : MonoBehaviour
         if (dist < minDistance)
             return maxAmplitude;
         if (dist < maxDistance)
-            return maxAmplitude*Mathf.Clamp((dist - minDistance)/maxDistance, 0f, 1f);
+            return maxAmplitude*(1f - Mathf.Clamp((dist - minDistance)/maxDistance, 0f, 1f));
         return 0f;
     }
 }
