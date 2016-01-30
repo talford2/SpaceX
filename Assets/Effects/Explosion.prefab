@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxAmplitude: 1
-  MinDistance: 100
+  MinDistance: 20
   MaxDistance: 1000
   Frequency: 0.7
   Duration: 0.4
@@ -12614,7 +12614,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MinDistance
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
