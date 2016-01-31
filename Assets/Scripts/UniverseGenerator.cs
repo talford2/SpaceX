@@ -1,315 +1,262 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
 public class UniverseGenerator : MonoBehaviour
 {
-	public Color PrimaryColor = Color.red;
-	public Color SecondaryColor = Color.yellow;
-	public GameObject BackgroundContainer;
-	public ReflectionProbe SceneRelfectionProbe;
-	public GameObject SunObject;
-	public bool UseRandomColours = false;
-	public Camera BackgroundCamera;
-	public bool FlattenToTexture = false;
+	#region Private Members
 
-	// Cube map stuff
-	public RenderTexture BackgroundGenCubmap;
-	public Material BackgroundGenMaterial;
-	public int FlatResolution = 4096;
+	private GameObject _universeObj;
 
-	// Materials
-	public Material BackgroundMaterial;
-	public Material DustMaterial;
-	public Material AddFogMaterial;
+	private Transform _parent;
 
-	public GameObject UniverseRing;
+	private Camera _renderCamera;
 
-	// Nebulas
-	public int MinNebulas = 30;
-	public int MaxNubulas = 40;
-	public float NebulaBrightnessMultiplier = 0.1f;
-	public List<GameObject> Nebulas;
+	public string BackgroundLayerName = "BackgroundLayer";
 
-	// Planets
-	public int MinPlanets = 4;
-	public int MaxPlanets = 10;
-	public List<GameObject> Planets;
+	public LayerMask Layer;
 
-	// Starfield
-	public List<GameObject> StarPrefabs;
-	public float MinSize;
-	public float MaxSize;
-	public float Radius;
-	public int Count;
+	#endregion
 
-	// Universe Events
-	public int CellRadius = 10;
-	public List<UniverseEventCount> UniverseEvents;
+	#region Public Variables
 
-	private Light _sunLight;
-	private GameObject _sunObj;
+	public int FlatResolution = 2048;
 
-	private List<GameObject> _destroyAfterGeneration;
+	public Shader BaseShader;
 
-	void Awake()
+	public Shader CubemapShader;
+
+	public Color BackgroundColor = Color.black;
+
+	public List<ScatterSettings> ScatterObjects;
+
+	// Sun
+	public Light SunLight;
+
+	public Texture SunTexture;
+
+	public GameObject SunModel;
+
+	#endregion
+
+	public UniverseGenerator()
 	{
-		_destroyAfterGeneration = new List<GameObject>();
-
-		if (BackgroundContainer == null)
+		if (ScatterObjects == null)
 		{
-			BackgroundContainer = new GameObject();
-			BackgroundContainer.name = "Universe Container";
-		}
-
-		if (SceneRelfectionProbe == null)
-		{
-			var reflectionProbe = new GameObject();
-			reflectionProbe.name = "Reflection Probe";
-			SceneRelfectionProbe = reflectionProbe.AddComponent<ReflectionProbe>();
-			SceneRelfectionProbe.size = Vector3.one * 1500f;
-			SceneRelfectionProbe.mode = UnityEngine.Rendering.ReflectionProbeMode.Realtime;
-			SceneRelfectionProbe.timeSlicingMode = UnityEngine.Rendering.ReflectionProbeTimeSlicingMode.AllFacesAtOnce;
-			SceneRelfectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
+			ScatterObjects = new List<ScatterSettings>();
 		}
 	}
 
-	public void Start()
+	void Start()
 	{
-		RandomiseUniverse();
-		RandomiseUniverseEvents();
+		if (ScatterObjects == null)
+		{
+			ScatterObjects = new List<ScatterSettings>();
+		}
+		Generate();
 	}
 
-	public void Update()
+	#region Public Methods
+
+	public void Generate()
 	{
-		if (Input.GetKeyUp(KeyCode.U))
+		Destroy(_universeObj);
+		_universeObj = new GameObject("UniverseObject");
+		_parent = _universeObj.transform;
+
+		// Construct Camera
+		var camObj = new GameObject("BackgroundCamera");
+		camObj.transform.parent = _parent;
+		_renderCamera = camObj.AddComponent<Camera>();
+		// VERY IMPORTANT - must set clear to color before creating universe, then set to skybox after clearing
+		_renderCamera.clearFlags = CameraClearFlags.Color;
+		_renderCamera.renderingPath = RenderingPath.DeferredShading;
+		_renderCamera.hdr = true;
+		_renderCamera.farClipPlane = 20000;
+		_renderCamera.cullingMask = LayerMask.GetMask(BackgroundLayerName);
+		_renderCamera.backgroundColor = BackgroundColor;
+
+		// Sun
+		var sunObj = Instantiate<GameObject>(SunModel);
+		sunObj.transform.SetParent(_parent);
+		sunObj.layer = LayerMask.NameToLayer(BackgroundLayerName);
+		sunObj.transform.position = Random.onUnitSphere * 10000;
+		sunObj.transform.localScale = Vector3.one * 2000;
+		sunObj.GetComponent<Renderer>().material = CreateMaterial(SunTexture, Color.white);
+		sunObj.transform.rotation = LookAtWithRandomTwist(sunObj.transform.position, Vector3.zero);
+		SunLight.transform.position = sunObj.transform.position;
+		SunLight.transform.forward = Vector3.zero - sunObj.transform.localPosition;
+
+		foreach (var sg in ScatterObjects)
 		{
-			RandomiseUniverse();
-		}
-	}
-
-	private void RandomiseUniverse()
-	{
-		foreach (Transform trans in BackgroundContainer.transform)
-		{
-			DestroyImmediate(trans.gameObject);
-		}
-
-		_sunObj = Instantiate<GameObject>(SunObject);
-		_sunObj.transform.SetParent(BackgroundContainer.transform);
-
-		_sunLight = _sunObj.GetComponentInChildren<Light>();
-
-		if (UseRandomColours)
-		{
-			var h = HSVColor.FromColor(Random.ColorHSV(0f, 1f, 0.5f, 0.9f, 0.4f, 0.7f, 1f, 1f));
-			PrimaryColor = h.GetColor();
-
-			var h2 = HSVColor.FromColor(Random.ColorHSV(0f, 1f, 0.5f, 0.9f, 0.4f, 0.7f, 1f, 1f));
-			h2.H = h.H + Random.Range(0.2f, 0.8f);
-			while (h2.H > 1)
+			if (sg.IsActive)
 			{
-				h2.H -= 1;
+				Scatter(sg);
 			}
-			SecondaryColor = h2.GetColor();
 		}
 
-		var bgColor = Utility.GetRandomColor(PrimaryColor, SecondaryColor);
-		BackgroundMaterial.SetColor("_Tint", bgColor);
-
-		var bg = HSVColor.FromColor(bgColor);
-		//bg.V *= Random.Range(0.05f, 0.2f);
-		//bg.V *= Random.Range(0.05f, 0.5f);
-		bg.V = Random.Range(0.02f, 0.15f);
-
-		BackgroundCamera.clearFlags = CameraClearFlags.Color;
-		BackgroundCamera.backgroundColor = bg.GetColor();
-
-
-		// Draw universe ring
-		var ring = Instantiate<GameObject>(UniverseRing);
-		ring.transform.localScale *= 1000F;
-		ring.transform.position = Vector3.zero;
-		ring.transform.rotation = Random.rotation;
-		//ring.GetComponent<Renderer>().material.SetColor("_Color", bg.GetColor());
-
-		var ringColor = new HSVColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor));
-		ringColor.A = Random.Range(0.03f, 0.15f);
-		ring.GetComponent<Renderer>().material.SetColor("_Color", ringColor.GetColor());
-		_destroyAfterGeneration.Add(ring);
-
-		var fogColor = HSVColor.FromColor(bgColor);
-		fogColor.S *= 0.5f;
-		fogColor.V *= 0.3f;
-		AddFogMaterial.SetColor("_Color", fogColor.GetColor());
-
-		var dustColor = HSVColor.FromColor(bgColor);
-		dustColor.V *= 0.5f;
-		dustColor.S *= 0.5f;
-		DustMaterial.SetColor("_Color", dustColor.GetColor());
-
-		// Nebula
-		int totalNebula = Random.Range(MinNebulas, MaxNubulas);
-		for (var i = 0; i < totalNebula; i++)
-		{
-			var gm = Instantiate<GameObject>(Nebulas[Random.Range(0, Nebulas.Count)]);
-			gm.transform.rotation = Random.rotationUniform;
-			gm.transform.localScale = Vector3.one * Random.Range(0.6f, 1.3f);
-			gm.transform.SetParent(BackgroundContainer.transform);
-			gm.layer = LayerMask.NameToLayer("Universe Background");
-			gm.transform.localPosition = Vector3.zero;
-
-			//var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.3f));
-			var randC = HSVColor.FromColor(Utility.GetRandomColor(PrimaryColor, SecondaryColor, 0.8f));
-			//randC.V *= NebulaBrightnessMultiplier;
-			//randC.V = 0.05f;
-			randC.V = Random.Range(0.01f, 0.05f);
-			randC.S = 0.9f;
-
-			gm.GetComponent<Renderer>().material.SetColor("_Color", randC.GetColor());
-
-			_destroyAfterGeneration.Add(gm);
-			//gm.GetComponent<Renderer>().material.SetColor("_TintColor", Utility.GetRandomColor(PrimaryColor, SecondaryColor, 1f, 255f));
-		}
-
-		_sunObj.transform.localPosition = Random.onUnitSphere * 1000f;
-		_sunObj.transform.forward = Vector3.zero - _sunObj.transform.localPosition;
-
-		var sunColor = HSVColor.FromColor(bgColor);
-		sunColor.V = 1f;
-		sunColor.S *= Random.Range(0.1f, 0.5f);
-		_sunLight.color = sunColor.GetColor();
-
-		// Planets
-		GeneratePlanets(bg);
-
-		if (StarPrefabs.Count > 0)
-		{
-			var c = new Color(1f, 1f, 1f, Random.Range(0.2f, 1f));
-			StarPrefabs.First().GetComponentInChildren<Renderer>().sharedMaterial.SetColor("_Color", c);
-		}
-
-		// Stars
-		for (var i = 0; i < Count; i++)
-		{
-			var position = Radius * Random.onUnitSphere;
-			var star = Utility.InstantiateInParent(StarPrefabs[Random.Range(0, StarPrefabs.Count)], transform);
-
-			Utility.SetLayerRecursively(star, LayerMask.NameToLayer("Universe Background"));
-			star.transform.localScale = Vector3.one * Random.Range(MinSize, MaxSize);
-			star.transform.SetParent(BackgroundContainer.transform);
-			star.transform.localPosition = position;
-			star.transform.LookAt(Camera.main.transform, transform.up);
-
-			star.transform.rotation *= Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward);
-
-			_destroyAfterGeneration.Add(star);
-		}
-
-		SceneRelfectionProbe.backgroundColor = bg.GetColor();
-		SceneRelfectionProbe.RenderProbe();
-
-		if (FlattenToTexture)
-		{
-			BackgroundSnapshop();
-		}
+		Flatten();
 	}
 
-	private void GeneratePlanets(HSVColor backgroundColor)
+	public void Flatten()
 	{
-		// Planets
-		int totalPlanets = Random.Range(MinPlanets, MaxPlanets);
-		for (var i = 0; i < totalPlanets; i++)
-		{
-			var pl = Instantiate<GameObject>(Planets[Random.Range(0, Planets.Count)]);
-			pl.transform.SetParent(BackgroundContainer.transform);
+		var renderTexture = new RenderTexture(FlatResolution, FlatResolution, 24);
+		renderTexture.wrapMode = TextureWrapMode.Repeat;
+		renderTexture.antiAliasing = 2;
+		renderTexture.anisoLevel = 9;
+		renderTexture.filterMode = FilterMode.Trilinear;
+		renderTexture.generateMips = false;
+		renderTexture.isCubemap = true;
 
-			pl.transform.localScale = Random.Range(0.1f, 50f) * Vector3.one;
+		var bgMaterial = new Material(CubemapShader);
+		bgMaterial.SetTexture("_Tex", renderTexture);
+		
+		// Reflection probe
+		var reflectionProbe = new GameObject();
+		reflectionProbe.name = "Reflection Probe";
+		var sceneRelfectionProbe = reflectionProbe.AddComponent<ReflectionProbe>();
+		sceneRelfectionProbe.size = Vector3.one * 1500f;
+		sceneRelfectionProbe.mode = UnityEngine.Rendering.ReflectionProbeMode.Realtime;
+		sceneRelfectionProbe.timeSlicingMode = UnityEngine.Rendering.ReflectionProbeTimeSlicingMode.AllFacesAtOnce;
+		sceneRelfectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
+		sceneRelfectionProbe.RenderProbe();
+		//-------
 
-			//var planetPos = Random.onUnitSphere * Random.Range(400f, 800f);
-			var planetPos = Random.onUnitSphere * Random.Range(200f, 400f);
+		Destroy(_parent.gameObject);
 
-			pl.transform.localPosition = planetPos;
+		RenderSettings.skybox = bgMaterial;
 
-			//pl.transform.rotation = Random.rotation;
-			pl.transform.forward = _sunLight.transform.right;
+		_renderCamera.RenderToCubemap(renderTexture, 63);
 
-			pl.layer = LayerMask.NameToLayer("Universe Background");
+		_renderCamera.clearFlags = CameraClearFlags.Skybox;
+		_renderCamera.enabled = false;
 
-			var mat = pl.GetComponent<Renderer>().material;
-			backgroundColor.V = 0.15f;
-			backgroundColor.A = 0.5f;
-
-			mat.EnableKeyword("_EMISSION");
-			mat.SetColor("_EmissionColor", backgroundColor.GetColor());
-
-			mat.SetColor("_EnvironmentColor", backgroundColor.GetColor());
-
-			pl.GetComponent<Renderer>().material = mat;
-
-			_destroyAfterGeneration.Add(pl);
-		}
 	}
 
-	private void RandomiseUniverseEvents()
+	#endregion
+
+	#region Private Methods
+
+	private void Scatter(ScatterSettings settings)
 	{
-		foreach (var ue in UniverseEvents)
+		var count = Random.Range(settings.CountMin, settings.CountMax);
+		for (var i = 0; i < count; i++)
 		{
-			for (var i = 0; i < ue.Count; i++)
+			var model = Instantiate<GameObject>(settings.Model);
+			model.layer = LayerMask.NameToLayer(BackgroundLayerName);
+
+			if (settings.RadiusMax == 0 && settings.RadiusMin == 0)
 			{
-				var eventObj = Instantiate(ue.Prefab).GetComponent<UniverseEvent>();
-				var shifter = eventObj.Shiftable;
-				eventObj.transform.rotation = Random.rotation;
-				shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * CellRadius);
-				shifter.CellLocalPosition = Utility.RandomInsideCube * Universe.Current.CellSize;
-				Universe.Current.UniverseEvents.Add(eventObj);
+				model.transform.position = Vector3.zero;
+				model.transform.rotation = Random.rotation;
+			}
+			else {
+				model.transform.position = Random.onUnitSphere * Random.Range(settings.RadiusMin, settings.RadiusMax);
+
+				if (settings.LookAtCenter)
+				{
+					model.transform.rotation = LookAtWithRandomTwist(model.transform.position, Vector3.zero);
+				}
+				else
+				{
+					model.transform.rotation = Random.rotation;
+				}
+			}
+
+			model.transform.localScale = Vector3.one * Random.Range(settings.ScaleMin, settings.ScaleMax);
+			model.transform.SetParent(_parent);
+
+			if (settings.UseMaterials)
+			{
+				model.GetComponent<Renderer>().material = settings.Materials[Random.Range(0, settings.Materials.Count)];
+			}
+			else {
+				if (settings.Textures != null && settings.Textures.Any())
+				{
+					var tex = settings.Textures[Random.Range(0, settings.Textures.Count)];
+					var colr = settings.Colors[Random.Range(0, settings.Colors.Count)].GetRandom();
+					model.GetComponent<Renderer>().material = CreateMaterial(tex, colr);
+				}
 			}
 		}
 	}
 
-	private void BackgroundSnapshop()
+	private Quaternion LookAtWithRandomTwist(Vector3 positon, Vector3 target)
 	{
-		var renText = new RenderTexture(FlatResolution, FlatResolution, 24);
+		var relativeForward = target - positon;
+		var lookat = Quaternion.LookRotation(relativeForward);
 
-		renText.wrapMode = TextureWrapMode.Repeat;
-		renText.antiAliasing = 2;
-		renText.anisoLevel = 9;
-		renText.filterMode = FilterMode.Trilinear;
-		renText.generateMips = false;
-		renText.isCubemap = true;
+		// This isn't right yet
+		//lookat = Quaternion.AngleAxis(Random.Range(0f, 360f), forwardS);
 
-		BackgroundGenMaterial.SetTexture("_Tex", renText);
+		return lookat;
+	}
 
-		RenderSettings.skybox = BackgroundGenMaterial;
+	private Material CreateMaterial(Texture tex, Color color)
+	{
+		var mat = new Material(BaseShader);
+		mat.SetTexture("_MainTex", tex);
+		mat.SetColor("_Color", color);
+		return mat;
+	}
 
-		//_sunObj.SetActive(false);
-		//Destroy(_sunObj);
-		BackgroundCamera.RenderToCubemap(renText, 63);
+	#endregion
+}
 
-		//_sunObj.SetActive(true);
+[System.Serializable]
+public class ScatterSettings
+{
+	public string Name;
 
-		// Save to file
-		//RenderTexture.active = renText;
-		//var new2dTex = new Texture2D(FlatResolution * 1, FlatResolution * 1);
-		//new2dTex.ReadPixels(new Rect(0, 0, FlatResolution * 1, FlatResolution * 1), 0, 0);
-		//var bytesCode = new2dTex.EncodeToPNG();
-		//File.WriteAllBytes(@"C:\Test\test.png", bytesCode);
+	public bool IsActive;
 
-		foreach (var destroyerable in _destroyAfterGeneration)
-		{
-			Destroy(destroyerable);
-		}
-		BackgroundCamera.clearFlags = CameraClearFlags.Skybox;
-		SceneRelfectionProbe.RenderProbe();
+	public int CountMin;
+
+	public int CountMax;
+
+	public float ScaleMin;
+
+	public float ScaleMax;
+
+	public float RadiusMin;
+
+	public float RadiusMax;
+
+	public GameObject Model;
+
+	public bool LookAtCenter;
+
+	public List<Texture> Textures;
+
+	public List<ColorRange> Colors;
+
+	public bool UseMaterials;
+
+	public List<Material> Materials;
+
+	public ScatterSettings()
+	{
+		IsActive = true;
+		Colors = new List<ColorRange> { new ColorRange() };
 	}
 }
 
 [System.Serializable]
-public class UniverseEventCount
+public class ColorRange
 {
-	public GameObject Prefab;
+	public Color Color1;
 
-	public int Count;
+	public Color Color2;
+
+	public ColorRange()
+	{
+		Color1 = Color.white;
+		Color2 = Color.white;
+	}
+
+	public Color GetRandom()
+	{
+		return Utility.GetRandomColor(Color1, Color2);
+	}
 }

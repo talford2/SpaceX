@@ -97,26 +97,6 @@ Material:
         second: 0.02
       data:
         first:
-          name: _Size
-        second: 0.19
-      data:
-        first:
-          name: _Falloff
-        second: 5.27
-      data:
-        first:
-          name: _FalloffPlanet
-        second: 5.4
-      data:
-        first:
-          name: _Transparency
-        second: 94.9
-      data:
-        first:
-          name: _TransparencyPlanet
-        second: 4.5
-      data:
-        first:
           name: _ZWrite
         second: 1
       data:
@@ -153,6 +133,26 @@ Material:
         second: 0
       data:
         first:
+          name: _Size
+        second: 0.19
+      data:
+        first:
+          name: _Falloff
+        second: 5.27
+      data:
+        first:
+          name: _FalloffPlanet
+        second: 5.4
+      data:
+        first:
+          name: _Transparency
+        second: 94.9
+      data:
+        first:
+          name: _TransparencyPlanet
+        second: 4.5
+      data:
+        first:
           name: _RimPower
         second: 2.15
     m_Colors:
@@ -166,21 +166,21 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _AtmoColor
-        second: {r: 1, g: 0.6920893, b: 0.49264705, a: 1}
-      data:
-        first:
           name: _EmissionColorUI
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _AtmoColor
+        second: {r: 1, g: 0.6920893, b: 0.49264705, a: 1}
       data:
         first:
           name: _RimColor
         second: {r: 0.08627451, g: 0.056469303, b: 0.043644752, a: 0}
       data:
         first:
-          name: _AtmosColor
-        second: {r: 0.9485294, g: 0, b: 0, a: 1}
+          name: _EnvironmentColor
+        second: {r: 1, g: 1, b: 1, a: 0}
       data:
         first:
-          name: _EnvironmentColor
-        second: {r: 0, g: 0, b: 0, a: 1}
+          name: _AtmosColor
+        second: {r: 0.9485294, g: 0, b: 0, a: 1}

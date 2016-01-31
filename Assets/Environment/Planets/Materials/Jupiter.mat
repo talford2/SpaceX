@@ -179,4 +179,4 @@ Material:
       data:
         first:
           name: _EnvironmentColor
-        second: {r: 0.428, g: 0, b: 0, a: 0.591}
+        second: {r: 1, g: 1, b: 1, a: 0}
