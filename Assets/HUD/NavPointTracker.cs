@@ -69,9 +69,12 @@ public class NavPointTracker : Tracker
             imageInstance.rectTransform.localPosition = screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f);
             imageInstance.rectTransform.localRotation = Quaternion.identity;
 
-            var fromPlayer = shiftable.GetAbsoluteUniversePosition() - PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
-            labelInstance.text = DistanceDisplay.GetDistanceString(fromPlayer.magnitude);
-            labelInstance.enabled = true;
+            if (PlayerController.Current.VehicleInstance != null)
+            {
+                var fromPlayer = shiftable.GetAbsoluteUniversePosition() - PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
+                labelInstance.text = DistanceDisplay.GetDistanceString(fromPlayer.magnitude);
+                labelInstance.enabled = true;
+            }
         }
         else
         {

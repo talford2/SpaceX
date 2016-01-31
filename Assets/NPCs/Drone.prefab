@@ -43,6 +43,7 @@ MonoBehaviour:
   Team: 2
   IsSquadronMember: 0
   CallSign: 
+  DropItem: {fileID: 11400274, guid: 816f10aa082864542b4127328f007432, type: 2}
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   MaxTargetDistance: 2000
@@ -90,6 +91,11 @@ Prefab:
       propertyPath: VehiclePrefab
       value: 
       objectReference: {fileID: 11433924, guid: 83c398319f072814d820c8dbb6e990f0,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: DropItem
+      value: 
+      objectReference: {fileID: 11400274, guid: 816f10aa082864542b4127328f007432,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

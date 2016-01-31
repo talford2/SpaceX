@@ -8,8 +8,10 @@ public class Fighter : Npc<Fighter>
     public Team Team;
     public bool IsSquadronMember;
     public string CallSign;
+    public Collectible DropItem;
+    public int MaxDropAmount = 5;
 
-	private Vehicle _vehicleInstance;
+    private Vehicle _vehicleInstance;
 	public Vector3 Destination;
 
 	public Transform Target;
@@ -142,6 +144,17 @@ public class Fighter : Npc<Fighter>
     private void OnVehicleDestroyed(Killable sender)
     {
         Target = null;
+        if (DropItem != null)
+        {
+            var dropAmount = Random.Range(0, MaxDropAmount + 1);
+            for (var i = 0f; i < dropAmount; i++)
+            {
+                var dropPosition = VehicleInstance.transform.position + Random.onUnitSphere*1.5f;
+                var dropItem = ((GameObject) Instantiate(DropItem.gameObject, VehicleInstance.transform.position + Random.onUnitSphere*1.5f, Quaternion.identity)).GetComponent<Collectible>();
+                dropItem.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(dropPosition));
+                dropItem.SetVelocity(VehicleInstance.GetVelocity() + Random.onUnitSphere*5f);
+            }
+        }
         if (!IsSquadronMember)
             Destroy(gameObject);
     }
