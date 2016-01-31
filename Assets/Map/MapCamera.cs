@@ -9,6 +9,9 @@ public class MapCamera : MonoBehaviour
     public float RotateSpeed = 3f;
     public float PanSpeed = 0.1f;
 
+    public delegate void OnCameraMove();
+    public OnCameraMove OnMove;
+
     private Camera controlCamera;
     private float cameraDistance;
     private float yawRotate;
@@ -38,7 +41,7 @@ public class MapCamera : MonoBehaviour
         current = this;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (Map.Current.IsShown())
         {
@@ -67,6 +70,9 @@ public class MapCamera : MonoBehaviour
             }
             CameraRotateSpace();
         }
+
+        if (OnMove != null)
+            OnMove();
     }
 
     private void CameraRotateSpace()
