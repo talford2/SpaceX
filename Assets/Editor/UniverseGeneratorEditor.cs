@@ -1,94 +1,123 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(UniverseGenerator))]
 public class UniverseGeneratorEditor : Editor
 {
+	void OnEnable()
+	{
+		hideFlags = HideFlags.HideAndDontSave;
+		Debug.Log("On Enabled!");
+	}
+
 	public override void OnInspectorGUI()
 	{
 		var universeGen = (UniverseGenerator)target;
 
-		universeGen.FlattenToTexture = EditorGUILayout.Toggle("Flatten", universeGen.FlattenToTexture);
-		universeGen.FlatResolution = EditorGUILayout.IntField("Flatten Resolution", universeGen.FlatResolution);
-		universeGen.UseRandomColours = EditorGUILayout.Toggle("Use Random Colours", universeGen.UseRandomColours);
-		EditorGUILayout.BeginHorizontal();
-		EditorGUILayout.PrefixLabel("Colour Range");
-		universeGen.PrimaryColor = EditorGUILayout.ColorField(universeGen.PrimaryColor);
-		universeGen.SecondaryColor = EditorGUILayout.ColorField(universeGen.SecondaryColor);
-		EditorGUILayout.EndHorizontal();
-		universeGen.BackgroundContainer = EditorExtensions.ObjectField<GameObject>("Container", universeGen.BackgroundContainer, true);
-		universeGen.SceneRelfectionProbe = EditorExtensions.ObjectField<ReflectionProbe>("Reflection Probe", universeGen.SceneRelfectionProbe, true);
-		universeGen.BackgroundCamera = EditorExtensions.ObjectField<Camera>("Camera", universeGen.BackgroundCamera, true);
-		universeGen.SunObject = EditorExtensions.ObjectField<GameObject>("Sun", universeGen.SunObject, false);
-
-		EditorGUILayout.PrefixLabel("Sun Colour");
-
-		EditorGUILayout.Separator();
-
-		EditorGUILayout.LabelField("Materials", EditorStyles.boldLabel);
-		universeGen.BackgroundMaterial = EditorExtensions.ObjectField<Material>("Background", universeGen.BackgroundMaterial, false);
-		universeGen.DustMaterial = EditorExtensions.ObjectField<Material>("Dust", universeGen.DustMaterial, false);
-		universeGen.AddFogMaterial = EditorExtensions.ObjectField<Material>("Fog", universeGen.AddFogMaterial, false);
-		EditorGUILayout.Separator();
-
-		// Cubemap stuff
-		universeGen.BackgroundGenCubmap = EditorExtensions.ObjectField<RenderTexture>("Cube Map", universeGen.BackgroundGenCubmap, false);
-		universeGen.BackgroundGenMaterial = EditorExtensions.ObjectField<Material>("Gen Material", universeGen.BackgroundGenMaterial, false);
-		EditorGUILayout.Separator();
-
-		universeGen.UniverseRing = EditorExtensions.ObjectField<GameObject>("Ring", universeGen.UniverseRing, false);
-
-		EditorGUILayout.LabelField("Nebulae", EditorStyles.boldLabel);
-		EditorGUILayout.BeginHorizontal();
-		EditorGUILayout.PrefixLabel("Count");
-		universeGen.MinNebulas = EditorGUILayout.IntField(universeGen.MinNebulas);
-		universeGen.MaxNubulas = EditorGUILayout.IntField(universeGen.MaxNubulas);
-		EditorGUILayout.EndHorizontal();
-		universeGen.NebulaBrightnessMultiplier = EditorGUILayout.Slider("Brightness Multiplier", universeGen.NebulaBrightnessMultiplier, 0, 1);
-		universeGen.Nebulas = EditorExtensions.GameObjectList("Prefabs", universeGen.Nebulas, false);
-		EditorGUILayout.Separator();
-
-		EditorGUILayout.LabelField("Planets", EditorStyles.boldLabel);
-		EditorGUILayout.BeginHorizontal();
-		EditorGUILayout.PrefixLabel("Count");
-		universeGen.MinPlanets = EditorGUILayout.IntField(universeGen.MinPlanets);
-		universeGen.MaxPlanets = EditorGUILayout.IntField(universeGen.MaxPlanets);
-		EditorGUILayout.EndHorizontal();
-		universeGen.Planets = EditorExtensions.GameObjectList("Prefabs", universeGen.Planets, false);
-
-		EditorGUILayout.Separator();
-		EditorGUILayout.LabelField("Star Field", EditorStyles.boldLabel);
-		EditorGUILayout.BeginHorizontal();
-		EditorGUILayout.PrefixLabel("Count");
-		universeGen.Count = EditorGUILayout.IntField(universeGen.Count);
-		universeGen.Radius = EditorGUILayout.FloatField(universeGen.Radius);
-		EditorGUILayout.EndHorizontal();
-		EditorGUILayout.BeginHorizontal();
-		EditorGUILayout.PrefixLabel("Size");
-		universeGen.MinSize = EditorGUILayout.FloatField(universeGen.MinSize);
-		universeGen.MaxSize = EditorGUILayout.FloatField(universeGen.MaxSize);
-		EditorGUILayout.EndHorizontal();
-		EditorGUILayout.Separator();
-
-		EditorGUILayout.LabelField("Universe Events", EditorStyles.boldLabel);
-		universeGen.CellRadius = EditorGUILayout.IntField("Cell Radius", universeGen.CellRadius);
-		for (var i = 0; i < universeGen.UniverseEvents.Count; i++)
+		if (universeGen != null)
 		{
-			var ue = universeGen.UniverseEvents[i];
+			universeGen.BackgroundLayerName = EditorGUILayout.TextField("Layer", universeGen.BackgroundLayerName);
+			universeGen.FlatResolution = EditorExtensions.IntDropdown("Resolution", new List<int> { 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192 }, universeGen.FlatResolution);
 
-			EditorGUILayout.BeginHorizontal();
-			ue.Prefab = EditorExtensions.ObjectField<GameObject>(ue.Prefab, false); //("Prefabe", ue..Prefab, false);
-			ue.Count = EditorGUILayout.IntField(ue.Count);
-			if (GUILayout.Button("X"))
+			universeGen.CubemapShader = EditorExtensions.ObjectField<Shader>("Background Shader", universeGen.CubemapShader, false);
+			universeGen.BaseShader = EditorExtensions.ObjectField<Shader>("Base Shader", universeGen.BaseShader, false);
+			universeGen.BackgroundColor = EditorGUILayout.ColorField("Background Color", universeGen.BackgroundColor);
+
+			// Sun
+			EditorGUILayout.LabelField("Sun", EditorStyles.boldLabel);
+			universeGen.SunLight = EditorExtensions.ObjectField<Light>("Sun Light", universeGen.SunLight, true);
+			universeGen.SunModel = EditorExtensions.ObjectField<GameObject>("Sun Model", universeGen.SunModel, false);
+			universeGen.SunTexture = EditorExtensions.ObjectField<Texture>("Sun Texture", universeGen.SunTexture, false);
+
+			EditorGUILayout.LabelField(string.Format("Scatter Groups ({0})", universeGen.ScatterObjects.Count), EditorStyles.boldLabel);
+			EditorGUILayout.Separator();
+
+			for (var i = 0; i < universeGen.ScatterObjects.Count; i++)
 			{
-				universeGen.UniverseEvents.RemoveAt(i);
+				var so = universeGen.ScatterObjects[i];
+				so = ScatterGUI(so);
+
+				if (GUILayout.Button("Remove"))
+				{
+					universeGen.ScatterObjects.RemoveAt(i);
+				}
 			}
-			EditorGUILayout.EndHorizontal();
+
+			EditorGUILayout.Separator();
+			if (GUILayout.Button("Add Scatter Group"))
+			{
+				universeGen.ScatterObjects.Add(new ScatterSettings());
+			}
 		}
-		if (GUILayout.Button("Add"))
+
+		//EditorGUILayout.TextArea(JsonUtility.ToJson(universeGen), GUILayout.Height(100), GUILayout.MaxWidth(200));
+	}
+
+	private ScatterSettings ScatterGUI(ScatterSettings so)
+	{
+		EditorGUILayout.BeginHorizontal();
+		so.IsActive = GUILayout.Toggle(so.IsActive, "", GUILayout.Width(10));
+		EditorGUILayout.LabelField(so.Name, EditorStyles.boldLabel);
+		EditorGUILayout.EndHorizontal();
+
+		so.Name = EditorGUILayout.TextField("Name", so.Name);
+
+		so.Model = EditorExtensions.ObjectField<GameObject>("Model", so.Model, false);
+
+		// Radius
+		var radius = EditorExtensions.FloatRange("Radius", so.RadiusMin, so.RadiusMax);
+		so.RadiusMin = radius.Min;
+		so.RadiusMax = radius.Max;
+
+		// Count
+		var count = EditorExtensions.IntRange("Count", so.CountMin, so.CountMax);
+		so.CountMin = count.Min;
+		so.CountMax = count.Max;
+
+		// Scale
+		var scale = EditorExtensions.FloatRange("Scale", so.ScaleMin, so.ScaleMax);
+		so.ScaleMin = scale.Min;
+		so.ScaleMax = scale.Max;
+
+		so.LookAtCenter = GUILayout.Toggle(so.LookAtCenter, "Look at Centre");
+
+		// Materials
+		so.UseMaterials = GUILayout.Toggle(so.UseMaterials, "Use materials");
+		if (so.UseMaterials)
 		{
-			universeGen.UniverseEvents.Add(null);
+			so.Materials = EditorExtensions.GameObjectList<Material>("Materials", so.Materials, false);
 		}
+		else
+		{
+			// Textures
+			so.Textures = EditorExtensions.GameObjectList<Texture>("Textures", so.Textures, false);
+
+			// Colours
+			if (so.Colors == null)
+			{
+				so.Colors = new List<ColorRange>();
+			}
+			for (var j = 0; j < so.Colors.Count; j++)
+			{
+				var clr = so.Colors[j];
+				EditorGUILayout.BeginHorizontal();
+				EditorGUILayout.PrefixLabel("Color");
+				clr.Color1 = EditorGUILayout.ColorField(clr.Color1);
+				clr.Color2 = EditorGUILayout.ColorField(clr.Color2);
+				if (GUILayout.Button("X"))
+				{
+					so.Colors.RemoveAt(j);
+				}
+				EditorGUILayout.EndHorizontal();
+			}
+			if (GUILayout.Button("Add Color"))
+			{
+				so.Colors.Add(new ColorRange());
+			}
+		}
+
+		return so;
 	}
 }

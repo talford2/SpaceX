@@ -90,11 +90,11 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
       data:
         first:
           name: _ZWrite
@@ -102,11 +102,11 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .0309999995
+        second: 0.031
       data:
         first:
           name: _BumpScale
-        second: .300000012
+        second: 0.3
       data:
         first:
           name: _OcclusionStrength
@@ -134,7 +134,7 @@ Material:
       data:
         first:
           name: _Size
-        second: .100000001
+        second: 0.1
       data:
         first:
           name: _Falloff
@@ -150,11 +150,11 @@ Material:
       data:
         first:
           name: _TransparencyPlanet
-        second: 1.23000002
+        second: 1.23
       data:
         first:
           name: _RimPower
-        second: 2.6099999
+        second: 2.61
     m_Colors:
       data:
         first:
@@ -171,8 +171,12 @@ Material:
       data:
         first:
           name: _AtmoColor
-        second: {r: .39608565, g: .727941155, b: .714209139, a: 1}
+        second: {r: 0.39608565, g: 0.72794116, b: 0.71420914, a: 1}
       data:
         first:
           name: _RimColor
-        second: {r: .125490203, g: .13333334, b: .132743463, a: 0}
+        second: {r: 0.1254902, g: 0.13333334, b: 0.13274346, a: 0}
+      data:
+        first:
+          name: _EnvironmentColor
+        second: {r: 1, g: 1, b: 1, a: 0}

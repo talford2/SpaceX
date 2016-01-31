@@ -47,4 +47,50 @@ public static class EditorExtensions
 	{
 		return (T)EditorGUILayout.ObjectField(label, obj, typeof(T), allowSceneObjects);
 	}
+
+	public static EditorRange<float> FloatRange(string label, float min, float max)
+	{
+		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.PrefixLabel(label);
+		var range = new EditorRange<float>();
+		range.Min = EditorGUILayout.FloatField(min);
+		range.Max = EditorGUILayout.FloatField(max);
+		EditorGUILayout.EndHorizontal();
+		return range;
+	}
+
+	public static EditorRange<int> IntRange(string label, int min, int max)
+	{
+		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.PrefixLabel(label);
+		var range = new EditorRange<int>();
+		range.Min = EditorGUILayout.IntField(min);
+		range.Max = EditorGUILayout.IntField(max);
+		EditorGUILayout.EndHorizontal();
+		return range;
+	}
+
+	public static EditorRange<Color> ColorRange(string label, Color min, Color max)
+	{
+		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.PrefixLabel(label);
+		var range = new EditorRange<Color>();
+		range.Min = EditorGUILayout.ColorField(min);
+		range.Max = EditorGUILayout.ColorField(max);
+		EditorGUILayout.EndHorizontal();
+		return range;
+	}
+
+	public static int IntDropdown(string label, List<int> valList, int value)
+	{
+		return valList[EditorGUILayout.Popup(label, valList.IndexOf(value), valList.Select(v => v.ToString()).ToArray())];
+	}
+}
+
+[System.Serializable]
+public class EditorRange<T>
+{
+	public T Min;
+
+	public T Max;
 }

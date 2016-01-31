@@ -90,11 +90,11 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
       data:
         first:
           name: _ZWrite
@@ -102,7 +102,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .0260000005
+        second: 0.026
       data:
         first:
           name: _BumpScale
@@ -126,7 +126,7 @@ Material:
       data:
         first:
           name: _Metallic
-        second: .023
+        second: 0.023
       data:
         first:
           name: _EmissionScaleUI
@@ -134,27 +134,27 @@ Material:
       data:
         first:
           name: _Size
-        second: .140000001
+        second: 0.14
       data:
         first:
           name: _Falloff
-        second: 3.43000007
+        second: 3.43
       data:
         first:
           name: _FalloffPlanet
-        second: 4.07000017
+        second: 4.07
       data:
         first:
           name: _Transparency
-        second: 4.65999985
+        second: 4.66
       data:
         first:
           name: _TransparencyPlanet
-        second: 1.69000006
+        second: 1.69
       data:
         first:
           name: _RimPower
-        second: 2.0999999
+        second: 2.1
     m_Colors:
       data:
         first:
@@ -163,7 +163,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .621999979, g: .703000009, b: .80344826, a: 1}
+        second: {r: 0.622, g: 0.703, b: 0.80344826, a: 1}
       data:
         first:
           name: _EmissionColorUI
@@ -171,8 +171,12 @@ Material:
       data:
         first:
           name: _AtmoColor
-        second: {r: .628000021, g: .680999994, b: .748275876, a: 1}
+        second: {r: 0.628, g: 0.681, b: 0.7482759, a: 1}
       data:
         first:
           name: _RimColor
-        second: {r: .184313729, g: .180367529, b: .178531334, a: 0}
+        second: {r: 0.18431373, g: 0.18036753, b: 0.17853133, a: 0}
+      data:
+        first:
+          name: _EnvironmentColor
+        second: {r: 1, g: 1, b: 1, a: 0}
