@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Tracker : MonoBehaviour
+public class VehicleTracker : MonoBehaviour
 {
     public Texture2D ArrowCursorImage;
     public Texture2D TrackerCurosrImage;
