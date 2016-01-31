@@ -36,9 +36,12 @@ public class Collectible : MonoBehaviour
     {
         if (isCollected && collectorTransform != null)
         {
+            if (PlayerController.Current.VehicleInstance != null)
+                velocity = PlayerController.Current.VehicleInstance.GetVelocity();
+
             var toCollector = transform.position - collectorTransform.position;
             followSpeed += followAcceleration * Time.deltaTime;
-            velocity -= followSpeed * Time.deltaTime * toCollector.normalized;
+            velocity -= followSpeed * toCollector.normalized;
 
             toCollector = transform.position - collectorTransform.position;
             var dotProd = Vector3.Dot(lastTo, toCollector);
