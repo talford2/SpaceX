@@ -48,4 +48,9 @@ public class TrackerManager : MonoBehaviour {
             tracker.UpdateInstance();
         }
     }
+
+    public void SetTrackersVisibility(bool value)
+    {
+        trackerCanvas.enabled = value;
+    }
 }

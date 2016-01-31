@@ -120,6 +120,8 @@ public class Map : MonoBehaviour
             UniverseTrackers.Current.gameObject.SetActive(false);
 
         _mapCanvas.enabled = true;
+        if (TrackerManager.Current != null)
+            TrackerManager.Current.SetTrackersVisibility(false);
     }
 
     public void Hide()
@@ -131,6 +133,8 @@ public class Map : MonoBehaviour
         if (UniverseTrackers.Current != null)
             UniverseTrackers.Current.gameObject.SetActive(true);
         _mapCanvas.enabled = false;
+        if (TrackerManager.Current != null)
+            TrackerManager.Current.SetTrackersVisibility(true);
     }
 
     public void Toggle()

@@ -130,6 +130,9 @@ public class VehicleTracker : Tracker
             imageInstance.sprite = arrowSprite;
             imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, screenBounds);
             imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+
+            healthBarBackgroundInstance.enabled = false;
+            healthBarInstance.enabled = false;
         }
     }
 
