@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class EventGenerator : MonoBehaviour
@@ -15,8 +14,7 @@ public class EventGenerator : MonoBehaviour
 
 	public void Generate()
 	{
-		var go = new GameObject();
-		go.name = "UniverseEvents";
+		var go = new GameObject("UniverseEvents");
 		var parent = go.transform;
 
 		foreach (var ue in UniverseEvents)
