@@ -12,9 +12,12 @@ public abstract class Tracker : MonoBehaviour
 
     public abstract void UpdateInstance();
 
+    public abstract void DestroyInstance();
+
     public virtual void OnDestroy()
     {
         TrackerManager.Current.RemoveTracker(this);
+        DestroyInstance();
     }
 
     public static Vector2 GetBoundsIntersection(Vector2 point, Rect bounds)

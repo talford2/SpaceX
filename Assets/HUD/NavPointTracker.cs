@@ -4,10 +4,14 @@ using UnityEngine.UI;
 public class NavPointTracker : Tracker
 {
     public Texture2D TrackerCursorImage;
+    public Texture2D ArrowCursorImage;
 
     private Vector2 screenCentre;
     private Rect screenBounds;
     private Image imageInstance;
+
+    private Sprite trackerSprite;
+    private Sprite arrowSprite;
 
     private void Awake()
     {
@@ -23,7 +27,11 @@ public class NavPointTracker : Tracker
 
         trackerImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
         trackerImg.color = new Color(1f, 1f, 1f, 1f);
-        trackerImg.sprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
+
+        trackerSprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
+        arrowSprite = Sprite.Create(ArrowCursorImage, new Rect(0, 0, ArrowCursorImage.width, ArrowCursorImage.height), Vector2.zero);
+
+        trackerImg.sprite = trackerSprite;
         trackerImg.SetNativeSize();
 
         imageInstance = trackerImg;
@@ -36,14 +44,22 @@ public class NavPointTracker : Tracker
         imageInstance.rectTransform.localPosition = screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f);
         if (screenBounds.Contains(screenPosition))
         {
+            imageInstance.sprite = trackerSprite;
             imageInstance.rectTransform.localPosition = screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f);
             imageInstance.rectTransform.localRotation = Quaternion.identity;
         }
         else
         {
+            imageInstance.sprite = arrowSprite;
             imageInstance.rectTransform.localPosition = GetBoundsIntersection(screenPosition, screenBounds);
             imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
         }
+    }
+
+    public override void DestroyInstance()
+    {
+        if (imageInstance != null)
+            Destroy(imageInstance);
     }
 
     private float GetScreenAngle(Vector2 point)
