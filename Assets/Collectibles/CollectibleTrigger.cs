@@ -30,10 +30,14 @@ public class CollectibleTrigger : MonoBehaviour
                 var vehicle = hitCollider.GetComponent<Detectable>().TargetTransform;
                 if (vehicle != null)
                 {
-                    if (vehicle.transform == PlayerController.Current.VehicleInstance.transform)
+                    if (PlayerController.Current.VehicleInstance != null)
                     {
-                        Item.Collect(vehicle.gameObject);
-                        isEnabled = false;
+                        if (vehicle.transform == PlayerController.Current.VehicleInstance.transform)
+                        {
+                            Item.SetVelocity(PlayerController.Current.VehicleInstance.GetVelocity());
+                            Item.Collect(vehicle.gameObject);
+                            isEnabled = false;
+                        }
                     }
                 }
             }
