@@ -15,12 +15,17 @@ public class EventGenerator : MonoBehaviour
 
 	public void Generate()
 	{
+		var go = new GameObject();
+		go.name = "UniverseEvents";
+		var parent = go.transform;
+
 		foreach (var ue in UniverseEvents)
 		{
 			for (var i = 0; i < ue.Count; i++)
 			{
 				var eventObj = Instantiate(ue.Prefab).GetComponent<UniverseEvent>();
 				var shifter = eventObj.Shiftable;
+				eventObj.transform.SetParent(parent);
 				eventObj.transform.rotation = Random.rotation;
 				shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * CellRadius);
 				shifter.CellLocalPosition = Utility.RandomInsideCube * Universe.Current.CellSize;

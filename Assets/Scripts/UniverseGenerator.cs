@@ -57,6 +57,14 @@ public class UniverseGenerator : MonoBehaviour
 		Generate();
 	}
 
+	void Update()
+	{
+		if (Input.GetKeyUp(KeyCode.U))
+		{
+			Generate();
+		}
+	}
+
 	#region Public Methods
 
 	public void Generate()
