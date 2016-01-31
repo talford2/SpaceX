@@ -133,7 +133,7 @@ public class UniverseTrackers : MonoBehaviour
 		}
 
         tracker.ArrowCursor = CreateTracker(tracker.ArrowCursorImage, tracker.name + "_Arrow");
-		tracker.TrackerCurosr = CreateTracker(tracker.TrackerCurosrImage, tracker.name + "_Tracker");
+		tracker.TrackerCurosr = CreateTracker(tracker.TrackerCursorImage, tracker.name + "_Tracker");
         tracker.FarTrackerCursor = CreateTracker(tracker.FarTrackerCursorImage, tracker.name + "_FarTracker");
         tracker.VeryFarTrackerCursor = CreateTracker(tracker.VeryFarTrackerCursorImage, tracker.name + "_VeryFarTracker");
         tracker.HealthBarBackground = CreateTracker(healthBarBackgroundTexture, new Vector2(0.5f, -15f), tracker.name + "_HealthBack");

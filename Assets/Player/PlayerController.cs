@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 		member.SpawnVehicle(member.VehiclePrefab, position);
 		var memberTracker = member.VehicleInstance.GetComponent<VehicleTracker>();
 		memberTracker.ArrowCursorImage = ArrowCursorImage;
-		memberTracker.TrackerCurosrImage = TrackerCurosrImage;
+		memberTracker.TrackerCursorImage = TrackerCurosrImage;
 		memberTracker.FarTrackerCursorImage = FarTrackerCursorImage;
 		memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
 		memberTracker.LockingCursorImage = LockingTrackerCursorImage;
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
 		var playerTracker = _playVehicleInstance.GetComponent<VehicleTracker>();
 		playerTracker.ArrowCursorImage = ArrowCursorImage;
-		playerTracker.TrackerCurosrImage = TrackerCurosrImage;
+		playerTracker.TrackerCursorImage = TrackerCurosrImage;
 		playerTracker.FarTrackerCursorImage = FarTrackerCursorImage;
 		playerTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
 		playerTracker.IsDisabled = true;
