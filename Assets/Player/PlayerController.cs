@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 	public Team Team;
 	public string CallSign;
     public int SpaceJunkCount;
+    public float CollectRadius = 8f;
 
 	private Vehicle _playVehicleInstance;
 	private Fighter _playerNpc;
@@ -184,6 +185,17 @@ public class PlayerController : MonoBehaviour
 		_controlEnabled = value;
 	}
 
+    private void PickupCollectibles()
+    {
+        var hitColliders = Physics.OverlapSphere(VehicleInstance.transform.position, CollectRadius, LayerMask.GetMask("Collectible"));
+        foreach (var hitCollider in hitColliders)
+        {
+            var collectible = hitCollider.GetComponent<CollectibleTrigger>();
+            if (collectible != null)
+                collectible.Pickup(VehicleInstance.gameObject, VehicleInstance.GetVelocity());
+        }
+    }
+
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -239,6 +251,8 @@ public class PlayerController : MonoBehaviour
 			    {
                     Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.04f, 1f);
                 }
+
+                PickupCollectibles();
 			}
 
 			if (Input.GetKeyUp(KeyCode.R))

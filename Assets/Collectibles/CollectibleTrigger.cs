@@ -22,31 +22,15 @@ public class CollectibleTrigger : MonoBehaviour
 	        if (delayCooldown < 0f)
 	            isEnabled = true;
 	    }
-	    if (isEnabled)
-	    {
-            var hitColliders = Physics.OverlapSphere(transform.position, Radius, LayerMask.GetMask("Detectable"));
-            foreach (var hitCollider in hitColliders)
-            {
-                var vehicle = hitCollider.GetComponent<Detectable>().TargetTransform;
-                if (vehicle != null)
-                {
-                    if (PlayerController.Current.VehicleInstance != null)
-                    {
-                        if (vehicle.transform == PlayerController.Current.VehicleInstance.transform)
-                        {
-                            Item.SetVelocity(PlayerController.Current.VehicleInstance.GetVelocity());
-                            Item.Collect(vehicle.gameObject);
-                            isEnabled = false;
-                        }
-                    }
-                }
-            }
-        }
 	}
 
-    private void OnDrawGizmos()
+    public void Pickup(GameObject fromObject, Vector3 fromVelocity)
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, Radius);
+        if (isEnabled)
+        {
+            Item.SetVelocity(fromVelocity);
+            Item.Collect(fromObject);
+            isEnabled = false;
+        }
     }
 }
