@@ -14,6 +14,8 @@ public class Collectible : MonoBehaviour
     private float followAcceleration = 250f;
     private float followSpeed;
     private Vector3 lastTo;
+    private float inheritVelocityFraction;
+    private float inheritVelocityFractionSpeed = 0.4f;
 
     public Shiftable Shiftable { get { return shiftable; } }
 
@@ -29,6 +31,7 @@ public class Collectible : MonoBehaviour
         {
             isCollected = true;
             collectorTransform = collector.transform;
+            inheritVelocityFraction = 0.6f;
         }
     }
 
@@ -37,7 +40,15 @@ public class Collectible : MonoBehaviour
         if (isCollected && collectorTransform != null)
         {
             if (PlayerController.Current.VehicleInstance != null)
-                velocity = PlayerController.Current.VehicleInstance.GetVelocity();
+            {
+                if (inheritVelocityFraction < 1f)
+                {
+                    inheritVelocityFractionSpeed += inheritVelocityFractionSpeed*Time.deltaTime;
+                    if (inheritVelocityFraction > 1f)
+                        inheritVelocityFraction = 1f;
+                }
+                velocity = inheritVelocityFraction*PlayerController.Current.VehicleInstance.GetVelocity();
+            }
 
             var toCollector = transform.position - collectorTransform.position;
             followSpeed += followAcceleration * Time.deltaTime;
