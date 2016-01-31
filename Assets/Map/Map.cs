@@ -116,9 +116,6 @@ public class Map : MonoBehaviour
         _mapCamera.enabled = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        if (UniverseTrackers.Current != null)
-            UniverseTrackers.Current.gameObject.SetActive(false);
-
         _mapCanvas.enabled = true;
         if (TrackerManager.Current != null)
             TrackerManager.Current.SetTrackersVisibility(false);
@@ -130,8 +127,6 @@ public class Map : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _mapCamera.enabled = false;
         PlayerController.Current.SetControlEnabled(true);
-        if (UniverseTrackers.Current != null)
-            UniverseTrackers.Current.gameObject.SetActive(true);
         _mapCanvas.enabled = false;
         if (TrackerManager.Current != null)
             TrackerManager.Current.SetTrackersVisibility(true);

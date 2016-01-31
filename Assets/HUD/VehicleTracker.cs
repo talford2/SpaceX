@@ -12,19 +12,6 @@ public class VehicleTracker : Tracker
     public string CallSign;
     public bool IsDisabled;
 
-    public bool IsDelayComplete;
-    public float DelayCooldown;
-
-    public Image ArrowCursor { get; set; }
-    public Image TrackerCurosr { get; set; }
-    public Image FarTrackerCursor { get; set; }
-    public Image VeryFarTrackerCursor { get; set; }
-    public Image HealthBarBackground { get; set; }
-    public Image HealthBar { get; set; }
-    public Image LockingCursor { get; set; }
-    public Image LockedCursor { get; set; }
-    public Text CallSignText { get; set; }
-
     private Vector2 screenCentre;
     private Rect screenBounds;
     private Image imageInstance;
@@ -98,41 +85,51 @@ public class VehicleTracker : Tracker
 
     public override void UpdateInstance()
     {
-        var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
-        if (screenPosition.z < 0f)
-            screenPosition *= -1f;
-        screenPosition.z = 0f;
-
-        if (screenBounds.Contains(screenPosition))
+        if (IsDisabled)
         {
-            var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
-            var useSprite = trackerSprite;
-            if (distanceSquared > 1000f*1000f)
-            {
-                useSprite = farTrackerSprite;
-                if (distanceSquared > 2000f*2000f)
-                {
-                    useSprite = veryFarTrackerSprite;
-                }
-                healthBarBackgroundInstance.enabled = false;
-                healthBarInstance.enabled = false;
-            }
-            else
-            {
-                UpdateHealthBar();
-            }
-            imageInstance.sprite = useSprite;
-            imageInstance.rectTransform.localPosition = screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f);
-            imageInstance.rectTransform.localRotation = Quaternion.identity;
+            imageInstance.enabled = false;
+            healthBarBackgroundInstance.enabled = false;
+            healthBarInstance.enabled = false;
         }
         else
         {
-            imageInstance.sprite = arrowSprite;
-            imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, screenBounds);
-            imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+            imageInstance.enabled = true;
+            var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
+            if (screenPosition.z < 0f)
+                screenPosition *= -1f;
+            screenPosition.z = 0f;
 
-            healthBarBackgroundInstance.enabled = false;
-            healthBarInstance.enabled = false;
+            if (screenBounds.Contains(screenPosition))
+            {
+                var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
+                var useSprite = trackerSprite;
+                if (distanceSquared > 1000f*1000f)
+                {
+                    useSprite = farTrackerSprite;
+                    if (distanceSquared > 2000f*2000f)
+                    {
+                        useSprite = veryFarTrackerSprite;
+                    }
+                    healthBarBackgroundInstance.enabled = false;
+                    healthBarInstance.enabled = false;
+                }
+                else
+                {
+                    UpdateHealthBar();
+                }
+                imageInstance.sprite = useSprite;
+                imageInstance.rectTransform.localPosition = screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f);
+                imageInstance.rectTransform.localRotation = Quaternion.identity;
+            }
+            else
+            {
+                imageInstance.sprite = arrowSprite;
+                imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, screenBounds);
+                imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+
+                healthBarBackgroundInstance.enabled = false;
+                healthBarInstance.enabled = false;
+            }
         }
     }
 
@@ -167,70 +164,5 @@ public class VehicleTracker : Tracker
         var delta = point - screenCentre;
         var angle = Mathf.Rad2Deg * Mathf.Atan2(delta.x, -delta.y) + 180f;
         return angle;
-    }
-
-    public void HideAllCursors()
-    {
-        ArrowCursor.enabled = false;
-        TrackerCurosr.enabled = false;
-        FarTrackerCursor.enabled = false;
-        VeryFarTrackerCursor.enabled = false;
-        HealthBarBackground.enabled = false;
-        HealthBar.enabled = false;
-        LockingCursor.enabled = false;
-        LockedCursor.enabled = false;
-        CallSignText.enabled = false;
-    }
-
-    public Image SwitchToArrow()
-    {
-        HideAllCursors();
-        ArrowCursor.enabled = true;
-        return ArrowCursor;
-    }
-
-    public Image SwitchCursor(float distanceSquared)
-    {
-        if (distanceSquared > 1000f*1000f)
-        {
-            HealthBarBackground.enabled = false;
-            HealthBar.enabled = false;
-            CallSignText.enabled = false;
-            if (distanceSquared > 2000f * 2000f)
-            {
-                TrackerCurosr.enabled = false;
-                FarTrackerCursor.enabled = false;
-                VeryFarTrackerCursor.enabled = true;
-                return VeryFarTrackerCursor;
-            }
-            TrackerCurosr.enabled = false;
-            FarTrackerCursor.enabled = true;
-            VeryFarTrackerCursor.enabled = false;
-            return FarTrackerCursor;
-        }
-        LockingCursor.enabled = false;
-        LockedCursor.enabled = false;
-        if (PlayerController.Current.VehicleInstance != null)
-        {
-            if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
-            {
-                LockedCursor.enabled = true;
-            }
-            else
-            {
-                if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockingOnTarget() == transform)
-                {
-                    LockingCursor.enabled = true;
-                }
-            }
-        }
-        HealthBarBackground.enabled = true;
-        HealthBar.enabled = true;
-        TrackerCurosr.enabled = true;
-        FarTrackerCursor.enabled = false;
-        VeryFarTrackerCursor.enabled = false;
-        CallSignText.text = CallSign;
-        CallSignText.enabled = true;
-        return TrackerCurosr;
     }
 }
