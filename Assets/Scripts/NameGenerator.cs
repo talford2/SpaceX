@@ -13,11 +13,8 @@ public static class NameGenerator
 		{
 			if (_callSigns == null)
 			{
-				var filename = Path.Combine(Application.dataPath, "CallSigns.txt");
-				var reader = new StreamReader(filename);
-				var res = reader.ReadToEnd();
-				reader.Close();
-				_callSigns = res.Split(',').ToList();
+				var txt = Resources.Load<TextAsset>("CallSigns");
+				_callSigns = txt.text.Split(',').ToList();
 				Debug.Log(_callSigns);
 			}
 			return _callSigns;
