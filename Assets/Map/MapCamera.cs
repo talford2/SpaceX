@@ -19,6 +19,13 @@ public class MapCamera : MonoBehaviour
 
     private Vector2 pan;
 
+    private static MapCamera current;
+
+    public static MapCamera Current
+    {
+        get { return current; }
+    }
+
     private void Awake()
     {
         controlCamera = GetComponent<Camera>();
@@ -28,6 +35,7 @@ public class MapCamera : MonoBehaviour
         CameraRotateSpace();
 
         pan = Vector2.zero;
+        current = this;
     }
 
     private void Update()
@@ -73,5 +81,6 @@ public class MapCamera : MonoBehaviour
     public void SetLookAt(Vector3 position)
     {
         lookAt = position;
+        CameraRotateSpace();
     }
 }
