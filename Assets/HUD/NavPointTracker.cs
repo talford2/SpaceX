@@ -41,7 +41,10 @@ public class NavPointTracker : Tracker
     public override void UpdateInstance()
     {
         var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
-        imageInstance.rectTransform.localPosition = screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f);
+        if (screenPosition.z < 0f)
+            screenPosition *= -1f;
+        screenPosition.z = 0f;
+
         if (screenBounds.Contains(screenPosition))
         {
             imageInstance.sprite = trackerSprite;
@@ -51,7 +54,7 @@ public class NavPointTracker : Tracker
         else
         {
             imageInstance.sprite = arrowSprite;
-            imageInstance.rectTransform.localPosition = GetBoundsIntersection(screenPosition, screenBounds);
+            imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, screenBounds);
             imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
         }
     }
