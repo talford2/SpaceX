@@ -632,14 +632,12 @@ MonoBehaviour:
   TrackerCursorImage: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
   FarTrackerCursorImage: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612,
     type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: fc94074c6eb140143aebefc9c5605a5a,
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03,
     type: 3}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   CallSign: 
   IsDisabled: 0
-  IsDelayComplete: 0
-  DelayCooldown: 0
 --- !u!114 &11423764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1102,7 +1100,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: VeryFarTrackerCursorImage
       value: 
-      objectReference: {fileID: 2800000, guid: fc94074c6eb140143aebefc9c5605a5a, type: 3}
+      objectReference: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03, type: 3}
     - target: {fileID: 0}
       propertyPath: FarTrackerCursorImage
       value: 
