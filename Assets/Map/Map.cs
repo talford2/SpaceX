@@ -37,6 +37,9 @@ public class Map : MonoBehaviour
         _destination = Instantiate(DestinationPrefab);
         _destination.SetActive(false);
         isDestinationSet = false;
+
+        GetComponentInChildren<MapCamera>().OnMove += UpdateDestination;
+
         Hide();
     }
 
@@ -92,10 +95,10 @@ public class Map : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
+    private void UpdateDestination()
     {
         if (isDestinationSet)
-            DestinationImage.rectTransform.localPosition = _mapCamera.WorldToScreenPoint(MapScale*_destination.GetComponent<Shiftable>().GetAbsoluteUniversePosition()) - new Vector3(Screen.width/2f, Screen.height/2f, 0);
+            DestinationImage.rectTransform.localPosition = _mapCamera.WorldToScreenPoint(MapScale * _destination.GetComponent<Shiftable>().GetAbsoluteUniversePosition()) - new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
     }
 
     private GameObject CreatePin(GameObject prefab)
