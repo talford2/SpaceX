@@ -67,6 +67,8 @@ public class Fighter : Npc<Fighter>
                 //SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0,0,0), new Vector3()));
             }
         }
+		
+		CallSign = NameGenerator.GetRandomCallSign();
 
         Steering = new FighterSteering(this);
         State = new FighterIdle(this);
