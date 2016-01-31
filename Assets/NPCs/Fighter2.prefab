@@ -44,6 +44,7 @@ MonoBehaviour:
   IsSquadronMember: 0
   CallSign: 
   DropItem: {fileID: 11400274, guid: 816f10aa082864542b4127328f007432, type: 2}
+  MaxDropAmount: 8
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   MaxTargetDistance: 2000
@@ -97,6 +98,10 @@ Prefab:
       value: 
       objectReference: {fileID: 11400274, guid: 816f10aa082864542b4127328f007432,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: MaxDropAmount
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 145396}
