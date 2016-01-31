@@ -27,6 +27,7 @@ GameObject:
   - 4: {fileID: 444050}
   - 114: {fileID: 11450094}
   - 114: {fileID: 11434974}
+  - 114: {fileID: 11409030}
   m_Layer: 1
   m_Name: Explosion
   m_TagString: Untagged
@@ -372,6 +373,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11409030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692051f2ff08a2843a755bcb2b8461fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxAmplitude: 1
+  MinDistance: 20
+  MaxDistance: 1000
+  Frequency: 0.7
+  Duration: 0.4
 --- !u!114 &11434974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12590,6 +12607,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxDistance
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MinDistance
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
