@@ -74,7 +74,7 @@ public class Fighter : Npc<Fighter>
         if (IsDebugSpawn)
         {
             SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)));
-            _vehicleInstance.GetComponent<Tracker>().enabled = false;
+            _vehicleInstance.GetComponent<VehicleTracker>().enabled = false;
         }
     }
 

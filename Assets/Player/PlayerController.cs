@@ -93,9 +93,9 @@ public class PlayerController : MonoBehaviour
 	private void SpawnSquadronVehicle(Fighter member, UniversePosition position)
 	{
 		member.SpawnVehicle(member.VehiclePrefab, position);
-		var memberTracker = member.VehicleInstance.GetComponent<Tracker>();
+		var memberTracker = member.VehicleInstance.GetComponent<VehicleTracker>();
 		memberTracker.ArrowCursorImage = ArrowCursorImage;
-		memberTracker.TrackerCurosrImage = TrackerCurosrImage;
+		memberTracker.TrackerCursorImage = TrackerCurosrImage;
 		memberTracker.FarTrackerCursorImage = FarTrackerCursorImage;
 		memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
 		memberTracker.LockingCursorImage = LockingTrackerCursorImage;
@@ -122,9 +122,9 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance.Shiftable.SetShiftPosition(universePosition);
 		//Destroy(_playVehicleInstance.GetComponent<Tracker>());
 
-		var playerTracker = _playVehicleInstance.GetComponent<Tracker>();
+		var playerTracker = _playVehicleInstance.GetComponent<VehicleTracker>();
 		playerTracker.ArrowCursorImage = ArrowCursorImage;
-		playerTracker.TrackerCurosrImage = TrackerCurosrImage;
+		playerTracker.TrackerCursorImage = TrackerCurosrImage;
 		playerTracker.FarTrackerCursorImage = FarTrackerCursorImage;
 		playerTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
 		playerTracker.IsDisabled = true;
@@ -401,7 +401,7 @@ public class PlayerController : MonoBehaviour
 					//_playVehicleInstance.GetComponent<Killable>().OnDie -= OnVehicleDestroyed;
 					Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
 					Squadron[oldSquadronIndex].enabled = true;
-					Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Tracker>().IsDisabled = false;
+					Squadron[oldSquadronIndex].VehicleInstance.GetComponent<VehicleTracker>().IsDisabled = false;
 					Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDamage -= PlayerController_OnDamage;
 					Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDie -= PlayerController_OnDie;
 				}
@@ -412,7 +412,7 @@ public class PlayerController : MonoBehaviour
 					HeadsUpDisplay.Current.ShowSquadronPrompt(Squadron[_curSquadronIndex].CallSign);
 
 					_playVehicleInstance = Squadron[_curSquadronIndex].VehicleInstance;
-					_playVehicleInstance.GetComponent<Tracker>().IsDisabled = true;
+					_playVehicleInstance.GetComponent<VehicleTracker>().IsDisabled = true;
 					_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
 					//_playVehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
 					_playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;

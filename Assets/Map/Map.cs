@@ -108,11 +108,17 @@ public class Map : MonoBehaviour
     public void Show()
     {
         PlayerController.Current.SetControlEnabled(false);
+
+        if (PlayerController.Current.VehicleInstance != null)
+            _playerPin.transform.position = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
+        MapCamera.Current.SetLookAt(_playerPin.transform.position);
+
         _mapCamera.enabled = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         if (UniverseTrackers.Current != null)
             UniverseTrackers.Current.gameObject.SetActive(false);
+
         _mapCanvas.enabled = true;
     }
 

@@ -1,102 +1,61 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Tracker : MonoBehaviour
+public abstract class Tracker : MonoBehaviour
 {
-    public Texture2D ArrowCursorImage;
-    public Texture2D TrackerCurosrImage;
-    public Texture2D FarTrackerCursorImage;
-    public Texture2D VeryFarTrackerCursorImage;
-    public Texture2D LockingCursorImage;
-    public Texture2D LockedCursorImage;
-    public string CallSign;
-    public bool IsDisabled;
-
-    public bool IsDelayComplete;
-    public float DelayCooldown;
-
-    public Image ArrowCursor { get; set; }
-    public Image TrackerCurosr { get; set; }
-    public Image FarTrackerCursor { get; set; }
-    public Image VeryFarTrackerCursor { get; set; }
-    public Image HealthBarBackground { get; set; }
-    public Image HealthBar { get; set; }
-    public Image LockingCursor { get; set; }
-    public Image LockedCursor { get; set; }
-    public Text CallSignText { get; set; }
-
-    private void Start()
+    public virtual void Start()
     {
-        UniverseTrackers.Current.AddTracker(this);
+        TrackerManager.Current.AddTracker(this);
     }
 
-    private void OnDestroy()
+    public abstract Image CreateInstance();
+
+    public abstract void UpdateInstance();
+
+    public abstract void DestroyInstance();
+
+    public virtual void OnDestroy()
     {
-        UniverseTrackers.Current.RemoveTracker(this);
+        TrackerManager.Current.RemoveTracker(this);
+        DestroyInstance();
     }
 
-    public void HideAllCursors()
+    public static Vector2 GetBoundsIntersection(Vector2 point, Rect bounds)
     {
-        ArrowCursor.enabled = false;
-        TrackerCurosr.enabled = false;
-        FarTrackerCursor.enabled = false;
-        VeryFarTrackerCursor.enabled = false;
-        HealthBarBackground.enabled = false;
-        HealthBar.enabled = false;
-        LockingCursor.enabled = false;
-        LockedCursor.enabled = false;
-        CallSignText.enabled = false;
-    }
+        var anchor = new Vector2(bounds.xMin + (bounds.xMax - bounds.xMin) / 2f, bounds.yMin + (bounds.yMax - bounds.yMin) / 2f);
 
-    public Image SwitchToArrow()
-    {
-        HideAllCursors();
-        ArrowCursor.enabled = true;
-        return ArrowCursor;
-    }
+        var delta = point - anchor;
+        var gradient = delta.y / delta.x;
 
-    public Image SwitchCursor(float distanceSquared)
-    {
-        if (distanceSquared > 1000f*1000f)
+        if (!bounds.Contains(point))
         {
-            HealthBarBackground.enabled = false;
-            HealthBar.enabled = false;
-            CallSignText.enabled = false;
-            if (distanceSquared > 2000f * 2000f)
+            var result = point - anchor;
+
+            if (result.x < bounds.xMin - anchor.x)
             {
-                TrackerCurosr.enabled = false;
-                FarTrackerCursor.enabled = false;
-                VeryFarTrackerCursor.enabled = true;
-                return VeryFarTrackerCursor;
+                result.x = bounds.xMin - anchor.x;
+                result.y = gradient * result.x;
             }
-            TrackerCurosr.enabled = false;
-            FarTrackerCursor.enabled = true;
-            VeryFarTrackerCursor.enabled = false;
-            return FarTrackerCursor;
+            if (result.x > bounds.xMax - anchor.x)
+            {
+                result.x = bounds.xMax - anchor.x;
+                result.y = gradient * result.x;
+            }
+            if (result.y < bounds.yMin - anchor.y)
+            {
+                result.y = bounds.yMin - anchor.y;
+                result.x = result.y / gradient;
+            }
+            if (result.y > bounds.yMax - anchor.y)
+            {
+                result.y = bounds.yMax - anchor.y;
+                result.x = result.y / gradient;
+            }
+
+            result.x = Mathf.Clamp(result.x, bounds.xMin - anchor.x, bounds.xMax - anchor.x);
+            result.y = Mathf.Clamp(result.y, bounds.yMin - anchor.y, bounds.yMax - anchor.y);
+            return result;
         }
-        LockingCursor.enabled = false;
-        LockedCursor.enabled = false;
-        if (PlayerController.Current.VehicleInstance != null)
-        {
-            if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
-            {
-                LockedCursor.enabled = true;
-            }
-            else
-            {
-                if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockingOnTarget() == transform)
-                {
-                    LockingCursor.enabled = true;
-                }
-            }
-        }
-        HealthBarBackground.enabled = true;
-        HealthBar.enabled = true;
-        TrackerCurosr.enabled = true;
-        FarTrackerCursor.enabled = false;
-        VeryFarTrackerCursor.enabled = false;
-        CallSignText.text = CallSign;
-        CallSignText.enabled = true;
-        return TrackerCurosr;
+        return point - anchor;
     }
 }

@@ -16,7 +16,7 @@ public class UniverseTrackers : MonoBehaviour
     private Texture2D healthBarBackgroundTexture;
     private Texture2D healthBarTexture;
 
-	private static List<Tracker> _trackers { get; set; }
+	private static List<VehicleTracker> _trackers { get; set; }
 
 	public static UniverseTrackers Current;
 
@@ -125,15 +125,15 @@ public class UniverseTrackers : MonoBehaviour
 	    }
 	}
 
-	public void AddTracker(Tracker tracker)
+	public void AddTracker(VehicleTracker tracker)
 	{
 		if (_trackers == null)
 		{
-			_trackers = new List<Tracker>();
+			_trackers = new List<VehicleTracker>();
 		}
 
         tracker.ArrowCursor = CreateTracker(tracker.ArrowCursorImage, tracker.name + "_Arrow");
-		tracker.TrackerCurosr = CreateTracker(tracker.TrackerCurosrImage, tracker.name + "_Tracker");
+		tracker.TrackerCurosr = CreateTracker(tracker.TrackerCursorImage, tracker.name + "_Tracker");
         tracker.FarTrackerCursor = CreateTracker(tracker.FarTrackerCursorImage, tracker.name + "_FarTracker");
         tracker.VeryFarTrackerCursor = CreateTracker(tracker.VeryFarTrackerCursorImage, tracker.name + "_VeryFarTracker");
         tracker.HealthBarBackground = CreateTracker(healthBarBackgroundTexture, new Vector2(0.5f, -15f), tracker.name + "_HealthBack");
@@ -188,7 +188,7 @@ public class UniverseTrackers : MonoBehaviour
         return txt;
     }
 
-	public void RemoveTracker(Tracker tracker)
+	public void RemoveTracker(VehicleTracker tracker)
 	{
 		_trackers.Remove(tracker);
         DestroyTrackerCursor(tracker.ArrowCursor);
