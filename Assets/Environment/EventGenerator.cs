@@ -28,7 +28,7 @@ public class EventGenerator : MonoBehaviour
 				eventObj.transform.SetParent(parent);
 				eventObj.transform.rotation = Random.rotation;
 				shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * CellRadius);
-				shifter.CellLocalPosition = Utility.RandomInsideCube * Universe.Current.CellSize;
+			    shifter.CellLocalPosition = Utility.RandomInsideCube*Universe.Current.CellSize - Universe.Current.CellSize*0.5f*Vector3.one;
 				Universe.Current.UniverseEvents.Add(eventObj);
 			}
 		}
