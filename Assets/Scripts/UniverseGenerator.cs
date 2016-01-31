@@ -13,13 +13,13 @@ public class UniverseGenerator : MonoBehaviour
 
 	private Camera _renderCamera;
 
-	public string BackgroundLayerName = "BackgroundLayer";
-
-	public LayerMask Layer;
+	private GameObject _reflectionProbeObj;
 
 	#endregion
 
 	#region Public Variables
+
+	public string BackgroundLayerName = "BackgroundLayer";
 
 	public int FlatResolution = 2048;
 
@@ -120,8 +120,6 @@ public class UniverseGenerator : MonoBehaviour
 		var bgMaterial = new Material(CubemapShader);
 		bgMaterial.SetTexture("_Tex", renderTexture);
 
-
-
 		RenderSettings.skybox = bgMaterial;
 
 		_renderCamera.RenderToCubemap(renderTexture);
@@ -129,10 +127,15 @@ public class UniverseGenerator : MonoBehaviour
 		_renderCamera.clearFlags = CameraClearFlags.Skybox;
 		_renderCamera.enabled = false;
 
+		if (_reflectionProbeObj != null)
+		{
+			Destroy(_reflectionProbeObj);
+		}
+
 		// Reflection probe
-		var reflectionProbe = new GameObject();
-		reflectionProbe.name = "Reflection Probe";
-		var sceneRelfectionProbe = reflectionProbe.AddComponent<ReflectionProbe>();
+		_reflectionProbeObj = new GameObject();
+		_reflectionProbeObj.name = "Reflection Probe";
+		var sceneRelfectionProbe = _reflectionProbeObj.AddComponent<ReflectionProbe>();
 		sceneRelfectionProbe.size = Vector3.one * 1500f;
 		sceneRelfectionProbe.timeSlicingMode = UnityEngine.Rendering.ReflectionProbeTimeSlicingMode.AllFacesAtOnce;
 
