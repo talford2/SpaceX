@@ -1879,8 +1879,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 1097665390}
   - 114: {fileID: 1097665389}
-  - 114: {fileID: 1097665391}
   - 114: {fileID: 1097665392}
+  - 114: {fileID: 1097665393}
+  - 114: {fileID: 1097665391}
   m_Layer: 0
   m_Name: Universe
   m_TagString: Untagged
@@ -1932,7 +1933,7 @@ MonoBehaviour:
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
-  BackgroundColor: {r: 0.0648272, g: 0.015138407, b: 0.13725491, a: 1}
+  BackgroundColor: {r: 0.06422862, g: 0.014129171, b: 0.13725491, a: 1}
   ScatterObjects:
   - Name: Clouds
     IsActive: 1
@@ -1947,8 +1948,8 @@ MonoBehaviour:
     Textures:
     - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
     Colors:
-    - Color1: {r: 0.266859, g: 0.3920849, b: 0.597, a: 0.007843138}
-      Color2: {r: 0.653, g: 0.23442705, b: 0.4162895, a: 0.011764706}
+    - Color1: {r: 0.207152, g: 0.29092193, b: 0.42799997, a: 0.019607844}
+      Color2: {r: 0.44099998, g: 0.21917698, b: 0.3155551, a: 0.011764706}
     UseMaterials: 0
     Materials: []
   - Name: Stars
@@ -1991,6 +1992,23 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 16f1ca9e95c13b44c8ad1e25e2dc1633, type: 2}
     - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
     - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
+  - Name: Nebula
+    IsActive: 1
+    CountMin: 10
+    CountMax: 20
+    ScaleMin: 1
+    ScaleMax: 1
+    RadiusMin: 0
+    RadiusMax: 0
+    Model: {fileID: 100000, guid: d02b92b1db28dfc4aa6bdb760aa164f9, type: 3}
+    LookAtCenter: 0
+    Textures:
+    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    Colors:
+    - Color1: {r: 0.328, g: 0.6385104, b: 1, a: 0.11764706}
+      Color2: {r: 1, g: 0.37199998, b: 0.77478653, a: 0.019607844}
+    UseMaterials: 0
+    Materials: []
   SunLight: {fileID: 1376424185}
   SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
   SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
@@ -2000,7 +2018,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1097665388}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
   m_Name: 
@@ -2016,6 +2034,21 @@ MonoBehaviour:
     Count: 150
   - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
     Count: 300
+  CellRadius: 10
+--- !u!114 &1097665393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1097665388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseEvents:
+  - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
+    Count: 180
   CellRadius: 10
 --- !u!1 &1109137749
 GameObject:

@@ -112,26 +112,24 @@ public class UniverseGenerator : MonoBehaviour
 		var bgMaterial = new Material(CubemapShader);
 		bgMaterial.SetTexture("_Tex", renderTexture);
 		
+		Destroy(_parent.gameObject);
+
+		RenderSettings.skybox = bgMaterial;
+
+		_renderCamera.RenderToCubemap(renderTexture);
+
+		_renderCamera.clearFlags = CameraClearFlags.Skybox;
+		_renderCamera.enabled = false;
+		
 		// Reflection probe
 		var reflectionProbe = new GameObject();
 		reflectionProbe.name = "Reflection Probe";
 		var sceneRelfectionProbe = reflectionProbe.AddComponent<ReflectionProbe>();
 		sceneRelfectionProbe.size = Vector3.one * 1500f;
-		sceneRelfectionProbe.mode = UnityEngine.Rendering.ReflectionProbeMode.Realtime;
 		sceneRelfectionProbe.timeSlicingMode = UnityEngine.Rendering.ReflectionProbeTimeSlicingMode.AllFacesAtOnce;
+		sceneRelfectionProbe.mode = UnityEngine.Rendering.ReflectionProbeMode.Custom;
 		sceneRelfectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
-		sceneRelfectionProbe.RenderProbe();
-		//-------
-
-		Destroy(_parent.gameObject);
-
-		RenderSettings.skybox = bgMaterial;
-
-		_renderCamera.RenderToCubemap(renderTexture, 63);
-
-		_renderCamera.clearFlags = CameraClearFlags.Skybox;
-		_renderCamera.enabled = false;
-
+		sceneRelfectionProbe.customBakedTexture = renderTexture;
 	}
 
 	#endregion
