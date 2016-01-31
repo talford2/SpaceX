@@ -1867,7 +1867,7 @@ MonoBehaviour:
   AimSensitivity: 15
   MouseMoveClamp: 0.02
   DefaultAimDistance: 500
-  MinAimDistance: 50
+  MinAimDistance: 5
   MaxAimDistance: 1000
 --- !u!4 &1064748905
 Transform:
