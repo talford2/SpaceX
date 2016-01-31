@@ -42,6 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TrackerCursorImage: {fileID: 2800000, guid: 1699760e65f03584aa67e24fc3c7658e, type: 3}
   ArrowCursorImage: {fileID: 2800000, guid: 23a27d8840181934790cdaddd830785c, type: 3}
+  LabelFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba, type: 3}
 --- !u!114 &11452060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,6 +79,11 @@ Prefab:
       propertyPath: ArrowCursorImage
       value: 
       objectReference: {fileID: 2800000, guid: 23a27d8840181934790cdaddd830785c, type: 3}
+    - target: {fileID: 0}
+      propertyPath: LabelFont
+      value: 
+      objectReference: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 108758}
