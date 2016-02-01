@@ -2,6 +2,18 @@
 
 public class Utility
 {
+    private static float projectOffscreenLength;
+
+    public static float ProjectOffscreenLength
+    {
+        get
+        {
+            if (projectOffscreenLength < 1f)
+                projectOffscreenLength = new Vector2(Screen.width, Screen.height).magnitude + 10f;
+            return projectOffscreenLength;
+        }
+    }
+
 	public static Transform FindOrCreateContainer(string name)
 	{
 		var existing = GameObject.Find(name);
