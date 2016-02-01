@@ -8,31 +8,25 @@ namespace Effects
 
 		public bool StartOn;
 
-		private bool _isStarted;
-
-		private float _runningCooldown;
-
 		private void Awake()
 		{
-			_isStarted = StartOn;
-			_runningCooldown = Cooldown;
 		}
 
 		public void StartCooldown()
 		{
-			_isStarted = true;
+			StartOn = true;
 		}
 
 		private void Update()
 		{
-			if (_isStarted)
+			if (StartOn)
 			{
-				if (_runningCooldown >= 0)
+				if (Cooldown >= 0)
 				{
-					_runningCooldown -= Time.deltaTime;
+					Cooldown -= Time.deltaTime;
 				}
 
-				if (_runningCooldown < 0)
+				if (Cooldown < 0)
 				{
 					Destroy(gameObject);
 				}

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Effects;
+using System.Collections;
+using UnityEngine;
 
 public class Utility
 {
@@ -250,6 +252,11 @@ public class Utility
 			var audioSource = newGameObj.AddComponent<AudioSource>();
 			audioSource.clip = clip;
 			audioSource.Play();
+
+			var selfDes = newGameObj.AddComponent<SelfDestructor>();
+			selfDes.Cooldown = clip.length;
+			selfDes.StartOn = false;
+			selfDes.StartCooldown();
 		}
 	}
 }
