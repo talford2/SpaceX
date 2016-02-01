@@ -29,6 +29,7 @@ GameObject:
   - 114: {fileID: 11499834}
   - 54: {fileID: 5444890}
   - 114: {fileID: 11431714}
+  - 114: {fileID: 11446934}
   m_Layer: 0
   m_Name: SpaceJunk
   m_TagString: Untagged
@@ -200,6 +201,19 @@ MonoBehaviour:
   LockedCursorImage: {fileID: 0}
   CallSign: 
   IsDisabled: 0
+--- !u!114 &11446934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670c40cbcc89a784b93fddab3be12e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cooldown: 15
+  StartOn: 1
 --- !u!114 &11499834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -315,6 +329,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: LockedCursorImage
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: StartOn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Cooldown
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
