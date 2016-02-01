@@ -5,152 +5,201 @@ using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
-    public float MapScale = 0.01f;
-    public Text MapSystemText;
-    public GameObject DestinationPrefab;
-    public Image DestinationImage;
+	public float MapScale = 0.01f;
+	public Text MapSystemText;
+	public GameObject DestinationPrefab;
+	public Image DestinationImage;
+	public Material GridLineMaterial;
 
-    private Camera _mapCamera;
-    private Canvas _mapCanvas;
-    private static Map _current;
+	private Camera _mapCamera;
+	private Canvas _mapCanvas;
+	private static Map _current;
 
-    private GameObject _playerPin;
-    private List<GameObject> _squadronPins;
-    private List<MapPin> _pins;
+	private GameObject _playerPin;
+	private List<GameObject> _squadronPins;
+	private List<MapPin> _pins;
 
-    private bool isDestinationSet;
-    private GameObject _destination;
+	private bool isDestinationSet;
+	private GameObject _destination;
 
-    private List<Transform> _pinTransforms;
+	private List<Transform> _pinTransforms;
 
-    public static Map Current
-    {
-        get { return _current; }
-    }
+	public static Map Current
+	{
+		get { return _current; }
+	}
 
-    private void Awake()
-    {
-        _mapCamera = GetComponentInChildren<Camera>();
-        _mapCanvas = GetComponentInChildren<Canvas>();
-        _current = this;
-        _playerPin = CreatePin(PlayerController.Current.PlayerPinPrefab);
-        _destination = Instantiate(DestinationPrefab);
-        _destination.SetActive(false);
-        isDestinationSet = false;
+	private void Awake()
+	{
+		_mapCamera = GetComponentInChildren<Camera>();
+		_mapCanvas = GetComponentInChildren<Canvas>();
+		_current = this;
+		_playerPin = CreatePin(PlayerController.Current.PlayerPinPrefab);
+		_destination = Instantiate(DestinationPrefab);
+		_destination.SetActive(false);
+		isDestinationSet = false;
 
-        GetComponentInChildren<MapCamera>().OnMove += UpdateDestination;
+		GetComponentInChildren<MapCamera>().OnMove += UpdateDestination;
 
-        Hide();
-    }
+		Hide();
+	}
 
-    public void AddPin(MapPin pin)
-    {
-        if (_pins == null)
-            _pins = new List<MapPin>();
+	private void Start()
+	{
+		CreateGrid();
+	}
 
-        pin.ActiveInstance = CreatePin(pin.ActivePin);
-        if (pin.ActiveInstance.GetComponentInChildren<Billboard>())
-            pin.ActiveInstance.GetComponentInChildren<Billboard>().UseCamera = _mapCamera;
+	public void AddPin(MapPin pin)
+	{
+		if (_pins == null)
+			_pins = new List<MapPin>();
 
-        pin.InactiveInstance = CreatePin(pin.InactivePin);
-        if (pin.InactiveInstance.GetComponentInChildren<Billboard>())
-            pin.InactiveInstance.GetComponentInChildren<Billboard>().UseCamera = _mapCamera;
+		pin.ActiveInstance = CreatePin(pin.ActivePin);
+		if (pin.ActiveInstance.GetComponentInChildren<Billboard>())
+			pin.ActiveInstance.GetComponentInChildren<Billboard>().UseCamera = _mapCamera;
 
-        _pins.Add(pin);
-        
-    }
+		pin.InactiveInstance = CreatePin(pin.InactivePin);
+		if (pin.InactiveInstance.GetComponentInChildren<Billboard>())
+			pin.InactiveInstance.GetComponentInChildren<Billboard>().UseCamera = _mapCamera;
 
-    public void RemovePin(MapPin pin)
-    {
-        _pins.Remove(pin);
-        if (pin.ActiveInstance != null)
-            Destroy(pin.ActiveInstance);
-    }
+		_pins.Add(pin);
 
-    private void Update()
-    {
-        if (IsShown())
-        {
-            if (PlayerController.Current.VehicleInstance != null)
-                _playerPin.transform.position = MapScale*PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
-            foreach (var pin in _pins)
-            {
-                pin.RenderState();
-                pin.CurrentInstance.transform.position = MapScale*pin.Shiftable.GetAbsoluteUniversePosition();
-            }
+	}
 
-            var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit mouseHit;
-            if (Physics.Raycast(mouseRay, out mouseHit, Mathf.Infinity, LayerMask.GetMask("Map")))
-            {
-                if (Input.GetMouseButtonUp(0))
-                {
-                    var clickedPin = _pins.First(p => p.CurrentInstance.transform == mouseHit.collider.transform.parent.transform);
-                    _destination.SetActive(true);
-                    isDestinationSet = true;
-                    _destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);
-                    _destination.transform.position = clickedPin.Shiftable.GetWorldPosition();
-                }
-            }
-        }
-    }
+	public void RemovePin(MapPin pin)
+	{
+		_pins.Remove(pin);
+		if (pin.ActiveInstance != null)
+			Destroy(pin.ActiveInstance);
+	}
 
-    private void UpdateDestination()
-    {
-        if (isDestinationSet)
-            DestinationImage.rectTransform.localPosition = _mapCamera.WorldToScreenPoint(MapScale * _destination.GetComponent<Shiftable>().GetAbsoluteUniversePosition()) - new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
-    }
+	private void Update()
+	{
+		if (IsShown())
+		{
+			if (PlayerController.Current.VehicleInstance != null)
+				_playerPin.transform.position = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
+			foreach (var pin in _pins)
+			{
+				pin.RenderState();
+				pin.CurrentInstance.transform.position = MapScale * pin.Shiftable.GetAbsoluteUniversePosition();
+			}
 
-    private GameObject CreatePin(GameObject prefab)
-    {
-        var pin = Utility.InstantiateInParent(prefab, transform);
-        Utility.SetLayerRecursively(pin, LayerMask.NameToLayer("Map"));
-        return pin;
-    }
+			var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
+			RaycastHit mouseHit;
+			if (Physics.Raycast(mouseRay, out mouseHit, Mathf.Infinity, LayerMask.GetMask("Map")))
+			{
+				if (Input.GetMouseButtonUp(0))
+				{
+					var clickedPin = _pins.First(p => p.CurrentInstance.transform == mouseHit.collider.transform.parent.transform);
+					_destination.SetActive(true);
+					isDestinationSet = true;
+					_destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);
+					_destination.transform.position = clickedPin.Shiftable.GetWorldPosition();
+				}
+			}
+		}
+	}
 
-    public void Show()
-    {
-        PlayerController.Current.SetControlEnabled(false);
+	private void UpdateDestination()
+	{
+		if (isDestinationSet)
+			DestinationImage.rectTransform.localPosition = _mapCamera.WorldToScreenPoint(MapScale * _destination.GetComponent<Shiftable>().GetAbsoluteUniversePosition()) - new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
+	}
 
-        if (PlayerController.Current.VehicleInstance != null)
-            _playerPin.transform.position = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
-        MapCamera.Current.SetLookAt(_playerPin.transform.position);
+	private GameObject CreatePin(GameObject prefab)
+	{
+		var pin = Utility.InstantiateInParent(prefab, transform);
+		Utility.SetLayerRecursively(pin, LayerMask.NameToLayer("Map"));
+		return pin;
+	}
 
-        _mapCamera.enabled = true;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        _mapCanvas.enabled = true;
-        if (TrackerManager.Current != null)
-            TrackerManager.Current.SetTrackersVisibility(false);
-    }
+	public void Show()
+	{
+		PlayerController.Current.SetControlEnabled(false);
 
-    public void Hide()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        _mapCamera.enabled = false;
-        PlayerController.Current.SetControlEnabled(true);
-        _mapCanvas.enabled = false;
-        if (TrackerManager.Current != null)
-            TrackerManager.Current.SetTrackersVisibility(true);
-    }
+		if (PlayerController.Current.VehicleInstance != null)
+			_playerPin.transform.position = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
+		MapCamera.Current.SetLookAt(_playerPin.transform.position);
 
-    public void Toggle()
-    {
-        if (_mapCamera.enabled)
-        {
-            Hide();
+		_mapCamera.enabled = true;
+		Cursor.visible = true;
+		Cursor.lockState = CursorLockMode.None;
+		_mapCanvas.enabled = true;
+		if (TrackerManager.Current != null)
+			TrackerManager.Current.SetTrackersVisibility(false);
+	}
+
+	public void Hide()
+	{
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+		_mapCamera.enabled = false;
+		PlayerController.Current.SetControlEnabled(true);
+		_mapCanvas.enabled = false;
+		if (TrackerManager.Current != null)
+			TrackerManager.Current.SetTrackersVisibility(true);
+	}
+
+	public void Toggle()
+	{
+		if (_mapCamera.enabled)
+		{
+			Hide();
 			gameObject.SetActive(false);
-        }
-        else
-        {
-            Show();
+		}
+		else
+		{
+			Show();
 			gameObject.SetActive(true);
 		}
-    }
+	}
 
-    public bool IsShown()
-    {
-        return _mapCamera.enabled;
-    }
+	public bool IsShown()
+	{
+		return _mapCamera.enabled;
+	}
+
+	private void CreateGrid()
+	{
+		var grid = new GameObject();
+		grid.transform.SetParent(transform);
+		grid.name = "Grid";
+		grid.layer = LayerMask.NameToLayer("Map");
+		
+		var radius = 100f;
+		var gridCount = 16;
+
+		float gridStep = radius * 2f / (float)gridCount;
+
+		float lineWidth = 0.5f;
+		for (var x = 0; x <= gridCount; x++)
+		{
+			var xPos = radius - x * gridStep;
+
+			var line1 = new GameObject();
+			line1.transform.SetParent(grid.transform);
+			line1.name = "LineX" + x;
+			line1.layer = LayerMask.NameToLayer("Map");
+			var lr = line1.AddComponent<LineRenderer>();
+			lr.material = GridLineMaterial;
+			lr.SetWidth(lineWidth, lineWidth);
+			lr.SetPositions(new Vector3[] {
+				new Vector3(xPos, 0, -radius),
+				new Vector3(xPos, 0, radius)
+			});
+
+			var line2 = new GameObject();
+			line2.transform.SetParent(grid.transform);
+			line2.name = "LineZ" + x;
+			line2.layer = LayerMask.NameToLayer("Map");
+			var lr2 = line2.AddComponent<LineRenderer>();
+			lr2.material = GridLineMaterial;
+			lr2.SetWidth(lineWidth, lineWidth);
+			lr2.SetPositions(new Vector3[] {
+				new Vector3(-radius, 0 ,xPos),
+				new Vector3(radius, 0, xPos)
+			});
+		}
+	}
 }
