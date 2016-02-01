@@ -62,7 +62,7 @@ public class NavPointTracker : Tracker
         if (screenPosition.z < 0f)
         {
             screenPosition *= -1f;
-            screenPosition = (screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f))*20000f + new Vector3(screenCentre.x, screenCentre.y, 0f);
+            screenPosition = (screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f))*Utility.ProjectOffscreenLength + new Vector3(screenCentre.x, screenCentre.y, 0f);
         }
         screenPosition.z = 0f;
 
