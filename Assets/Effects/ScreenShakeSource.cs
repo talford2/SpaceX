@@ -20,7 +20,7 @@ public class ScreenShakeSource : MonoBehaviour
 
     private float GetAmplitude(float maxAmplitude, float minDistance, float maxDistance)
     {
-        var dist = (shiftable.GetWorldPosition() - Universe.Current.ViewPort.Shiftable.GetWorldPosition()).magnitude;
+        var dist = (transform.position - PlayerController.Current.VehicleInstance.transform.position).magnitude;
         if (dist < minDistance)
             return maxAmplitude;
         if (dist < maxDistance)
