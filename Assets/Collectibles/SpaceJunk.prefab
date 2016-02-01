@@ -28,7 +28,7 @@ GameObject:
   - 114: {fileID: 11400274}
   - 114: {fileID: 11499834}
   - 54: {fileID: 5444890}
-  - 114: {fileID: 11431714}
+  - 114: {fileID: 11467622}
   - 114: {fileID: 11446934}
   m_Layer: 0
   m_Name: SpaceJunk
@@ -180,27 +180,6 @@ MonoBehaviour:
   Item: {fileID: 11400274}
   Radius: 8
   Delay: 0.5
---- !u!114 &11431714
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 163398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ArrowCursorImage: {fileID: 2800000, guid: c26f54cfdc4f5f040bcf72dc38fec08b, type: 3}
-  TrackerCursorImage: {fileID: 2800000, guid: 97d3f06b1400baf4cbf64a187fdcbf67, type: 3}
-  FarTrackerCursorImage: {fileID: 2800000, guid: 97557eeafc980b448bd3053151c8f144,
-    type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: bb1bae53db7561f4db60a71bf4d7a128,
-    type: 3}
-  LockingCursorImage: {fileID: 0}
-  LockedCursorImage: {fileID: 0}
-  CallSign: 
-  IsDisabled: 0
 --- !u!114 &11446934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -214,6 +193,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cooldown: 15
   StartOn: 1
+--- !u!114 &11467622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4e32afd8ecb214fa3ac6713f43d160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowCursorImage: {fileID: 2800000, guid: c26f54cfdc4f5f040bcf72dc38fec08b, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 97d3f06b1400baf4cbf64a187fdcbf67, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 97557eeafc980b448bd3053151c8f144,
+    type: 3}
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: bb1bae53db7561f4db60a71bf4d7a128,
+    type: 3}
 --- !u!114 &11499834
 MonoBehaviour:
   m_ObjectHideFlags: 1
