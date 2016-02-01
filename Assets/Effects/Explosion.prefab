@@ -386,7 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxAmplitude: 0.7
   MinDistance: 20
-  MaxDistance: 1000
+  MaxDistance: 500
   Frequency: 0.7
   Duration: 0.4
 --- !u!114 &11434974
@@ -12610,7 +12610,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxDistance
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MinDistance
