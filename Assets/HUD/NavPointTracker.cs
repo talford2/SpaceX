@@ -60,7 +60,10 @@ public class NavPointTracker : Tracker
     {
         var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
         if (screenPosition.z < 0f)
+        {
             screenPosition *= -1f;
+            screenPosition = (screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f))*20000f + new Vector3(screenCentre.x, screenCentre.y, 0f);
+        }
         screenPosition.z = 0f;
 
         if (screenBounds.Contains(screenPosition))
