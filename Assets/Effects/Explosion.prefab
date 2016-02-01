@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692051f2ff08a2843a755bcb2b8461fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxAmplitude: 1
+  MaxAmplitude: 0.7
   MinDistance: 20
   MaxDistance: 1000
   Frequency: 0.7
@@ -12615,6 +12615,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MinDistance
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxAmplitude
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
