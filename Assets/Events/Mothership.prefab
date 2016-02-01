@@ -92,6 +92,7 @@ GameObject:
   - 114: {fileID: 11400518}
   - 114: {fileID: 11458226}
   - 114: {fileID: 11423400}
+  - 114: {fileID: 11431964}
   m_Layer: 0
   m_Name: DualLaserTurret (3)
   m_TagString: Untagged
@@ -254,6 +255,7 @@ GameObject:
   - 114: {fileID: 11469974}
   - 114: {fileID: 11493126}
   - 114: {fileID: 11448764}
+  - 114: {fileID: 11422860}
   m_Layer: 0
   m_Name: DualLaserTurret (2)
   m_TagString: Untagged
@@ -866,6 +868,7 @@ GameObject:
   - 114: {fileID: 11449878}
   - 114: {fileID: 11474600}
   - 114: {fileID: 11421710}
+  - 114: {fileID: 11458744}
   m_Layer: 0
   m_Name: DualLaserTurret (1)
   m_TagString: Untagged
@@ -997,6 +1000,7 @@ GameObject:
   - 114: {fileID: 11499304}
   - 114: {fileID: 11442548}
   - 114: {fileID: 11473724}
+  - 114: {fileID: 11465680}
   m_Layer: 0
   m_Name: DualLaserTurret
   m_TagString: Untagged
@@ -2393,6 +2397,7 @@ MonoBehaviour:
   MinPitch: 25
   MaxPitch: 300
   AimTolerance: 5
+  ExtrapolationTimeError: 0.5
 --- !u!114 &11402434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2470,6 +2475,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 471328}
+--- !u!114 &11422860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowCursorImage: {fileID: 2800000, guid: 6d378ba77f480244ab315a1910910d5e, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612,
+    type: 3}
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03,
+    type: 3}
+  LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
+  LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  CallSign: 
+  IsDisabled: 0
 --- !u!114 &11423400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2511,6 +2537,27 @@ MonoBehaviour:
   - {fileID: 11421710}
   - {fileID: 11448764}
   - {fileID: 11423400}
+--- !u!114 &11431964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowCursorImage: {fileID: 2800000, guid: 6d378ba77f480244ab315a1910910d5e, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612,
+    type: 3}
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03,
+    type: 3}
+  LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
+  LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  CallSign: 
+  IsDisabled: 0
 --- !u!114 &11442332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2537,7 +2584,7 @@ MonoBehaviour:
   Health: 50
   MaxHealth: 50
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 0}
+  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11448764
@@ -2573,6 +2620,7 @@ MonoBehaviour:
   MinPitch: 25
   MaxPitch: 300
   AimTolerance: 5
+  ExtrapolationTimeError: 0.5
 --- !u!114 &11453732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2599,7 +2647,7 @@ MonoBehaviour:
   Health: 50
   MaxHealth: 50
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 0}
+  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11458716
@@ -2618,6 +2666,27 @@ MonoBehaviour:
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
   CurrentInstance: {fileID: 0}
+--- !u!114 &11458744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowCursorImage: {fileID: 2800000, guid: 6d378ba77f480244ab315a1910910d5e, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612,
+    type: 3}
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03,
+    type: 3}
+  LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
+  LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  CallSign: 
+  IsDisabled: 0
 --- !u!114 &11461348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2642,6 +2711,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
+--- !u!114 &11465680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowCursorImage: {fileID: 2800000, guid: 6d378ba77f480244ab315a1910910d5e, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612,
+    type: 3}
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03,
+    type: 3}
+  LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
+  LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  CallSign: 
+  IsDisabled: 0
 --- !u!114 &11469974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2663,6 +2753,7 @@ MonoBehaviour:
   MinPitch: 25
   MaxPitch: 300
   AimTolerance: 5
+  ExtrapolationTimeError: 0.5
 --- !u!114 &11473724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2689,7 +2780,7 @@ MonoBehaviour:
   Health: 50
   MaxHealth: 50
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 0}
+  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11476396
@@ -2730,7 +2821,7 @@ MonoBehaviour:
   Health: 50
   MaxHealth: 50
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 0}
+  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11495474
@@ -2778,6 +2869,7 @@ MonoBehaviour:
   MinPitch: 25
   MaxPitch: 300
   AimTolerance: 5
+  ExtrapolationTimeError: 0.5
 --- !u!135 &13547422
 SphereCollider:
   m_ObjectHideFlags: 1
