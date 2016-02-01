@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemTracker : Tracker
+public class CollectibleTracker : Tracker
 {
     public Texture2D ArrowCursorImage;
     public Texture2D TrackerCursorImage;
