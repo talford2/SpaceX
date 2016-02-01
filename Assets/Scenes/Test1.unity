@@ -1904,7 +1904,7 @@ MonoBehaviour:
   Team: 1
   CallSign: Player
   SpaceJunkCount: 0
-  CollectRadius: 8
+  CollectRadius: 50
   Squadron:
   - {fileID: 290884929}
   - {fileID: 989789834}
