@@ -9,18 +9,15 @@ public class ScreenShakeSource : MonoBehaviour
     public float Frequency = 0.7f;
     public float Duration = 1f;
 
-    private Shiftable shiftable;
-
-    private void Awake()
+    private void Start()
     {
-        shiftable = GetComponent<Shiftable>();
         var amplitude = GetAmplitude(MaxAmplitude, MinDistance, MaxDistance);
         Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(amplitude, Frequency, Duration);
     }
 
     private float GetAmplitude(float maxAmplitude, float minDistance, float maxDistance)
     {
-        var dist = (transform.position - PlayerController.Current.VehicleInstance.transform.position).magnitude;
+        var dist = (transform.position - Universe.Current.ViewPort.transform.position).magnitude;
         if (dist < minDistance)
             return maxAmplitude;
         if (dist < maxDistance)
