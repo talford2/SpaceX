@@ -2,17 +2,17 @@
 
 public class Utility
 {
-    private static float projectOffscreenLength;
+	private static float projectOffscreenLength;
 
-    public static float ProjectOffscreenLength
-    {
-        get
-        {
-            if (projectOffscreenLength < 1f)
-                projectOffscreenLength = new Vector2(Screen.width, Screen.height).magnitude + 10f;
-            return projectOffscreenLength;
-        }
-    }
+	public static float ProjectOffscreenLength
+	{
+		get
+		{
+			if (projectOffscreenLength < 1f)
+				projectOffscreenLength = new Vector2(Screen.width, Screen.height).magnitude + 10f;
+			return projectOffscreenLength;
+		}
+	}
 
 	public static Transform FindOrCreateContainer(string name)
 	{
@@ -237,6 +237,20 @@ public class Utility
 		var distance = (vehicle.transform.position - shootWeapon.GetShootPointCentre()).magnitude;
 		var timeToHit = distance / shootWeapon.MissilePrefab.GetComponent<Missile>().MissileSpeed;
 		return vehicle.transform.position + vehicle.GetVelocity() * (timeToHit + timeError);
+	}
+
+	public static void PlayOnTransform(AudioClip clip, Transform trans)
+	{
+		if (clip != null)
+		{
+			var newGameObj = new GameObject();
+			newGameObj.transform.SetParent(trans);
+			newGameObj.name = "Sound";
+
+			var audioSource = newGameObj.AddComponent<AudioSource>();
+			audioSource.clip = clip;
+			audioSource.Play();
+		}
 	}
 }
 
