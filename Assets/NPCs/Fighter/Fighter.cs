@@ -149,7 +149,7 @@ public class Fighter : Npc<Fighter>
         Target = null;
         if (DropItem != null)
         {
-            var dropAmount = Random.Range(0, MaxDropAmount);
+            var dropAmount = Random.Range(0, MaxDropAmount + 1);
             for (var i = 0f; i < dropAmount; i++)
             {
                 var dropPosition = VehicleInstance.transform.position + Random.onUnitSphere*1.5f;
