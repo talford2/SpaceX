@@ -7,10 +7,10 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PirateSquad
-  m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -127,12 +127,24 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _MaxDistance
+        second: 9.4
     m_Colors:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 0, a: 1}
+        second: {r: 0, g: 0.5991242, b: 0.797, a: 0.141}
+      data:
+        first:
+          name: _Position
+        second: {r: 0, g: 0, b: 0, a: -1}
+      data:
+        first:
+          name: _ShieldColor
+        second: {r: 0.7, g: 1, b: 1, a: 0.059}

@@ -172,7 +172,7 @@ public class Map : MonoBehaviour
 
 		float gridStep = radius * 2f / (float)gridCount;
 
-		float lineWidth = 0.5f;
+		float lineWidth = 0.25f;
 		for (var x = 0; x <= gridCount; x++)
 		{
 			var xPos = radius - x * gridStep;
