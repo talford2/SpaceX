@@ -166,8 +166,8 @@ public class Map : MonoBehaviour
 		grid.transform.SetParent(transform);
 		grid.name = "Grid";
 		grid.layer = LayerMask.NameToLayer("Map");
-		
-		var radius = 100f;
+
+		var radius = 130f;
 		var gridCount = 16;
 
 		float gridStep = radius * 2f / (float)gridCount;
@@ -184,8 +184,11 @@ public class Map : MonoBehaviour
 			var lr = line1.AddComponent<LineRenderer>();
 			lr.material = GridLineMaterial;
 			lr.SetWidth(lineWidth, lineWidth);
+			lr.SetVertexCount(3);
+
 			lr.SetPositions(new Vector3[] {
 				new Vector3(xPos, 0, -radius),
+				new Vector3(xPos, 0, 0),
 				new Vector3(xPos, 0, radius)
 			});
 
@@ -196,8 +199,11 @@ public class Map : MonoBehaviour
 			var lr2 = line2.AddComponent<LineRenderer>();
 			lr2.material = GridLineMaterial;
 			lr2.SetWidth(lineWidth, lineWidth);
+			lr2.SetVertexCount(3);
+
 			lr2.SetPositions(new Vector3[] {
 				new Vector3(-radius, 0 ,xPos),
+				new Vector3(0, 0 ,xPos),
 				new Vector3(radius, 0, xPos)
 			});
 		}
