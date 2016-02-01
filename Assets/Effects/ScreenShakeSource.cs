@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Shiftable))]
 public class ScreenShakeSource : MonoBehaviour
 {
     public float MaxAmplitude = 1f;
@@ -8,15 +9,18 @@ public class ScreenShakeSource : MonoBehaviour
     public float Frequency = 0.7f;
     public float Duration = 1f;
 
+    private Shiftable shiftable;
+
     private void Awake()
     {
-        var amplitude = GetAmplitude(transform.position, MaxAmplitude, MinDistance, MaxDistance);
+        shiftable = GetComponent<Shiftable>();
+        var amplitude = GetAmplitude(MaxAmplitude, MinDistance, MaxDistance);
         Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(amplitude, Frequency, Duration);
     }
 
-    private float GetAmplitude(Vector3 position, float maxAmplitude, float minDistance, float maxDistance)
+    private float GetAmplitude(float maxAmplitude, float minDistance, float maxDistance)
     {
-        var dist = (position - Universe.Current.ViewPort.transform.position).magnitude;
+        var dist = (shiftable.GetWorldPosition() - Universe.Current.ViewPort.Shiftable.GetWorldPosition()).magnitude;
         if (dist < minDistance)
             return maxAmplitude;
         if (dist < maxDistance)
