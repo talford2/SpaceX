@@ -44,7 +44,7 @@ MonoBehaviour:
   IsSquadronMember: 0
   CallSign: 
   DropItem: {fileID: 11400274, guid: 816f10aa082864542b4127328f007432, type: 2}
-  MaxDropAmount: 8
+  MaxDropAmount: 3
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   MaxTargetDistance: 2000
@@ -60,7 +60,7 @@ MonoBehaviour:
   BurstTime: 0.5
   BurstWaitTime: 0.7
   ExrapolationTimeError: 0.5
-  AimOffsetRadius: 5
+  AimOffsetRadius: 8
   EvadeDistance: 400
   TurnAroundDistance: 250
   AcclerateDistance: 100
@@ -100,6 +100,10 @@ Prefab:
         type: 2}
     - target: {fileID: 0}
       propertyPath: MaxDropAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: AimOffsetRadius
       value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
