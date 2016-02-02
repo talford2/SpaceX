@@ -25,6 +25,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 483904}
+  - 114: {fileID: 11441756}
   m_Layer: 0
   m_Name: Mothership3
   m_TagString: Untagged
@@ -766,7 +767,6 @@ GameObject:
   - 114: {fileID: 11402434}
   - 114: {fileID: 11429504}
   - 114: {fileID: 11458716}
-  - 114: {fileID: 11430234}
   m_Layer: 0
   m_Name: Mothership
   m_TagString: Untagged
@@ -2519,24 +2519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c0e240e5c41af49bae7e5465494283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11430234
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7806c2c78bc2bb444bf4fc12544f4df6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LineRendererWidth: 35
-  LineRenderers: []
-  TargetableObjects:
-  - {fileID: 11473724}
-  - {fileID: 11421710}
-  - {fileID: 11448764}
-  - {fileID: 11423400}
 --- !u!114 &11431964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2558,6 +2540,25 @@ MonoBehaviour:
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   CallSign: 
   IsDisabled: 0
+--- !u!114 &11441756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7806c2c78bc2bb444bf4fc12544f4df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FocusShiftable: {fileID: 11402434}
+  LineRendererWidth: 35
+  LineRenderers: []
+  TargetableObjects:
+  - {fileID: 11473724}
+  - {fileID: 11421710}
+  - {fileID: 11448764}
+  - {fileID: 11423400}
 --- !u!114 &11442332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2661,7 +2662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c4ddec4abcfd448bf35628836b2578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePin: {fileID: 133228, guid: 04a933840e88bec44867eb87c3bd0066, type: 2}
+  ActivePin: {fileID: 133228, guid: da416f80ff52a4c41ab588e73d0e57a2, type: 2}
   InactivePin: {fileID: 133228, guid: e60460a5db76a7842a14febd8542e701, type: 2}
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
@@ -3148,7 +3149,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ActivePin
       value: 
-      objectReference: {fileID: 133228, guid: 04a933840e88bec44867eb87c3bd0066, type: 2}
+      objectReference: {fileID: 133228, guid: da416f80ff52a4c41ab588e73d0e57a2, type: 2}
     - target: {fileID: 0}
       propertyPath: InactivePin
       value: 

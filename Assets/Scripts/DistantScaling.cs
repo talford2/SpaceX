@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class DistantScaling : MonoBehaviour
 {
-	private Shiftable _shiftable;
 	private float _thresholdDistance;
 	private float _thresholdDistanceSquared;
 	private float _distantScale;
@@ -12,6 +11,7 @@ public class DistantScaling : MonoBehaviour
 	private int _defaultLayer;
 
 	// Crappy solution
+    public Shiftable FocusShiftable;
 	public float LineRendererWidth = 35f;
 	public List<LineRenderer> LineRenderers;
 
@@ -22,7 +22,6 @@ public class DistantScaling : MonoBehaviour
 
 	private void Awake()
 	{
-		_shiftable = GetComponent<Shiftable>();
 		_thresholdDistance = 1000f;
 		_distantScale = 1000f;
 
@@ -38,8 +37,10 @@ public class DistantScaling : MonoBehaviour
 
 	private void UpdatePositionAndScale()
 	{
+	    if (FocusShiftable == null)
+	        return;
 		// Scaling
-		var worldDestination = Universe.Current.GetWorldPosition(_shiftable.UniversePosition);
+		var worldDestination = Universe.Current.GetWorldPosition(FocusShiftable.UniversePosition);
         var toCamera = worldDestination - Universe.Current.ViewPort.AttachedCamera.transform.position;
 
 		if (toCamera.sqrMagnitude > _thresholdDistanceSquared)

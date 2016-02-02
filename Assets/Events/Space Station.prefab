@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 480088}
   - 33: {fileID: 3342002}
   - 23: {fileID: 2352738}
-  - 114: {fileID: 11492316}
   - 114: {fileID: 11429468}
   - 114: {fileID: 11485238}
   - 114: {fileID: 11482882}
@@ -19,7 +18,7 @@ GameObject:
   m_Layer: 0
   m_Name: Space Station
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -32,6 +31,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 414198}
   - 114: {fileID: 11483114}
+  - 114: {fileID: 11472736}
   m_Layer: 0
   m_Name: PlayerSpawner
   m_TagString: Untagged
@@ -58,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106982}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.1089067, y: -4.705825, z: 5.4574223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 414198}
@@ -142,6 +142,21 @@ MonoBehaviour:
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
   CurrentInstance: {fileID: 0}
+--- !u!114 &11472736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 156482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7806c2c78bc2bb444bf4fc12544f4df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FocusShiftable: {fileID: 11429468}
+  LineRendererWidth: 35
+  LineRenderers: []
+  TargetableObjects: []
 --- !u!114 &11482882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,27 +192,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowCursorImage: {fileID: 2800000, guid: 3ff4affc978dcee4998bd90d5f9c6896, type: 3}
-  TrackerCurosrImage: {fileID: 2800000, guid: 140e49d363b2df244bf0c5f8ebe6fe04, type: 3}
+  TrackerCursorImage: {fileID: 0}
   FarTrackerCursorImage: {fileID: 0}
   VeryFarTrackerCursorImage: {fileID: 0}
   LockingCursorImage: {fileID: 0}
   LockedCursorImage: {fileID: 0}
+  CallSign: 
   IsDisabled: 0
-  IsDelayComplete: 0
-  DelayCooldown: 0
---- !u!114 &11492316
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7806c2c78bc2bb444bf4fc12544f4df6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LineRendererWidth: 35
-  LineRenderers: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -231,6 +232,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Shiftable
+      value: 
+      objectReference: {fileID: 11429468}
+    - target: {fileID: 0}
+      propertyPath: FocusShiftable
       value: 
       objectReference: {fileID: 11429468}
     m_RemovedComponents: []
