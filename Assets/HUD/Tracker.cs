@@ -14,6 +14,8 @@ public abstract class Tracker : MonoBehaviour
 
     public abstract void DestroyInstance();
 
+    public abstract void SetVisible(bool value);
+
     public virtual void OnDestroy()
     {
         TrackerManager.Current.RemoveTracker(this);

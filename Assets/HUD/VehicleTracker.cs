@@ -162,6 +162,12 @@ public class VehicleTracker : Tracker
             Destroy(imageInstance.gameObject);
     }
 
+    public override void SetVisible(bool value)
+    {
+        IsDisabled = !value;
+        UpdateInstance();
+    }
+
     private float GetScreenAngle(Vector2 point)
     {
         var delta = point - screenCentre;

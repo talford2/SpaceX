@@ -86,6 +86,11 @@ public class CollectibleTracker : Tracker
             Destroy(imageInstance);
     }
 
+    public override void SetVisible(bool value)
+    {
+        imageInstance.enabled = value;
+    }
+
     private float GetScreenAngle(Vector2 point)
     {
         var delta = point - screenCentre;

@@ -100,25 +100,21 @@ public class DistantScaling : MonoBehaviour
 
     private void ManageTargtables()
     {
-        if (isDistant)
+        SetTargetablesEnabled(!isDistant);
+    }
+
+    private void SetTargetablesEnabled(bool value)
+    {
+        foreach (var targetable in TargetableObjects)
         {
-            foreach (var targetable in TargetableObjects)
+            if (targetable != null)
             {
-                if (targetable != null)
+                targetable.SetEnabled(value);
+                targetable.gameObject.SetActive(value);
+                var tracker = targetable.GetComponent<Tracker>();
+                if (tracker != null)
                 {
-                    targetable.SetEnabled(false);
-                    targetable.gameObject.SetActive(false);
-                }
-            }
-        }
-        else
-        {
-            foreach (var targetable in TargetableObjects)
-            {
-                if (targetable != null)
-                {
-                    targetable.gameObject.SetActive(true);
-                    targetable.SetEnabled(true);
+                    tracker.SetVisible(value);
                 }
             }
         }
