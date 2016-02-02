@@ -686,6 +686,8 @@ MonoBehaviour:
   YawSpeed: 250
   RollAcceleration: 640
   MaxRollSpeed: 120
+  CollisionsCentre: {x: 0, y: 0, z: 0}
+  CollisionRadius: 3.4
   MaxBoostEnergy: 100
   BoostEnergy: 100
   BoostCost: 20

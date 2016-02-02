@@ -14,7 +14,6 @@ GameObject:
   - 114: {fileID: 11485238}
   - 114: {fileID: 11482882}
   - 114: {fileID: 11462916}
-  - 64: {fileID: 6468710}
   m_Layer: 0
   m_Name: Space Station
   m_TagString: Untagged
@@ -22,18 +21,49 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &147696
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 428724}
+  - 64: {fileID: 6492692}
+  m_Layer: 14
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &156482
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 414198}
   - 114: {fileID: 11483114}
-  - 114: {fileID: 11472736}
   m_Layer: 0
   m_Name: PlayerSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &166962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 484754}
+  - 114: {fileID: 11494040}
+  m_Layer: 0
+  m_Name: ScalingObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,8 +79,20 @@ Transform:
   m_LocalPosition: {x: 0, y: -80, z: 110}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 480088}
+  m_Father: {fileID: 484754}
   m_RootOrder: 0
+--- !u!4 &428724
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147696}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 484754}
+  m_RootOrder: 1
 --- !u!4 &480088
 Transform:
   m_ObjectHideFlags: 1
@@ -58,11 +100,25 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106982}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1089067, y: -4.705825, z: 5.4574223}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 484754}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &484754
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166962}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 414198}
-  m_Father: {fileID: 0}
+  - {fileID: 428724}
+  m_Father: {fileID: 480088}
   m_RootOrder: 0
 --- !u!23 &2352738
 MeshRenderer:
@@ -97,12 +153,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106982}
   m_Mesh: {fileID: 4300000, guid: fc2be7ce9ba3ce0489cd2b2403dc4fad, type: 3}
---- !u!64 &6468710
+--- !u!64 &6492692
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106982}
+  m_GameObject: {fileID: 147696}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -142,21 +198,6 @@ MonoBehaviour:
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
   CurrentInstance: {fileID: 0}
---- !u!114 &11472736
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 156482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7806c2c78bc2bb444bf4fc12544f4df6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FocusShiftable: {fileID: 11429468}
-  LineRendererWidth: 35
-  LineRenderers: []
-  TargetableObjects: []
 --- !u!114 &11482882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,6 +240,23 @@ MonoBehaviour:
   LockedCursorImage: {fileID: 0}
   CallSign: 
   IsDisabled: 0
+--- !u!114 &11494040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7806c2c78bc2bb444bf4fc12544f4df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FocusShiftable: {fileID: 11429468}
+  LineRendererWidth: 35
+  LineRenderers: []
+  TargetableObjects: []
+  ManagedColliders:
+  - {fileID: 6492692}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

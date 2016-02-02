@@ -30,6 +30,10 @@ public class Vehicle : MonoBehaviour
 
 	public float MaxRollSpeed = 100f;
 
+    [Header("Collisions")]
+    public Vector3 CollisionsCentre;
+    public float CollisionRadius = 3f;
+
 	[Header("Boost Energy")]
 	public float MaxBoostEnergy = 100f;
 
@@ -269,7 +273,10 @@ public class Vehicle : MonoBehaviour
 		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20f * Time.deltaTime);
 
 		_velocity = transform.forward * CurrentSpeed;
-		_velocityReference.Value = _velocity;
+
+        UpdateVelocityFromCollisions();
+
+        _velocityReference.Value = _velocity;
 		_shiftable.Translate(_velocity * Time.deltaTime);
 
 		var thrustAmount = acceleration / MaxSpeed;
@@ -302,8 +309,27 @@ public class Vehicle : MonoBehaviour
 		}
 	}
 
-	public Vector3 GetVelocity()
+    private void UpdateVelocityFromCollisions()
+    {
+        /*
+        var moveRay = new Ray(transform.position + CollisionsCentre, _velocity);
+        var moveHits = Physics.SphereCastAll(moveRay, CollisionRadius, _velocity.magnitude * Time.deltaTime, LayerMask.GetMask("Environment"));
+        foreach (var moveHit in moveHits)
+        {
+            var projVel = Vector3.Project(_velocity, moveHit.normal);
+            _velocity -= projVel;
+        }
+        */
+    }
+
+    public Vector3 GetVelocity()
 	{
 		return _velocity;
 	}
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position + CollisionsCentre, CollisionRadius);
+    }
 }

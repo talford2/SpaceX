@@ -19,6 +19,7 @@ public class DistantScaling : MonoBehaviour
     private bool lastIsDistant;
 
     public List<Targetable> TargetableObjects;
+    public List<Collider> ManagedColliders;
 
 	private void Awake()
 	{
@@ -81,6 +82,10 @@ public class DistantScaling : MonoBehaviour
 			transform.position = worldDestination;
 			if (gameObject.layer != _defaultLayer)
 				Utility.SetLayerRecursively(gameObject, _defaultLayer);
+		    foreach (var managedCollider in ManagedColliders)
+		    {
+		        managedCollider.gameObject.layer = LayerMask.NameToLayer("Environment");
+		    }
 		}
 
 	    if (isDistant != lastIsDistant)
@@ -102,6 +107,10 @@ public class DistantScaling : MonoBehaviour
     private void ManageTargtables()
     {
         SetTargetablesEnabled(!isDistant);
+        foreach (var managedCollider in ManagedColliders)
+        {
+            managedCollider.enabled = !isDistant;
+        }
     }
 
     private void SetTargetablesEnabled(bool value)
