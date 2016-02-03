@@ -2002,7 +2002,7 @@ MonoBehaviour:
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
-  BackgroundColor: {r: 0.09499411, g: 0.020897042, b: 0.203, a: 1}
+  BackgroundColor: {r: 0, g: 0, b: 0, a: 1}
   ScatterObjects:
   - Name: Clouds
     IsActive: 0
