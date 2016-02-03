@@ -290,8 +290,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MissileSpeed: 50
+  MinChaseDistance: 50
   ExplodePrefab: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
-  Rocket: {fileID: 0}
+  Rocket: {fileID: 2355120}
   Tracer: {fileID: 9611106}
 --- !u!120 &12080608
 LineRenderer:
@@ -413,7 +414,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Rocket
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2355120}
     - target: {fileID: 0}
       propertyPath: Tracer
       value: 
