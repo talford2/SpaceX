@@ -2438,7 +2438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c500da126aa939c429ebf252cb7c9d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {fileID: 470426}
+  TargetTransform: {fileID: 475736}
 --- !u!114 &11421710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2474,7 +2474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c500da126aa939c429ebf252cb7c9d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {fileID: 471328}
+  TargetTransform: {fileID: 413552}
 --- !u!114 &11422860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2559,6 +2559,12 @@ MonoBehaviour:
   - {fileID: 11421710}
   - {fileID: 11448764}
   - {fileID: 11423400}
+  ManagedColliders: []
+  ManagedDetectables:
+  - {fileID: 11417674}
+  - {fileID: 11422754}
+  - {fileID: 11453732}
+  - {fileID: 11442332}
 --- !u!114 &11442332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2570,7 +2576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c500da126aa939c429ebf252cb7c9d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {fileID: 447032}
+  TargetTransform: {fileID: 449480}
 --- !u!114 &11442548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2633,7 +2639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c500da126aa939c429ebf252cb7c9d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {fileID: 453078}
+  TargetTransform: {fileID: 465482}
 --- !u!114 &11458226
 MonoBehaviour:
   m_ObjectHideFlags: 1
