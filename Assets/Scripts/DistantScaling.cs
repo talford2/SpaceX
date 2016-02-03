@@ -20,6 +20,7 @@ public class DistantScaling : MonoBehaviour
 
     public List<Targetable> TargetableObjects;
     public List<Collider> ManagedColliders;
+    public List<Detectable> ManagedDetectables;
 
 	private void Awake()
 	{
@@ -85,6 +86,13 @@ public class DistantScaling : MonoBehaviour
 		    foreach (var managedCollider in ManagedColliders)
 		    {
 		        managedCollider.gameObject.layer = LayerMask.NameToLayer("Environment");
+		    }
+		    foreach (var detectable in ManagedDetectables)
+		    {
+		        if (detectable != null)
+		        {
+		            detectable.gameObject.layer = LayerMask.NameToLayer("Detectable");
+		        }
 		    }
 		}
 
