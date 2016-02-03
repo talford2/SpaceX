@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 418090}
   - 120: {fileID: 12017834}
-  - 114: {fileID: 11407598}
+  - 114: {fileID: 11498606}
   - 114: {fileID: 11443858}
   m_Layer: 0
   m_Name: TurretLaser
@@ -30,22 +30,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11407598
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 586daa87f055a7b40a956bca24299873, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MissileLength: 30
-  MissileSpeed: 600
-  MissileDamage: 5
-  HitEffectPrefab: {fileID: 198982, guid: 4bb191ad1a7963849a6c492ebb749803, type: 2}
-  HitDecalPrefab: {fileID: 121998, guid: 5ca4b0ff81cbb7148a77afcf43fcab11, type: 2}
 --- !u!114 &11443858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -63,6 +47,21 @@ MonoBehaviour:
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
   ShiftParticleSystems: []
+--- !u!114 &11498606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6ab23b8aef1484781c41a246051fc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MissileSpeed: 150
+  MissileLength: 6
+  HitEffectPrefab: {fileID: 198982, guid: 4bb191ad1a7963849a6c492ebb749803, type: 2}
+  HitDecalPrefab: {fileID: 121998, guid: 5ca4b0ff81cbb7148a77afcf43fcab11, type: 2}
 --- !u!120 &12017834
 LineRenderer:
   m_ObjectHideFlags: 1

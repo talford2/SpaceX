@@ -95,35 +95,40 @@ public class Weapon : MonoBehaviour
         _aimAt = aimAt;
     }
 
+    private GameObject GetNextMissile()
+    {
+        var missile = _missileInstances[_curMissileIndex];
+        _curMissileIndex++;
+        if (_curMissileIndex >= _missileInstances.Count)
+            _curMissileIndex = 0;
+        return missile;
+    }
+
+    public void FireMissile(GameObject missile)
+    {
+        if (OnShoot != null)
+            OnShoot();
+
+        var _shootPoint = _shootPoints[_shootPointIndex];
+
+        var direction = _aimAt - _shootPoint.transform.position;
+        if (!MissilesConverge)
+            direction += _shootPoint.transform.position - GetShootPointCentre();
+        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, direction, _velocityReference.Value);
+
+        _shootPoint.Flash();
+        FireSound.Play();
+
+        _shootPointIndex++;
+        if (_shootPointIndex >= _shootPoints.Count)
+            _shootPointIndex = 0;
+    }
+
 	public void Fire()
 	{
         for (var i = 0; i < MissilesPerShot; i++)
 	    {
-	        var missile = _missileInstances[_curMissileIndex];
-
-	        if (OnShoot != null)
-	            OnShoot();
-
-	        var _shootPoint = _shootPoints[_shootPointIndex];
-
-	        missile.transform.position = _shootPoint.transform.position;
-	        var direction = _aimAt - _shootPoint.transform.position;
-	        if (!MissilesConverge)
-	            direction += _shootPoint.transform.position - GetShootPointCentre();
-	        missile.transform.forward = direction;
-	        //missile.GetComponent<Shiftable>().UniverseCellIndex = _owner.GetComponent<Vehicle>().Shiftable.UniverseCellIndex;
-	        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, direction, _velocityReference.Value);
-
-	        _shootPoint.Flash();
-	        FireSound.Play();
-
-	        _curMissileIndex++;
-	        if (_curMissileIndex >= _missileInstances.Count)
-	            _curMissileIndex = 0;
-
-	        _shootPointIndex++;
-	        if (_shootPointIndex >= _shootPoints.Count)
-	            _shootPointIndex = 0;
+	        FireMissile(GetNextMissile());
 	    }
 	}
 
@@ -206,7 +211,9 @@ public class Weapon : MonoBehaviour
                 {
                     SetAimAt(lockedTarget.position);
                 }
-                Fire();
+                var nextMissile = GetNextMissile();
+                nextMissile.GetComponent<Missile>().SetTarget(lockedTarget);
+                FireMissile(nextMissile);
                 ClearTargetLock();
             }
         }
