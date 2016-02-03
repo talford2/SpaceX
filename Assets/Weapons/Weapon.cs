@@ -211,6 +211,7 @@ public class Weapon : MonoBehaviour
                 {
                     SetAimAt(lockedTarget.position);
                 }
+                SetAimAt(GetShootPointCentre() + _velocityReference.Value);
                 var nextMissile = GetNextMissile();
                 nextMissile.GetComponent<Missile>().SetTarget(lockedTarget);
                 FireMissile(nextMissile);
