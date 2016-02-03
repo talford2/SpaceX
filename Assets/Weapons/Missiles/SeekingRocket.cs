@@ -3,6 +3,7 @@
 [RequireComponent(typeof (Shiftable))]
 public class SeekingRocket : Missile
 {
+    public float MinChaseDistance = 50f;
     public GameObject ExplodePrefab;
     public MeshRenderer Rocket;
     public TrailRenderer Tracer;
@@ -19,7 +20,6 @@ public class SeekingRocket : Missile
 
     private Vector3 velocity;
 
-    private float minChaseDistance = 30f;
     private float explodeDistance = 2f;
 
     private float travelStraightTime = 1f;
@@ -47,7 +47,7 @@ public class SeekingRocket : Missile
             {
                 if (isVehicleTarget)
                 {
-                    if (toTarget.sqrMagnitude > minChaseDistance*minChaseDistance)
+                    if (toTarget.sqrMagnitude > MinChaseDistance*MinChaseDistance)
                     {
                         offsetVelocity = _initVelocity;
                     }
@@ -58,7 +58,7 @@ public class SeekingRocket : Missile
                 }
                 else
                 {
-                    if (toTarget.sqrMagnitude > minChaseDistance*minChaseDistance)
+                    if (toTarget.sqrMagnitude > MinChaseDistance*MinChaseDistance)
                     {
                         offsetVelocity = _initVelocity;
                     }
@@ -68,7 +68,7 @@ public class SeekingRocket : Missile
                     }
                 }
 
-                if (toTarget.sqrMagnitude > minChaseDistance*minChaseDistance)
+                if (toTarget.sqrMagnitude > MinChaseDistance*MinChaseDistance)
                 {
                     transform.forward = Vector3.Lerp(transform.forward, toTarget.normalized, 2f*Time.deltaTime);
                 }
