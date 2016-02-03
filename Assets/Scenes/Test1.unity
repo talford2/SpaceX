@@ -1993,7 +1993,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1097665388}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fcc537c0b90f2a4496ecf8f4abcc37c, type: 3}
   m_Name: 
@@ -2005,7 +2005,7 @@ MonoBehaviour:
   BackgroundColor: {r: 0.09499411, g: 0.020897042, b: 0.203, a: 1}
   ScatterObjects:
   - Name: Clouds
-    IsActive: 1
+    IsActive: 0
     CountMin: 100
     CountMax: 200
     ScaleMin: 100
@@ -2062,7 +2062,7 @@ MonoBehaviour:
     - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
     - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
   - Name: Nebula
-    IsActive: 1
+    IsActive: 0
     CountMin: 5
     CountMax: 10
     ScaleMin: 300
