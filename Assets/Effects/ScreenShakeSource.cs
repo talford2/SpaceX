@@ -12,7 +12,8 @@ public class ScreenShakeSource : MonoBehaviour
     private void Start()
     {
         var amplitude = MaxAmplitude*GetAmplitudeFraction(Universe.Current.ViewPort.transform.position, transform.position, MinDistance, MaxDistance);
-        Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(amplitude, Frequency, Duration);
+        if (amplitude > 0f)
+            Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(amplitude, Frequency, Duration);
     }
 
     private float GetAmplitudeFraction(Vector3 targetPosition, Vector3 emitterPosition, float minDistance, float maxDistance)
