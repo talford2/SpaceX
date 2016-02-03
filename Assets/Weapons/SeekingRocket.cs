@@ -4,13 +4,14 @@
 public class SeekingRocket : Missile
 {
     public GameObject ExplodePrefab;
+    public MeshRenderer Rocket;
+    public TrailRenderer Tracer;
 
     private Shiftable _shiftable;
 
     private Transform _target;
     private Vector3 _shootFrom;
     private Vector3 _initVelocity;
-    private float _initSpeed;
 
     private Vector3 velocity;
 
@@ -20,7 +21,7 @@ public class SeekingRocket : Missile
     private void Awake()
     {
         _shiftable = GetComponent<Shiftable>();
-        _shiftable.OnShift += Shift;
+        //_shiftable.OnShift += Shift;
     }
 
     public override void LiveUpdate()
@@ -39,7 +40,7 @@ public class SeekingRocket : Missile
                 if (vehicle != null)
                 {
                     transform.forward = toTarget.normalized;
-                    velocity = vehicle.GetVelocity() + transform.forward * MissileSpeed;
+                    velocity = Vector3.Lerp(velocity, vehicle.GetVelocity() + transform.forward * MissileSpeed, 5f*Time.deltaTime);
                 }
             }
 
@@ -63,18 +64,20 @@ public class SeekingRocket : Missile
         base.Shoot(shootFrom, direction, initVelocity);
         _shootFrom = shootFrom;
         _initVelocity = initVelocity;
-        _initSpeed = _initVelocity.magnitude;
 
         velocity = _initVelocity;
 
         transform.position = _shootFrom;
         transform.forward = direction;
         transform.position += initVelocity*Time.deltaTime;
+
+        Rocket.enabled = true;
+        Tracer.enabled = true;
     }
 
     private void Explode()
     {
-        var explodeInstance = Utility.InstantiateInParent(ExplodePrefab, transform.position, transform.rotation, transform.parent);
+        var explodeInstance = (GameObject)Instantiate(ExplodePrefab, transform.position, transform.rotation);
 
         explodeInstance.transform.localScale = transform.localScale;
         var explodeShiftable = explodeInstance.GetComponent<Shiftable>();
@@ -86,7 +89,7 @@ public class SeekingRocket : Missile
             explodeShiftable.SetShiftPosition(univPos);
         }
 
-        var damageColliders = Physics.OverlapSphere(transform.position, 20f, LayerMask.GetMask("Detectable"));
+        var damageColliders = Physics.OverlapSphere(transform.position, 10f, LayerMask.GetMask("Detectable"));
         foreach (var damageCollider in damageColliders)
         {
             var detectable = damageCollider.GetComponent<Detectable>();
@@ -97,6 +100,13 @@ public class SeekingRocket : Missile
             }
         }
         Stop();
+    }
+
+    public override void Stop()
+    {
+        base.Stop();
+        Rocket.enabled = false;
+        Tracer.enabled = false;
     }
 
     private void Shift(Shiftable sender, Vector3 delta)
