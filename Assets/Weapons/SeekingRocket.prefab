@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MissileSpeed: 20
+  ExplodePrefab: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
 --- !u!135 &13513998
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -241,6 +242,10 @@ Prefab:
       propertyPath: m_Autodestruct
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ExplodePrefab
+      value: 
+      objectReference: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 176048}
