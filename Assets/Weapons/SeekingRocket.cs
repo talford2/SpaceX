@@ -142,17 +142,28 @@ public class SeekingRocket : Missile
             explodeShiftable.SetShiftPosition(univPos);
         }
 
-        var damageColliders = Physics.OverlapSphere(transform.position, 10f, LayerMask.GetMask("Detectable"));
+        var damageColliders = Physics.OverlapSphere(transform.position, 15f, LayerMask.GetMask("Detectable"));
         foreach (var damageCollider in damageColliders)
         {
             var detectable = damageCollider.GetComponent<Detectable>();
             if (detectable != null)
             {
                 var killable = detectable.TargetTransform.GetComponent<Killable>();
-                killable.Damage(100f, transform.position, Vector3.up, Owner);
+                var damage = 100f*GetDamageFraction(detectable.transform.position, transform.position, 5f, 15f);
+                killable.Damage(damage, transform.position, Vector3.up, Owner);
             }
         }
         Stop();
+    }
+
+    private float GetDamageFraction(Vector3 targetPosition, Vector3 damagePosition, float minDistance, float maxDistance)
+    {
+        var toDamage = targetPosition - damagePosition;
+        if (toDamage.sqrMagnitude < minDistance*minDistance)
+            return 1f;
+        if (toDamage.sqrMagnitude > maxDistance*maxDistance)
+            return 0f;
+        return 1f - Mathf.Clamp((toDamage.magnitude - minDistance)/(maxDistance - minDistance), 0, 1f);
     }
 
     public override void Stop()
