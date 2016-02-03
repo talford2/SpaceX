@@ -54,7 +54,6 @@ public class SeekingRocket : Missile
                     else
                     {
                         offsetVelocity = Vector3.Lerp(offsetVelocity, vehicle.GetVelocity(), 5f*Time.deltaTime);
-
                     }
                 }
                 else
@@ -71,7 +70,7 @@ public class SeekingRocket : Missile
 
                 if (toTarget.sqrMagnitude > minChaseDistance*minChaseDistance)
                 {
-                    transform.forward = Vector3.Lerp(transform.forward, toTarget.normalized, 5f*Time.deltaTime);
+                    transform.forward = Vector3.Lerp(transform.forward, toTarget.normalized, 2f*Time.deltaTime);
                 }
                 else
                 {

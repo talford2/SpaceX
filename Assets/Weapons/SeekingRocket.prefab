@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 491944}
   - 33: {fileID: 3377094}
   - 23: {fileID: 2391584}
-  - 96: {fileID: 9676764}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -45,6 +44,7 @@ GameObject:
   - 4: {fileID: 491384}
   - 33: {fileID: 3334916}
   - 23: {fileID: 2390714}
+  - 96: {fileID: 9611106}
   m_Layer: 0
   m_Name: MuzzleFlash
   m_TagString: Untagged
@@ -156,12 +156,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129262}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!96 &9676764
+--- !u!96 &9611106
 TrailRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 129262}
+  m_GameObject: {fileID: 199576}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -202,7 +202,7 @@ TrailRenderer:
       serializedVersion: 2
       rgba: 16777215
   m_MinVertexDistance: 1
-  m_Autodestruct: 1
+  m_Autodestruct: 0
 --- !u!114 &11425134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -234,7 +234,7 @@ MonoBehaviour:
   MissileSpeed: 50
   ExplodePrefab: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   Rocket: {fileID: 2391584}
-  Tracer: {fileID: 9676764}
+  Tracer: {fileID: 9611106}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -305,7 +305,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Tracer
       value: 
-      objectReference: {fileID: 9676764}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissileSpeed
       value: 50

@@ -22,9 +22,13 @@ public class VehicleTracker : Tracker
     private Sprite farTrackerSprite;
     private Sprite veryFarTrackerSprite;
     private Sprite arrowSprite;
+    private Sprite lockingSprite;
+    private Sprite lockedSprite;
 
     private Texture2D healthBarTexture;
     private Texture2D healthBarBackgroundTexture;
+
+    private bool isLockedOn;
 
     private void Awake()
     {
@@ -34,6 +38,8 @@ public class VehicleTracker : Tracker
 
         healthBarTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 1f));
         healthBarBackgroundTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 0.05f));
+
+        isLockedOn = false;
     }
 
     public override Image CreateInstance()
@@ -48,6 +54,8 @@ public class VehicleTracker : Tracker
         farTrackerSprite = Sprite.Create(FarTrackerCursorImage, new Rect(0, 0, FarTrackerCursorImage.width, FarTrackerCursorImage.height), Vector2.zero);
         veryFarTrackerSprite = Sprite.Create(VeryFarTrackerCursorImage, new Rect(0, 0, VeryFarTrackerCursorImage.width, VeryFarTrackerCursorImage.height), Vector2.zero);
         arrowSprite = Sprite.Create(ArrowCursorImage, new Rect(0, 0, ArrowCursorImage.width, ArrowCursorImage.height), Vector2.zero);
+        lockingSprite = Sprite.Create(LockingCursorImage, new Rect(0, 0, LockingCursorImage.width, LockingCursorImage.height), Vector2.zero);
+        lockedSprite = Sprite.Create(LockedCursorImage, new Rect(0, 0, LockedCursorImage.width, LockedCursorImage.height), Vector2.zero);
 
         trackerImg.sprite = trackerSprite;
         trackerImg.SetNativeSize();
@@ -120,7 +128,18 @@ public class VehicleTracker : Tracker
                 {
                     UpdateHealthBar();
                 }
+                if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockingOnTarget() == transform)
+                {
+                    useSprite = lockingSprite;
+                }
+                if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
+                {
+                    isLockedOn = true;
+                }
+                if (isLockedOn)
+                    useSprite = lockedSprite;
                 imageInstance.sprite = useSprite;
+
                 imageInstance.rectTransform.localPosition = screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f);
                 imageInstance.rectTransform.localRotation = Quaternion.identity;
             }
