@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c176fd291425e47b52ccc264029c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 5
+  Radius: 3
 --- !u!114 &11425650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -831,7 +831,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Radius
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: FarTrackerCurosrImage

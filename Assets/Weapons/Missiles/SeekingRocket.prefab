@@ -289,10 +289,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731465a9807668c4d997095e728426c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissileSpeed: 50
+  MissileSpeed: 120
   MinChaseDistance: 50
   ExplodePrefab: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   Rocket: {fileID: 2355120}
+  ThrusterMesh: {fileID: 2390714}
+  ThrustFlare: {fileID: 12381238}
   Tracer: {fileID: 9611106}
 --- !u!120 &12080608
 LineRenderer:
@@ -421,12 +423,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissileSpeed
-      value: 50
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Time
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ThrusterMesh
+      value: 
+      objectReference: {fileID: 2390714}
+    - target: {fileID: 0}
+      propertyPath: ThrustFlare
+      value: 
+      objectReference: {fileID: 12381238}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 176048}

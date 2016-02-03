@@ -6,6 +6,8 @@ public class SeekingRocket : Missile
     public float MinChaseDistance = 50f;
     public GameObject ExplodePrefab;
     public MeshRenderer Rocket;
+    public MeshRenderer ThrusterMesh;
+    public LensFlare ThrustFlare;
     public TrailRenderer Tracer;
 
     private Shiftable _shiftable;
@@ -123,6 +125,8 @@ public class SeekingRocket : Missile
 
         Rocket.enabled = true;
         Tracer.enabled = true;
+        ThrusterMesh.enabled = true;
+        ThrustFlare.enabled = true;
 
         noTargetCooldown = noTargetTime;
         travelStraightCooldown = travelStraightTime;
@@ -171,6 +175,8 @@ public class SeekingRocket : Missile
         base.Stop();
         Rocket.enabled = false;
         Tracer.enabled = false;
+        ThrusterMesh.enabled = false;
+        ThrustFlare.enabled = false;
     }
 
     private void Shift(Shiftable sender, Vector3 delta)
