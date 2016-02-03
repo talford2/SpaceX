@@ -704,7 +704,7 @@ MonoBehaviour:
   PrimaryShootPoints:
   - {fileID: 11475328}
   - {fileID: 11448042}
-  SecondaryWeaponPrefab: {fileID: 11492802, guid: 8d1335b2fcad39d469234af6d4b7f5f2,
+  SecondaryWeaponPrefab: {fileID: 11413680, guid: 4063efe36c8729246a44aec50d7e1406,
     type: 2}
   SecondaryShootPoints:
   - {fileID: 11475328}
@@ -1135,6 +1135,11 @@ Prefab:
       propertyPath: TrackerCursorImage
       value: 
       objectReference: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
+    - target: {fileID: 0}
+      propertyPath: SecondaryWeaponPrefab
+      value: 
+      objectReference: {fileID: 11413680, guid: 4063efe36c8729246a44aec50d7e1406,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}
