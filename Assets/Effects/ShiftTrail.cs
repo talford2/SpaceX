@@ -35,7 +35,7 @@ public class ShiftTrail : MonoBehaviour
         lineRenderer.enabled = true;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (lineRenderer.enabled)
         {
