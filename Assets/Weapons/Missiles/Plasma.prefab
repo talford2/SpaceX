@@ -73,7 +73,7 @@ Transform:
   m_GameObject: {fileID: 153558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 6, y: 6, z: 4}
   m_Children: []
   m_Father: {fileID: 462670}
   m_RootOrder: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   FromReference: {fileID: 0}
   HitEffectPrefab: {fileID: 0}
   HitDecalPrefab: {fileID: 0}
-  MissileLength: 2
+  MissileLength: 6
   Tracer: {fileID: 12011222}
 --- !u!114 &11451316
 MonoBehaviour:
@@ -208,7 +208,7 @@ LineRenderer:
     m_EndColor:
       serializedVersion: 2
       rgba: 4294901948
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -222,7 +222,7 @@ Prefab:
       objectReference: {fileID: 12011222}
     - target: {fileID: 0}
       propertyPath: MissileLength
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissileSpeed
