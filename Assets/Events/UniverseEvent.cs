@@ -13,6 +13,8 @@ public class UniverseEvent : MonoBehaviour
     private float triggerRadiusSquared;
     private float lastDistanceSquared;
 
+    private int cellRadius;
+
 	public virtual void Awake()
 	{
 		if (UniverseEvents == null)
@@ -26,17 +28,19 @@ public class UniverseEvent : MonoBehaviour
 	    triggerRadiusSquared = TriggerRadius*TriggerRadius;
 
 		UniverseEvents.Add(this);
+
+	    cellRadius = Mathf.CeilToInt(TriggerRadius/Universe.Current.CellSize) + 1;
 	}
 
 	private void Shiftable_OnShift(Shiftable sender, Vector3 delta)
 	{
 		//Debug.Log(sender.UniverseCellIndex + " ==? " + Universe.Current.ViewPort.Shiftable.UniverseCellIndex);
 	    sender.enabled = false;
-	    for (var i = -1; i < 2; i++)
+	    for (var i = -cellRadius; i < cellRadius + 1; i++)
 	    {
-	        for (var j = -1; j < 2; j++)
+	        for (var j = -cellRadius; j < cellRadius + 1; j++)
 	        {
-	            for (var k = -1; k < 2; k++)
+	            for (var k = -cellRadius; k < cellRadius + 1; k++)
 	            {
 	                if (sender.UniverseCellIndex.IsEqualTo(Universe.Current.ViewPort.Shiftable.UniverseCellIndex + new CellIndex(i, j, k)))
 	                {
@@ -46,7 +50,7 @@ public class UniverseEvent : MonoBehaviour
 	        }
 	    }
 
-        /*
+	    /*
 		if (sender.UniverseCellIndex.IsEqualTo(Universe.Current.ViewPort.Shiftable.UniverseCellIndex))
 		{
 			//Debug.Log("Go!");
