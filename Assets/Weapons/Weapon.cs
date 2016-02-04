@@ -114,6 +114,7 @@ public class Weapon : MonoBehaviour
         var direction = _aimAt - _shootPoint.transform.position;
         if (!MissilesConverge)
             direction += _shootPoint.transform.position - GetShootPointCentre();
+        missile.GetComponent<Missile>().FromReference = _shootPoint.transform;
         missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, direction, _velocityReference.Value);
 
         _shootPoint.Flash();

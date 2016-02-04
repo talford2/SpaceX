@@ -7,6 +7,10 @@ public abstract class Missile : MonoBehaviour
     protected float Damage;
 
     public float MissileSpeed = 150f;
+    public Transform FromReference;
+
+    public GameObject HitEffectPrefab;
+    public GameObject HitDecalPrefab;
 
     public virtual void Initialize(GameObject owner, float damage)
     {
@@ -34,6 +38,36 @@ public abstract class Missile : MonoBehaviour
 	{
 		IsLive = true;
 	}
+
+    public void PlaceHitEffects(Vector3 position, Vector3 normal, Transform parent)
+    {
+        // TODO: Should pull this effect from a pool or something...
+        if (HitEffectPrefab != null)
+        {
+            var hitEffectInstance = Instantiate(HitEffectPrefab);
+
+            var hitEffectShiftable = hitEffectInstance.GetComponent<Shiftable>();
+            if (hitEffectShiftable != null)
+            {
+                var univPos = Universe.Current.GetUniversePosition(position);
+                hitEffectShiftable.SetShiftPosition(univPos);
+            }
+            else
+            {
+                hitEffectInstance.transform.position = position;
+            }
+
+            hitEffectInstance.transform.forward = normal;
+        }
+
+        if (HitDecalPrefab != null)
+        {
+            var hitDecal = Instantiate(HitDecalPrefab);
+            hitDecal.transform.position = position;
+            hitDecal.transform.SetParent(parent);
+            hitDecal.transform.forward = normal;
+        }
+    }
 
     public virtual void SetTarget(Transform target)
     {

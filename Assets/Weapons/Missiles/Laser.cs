@@ -3,10 +3,6 @@
 public class Laser : Missile {
     public float MissileLength = 6f;
 
-    public GameObject HitEffectPrefab;
-
-    public GameObject HitDecalPrefab;
-
     private LineRenderer _lineRenderer;
     private Shiftable _shiftable;
     private bool _hasHit;
@@ -19,7 +15,6 @@ public class Laser : Missile {
     private Vector3 observationPosition;
     private float rayCheckMaxDistSquared = 25000000f;
     private float stopDistanceSquared = 100000000f;
-
 
     private void Awake()
     {
@@ -51,33 +46,7 @@ public class Laser : Missile {
                             _hitPosition = missileHit.point;
 
                             //killable.SendMessageUpwards("Hit", new HitEffectParameters { Position = missileHit.point, Normal = missileHit.normal });
-
-                            // TODO: Should pull this effect from a pool or something...
-                            if (HitEffectPrefab != null)
-                            {
-                                var hitEffectInstance = Instantiate(HitEffectPrefab);
-
-                                var hitEffectShiftable = hitEffectInstance.GetComponent<Shiftable>();
-                                if (hitEffectShiftable != null)
-                                {
-                                    var univPos = Universe.Current.GetUniversePosition(missileHit.point);
-                                    hitEffectShiftable.SetShiftPosition(univPos);
-                                }
-                                else
-                                {
-                                    hitEffectInstance.transform.position = missileHit.point;
-                                }
-
-                                hitEffectInstance.transform.forward = missileHit.normal;
-                            }
-
-                            if (HitDecalPrefab != null)
-                            {
-                                var hitDecal = Instantiate(HitDecalPrefab);
-                                hitDecal.transform.position = missileHit.point;
-                                hitDecal.transform.SetParent(missileHit.collider.gameObject.transform);
-                                hitDecal.transform.forward = missileHit.normal;
-                            }
+                            PlaceHitEffects(missileHit.point, missileHit.normal, missileHit.collider.gameObject.transform);
                         }
                     }
                 }
