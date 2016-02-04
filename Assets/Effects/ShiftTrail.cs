@@ -18,6 +18,8 @@ public class ShiftTrail : MonoBehaviour
         Shiftable.OnShift += Shift;
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.useWorldSpace = true;
+
+        lastPositions = new List<Vector3>();
     }
 
     public void Initialize(Vector3 position)
