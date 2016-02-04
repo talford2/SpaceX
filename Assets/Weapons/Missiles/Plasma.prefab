@@ -1,18 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &153558
+--- !u!1 &162556
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 482234}
-  - 33: {fileID: 3363776}
-  - 23: {fileID: 2361122}
-  - 114: {fileID: 11451644}
+  - 4: {fileID: 452486}
+  - 33: {fileID: 3398178}
+  - 23: {fileID: 2348156}
+  - 114: {fileID: 11428826}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,6 +51,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &452486
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 4}
+  m_Children: []
+  m_Father: {fileID: 462670}
+  m_RootOrder: 0
 --- !u!4 &462670
 Transform:
   m_ObjectHideFlags: 1
@@ -61,21 +73,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 482234}
+  - {fileID: 452486}
   - {fileID: 498392}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!4 &482234
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153558}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
-  m_Children: []
-  m_Father: {fileID: 462670}
   m_RootOrder: 0
 --- !u!4 &498392
 Transform:
@@ -89,12 +89,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 462670}
   m_RootOrder: 1
---- !u!23 &2361122
+--- !u!23 &2348156
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153558}
+  m_GameObject: {fileID: 162556}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -115,12 +115,12 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3363776
+--- !u!33 &3398178
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153558}
+  m_GameObject: {fileID: 162556}
   m_Mesh: {fileID: 4300000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
 --- !u!114 &11420608
 MonoBehaviour:
@@ -137,8 +137,22 @@ MonoBehaviour:
   FromReference: {fileID: 0}
   HitEffectPrefab: {fileID: 0}
   HitDecalPrefab: {fileID: 0}
-  MissileLength: 2
+  MissileLength: 6
   Tracer: {fileID: 12011222}
+--- !u!114 &11428826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6918efbd0024554c82f385d8172f20f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseCamera: {fileID: 0}
+  Flip: 0
+  UseCameraRotation: 0
 --- !u!114 &11451316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,20 +170,6 @@ MonoBehaviour:
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
   ShiftParticleSystems: []
---- !u!114 &11451644
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6918efbd0024554c82f385d8172f20f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UseCamera: {fileID: 0}
-  Flip: 0
-  UseCameraRotation: 0
 --- !u!120 &12011222
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -208,7 +208,7 @@ LineRenderer:
     m_EndColor:
       serializedVersion: 2
       rgba: 4294901948
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -222,7 +222,7 @@ Prefab:
       objectReference: {fileID: 12011222}
     - target: {fileID: 0}
       propertyPath: MissileLength
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissileSpeed
