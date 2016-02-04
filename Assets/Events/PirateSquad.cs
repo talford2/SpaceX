@@ -13,7 +13,7 @@ public class PirateSquad : UniverseEvent
 		_mapPin = GetComponent<MapPin>();
 	}
 
-	public override void Initialise()
+	public override void Trigger()
 	{
 		foreach (var spawner in Spawners)
 		{
@@ -22,6 +22,6 @@ public class PirateSquad : UniverseEvent
 		
 		if (_mapPin != null)
 			_mapPin.SetPinState(MapPin.MapPinState.Inactive);
-		base.Initialise();
+		base.Trigger();
 	}
 }

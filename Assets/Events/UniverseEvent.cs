@@ -35,7 +35,9 @@ public class UniverseEvent : MonoBehaviour
 	private void Shiftable_OnShift(Shiftable sender, Vector3 delta)
 	{
 		//Debug.Log(sender.UniverseCellIndex + " ==? " + Universe.Current.ViewPort.Shiftable.UniverseCellIndex);
-	    sender.enabled = false;
+
+	    var enable = false;
+	    var thisEvent = sender.GetComponent<UniverseEvent>();
 	    for (var i = -cellRadius; i < cellRadius + 1; i++)
 	    {
 	        for (var j = -cellRadius; j < cellRadius + 1; j++)
@@ -44,13 +46,14 @@ public class UniverseEvent : MonoBehaviour
 	            {
 	                if (sender.UniverseCellIndex.IsEqualTo(Universe.Current.ViewPort.Shiftable.UniverseCellIndex + new CellIndex(i, j, k)))
 	                {
-	                    sender.enabled = true;
+	                    enable = true;
 	                }
 	            }
 	        }
 	    }
+        thisEvent.enabled = enable;
 
-	    /*
+        /*
 		if (sender.UniverseCellIndex.IsEqualTo(Universe.Current.ViewPort.Shiftable.UniverseCellIndex))
 		{
 			//Debug.Log("Go!");
@@ -58,7 +61,7 @@ public class UniverseEvent : MonoBehaviour
 			Initialise();
 		}
         */
-	}
+    }
 
     private void Update()
     {
@@ -67,7 +70,7 @@ public class UniverseEvent : MonoBehaviour
         {
             if (toViewPortSquared < triggerRadiusSquared)
             {
-                Initialise();
+                Trigger();
             }
         }
         lastDistanceSquared = toViewPortSquared;
@@ -83,7 +86,7 @@ public class UniverseEvent : MonoBehaviour
 	//	}
 	//}
 
-	public virtual void Initialise()
+	public virtual void Trigger()
 	{
 		Debug.Log("Event triggered");
 	}
