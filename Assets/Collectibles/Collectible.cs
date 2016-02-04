@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Effects;
+using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Collectible : MonoBehaviour
 	private Shiftable shiftable;
 	private Vector3 velocity;
 	private Vector3 rotateSpeed;
+
+    private SelfDestructor destructor;
 
 	private float followAcceleration = 250f;
 	private float followSpeed;
@@ -23,6 +26,7 @@ public class Collectible : MonoBehaviour
 	{
 		shiftable = GetComponent<Shiftable>();
 		rotateSpeed = Random.insideUnitSphere * RotateSpeed;
+	    destructor = GetComponent<SelfDestructor>();
 	}
 
 	public void Collect(GameObject collector)
@@ -39,7 +43,14 @@ public class Collectible : MonoBehaviour
 
 	private void Update()
 	{
-		if (!isFinished && isCollected && collectorTransform != null)
+	    if (destructor != null)
+	    {
+	        if ((transform.position - Universe.Current.ViewPort.Shiftable.GetWorldPosition()).sqrMagnitude < 1000f*1000f)
+	        {
+	            destructor.Cooldown = 15f;
+	        }
+	    }
+	    if (!isFinished && isCollected && collectorTransform != null)
 		{
 			if (PlayerController.Current.VehicleInstance != null)
 			{
