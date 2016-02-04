@@ -6,6 +6,7 @@ public abstract class Missile : MonoBehaviour
     protected GameObject Owner;
     protected float Damage;
 
+    [Header("Missile")]
     public float MissileSpeed = 150f;
     public Transform FromReference;
 

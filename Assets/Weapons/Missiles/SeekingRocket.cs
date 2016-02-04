@@ -3,6 +3,7 @@
 [RequireComponent(typeof (Shiftable))]
 public class SeekingRocket : Missile
 {
+    [Header("Seeking Rocket")]
     public float MinChaseDistance = 50f;
     public GameObject ExplodePrefab;
     public MeshRenderer Rocket;

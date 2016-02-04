@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 public class Laser : Missile {
+    [Header("Laser")]
     public float MissileLength = 6f;
 
     private LineRenderer _lineRenderer;

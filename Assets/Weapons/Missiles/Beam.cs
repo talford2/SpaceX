@@ -4,6 +4,7 @@
 [RequireComponent(typeof(LineRenderer))]
 public class Beam : Missile
 {
+    [Header("Beam")]
     public float MissileLength = 1000f;
     public float Radius = 0.5f;
     public float FireTime = 0.2f;
