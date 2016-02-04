@@ -150,8 +150,9 @@ MonoBehaviour:
   MissileDamage: 20
   MissilesConverge: 0
   IsTargetLocking: 1
-  TargetLockTime: 0.7
+  TargetLockTime: 0.5
   TargetLockingMaxDistance: 2000
+  LockSound: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
   IsTriggered: 0
   MissilePoolCount: 20
 --- !u!1001 &100100000
@@ -183,8 +184,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TargetLockTime
-      value: 0.7
+      value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LockSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 168282}
