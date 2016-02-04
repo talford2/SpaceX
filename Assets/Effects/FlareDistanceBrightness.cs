@@ -18,4 +18,9 @@ public class FlareDistanceBrightness : MonoBehaviour
         var capFlareBright = MaxFlareBrightness/Mathf.Max(toCamera.sqrMagnitude/theFactor, 1f);
         flare.brightness = 1f*capFlareBright;
     }
+
+    public void SetVisible(bool value)
+    {
+        flare.enabled = value;
+    }
 }

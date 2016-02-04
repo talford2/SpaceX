@@ -10,6 +10,7 @@ public class SeekingRocket : Missile
     public MeshRenderer Rocket;
     public MeshRenderer ThrusterMesh;
     public ShiftTrail Tracer;
+    public FlareDistanceBrightness Flare;
 
     private Shiftable _shiftable;
 
@@ -125,6 +126,7 @@ public class SeekingRocket : Missile
         ThrusterMesh.enabled = true;
 
         Tracer.Initialize(transform.position);
+        Flare.SetVisible(true);
 
         noTargetCooldown = noTargetTime;
         travelStraightCooldown = travelStraightTime + turnTime;
@@ -174,6 +176,7 @@ public class SeekingRocket : Missile
         Rocket.enabled = false;
         ThrusterMesh.enabled = false;
         Tracer.Stop();
+        Flare.SetVisible(false);
     }
 
     private void Shift(Shiftable sender, Vector3 delta)

@@ -226,8 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9ec6df704b7304199da086053cf52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TotalPoints: 20
-  DistanceInterval: 5
+  TotalPoints: 30
+  DistanceInterval: 2.5
   Shiftable: {fileID: 11425134}
 --- !u!114 &11425134
 MonoBehaviour:
@@ -527,6 +527,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MinChaseDistance
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TotalPoints
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DistanceInterval
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
