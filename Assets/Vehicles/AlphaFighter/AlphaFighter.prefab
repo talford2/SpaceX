@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400808}
   - 123: {fileID: 12372590}
+  - 114: {fileID: 11471368}
   m_Layer: 0
   m_Name: ThrusterFlare
   m_TagString: Untagged
@@ -75,6 +76,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 450416}
   - 120: {fileID: 12062342}
+  - 114: {fileID: 11424130}
   m_Layer: 0
   m_Name: SideFlash
   m_TagString: Untagged
@@ -90,7 +92,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 422464}
-  - 114: {fileID: 11475310}
+  - 114: {fileID: 11443486}
   m_Layer: 0
   m_Name: EngineThrustRight
   m_TagString: Untagged
@@ -106,7 +108,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 458250}
-  - 114: {fileID: 11486206}
+  - 114: {fileID: 11402046}
   m_Layer: 0
   m_Name: EngineThrustLeft
   m_TagString: Untagged
@@ -156,6 +158,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 497732}
   - 123: {fileID: 12394176}
+  - 114: {fileID: 11490218}
   m_Layer: 0
   m_Name: ThrusterFlare (1)
   m_TagString: Untagged
@@ -188,6 +191,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 447296}
   - 120: {fileID: 12034890}
+  - 114: {fileID: 11403440}
   m_Layer: 0
   m_Name: SideFlash
   m_TagString: Untagged
@@ -357,7 +361,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 13.461796, y: 3.3549366, z: 75.97078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 498982}
@@ -617,6 +621,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11402046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01534c653f2e80849a877e7da33ca7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Flare: {fileID: 11471368}
+  Trail: {fileID: 11424130}
+--- !u!114 &11403440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9ec6df704b7304199da086053cf52c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TotalPoints: 20
+  DistanceInterval: 5
+  Shiftable: {fileID: 11450004}
 --- !u!114 &11408530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -650,6 +681,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Radius: 30
+--- !u!114 &11424130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9ec6df704b7304199da086053cf52c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TotalPoints: 20
+  DistanceInterval: 5
+  Shiftable: {fileID: 11450004}
 --- !u!114 &11425650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -704,14 +749,14 @@ MonoBehaviour:
   PrimaryShootPoints:
   - {fileID: 11475328}
   - {fileID: 11448042}
-  SecondaryWeaponPrefab: {fileID: 11444764, guid: 7566ec183c3fcfb4fbe0397de99578c0,
+  SecondaryWeaponPrefab: {fileID: 11413680, guid: 4063efe36c8729246a44aec50d7e1406,
     type: 2}
   SecondaryShootPoints:
   - {fileID: 11475328}
   - {fileID: 11448042}
   Thrusters:
-  - {fileID: 11486206}
-  - {fileID: 11475310}
+  - {fileID: 11402046}
+  - {fileID: 11443486}
   BoostSound: {fileID: 8260914}
 --- !u!114 &11442730
 MonoBehaviour:
@@ -736,6 +781,19 @@ MonoBehaviour:
   TargetLockingMaxDistance: 2000
   IsTriggered: 0
   MissilePoolCount: 20
+--- !u!114 &11443486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01534c653f2e80849a877e7da33ca7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Flare: {fileID: 11490218}
+  Trail: {fileID: 11403440}
 --- !u!114 &11448042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -765,21 +823,18 @@ MonoBehaviour:
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
   ShiftParticleSystems: []
---- !u!114 &11475310
+--- !u!114 &11471368
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 145098}
+  m_GameObject: {fileID: 117936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e53fe14314e93bb4a97bd59ad6947bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d4d8a755eee750439c62d6b72909ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Flare: {fileID: 12394176}
-  MaxFlareBrightness: 30
-  MaxLength: 100
-  Trail: {fileID: 12034890}
+  MaxFlareBrightness: 60
 --- !u!114 &11475328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -821,21 +876,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 474404}
---- !u!114 &11486206
+--- !u!114 &11490218
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147268}
+  m_GameObject: {fileID: 160146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e53fe14314e93bb4a97bd59ad6947bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d4d8a755eee750439c62d6b72909ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Flare: {fileID: 12372590}
-  MaxFlareBrightness: 30
-  MaxLength: 100
-  Trail: {fileID: 12062342}
+  MaxFlareBrightness: 60
 --- !u!120 &12034890
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -1140,8 +1192,16 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: SecondaryWeaponPrefab
       value: 
-      objectReference: {fileID: 11444764, guid: 7566ec183c3fcfb4fbe0397de99578c0,
+      objectReference: {fileID: 11413680, guid: 4063efe36c8729246a44aec50d7e1406,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: Shiftable
+      value: 
+      objectReference: {fileID: 11450004}
+    - target: {fileID: 0}
+      propertyPath: TrailPointCount
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}

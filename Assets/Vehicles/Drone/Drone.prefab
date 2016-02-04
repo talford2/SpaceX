@@ -25,6 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400808}
   - 123: {fileID: 12372590}
+  - 114: {fileID: 11442732}
   m_Layer: 0
   m_Name: ThrusterFlare
   m_TagString: Untagged
@@ -58,6 +59,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 450416}
   - 120: {fileID: 12062342}
+  - 114: {fileID: 11405858}
   m_Layer: 0
   m_Name: SideFlash
   m_TagString: Untagged
@@ -73,7 +75,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 458250}
-  - 114: {fileID: 11486206}
+  - 114: {fileID: 11482076}
   m_Layer: 0
   m_Name: EngineThrust
   m_TagString: Untagged
@@ -439,6 +441,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11405858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9ec6df704b7304199da086053cf52c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TotalPoints: 20
+  DistanceInterval: 5
+  Shiftable: {fileID: 11450004}
 --- !u!114 &11408530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -530,7 +546,7 @@ MonoBehaviour:
   SecondaryShootPoints:
   - {fileID: 11475328}
   Thrusters:
-  - {fileID: 11486206}
+  - {fileID: 11482076}
   BoostSound: {fileID: 8260914}
 --- !u!114 &11442730
 MonoBehaviour:
@@ -555,6 +571,18 @@ MonoBehaviour:
   TargetLockingMaxDistance: 2000
   IsTriggered: 0
   MissilePoolCount: 20
+--- !u!114 &11442732
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4d8a755eee750439c62d6b72909ebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxFlareBrightness: 30
 --- !u!114 &11450004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -601,6 +629,19 @@ MonoBehaviour:
   DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
   DestroyOnDie: 1
+--- !u!114 &11482076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01534c653f2e80849a877e7da33ca7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Flare: {fileID: 11442732}
+  Trail: {fileID: 11405858}
 --- !u!114 &11484020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -613,21 +654,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 474404}
---- !u!114 &11486206
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e53fe14314e93bb4a97bd59ad6947bd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Flare: {fileID: 12372590}
-  MaxFlareBrightness: 30
-  MaxLength: 100
-  Trail: {fileID: 12062342}
 --- !u!120 &12062342
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -713,6 +739,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Thrusters.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ThrusterFlares.Array.size
       value: 2
@@ -909,6 +939,18 @@ Prefab:
       propertyPath: CollisionRadius
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Shiftable
+      value: 
+      objectReference: {fileID: 11450004}
+    - target: {fileID: 0}
+      propertyPath: TrailPointCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Thrusters.Array.data[0]
+      value: 
+      objectReference: {fileID: 11482076}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}

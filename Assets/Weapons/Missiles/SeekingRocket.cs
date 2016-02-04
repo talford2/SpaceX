@@ -9,7 +9,7 @@ public class SeekingRocket : Missile
     public GameObject ExplodePrefab;
     public MeshRenderer Rocket;
     public MeshRenderer ThrusterMesh;
-    public Thruster Thruster;
+    public ShiftTrail Tracer;
 
     private Shiftable _shiftable;
 
@@ -96,9 +96,6 @@ public class SeekingRocket : Missile
 
         velocity = offsetVelocity + transform.forward*MissileSpeed;
 
-        Thruster.SetAmount(1f);
-        Thruster.UpdateFlare();
-
         var displacement = velocity*Time.deltaTime;
         _shiftable.Translate(displacement);
     }
@@ -126,7 +123,8 @@ public class SeekingRocket : Missile
 
         Rocket.enabled = true;
         ThrusterMesh.enabled = true;
-        Thruster.SetVisibility(true);
+
+        Tracer.Initialize(transform.position);
 
         noTargetCooldown = noTargetTime;
         travelStraightCooldown = travelStraightTime + turnTime;
@@ -175,7 +173,7 @@ public class SeekingRocket : Missile
         base.Stop();
         Rocket.enabled = false;
         ThrusterMesh.enabled = false;
-        Thruster.SetVisibility(false);
+        Tracer.Stop();
     }
 
     private void Shift(Shiftable sender, Vector3 delta)

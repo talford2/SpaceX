@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &136250
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 489164}
-  - 114: {fileID: 11432742}
-  m_Layer: 0
-  m_Name: Thruster
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &154088
 GameObject:
   m_ObjectHideFlags: 0
@@ -25,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 498272}
   - 120: {fileID: 12080608}
+  - 114: {fileID: 11406130}
   m_Layer: 0
   m_Name: Thrust
   m_TagString: Untagged
@@ -41,6 +26,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 499846}
   - 123: {fileID: 12381238}
+  - 114: {fileID: 11468780}
   m_Layer: 0
   m_Name: Flare
   m_TagString: Untagged
@@ -92,7 +78,6 @@ GameObject:
   - 4: {fileID: 491384}
   - 33: {fileID: 3334916}
   - 23: {fileID: 2390714}
-  - 96: {fileID: 9611106}
   m_Layer: 0
   m_Name: MuzzleFlash
   m_TagString: Untagged
@@ -111,7 +96,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 458476}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &458476
 Transform:
   m_ObjectHideFlags: 1
@@ -122,24 +107,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 489164}
   - {fileID: 418494}
   - {fileID: 498272}
   - {fileID: 491384}
   - {fileID: 499846}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!4 &489164
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136250}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 458476}
   m_RootOrder: 0
 --- !u!4 &491384
 Transform:
@@ -152,7 +124,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 458476}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!4 &498272
 Transform:
   m_ObjectHideFlags: 1
@@ -164,7 +136,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 458476}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!4 &499846
 Transform:
   m_ObjectHideFlags: 1
@@ -176,7 +148,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 458476}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!23 &2355120
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -243,53 +215,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 199576}
   m_Mesh: {fileID: 4300000, guid: 8e249181032e10c4a9b96b7f8a7983c9, type: 3}
---- !u!96 &9611106
-TrailRenderer:
+--- !u!114 &11406130
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 199576}
+  m_GameObject: {fileID: 154088}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_Materials:
-  - {fileID: 2100000, guid: f1190e943e3deca4d8b4b5fd7a514c4f, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Time: 1
-  m_StartWidth: 1
-  m_EndWidth: 1
-  m_Colors:
-    m_Color[0]:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_Color[1]:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_Color[2]:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_Color[3]:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_Color[4]:
-      serializedVersion: 2
-      rgba: 16777215
-  m_MinVertexDistance: 1
-  m_Autodestruct: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9ec6df704b7304199da086053cf52c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TotalPoints: 20
+  DistanceInterval: 5
+  Shiftable: {fileID: 11425134}
 --- !u!114 &11425134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -307,21 +246,6 @@ MonoBehaviour:
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
   ShiftParticleSystems: []
---- !u!114 &11432742
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e53fe14314e93bb4a97bd59ad6947bd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Flare: {fileID: 12381238}
-  MaxFlareBrightness: 30
-  MaxLength: 20
-  Trail: {fileID: 12080608}
 --- !u!114 &11449330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,7 +266,19 @@ MonoBehaviour:
   ExplodePrefab: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   Rocket: {fileID: 2355120}
   ThrusterMesh: {fileID: 2390714}
-  Thruster: {fileID: 11432742}
+  Tracer: {fileID: 11406130}
+--- !u!114 &11468780
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4d8a755eee750439c62d6b72909ebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxFlareBrightness: 30
 --- !u!120 &12080608
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -350,13 +286,13 @@ LineRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154088}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: f1190e943e3deca4d8b4b5fd7a514c4f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
+  m_UseLightProbes: 0
   m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
@@ -371,7 +307,6 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: -1}
   m_Parameters:
     startWidth: 0.5
     endWidth: 0.5
@@ -380,8 +315,8 @@ LineRenderer:
       rgba: 4294967295
     m_EndColor:
       serializedVersion: 2
-      rgba: 4294967295
-  m_UseWorldSpace: 0
+      rgba: 16777215
+  m_UseWorldSpace: 1
 --- !u!123 &12381238
 LensFlare:
   m_ObjectHideFlags: 1
@@ -404,6 +339,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -467,7 +406,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Tracer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11406130}
     - target: {fileID: 0}
       propertyPath: MissileSpeed
       value: 120
@@ -487,10 +426,102 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Thruster
       value: 
-      objectReference: {fileID: 11432742}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxLength
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[2].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[3].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[4].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[5].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[6].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[7].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[8].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[9].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[10].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[11].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[12].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[13].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[14].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[15].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[16].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[17].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[18].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Positions.Array.data[19].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrailPointCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_UseWorldSpace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Shiftable
+      value: 
+      objectReference: {fileID: 11425134}
+    - target: {fileID: 0}
+      propertyPath: m_Parameters.m_EndColor.rgba
+      value: 16777215
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

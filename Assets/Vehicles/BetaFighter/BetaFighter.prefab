@@ -82,6 +82,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 448688}
   - 123: {fileID: 12341988}
+  - 114: {fileID: 11482194}
   m_Layer: 0
   m_Name: ThrusterFlare
   m_TagString: Untagged
@@ -148,6 +149,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 423298}
   - 120: {fileID: 12047450}
+  - 114: {fileID: 11437500}
   m_Layer: 0
   m_Name: SideFlash
   m_TagString: Untagged
@@ -163,7 +165,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 423728}
-  - 114: {fileID: 11485608}
+  - 114: {fileID: 11405410}
   m_Layer: 0
   m_Name: EngineThrust
   m_TagString: Untagged
@@ -467,6 +469,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11405410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01534c653f2e80849a877e7da33ca7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Flare: {fileID: 11482194}
+  Trail: {fileID: 11437500}
 --- !u!114 &11417904
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -543,6 +558,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Team: 0
+--- !u!114 &11437500
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9ec6df704b7304199da086053cf52c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TotalPoints: 20
+  DistanceInterval: 5
+  Shiftable: {fileID: 11422806}
 --- !u!114 &11460988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -593,20 +622,18 @@ MonoBehaviour:
   DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
   DestroyOnDie: 1
---- !u!114 &11485608
+--- !u!114 &11482194
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177236}
+  m_GameObject: {fileID: 121292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e53fe14314e93bb4a97bd59ad6947bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d4d8a755eee750439c62d6b72909ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Flare: {fileID: 12341988}
   MaxFlareBrightness: 30
-  Trail: {fileID: 12047450}
 --- !u!114 &11490646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -631,6 +658,8 @@ MonoBehaviour:
   YawSpeed: 250
   RollAcceleration: 640
   MaxRollSpeed: 120
+  CollisionsCentre: {x: 0, y: 0, z: 0}
+  CollisionRadius: 3
   MaxBoostEnergy: 100
   BoostEnergy: 100
   BoostCost: 20
@@ -653,7 +682,7 @@ MonoBehaviour:
   - {fileID: 11417904}
   - {fileID: 11427670}
   Thrusters:
-  - {fileID: 11485608}
+  - {fileID: 11405410}
   BoostSound: {fileID: 8236044}
 --- !u!114 &11491306
 MonoBehaviour:
@@ -764,6 +793,18 @@ Prefab:
       propertyPath: VeryFarTrackerCursorImage
       value: 
       objectReference: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03, type: 3}
+    - target: {fileID: 0}
+      propertyPath: Shiftable
+      value: 
+      objectReference: {fileID: 11422806}
+    - target: {fileID: 0}
+      propertyPath: TrailPointCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Thrusters.Array.data[0]
+      value: 
+      objectReference: {fileID: 11405410}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 113112}

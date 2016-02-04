@@ -131,6 +131,7 @@ public class Vehicle : MonoBehaviour
 		{
 			shootPoint.Initialize();
 		}
+
 		_velocityReference = new VelocityReference(_velocity);
 
 		var targetable = GetComponent<Targetable>();
@@ -147,6 +148,14 @@ public class Vehicle : MonoBehaviour
 
 		targetRotation = transform.rotation;
 	}
+
+    private void Start()
+    {
+        foreach (var thruster in Thrusters)
+        {
+            thruster.Initialize();
+        }
+    }
 
 	public void SetAimAt(Vector3 aimAt)
 	{
@@ -302,11 +311,13 @@ public class Vehicle : MonoBehaviour
 		}
 
 		// Reduce flare brightness over distance from camera
+        /*
 		foreach (var thruster in Thrusters)
 		{
 			thruster.SetAmount(thrustAmount);
 			thruster.UpdateFlare();
 		}
+        */
 	}
 
     private void UpdateVelocityFromCollisions()
