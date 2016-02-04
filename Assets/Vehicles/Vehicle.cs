@@ -98,6 +98,9 @@ public class Vehicle : MonoBehaviour
 	private bool boostRegenerate;
 	private bool allowBoost;
 
+    // Target Locking
+    public Vehicle LockedOnByVehicle;
+
 	private float maxFlareBrightness = 30f;
 	public Weapon PrimaryWeaponInstance { get { return _primaryWeaponInstance; } }
 	public Weapon SecondaryWeaponInstance { get { return _secondaryWeaponInstance; } }

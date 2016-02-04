@@ -412,6 +412,8 @@ public class PlayerController : MonoBehaviour
 				// Set previous controlled vehicle to NPC control
 				if (_playVehicleInstance != null && Squadron[oldSquadronIndex] != null)
 				{
+                    _playVehicleInstance.PrimaryWeaponInstance.ClearTargetLock();
+                    _playVehicleInstance.SecondaryWeaponInstance.ClearTargetLock();
 					_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
 					//_playVehicleInstance.GetComponent<Killable>().OnDie -= OnVehicleDestroyed;
 					Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);

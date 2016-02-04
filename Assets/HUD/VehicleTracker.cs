@@ -129,18 +129,23 @@ public class VehicleTracker : Tracker
                     UpdateHealthBar();
                 }
                 // Locking
+                isLockedOn = false;
                 if (PlayerController.Current.VehicleInstance != null)
                 {
-                    if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockingOnTarget() == transform)
+                    if (PlayerController.Current.VehicleInstance != null)
                     {
-                        useSprite = lockingSprite;
+                        if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockingOnTarget() == transform)
+                        {
+                            useSprite = lockingSprite;
+                        }
+                        if (GetComponent<Vehicle>().LockedOnByVehicle == PlayerController.Current.VehicleInstance || PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
+                        //if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
+                        {
+                            isLockedOn = true;
+                        }
+                        if (isLockedOn)
+                            useSprite = lockedSprite;
                     }
-                    if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
-                    {
-                        isLockedOn = true;
-                    }
-                    if (isLockedOn)
-                        useSprite = lockedSprite;
                 }
                 imageInstance.sprite = useSprite;
 

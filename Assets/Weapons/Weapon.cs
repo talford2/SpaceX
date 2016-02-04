@@ -135,7 +135,7 @@ public class Weapon : MonoBehaviour
 		}
 	}
 
-	private void ClearTargetLock()
+	public void ClearTargetLock()
 	{
 		isLocked = false;
 		lastLockingTarget = null;
@@ -213,6 +213,8 @@ public class Weapon : MonoBehaviour
 					// Rough Extrapolation
 					var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(lockedVehicle, this, 0f);
 					SetAimAt(extrapolatePosition);
+                    // Possible null ref if owner is not vehicle
+				    lockedVehicle.LockedOnByVehicle = _owner.GetComponent<Vehicle>();
 				}
 				else
 				{
@@ -236,4 +238,9 @@ public class Weapon : MonoBehaviour
 	{
 		return lockedTarget;
 	}
+
+    private void OnDestroy()
+    {
+        ClearTargetLock();
+    }
 }
