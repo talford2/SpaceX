@@ -27,7 +27,7 @@ public class Thruster : MonoBehaviour
         tailPoint = Vector3.Lerp(tailPoint, targetTail, 2f*Time.deltaTime);
         Trail.SetPosition(1, tailPoint);
 
-        var toCamera = Universe.Current.ViewPort.Shiftable.GetWorldPosition() - transform.position;
+        var toCamera = transform.position - Universe.Current.ViewPort.Shiftable.GetWorldPosition();
         const float theFactor = 2000f;
         var capFlareBright = MaxFlareBrightness / Mathf.Max(toCamera.sqrMagnitude / theFactor, 1f);
         Flare.brightness = 1f * capFlareBright;

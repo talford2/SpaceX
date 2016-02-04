@@ -5,6 +5,7 @@ public class SeekingRocket : Missile
 {
     [Header("Seeking Rocket")]
     public float MinChaseDistance = 50f;
+    public float MaxTurnSpeed = 90f;
     public GameObject ExplodePrefab;
     public MeshRenderer Rocket;
     public MeshRenderer ThrusterMesh;
@@ -25,10 +26,12 @@ public class SeekingRocket : Missile
 
     private float explodeDistance = 2f;
 
-    private float travelStraightTime = 1f;
+    private float travelStraightTime = 0.5f;
     private float travelStraightCooldown;
     private float noTargetTime = 5f;
     private float noTargetCooldown;
+
+    private float turnTime = 2f;
 
     private void Awake()
     {
@@ -46,39 +49,34 @@ public class SeekingRocket : Missile
             }
 
             var toTarget = _target.position - transform.position;
-            if (travelStraightCooldown < 0f)
+            if (isVehicleTarget)
             {
-                if (isVehicleTarget)
-                {
-                    if (toTarget.sqrMagnitude > MinChaseDistance*MinChaseDistance)
-                    {
-                        offsetVelocity = _initVelocity;
-                    }
-                    else
-                    {
-                        offsetVelocity = Vector3.Lerp(offsetVelocity, vehicle.GetVelocity(), 5f*Time.deltaTime);
-                    }
-                }
-                else
-                {
-                    if (toTarget.sqrMagnitude > MinChaseDistance*MinChaseDistance)
-                    {
-                        offsetVelocity = _initVelocity;
-                    }
-                    else
-                    {
-                        offsetVelocity = Vector3.Lerp(offsetVelocity, Vector3.zero, 5f*Time.deltaTime);
-                    }
-                }
-
                 if (toTarget.sqrMagnitude > MinChaseDistance*MinChaseDistance)
                 {
-                    transform.forward = Vector3.Lerp(transform.forward, toTarget.normalized, 2f*Time.deltaTime);
+                    offsetVelocity = _initVelocity;
                 }
                 else
                 {
-                    transform.forward = toTarget.normalized;
+                    offsetVelocity = Vector3.Lerp(offsetVelocity, vehicle.GetVelocity(), 5f*Time.deltaTime);
                 }
+            }
+            else
+            {
+                if (toTarget.sqrMagnitude > MinChaseDistance*MinChaseDistance)
+                {
+                    offsetVelocity = _initVelocity;
+                }
+                else
+                {
+                    offsetVelocity = Vector3.Lerp(offsetVelocity, Vector3.zero, 5f*Time.deltaTime);
+                }
+            }
+ 
+            if (travelStraightCooldown < turnTime)
+            {
+                var turnFraction = Mathf.Clamp01(1f - travelStraightCooldown/turnTime);
+                var maxTurn = MaxTurnSpeed*turnFraction;
+                transform.forward = Vector3.RotateTowards(transform.forward, toTarget.normalized, maxTurn*Time.deltaTime, 0f);
             }
 
             if (toTarget.sqrMagnitude < explodeDistance*explodeDistance)
@@ -99,7 +97,7 @@ public class SeekingRocket : Missile
 
         velocity = offsetVelocity + transform.forward*MissileSpeed;
 
-        var displacement = velocity * Time.deltaTime;
+        var displacement = velocity*Time.deltaTime;
         _shiftable.Translate(displacement);
     }
 
@@ -130,7 +128,7 @@ public class SeekingRocket : Missile
         ThrustFlare.enabled = true;
 
         noTargetCooldown = noTargetTime;
-        travelStraightCooldown = travelStraightTime;
+        travelStraightCooldown = travelStraightTime + turnTime;
     }
 
     private void Explode()
