@@ -735,9 +735,9 @@ MonoBehaviour:
   CollisionRadius: 3.4
   MaxBoostEnergy: 100
   BoostEnergy: 100
-  BoostCost: 20
-  BoostEnergyRegenerateDelay: 5
-  BoostEnergyRegenerateRate: 5
+  BoostCost: 50
+  BoostEnergyRegenerateDelay: 2
+  BoostEnergyRegenerateRate: 10
   TriggerAccelerate: 0
   TriggerBrake: 0
   TriggerBoost: 0
@@ -779,6 +779,7 @@ MonoBehaviour:
   IsTargetLocking: 0
   TargetLockTime: 1.5
   TargetLockingMaxDistance: 2000
+  LockSound: {fileID: 0}
   IsTriggered: 0
   MissilePoolCount: 20
 --- !u!114 &11443486
@@ -1107,11 +1108,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BoostCost
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BoostEnergyRegenerateRate
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
@@ -1200,6 +1201,10 @@ Prefab:
       objectReference: {fileID: 11450004}
     - target: {fileID: 0}
       propertyPath: TrailPointCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BoostEnergyRegenerateDelay
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
