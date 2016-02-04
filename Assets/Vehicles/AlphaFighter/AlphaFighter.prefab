@@ -690,9 +690,9 @@ MonoBehaviour:
   CollisionRadius: 3.4
   MaxBoostEnergy: 100
   BoostEnergy: 100
-  BoostCost: 20
-  BoostEnergyRegenerateDelay: 5
-  BoostEnergyRegenerateRate: 5
+  BoostCost: 50
+  BoostEnergyRegenerateDelay: 2
+  BoostEnergyRegenerateRate: 10
   TriggerAccelerate: 0
   TriggerBrake: 0
   TriggerBoost: 0
@@ -1056,11 +1056,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BoostCost
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BoostEnergyRegenerateRate
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
@@ -1143,6 +1143,10 @@ Prefab:
       value: 
       objectReference: {fileID: 11413680, guid: 4063efe36c8729246a44aec50d7e1406,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: BoostEnergyRegenerateDelay
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}
