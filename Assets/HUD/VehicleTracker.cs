@@ -28,6 +28,7 @@ public class VehicleTracker : Tracker
     private Texture2D healthBarTexture;
     private Texture2D healthBarBackgroundTexture;
 
+    private Vehicle vehicle;
     private bool isLockedOn;
 
     private void Awake()
@@ -39,6 +40,7 @@ public class VehicleTracker : Tracker
         healthBarTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 1f));
         healthBarBackgroundTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 0.05f));
 
+        vehicle = GetComponent<Vehicle>();
         isLockedOn = false;
     }
 
@@ -135,14 +137,9 @@ public class VehicleTracker : Tracker
                     if (PlayerController.Current.VehicleInstance != null)
                     {
                         if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockingOnTarget() == transform)
-                        {
                             useSprite = lockingSprite;
-                        }
-                        if (GetComponent<Vehicle>().LockedOnByVehicle == PlayerController.Current.VehicleInstance || PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
-                        //if (PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
-                        {
+                        if (vehicle != null && vehicle.LockedOnByVehicle == PlayerController.Current.VehicleInstance || PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
                             isLockedOn = true;
-                        }
                         if (isLockedOn)
                             useSprite = lockedSprite;
                     }
