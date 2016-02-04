@@ -4,7 +4,7 @@ public class Laser : Missile {
     [Header("Laser")]
     public float MissileLength = 6f;
 
-    private LineRenderer _lineRenderer;
+    public LineRenderer Tracer;
     private Shiftable _shiftable;
     private bool _hasHit;
 
@@ -19,7 +19,6 @@ public class Laser : Missile {
 
     private void Awake()
     {
-        _lineRenderer = GetComponent<LineRenderer>();
         _shiftable = GetComponent<Shiftable>();
         _shiftable.OnShift += Shift;
     }
@@ -100,14 +99,14 @@ public class Laser : Missile {
             tailPosition = _shootFrom;
         }
 
-        _lineRenderer.SetPosition(0, tailPosition);
-        _lineRenderer.SetPosition(1, headPosition);
+        Tracer.SetPosition(0, tailPosition);
+        Tracer.SetPosition(1, headPosition);
     }
 
     public override void Stop()
     {
         base.Stop();
-        _lineRenderer.enabled = false;
+        Tracer.enabled = false;
         _hasHit = false;
         if (Owner == null)
             Destroy(gameObject);
@@ -116,7 +115,7 @@ public class Laser : Missile {
     public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
     {
         base.Shoot(shootFrom, direction, initVelocity);
-        _lineRenderer.enabled = true;
+        Tracer.enabled = true;
         _shootFrom = shootFrom;
         _initVelocity = initVelocity;
         _initSpeed = _initVelocity.magnitude;

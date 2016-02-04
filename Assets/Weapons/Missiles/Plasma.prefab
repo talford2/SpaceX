@@ -42,6 +42,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 462670}
+  - 114: {fileID: 11420608}
+  - 114: {fileID: 11451316}
   m_Layer: 0
   m_Name: Plasma
   m_TagString: Untagged
@@ -71,7 +73,7 @@ Transform:
   m_GameObject: {fileID: 153558}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 462670}
   m_RootOrder: 0
@@ -120,6 +122,40 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153558}
   m_Mesh: {fileID: 4300000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+--- !u!114 &11420608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6ab23b8aef1484781c41a246051fc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MissileSpeed: 100
+  FromReference: {fileID: 0}
+  HitEffectPrefab: {fileID: 0}
+  HitDecalPrefab: {fileID: 0}
+  MissileLength: 2
+  Tracer: {fileID: 12011222}
+--- !u!114 &11451316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseCellIndex:
+    X: 0
+    Y: 0
+    Z: 0
+  CellLocalPosition: {x: 0, y: 0, z: 0}
+  ShiftParticleSystems: []
 --- !u!114 &11451644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,7 +215,31 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Tracer
+      value: 
+      objectReference: {fileID: 12011222}
+    - target: {fileID: 0}
+      propertyPath: MissileLength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MissileSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195130}
