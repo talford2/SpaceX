@@ -219,7 +219,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -56.85833, y: -23.634165, z: -430.39935}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 490584}
@@ -532,6 +532,7 @@ MonoBehaviour:
   IsTargetLocking: 0
   TargetLockTime: 1.5
   TargetLockingMaxDistance: 2000
+  LockSound: {fileID: 0}
   IsTriggered: 0
   MissilePoolCount: 20
 --- !u!114 &11427670
@@ -570,7 +571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TotalPoints: 20
-  DistanceInterval: 5
+  DistanceInterval: 2.5
   Shiftable: {fileID: 11422806}
 --- !u!114 &11460988
 MonoBehaviour:
