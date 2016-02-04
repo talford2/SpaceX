@@ -3,14 +3,21 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    [Header("Parts")]
     public GameObject Head;
     public GameObject Guns;
 
     public Weapon WeaponPrefab;
     public List<ShootPoint> ShootPoints;
     public float MaxTargetDistance;
+
+    [Header("Turning")]
     public float MinPitch;
     public float MaxPitch;
+    public float MaxPitchSpeed = 90f;
+    public float MaxYawSpeed = 90f;
+
+    [Header("Aiming")]
     public float AimTolerance = 5f;
     public float ExtrapolationTimeError = 0.5f;
 
@@ -21,6 +28,11 @@ public class Turret : MonoBehaviour
     private Transform _target;
     private float targetSearchInterval = 2f;
     private float targetSearchCooldown;
+
+
+    private float aimInterval = 0.3f;
+    private float aimCooldown;
+    private Vector3 aimPosition;
 
     private float _yaw;
     private float _pitch;
@@ -52,23 +64,37 @@ public class Turret : MonoBehaviour
                 if (_target == null)
                     _target = Targeting.FindNearestTeam(Targeting.GetEnemyTeam(_targetable.Team), transform.position, MaxTargetDistance);
                 targetSearchCooldown = targetSearchInterval;
+                aimCooldown = 0f;
             }
         }
 
         if (_target != null)
         {
-            var targetPos = _target.transform.position;
+            if (aimCooldown >= 0f)
+            {
+                aimCooldown -= Time.deltaTime;
+                if (aimCooldown < 0f)
+                {
+                    aimPosition = _target.transform.position;
 
-            var targetVehicle = _target.GetComponent<Vehicle>();
-            if (targetVehicle != null)
-                targetPos = Utility.GetVehicleExtrapolatedPosition(targetVehicle, _weaponInstance, Random.Range(-ExtrapolationTimeError, ExtrapolationTimeError));
+                    var targetVehicle = _target.GetComponent<Vehicle>();
+                    if (targetVehicle != null)
+                        aimPosition = Utility.GetVehicleExtrapolatedPosition(targetVehicle, _weaponInstance, 0f); //Random.Range(-ExtrapolationTimeError, ExtrapolationTimeError));
 
-            Head.transform.LookAt(targetPos, Vector3.up);
-            _yaw = Mathf.LerpAngle(_yaw, Head.transform.localEulerAngles.y, 5f*Time.deltaTime);
+                    aimCooldown = aimInterval;
+                }
+            }
+
+            Head.transform.LookAt(aimPosition, Vector3.up);
+            var targetYaw = Head.transform.localEulerAngles.y;
+            //var targetYaw = Quaternion.LookRotation(aimPosition - Head.transform.position, Vector3.up).eulerAngles.y; // this is world space not local!
+
+            _yaw = Mathf.MoveTowardsAngle(_yaw, targetYaw, MaxYawSpeed*Time.deltaTime);
             Head.transform.localRotation = Quaternion.Euler(0, _yaw, 0);
 
-            Guns.transform.LookAt(targetPos, Vector3.forward);
+            Guns.transform.LookAt(aimPosition, Vector3.forward);
             var targetPitch = Guns.transform.localEulerAngles.x;
+            //var targetPitch = Quaternion.LookRotation(aimPosition - Guns.transform.position, Vector3.forward).eulerAngles.x; // this is world space not local!
 
             var deltaMin = Mathf.DeltaAngle(targetPitch, MinPitch);
             var deltaMax = Mathf.DeltaAngle(targetPitch, MaxPitch);
@@ -86,7 +112,7 @@ public class Turret : MonoBehaviour
                     targetPitch = MaxPitch;
                 }
             }
-            _pitch = Mathf.LerpAngle(_pitch, targetPitch, 5f*Time.deltaTime);
+            _pitch = Mathf.MoveTowardsAngle(_pitch, targetPitch, MaxPitchSpeed*Time.deltaTime);
             Guns.transform.localRotation = Quaternion.Euler(targetPitch, 0, 0);
 
             // Shooting
