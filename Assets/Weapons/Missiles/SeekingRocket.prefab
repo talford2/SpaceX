@@ -267,6 +267,7 @@ MonoBehaviour:
   Rocket: {fileID: 2355120}
   ThrusterMesh: {fileID: 2390714}
   Tracer: {fileID: 11406130}
+  Flare: {fileID: 11468780}
 --- !u!114 &11468780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -536,6 +537,10 @@ Prefab:
       propertyPath: DistanceInterval
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Flare
+      value: 
+      objectReference: {fileID: 11468780}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 176048}
