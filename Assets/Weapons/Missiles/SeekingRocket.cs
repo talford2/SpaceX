@@ -153,7 +153,7 @@ public class SeekingRocket : Missile
             if (detectable != null)
             {
                 var killable = detectable.TargetTransform.GetComponent<Killable>();
-                var damage = 100f*GetDamageFraction(detectable.transform.position, transform.position, 5f, 15f);
+                var damage = Mathf.Round(100f*GetDamageFraction(detectable.transform.position, transform.position, 5f, 15f));
                 killable.Damage(damage, transform.position, Vector3.up, Owner);
             }
         }
