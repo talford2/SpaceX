@@ -71,7 +71,14 @@ public class Beam : Missile
         _lineRenderer.SetPosition(1, transform.position + transform.forward* length);
     }
 
-    
+    public void LateUpdate()
+    {
+        if (!IsLive)
+        {
+            if (Owner == null)
+                Destroy(gameObject);
+        }
+    }
 
     private void Shift(Shiftable sender, Vector3 delta)
     {
@@ -82,5 +89,7 @@ public class Beam : Missile
     {
         base.Stop();
         _lineRenderer.enabled = false;
+        if (Owner == null)
+            Destroy(gameObject);
     }
 }
