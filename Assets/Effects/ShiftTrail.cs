@@ -77,7 +77,7 @@ public class ShiftTrail : MonoBehaviour
         {
             for (var i = 0; i < lastPositions.Count; i++)
             {
-                lastPositions[i] += delta;
+                lastPositions[i] -= delta;
                 lineRenderer.SetPosition(i, lastPositions[i]);
             }
         }
