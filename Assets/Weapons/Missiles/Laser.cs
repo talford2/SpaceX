@@ -41,19 +41,17 @@ public class Laser : Missile
 				RaycastHit missileHit;
 				if (Physics.Raycast(missileRay, out missileHit, displacement, ~LayerMask.GetMask("Distant", "Universe Background")))
 				{
-					if (missileHit.collider.gameObject != Owner)
-					{
-						var killable = missileHit.collider.GetComponentInParent<Killable>();
-						if (killable != null)
-						{
-							killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
-							_hasHit = true;
-							_hitPosition = missileHit.point;
-
-							//killable.SendMessageUpwards("Hit", new HitEffectParameters { Position = missileHit.point, Normal = missileHit.normal });
-							PlaceHitEffects(missileHit.point, missileHit.normal, missileHit.collider.gameObject.transform);
-						}
-					}
+				    if (missileHit.collider.gameObject != Owner)
+				    {
+				        var killable = missileHit.collider.GetComponentInParent<Killable>();
+				        if (killable != null)
+				        {
+				            killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
+				        }
+                        _hasHit = true;
+                        _hitPosition = missileHit.point;
+                        PlaceHitEffects(missileHit.point, missileHit.normal, missileHit.collider.gameObject.transform);
+				    }
 				}
 			}
 		}

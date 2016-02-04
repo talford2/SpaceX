@@ -60,10 +60,9 @@ public class Beam : Missile
             if (killable != null)
             {
                 killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
-                length = missileHit.distance;
-
-                PlaceHitEffects(missileHit.point, missileHit.normal, missileHit.collider.gameObject.transform);
             }
+            length = missileHit.distance;
+            PlaceHitEffects(missileHit.point, missileHit.normal, missileHit.collider.gameObject.transform);
         }
         UpdateLineRenderer();
     }

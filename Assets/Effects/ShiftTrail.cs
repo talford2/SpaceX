@@ -19,7 +19,11 @@ public class ShiftTrail : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.useWorldSpace = true;
 
-        lastPositions = new List<Vector3>();
+        lastPositions = new List<Vector3>
+        {
+            transform.position,
+            transform.position
+        };
     }
 
     public void Initialize(Vector3 position)
