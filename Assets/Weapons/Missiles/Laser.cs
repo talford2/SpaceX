@@ -78,7 +78,7 @@ public class Laser : Missile {
     public void UpdateLineRenderer()
     {
         var headPosition = transform.position;
-        var tailPosition = transform.position - transform.forward * MissileLength;
+        var tailPosition = transform.position - transform.forward*MissileLength;
 
         var tailDotProd = Vector3.Dot(tailPosition - _shootFrom, transform.forward);
         var headHitDotProd = Vector3.Dot(headPosition - _hitPosition, transform.forward);
@@ -99,8 +99,8 @@ public class Laser : Missile {
             tailPosition = _shootFrom;
         }
 
-        Tracer.SetPosition(0, tailPosition);
-        Tracer.SetPosition(1, headPosition);
+        Tracer.SetPosition(0, headPosition);
+        Tracer.SetPosition(1, tailPosition);
     }
 
     public override void Stop()
