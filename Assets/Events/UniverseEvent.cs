@@ -29,7 +29,7 @@ public class UniverseEvent : MonoBehaviour
 
 		UniverseEvents.Add(this);
 
-	    cellRadius = Mathf.CeilToInt(TriggerRadius/Universe.Current.CellSize) + 1;
+	    cellRadius = Mathf.CeilToInt(TriggerRadius/Universe.Current.CellSize);
 	}
 
 	private void Shiftable_OnShift(Shiftable sender, Vector3 delta)
