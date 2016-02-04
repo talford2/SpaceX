@@ -4,6 +4,8 @@ public class Targetable : MonoBehaviour
 {
     public Team Team;
 
+    public Transform LockedOnBy;
+
     private void Start()
     {
         Targeting.AddTargetable(Team, transform);

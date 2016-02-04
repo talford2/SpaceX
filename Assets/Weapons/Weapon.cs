@@ -213,14 +213,19 @@ public class Weapon : MonoBehaviour
 					// Rough Extrapolation
 					var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(lockedVehicle, this, 0f);
 					SetAimAt(extrapolatePosition);
-                    // Possible null ref if owner is not vehicle
-				    lockedVehicle.LockedOnByVehicle = _owner.GetComponent<Vehicle>();
 				}
 				else
 				{
 					SetAimAt(lockedTarget.position);
 				}
-				SetAimAt(GetShootPointCentre() + _velocityReference.Value);
+
+                var targetable = lockedTarget.GetComponent<Targetable>();
+                if (targetable != null)
+                {
+                    targetable.LockedOnBy = _owner.transform;
+                }
+
+                SetAimAt(GetShootPointCentre() + _velocityReference.Value);
 				var nextMissile = GetNextMissile();
 				nextMissile.GetComponent<Missile>().SetTarget(lockedTarget);
 				FireMissile(nextMissile);
