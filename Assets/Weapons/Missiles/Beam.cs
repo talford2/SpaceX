@@ -11,6 +11,8 @@ public class Beam : Missile
 
     private Shiftable _shiftable;
     private LineRenderer _lineRenderer;
+
+    private Quaternion dirRotate;
     private float length;
     private float fireCooldown;
 
@@ -29,7 +31,10 @@ public class Beam : Missile
 
         fireCooldown = FireTime;
         transform.position = FromReference.position;
-        transform.forward = FromReference.forward;
+
+        dirRotate = Quaternion.FromToRotation(FromReference.forward, direction.normalized);
+
+        transform.forward = direction;
         UpdateLineRenderer();
     }
 
@@ -43,7 +48,7 @@ public class Beam : Missile
         }
 
         transform.position = FromReference.position;
-        transform.forward = FromReference.forward;
+        transform.forward = dirRotate*FromReference.forward;
 
         length = MissileLength;
 
