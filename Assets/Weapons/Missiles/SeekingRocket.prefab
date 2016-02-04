@@ -320,6 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Flare: {fileID: 12381238}
   MaxFlareBrightness: 30
+  MaxLength: 20
   Trail: {fileID: 12080608}
 --- !u!114 &11449330
 MonoBehaviour:
@@ -337,11 +338,11 @@ MonoBehaviour:
   HitEffectPrefab: {fileID: 0}
   HitDecalPrefab: {fileID: 0}
   MinChaseDistance: 50
+  MaxTurnSpeed: 90
   ExplodePrefab: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   Rocket: {fileID: 2355120}
   ThrusterMesh: {fileID: 2390714}
-  ThrustFlare: {fileID: 12381238}
-  Tracer: {fileID: 9611106}
+  Thruster: {fileID: 11432742}
 --- !u!120 &12080608
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -483,6 +484,14 @@ Prefab:
       propertyPath: ThrustFlare
       value: 
       objectReference: {fileID: 12381238}
+    - target: {fileID: 0}
+      propertyPath: Thruster
+      value: 
+      objectReference: {fileID: 11432742}
+    - target: {fileID: 0}
+      propertyPath: MaxLength
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 176048}

@@ -4,6 +4,7 @@ public class Thruster : MonoBehaviour
 {
     public LensFlare Flare;
     public float MaxFlareBrightness = 30f;
+    public float MaxLength = 100f;
 
     public LineRenderer Trail;
 
@@ -14,7 +15,7 @@ public class Thruster : MonoBehaviour
     {
         if (amount > 0)
         {
-            targetTail = amount*new Vector3(0, 0, 100f);
+            targetTail = amount*new Vector3(0, 0, MaxLength);
         }
         else
         {
@@ -31,5 +32,11 @@ public class Thruster : MonoBehaviour
         const float theFactor = 2000f;
         var capFlareBright = MaxFlareBrightness / Mathf.Max(toCamera.sqrMagnitude / theFactor, 1f);
         Flare.brightness = 1f * capFlareBright;
+    }
+
+    public void SetVisibility(bool value)
+    {
+        Trail.enabled = value;
+        Flare.enabled = value;
     }
 }
