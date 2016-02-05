@@ -544,6 +544,7 @@ MonoBehaviour:
   Shifter: {fileID: 11454140}
   SpawnEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 0
 --- !u!114 &11415242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -748,6 +749,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: IdleSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: AddWarpEffect
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

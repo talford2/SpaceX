@@ -87,14 +87,14 @@ public class PlayerController : MonoBehaviour
 				member.IsSquadronMember = true;
                 // Give squadron members better aiming!
                 member.AimOffsetRadius = 1.5f;
-                SpawnSquadronVehicle(member, univPos);
+                SpawnSquadronVehicle(member, univPos, transform.rotation);
 			}
 		}
 	}
 
-	private void SpawnSquadronVehicle(Fighter member, UniversePosition position)
+	private void SpawnSquadronVehicle(Fighter member, UniversePosition position, Quaternion rotation)
 	{
-		member.SpawnVehicle(member.VehiclePrefab, position);
+		member.SpawnVehicle(member.VehiclePrefab, position, rotation);
 		var memberTracker = member.VehicleInstance.GetComponent<VehicleTracker>();
 		memberTracker.ArrowCursorImage = ArrowCursorImage;
 		memberTracker.TrackerCursorImage = TrackerCurosrImage;
@@ -379,7 +379,7 @@ public class PlayerController : MonoBehaviour
 							if (Squadron[i].VehicleInstance == null)
 							{
 								var spawnPos = Universe.Current.GetUniversePosition(Utility.GetRandomDirection(-Universe.Current.ViewPort.transform.forward, 80f) * 2000f);
-								SpawnSquadronVehicle(Squadron[i], spawnPos);
+								SpawnSquadronVehicle(Squadron[i], spawnPos, Quaternion.identity);
 							}
 						}
 					}

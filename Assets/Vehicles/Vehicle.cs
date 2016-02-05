@@ -157,6 +157,11 @@ public class Vehicle : MonoBehaviour
 		targetRotation = transform.rotation;
 	}
 
+    public void SetTargetRotation(Quaternion rotation)
+    {
+        targetRotation = rotation;
+    }
+
     private void Start()
     {
         foreach (var thruster in Thrusters)

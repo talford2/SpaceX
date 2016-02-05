@@ -64,7 +64,7 @@ public class Fighter : Npc<Fighter>
             var parentShifter = transform.GetComponentInParent<Shiftable>();
             if (parentShifter != null)
             {
-                SpawnVehicle(VehiclePrefab, parentShifter.UniversePosition);
+                //SpawnVehicle(VehiclePrefab, parentShifter.UniversePosition);
             }
             else
             {
@@ -80,7 +80,7 @@ public class Fighter : Npc<Fighter>
 
         if (IsDebugSpawn)
         {
-            SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)));
+            SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)), Quaternion.identity);
             _vehicleInstance.GetComponent<VehicleTracker>().enabled = false;
         }
     }
@@ -103,7 +103,7 @@ public class Fighter : Npc<Fighter>
         }
     }
 
-    public void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition)
+    public void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition, Quaternion rotation)
     {
         _vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
         _vehicleInstance.GetComponent<Targetable>().Team = Team;
@@ -111,6 +111,8 @@ public class Fighter : Npc<Fighter>
         _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
         _vehicleInstance.Shiftable.SetShiftPosition(universePosition);
         _vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();
+        _vehicleInstance.SetTargetRotation(rotation);
+        _vehicleInstance.transform.rotation = rotation;
         ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
     }
 

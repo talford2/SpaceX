@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
 	public GameObject SpawnEffect;
 
 	public bool SpawnOnAwake = false;
+    public bool AddWarpEffect = true;
 
 	private bool HasSpawned = false;
 
@@ -42,18 +43,19 @@ public class Spawner : MonoBehaviour
 		if (!HasSpawned)
 		{
 			_fighterInst = Instantiate<Fighter>(FighterPrefab);
+            _fighterInst.SpawnVehicle(_fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position), transform.rotation);
 
-            _fighterInst.SpawnVehicle(_fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position));
+		    if (AddWarpEffect)
+		    {
+		        var s = _fighterInst.VehicleInstance.gameObject.AddComponent<WarpEffect>();
+		        s.transform.position = transform.position;
+		        s.transform.forward = transform.forward;
 
-			var s = _fighterInst.VehicleInstance.gameObject.AddComponent<WarpEffect>();
-			s.transform.position = transform.position;
-			s.transform.forward = transform.forward;
-
-			s.WarpEffectPrefab = SpawnEffect;
-			s.Timeout = 0.4f;
-			s.Distance = 20f;
-
-			HasSpawned = true;
+		        s.WarpEffectPrefab = SpawnEffect;
+		        s.Timeout = 0.4f;
+		        s.Distance = 20f;
+		    }
+		    HasSpawned = true;
 		}
 	}
 }
