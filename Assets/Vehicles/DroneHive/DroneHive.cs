@@ -31,8 +31,10 @@ public class DroneHive : MonoBehaviour
         }
         TopDoor.localRotation = Quaternion.Euler(35f, 0f, 0f);
         BottomDoor.localRotation = Quaternion.Euler(-35f, 0f, 0f);
-        DroneCopy.enabled = false;
-        DroneSpawner.Spawn();
+        DroneSpawner.Spawn(0f, () =>
+        {
+            DroneCopy.enabled = false;
+        });
         DroneSpawner.Reset();
         yield return new WaitForSeconds(0.5f);
         for (var fraction = 0f; fraction < 1f; fraction += 0.05f)

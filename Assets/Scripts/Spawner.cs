@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public class Spawner : MonoBehaviour
@@ -28,15 +29,20 @@ public class Spawner : MonoBehaviour
 
 	public void Spawn(float delay = 0)
 	{
-		StartCoroutine(DoSpawn(delay));
+		StartCoroutine(DoSpawn(delay, null));
 	}
+
+    public void Spawn(float delay, Action callback)
+    {
+        StartCoroutine(DoSpawn(delay, callback));
+    }
 
     public void Reset()
     {
         HasSpawned = false;
     }
 
-	private IEnumerator DoSpawn(float delay)
+	private IEnumerator DoSpawn(float delay, Action callback)
 	{
 		yield return new WaitForSeconds(delay);
 
@@ -56,6 +62,8 @@ public class Spawner : MonoBehaviour
 		        s.Distance = 20f;
 		    }
 		    HasSpawned = true;
+		    if (callback != null)
+		        callback();
 		}
 	}
 }

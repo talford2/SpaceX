@@ -574,8 +574,8 @@ MonoBehaviour:
   Health: 200
   MaxHealth: 200
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
+  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+  WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
   DestroyOnDie: 1
 --- !u!114 &11439790
 MonoBehaviour:
@@ -754,6 +754,14 @@ Prefab:
       propertyPath: AddWarpEffect
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DieEffect
+      value: 
+      objectReference: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+    - target: {fileID: 0}
+      propertyPath: WoundEffect
+      value: 
+      objectReference: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 192696}
