@@ -84,9 +84,16 @@ public class VehicleCamera : UniverseCamera
 	        offsetAngle = Quaternion.Lerp(offsetAngle, Target.transform.rotation, RotationCatchup*Time.deltaTime);
 	        offset = Vector3.Lerp(offset, offsetAngle*new Vector3(0f, VerticalDistance, -DistanceBehind)*springDistance, OffsetCatchup*Time.deltaTime);
 
-	        _shiftable.Translate(Target.PrimaryWeaponInstance.GetShootPointCentre() + offset - transform.position);
+	        if (Target.PrimaryWeaponInstance != null)
+	        {
+	            _shiftable.Translate(Target.PrimaryWeaponInstance.GetShootPointCentre() + offset - transform.position);
+	        }
+	        else
+	        {
+	            _shiftable.Translate(Target.transform.position + offset - transform.position);
+            }
 
-	        targetUp = Vector3.Lerp(targetUp, Target.transform.up, 5f*Time.deltaTime);
+            targetUp = Vector3.Lerp(targetUp, Target.transform.up, 5f*Time.deltaTime);
 
             transform.LookAt(Target.GetAimPosition(), targetUp);
 	    }

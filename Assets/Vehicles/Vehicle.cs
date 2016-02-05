@@ -116,7 +116,9 @@ public class Vehicle : MonoBehaviour
 
     public Vector3 GetAimPosition()
     {
-        return _primaryWeaponInstance.GetShootPointCentre() + _aimDistance*transform.forward;
+        if (_primaryWeaponInstance != null)
+            return _primaryWeaponInstance.GetShootPointCentre() + _aimDistance*transform.forward;
+        return transform.position + _aimDistance*transform.forward;
     }
 
     private void Awake()
@@ -136,15 +138,21 @@ public class Vehicle : MonoBehaviour
 
 		var targetable = GetComponent<Targetable>();
 
-		_primaryWeaponInstance = Utility.InstantiateInParent(PrimaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
-		_primaryWeaponInstance.Initialize(gameObject, PrimaryShootPoints, _velocityReference, targetable.Team);
-		_primaryWeaponInstance.OnShoot += OnShoot;
+        if (PrimaryWeaponPrefab != null)
+        {
+            _primaryWeaponInstance = Utility.InstantiateInParent(PrimaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
+            _primaryWeaponInstance.Initialize(gameObject, PrimaryShootPoints, _velocityReference, targetable.Team);
+            _primaryWeaponInstance.OnShoot += OnShoot;
+        }
 
-		_secondaryWeaponInstance = Utility.InstantiateInParent(SecondaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
-		_secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference, targetable.Team);
-		_secondaryWeaponInstance.OnShoot += OnShoot;
+        if (SecondaryWeaponPrefab != null)
+        {
+            _secondaryWeaponInstance = Utility.InstantiateInParent(SecondaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
+            _secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference, targetable.Team);
+            _secondaryWeaponInstance.OnShoot += OnShoot;
+        }
 
-		allowBoost = true;
+        allowBoost = true;
 
 		targetRotation = transform.rotation;
 	}
@@ -157,13 +165,15 @@ public class Vehicle : MonoBehaviour
         }
     }
 
-	public void SetAimAt(Vector3 aimAt)
-	{
-		_primaryWeaponInstance.SetAimAt(aimAt);
-		_secondaryWeaponInstance.SetAimAt(aimAt);
-	}
+    public void SetAimAt(Vector3 aimAt)
+    {
+        if (_primaryWeaponInstance != null)
+            _primaryWeaponInstance.SetAimAt(aimAt);
+        if (_secondaryWeaponInstance != null)
+            _secondaryWeaponInstance.SetAimAt(aimAt);
+    }
 
-	private void OnShoot()
+    private void OnShoot()
 	{
 	}
 

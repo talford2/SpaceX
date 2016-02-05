@@ -163,8 +163,10 @@ public class PlayerController : MonoBehaviour
 		// Fancy System.
 		var viewPortPos = Universe.Current.ViewPort.transform.position;
 		var viewPortForward = Universe.Current.ViewPort.transform.forward;
-		var dotViewPort = Vector3.Dot(VehicleInstance.PrimaryWeaponInstance.GetShootPointCentre() - viewPortPos, viewPortForward);
-		var guessTarget = Targeting.FindFacingAngleAny(viewPortPos + dotViewPort * viewPortForward, viewPortForward, MaxAimDistance, 5f);
+	    var dotViewPort = VehicleInstance.PrimaryWeaponInstance != null
+            ? Vector3.Dot(VehicleInstance.PrimaryWeaponInstance.GetShootPointCentre() - viewPortPos, viewPortForward)
+            : Vector3.Dot(VehicleInstance.transform.position - viewPortPos, viewPortForward);
+	    var guessTarget = Targeting.FindFacingAngleAny(viewPortPos + dotViewPort * viewPortForward, viewPortForward, MaxAimDistance, 5f);
 		if (guessTarget != null)
 		{
 			var toGuessTarget = guessTarget.position - viewPortPos;
@@ -204,58 +206,60 @@ public class PlayerController : MonoBehaviour
 		}
 		if (_controlEnabled)
 		{
-			if (_playVehicleInstance != null)
-			{
-				var mouseHorizontal = AimSensitivity * Input.GetAxis("MouseHorizontal") / Screen.width;
-				var mouseVertical = AimSensitivity * screenAspect * Input.GetAxis("MouseVertical") / Screen.height;
+		    if (_playVehicleInstance != null)
+		    {
+		        var mouseHorizontal = AimSensitivity*Input.GetAxis("MouseHorizontal")/Screen.width;
+		        var mouseVertical = AimSensitivity*screenAspect*Input.GetAxis("MouseVertical")/Screen.height;
 
-				var controllerHorizontal = AimSensitivity * Input.GetAxis("Horizontal") / Screen.width;
-				var controllerVertical = AimSensitivity * screenAspect * Input.GetAxis("Vertical") / Screen.height;
+		        var controllerHorizontal = AimSensitivity*Input.GetAxis("Horizontal")/Screen.width;
+		        var controllerVertical = AimSensitivity*screenAspect*Input.GetAxis("Vertical")/Screen.height;
 
-				var pitchYaw = Vector2.ClampMagnitude(new Vector2(controllerVertical + mouseVertical, controllerHorizontal + mouseHorizontal), MouseMoveClamp);
+		        var pitchYaw = Vector2.ClampMagnitude(new Vector2(controllerVertical + mouseVertical, controllerHorizontal + mouseHorizontal), MouseMoveClamp);
 
-				if (InvertY)
-				{
-					_playVehicleInstance.PitchThotttle = pitchYaw.x * -1;
-				}
-				else
-				{
-					_playVehicleInstance.PitchThotttle = pitchYaw.x;
-				}
-				_playVehicleInstance.YawThrottle = pitchYaw.y;
-				_playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
-				_playVehicleInstance.PrimaryWeaponInstance.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
-				_playVehicleInstance.SecondaryWeaponInstance.IsTriggered = (Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0;
+		        if (InvertY)
+		        {
+		            _playVehicleInstance.PitchThotttle = pitchYaw.x*-1;
+		        }
+		        else
+		        {
+		            _playVehicleInstance.PitchThotttle = pitchYaw.x;
+		        }
+		        _playVehicleInstance.YawThrottle = pitchYaw.y;
+		        _playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
+		        if (_playVehicleInstance.PrimaryWeaponInstance != null)
+		            _playVehicleInstance.PrimaryWeaponInstance.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
+		        if (_playVehicleInstance.SecondaryWeaponInstance != null)
+		            _playVehicleInstance.SecondaryWeaponInstance.IsTriggered = (Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0;
 
-				_playVehicleInstance.SetAimAt(GetAimAt());
+		        _playVehicleInstance.SetAimAt(GetAimAt());
 
-				_playVehicleInstance.TriggerAccelerate = false;
-				if (Input.GetButton("Accelerate") || Input.GetButton("KeyboardAccelerate"))
-				{
-					_playVehicleInstance.TriggerAccelerate = true;
-				}
+		        _playVehicleInstance.TriggerAccelerate = false;
+		        if (Input.GetButton("Accelerate") || Input.GetButton("KeyboardAccelerate"))
+		        {
+		            _playVehicleInstance.TriggerAccelerate = true;
+		        }
 
-				_playVehicleInstance.TriggerBrake = false;
-				if (Input.GetButton("Brake") || Input.GetButton("KeyboardBrake"))
-				{
-					_playVehicleInstance.TriggerBrake = true;
-				}
+		        _playVehicleInstance.TriggerBrake = false;
+		        if (Input.GetButton("Brake") || Input.GetButton("KeyboardBrake"))
+		        {
+		            _playVehicleInstance.TriggerBrake = true;
+		        }
 
-				_playVehicleInstance.TriggerBoost = false;
-				if (Input.GetButton("Boost") || Input.GetButton("KeyboardBoost"))
-				{
-					_playVehicleInstance.TriggerBoost = true;
-				}
+		        _playVehicleInstance.TriggerBoost = false;
+		        if (Input.GetButton("Boost") || Input.GetButton("KeyboardBoost"))
+		        {
+		            _playVehicleInstance.TriggerBoost = true;
+		        }
 
-			    if (_playVehicleInstance.IsBoosting)
-			    {
-                    Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.04f, 1f);
-                }
+		        if (_playVehicleInstance.IsBoosting)
+		        {
+		            Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.04f, 1f);
+		        }
 
-                PickupCollectibles();
-			}
+		        PickupCollectibles();
+		    }
 
-			if (Input.GetKeyUp(KeyCode.R))
+		    if (Input.GetKeyUp(KeyCode.R))
 			{
 				if (_playVehicleInstance != null)
 					_playVehicleInstance.GetComponent<Killable>().Die();
@@ -410,20 +414,22 @@ public class PlayerController : MonoBehaviour
 			if (Squadron[_curSquadronIndex] != null)
 			{
 				// Set previous controlled vehicle to NPC control
-				if (_playVehicleInstance != null && Squadron[oldSquadronIndex] != null)
-				{
-                    _playVehicleInstance.PrimaryWeaponInstance.ClearTargetLock();
-                    _playVehicleInstance.SecondaryWeaponInstance.ClearTargetLock();
-					_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
-					//_playVehicleInstance.GetComponent<Killable>().OnDie -= OnVehicleDestroyed;
-					Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
-					Squadron[oldSquadronIndex].enabled = true;
-					Squadron[oldSquadronIndex].VehicleInstance.GetComponent<VehicleTracker>().IsDisabled = false;
-					Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDamage -= PlayerController_OnDamage;
-					Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDie -= PlayerController_OnDie;
-				}
+			    if (_playVehicleInstance != null && Squadron[oldSquadronIndex] != null)
+			    {
+			        if (_playVehicleInstance.PrimaryWeaponInstance != null)
+			            _playVehicleInstance.PrimaryWeaponInstance.ClearTargetLock();
+			        if (_playVehicleInstance.SecondaryWeaponInstance != null)
+			            _playVehicleInstance.SecondaryWeaponInstance.ClearTargetLock();
+			        _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
+			        //_playVehicleInstance.GetComponent<Killable>().OnDie -= OnVehicleDestroyed;
+			        Squadron[oldSquadronIndex].SetVehicleInstance(_playVehicleInstance);
+			        Squadron[oldSquadronIndex].enabled = true;
+			        Squadron[oldSquadronIndex].VehicleInstance.GetComponent<VehicleTracker>().IsDisabled = false;
+			        Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDamage -= PlayerController_OnDamage;
+			        Squadron[oldSquadronIndex].VehicleInstance.GetComponent<Killable>().OnDie -= PlayerController_OnDie;
+			    }
 
-				// Disable next vehicle NPC control and apply PlayerController
+			    // Disable next vehicle NPC control and apply PlayerController
 				if (Squadron[_curSquadronIndex].VehicleInstance != null)
 				{
 					HeadsUpDisplay.Current.ShowSquadronPrompt(Squadron[_curSquadronIndex].CallSign);
@@ -505,7 +511,7 @@ public class PlayerController : MonoBehaviour
 		GUI.Label(new Rect(30f, 150f, 100f, 25f), string.Format("SQUADRON: {0:f0}/{1:f0}", squadronLiveCount, Squadron.Count));
 		GUI.Label(new Rect(30f, 180f, 100f, 25f), string.Format("THREATS: {0}", threatCount));
 		//GUI.Label(new Rect(30f, 180f, 200f, 25f), string.Format("LOCK: {0} ({1:f2})", lockingTarget != null ? lockingTarget.name : string.Empty, lockingTime));
-		GUI.Label(new Rect(30f, 210f, 200f, 25f), string.Format("LOCKED: {0}", VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() != null ? VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget().name : string.Empty));
+		//GUI.Label(new Rect(30f, 210f, 200f, 25f), string.Format("LOCKED: {0}", VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() != null ? VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget().name : string.Empty));
 		GUI.Label(new Rect(30f, 240f, 200f, 25f), string.Format("AIM DIST: {0:f2}", aimDistance));
 		GUI.Label(new Rect(30f, 270f, 200f, 25f), string.Format("COLLECTED: {0:f0}", SpaceJunkCount));
 	}

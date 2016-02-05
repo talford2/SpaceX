@@ -135,12 +135,24 @@ public class VehicleTracker : Tracker
                 var playerVehicle = PlayerController.Current.VehicleInstance;
                 if (playerVehicle != null)
                 {
-                    if (playerVehicle.SecondaryWeaponInstance.GetLockingOnTarget() == transform)
-                        useSprite = lockingSprite;
-                    if (targetable != null && targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
-                        isLockedOn = true;
-                    if (isLockedOn)
-                        useSprite = lockedSprite;
+                    if (playerVehicle.PrimaryWeaponInstance != null)
+                    {
+                        if (playerVehicle.PrimaryWeaponInstance.GetLockingOnTarget() == transform)
+                            useSprite = lockingSprite;
+                        if (targetable != null && targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == transform)
+                            isLockedOn = true;
+                        if (isLockedOn)
+                            useSprite = lockedSprite;
+                    }
+                    if (playerVehicle.SecondaryWeaponInstance != null)
+                    {
+                        if (playerVehicle.SecondaryWeaponInstance.GetLockingOnTarget() == transform)
+                            useSprite = lockingSprite;
+                        if (targetable != null && targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
+                            isLockedOn = true;
+                        if (isLockedOn)
+                            useSprite = lockedSprite;
+                    }
                 }
                 imageInstance.sprite = useSprite;
 
