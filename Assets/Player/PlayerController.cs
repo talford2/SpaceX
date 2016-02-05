@@ -251,6 +251,15 @@ public class PlayerController : MonoBehaviour
 		            _playVehicleInstance.TriggerBoost = true;
 		        }
 
+		        var droneHive = _playVehicleInstance.GetComponent<DroneHive>();
+		        if (droneHive != null)
+		        {
+		            if (Input.GetKeyUp(KeyCode.T))
+		            {
+		                droneHive.ReleaseDrones(5);
+		            }
+		        }
+
 		        if (_playVehicleInstance.IsBoosting)
 		        {
 		            Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.04f, 1f);

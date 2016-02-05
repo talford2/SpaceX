@@ -30,6 +30,11 @@ public class Spawner : MonoBehaviour
 		StartCoroutine(DoSpawn(delay));
 	}
 
+    public void Reset()
+    {
+        HasSpawned = false;
+    }
+
 	private IEnumerator DoSpawn(float delay)
 	{
 		yield return new WaitForSeconds(delay);
