@@ -6,10 +6,19 @@ ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Portal
+    100004: Slipgate
     400000: //RootNode
+    400002: Portal
+    400004: Slipgate
     2300000: //RootNode
+    2300002: Portal
+    2300004: Slipgate
     3300000: //RootNode
+    3300002: Portal
+    3300004: Slipgate
     4300000: Slipgate
+    4300002: Portal
   materials:
     importMaterials: 1
     materialName: 0
