@@ -74,7 +74,7 @@ public class FighterAttack :NpcState<Fighter>
 
         Vector3 targetDestination;
         var targetVehicle = Npc.Target.GetComponent<Vehicle>();
-        if (targetVehicle != null)
+        if (targetVehicle != null && Npc.VehicleInstance.PrimaryWeaponInstance != null)
         {
             var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(Npc.Target.GetComponent<Vehicle>(), Npc.VehicleInstance.PrimaryWeaponInstance, burstTimeoffset);
             targetDestination = extrapolatePosition;
