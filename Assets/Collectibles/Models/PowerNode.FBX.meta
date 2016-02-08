@@ -1,24 +1,15 @@
 fileFormatVersion: 2
-guid: b164d455500aba749bee5cc4bd5d2599
-timeCreated: 1454775933
+guid: 7cc3e9c324fa59544b46bfb335881df4
+timeCreated: 1454930611
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Portal
-    100004: Slipgate
     400000: //RootNode
-    400002: Portal
-    400004: Slipgate
     2300000: //RootNode
-    2300002: Portal
-    2300004: Slipgate
     3300000: //RootNode
-    3300002: Portal
-    3300004: Slipgate
-    4300000: Slipgate
-    4300002: Portal
+    4300000: PowerNode
   materials:
     importMaterials: 1
     materialName: 0
