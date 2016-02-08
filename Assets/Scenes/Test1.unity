@@ -1605,6 +1605,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1001 &787236967
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!117 &833105724
 Texture3D:
   m_ObjectHideFlags: 0
@@ -2971,56 +3013,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1434290579}
---- !u!1001 &1452588354
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2362530, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
-      propertyPath: m_Materials.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 1.6393449
-      objectReference: {fileID: 0}
-    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -3.7797906
-      objectReference: {fileID: 0}
-    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.54727983
-      objectReference: {fileID: 0}
-    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 443880, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2362530, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 613794100dcffda47898318990958653, type: 2}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
-  m_IsPrefabParent: 0
 --- !u!117 &1481786853
 Texture3D:
   m_ObjectHideFlags: 0
