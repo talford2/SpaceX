@@ -152,6 +152,7 @@ MonoBehaviour:
   IsTargetLocking: 0
   TargetLockTime: 1.5
   TargetLockingMaxDistance: 2000
+  LockSound: {fileID: 0}
   IsTriggered: 0
   MissilePoolCount: 50
 --- !u!1001 &100100000

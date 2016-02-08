@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f44237590b34b4e8a84527be13d8aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TrackerCursorImage: {fileID: 2800000, guid: 1699760e65f03584aa67e24fc3c7658e, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 0518c842f3f385d47b5e29bf86b8d479, type: 3}
   ArrowCursorImage: {fileID: 2800000, guid: 23a27d8840181934790cdaddd830785c, type: 3}
   LabelFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba, type: 3}
 --- !u!114 &11452060
@@ -74,7 +74,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: TrackerCursorImage
       value: 
-      objectReference: {fileID: 2800000, guid: 1699760e65f03584aa67e24fc3c7658e, type: 3}
+      objectReference: {fileID: 2800000, guid: 0518c842f3f385d47b5e29bf86b8d479, type: 3}
     - target: {fileID: 0}
       propertyPath: ArrowCursorImage
       value: 

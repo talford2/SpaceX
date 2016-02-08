@@ -66,7 +66,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bd58b74244225704abc4a0bc15ce21b3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6b9b6989687c8414a9348b30afb38ca9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
@@ -152,6 +152,7 @@ MonoBehaviour:
   IsTargetLocking: 1
   TargetLockTime: 0.5
   TargetLockingMaxDistance: 2000
+  LockSound: {fileID: 0}
   IsTriggered: 0
   MissilePoolCount: 10
 --- !u!1001 &100100000
@@ -193,7 +194,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: bd58b74244225704abc4a0bc15ce21b3, type: 3}
+      objectReference: {fileID: 8300000, guid: 6b9b6989687c8414a9348b30afb38ca9, type: 3}
     - target: {fileID: 0}
       propertyPath: m_Volume
       value: .300000012

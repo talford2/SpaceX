@@ -1953,7 +1953,9 @@ GameObject:
   - 114: {fileID: 1097665389}
   - 114: {fileID: 1097665392}
   - 114: {fileID: 1097665393}
+  - 114: {fileID: 1097665394}
   - 114: {fileID: 1097665391}
+  - 114: {fileID: 1097665395}
   m_Layer: 0
   m_Name: Universe
   m_TagString: Untagged
@@ -1993,7 +1995,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1097665388}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fcc537c0b90f2a4496ecf8f4abcc37c, type: 3}
   m_Name: 
@@ -2002,7 +2004,7 @@ MonoBehaviour:
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
-  BackgroundColor: {r: 0.09499411, g: 0.020897042, b: 0.203, a: 1}
+  BackgroundColor: {r: 0.11231208, g: 0, b: 0.278, a: 1}
   ScatterObjects:
   - Name: Clouds
     IsActive: 1
@@ -2121,6 +2123,194 @@ MonoBehaviour:
   - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
     Count: 180
   CellRadius: 10
+--- !u!114 &1097665394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1097665388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fcc537c0b90f2a4496ecf8f4abcc37c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BackgroundLayerName: Universe Background
+  FlatResolution: 4096
+  BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
+  CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
+  BackgroundColor: {r: 0.11770889, g: 0.024088217, b: 0.234, a: 1}
+  ScatterObjects:
+  - Name: Clouds
+    IsActive: 1
+    CountMin: 100
+    CountMax: 200
+    ScaleMin: 100
+    ScaleMax: 400
+    RadiusMin: 100
+    RadiusMax: 100
+    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    LookAtCenter: 1
+    Textures:
+    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    Colors:
+    - Color1: {r: 0, g: 0.06591212, b: 0.42799997, a: 0.019607844}
+      Color2: {r: 0.44099998, g: 0, b: 0.420714, a: 0.011764706}
+    UseMaterials: 0
+    Materials: []
+  - Name: Stars
+    IsActive: 1
+    CountMin: 20
+    CountMax: 50
+    ScaleMin: 200
+    ScaleMax: 250
+    RadiusMin: 100
+    RadiusMax: 100
+    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    LookAtCenter: 1
+    Textures:
+    - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
+    Colors:
+    - Color1: {r: 0.329, g: 0.329, b: 0.329, a: 1}
+      Color2: {r: 1, g: 1, b: 1, a: 1}
+    UseMaterials: 0
+    Materials: []
+  - Name: Planets
+    IsActive: 1
+    CountMin: 3
+    CountMax: 5
+    ScaleMin: 1
+    ScaleMax: 10
+    RadiusMin: 50
+    RadiusMax: 60
+    Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+    LookAtCenter: 0
+    Textures: []
+    Colors:
+    - Color1: {r: 1, g: 1, b: 1, a: 1}
+      Color2: {r: 1, g: 1, b: 1, a: 1}
+    UseMaterials: 1
+    Materials:
+    - {fileID: 2100000, guid: 600e83dc5ac989b4ba772d3942eb6faa, type: 2}
+    - {fileID: 2100000, guid: db3ff9d7a31efaa4599df592ca4fd892, type: 2}
+    - {fileID: 2100000, guid: f8b5f601b4c405b42ae6b49ba2aa7fe8, type: 2}
+    - {fileID: 2100000, guid: 621619c5b9f03b744a3c0bde134bcfba, type: 2}
+    - {fileID: 2100000, guid: 16f1ca9e95c13b44c8ad1e25e2dc1633, type: 2}
+    - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
+    - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
+  - Name: Nebula
+    IsActive: 1
+    CountMin: 5
+    CountMax: 10
+    ScaleMin: 300
+    ScaleMax: 500
+    RadiusMin: 100
+    RadiusMax: 100
+    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    LookAtCenter: 1
+    Textures:
+    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    Colors:
+    - Color1: {r: 0, g: 0.23199987, b: 1, a: 0.11764706}
+      Color2: {r: 0.93200064, g: 0, b: 1, a: 0.019607844}
+    UseMaterials: 0
+    Materials: []
+  SunLight: {fileID: 1376424185}
+  SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
+  SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+--- !u!114 &1097665395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1097665388}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fcc537c0b90f2a4496ecf8f4abcc37c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BackgroundLayerName: Universe Background
+  FlatResolution: 4096
+  BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
+  CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
+  BackgroundColor: {r: 0.278, g: 0.026688, b: 0, a: 1}
+  ScatterObjects:
+  - Name: Clouds
+    IsActive: 1
+    CountMin: 100
+    CountMax: 200
+    ScaleMin: 100
+    ScaleMax: 400
+    RadiusMin: 100
+    RadiusMax: 100
+    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    LookAtCenter: 1
+    Textures:
+    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    Colors:
+    - Color1: {r: 0.42799997, g: 0.207152, b: 0.30255845, a: 0.019607844}
+      Color2: {r: 0.44099998, g: 0.2897167, b: 0.21917698, a: 0.011764706}
+    UseMaterials: 0
+    Materials: []
+  - Name: Stars
+    IsActive: 1
+    CountMin: 20
+    CountMax: 50
+    ScaleMin: 200
+    ScaleMax: 250
+    RadiusMin: 100
+    RadiusMax: 100
+    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    LookAtCenter: 1
+    Textures:
+    - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
+    Colors:
+    - Color1: {r: 0.329, g: 0.329, b: 0.329, a: 1}
+      Color2: {r: 1, g: 1, b: 1, a: 1}
+    UseMaterials: 0
+    Materials: []
+  - Name: Planets
+    IsActive: 1
+    CountMin: 3
+    CountMax: 5
+    ScaleMin: 1
+    ScaleMax: 10
+    RadiusMin: 50
+    RadiusMax: 60
+    Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+    LookAtCenter: 0
+    Textures: []
+    Colors:
+    - Color1: {r: 1, g: 1, b: 1, a: 1}
+      Color2: {r: 1, g: 1, b: 1, a: 1}
+    UseMaterials: 1
+    Materials:
+    - {fileID: 2100000, guid: 600e83dc5ac989b4ba772d3942eb6faa, type: 2}
+    - {fileID: 2100000, guid: db3ff9d7a31efaa4599df592ca4fd892, type: 2}
+    - {fileID: 2100000, guid: f8b5f601b4c405b42ae6b49ba2aa7fe8, type: 2}
+    - {fileID: 2100000, guid: 621619c5b9f03b744a3c0bde134bcfba, type: 2}
+    - {fileID: 2100000, guid: 16f1ca9e95c13b44c8ad1e25e2dc1633, type: 2}
+    - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
+    - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
+  - Name: Nebula
+    IsActive: 1
+    CountMin: 5
+    CountMax: 10
+    ScaleMin: 300
+    ScaleMax: 500
+    RadiusMin: 100
+    RadiusMax: 100
+    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    LookAtCenter: 1
+    Textures:
+    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    Colors:
+    - Color1: {r: 1, g: 0.328, b: 0.5416956, a: 0.11764706}
+      Color2: {r: 1, g: 0.571704, b: 0.37199998, a: 0.019607844}
+    UseMaterials: 0
+    Materials: []
+  SunLight: {fileID: 1376424185}
+  SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
+  SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
 --- !u!1 &1109137749
 GameObject:
   m_ObjectHideFlags: 0
