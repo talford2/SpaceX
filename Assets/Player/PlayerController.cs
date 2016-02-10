@@ -33,8 +33,9 @@ public class PlayerController : MonoBehaviour
 	public Texture2D VeryFarTrackerCursorImage;
 	public Texture2D LockingTrackerCursorImage;
 	public Texture2D LockedTrackerCursorImage;
+    public Color TrackerColor = Color.white;
 
-	[Header("Aiming")]
+    [Header("Aiming")]
 	public float AimSensitivity = 10f;
 	public float MouseMoveClamp = 0.02f;
 
@@ -102,6 +103,7 @@ public class PlayerController : MonoBehaviour
 		memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
 		memberTracker.LockingCursorImage = LockingTrackerCursorImage;
 		memberTracker.LockedCursorImage = LockedTrackerCursorImage;
+	    memberTracker.TrackerColor = TrackerColor;
 		memberTracker.CallSign = member.CallSign;
 		member.IsFollowIdleDestination = true;
 		var mapPin = member.VehicleInstance.gameObject.AddComponent<MapPin>();
@@ -129,6 +131,7 @@ public class PlayerController : MonoBehaviour
 		playerTracker.TrackerCursorImage = TrackerCurosrImage;
 		playerTracker.FarTrackerCursorImage = FarTrackerCursorImage;
 		playerTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
+	    playerTracker.TrackerColor = TrackerColor;
 		playerTracker.IsDisabled = true;
 
 		_playVehicleInstance.GetComponent<Targetable>().Team = Team;

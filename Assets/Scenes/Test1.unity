@@ -1925,6 +1925,7 @@ MonoBehaviour:
     type: 3}
   LockedTrackerCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2,
     type: 3}
+  TrackerColor: {r: 0, g: 0.8, b: 1, a: 1}
   AimSensitivity: 15
   MouseMoveClamp: 0.02
   DefaultAimDistance: 500
