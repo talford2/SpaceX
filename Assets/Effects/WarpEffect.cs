@@ -11,7 +11,8 @@ public class WarpEffect : MonoBehaviour
 	public GameObject WarpEffectPrefab;
 
 	private float _cooldown;
-	private Vector3 _finalDestination;
+	private UniversePosition _finalDestination;
+    
 	private Vector3 _warpPos;
 	private Rigidbody _rigidBody;
     private Shiftable _shiftable;
@@ -19,7 +20,7 @@ public class WarpEffect : MonoBehaviour
 	void Awake()
 	{
 		_naturalScale = transform.localScale.x;
-		_finalDestination = transform.position;
+		_finalDestination = Universe.Current.GetUniversePosition(transform.position);
 
 		_warpPos = transform.position - (transform.forward * Distance);
 
@@ -42,7 +43,7 @@ public class WarpEffect : MonoBehaviour
 		// 0 to 1
 		var frac = 1 - _cooldown / Timeout;
 
-	    var pos = Vector3.Lerp(_shiftable.GetWorldPosition(), _finalDestination, frac);
+	    var pos = Vector3.Lerp(_shiftable.GetWorldPosition(), Universe.Current.GetWorldPosition(_finalDestination), frac);
 	    var displacement = pos - _shiftable.GetWorldPosition();
         _shiftable.Translate(displacement);
 
