@@ -278,12 +278,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4e32afd8ecb214fa3ac6713f43d160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowCursorImage: {fileID: 2800000, guid: c26f54cfdc4f5f040bcf72dc38fec08b, type: 3}
-  TrackerCursorImage: {fileID: 2800000, guid: 97d3f06b1400baf4cbf64a187fdcbf67, type: 3}
-  FarTrackerCursorImage: {fileID: 2800000, guid: 97557eeafc980b448bd3053151c8f144,
+  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012,
     type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: bb1bae53db7561f4db60a71bf4d7a128,
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4,
     type: 3}
+  TrackerColor: {r: 0.82400036, g: 0, b: 1, a: 1}
 --- !u!114 &11455812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -363,19 +364,31 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ArrowCursorImage
       value: 
-      objectReference: {fileID: 2800000, guid: c26f54cfdc4f5f040bcf72dc38fec08b, type: 3}
+      objectReference: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
     - target: {fileID: 0}
       propertyPath: TrackerCursorImage
       value: 
-      objectReference: {fileID: 2800000, guid: 97d3f06b1400baf4cbf64a187fdcbf67, type: 3}
+      objectReference: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
     - target: {fileID: 0}
       propertyPath: FarTrackerCursorImage
       value: 
-      objectReference: {fileID: 2800000, guid: 97557eeafc980b448bd3053151c8f144, type: 3}
+      objectReference: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
     - target: {fileID: 0}
       propertyPath: VeryFarTrackerCursorImage
       value: 
-      objectReference: {fileID: 2800000, guid: bb1bae53db7561f4db60a71bf4d7a128, type: 3}
+      objectReference: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4, type: 3}
+    - target: {fileID: 0}
+      propertyPath: TrackerColor.r
+      value: 0.82400036
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrackerColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrackerColor.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 121892}

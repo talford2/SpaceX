@@ -9,6 +9,8 @@ public class CollectibleTracker : Tracker
 	public Texture2D FarTrackerCursorImage;
 	public Texture2D VeryFarTrackerCursorImage;
 
+	public Color TrackerColor = Color.white;
+
 	private Vector2 screenCentre;
 	private Rect screenBounds;
 	private Image imageInstance;
@@ -26,6 +28,7 @@ public class CollectibleTracker : Tracker
 		screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
 		var boundaryPadding = 20f;
 		screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
+		imageInstance.color = TrackerColor;
 	}
 
 	public override Image CreateInstance()
@@ -104,10 +107,10 @@ public class CollectibleTracker : Tracker
 	{
 		for (var fraction = 1f; fraction >= 0f; fraction -= 0.1f)
 		{
-			imageInstance.color = new Color(1f, 1f, 1f, fraction);
+			imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, fraction);
 			yield return new WaitForSeconds(0.05f);
 		}
-		imageInstance.color = new Color(1f, 1f, 1f, 0f);
+		imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 0f);
 		isVisible = false;
 		isFading = false;
 	}
@@ -116,10 +119,11 @@ public class CollectibleTracker : Tracker
 	{
 		for (var fraction = 1f; fraction >= 0f; fraction -= 0.1f)
 		{
-			imageInstance.color = new Color(1f, 1f, 1f, 1f - fraction);
+
+			imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f - fraction);
 			yield return new WaitForSeconds(0.05f);
 		}
-		imageInstance.color = new Color(1f, 1f, 1f, 1f);
+		imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f);
 		isVisible = true;
 		isFading = false;
 	}
