@@ -230,7 +230,23 @@ MonoBehaviour:
   RotateSpeed: 360
   Lifetime: 15
   FadeObject: {fileID: 187244}
-  FadeTime: 1
+  FadeTime: 0.5
+  FadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 4.8540425
+      outSlope: 2.6864312
+      tangentMode: 1
+    - time: 1
+      value: 1
+      inSlope: -0.03864076
+      outSlope: -0.03864076
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &11426734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,6 +431,34 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: TrackerColor.b
       value: 0.56078434
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FadeOutCurve.m_Curve.Array.data[0].inSlope
+      value: 4.8540425
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FadeOutCurve.m_Curve.Array.data[0].outSlope
+      value: 2.6864312
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FadeOutCurve.m_Curve.Array.data[1].inSlope
+      value: -0.03864076
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FadeOutCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FadeOutCurve.m_Curve.Array.data[0].tangentMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FadeOutCurve.m_Curve.Array.data[1].outSlope
+      value: -0.03864076
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FadeTime
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

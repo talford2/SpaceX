@@ -24,6 +24,8 @@ public class CollectibleTracker : Tracker
 	private bool isVisible;
 	private bool isFading;
 
+	private float _width;
+
 	private void Awake()
 	{
 		screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
@@ -49,6 +51,7 @@ public class CollectibleTracker : Tracker
 
 		imageInstance = trackerImg;
 		imageInstance.color = TrackerColor;
+		_width = imageInstance.rectTransform.rect.width;
 
 		isVisible = true;
 		return trackerImg;
@@ -117,6 +120,14 @@ public class CollectibleTracker : Tracker
 	public void SetAlpha(float alpha)
 	{
 		SetColor(Utility.SetColorAlpha(TrackerColor, alpha));
+	}
+
+	public void SetScale(float scale)
+	{
+		if (imageInstance != null)
+		{
+			imageInstance.rectTransform.sizeDelta = Vector2.one * _width * scale;
+		}
 	}
 
 	private float fadeStep = 0.02f;

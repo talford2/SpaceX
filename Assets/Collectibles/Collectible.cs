@@ -10,6 +10,8 @@ public class Collectible : MonoBehaviour
 	public GameObject FadeObject;
 	public float FadeTime = 1;
 
+	public AnimationCurve FadeOutCurve = AnimationCurve.Linear(0, 0, 1, 1);
+
 	private bool _isCollected;
 	private Transform _collectorTransform;
 	private Shiftable _shiftable;
@@ -27,7 +29,7 @@ public class Collectible : MonoBehaviour
 
 	private float _lifeTimeCooldown = 0;
 	private float _fadeCooldown = 0;
-	
+
 	public Shiftable Shiftable { get { return _shiftable; } }
 
 	private void Awake()
@@ -101,13 +103,21 @@ public class Collectible : MonoBehaviour
 
 		if ((_lifeTimeCooldown - FadeTime) < 0f)
 		{
-			var frac = _fadeCooldown / FadeTime;
-			FadeObject.transform.localScale = Vector3.one * frac;
+			var linearFrac = _fadeCooldown / FadeTime;
+
+			var finalFrac = linearFrac;
+			if (FadeOutCurve != null)
+			{
+				finalFrac = FadeOutCurve.Evaluate(linearFrac);
+			}
+
+			FadeObject.transform.localScale = Vector3.one * finalFrac;
 			_fadeCooldown -= Time.deltaTime;
-			
-			_collectibleTracker.SetAlpha(frac);
-			
-			if (frac < 0f)
+
+			_collectibleTracker.SetAlpha(finalFrac);
+			_collectibleTracker.SetScale(finalFrac);
+
+			if (linearFrac < 0f)
 			{
 				Destroy(gameObject);
 			}
