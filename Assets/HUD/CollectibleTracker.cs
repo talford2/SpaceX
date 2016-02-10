@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CollectibleTracker : Tracker
@@ -16,6 +17,9 @@ public class CollectibleTracker : Tracker
     private Sprite farTrackerSprite;
     private Sprite veryFarTrackerSprite;
     private Sprite arrowSprite;
+
+    private bool isVisible;
+    private bool isFading;
 
     private void Awake()
     {
@@ -79,6 +83,45 @@ public class CollectibleTracker : Tracker
         }
     }
 
+    public void TriggerFadeIn()
+    {
+        if (!isFading && !isVisible)
+        {
+            StartCoroutine(FadeIn());
+        }
+    }
+
+    public void TriggerFadeOut()
+    {
+        if (!isFading && isVisible)
+        {
+            StartCoroutine(FadeOut());
+        }
+    }
+
+    private IEnumerator FadeOut()
+    {
+        for (var fraction = 1f; fraction >= 0f; fraction -= 0.1f)
+        {
+            imageInstance.color = new Color(1f, 1f, 1f, fraction);
+            yield return new WaitForSeconds(0.05f);
+        }
+        imageInstance.color = new Color(1f, 1f, 1f, 0f);
+        isVisible = false;
+        isFading = false;
+    }
+
+    private IEnumerator FadeIn()
+    {
+        for (var fraction = 1f; fraction >= 0f; fraction -= 0.1f)
+        {
+            imageInstance.color = new Color(1f, 1f, 1f, 1f - fraction);
+            yield return new WaitForSeconds(0.05f);
+        }
+        imageInstance.color = new Color(1f, 1f, 1f, 1f);
+        isVisible = true;
+        isFading = false;
+    }
 
     public override void DestroyInstance()
     {
