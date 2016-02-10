@@ -27,9 +27,7 @@ public class Collectible : MonoBehaviour
 
 	private float _lifeTimeCooldown = 0;
 	private float _fadeCooldown = 0;
-
-	private bool _isFading = false;
-
+	
 	public Shiftable Shiftable { get { return _shiftable; } }
 
 	private void Awake()
@@ -101,20 +99,17 @@ public class Collectible : MonoBehaviour
 		var displacement = _velocity * Time.deltaTime;
 		_shiftable.Translate(displacement);
 
-		if ((_lifeTimeCooldown - FadeTime) < 0)
+		if ((_lifeTimeCooldown - FadeTime) < 0f)
 		{
-			_fadeCooldown -= Time.deltaTime;
 			var frac = _fadeCooldown / FadeTime;
 			FadeObject.transform.localScale = Vector3.one * frac;
-			if (frac < 0)
+			_fadeCooldown -= Time.deltaTime;
+			
+			_collectibleTracker.SetAlpha(frac);
+			
+			if (frac < 0f)
 			{
 				Destroy(gameObject);
-			}
-			if (!_isFading)
-			{
-				Debug.Log("Fade me!");
-				_collectibleTracker.TriggerFadeOut(FadeTime);
-				_isFading = true;
 			}
 		}
 		else

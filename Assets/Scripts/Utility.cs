@@ -221,6 +221,11 @@ public class Utility
 		return texture;
 	}
 
+	public static Color SetColorAlpha(Color baseColour, float alpha)
+	{
+		return new Color(baseColour.r, baseColour.g, baseColour.b, Mathf.Clamp(alpha, 0, 1));
+	}
+
 	public static Vector3 GetRandomDirection(Vector3 direction, float angle)
 	{
 		return Quaternion.Euler(Random.Range(-angle, angle), Random.Range(-angle, angle), Random.Range(-angle, angle)) * -direction;

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -104,14 +105,35 @@ public class CollectibleTracker : Tracker
 		}
 	}
 
-    private float fadeStep = 0.02f;
-
-    private IEnumerator FadeOut(float duration)
+	public void SetColor(Color color)
 	{
-        var stepFraction = fadeStep / duration;
-        for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
+		TrackerColor = color;
+		if (imageInstance != null)
+		{
+			imageInstance.color = color;
+		}
+	}
+
+	public void SetAlpha(float alpha)
+	{
+		SetColor(Utility.SetColorAlpha(TrackerColor, alpha));
+	}
+
+	private float fadeStep = 0.02f;
+
+	private IEnumerator FadeOut(float duration)
+	{
+		var start = DateTime.Now;
+		var ii = 0;
+
+		var stepFraction = fadeStep / duration;
+		for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
 		{
 			imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, fraction);
+
+			ii++;
+			Debug.Log("Time running: " + DateTime.Now.Subtract(start).TotalSeconds + " (" + ii + ")");
+
 			yield return new WaitForSeconds(fadeStep);
 		}
 		imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 0f);
@@ -121,8 +143,8 @@ public class CollectibleTracker : Tracker
 
 	private IEnumerator FadeIn(float duration)
 	{
-        var stepFraction = fadeStep / duration;
-        for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
+		var stepFraction = fadeStep / duration;
+		for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
 		{
 			imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f - fraction);
 			yield return new WaitForSeconds(fadeStep);
