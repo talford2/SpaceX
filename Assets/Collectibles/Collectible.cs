@@ -113,7 +113,7 @@ public class Collectible : MonoBehaviour
 			if (!_isFading)
 			{
 				Debug.Log("Fade me!");
-				_collectibleTracker.TriggerFadeOut();
+				_collectibleTracker.TriggerFadeOut(FadeTime);
 				_isFading = true;
 			}
 		}
