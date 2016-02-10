@@ -54,16 +54,18 @@ public class FighterAttack :NpcState<Fighter>
     {
         if (Npc.Target == null)
         {
-            Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
+            if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
+                Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
             Npc.State = new FighterIdle(Npc);
             return;
         }
 
         var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
 
-        if (toTarget.sqrMagnitude > Npc.AttackRange * Npc.AttackRange)
+        if (toTarget.sqrMagnitude > Npc.AttackRange*Npc.AttackRange)
         {
-            Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
+            if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
+                Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
             Npc.State = new FighterChase(Npc);
             return;
         }
