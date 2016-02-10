@@ -92,7 +92,7 @@ public class CollectibleTracker : Tracker
 	{
 		if (!isFading && !isVisible)
 		{
-			StartCoroutine(FadeIn());
+			StartCoroutine(FadeIn(time));
 		}
 	}
 
@@ -100,17 +100,19 @@ public class CollectibleTracker : Tracker
 	{
 		if (!isFading && isVisible)
 		{
-			StartCoroutine(FadeOut());
+			StartCoroutine(FadeOut(time));
 		}
 	}
 
-	private IEnumerator FadeOut(float duration)
+    private float fadeStep = 0.02f;
+
+    private IEnumerator FadeOut(float duration)
 	{
         var stepFraction = fadeStep / duration;
         for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
 		{
 			imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, fraction);
-			yield return new WaitForSeconds(0.05f);
+			yield return new WaitForSeconds(fadeStep);
 		}
 		imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 0f);
 		isVisible = false;
@@ -122,9 +124,8 @@ public class CollectibleTracker : Tracker
         var stepFraction = fadeStep / duration;
         for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
 		{
-
 			imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f - fraction);
-			yield return new WaitForSeconds(0.05f);
+			yield return new WaitForSeconds(fadeStep);
 		}
 		imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f);
 		isVisible = true;
