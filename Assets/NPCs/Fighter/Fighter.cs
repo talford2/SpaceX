@@ -150,7 +150,7 @@ public class Fighter : Npc<Fighter>
     private void OnVehicleDestroyed(Killable sender)
     {
         Target = null;
-        if (DropItems != null)
+        if (DropItems != null && DropItems.Count > 0)
         {
             var dropAmount = Random.Range(0, MaxDropAmount + 1);
             for (var i = 0f; i < dropAmount; i++)
