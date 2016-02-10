@@ -10,8 +10,17 @@ public class UniverseEvent : MonoBehaviour
 
     public float TriggerRadius;
 
+    [Header("Tracker")]
+    public float TrackerRadius = 1000f;
+    public Texture2D TrackerCursorImage;
+    public Texture2D ArrowCursorImage;
+    public Font LabelFont;
+
     private float triggerRadiusSquared;
     private float lastDistanceSquared;
+    private float trackerRadiusSquared;
+
+    private EventTracker tracker;
 
     private int cellRadius;
 
@@ -26,6 +35,7 @@ public class UniverseEvent : MonoBehaviour
 		Shiftable.OnShift += Shiftable_OnShift;
 
 	    triggerRadiusSquared = TriggerRadius*TriggerRadius;
+	    trackerRadiusSquared = TrackerRadius*TrackerRadius;
 
 		UniverseEvents.Add(this);
 
@@ -71,6 +81,29 @@ public class UniverseEvent : MonoBehaviour
             if (toViewPortSquared < triggerRadiusSquared)
             {
                 Trigger();
+            }
+        }
+        if (tracker == null)
+        {
+            if (lastDistanceSquared > trackerRadiusSquared)
+            {
+                if (toViewPortSquared < trackerRadiusSquared)
+                {
+                    tracker = gameObject.AddComponent<EventTracker>();
+                    tracker.ArrowCursorImage = ArrowCursorImage;
+                    tracker.TrackerCursorImage = TrackerCursorImage;
+                    tracker.LabelFont = LabelFont;
+                }
+            }
+        }
+        if (tracker != null)
+        {
+            if (lastDistanceSquared < trackerRadiusSquared)
+            {
+                if (toViewPortSquared > trackerRadiusSquared)
+                {
+                    tracker.SelfDestroy();
+                }
             }
         }
         lastDistanceSquared = toViewPortSquared;

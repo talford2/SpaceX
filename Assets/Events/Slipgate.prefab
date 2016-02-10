@@ -461,6 +461,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TriggerRadius: 500
+  TrackerRadius: 1200
+  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  LabelFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba, type: 3}
 --- !u!123 &12304444
 LensFlare:
   m_ObjectHideFlags: 1
@@ -591,6 +595,23 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrackerCursorImage
+      value: 
+      objectReference: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+    - target: {fileID: 0}
+      propertyPath: ArrowCursorImage
+      value: 
+      objectReference: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: LabelFont
+      value: 
+      objectReference: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: TrackerRadius
+      value: 1200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

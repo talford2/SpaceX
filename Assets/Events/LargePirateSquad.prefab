@@ -509,6 +509,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11413208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -524,6 +525,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11414988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -539,6 +541,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11419252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -554,6 +557,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11427924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -569,6 +573,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11436478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -584,6 +589,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11442196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -599,6 +605,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11442656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -614,6 +621,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11442756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -629,6 +637,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11449274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -644,6 +653,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11453630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -659,6 +669,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11463382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -691,6 +702,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11469296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -703,6 +715,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TriggerRadius: 500
+  TrackerRadius: 1200
+  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  LabelFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba, type: 3}
   Spawners:
   - {fileID: 11442756}
   - {fileID: 11406916}
@@ -751,6 +767,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11482788
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -766,6 +783,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11494122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -781,6 +799,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!114 &11497012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -796,6 +815,7 @@ MonoBehaviour:
   Shifter: {fileID: 11463382}
   SpawnEffect: {fileID: 160272, guid: 59c7c5b346ee3524d89dd042b54a9002, type: 2}
   SpawnOnAwake: 0
+  AddWarpEffect: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -815,6 +835,23 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: TriggerRadius
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrackerCursorImage
+      value: 
+      objectReference: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+    - target: {fileID: 0}
+      propertyPath: ArrowCursorImage
+      value: 
+      objectReference: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: LabelFont
+      value: 
+      objectReference: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: TrackerRadius
+      value: 1200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
