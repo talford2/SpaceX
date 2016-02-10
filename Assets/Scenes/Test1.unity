@@ -3456,6 +3456,10 @@ Prefab:
       propertyPath: CellLocalPosition.z
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 11425734, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
+      propertyPath: Lifetime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
   m_IsPrefabParent: 0
