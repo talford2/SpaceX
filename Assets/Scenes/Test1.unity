@@ -1915,11 +1915,11 @@ MonoBehaviour:
   RespawnPosition: {fileID: 761010713}
   PlayerPinPrefab: {fileID: 133228, guid: 4537303a7240d1d49a3e4dcf875bc48a, type: 2}
   SquadronPinPrefab: {fileID: 133228, guid: f081ff83f0cde7943b6660d2161432f8, type: 2}
-  ArrowCursorImage: {fileID: 2800000, guid: 3ff4affc978dcee4998bd90d5f9c6896, type: 3}
-  TrackerCurosrImage: {fileID: 2800000, guid: 140e49d363b2df244bf0c5f8ebe6fe04, type: 3}
-  FarTrackerCursorImage: {fileID: 2800000, guid: 04fff4d1f62444a4f91ee37508ef8509,
+  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  TrackerCurosrImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012,
     type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: be9a7aa353fb667498a123e97667bab0,
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4,
     type: 3}
   LockingTrackerCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b,
     type: 3}
