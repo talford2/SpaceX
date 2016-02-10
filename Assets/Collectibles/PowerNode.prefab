@@ -11,7 +11,6 @@ GameObject:
   - 114: {fileID: 11425734}
   - 114: {fileID: 11455812}
   - 114: {fileID: 11448732}
-  - 114: {fileID: 11479112}
   m_Layer: 0
   m_Name: PowerNode
   m_TagString: Untagged
@@ -21,7 +20,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &136482
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -38,7 +37,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &143246
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -49,6 +48,21 @@ GameObject:
   - 114: {fileID: 11406688}
   m_Layer: 0
   m_Name: Quad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &163690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 498662}
+  m_Layer: 0
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,8 +96,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
-  m_Father: {fileID: 443880}
-  m_RootOrder: 1
+  m_Father: {fileID: 498662}
+  m_RootOrder: 0
 --- !u!4 &427530
 Transform:
   m_ObjectHideFlags: 1
@@ -106,8 +120,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 443880}
-  m_RootOrder: 2
+  m_Father: {fileID: 498662}
+  m_RootOrder: 1
 --- !u!4 &443880
 Transform:
   m_ObjectHideFlags: 1
@@ -119,10 +133,23 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 427530}
-  - {fileID: 401008}
-  - {fileID: 441604}
+  - {fileID: 498662}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &498662
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163690}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 401008}
+  - {fileID: 441604}
+  m_Father: {fileID: 443880}
+  m_RootOrder: 1
 --- !u!23 &2362530
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -237,6 +264,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoundClip: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
   RotateSpeed: 360
+  Lifetime: 15
+  FadeObject: {fileID: 163690}
+  FadeTime: 1
 --- !u!114 &11448732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -271,19 +301,6 @@ MonoBehaviour:
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
   ShiftParticleSystems: []
---- !u!114 &11479112
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 670c40cbcc89a784b93fddab3be12e1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cooldown: 15
-  StartOn: 1
 --- !u!135 &13590832
 SphereCollider:
   m_ObjectHideFlags: 1
