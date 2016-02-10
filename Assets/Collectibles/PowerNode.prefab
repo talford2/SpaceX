@@ -8,8 +8,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 443880}
-  - 114: {fileID: 11455812}
   - 114: {fileID: 11425734}
+  - 114: {fileID: 11455812}
   - 114: {fileID: 11479112}
   m_Layer: 0
   m_Name: PowerNode

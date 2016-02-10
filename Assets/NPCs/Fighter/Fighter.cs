@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,7 +10,7 @@ public class Fighter : Npc<Fighter>
     public bool IsSquadronMember;
     public string CallSign;
     [Header("Drop Item on Death")]
-    public Collectible DropItem;
+    public List<Collectible> DropItems;
     public int MaxDropAmount = 5;
 
     private Vehicle _vehicleInstance;
@@ -149,13 +150,14 @@ public class Fighter : Npc<Fighter>
     private void OnVehicleDestroyed(Killable sender)
     {
         Target = null;
-        if (DropItem != null)
+        if (DropItems != null)
         {
             var dropAmount = Random.Range(0, MaxDropAmount + 1);
             for (var i = 0f; i < dropAmount; i++)
             {
                 var dropPosition = VehicleInstance.transform.position + Random.onUnitSphere*1.5f;
-                var dropItem = ((GameObject) Instantiate(DropItem.gameObject, VehicleInstance.transform.position + Random.onUnitSphere*1.5f, Quaternion.identity)).GetComponent<Collectible>();
+                var collectible = DropItems[Random.Range(0, DropItems.Count)].gameObject;
+                var dropItem = ((GameObject) Instantiate(collectible, VehicleInstance.transform.position + Random.onUnitSphere*1.5f, Quaternion.identity)).GetComponent<Collectible>();
                 dropItem.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(dropPosition));
                 dropItem.SetVelocity(VehicleInstance.GetVelocity() + Random.onUnitSphere*5f);
             }

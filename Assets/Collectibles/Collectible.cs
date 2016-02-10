@@ -72,7 +72,6 @@ public class Collectible : MonoBehaviour
 			if (dotProd < 0f)
 			{
 				isFinished = true;
-				Debug.Log("COLLECTED!");
 				if (SoundClip != null)
 				{
 					Utility.PlayOnTransform(SoundClip, PlayerController.Current.VehicleInstance.transform);
