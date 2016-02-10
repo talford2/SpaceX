@@ -104,9 +104,10 @@ public class CollectibleTracker : Tracker
 		}
 	}
 
-	private IEnumerator FadeOut()
+	private IEnumerator FadeOut(float duration)
 	{
-		for (var fraction = 1f; fraction >= 0f; fraction -= 0.1f)
+        var stepFraction = fadeStep / duration;
+        for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
 		{
 			imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, fraction);
 			yield return new WaitForSeconds(0.05f);
@@ -116,9 +117,10 @@ public class CollectibleTracker : Tracker
 		isFading = false;
 	}
 
-	private IEnumerator FadeIn()
+	private IEnumerator FadeIn(float duration)
 	{
-		for (var fraction = 1f; fraction >= 0f; fraction -= 0.1f)
+        var stepFraction = fadeStep / duration;
+        for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
 		{
 
 			imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f - fraction);
