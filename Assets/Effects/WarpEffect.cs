@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class WarpEffect : MonoBehaviour
 {
@@ -11,13 +10,11 @@ public class WarpEffect : MonoBehaviour
 
 	public GameObject WarpEffectPrefab;
 
-	private float _cooldown = 0;
-
+	private float _cooldown;
 	private Vector3 _finalDestination;
-
 	private Vector3 _warpPos;
-
 	private Rigidbody _rigidBody;
+    private Shiftable _shiftable;
 
 	void Awake()
 	{
@@ -28,8 +25,10 @@ public class WarpEffect : MonoBehaviour
 
 		_cooldown = Timeout;
 
-		//_rigidBody = GetComponent<Rigidbody>();
-		//_rigidBody.isKinematic = true;
+	    _shiftable = GetComponent<Shiftable>();
+
+	    //_rigidBody = GetComponent<Rigidbody>();
+	    //_rigidBody.isKinematic = true;
 	}
 
 	void Start()
@@ -43,9 +42,13 @@ public class WarpEffect : MonoBehaviour
 		// 0 to 1
 		var frac = 1 - _cooldown / Timeout;
 
-		transform.position = Vector3.Lerp(_warpPos, _finalDestination, frac);
-		//transform.localScale = _naturalScale * Vector3.one * frac;
-		_cooldown -= Time.deltaTime;
+	    var pos = Vector3.Lerp(_shiftable.GetWorldPosition(), _finalDestination, frac);
+	    var displacement = pos - _shiftable.GetWorldPosition();
+        _shiftable.Translate(displacement);
+
+        //transform.position = Vector3.Lerp(_warpPos, _finalDestination, frac);
+        //transform.localScale = _naturalScale * Vector3.one * frac;
+        _cooldown -= Time.deltaTime;
 		if (_cooldown < 0)
 		{
 			//_rigidBody.isKinematic = false;

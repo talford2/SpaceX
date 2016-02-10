@@ -728,7 +728,7 @@ MonoBehaviour:
   Team: 1
   IsSquadronMember: 0
   CallSign: Bilbo
-  DropItem: {fileID: 0}
+  DropItems: []
   MaxDropAmount: 5
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
@@ -1686,7 +1686,7 @@ MonoBehaviour:
   Team: 1
   IsSquadronMember: 0
   CallSign: Frodo
-  DropItem: {fileID: 0}
+  DropItems: []
   MaxDropAmount: 5
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
@@ -1900,7 +1900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a752b4f4dd3bee74faef179b661f699f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VehiclePrefab: {fileID: 11466194, guid: 3664b3886f5f3894287df53b5f737acf, type: 2}
+  VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
   Team: 1
   CallSign: Player
   SpaceJunkCount: 0
@@ -3444,7 +3444,7 @@ MonoBehaviour:
   Team: 1
   IsSquadronMember: 0
   CallSign: Sam
-  DropItem: {fileID: 0}
+  DropItems: []
   MaxDropAmount: 5
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
@@ -3675,7 +3675,7 @@ MonoBehaviour:
   Team: 1
   IsSquadronMember: 0
   CallSign: Merry
-  DropItem: {fileID: 0}
+  DropItems: []
   MaxDropAmount: 5
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
