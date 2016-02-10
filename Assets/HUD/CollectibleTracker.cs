@@ -45,6 +45,7 @@ public class CollectibleTracker : Tracker
         trackerImg.SetNativeSize();
 
         imageInstance = trackerImg;
+        isVisible = true;
         return trackerImg;
     }
 
