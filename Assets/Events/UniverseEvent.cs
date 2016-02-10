@@ -109,6 +109,12 @@ public class UniverseEvent : MonoBehaviour
         lastDistanceSquared = toViewPortSquared;
     }
 
+    private void OnDisable()
+    {
+        if (tracker != null)
+            tracker.SelfDestroy();
+    }
+
 	//private void OnDrawGizmos()
 	//{
 	//	var children = GetComponentsInChildren<Transform>();
