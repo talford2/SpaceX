@@ -6,7 +6,9 @@ public class Collectible : MonoBehaviour
 	public AudioClip SoundClip;
 	public float RotateSpeed;
 
-	public float Lifetime = 15;
+	public float MinLifetime = 14;
+	public float MaxLifetime = 15;
+
 	public GameObject FadeObject;
 	public float FadeTime = 1;
 
@@ -37,7 +39,8 @@ public class Collectible : MonoBehaviour
 		_shiftable = GetComponent<Shiftable>();
 		_rotateSpeed = Random.insideUnitSphere * RotateSpeed;
 		_destructor = GetComponent<SelfDestructor>();
-		_lifeTimeCooldown = Lifetime;
+		_lifeTimeCooldown = Random.Range(MinLifetime, MaxLifetime);
+
 		_fadeCooldown = FadeTime;
 		_collectibleTracker = GetComponent<CollectibleTracker>();
 	}
