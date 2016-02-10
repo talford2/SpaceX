@@ -228,7 +228,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoundClip: {fileID: 8300000, guid: 36b2822986f1176459f9d648f813868e, type: 3}
   RotateSpeed: 360
-  Lifetime: 15
+  MinLifetime: 14.5
+  MaxLifetime: 15
   FadeObject: {fileID: 187244}
   FadeTime: 0.5
   FadeOutCurve:
@@ -459,6 +460,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: FadeTime
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MinLifetime
+      value: 14.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
