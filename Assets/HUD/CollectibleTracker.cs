@@ -28,7 +28,6 @@ public class CollectibleTracker : Tracker
 		screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
 		var boundaryPadding = 20f;
 		screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
-		imageInstance.color = TrackerColor;
 	}
 
 	public override Image CreateInstance()
@@ -48,6 +47,8 @@ public class CollectibleTracker : Tracker
 		trackerImg.SetNativeSize();
 
 		imageInstance = trackerImg;
+		imageInstance.color = TrackerColor;
+
 		isVisible = true;
 		return trackerImg;
 	}
