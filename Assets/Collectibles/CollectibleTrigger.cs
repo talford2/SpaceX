@@ -3,7 +3,6 @@
 public class CollectibleTrigger : MonoBehaviour
 {
     public Collectible Item;
-    public float Radius;
     public float Delay;
 
     private float delayCooldown;
