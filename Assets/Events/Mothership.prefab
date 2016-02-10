@@ -2396,6 +2396,8 @@ MonoBehaviour:
   MaxTargetDistance: 1000
   MinPitch: 25
   MaxPitch: 300
+  MaxPitchSpeed: 90
+  MaxYawSpeed: 90
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
 --- !u!114 &11402434
@@ -2451,6 +2453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Team: 2
+  LockedOnBy: {fileID: 0}
 --- !u!114 &11421868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2486,12 +2489,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowCursorImage: {fileID: 2800000, guid: 6d378ba77f480244ab315a1910910d5e, type: 3}
-  TrackerCursorImage: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
-  FarTrackerCursorImage: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612,
+  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012,
     type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03,
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4,
     type: 3}
+  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   CallSign: 
@@ -2508,6 +2512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Team: 2
+  LockedOnBy: {fileID: 0}
 --- !u!114 &11429504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2531,12 +2536,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowCursorImage: {fileID: 2800000, guid: 6d378ba77f480244ab315a1910910d5e, type: 3}
-  TrackerCursorImage: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
-  FarTrackerCursorImage: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612,
+  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012,
     type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03,
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4,
     type: 3}
+  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   CallSign: 
@@ -2607,6 +2613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Team: 2
+  LockedOnBy: {fileID: 0}
 --- !u!114 &11449878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2627,6 +2634,8 @@ MonoBehaviour:
   MaxTargetDistance: 1000
   MinPitch: 25
   MaxPitch: 300
+  MaxPitchSpeed: 90
+  MaxYawSpeed: 90
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
 --- !u!114 &11453732
@@ -2685,12 +2694,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowCursorImage: {fileID: 2800000, guid: 6d378ba77f480244ab315a1910910d5e, type: 3}
-  TrackerCursorImage: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
-  FarTrackerCursorImage: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612,
+  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012,
     type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03,
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4,
     type: 3}
+  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   CallSign: 
@@ -2730,12 +2740,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowCursorImage: {fileID: 2800000, guid: 6d378ba77f480244ab315a1910910d5e, type: 3}
-  TrackerCursorImage: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
-  FarTrackerCursorImage: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612,
+  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012,
     type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03,
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4,
     type: 3}
+  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   CallSign: 
@@ -2760,6 +2771,8 @@ MonoBehaviour:
   MaxTargetDistance: 1000
   MinPitch: 25
   MaxPitch: 300
+  MaxPitchSpeed: 90
+  MaxYawSpeed: 90
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
 --- !u!114 &11473724
@@ -2774,6 +2787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Team: 2
+  LockedOnBy: {fileID: 0}
 --- !u!114 &11474600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2876,6 +2890,8 @@ MonoBehaviour:
   MaxTargetDistance: 1000
   MinPitch: 25
   MaxPitch: 300
+  MaxPitchSpeed: 90
+  MaxYawSpeed: 90
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
 --- !u!135 &13547422
