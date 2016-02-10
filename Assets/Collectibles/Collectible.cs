@@ -16,6 +16,7 @@ public class Collectible : MonoBehaviour
 	private Vector3 _velocity;
 	private Vector3 _rotateSpeed;
 
+	private CollectibleTracker _collectibleTracker;
 	private SelfDestructor _destructor;
 
 	private float _followAcceleration = 250f;
@@ -27,8 +28,10 @@ public class Collectible : MonoBehaviour
 	private float _lifeTimeCooldown = 0;
 	private float _fadeCooldown = 0;
 
+	private bool _isFading = false;
+
 	public Shiftable Shiftable { get { return _shiftable; } }
-	
+
 	private void Awake()
 	{
 		_shiftable = GetComponent<Shiftable>();
@@ -36,6 +39,7 @@ public class Collectible : MonoBehaviour
 		_destructor = GetComponent<SelfDestructor>();
 		_lifeTimeCooldown = Lifetime;
 		_fadeCooldown = FadeTime;
+		_collectibleTracker = GetComponent<CollectibleTracker>();
 	}
 
 	public void Collect(GameObject collector)
@@ -105,6 +109,11 @@ public class Collectible : MonoBehaviour
 			if (frac < 0)
 			{
 				Destroy(gameObject);
+			}
+			if (!_isFading)
+			{
+				_collectibleTracker.TriggerFadeOut();
+				_isFading = true;
 			}
 		}
 		else
