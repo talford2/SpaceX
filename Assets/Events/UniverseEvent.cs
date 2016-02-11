@@ -15,6 +15,7 @@ public class UniverseEvent : MonoBehaviour
     public Texture2D TrackerCursorImage;
     public Texture2D ArrowCursorImage;
     public Font LabelFont;
+    public bool HasBeenTriggered = false;
 
     private float triggerRadiusSquared;
     private float lastDistanceSquared;
@@ -56,7 +57,10 @@ public class UniverseEvent : MonoBehaviour
 	            {
 	                if (sender.UniverseCellIndex.IsEqualTo(Universe.Current.ViewPort.Shiftable.UniverseCellIndex + new CellIndex(i, j, k)))
 	                {
-	                    enable = true;
+	                    if (!thisEvent.HasBeenTriggered)
+	                    {
+	                        enable = true;
+	                    }
 	                }
 	            }
 	        }
@@ -130,5 +134,7 @@ public class UniverseEvent : MonoBehaviour
 		Debug.Log("Event triggered");
         if (tracker != null)
             tracker.SelfDestroy();
-    }
+	    HasBeenTriggered = true;
+	    enabled = false;
+	}
 }
