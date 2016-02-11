@@ -716,7 +716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TriggerRadius: 500
   TrackerRadius: 1200
-  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: a0c6281620ee7a64681a5e67a81b32b9, type: 3}
   ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
   LabelFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba, type: 3}
   Spawners:
@@ -839,7 +839,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: TrackerCursorImage
       value: 
-      objectReference: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+      objectReference: {fileID: 2800000, guid: a0c6281620ee7a64681a5e67a81b32b9, type: 3}
     - target: {fileID: 0}
       propertyPath: ArrowCursorImage
       value: 
