@@ -128,5 +128,7 @@ public class UniverseEvent : MonoBehaviour
 	public virtual void Trigger()
 	{
 		Debug.Log("Event triggered");
-	}
+        if (tracker != null)
+            tracker.SelfDestroy();
+    }
 }
