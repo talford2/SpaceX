@@ -16,6 +16,7 @@
             _mapPin.SetPinState(MapPin.MapPinState.Inactive);
         var collectible = Instantiate(CollectiblePrefab);
         collectible.Shiftable.SetShiftPosition(Shiftable.UniversePosition);
+        collectible.transform.position = Universe.Current.GetWorldPosition(Shiftable.UniversePosition);
         base.Trigger();
     }
 }
