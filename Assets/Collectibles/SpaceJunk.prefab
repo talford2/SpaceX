@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95bfab0e01251ec488002e8bb54ea21c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GiveType: 0
   SoundClip: {fileID: 8300000, guid: 36b2822986f1176459f9d648f813868e, type: 3}
   RotateSpeed: 360
   MinLifetime: 14.5
@@ -248,6 +249,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  Shiftable: {fileID: 11499834}
 --- !u!114 &11426734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -465,6 +467,10 @@ Prefab:
       propertyPath: MinLifetime
       value: 14.5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Shiftable
+      value: 
+      objectReference: {fileID: 11499834}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 163398}

@@ -33,11 +33,10 @@ public class Collectible : MonoBehaviour
 	private float _lifeTimeCooldown = 0;
 	private float _fadeCooldown = 0;
 
-	public Shiftable Shiftable { get { return _shiftable; } }
+    public Shiftable Shiftable;
 
 	private void Awake()
 	{
-		_shiftable = GetComponent<Shiftable>();
 		_rotateSpeed = Random.insideUnitSphere * RotateSpeed;
 		_destructor = GetComponent<SelfDestructor>();
 		_lifeTimeCooldown = Random.Range(MinLifetime, MaxLifetime);

@@ -285,6 +285,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  Shiftable: {fileID: 11455812}
 --- !u!114 &11448732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -487,6 +488,10 @@ Prefab:
       propertyPath: GiveType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Shiftable
+      value: 
+      objectReference: {fileID: 11455812}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 121892}
