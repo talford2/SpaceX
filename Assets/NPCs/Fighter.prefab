@@ -45,7 +45,6 @@ MonoBehaviour:
   CallSign: 
   DropItems:
   - {fileID: 11400274, guid: 816f10aa082864542b4127328f007432, type: 2}
-  - {fileID: 11425734, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
   MaxDropAmount: 6
   Destination: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
@@ -80,7 +79,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: DropItems.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Name
