@@ -157,6 +157,15 @@ public class VehicleTracker : Tracker
 							useSprite = lockedSprite;
 					}
 				}
+                // Dodgey method of colouring locking cursors white.
+			    if (useSprite == lockingSprite || useSprite == lockedSprite)
+			    {
+			        imageInstance.color = Color.white;
+			    }
+			    else
+			    {
+                    imageInstance.color = TrackerColor;
+                }
 				imageInstance.sprite = useSprite;
 
 				imageInstance.rectTransform.localPosition = screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f);
