@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95bfab0e01251ec488002e8bb54ea21c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GiveType: 1
   SoundClip: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
   RotateSpeed: 360
   MinLifetime: 14.5
@@ -481,6 +482,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MinLifetime
       value: 14.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: GiveType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

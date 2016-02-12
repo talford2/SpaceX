@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 	public Team Team;
 	public string CallSign;
     public int SpaceJunkCount;
+    public int PowerNodeCount;
     public float CollectRadius = 8f;
 
 	private Vehicle _playVehicleInstance;
@@ -525,8 +526,9 @@ public class PlayerController : MonoBehaviour
 		//GUI.Label(new Rect(30f, 180f, 200f, 25f), string.Format("LOCK: {0} ({1:f2})", lockingTarget != null ? lockingTarget.name : string.Empty, lockingTime));
 		//GUI.Label(new Rect(30f, 210f, 200f, 25f), string.Format("LOCKED: {0}", VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() != null ? VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget().name : string.Empty));
 		GUI.Label(new Rect(30f, 240f, 200f, 25f), string.Format("AIM DIST: {0:f2}", aimDistance));
-		GUI.Label(new Rect(30f, 270f, 200f, 25f), string.Format("COLLECTED: {0:f0}", SpaceJunkCount));
-	}
+		GUI.Label(new Rect(30f, 270f, 200f, 25f), string.Format("SPACE JUNK: {0:f0}", SpaceJunkCount));
+		GUI.Label(new Rect(30f, 300f, 200f, 25f), string.Format("POWER NODES: {0:f0}", PowerNodeCount));
+    }
 
 	private void OnDrawGizmos()
 	{

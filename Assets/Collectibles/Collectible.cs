@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
+    public CollectType GiveType;
 	public AudioClip SoundClip;
 	public float RotateSpeed;
 
@@ -94,7 +95,10 @@ public class Collectible : MonoBehaviour
 				}
 				if (PlayerController.Current != null)
 				{
-					PlayerController.Current.SpaceJunkCount++;
+				    if (GiveType == CollectType.SpaceJunk)
+				        PlayerController.Current.SpaceJunkCount++;
+				    if (GiveType == CollectType.PowerNode)
+				        PlayerController.Current.PowerNodeCount++;
 				}
 				Destroy(gameObject);
 			}
