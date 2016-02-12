@@ -12,11 +12,16 @@
 
     public override void Trigger()
     {
-        if (_mapPin != null)
-            _mapPin.SetPinState(MapPin.MapPinState.Inactive);
         var collectible = Instantiate(CollectiblePrefab);
         collectible.Shiftable.SetShiftPosition(Shiftable.UniversePosition);
         collectible.transform.position = Universe.Current.GetWorldPosition(Shiftable.UniversePosition);
+        collectible.OnCollect += Deactivate;
         base.Trigger();
+    }
+
+    public void Deactivate()
+    {
+        if (_mapPin != null)
+            _mapPin.SetPinState(MapPin.MapPinState.Inactive);
     }
 }
