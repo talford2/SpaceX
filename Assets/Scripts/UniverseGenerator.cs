@@ -67,6 +67,7 @@ public class UniverseGenerator : MonoBehaviour
 			ScatterObjects = new List<ScatterSettings>();
 		}
 		Generate();
+		
 	}
 
 	void Update()
@@ -141,11 +142,11 @@ public class UniverseGenerator : MonoBehaviour
 		_mat = new Material(CubemapShader);
 		_mat.SetTexture("_Tex", renderTexture);
 
-		//RenderSettings.skybox = bgMaterial;
+		RenderSettings.skybox = _mat;
 
 		_renderCamera.RenderToCubemap(renderTexture);
 
-		//_renderCamera.clearFlags = CameraClearFlags.Skybox;
+		_renderCamera.clearFlags = CameraClearFlags.Skybox;
 		_renderCamera.enabled = false;
 
 		if (_reflectionProbeObj != null)

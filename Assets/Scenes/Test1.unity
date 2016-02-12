@@ -248,11 +248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400180a1392aeb44ea85504bc0e59fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Levels:
-  - {fileID: 1097665388}
-  - {fileID: 1117886433}
-  - {fileID: 1807080963}
-  LevelBackgrounds: []
 --- !u!1 &128853634
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,7 +2017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1097665390
 Transform:
   m_ObjectHideFlags: 0
