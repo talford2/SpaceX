@@ -24,7 +24,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 417288}
   - 114: {fileID: 11467844}
-  - 114: {fileID: 11402926}
+  - 114: {fileID: 11462672}
   - 114: {fileID: 11406526}
   m_Layer: 0
   m_Name: PowerNodeEvent
@@ -255,23 +255,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196394}
   m_Mesh: {fileID: 4300000, guid: 7cc3e9c324fa59544b46bfb335881df4, type: 3}
---- !u!114 &11402926
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0c0e240e5c41af49bae7e5465494283, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TriggerRadius: 0
-  TrackerRadius: 1000
-  TrackerCursorImage: {fileID: 2800000, guid: a0c6281620ee7a64681a5e67a81b32b9, type: 3}
-  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  LabelFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba, type: 3}
-  HasBeenTriggered: 0
 --- !u!114 &11406526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,6 +302,24 @@ MonoBehaviour:
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
   ShiftParticleSystems: []
+--- !u!114 &11462672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a56936f7d602c4598e1cdeb5fefd00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TriggerRadius: 0
+  TrackerRadius: 1000
+  TrackerCursorImage: {fileID: 2800000, guid: a0c6281620ee7a64681a5e67a81b32b9, type: 3}
+  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  LabelFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba, type: 3}
+  HasBeenTriggered: 0
+  CollectiblePrefab: {fileID: 11425734, guid: c03f0cafd954a874393d18accdfb4fc9, type: 2}
 --- !u!114 &11467844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -437,6 +438,15 @@ Prefab:
       propertyPath: InactivePin
       value: 
       objectReference: {fileID: 133228, guid: e60460a5db76a7842a14febd8542e701, type: 2}
+    - target: {fileID: 0}
+      propertyPath: CurrentInstance
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CollectiblePrefab
+      value: 
+      objectReference: {fileID: 11425734, guid: c03f0cafd954a874393d18accdfb4fc9,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 177598}
