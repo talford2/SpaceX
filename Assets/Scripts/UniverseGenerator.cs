@@ -145,7 +145,7 @@ public class UniverseGenerator : MonoBehaviour
 
 		_renderCamera.RenderToCubemap(renderTexture);
 
-		_renderCamera.clearFlags = CameraClearFlags.Skybox;
+		//_renderCamera.clearFlags = CameraClearFlags.Skybox;
 		_renderCamera.enabled = false;
 
 		if (_reflectionProbeObj != null)

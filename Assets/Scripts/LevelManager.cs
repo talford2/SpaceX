@@ -12,16 +12,34 @@ public class LevelManager : MonoBehaviour
 	void Start()
 	{
 		LevelBackgrounds = new List<Material>();
-		foreach (var level in Levels)
-		{
-			var uGen = level.GetComponent<UniverseGenerator>();
-			LevelBackgrounds.Add(uGen.GetMaterial());
-		}
-		ChangeLevel(0);
+		//foreach (var level in Levels)
+		//{
+		//	var uGen = level.GetComponent<UniverseGenerator>();
+		//	LevelBackgrounds.Add(uGen.GetMaterial());
+		//}
+		//ChangeLevel(0);
 	}
+
+	int index = 0;
+
+	private float _systemGenTime = 2;
+	private float _systemGenCooldown = 0;
 
 	void Update()
 	{
+		if (index < Levels.Count)
+		{
+			_systemGenCooldown -= Time.deltaTime;
+			if (_systemGenCooldown < 0)
+			{
+				Debug.Log("Render system " + index);
+				_systemGenCooldown = _systemGenTime;
+				var uGen = Levels[index].GetComponent<UniverseGenerator>();
+				LevelBackgrounds.Add(uGen.GetMaterial());	
+				index++;
+			}
+		}
+
 		if (Input.GetKeyUp(KeyCode.N))
 		{
 			_levelIndex++;
@@ -35,6 +53,7 @@ public class LevelManager : MonoBehaviour
 
 	private void ChangeLevel(int index)
 	{
+
 		RenderSettings.skybox = LevelBackgrounds[index];
 	}
 }
