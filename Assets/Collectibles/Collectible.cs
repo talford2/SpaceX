@@ -13,6 +13,9 @@ public class Collectible : MonoBehaviour
 	public GameObject FadeObject;
 	public float FadeTime = 1;
 
+    public delegate void OnCollectibleCollect();
+    public OnCollectibleCollect OnCollect;
+
 	public AnimationCurve FadeOutCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
 	private bool _isCollected;
@@ -100,6 +103,8 @@ public class Collectible : MonoBehaviour
 				    if (GiveType == CollectType.PowerNode)
 				        PlayerController.Current.PowerNodeCount++;
 				}
+			    if (OnCollect != null)
+			        OnCollect();
 				Destroy(gameObject);
 			}
 			_lastTo = toCollector;
