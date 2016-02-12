@@ -15,6 +15,18 @@ public class UniverseGenerator : MonoBehaviour
 
 	private GameObject _reflectionProbeObj;
 
+	private bool _hasGenerated = false;
+
+	private Material _mat;
+
+	public bool HasGenerated
+	{
+		get
+		{
+			return _hasGenerated;
+		}
+	}
+
 	#endregion
 
 	#region Public Variables
@@ -105,6 +117,15 @@ public class UniverseGenerator : MonoBehaviour
 		}
 
 		Flatten();
+		_hasGenerated = true;
+	}
+
+
+	public Material GetMaterial()
+	{
+		Generate();
+		Flatten();
+		return _mat;
 	}
 
 	public void Flatten()
@@ -117,10 +138,10 @@ public class UniverseGenerator : MonoBehaviour
 		renderTexture.generateMips = false;
 		renderTexture.isCubemap = true;
 
-		var bgMaterial = new Material(CubemapShader);
-		bgMaterial.SetTexture("_Tex", renderTexture);
+		_mat = new Material(CubemapShader);
+		_mat.SetTexture("_Tex", renderTexture);
 
-		RenderSettings.skybox = bgMaterial;
+		//RenderSettings.skybox = bgMaterial;
 
 		_renderCamera.RenderToCubemap(renderTexture);
 
@@ -151,7 +172,8 @@ public class UniverseGenerator : MonoBehaviour
 		sceneRelfectionProbe.resolution = 512;
 		var rendId = sceneRelfectionProbe.RenderProbe();
 		sceneRelfectionProbe.hdr = true;
-
+		
+		//_parent.gameObject.SetActive(false);
 		Destroy(_parent.gameObject);
 	}
 
