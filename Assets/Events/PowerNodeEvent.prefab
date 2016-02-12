@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 403746}
   - 114: {fileID: 11496452}
+  - 114: {fileID: 11462264}
   - 114: {fileID: 11487934}
   m_Layer: 0
   m_Name: PowerNode
@@ -283,7 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActivePin: {fileID: 133228, guid: bb1424a9f4511bc46998ff93b8cf9b82, type: 2}
-  InactivePin: {fileID: 0}
+  InactivePin: {fileID: 133228, guid: e60460a5db76a7842a14febd8542e701, type: 2}
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
   CurrentInstance: {fileID: 0}
@@ -301,6 +302,23 @@ MonoBehaviour:
   UseCamera: {fileID: 0}
   Flip: 0
   UseCameraRotation: 0
+--- !u!114 &11462264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseCellIndex:
+    X: 0
+    Y: 0
+    Z: 0
+  CellLocalPosition: {x: 0, y: 0, z: 0}
+  ShiftParticleSystems: []
 --- !u!114 &11467844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -383,7 +401,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  Shiftable: {fileID: 11467844}
 --- !u!135 &13542250
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -416,6 +433,10 @@ Prefab:
       value: 
       objectReference: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: InactivePin
+      value: 
+      objectReference: {fileID: 133228, guid: e60460a5db76a7842a14febd8542e701, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 177598}
