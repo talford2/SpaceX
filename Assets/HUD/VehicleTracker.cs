@@ -140,10 +140,6 @@ public class VehicleTracker : Tracker
                 // Trigger Fade Out!
                 fadeDirection = -1;
                 fadeCooldown = fadeTime;
-
-                _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 1f);
-                _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 1f);
-                _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 1f);
             }
         }
         if (lastDistanceSquared > _maxDistanceSquared)
@@ -153,10 +149,6 @@ public class VehicleTracker : Tracker
                 // Trigger fade in!
                 fadeDirection = 1;
                 fadeCooldown = fadeTime;
-
-                _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 0f);
-                _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 0f);
-                _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 0f);
             }
         }
 
