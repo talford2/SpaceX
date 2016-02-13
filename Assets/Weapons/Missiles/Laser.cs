@@ -14,9 +14,9 @@ public class Laser : Missile
 	private float _initSpeed;
 	private Vector3 _hitPosition;
 
-	private Vector3 observationPosition;
-	private float rayCheckMaxDistSquared = 25000000f;
-	private float stopDistanceSquared = 100000000f;
+	private Vector3 _observationPosition;
+	private float _rayCheckMaxDistSquared = 25000000f;
+	private float _stopDistanceSquared = 100000000f;
 
 	private void Awake()
 	{
@@ -31,9 +31,9 @@ public class Laser : Missile
 	public override void LiveUpdate()
 	{
 		var displacement = (_initSpeed + MissileSpeed) * Time.deltaTime;
-		observationPosition = Universe.Current.ViewPort.transform.position;
-		var toOberverSquared = (transform.position - observationPosition).sqrMagnitude;
-		if (toOberverSquared < rayCheckMaxDistSquared)
+		_observationPosition = Universe.Current.ViewPort.transform.position;
+		var toOberverSquared = (transform.position - _observationPosition).sqrMagnitude;
+		if (toOberverSquared < _rayCheckMaxDistSquared)
 		{
 			if (!_hasHit)
 			{
@@ -57,7 +57,7 @@ public class Laser : Missile
 		}
 		else
 		{
-			if (toOberverSquared > stopDistanceSquared)
+			if (toOberverSquared > _stopDistanceSquared)
 			{
 				Stop();
 			}

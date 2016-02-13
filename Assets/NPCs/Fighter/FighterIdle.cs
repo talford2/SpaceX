@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class FighterIdle : NpcState<Fighter>
 {
-    private float targetSearchInterval = 3f;
-    private float targetSearchCooldown;
+    private float _targetSearchInterval = 3f;
+    private float _targetSearchCooldown;
 
     // Neighbors
-    private float neighborDetectInterval = 0.2f;
-    private float neighborDetectCooldown;
-    private List<Transform> neighbors;
+    private float _neighborDetectInterval = 0.2f;
+    private float _neighborDetectCooldown;
+    private List<Transform> _neighbors;
 
     public FighterIdle(Fighter npc) : base(npc)
     {
@@ -19,14 +19,14 @@ public class FighterIdle : NpcState<Fighter>
 
     private void CheckSensors()
     {
-        if (neighborDetectCooldown >= 0f)
+        if (_neighborDetectCooldown >= 0f)
         {
-            neighbors = new List<Transform>();
-            neighborDetectCooldown -= Time.deltaTime;
-            if (neighborDetectCooldown < 0f)
+            _neighbors = new List<Transform>();
+            _neighborDetectCooldown -= Time.deltaTime;
+            if (_neighborDetectCooldown < 0f)
             {
                 Npc.ProximitySensor.Detect(DetectNeighbor);
-                neighborDetectCooldown = neighborDetectInterval;
+                _neighborDetectCooldown = _neighborDetectInterval;
             }
         }
     }
@@ -37,13 +37,13 @@ public class FighterIdle : NpcState<Fighter>
 
         Npc.VehicleInstance.RollThrottle = 0f;
 
-        if (targetSearchCooldown >= 0f)
+        if (_targetSearchCooldown >= 0f)
         {
-            targetSearchCooldown -= Time.deltaTime;
-            if (targetSearchCooldown < 0f)
+            _targetSearchCooldown -= Time.deltaTime;
+            if (_targetSearchCooldown < 0f)
             {
                 Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
-                targetSearchCooldown = targetSearchInterval;
+                _targetSearchCooldown = _targetSearchInterval;
                 if (Npc.Target != null)
                 {
                     Npc.State = new FighterChase(Npc);
@@ -68,7 +68,7 @@ public class FighterIdle : NpcState<Fighter>
         }
 
         // Steering stuff
-        var immediateDestination = Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward*5f + Npc.Steering.GetSeparationForce(neighbors);
+        var immediateDestination = Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward*5f + Npc.Steering.GetSeparationForce(_neighbors);
         if (Npc.IsFollowIdleDestination)
         {
             //Debug.Log("FOLLOWING FORMATION!");
@@ -147,9 +147,9 @@ public class FighterIdle : NpcState<Fighter>
     {
         if (neighbor != Npc.VehicleInstance.transform)
         {
-            if (!neighbors.Contains(neighbor))
+            if (!_neighbors.Contains(neighbor))
             {
-                neighbors.Add(neighbor);
+                _neighbors.Add(neighbor);
             }
         }
     }

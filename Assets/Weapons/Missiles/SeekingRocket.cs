@@ -17,21 +17,21 @@ public class SeekingRocket : Missile
     private Transform _target;
     private Vector3 _shootFrom;
     private Vector3 _initVelocity;
-    private Vector3 offsetVelocity;
+    private Vector3 _offsetVelocity;
 
-    private bool isVehicleTarget;
-    private Vehicle vehicle;
+    private bool _isVehicleTarget;
+    private Vehicle _vehicle;
 
-    private Vector3 velocity;
+    private Vector3 _velocity;
 
-    private float explodeDistance = 2f;
+    private float _explodeDistance = 2f;
 
-    private float travelStraightTime = 0.5f;
-    private float travelStraightCooldown;
-    private float noTargetTime = 5f;
-    private float noTargetCooldown;
+    private float _travelStraightTime = 0.5f;
+    private float _travelStraightCooldown;
+    private float _noTargetTime = 5f;
+    private float _noTargetCooldown;
 
-    private float turnTime = 2f;
+    private float _turnTime = 2f;
 
     private void Awake()
     {
@@ -43,61 +43,61 @@ public class SeekingRocket : Missile
     {
         if (_target != null)
         {
-            if (travelStraightCooldown >= 0)
+            if (_travelStraightCooldown >= 0)
             {
-                travelStraightCooldown -= Time.deltaTime;
+                _travelStraightCooldown -= Time.deltaTime;
             }
 
             var toTarget = _target.position - transform.position;
-            if (isVehicleTarget)
+            if (_isVehicleTarget)
             {
                 if (toTarget.sqrMagnitude > MinChaseDistance*MinChaseDistance)
                 {
-                    offsetVelocity = _initVelocity;
+                    _offsetVelocity = _initVelocity;
                 }
                 else
                 {
-                    offsetVelocity = Vector3.Lerp(offsetVelocity, vehicle.GetVelocity(), 5f*Time.deltaTime);
+                    _offsetVelocity = Vector3.Lerp(_offsetVelocity, _vehicle.GetVelocity(), 5f*Time.deltaTime);
                 }
             }
             else
             {
                 if (toTarget.sqrMagnitude > MinChaseDistance*MinChaseDistance)
                 {
-                    offsetVelocity = _initVelocity;
+                    _offsetVelocity = _initVelocity;
                 }
                 else
                 {
-                    offsetVelocity = Vector3.Lerp(offsetVelocity, Vector3.zero, 5f*Time.deltaTime);
+                    _offsetVelocity = Vector3.Lerp(_offsetVelocity, Vector3.zero, 5f*Time.deltaTime);
                 }
             }
  
-            if (travelStraightCooldown < turnTime)
+            if (_travelStraightCooldown < _turnTime)
             {
-                var turnFraction = Mathf.Clamp01(1f - travelStraightCooldown/turnTime);
+                var turnFraction = Mathf.Clamp01(1f - _travelStraightCooldown/_turnTime);
                 var maxTurn = MaxTurnSpeed*turnFraction;
                 transform.forward = Vector3.RotateTowards(transform.forward, toTarget.normalized, maxTurn*Time.deltaTime, 0f);
             }
 
-            if (toTarget.sqrMagnitude < explodeDistance*explodeDistance)
+            if (toTarget.sqrMagnitude < _explodeDistance*_explodeDistance)
             {
                 Explode();
             }
-            noTargetCooldown = noTargetTime;
+            _noTargetCooldown = _noTargetTime;
         }
 
-        if (noTargetCooldown >= 0f)
+        if (_noTargetCooldown >= 0f)
         {
-            noTargetCooldown -= Time.deltaTime;
-            if (noTargetCooldown < 0f)
+            _noTargetCooldown -= Time.deltaTime;
+            if (_noTargetCooldown < 0f)
             {
                 Explode();
             }
         }
 
-        velocity = offsetVelocity + transform.forward*MissileSpeed;
+        _velocity = _offsetVelocity + transform.forward*MissileSpeed;
 
-        var displacement = velocity*Time.deltaTime;
+        var displacement = _velocity*Time.deltaTime;
         _shiftable.Translate(displacement);
     }
 
@@ -106,8 +106,8 @@ public class SeekingRocket : Missile
         base.SetTarget(target);
         _target = target;
 
-        vehicle = _target.GetComponent<Vehicle>();
-        isVehicleTarget = vehicle != null;
+        _vehicle = _target.GetComponent<Vehicle>();
+        _isVehicleTarget = _vehicle != null;
     }
 
     public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
@@ -116,7 +116,7 @@ public class SeekingRocket : Missile
         _shootFrom = shootFrom;
         _initVelocity = initVelocity;
 
-        velocity = _initVelocity;
+        _velocity = _initVelocity;
 
         transform.position = _shootFrom;
         transform.forward = direction;
@@ -128,8 +128,8 @@ public class SeekingRocket : Missile
         Tracer.Initialize(transform.position);
         Flare.SetVisible(true);
 
-        noTargetCooldown = noTargetTime;
-        travelStraightCooldown = travelStraightTime + turnTime;
+        _noTargetCooldown = _noTargetTime;
+        _travelStraightCooldown = _travelStraightTime + _turnTime;
     }
 
     private void Explode()
