@@ -3,26 +3,26 @@ using UnityEngine;
 
 public class FighterEvade : NpcState<Fighter>
 {
-    private float evadeTimeout = 2f;
-    private float evadeCooldown;
+    private float _evadeTimeout = 2f;
+    private float _evadeCooldown;
 
     // Dodge
-    private float dodgeCooldown;
-    private Vector3 dodgeOffset;
+    private float _dodgeCooldown;
+    private Vector3 _dodgeOffset;
 
     // Neighbors
-    private float neighborDetectInterval = 0.2f;
-    private float neighborDetectCooldown;
-    private List<Transform> neighbors;
+    private float _neighborDetectInterval = 0.2f;
+    private float _neighborDetectCooldown;
+    private List<Transform> _neighbors;
 
     // Target Reconsider
-    private float reconsiderTargetCooldown;
-    private float reconsiderTargetInterval = 3f;
+    private float _reconsiderTargetCooldown;
+    private float _reconsiderTargetInterval = 3f;
 
     public FighterEvade(Fighter npc) : base(npc)
     {
         Name = "Evade";
-        reconsiderTargetCooldown = reconsiderTargetInterval;
+        _reconsiderTargetCooldown = _reconsiderTargetInterval;
         Npc.OnVehicleDamage = OnVehicleDamage;
     }
 
@@ -34,14 +34,14 @@ public class FighterEvade : NpcState<Fighter>
 
     private void CheckSensors()
     {
-        if (neighborDetectCooldown >= 0f)
+        if (_neighborDetectCooldown >= 0f)
         {
-            neighbors = new List<Transform>();
-            neighborDetectCooldown -= Time.deltaTime;
-            if (neighborDetectCooldown < 0f)
+            _neighbors = new List<Transform>();
+            _neighborDetectCooldown -= Time.deltaTime;
+            if (_neighborDetectCooldown < 0f)
             {
                 Npc.ProximitySensor.Detect(DetectNeighbor);
-                neighborDetectCooldown = neighborDetectInterval;
+                _neighborDetectCooldown = _neighborDetectInterval;
             }
         }
     }
@@ -50,7 +50,7 @@ public class FighterEvade : NpcState<Fighter>
     {
         var steerForce = Vector3.zero;
 
-        steerForce += 0.8f * Npc.Steering.GetSeparationForce(neighbors);
+        steerForce += 0.8f * Npc.Steering.GetSeparationForce(_neighbors);
         if (steerForce.sqrMagnitude > 1f)
             return steerForce.normalized;
 
@@ -70,13 +70,13 @@ public class FighterEvade : NpcState<Fighter>
         }
         var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
 
-        if (dodgeCooldown >= 0f)
+        if (_dodgeCooldown >= 0f)
         {
-            dodgeCooldown -= Time.deltaTime;
-            if (dodgeCooldown < 0f)
+            _dodgeCooldown -= Time.deltaTime;
+            if (_dodgeCooldown < 0f)
             {
-                dodgeOffset = GetRandomArc(Npc.DodgeArcAngle)*-toTarget.normalized*Npc.DodgeRadius;
-                dodgeCooldown = Random.Range(Npc.MinDodgeIntervalTime, Npc.MaxDodgeIntervalTime);
+                _dodgeOffset = GetRandomArc(Npc.DodgeArcAngle)*-toTarget.normalized*Npc.DodgeRadius;
+                _dodgeCooldown = Random.Range(Npc.MinDodgeIntervalTime, Npc.MaxDodgeIntervalTime);
             }
         }
 
@@ -84,7 +84,7 @@ public class FighterEvade : NpcState<Fighter>
 
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
-        var targetDestination = Npc.Target.position - toTarget.normalized*Npc.TurnAroundDistance + dodgeOffset;
+        var targetDestination = Npc.Target.position - toTarget.normalized*Npc.TurnAroundDistance + _dodgeOffset;
         Npc.Destination = Npc.VehicleInstance.transform.position + GetSteerForce(targetDestination);
 
         if (toTarget.sqrMagnitude < Npc.AcclerateDistance*Npc.AcclerateDistance)
@@ -105,7 +105,7 @@ public class FighterEvade : NpcState<Fighter>
                 Npc.State = new FighterChase(Npc);
                 return;
             }
-            evadeCooldown = evadeTimeout;
+            _evadeCooldown = _evadeTimeout;
 
             var dotTargetFacing = Vector3.Dot(toTarget, Npc.Target.forward);
             if (dotTargetFacing > 0f)
@@ -116,10 +116,10 @@ public class FighterEvade : NpcState<Fighter>
             }
         }
 
-        if (evadeCooldown > 0f)
+        if (_evadeCooldown > 0f)
         {
-            evadeCooldown -= Time.deltaTime;
-            if (evadeCooldown < 0f)
+            _evadeCooldown -= Time.deltaTime;
+            if (_evadeCooldown < 0f)
             {
                 Npc.State = new FighterChase(Npc);
                 return;
@@ -127,13 +127,13 @@ public class FighterEvade : NpcState<Fighter>
         }
 
         // Reconsider Target
-        if (reconsiderTargetCooldown >= 0f)
+        if (_reconsiderTargetCooldown >= 0f)
         {
-            reconsiderTargetCooldown -= Time.deltaTime;
-            if (reconsiderTargetCooldown < 0f)
+            _reconsiderTargetCooldown -= Time.deltaTime;
+            if (_reconsiderTargetCooldown < 0f)
             {
                 Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
-                reconsiderTargetCooldown = reconsiderTargetInterval;
+                _reconsiderTargetCooldown = _reconsiderTargetInterval;
                 if (Npc.Target != null)
                 {
                     Npc.State = new FighterChase(Npc);
@@ -148,9 +148,9 @@ public class FighterEvade : NpcState<Fighter>
     {
         if (neighbor != Npc.VehicleInstance.transform)
         {
-            if (!neighbors.Contains(neighbor))
+            if (!_neighbors.Contains(neighbor))
             {
-                neighbors.Add(neighbor);
+                _neighbors.Add(neighbor);
             }
         }
     }

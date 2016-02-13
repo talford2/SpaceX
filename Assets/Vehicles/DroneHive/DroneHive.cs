@@ -8,15 +8,15 @@ public class DroneHive : MonoBehaviour
     public Transform BottomDoor;
     public MeshRenderer DroneCopy;
 
-    private bool isReleasingDrones;
+    private bool _isReleasingDrones;
 
     public void ReleaseDrones(int amount)
     {
-        if (!isReleasingDrones)
+        if (!_isReleasingDrones)
         {
             DroneCopy.enabled = true;
             Debug.Log("RELEASE THE DRONES!");
-            isReleasingDrones = true;
+            _isReleasingDrones = true;
             StartCoroutine(OpenAndCloseDoors());
         }
     }
@@ -45,6 +45,6 @@ public class DroneHive : MonoBehaviour
         }
         TopDoor.localRotation = Quaternion.Euler(0f, 0f, 0f);
         BottomDoor.localRotation = Quaternion.Euler(0f, 0f, 0f);
-        isReleasingDrones = false;
+        _isReleasingDrones = false;
     }
 }

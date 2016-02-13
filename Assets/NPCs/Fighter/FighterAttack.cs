@@ -4,33 +4,33 @@ using UnityEngine;
 public class FighterAttack :NpcState<Fighter>
 {
     // Neighbors
-    private float neighborDetectInterval = 0.2f;
-    private float neighborDetectCooldown;
-    private List<Transform> neighbors;
+    private float _neighborDetectInterval = 0.2f;
+    private float _neighborDetectCooldown;
+    private List<Transform> _neighbors;
 
-    private bool allowShoot;
-    private float burstCooldown;
-    private float burstAmount;
-    private float burstTimeoffset;
+    private bool _allowShoot;
+    private float _burstCooldown;
+    private float _burstAmount;
+    private float _burstTimeoffset;
 
-    private Vector3 targetOffset;
+    private Vector3 _targetOffset;
 
     public FighterAttack(Fighter npc) : base(npc)
     {
         Name = "Attack";
-        allowShoot = true;
+        _allowShoot = true;
     }
 
     private void CheckSensors()
     {
-        if (neighborDetectCooldown >= 0f)
+        if (_neighborDetectCooldown >= 0f)
         {
-            neighbors = new List<Transform>();
-            neighborDetectCooldown -= Time.deltaTime;
-            if (neighborDetectCooldown < 0f)
+            _neighbors = new List<Transform>();
+            _neighborDetectCooldown -= Time.deltaTime;
+            if (_neighborDetectCooldown < 0f)
             {
                 Npc.ProximitySensor.Detect(DetectNeighbor);
-                neighborDetectCooldown = neighborDetectInterval;
+                _neighborDetectCooldown = _neighborDetectInterval;
             }
         }
     }
@@ -39,7 +39,7 @@ public class FighterAttack :NpcState<Fighter>
     {
         var steerForce = Vector3.zero;
 
-        steerForce += 0.8f * Npc.Steering.GetSeparationForce(neighbors);
+        steerForce += 0.8f * Npc.Steering.GetSeparationForce(_neighbors);
         if (steerForce.sqrMagnitude > 1f)
             return steerForce.normalized;
 
@@ -78,7 +78,7 @@ public class FighterAttack :NpcState<Fighter>
         var targetVehicle = Npc.Target.GetComponent<Vehicle>();
         if (targetVehicle != null && Npc.VehicleInstance.PrimaryWeaponInstance != null)
         {
-            var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(Npc.Target.GetComponent<Vehicle>(), Npc.VehicleInstance.PrimaryWeaponInstance, burstTimeoffset);
+            var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(Npc.Target.GetComponent<Vehicle>(), Npc.VehicleInstance.PrimaryWeaponInstance, _burstTimeoffset);
             targetDestination = extrapolatePosition;
         }
         else
@@ -86,19 +86,19 @@ public class FighterAttack :NpcState<Fighter>
             targetDestination = Npc.Target.position;
         }
 
-        if (burstCooldown >= 0f)
+        if (_burstCooldown >= 0f)
         {
-            burstCooldown -= Time.deltaTime;
-            if (burstCooldown < 0f)
+            _burstCooldown -= Time.deltaTime;
+            if (_burstCooldown < 0f)
             {
-                allowShoot = true;
-                burstAmount = 0f;
-                burstTimeoffset = Random.Range(-Npc.ExrapolationTimeError, Npc.ExrapolationTimeError);
-                targetOffset = Random.insideUnitSphere*Npc.AimOffsetRadius;
+                _allowShoot = true;
+                _burstAmount = 0f;
+                _burstTimeoffset = Random.Range(-Npc.ExrapolationTimeError, Npc.ExrapolationTimeError);
+                _targetOffset = Random.insideUnitSphere*Npc.AimOffsetRadius;
             }
         }
 
-        Npc.Destination = Npc.VehicleInstance.transform.position + GetSteerForce(targetDestination + targetOffset);
+        Npc.Destination = Npc.VehicleInstance.transform.position + GetSteerForce(targetDestination + _targetOffset);
 
         Npc.VehicleInstance.TriggerBrake = false;
         Npc.VehicleInstance.TriggerAccelerate = false;
@@ -107,7 +107,7 @@ public class FighterAttack :NpcState<Fighter>
         {
             if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
             {
-                if (allowShoot)
+                if (_allowShoot)
                 {
                     var angleToTarget = Vector3.Angle(toTarget.normalized, Npc.VehicleInstance.transform.forward.normalized);
                     if (Mathf.Abs(angleToTarget) < Npc.ShootAngleTolerance)
@@ -115,11 +115,11 @@ public class FighterAttack :NpcState<Fighter>
                         Npc.VehicleInstance.SetAimAt(Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward*100f);
 
                         Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = true;
-                        burstAmount += Time.deltaTime;
-                        if (burstAmount > Npc.BurstTime)
+                        _burstAmount += Time.deltaTime;
+                        if (_burstAmount > Npc.BurstTime)
                         {
-                            burstCooldown = Npc.BurstWaitTime;
-                            allowShoot = false;
+                            _burstCooldown = Npc.BurstWaitTime;
+                            _allowShoot = false;
                         }
                     }
                     else
@@ -164,9 +164,9 @@ public class FighterAttack :NpcState<Fighter>
     {
         if (neighbor != Npc.VehicleInstance.transform)
         {
-            if (!neighbors.Contains(neighbor))
+            if (!_neighbors.Contains(neighbor))
             {
-                neighbors.Add(neighbor);
+                _neighbors.Add(neighbor);
             }
         }
     }

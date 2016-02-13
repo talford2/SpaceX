@@ -12,16 +12,16 @@ public class Beam : Missile
     private Shiftable _shiftable;
     private LineRenderer _lineRenderer;
 
-    private Quaternion dirRotate;
-    private float length;
-    private float fireCooldown;
+    private Quaternion _dirRotate;
+    private float _length;
+    private float _fireCooldown;
 
     private void Awake()
     {
         _shiftable = GetComponent<Shiftable>();
         _shiftable.OnShift += Shift;
         _lineRenderer = GetComponent<LineRenderer>();
-        length = MissileLength;
+        _length = MissileLength;
     }
 
     public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
@@ -29,10 +29,10 @@ public class Beam : Missile
         base.Shoot(shootFrom, direction, initVelocity);
         _lineRenderer.enabled = true;
 
-        fireCooldown = FireTime;
+        _fireCooldown = FireTime;
         transform.position = FromReference.position;
 
-        dirRotate = Quaternion.FromToRotation(FromReference.forward, direction.normalized);
+        _dirRotate = Quaternion.FromToRotation(FromReference.forward, direction.normalized);
 
         transform.forward = direction;
         UpdateLineRenderer();
@@ -40,17 +40,17 @@ public class Beam : Missile
 
     public override void LiveUpdate()
     {
-        if (fireCooldown >= 0f)
+        if (_fireCooldown >= 0f)
         {
-            fireCooldown -= Time.deltaTime;
-            if (fireCooldown < 0f)
+            _fireCooldown -= Time.deltaTime;
+            if (_fireCooldown < 0f)
                 Stop();
         }
 
         transform.position = FromReference.position;
-        transform.forward = dirRotate*FromReference.forward;
+        transform.forward = _dirRotate*FromReference.forward;
 
-        length = MissileLength;
+        _length = MissileLength;
 
         var shootRay = new Ray(transform.position, transform.forward);
         RaycastHit missileHit;
@@ -61,7 +61,7 @@ public class Beam : Missile
             {
                 killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
             }
-            length = missileHit.distance;
+            _length = missileHit.distance;
             PlaceHitEffects(missileHit.point, missileHit.normal, missileHit.collider.gameObject.transform);
         }
         UpdateLineRenderer();
@@ -69,11 +69,11 @@ public class Beam : Missile
 
     private void UpdateLineRenderer()
     {
-        var cooldownFraction = Mathf.Clamp01(fireCooldown / FireTime);
+        var cooldownFraction = Mathf.Clamp01(_fireCooldown / FireTime);
         var diameter = 2f*Radius*cooldownFraction;
         _lineRenderer.SetWidth(diameter, diameter);
         _lineRenderer.SetPosition(0, transform.position);
-        _lineRenderer.SetPosition(1, transform.position + transform.forward* length);
+        _lineRenderer.SetPosition(1, transform.position + transform.forward* _length);
     }
 
     public void LateUpdate()

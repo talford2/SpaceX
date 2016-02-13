@@ -4,31 +4,31 @@ using UnityEngine;
 public class FighterChase : NpcState<Fighter>
 {
     // Neighbors
-    private float neighborDetectInterval = 0.2f;
-    private float neighborDetectCooldown;
-    private List<Transform> neighbors;
+    private float _neighborDetectInterval = 0.2f;
+    private float _neighborDetectCooldown;
+    private List<Transform> _neighbors;
 
     // Target Reconsider
-    private float reconsiderTargetCooldown;
-    private float reconsiderTargetInterval = 3f;
+    private float _reconsiderTargetCooldown;
+    private float _reconsiderTargetInterval = 3f;
 
 	public FighterChase(Fighter npc) : base(npc)
 	{
 		Name = "Chase";
-        reconsiderTargetCooldown = reconsiderTargetInterval;
+        _reconsiderTargetCooldown = _reconsiderTargetInterval;
 	    Npc.OnVehicleDamage = OnVehicleDamage;
 	}
 
     private void CheckSensors()
     {
-        if (neighborDetectCooldown >= 0f)
+        if (_neighborDetectCooldown >= 0f)
         {
-            neighbors = new List<Transform>();
-            neighborDetectCooldown -= Time.deltaTime;
-            if (neighborDetectCooldown < 0f)
+            _neighbors = new List<Transform>();
+            _neighborDetectCooldown -= Time.deltaTime;
+            if (_neighborDetectCooldown < 0f)
             {
                 Npc.ProximitySensor.Detect(DetectNeighbor);
-                neighborDetectCooldown = neighborDetectInterval;
+                _neighborDetectCooldown = _neighborDetectInterval;
             }
         }
     }
@@ -37,7 +37,7 @@ public class FighterChase : NpcState<Fighter>
     {
         var steerForce = Vector3.zero;
 
-        steerForce += 0.8f*Npc.Steering.GetSeparationForce(neighbors);
+        steerForce += 0.8f*Npc.Steering.GetSeparationForce(_neighbors);
         if (steerForce.sqrMagnitude > 1f)
             return steerForce.normalized;
 
@@ -95,13 +95,13 @@ public class FighterChase : NpcState<Fighter>
         }
 
         // Reconsider Target
-        if (reconsiderTargetCooldown >= 0f)
+        if (_reconsiderTargetCooldown >= 0f)
         {
-            reconsiderTargetCooldown -= Time.deltaTime;
-            if (reconsiderTargetCooldown < 0f)
+            _reconsiderTargetCooldown -= Time.deltaTime;
+            if (_reconsiderTargetCooldown < 0f)
             {
                 Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward, 500f);
-                reconsiderTargetCooldown = reconsiderTargetInterval;
+                _reconsiderTargetCooldown = _reconsiderTargetInterval;
                 if (Npc.Target != null)
                 {
                     Npc.State = new FighterChase(Npc);
@@ -122,9 +122,9 @@ public class FighterChase : NpcState<Fighter>
     {
         if (neighbor != Npc.VehicleInstance.transform)
         {
-            if (!neighbors.Contains(neighbor))
+            if (!_neighbors.Contains(neighbor))
             {
-                neighbors.Add(neighbor);
+                _neighbors.Add(neighbor);
             }
         }
     }
