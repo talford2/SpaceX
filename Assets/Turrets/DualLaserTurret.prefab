@@ -42,7 +42,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400278}
   - 114: {fileID: 11479290}
-  - 114: {fileID: 11405244}
   m_Layer: 0
   m_Name: Tracker
   m_TagString: Untagged
@@ -169,6 +168,7 @@ GameObject:
   - 95: {fileID: 9518466}
   - 114: {fileID: 11472348}
   - 114: {fileID: 11454552}
+  - 114: {fileID: 11488622}
   m_Layer: 0
   m_Name: DualLaserTurret
   m_TagString: Untagged
@@ -375,19 +375,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
---- !u!114 &11405244
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Team: 2
-  LockedOnBy: {fileID: 0}
 --- !u!114 &11440442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -453,7 +440,7 @@ MonoBehaviour:
   MaxYawSpeed: 90
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
-  Targetable: {fileID: 11405244}
+  Targetable: {fileID: 0}
 --- !u!114 &11479290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -474,8 +461,23 @@ MonoBehaviour:
   TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  Targetable: {fileID: 11488622}
+  Killable: {fileID: 11454552}
   CallSign: 
   IsDisabled: 0
+--- !u!114 &11488622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Team: 2
+  LockedOnBy: {fileID: 0}
 --- !u!135 &13547558
 SphereCollider:
   m_ObjectHideFlags: 1

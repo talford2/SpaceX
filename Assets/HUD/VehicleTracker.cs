@@ -11,6 +11,9 @@ public class VehicleTracker : Tracker
 	public Texture2D LockingCursorImage;
 	public Texture2D LockedCursorImage;
 
+    public Targetable Targetable;
+    public Killable Killable;
+
 	public string CallSign;
 	public bool IsDisabled;
 
@@ -31,6 +34,7 @@ public class VehicleTracker : Tracker
 	private Texture2D _healthBarBackgroundTexture;
 
 	private Targetable _targetable;
+    private Killable _killable;
 	private bool _isLockedOn;
 
 	private void Awake()
@@ -42,8 +46,10 @@ public class VehicleTracker : Tracker
 		_healthBarTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 1f));
 		_healthBarBackgroundTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 0.05f));
 
-		_targetable = GetComponent<Targetable>();
-		_isLockedOn = false;
+	    _targetable = Targetable ?? GetComponent<Targetable>();
+	    _killable = Killable ?? GetComponent<Killable>();
+
+	    _isLockedOn = false;
 	}
 
 	public override Image CreateInstance()
@@ -140,18 +146,18 @@ public class VehicleTracker : Tracker
 				{
 					if (playerVehicle.PrimaryWeaponInstance != null)
 					{
-						if (playerVehicle.PrimaryWeaponInstance.GetLockingOnTarget() == transform)
+						if (playerVehicle.PrimaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
 							useSprite = _lockingSprite;
-						if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == transform)
+						if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
 							_isLockedOn = true;
 						if (_isLockedOn)
 							useSprite = _lockedSprite;
 					}
 					if (playerVehicle.SecondaryWeaponInstance != null)
 					{
-						if (playerVehicle.SecondaryWeaponInstance.GetLockingOnTarget() == transform)
+						if (playerVehicle.SecondaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
 							useSprite = _lockingSprite;
-						if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
+						if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
 							_isLockedOn = true;
 						if (_isLockedOn)
 							useSprite = _lockedSprite;
@@ -185,10 +191,9 @@ public class VehicleTracker : Tracker
 
 	private void UpdateHealthBar()
 	{
-		var ownerKillable = gameObject.GetComponent<Killable>();
-		if (ownerKillable != null)
+		if (_killable != null)
 		{
-			var healthFraction = Mathf.Clamp01(ownerKillable.Health / ownerKillable.MaxHealth);
+			var healthFraction = Mathf.Clamp01(_killable.Health / _killable.MaxHealth);
 			if (healthFraction < 1f)
 			{
 				_healthBarInstance.fillAmount = healthFraction;
