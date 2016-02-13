@@ -19,7 +19,7 @@ public class PirateSquad : UniverseEvent
 		{
 			foreach (var s in Spawners)
 			{
-				s.transform.position = Random.insideUnitSphere * Radius;
+				s.transform.localPosition = Random.insideUnitSphere * Radius;
 			}
 		}
 	}
