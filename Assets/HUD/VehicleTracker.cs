@@ -103,107 +103,170 @@ public class VehicleTracker : Tracker
 
 		_imageInstance = trackerImg;
 		_imageInstance.color = TrackerColor;
-		return trackerImg;
-	}
 
-	public override void UpdateInstance()
-	{
-        var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
-	    if (distanceSquared > _maxDistanceSquared)
+        var distanceSquared = (_targetable.transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
+	    if (distanceSquared < _maxDistanceSquared)
 	    {
-	        _imageInstance.enabled = false;
-	        _healthBarBackgroundInstance.enabled = false;
-	        _healthBarInstance.enabled = false;
-	    }
+            Debug.Log(_targetable.transform.name + " - YAY - " + distanceSquared);
+            _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 1f);
+            _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 1f);
+            _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 1f);
+        }
 	    else
 	    {
-	        if (IsDisabled)
-	        {
-	            _imageInstance.enabled = false;
-	            _healthBarBackgroundInstance.enabled = false;
-	            _healthBarInstance.enabled = false;
-	        }
-	        else
-	        {
-	            _imageInstance.enabled = true;
-	            var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
-	            if (screenPosition.z < 0f)
-	            {
-	                screenPosition *= -1f;
-	                screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f))*Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
-	            }
-	            screenPosition.z = 0f;
+            Debug.Log(_targetable.transform.name + " - CUNT - " + distanceSquared);
+            _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 0f);
+            _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 0f);
+            _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 0f);
+        }
+	    fadeCooldown = -1f;
+	    lastDistanceSquared = distanceSquared;
 
-	            if (_screenBounds.Contains(screenPosition))
-	            {
-
-	                var useSprite = _trackerSprite;
-	                if (distanceSquared > 1000f*1000f)
-	                {
-	                    useSprite = _farTrackerSprite;
-	                    if (distanceSquared > 2000f*2000f)
-	                    {
-	                        useSprite = _veryFarTrackerSprite;
-	                    }
-	                    _healthBarBackgroundInstance.enabled = false;
-	                    _healthBarInstance.enabled = false;
-	                }
-	                else
-	                {
-	                    UpdateHealthBar();
-	                }
-	                // Locking
-	                _isLockedOn = false;
-	                var playerVehicle = PlayerController.Current.VehicleInstance;
-	                if (playerVehicle != null)
-	                {
-	                    if (playerVehicle.PrimaryWeaponInstance != null)
-	                    {
-	                        if (playerVehicle.PrimaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
-	                            useSprite = _lockingSprite;
-	                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
-	                            _isLockedOn = true;
-	                        if (_isLockedOn)
-	                            useSprite = _lockedSprite;
-	                    }
-	                    if (playerVehicle.SecondaryWeaponInstance != null)
-	                    {
-	                        if (playerVehicle.SecondaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
-	                            useSprite = _lockingSprite;
-	                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
-	                            _isLockedOn = true;
-	                        if (_isLockedOn)
-	                            useSprite = _lockedSprite;
-	                    }
-	                }
-	                // Dodgey method of colouring locking cursors white.
-	                if (useSprite == _lockingSprite || useSprite == _lockedSprite)
-	                {
-	                    _imageInstance.color = Color.white;
-	                }
-	                else
-	                {
-	                    _imageInstance.color = TrackerColor;
-	                }
-	                _imageInstance.sprite = useSprite;
-
-	                _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
-	                _imageInstance.rectTransform.localRotation = Quaternion.identity;
-	            }
-	            else
-	            {
-	                _imageInstance.sprite = _arrowSprite;
-	                _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
-	                _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
-
-	                _healthBarBackgroundInstance.enabled = false;
-	                _healthBarInstance.enabled = false;
-	            }
-	        }
-	    }
+        return trackerImg;
 	}
 
-	private void UpdateHealthBar()
+    private int fadeDirection;
+    private float fadeCooldown;
+    private float fadeTime = 1f;
+    private float lastDistanceSquared;
+
+    public override void UpdateInstance()
+    {
+        var distanceSquared = (_targetable.transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
+
+        if (lastDistanceSquared < _maxDistanceSquared)
+        {
+            if (distanceSquared > _maxDistanceSquared)
+            {
+                // Trigger Fade Out!
+                fadeDirection = -1;
+                fadeCooldown = fadeTime;
+
+                _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 1f);
+                _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 1f);
+                _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 1f);
+            }
+        }
+        if (lastDistanceSquared > _maxDistanceSquared)
+        {
+            if (distanceSquared < _maxDistanceSquared)
+            {
+                // Trigger fade in!
+                fadeDirection = 1;
+                fadeCooldown = fadeTime;
+
+                _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 0f);
+                _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 0f);
+                _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 0f);
+            }
+        }
+
+        if (fadeCooldown >= 0f)
+        {
+            fadeCooldown -= Time.deltaTime;
+            var fadeFraction = Mathf.Clamp01(fadeCooldown/fadeTime);
+            if (fadeDirection > 0)
+            {
+                _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 1f- fadeFraction);
+                _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 1f- fadeFraction);
+                _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 1f- fadeFraction);
+            }
+            else
+            {
+                _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, fadeFraction);
+                _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, fadeFraction);
+                _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, fadeFraction);
+            }
+        }
+
+        if (IsDisabled)
+        {
+            _imageInstance.enabled = false;
+            _healthBarBackgroundInstance.enabled = false;
+            _healthBarInstance.enabled = false;
+        }
+        else
+        {
+            _imageInstance.enabled = true;
+            var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
+            if (screenPosition.z < 0f)
+            {
+                screenPosition *= -1f;
+                screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f))*Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+            }
+            screenPosition.z = 0f;
+
+            if (_screenBounds.Contains(screenPosition))
+            {
+
+                var useSprite = _trackerSprite;
+                if (distanceSquared > 1000f*1000f)
+                {
+                    useSprite = _farTrackerSprite;
+                    if (distanceSquared > 2000f*2000f)
+                    {
+                        useSprite = _veryFarTrackerSprite;
+                    }
+                    _healthBarBackgroundInstance.enabled = false;
+                    _healthBarInstance.enabled = false;
+                }
+                else
+                {
+                    UpdateHealthBar();
+                }
+                // Locking
+                _isLockedOn = false;
+                var playerVehicle = PlayerController.Current.VehicleInstance;
+                if (playerVehicle != null)
+                {
+                    if (playerVehicle.PrimaryWeaponInstance != null)
+                    {
+                        if (playerVehicle.PrimaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
+                            useSprite = _lockingSprite;
+                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
+                            _isLockedOn = true;
+                        if (_isLockedOn)
+                            useSprite = _lockedSprite;
+                    }
+                    if (playerVehicle.SecondaryWeaponInstance != null)
+                    {
+                        if (playerVehicle.SecondaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
+                            useSprite = _lockingSprite;
+                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
+                            _isLockedOn = true;
+                        if (_isLockedOn)
+                            useSprite = _lockedSprite;
+                    }
+                }
+                // Dodgey method of colouring locking cursors white.
+                if (useSprite == _lockingSprite || useSprite == _lockedSprite)
+                {
+                    _imageInstance.color = Color.white;
+                }
+                else
+                {
+                    _imageInstance.color = Utility.SetColorAlpha(TrackerColor, _imageInstance.color.a);
+                }
+                _imageInstance.sprite = useSprite;
+
+                _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+                _imageInstance.rectTransform.localRotation = Quaternion.identity;
+            }
+            else
+            {
+                _imageInstance.sprite = _arrowSprite;
+                _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
+                _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+
+                _healthBarBackgroundInstance.enabled = false;
+                _healthBarInstance.enabled = false;
+            }
+        }
+
+        lastDistanceSquared = distanceSquared;
+    }
+
+    private void UpdateHealthBar()
 	{
 		if (_killable != null)
 		{
