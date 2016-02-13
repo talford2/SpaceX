@@ -719,6 +719,7 @@ MonoBehaviour:
   TrackerCursorImage: {fileID: 2800000, guid: a0c6281620ee7a64681a5e67a81b32b9, type: 3}
   ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
   LabelFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba, type: 3}
+  HasBeenTriggered: 0
   Spawners:
   - {fileID: 11442756}
   - {fileID: 11406916}
@@ -736,6 +737,8 @@ MonoBehaviour:
   - {fileID: 11497012}
   - {fileID: 11442196}
   - {fileID: 11436478}
+  Randomize: 1
+  Radius: 70
 --- !u!114 &11470340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -852,6 +855,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: TrackerRadius
       value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Randomize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Radius
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

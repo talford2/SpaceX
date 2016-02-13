@@ -4,13 +4,24 @@ using UnityEngine;
 public class PirateSquad : UniverseEvent
 {
 	private MapPin _mapPin;
-	
+
 	public List<Spawner> Spawners;
+
+	public bool Randomize = false;
+	public float Radius = 10f;
 
 	public override void Awake()
 	{
 		base.Awake();
 		_mapPin = GetComponent<MapPin>();
+
+		if (Randomize)
+		{
+			foreach (var s in Spawners)
+			{
+				s.transform.position = Random.insideUnitSphere * Radius;
+			}
+		}
 	}
 
 	public override void Trigger()
@@ -19,7 +30,7 @@ public class PirateSquad : UniverseEvent
 		{
 			spawner.Spawn(Random.Range(0f, 1f));
 		}
-		
+
 		if (_mapPin != null)
 			_mapPin.SetPinState(MapPin.MapPinState.Inactive);
 		base.Trigger();
