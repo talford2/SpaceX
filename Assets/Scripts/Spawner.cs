@@ -15,10 +15,8 @@ public class Spawner : MonoBehaviour
 	public bool SpawnOnAwake = false;
     public bool AddWarpEffect = true;
 
-	private bool HasSpawned = false;
-
-	private float _delayTime = 0f;
-
+	private bool _hasSpawned = false;
+	
 	private void Awake()
 	{
 		if (SpawnOnAwake)
@@ -39,14 +37,14 @@ public class Spawner : MonoBehaviour
 
     public void Reset()
     {
-        HasSpawned = false;
+        _hasSpawned = false;
     }
 
 	private IEnumerator DoSpawn(float delay, Action callback)
 	{
 		yield return new WaitForSeconds(delay);
 
-		if (!HasSpawned)
+		if (!_hasSpawned)
 		{
 			_fighterInst = Instantiate<Fighter>(FighterPrefab);
             _fighterInst.SpawnVehicle(_fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position), transform.rotation);
@@ -61,7 +59,7 @@ public class Spawner : MonoBehaviour
 		        s.Timeout = 0.4f;
 		        s.Distance = 20f;
 		    }
-		    HasSpawned = true;
+		    _hasSpawned = true;
 		    if (callback != null)
 		        callback();
 		}

@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class AdvancedParticlewSystem : MonoBehaviour
 {
@@ -36,12 +35,10 @@ public class AdvancedParticlewSystem : MonoBehaviour
 
 	#region Private Variables
 
-	private bool IsPlaying = false;
+	private bool _isPlaying = false;
 	
 	private float _durationCooldown = 0;
-
-	private float _emissionCooldown = 0;
-
+	
 	private List<AdvancedParticle> _particles;
 
 	#endregion
@@ -103,9 +100,8 @@ public class AdvancedParticlewSystem : MonoBehaviour
 
 	public void StartEmission()
 	{
-		IsPlaying = true;
+		_isPlaying = true;
 		_durationCooldown = Duration;
-		_emissionCooldown = 1;
 	}
 
 	void Update()
@@ -115,7 +111,7 @@ public class AdvancedParticlewSystem : MonoBehaviour
 			StartEmission();
 		}
 		
-		if (IsPlaying)
+		if (_isPlaying)
 		{
 			foreach (var particle in _particles)
 			{

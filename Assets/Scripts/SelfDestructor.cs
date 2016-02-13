@@ -8,10 +8,6 @@ namespace Effects
 
 		public bool StartOn;
 
-		private void Awake()
-		{
-		}
-
 		public void StartCooldown()
 		{
 			StartOn = true;

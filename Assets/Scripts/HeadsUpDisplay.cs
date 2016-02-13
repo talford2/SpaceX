@@ -16,7 +16,7 @@ public class HeadsUpDisplay : MonoBehaviour
 
 	public Image HitImage;
 
-	private float squadronPromptCooldown;
+	private float _squadronPromptCooldown;
 
 	private static HeadsUpDisplay _current;
 
@@ -24,7 +24,7 @@ public class HeadsUpDisplay : MonoBehaviour
 
 	private float _hitCooldown = 0;
 
-    private List<SquadronIcon> squadronIcons;
+    private List<SquadronIcon> _squadronIcons;
 
 	public static HeadsUpDisplay Current { get { return _current; } }
 
@@ -32,7 +32,7 @@ public class HeadsUpDisplay : MonoBehaviour
 	{
 		_current = this;
 		HitImage.color = new Color(1, 1, 1, 0);
-        squadronIcons = new List<SquadronIcon>();
+        _squadronIcons = new List<SquadronIcon>();
 	}
 
 	private void Update()
@@ -42,21 +42,21 @@ public class HeadsUpDisplay : MonoBehaviour
 			EnergyText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.BoostEnergy);
 			HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.GetComponent<Killable>().Health);
 		}
-		if (squadronPromptCooldown >= 0f)
+		if (_squadronPromptCooldown >= 0f)
 		{
-			squadronPromptCooldown -= Time.deltaTime;
-			if (squadronPromptCooldown < 0f)
+			_squadronPromptCooldown -= Time.deltaTime;
+			if (_squadronPromptCooldown < 0f)
 			{
 				HideSquadronPrompt();
 			}
 		}
 
-	    while (squadronIcons.Count < PlayerController.Current.Squadron.Count)
+	    while (_squadronIcons.Count < PlayerController.Current.Squadron.Count)
 	    {
             var icon = Instantiate(SquadronIcon);
             icon.transform.SetParent(SquadronIconContainer.transform);
 	        icon.rectTransform.localScale = Vector3.one;
-            squadronIcons.Add(icon.GetComponent<SquadronIcon>());
+            _squadronIcons.Add(icon.GetComponent<SquadronIcon>());
 	    }
 
 	    for (var i = 0; i < PlayerController.Current.Squadron.Count; i++)
@@ -66,12 +66,12 @@ public class HeadsUpDisplay : MonoBehaviour
                 : PlayerController.Current.Squadron[i].VehicleInstance;
 	        if (squadronVehicle != null)
 	        {
-	            squadronIcons[i].SetSelected(PlayerController.Current.GetSquadronSelectedIndex() == i);
-	            squadronIcons[i].SetHealthFraction(squadronVehicle.GetComponent<Killable>().Health/squadronVehicle.GetComponent<Killable>().MaxHealth);
+	            _squadronIcons[i].SetSelected(PlayerController.Current.GetSquadronSelectedIndex() == i);
+	            _squadronIcons[i].SetHealthFraction(squadronVehicle.GetComponent<Killable>().Health/squadronVehicle.GetComponent<Killable>().MaxHealth);
 	        }
 	        else
 	        {
-	            squadronIcons[i].SetHealthFraction(0f);
+	            _squadronIcons[i].SetHealthFraction(0f);
 	        }
 	    }
 
@@ -99,7 +99,7 @@ public class HeadsUpDisplay : MonoBehaviour
 	{
 		SquadronPrompt.SetActive(true);
 		SquadronNameText.text = message;
-		squadronPromptCooldown = SquadronPromptTime;
+		_squadronPromptCooldown = SquadronPromptTime;
 		SquadronPrompt.GetComponent<Image>().CrossFadeAlpha(1f, 0.1f, false);
 		SquadronNameText.CrossFadeAlpha(1f, 0.1f, false);
 	}

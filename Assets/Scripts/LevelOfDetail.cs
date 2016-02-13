@@ -19,12 +19,12 @@ public class LevelOfDetail : MonoBehaviour
 
     public OnEnterLargestDistanceEvent OnEnterLargestDistance;
 
-    private float largestDistanceSquared;
+    private float _largestDistanceSquared;
 
     private void Awake()
     {
         var largestDistance = Distances.OrderByDescending(d => d.Distance).First().Distance;
-        largestDistanceSquared = largestDistance*largestDistance;
+        _largestDistanceSquared = largestDistance*largestDistance;
 
         if (Running)
         {
@@ -58,7 +58,7 @@ public class LevelOfDetail : MonoBehaviour
         }
 
 
-        if (toCamera.sqrMagnitude > largestDistanceSquared)
+        if (toCamera.sqrMagnitude > _largestDistanceSquared)
         {
             if (OnExitLargestDistance != null)
                 OnExitLargestDistance(gameObject);

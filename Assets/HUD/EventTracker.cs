@@ -9,25 +9,27 @@ public class EventTracker : Tracker
     public Texture2D ArrowCursorImage;
     public Font LabelFont;
 
-    private Vector2 screenCentre;
-    private Rect screenBounds;
-    private Image imageInstance;
-    private Text labelInstance;
+    private Vector2 _screenCentre;
+    private Rect _screenBounds;
+    private Image _imageInstance;
+    private Text _labelInstance;
 
-    private Sprite trackerSprite;
-    private Sprite arrowSprite;
+    private Sprite _trackerSprite;
+    private Sprite _arrowSprite;
 
-    private Shiftable shiftable;
+    private Shiftable _shiftable;
 
-    private bool isVisible;
-    private bool isFading;
+    private bool _isVisible;
+    private bool _isFading;
 
-    private void Awake()
+	private float _fadeStep = 0.02f;
+
+	private void Awake()
     {
-        screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
+        _screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
         var boundaryPadding = 20f;
-        screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
-        shiftable = GetComponent<Shiftable>();
+        _screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
+        _shiftable = GetComponent<Shiftable>();
     }
 
     public override Image CreateInstance()
@@ -38,10 +40,10 @@ public class EventTracker : Tracker
         trackerImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
         trackerImg.color = new Color(1f, 1f, 1f, 1f);
 
-        trackerSprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
-        arrowSprite = Sprite.Create(ArrowCursorImage, new Rect(0, 0, ArrowCursorImage.width, ArrowCursorImage.height), Vector2.zero);
+        _trackerSprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
+        _arrowSprite = Sprite.Create(ArrowCursorImage, new Rect(0, 0, ArrowCursorImage.width, ArrowCursorImage.height), Vector2.zero);
 
-        trackerImg.sprite = trackerSprite;
+        trackerImg.sprite = _trackerSprite;
         trackerImg.SetNativeSize();
 
         var labelObject = new GameObject(string.Format("{0}_Label", transform.name));
@@ -56,9 +58,9 @@ public class EventTracker : Tracker
 
         labelObject.transform.SetParent(trackerObj.transform);
 
-        labelInstance = labelText;
-        imageInstance = trackerImg;
-        isVisible = false;
+        _labelInstance = labelText;
+        _imageInstance = trackerImg;
+        _isVisible = false;
         TriggerFadeIn();
 
         return trackerImg;
@@ -70,36 +72,36 @@ public class EventTracker : Tracker
         if (screenPosition.z < 0f)
         {
             screenPosition *= -1f;
-            screenPosition = (screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f))*Utility.ProjectOffscreenLength + new Vector3(screenCentre.x, screenCentre.y, 0f);
+            screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f))*Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
         }
         screenPosition.z = 0f;
 
-        if (screenBounds.Contains(screenPosition))
+        if (_screenBounds.Contains(screenPosition))
         {
-            imageInstance.sprite = trackerSprite;
-            imageInstance.rectTransform.localPosition = screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f);
-            imageInstance.rectTransform.localRotation = Quaternion.identity;
+            _imageInstance.sprite = _trackerSprite;
+            _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+            _imageInstance.rectTransform.localRotation = Quaternion.identity;
 
             if (PlayerController.Current.VehicleInstance != null)
             {
-                var fromPlayer = shiftable.GetAbsoluteUniversePosition() - PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
-                labelInstance.text = DistanceDisplay.GetDistanceString(fromPlayer.magnitude);
-                labelInstance.enabled = true;
+                var fromPlayer = _shiftable.GetAbsoluteUniversePosition() - PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
+                _labelInstance.text = DistanceDisplay.GetDistanceString(fromPlayer.magnitude);
+                _labelInstance.enabled = true;
             }
         }
         else
         {
-            imageInstance.sprite = arrowSprite;
-            imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, screenBounds);
-            imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+            _imageInstance.sprite = _arrowSprite;
+            _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
+            _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
 
-            labelInstance.enabled = false;
+            _labelInstance.enabled = false;
         }
     }
 
     public void TriggerFadeIn(float time = 0.5f)
     {
-        if (!isFading && !isVisible)
+        if (!_isFading && !_isVisible)
         {
             StartCoroutine(FadeIn(time));
         }
@@ -107,40 +109,38 @@ public class EventTracker : Tracker
 
     public void TriggerFadeOut(float time, Action onFinish)
     {
-        if (!isFading && isVisible)
+        if (!_isFading && _isVisible)
         {
             StartCoroutine(FadeOut(time, onFinish));
         }
     }
-
-    private float fadeStep = 0.02f;
-
+	
     private IEnumerator FadeOut(float duration, Action onFinish = null)
     {
-        var stepFraction = fadeStep / duration;
+        var stepFraction = _fadeStep / duration;
         for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
         {
-            imageInstance.color = new Color(1f, 1f, 1f, fraction);
-            yield return new WaitForSeconds(fadeStep);
+            _imageInstance.color = new Color(1f, 1f, 1f, fraction);
+            yield return new WaitForSeconds(_fadeStep);
         }
-        imageInstance.color = new Color(1f, 1f, 1f, 0f);
-        isVisible = false;
-        isFading = false;
+        _imageInstance.color = new Color(1f, 1f, 1f, 0f);
+        _isVisible = false;
+        _isFading = false;
         if (onFinish != null)
             onFinish();
     }
 
     private IEnumerator FadeIn(float duration)
     {
-        var stepFraction = fadeStep / duration;
+        var stepFraction = _fadeStep / duration;
         for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
         {
-            imageInstance.color = new Color(1f, 1f, 1f, 1f - fraction);
-            yield return new WaitForSeconds(fadeStep);
+            _imageInstance.color = new Color(1f, 1f, 1f, 1f - fraction);
+            yield return new WaitForSeconds(_fadeStep);
         }
-        imageInstance.color = new Color(1f, 1f, 1f, 1f);
-        isVisible = true;
-        isFading = false;
+        _imageInstance.color = new Color(1f, 1f, 1f, 1f);
+        _isVisible = true;
+        _isFading = false;
     }
 
     public void SelfDestroy()
@@ -153,21 +153,21 @@ public class EventTracker : Tracker
 
     public override void DestroyInstance()
     {
-        if (imageInstance != null)
-            Destroy(imageInstance);
-        if (labelInstance != null)
-            Destroy(labelInstance);
+        if (_imageInstance != null)
+            Destroy(_imageInstance);
+        if (_labelInstance != null)
+            Destroy(_labelInstance);
     }
 
     public override void SetVisible(bool value)
     {
-        imageInstance.enabled = value;
-        labelInstance.enabled = value;
+        _imageInstance.enabled = value;
+        _labelInstance.enabled = value;
     }
 
     private float GetScreenAngle(Vector2 point)
     {
-        var delta = point - screenCentre;
+        var delta = point - _screenCentre;
         var angle = Mathf.Rad2Deg * Mathf.Atan2(delta.x, -delta.y) + 180f;
         return angle;
     }

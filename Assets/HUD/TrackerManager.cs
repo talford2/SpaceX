@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 
 public class TrackerManager : MonoBehaviour {
-    private static TrackerManager current;
+    private static TrackerManager _current;
 
     public static TrackerManager Current
     {
-        get { return current; }
+        get { return _current; }
     }
 
-    private List<Tracker> trackers;
-    private Canvas trackerCanvas;
+    private List<Tracker> _trackers;
+    private Canvas _trackerCanvas;
 
     private void Awake()
     {
-        trackerCanvas = GetComponentInChildren<Canvas>();
-        trackers = new List<Tracker>();
-        current = this;
+        _trackerCanvas = GetComponentInChildren<Canvas>();
+        _trackers = new List<Tracker>();
+        _current = this;
     }
 
     private void Start()
@@ -26,24 +26,24 @@ public class TrackerManager : MonoBehaviour {
 
     public void AddTracker(Tracker tracker)
     {
-        trackers.Add(tracker);
+        _trackers.Add(tracker);
         var trackerImage = tracker.CreateInstance();
-        trackerImage.transform.SetParent(trackerCanvas.transform);
+        trackerImage.transform.SetParent(_trackerCanvas.transform);
     }
 
     public void RemoveTracker(Tracker enemyTracker)
     {
-        trackers.Remove(enemyTracker);
+        _trackers.Remove(enemyTracker);
     }
 
     public List<Tracker> GetTrackers()
     {
-        return trackers;
+        return _trackers;
     }
 
     private void UpdateTrackers()
     {
-        foreach (var tracker in trackers)
+        foreach (var tracker in _trackers)
         {
             tracker.UpdateInstance();
         }
@@ -51,6 +51,6 @@ public class TrackerManager : MonoBehaviour {
 
     public void SetTrackersVisibility(bool value)
     {
-        trackerCanvas.enabled = value;
+        _trackerCanvas.enabled = value;
     }
 }

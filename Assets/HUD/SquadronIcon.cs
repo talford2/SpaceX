@@ -10,7 +10,7 @@ public class SquadronIcon : MonoBehaviour
     public Texture2D Selected;
     public Texture2D Dead;
 
-    private bool isSelected;
+    private bool _isSelected;
 
     public void SetHealthFraction(float fraction)
     {
@@ -27,14 +27,14 @@ public class SquadronIcon : MonoBehaviour
 
     public void SetSelected(bool selected)
     {
-        isSelected = selected;
+        _isSelected = selected;
         AssignLivingIcons();
     }
 
     private void AssignLivingIcons()
     {
         var texture = Default;
-        if (isSelected)
+        if (_isSelected)
             texture = Selected;
         Icon.overrideSprite = Sprite.Create(texture, new Rect(0, 0, 70f, 70f), new Vector2(0.5f, 0.5f));
     }

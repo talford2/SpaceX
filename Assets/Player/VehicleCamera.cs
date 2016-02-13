@@ -25,32 +25,32 @@ public class VehicleCamera : UniverseCamera
 
 	public AnimationCurve ShakeAmplitude = AnimationCurve.Linear(0, 0, 1, 1);
 
-	private float springDistance;
-	private Quaternion offsetAngle;
-	private Vector3 offset;
+	private float _springDistance;
+	private Quaternion _offsetAngle;
+	private Vector3 _offset;
 
-	private float targetFov;
-	private Vector3 targetUp;
+	private float _targetFov;
+	private Vector3 _targetUp;
 
     // Shake Params
-    private bool isShaking;
-    private bool isContinuous;
-    private bool isShakingTriggered;
-    private float shakeAmplitude;
-    private float shakeDuration;
-    private float shakeCooldown;
-    private float shakeFrequency;
+    private bool _isShaking;
+    private bool _isContinuous;
+    private bool _isShakingTriggered;
+    private float _shakeAmplitude;
+    private float _shakeDuration;
+    private float _shakeCooldown;
+    private float _shakeFrequency;
 
-    private float amplitudeFrac;
-    private float shakeTime;
+    private float _amplitudeFrac;
+    private float _shakeTime;
 
     private void Start()
 	{
-		springDistance = 1f;
+		_springDistance = 1f;
 		Target = PlayerController.Current.VehicleInstance;
-		offsetAngle = Target.transform.rotation;
-		targetUp = Target.transform.up;
-        isShakingTriggered = false;
+		_offsetAngle = Target.transform.rotation;
+		_targetUp = Target.transform.up;
+        _isShakingTriggered = false;
 	}
 
 	public override void Move()
@@ -58,11 +58,11 @@ public class VehicleCamera : UniverseCamera
 	    if (Target != null)
 	    {
 	        var targetSpringDistance = 1f;
-	        targetFov = 60f;
+	        _targetFov = 60f;
 	        if (Target.IsBoosting)
 	        {
 	            targetSpringDistance = SpringBoostExpansion;
-	            targetFov = 100f;
+	            _targetFov = 100f;
 	        }
 	        else
 	        {
@@ -79,77 +79,77 @@ public class VehicleCamera : UniverseCamera
 	            }
 	        }
 
-	        springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup*Time.deltaTime);
+	        _springDistance = Mathf.Lerp(_springDistance, targetSpringDistance, SpringCatchup*Time.deltaTime);
 
-	        offsetAngle = Quaternion.Lerp(offsetAngle, Target.transform.rotation, RotationCatchup*Time.deltaTime);
-	        offset = Vector3.Lerp(offset, offsetAngle*new Vector3(0f, VerticalDistance, -DistanceBehind)*springDistance, OffsetCatchup*Time.deltaTime);
+	        _offsetAngle = Quaternion.Lerp(_offsetAngle, Target.transform.rotation, RotationCatchup*Time.deltaTime);
+	        _offset = Vector3.Lerp(_offset, _offsetAngle*new Vector3(0f, VerticalDistance, -DistanceBehind)*_springDistance, OffsetCatchup*Time.deltaTime);
 
 	        if (Target.PrimaryWeaponInstance != null)
 	        {
-	            _shiftable.Translate(Target.PrimaryWeaponInstance.GetShootPointCentre() + offset - transform.position);
+	            _shiftable.Translate(Target.PrimaryWeaponInstance.GetShootPointCentre() + _offset - transform.position);
 	        }
 	        else
 	        {
-	            _shiftable.Translate(Target.transform.position + offset - transform.position);
+	            _shiftable.Translate(Target.transform.position + _offset - transform.position);
             }
 
-            targetUp = Vector3.Lerp(targetUp, Target.transform.up, 5f*Time.deltaTime);
+            _targetUp = Vector3.Lerp(_targetUp, Target.transform.up, 5f*Time.deltaTime);
 
-            transform.LookAt(Target.GetAimPosition(), targetUp);
+            transform.LookAt(Target.GetAimPosition(), _targetUp);
 	    }
 
 	    BackgroundTransform.transform.position = transform.position;
 
-		AttachedCamera.fieldOfView = Mathf.Lerp(AttachedCamera.fieldOfView, targetFov, Time.deltaTime);
+		AttachedCamera.fieldOfView = Mathf.Lerp(AttachedCamera.fieldOfView, _targetFov, Time.deltaTime);
 
 		foreach (var childCam in ChildCameras)
 		{
 			childCam.fieldOfView = AttachedCamera.fieldOfView;
 		}
 
-		if (isShaking)
+		if (_isShaking)
 		{
-		    if (!isContinuous)
+		    if (!_isContinuous)
 		    {
-		        if (shakeCooldown >= 0f)
+		        if (_shakeCooldown >= 0f)
 		        {
-		            shakeCooldown -= Time.deltaTime;
-                    if (shakeCooldown < 0f)
+		            _shakeCooldown -= Time.deltaTime;
+                    if (_shakeCooldown < 0f)
                     {
                         AttachedCamera.transform.localPosition = Vector3.zero;
-                        isShaking = true;
+                        _isShaking = true;
                     }
 
-                    var frac = 1f - shakeCooldown/shakeDuration;
-                    amplitudeFrac = ShakeAmplitude.Evaluate(frac);
-                    var freq = shakeCooldown*Mathf.Rad2Deg* shakeFrequency;
+                    var frac = 1f - _shakeCooldown/_shakeDuration;
+                    _amplitudeFrac = ShakeAmplitude.Evaluate(frac);
+                    var freq = _shakeCooldown*Mathf.Rad2Deg* _shakeFrequency;
 
-                    Shake(amplitudeFrac, freq);
+                    Shake(_amplitudeFrac, freq);
                 }
             }
             else
 		    {
-		        if (isShakingTriggered)
+		        if (_isShakingTriggered)
 		        {
-		            amplitudeFrac = Mathf.Lerp(amplitudeFrac, 1f, 5f*Time.deltaTime);
+		            _amplitudeFrac = Mathf.Lerp(_amplitudeFrac, 1f, 5f*Time.deltaTime);
 		        }
 		        else
 		        {
-                    amplitudeFrac = Mathf.Lerp(amplitudeFrac, 0f, 5f * Time.deltaTime);
+                    _amplitudeFrac = Mathf.Lerp(_amplitudeFrac, 0f, 5f * Time.deltaTime);
                 }
-		        if (amplitudeFrac < 0.0001f)
+		        if (_amplitudeFrac < 0.0001f)
 		        {
                     AttachedCamera.transform.localPosition = Vector3.zero;
-                    isShaking = false;
+                    _isShaking = false;
 		        }
 
-		        shakeTime += Time.deltaTime;
-		        shakeTime -= Mathf.Floor(shakeTime);
-                var freq = shakeTime * Mathf.Rad2Deg * shakeFrequency;
+		        _shakeTime += Time.deltaTime;
+		        _shakeTime -= Mathf.Floor(_shakeTime);
+                var freq = _shakeTime * Mathf.Rad2Deg * _shakeFrequency;
 
-                Shake(amplitudeFrac, freq);
+                Shake(_amplitudeFrac, freq);
 
-		        isShakingTriggered = false;
+		        _isShakingTriggered = false;
             }
 		}
 	}
@@ -162,37 +162,37 @@ public class VehicleCamera : UniverseCamera
 
         var fracVec = new Vector3(x, y, z)*amplitudeFraction;
 
-        AttachedCamera.transform.localPosition = shakeAmplitude*fracVec;
-        AttachedCamera.transform.localRotation = Quaternion.Euler(2f*Mathf.PI*shakeAmplitude*fracVec);
+        AttachedCamera.transform.localPosition = _shakeAmplitude*fracVec;
+        AttachedCamera.transform.localRotation = Quaternion.Euler(2f*Mathf.PI*_shakeAmplitude*fracVec);
     }
 
     public void TriggerShake(float amplitude, float frequency, float duration)
 	{
-		isShaking = true;
-	    isContinuous = false;
-		shakeAmplitude = amplitude;
-		shakeDuration = duration;
-		shakeCooldown = shakeDuration;
-		shakeFrequency = frequency;
+		_isShaking = true;
+	    _isContinuous = false;
+		_shakeAmplitude = amplitude;
+		_shakeDuration = duration;
+		_shakeCooldown = _shakeDuration;
+		_shakeFrequency = frequency;
 	}
 
     public void TriggerShake(float amplitude, float frequency)
     {
-        isShaking = true;
-        isContinuous = true;
-        isShakingTriggered = true;
-        shakeAmplitude = amplitude;
-        shakeFrequency = frequency;
+        _isShaking = true;
+        _isContinuous = true;
+        _isShakingTriggered = true;
+        _shakeAmplitude = amplitude;
+        _shakeFrequency = frequency;
     }
 
 	public void Reset()
 	{
-		offsetAngle = Target.transform.rotation;
-		springDistance = 1f;
-		offset = offsetAngle * new Vector3(0f, VerticalDistance, -DistanceBehind) * springDistance;
-		targetUp = Target.transform.up;
+		_offsetAngle = Target.transform.rotation;
+		_springDistance = 1f;
+		_offset = _offsetAngle * new Vector3(0f, VerticalDistance, -DistanceBehind) * _springDistance;
+		_targetUp = Target.transform.up;
 
-		transform.position = Target.transform.position + offset;
+		transform.position = Target.transform.position + _offset;
 		transform.LookAt(Target.transform, Target.transform.up);
 		//Debug.Break();
 	}

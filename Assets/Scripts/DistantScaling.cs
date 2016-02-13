@@ -15,8 +15,8 @@ public class DistantScaling : MonoBehaviour
 	public float LineRendererWidth = 35f;
 	public List<LineRenderer> LineRenderers;
 
-    private bool isDistant;
-    private bool lastIsDistant;
+    private bool _isDistant;
+    private bool _lastIsDistant;
 
     public GameObject DistantObject;
     public GameObject NearObject;
@@ -49,11 +49,11 @@ public class DistantScaling : MonoBehaviour
 
 		if (toCamera.sqrMagnitude > _thresholdDistanceSquared)
 		{
-		    if (!isDistant)
+		    if (!_isDistant)
 		    {
                 DistantObject.SetActive(true);
                 NearObject.SetActive(false);
-		        isDistant = true;
+		        _isDistant = true;
 		    }
 		    var distance = toCamera.magnitude;
 
@@ -78,11 +78,11 @@ public class DistantScaling : MonoBehaviour
 		}
 		else
 		{
-		    if (isDistant)
+		    if (_isDistant)
 		    {
                 DistantObject.SetActive(false);
                 NearObject.SetActive(true);
-                isDistant = false;
+                _isDistant = false;
 		    }
 		    transform.localScale = new Vector3(1f, 1f, 1f);
 
@@ -120,17 +120,17 @@ public class DistantScaling : MonoBehaviour
 	        }
 	    }
         */
-	    lastIsDistant = isDistant;
+	    _lastIsDistant = _isDistant;
 
         //ManageTargtables();
 	}
 
     private void ManageTargtables()
     {
-        SetTargetablesEnabled(!isDistant);
+        SetTargetablesEnabled(!_isDistant);
         foreach (var managedCollider in ManagedColliders)
         {
-            managedCollider.enabled = !isDistant;
+            managedCollider.enabled = !_isDistant;
         }
     }
 

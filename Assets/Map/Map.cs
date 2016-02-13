@@ -16,14 +16,11 @@ public class Map : MonoBehaviour
 	private static Map _current;
 
 	private GameObject _playerPin;
-	private List<GameObject> _squadronPins;
 	private List<MapPin> _pins;
 
 	private bool isDestinationSet;
 	private GameObject _destination;
-
-	private List<Transform> _pinTransforms;
-
+	
 	public static Map Current
 	{
 		get { return _current; }

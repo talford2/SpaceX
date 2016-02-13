@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class Targeting
 {
-    private static Dictionary<Team, List<Transform>> targetables;
-    private static List<Transform> allTargetables;
+    private static Dictionary<Team, List<Transform>> _targetables;
+    private static List<Transform> _allTargetables;
 
     public static void AddTargetable(Team team, Transform transform)
     {
-        if (targetables == null)
+        if (_targetables == null)
         {
-            targetables = new Dictionary<Team, List<Transform>>();
-            allTargetables = new List<Transform>();
+            _targetables = new Dictionary<Team, List<Transform>>();
+            _allTargetables = new List<Transform>();
         }
-        if (!targetables.ContainsKey(team))
-            targetables.Add(team, new List<Transform>());
-        targetables[team].Add(transform);
-        allTargetables.Add(transform);
+        if (!_targetables.ContainsKey(team))
+            _targetables.Add(team, new List<Transform>());
+        _targetables[team].Add(transform);
+        _allTargetables.Add(transform);
     }
 
     public static void RemoveTargetable(Team team, Transform transform)
     {
-        if (targetables.ContainsKey(team))
+        if (_targetables.ContainsKey(team))
         {
-            targetables[team].Remove(transform);
-            allTargetables.Remove(transform);
+            _targetables[team].Remove(transform);
+            _allTargetables.Remove(transform);
         }
     }
 
@@ -39,9 +39,9 @@ public class Targeting
     public static Transform FindNearestTeam(Team team, Vector3 fromPosition, float maxDistance)
     {
         Transform target = null;
-        if (targetables.ContainsKey(team))
+        if (_targetables.ContainsKey(team))
         {
-            var targetCandidates = targetables[team];
+            var targetCandidates = _targetables[team];
             var smallestDistanceSquared = Mathf.Infinity;
             if (targetCandidates.Any())
             {
@@ -68,9 +68,9 @@ public class Targeting
 
     public static Transform FindFacingAngleTeam(Team team, Vector3 fromPosition, Vector3 facing, float maxDistance)
     {
-        if (targetables.ContainsKey(team))
+        if (_targetables.ContainsKey(team))
         {
-            var targetCandidates = targetables[team];
+            var targetCandidates = _targetables[team];
             return FindFacingAngleTarget(targetCandidates, fromPosition, facing, maxDistance, 90f);
         }
         return null;
@@ -78,7 +78,7 @@ public class Targeting
 
     public static Transform FindFacingAngleAny(Vector3 fromPosition, Vector3 facing, float maxDistance, float angleTolerance)
     {
-        var targetCandidates = allTargetables;
+        var targetCandidates = _allTargetables;
         return FindFacingAngleTarget(targetCandidates, fromPosition, facing, maxDistance, angleTolerance);
     }
 

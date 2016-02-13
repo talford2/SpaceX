@@ -14,36 +14,36 @@ public class VehicleTracker : Tracker
 	public string CallSign;
 	public bool IsDisabled;
 
-	private Vector2 screenCentre;
-	private Rect screenBounds;
-	private Image imageInstance;
-	private Image healthBarBackgroundInstance;
-	private Image healthBarInstance;
+	private Vector2 _screenCentre;
+	private Rect _screenBounds;
+	private Image _imageInstance;
+	private Image _healthBarBackgroundInstance;
+	private Image _healthBarInstance;
 
-	private Sprite trackerSprite;
-	private Sprite farTrackerSprite;
-	private Sprite veryFarTrackerSprite;
-	private Sprite arrowSprite;
-	private Sprite lockingSprite;
-	private Sprite lockedSprite;
+	private Sprite _trackerSprite;
+	private Sprite _farTrackerSprite;
+	private Sprite _veryFarTrackerSprite;
+	private Sprite _arrowSprite;
+	private Sprite _lockingSprite;
+	private Sprite _lockedSprite;
 
-	private Texture2D healthBarTexture;
-	private Texture2D healthBarBackgroundTexture;
+	private Texture2D _healthBarTexture;
+	private Texture2D _healthBarBackgroundTexture;
 
-	private Targetable targetable;
-	private bool isLockedOn;
+	private Targetable _targetable;
+	private bool _isLockedOn;
 
 	private void Awake()
 	{
-		screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
+		_screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
 		var boundaryPadding = 20f;
-		screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
+		_screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
 
-		healthBarTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 1f));
-		healthBarBackgroundTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 0.05f));
+		_healthBarTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 1f));
+		_healthBarBackgroundTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 0.05f));
 
-		targetable = GetComponent<Targetable>();
-		isLockedOn = false;
+		_targetable = GetComponent<Targetable>();
+		_isLockedOn = false;
 	}
 
 	public override Image CreateInstance()
@@ -54,14 +54,14 @@ public class VehicleTracker : Tracker
 		trackerImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
 		trackerImg.color = new Color(1f, 1f, 1f, 1f);
 
-		trackerSprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
-		farTrackerSprite = Sprite.Create(FarTrackerCursorImage, new Rect(0, 0, FarTrackerCursorImage.width, FarTrackerCursorImage.height), Vector2.zero);
-		veryFarTrackerSprite = Sprite.Create(VeryFarTrackerCursorImage, new Rect(0, 0, VeryFarTrackerCursorImage.width, VeryFarTrackerCursorImage.height), Vector2.zero);
-		arrowSprite = Sprite.Create(ArrowCursorImage, new Rect(0, 0, ArrowCursorImage.width, ArrowCursorImage.height), Vector2.zero);
-		lockingSprite = Sprite.Create(LockingCursorImage, new Rect(0, 0, LockingCursorImage.width, LockingCursorImage.height), Vector2.zero);
-		lockedSprite = Sprite.Create(LockedCursorImage, new Rect(0, 0, LockedCursorImage.width, LockedCursorImage.height), Vector2.zero);
+		_trackerSprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
+		_farTrackerSprite = Sprite.Create(FarTrackerCursorImage, new Rect(0, 0, FarTrackerCursorImage.width, FarTrackerCursorImage.height), Vector2.zero);
+		_veryFarTrackerSprite = Sprite.Create(VeryFarTrackerCursorImage, new Rect(0, 0, VeryFarTrackerCursorImage.width, VeryFarTrackerCursorImage.height), Vector2.zero);
+		_arrowSprite = Sprite.Create(ArrowCursorImage, new Rect(0, 0, ArrowCursorImage.width, ArrowCursorImage.height), Vector2.zero);
+		_lockingSprite = Sprite.Create(LockingCursorImage, new Rect(0, 0, LockingCursorImage.width, LockingCursorImage.height), Vector2.zero);
+		_lockedSprite = Sprite.Create(LockedCursorImage, new Rect(0, 0, LockedCursorImage.width, LockedCursorImage.height), Vector2.zero);
 
-		trackerImg.sprite = trackerSprite;
+		trackerImg.sprite = _trackerSprite;
 		trackerImg.SetNativeSize();
 
 		// Healthbar background
@@ -69,7 +69,7 @@ public class VehicleTracker : Tracker
 		var healthBarBackgroundImg = healthBarBackgroundObj.AddComponent<Image>();
 		healthBarBackgroundImg.rectTransform.pivot = new Vector2(0.5f, -15f);
 		healthBarBackgroundImg.color = new Color(1f, 1f, 1f, 1f);
-		healthBarBackgroundImg.sprite = Sprite.Create(healthBarBackgroundTexture, new Rect(0, 0, healthBarBackgroundTexture.width, healthBarBackgroundTexture.height), Vector2.zero);
+		healthBarBackgroundImg.sprite = Sprite.Create(_healthBarBackgroundTexture, new Rect(0, 0, _healthBarBackgroundTexture.width, _healthBarBackgroundTexture.height), Vector2.zero);
 		healthBarBackgroundImg.SetNativeSize();
 
 		// Healthbar
@@ -77,7 +77,7 @@ public class VehicleTracker : Tracker
 		var healthBarImg = healthBarObj.AddComponent<Image>();
 		healthBarImg.rectTransform.pivot = new Vector2(0.5f, -15f);
 		healthBarImg.color = new Color(1f, 1f, 1f, 1f);
-		healthBarImg.sprite = Sprite.Create(healthBarTexture, new Rect(0, 0, healthBarTexture.width, healthBarTexture.height), Vector2.zero);
+		healthBarImg.sprite = Sprite.Create(_healthBarTexture, new Rect(0, 0, _healthBarTexture.width, _healthBarTexture.height), Vector2.zero);
 
 		healthBarImg.type = Image.Type.Filled;
 		healthBarImg.fillMethod = Image.FillMethod.Horizontal;
@@ -88,11 +88,11 @@ public class VehicleTracker : Tracker
 		healthBarBackgroundObj.transform.SetParent(trackerImg.transform);
 		healthBarObj.transform.SetParent(trackerImg.transform);
 
-		healthBarBackgroundInstance = healthBarBackgroundImg;
-		healthBarInstance = healthBarImg;
+		_healthBarBackgroundInstance = healthBarBackgroundImg;
+		_healthBarInstance = healthBarImg;
 
-		imageInstance = trackerImg;
-		imageInstance.color = TrackerColor;
+		_imageInstance = trackerImg;
+		_imageInstance.color = TrackerColor;
 		return trackerImg;
 	}
 
@@ -100,85 +100,85 @@ public class VehicleTracker : Tracker
 	{
 		if (IsDisabled)
 		{
-			imageInstance.enabled = false;
-			healthBarBackgroundInstance.enabled = false;
-			healthBarInstance.enabled = false;
+			_imageInstance.enabled = false;
+			_healthBarBackgroundInstance.enabled = false;
+			_healthBarInstance.enabled = false;
 		}
 		else
 		{
-			imageInstance.enabled = true;
+			_imageInstance.enabled = true;
 			var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
 			if (screenPosition.z < 0f)
 			{
 				screenPosition *= -1f;
-				screenPosition = (screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f)) * Utility.ProjectOffscreenLength + new Vector3(screenCentre.x, screenCentre.y, 0f);
+				screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f)) * Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
 			}
 			screenPosition.z = 0f;
 
-			if (screenBounds.Contains(screenPosition))
+			if (_screenBounds.Contains(screenPosition))
 			{
 				var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
-				var useSprite = trackerSprite;
+				var useSprite = _trackerSprite;
 				if (distanceSquared > 1000f * 1000f)
 				{
-					useSprite = farTrackerSprite;
+					useSprite = _farTrackerSprite;
 					if (distanceSquared > 2000f * 2000f)
 					{
-						useSprite = veryFarTrackerSprite;
+						useSprite = _veryFarTrackerSprite;
 					}
-					healthBarBackgroundInstance.enabled = false;
-					healthBarInstance.enabled = false;
+					_healthBarBackgroundInstance.enabled = false;
+					_healthBarInstance.enabled = false;
 				}
 				else
 				{
 					UpdateHealthBar();
 				}
 				// Locking
-				isLockedOn = false;
+				_isLockedOn = false;
 				var playerVehicle = PlayerController.Current.VehicleInstance;
 				if (playerVehicle != null)
 				{
 					if (playerVehicle.PrimaryWeaponInstance != null)
 					{
 						if (playerVehicle.PrimaryWeaponInstance.GetLockingOnTarget() == transform)
-							useSprite = lockingSprite;
-						if (targetable != null && targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == transform)
-							isLockedOn = true;
-						if (isLockedOn)
-							useSprite = lockedSprite;
+							useSprite = _lockingSprite;
+						if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == transform)
+							_isLockedOn = true;
+						if (_isLockedOn)
+							useSprite = _lockedSprite;
 					}
 					if (playerVehicle.SecondaryWeaponInstance != null)
 					{
 						if (playerVehicle.SecondaryWeaponInstance.GetLockingOnTarget() == transform)
-							useSprite = lockingSprite;
-						if (targetable != null && targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
-							isLockedOn = true;
-						if (isLockedOn)
-							useSprite = lockedSprite;
+							useSprite = _lockingSprite;
+						if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == transform)
+							_isLockedOn = true;
+						if (_isLockedOn)
+							useSprite = _lockedSprite;
 					}
 				}
                 // Dodgey method of colouring locking cursors white.
-			    if (useSprite == lockingSprite || useSprite == lockedSprite)
+			    if (useSprite == _lockingSprite || useSprite == _lockedSprite)
 			    {
-			        imageInstance.color = Color.white;
+			        _imageInstance.color = Color.white;
 			    }
 			    else
 			    {
-                    imageInstance.color = TrackerColor;
+                    _imageInstance.color = TrackerColor;
                 }
-				imageInstance.sprite = useSprite;
+				_imageInstance.sprite = useSprite;
 
-				imageInstance.rectTransform.localPosition = screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f);
-				imageInstance.rectTransform.localRotation = Quaternion.identity;
+				_imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+				_imageInstance.rectTransform.localRotation = Quaternion.identity;
 			}
 			else
 			{
-				imageInstance.sprite = arrowSprite;
-				imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, screenBounds);
-				imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+				_imageInstance.sprite = _arrowSprite;
+				_imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
+				_imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
 
-				healthBarBackgroundInstance.enabled = false;
-				healthBarInstance.enabled = false;
+				_healthBarBackgroundInstance.enabled = false;
+				_healthBarInstance.enabled = false;
 			}
 		}
 	}
@@ -191,22 +191,22 @@ public class VehicleTracker : Tracker
 			var healthFraction = Mathf.Clamp01(ownerKillable.Health / ownerKillable.MaxHealth);
 			if (healthFraction < 1f)
 			{
-				healthBarInstance.fillAmount = healthFraction;
-				healthBarBackgroundInstance.enabled = true;
-				healthBarInstance.enabled = true;
+				_healthBarInstance.fillAmount = healthFraction;
+				_healthBarBackgroundInstance.enabled = true;
+				_healthBarInstance.enabled = true;
 			}
 			else
 			{
-				healthBarBackgroundInstance.enabled = false;
-				healthBarInstance.enabled = false;
+				_healthBarBackgroundInstance.enabled = false;
+				_healthBarInstance.enabled = false;
 			}
 		}
 	}
 
 	public override void DestroyInstance()
 	{
-		if (imageInstance != null)
-			Destroy(imageInstance.gameObject);
+		if (_imageInstance != null)
+			Destroy(_imageInstance.gameObject);
 	}
 
 	public override void SetVisible(bool value)
@@ -217,7 +217,7 @@ public class VehicleTracker : Tracker
 
 	private float GetScreenAngle(Vector2 point)
 	{
-		var delta = point - screenCentre;
+		var delta = point - _screenCentre;
 		var angle = Mathf.Rad2Deg * Mathf.Atan2(delta.x, -delta.y) + 180f;
 		return angle;
 	}

@@ -6,36 +6,36 @@ public class HealthRegenerator : MonoBehaviour
     public float RegenerationRate;
     public float RegenerationDelay;
 
-    private Killable killable;
-    private float delayCooldown;
+    private Killable _killable;
+    private float _delayCooldown;
 
     private void Awake()
     {
-        killable = GetComponent<Killable>();
-        killable.OnDamage += HealthRegenerator_OnDamage;
+        _killable = GetComponent<Killable>();
+        _killable.OnDamage += HealthRegenerator_OnDamage;
     }
 
     private void Update()
     {
-        if (delayCooldown >= 0f)
+        if (_delayCooldown >= 0f)
         {
-            delayCooldown -= Time.deltaTime;
+            _delayCooldown -= Time.deltaTime;
         }
-        if (delayCooldown < 0f)
+        if (_delayCooldown < 0f)
         {
-            if (killable.Health < killable.MaxHealth)
+            if (_killable.Health < _killable.MaxHealth)
             {
-                killable.Health += RegenerationRate*Time.deltaTime;
-                if (killable.Health/killable.MaxHealth > 0.5f)
-                    killable.StopWoundEffect();
-                if (killable.Health > killable.MaxHealth)
-                    killable.Health = killable.MaxHealth;
+                _killable.Health += RegenerationRate*Time.deltaTime;
+                if (_killable.Health/_killable.MaxHealth > 0.5f)
+                    _killable.StopWoundEffect();
+                if (_killable.Health > _killable.MaxHealth)
+                    _killable.Health = _killable.MaxHealth;
             }
         }
     }
 
     private void HealthRegenerator_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
     {
-        delayCooldown = RegenerationDelay;
+        _delayCooldown = RegenerationDelay;
     }
 }

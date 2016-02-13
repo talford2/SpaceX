@@ -62,7 +62,7 @@ public class Vehicle : MonoBehaviour
 
 	public bool IsBraking { get { return TriggerBrake; } }
 
-	public bool IsBoosting { get { return TriggerBoost && BoostEnergy > 0f && allowBoost; } }
+	public bool IsBoosting { get { return TriggerBoost && BoostEnergy > 0f && _allowBoost; } }
 
 	[Header("Primary Weapon")]
 	public Weapon PrimaryWeaponPrefab;
@@ -90,15 +90,15 @@ public class Vehicle : MonoBehaviour
 	private readonly float _aimDistance = 1000f;
 
 	// Steering
-	private float rollSpeed;
-	private Quaternion targetRotation;
+	private float _rollSpeed;
+	private Quaternion _targetRotation;
 
 	// Boost
-	private float boostEnergyCooldown;
-	private bool boostRegenerate;
-	private bool allowBoost;
+	private float _boostEnergyCooldown;
+	private bool _boostRegenerate;
+	private bool _allowBoost;
 
-	private float maxFlareBrightness = 30f;
+	private float _maxFlareBrightness = 30f;
 	public Weapon PrimaryWeaponInstance { get { return _primaryWeaponInstance; } }
 	public Weapon SecondaryWeaponInstance { get { return _secondaryWeaponInstance; } }
 
@@ -152,14 +152,14 @@ public class Vehicle : MonoBehaviour
             _secondaryWeaponInstance.OnShoot += OnShoot;
         }
 
-        allowBoost = true;
+        _allowBoost = true;
 
-		targetRotation = transform.rotation;
+		_targetRotation = transform.rotation;
 	}
 
     public void SetTargetRotation(Quaternion rotation)
     {
-        targetRotation = rotation;
+        _targetRotation = rotation;
     }
 
     private void Start()
@@ -204,20 +204,20 @@ public class Vehicle : MonoBehaviour
 				CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
 			}
 
-			allowBoost = true;
+			_allowBoost = true;
 		}
 
 		// Restore boost energy
-		if (boostEnergyCooldown > 0f)
+		if (_boostEnergyCooldown > 0f)
 		{
-			boostEnergyCooldown -= Time.deltaTime;
-			if (boostEnergyCooldown < 0f)
+			_boostEnergyCooldown -= Time.deltaTime;
+			if (_boostEnergyCooldown < 0f)
 			{
-				boostRegenerate = true;
+				_boostRegenerate = true;
 			}
 		}
 
-		if (boostRegenerate)
+		if (_boostRegenerate)
 		{
 			if (BoostEnergy < MaxBoostEnergy)
 			{
@@ -230,7 +230,7 @@ public class Vehicle : MonoBehaviour
 		// Boosting
 		if (TriggerBoost)
 		{
-			if (allowBoost && BoostEnergy > 0f)
+			if (_allowBoost && BoostEnergy > 0f)
 			{
 				if (CurrentSpeed < MaxBoostSpeed)
 				{
@@ -242,10 +242,10 @@ public class Vehicle : MonoBehaviour
 				if (BoostEnergy < 0f)
 				{
 					BoostEnergy = 0f;
-					allowBoost = false;
+					_allowBoost = false;
 				}
-				boostRegenerate = false;
-				boostEnergyCooldown = BoostEnergyRegenerateDelay;
+				_boostRegenerate = false;
+				_boostEnergyCooldown = BoostEnergyRegenerateDelay;
 			}
 			if (!BoostSound.isPlaying)
 			{
@@ -280,21 +280,21 @@ public class Vehicle : MonoBehaviour
 			}
 		}
 
-		rollSpeed += RollAcceleration * Mathf.Clamp(RollThrottle, -1, 1) * Time.deltaTime;
+		_rollSpeed += RollAcceleration * Mathf.Clamp(RollThrottle, -1, 1) * Time.deltaTime;
 
 		if (Mathf.Abs(RollThrottle) < 0.01f)
 		{
-			rollSpeed = Mathf.Lerp(rollSpeed, 0f, 10f * Time.deltaTime);
+			_rollSpeed = Mathf.Lerp(_rollSpeed, 0f, 10f * Time.deltaTime);
 		}
 
 		// Turning
 		var dYaw = YawThrottle * YawSpeed;
 		var dPitch = PitchThotttle * PitchSpeed;
-		var dRoll = -Mathf.Clamp(rollSpeed, -MaxRollSpeed, MaxRollSpeed) * Time.deltaTime;
+		var dRoll = -Mathf.Clamp(_rollSpeed, -MaxRollSpeed, MaxRollSpeed) * Time.deltaTime;
 
-		targetRotation *= Quaternion.Euler(dPitch, dYaw, dRoll);
+		_targetRotation *= Quaternion.Euler(dPitch, dYaw, dRoll);
 
-		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20f * Time.deltaTime);
+		transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, 20f * Time.deltaTime);
 
 		_velocity = transform.forward * CurrentSpeed;
 

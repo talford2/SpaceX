@@ -8,18 +8,18 @@ public class ShiftTrail : MonoBehaviour
     public float DistanceInterval = 5;
     public Shiftable Shiftable;
 
-    private LineRenderer lineRenderer;
-    private List<Vector3> lastPositions;
-    private float lastIntervalTime;
-    private float intervalTime;
+    private LineRenderer _lineRenderer;
+    private List<Vector3> _lastPositions;
+    private float _lastIntervalTime;
+    private float _intervalTime;
 
     private void Awake()
     {
         Shiftable.OnShift += Shift;
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.useWorldSpace = true;
+        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.useWorldSpace = true;
 
-        lastPositions = new List<Vector3>
+        _lastPositions = new List<Vector3>
         {
             transform.position,
             transform.position
@@ -28,63 +28,63 @@ public class ShiftTrail : MonoBehaviour
 
     public void Initialize(Vector3 position)
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.useWorldSpace = true;
+        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.useWorldSpace = true;
 
-        lastPositions = new List<Vector3>
+        _lastPositions = new List<Vector3>
         {
             position,
             position
         };
 
-        lineRenderer.SetVertexCount(lastPositions.Count);
-        lineRenderer.enabled = true;
+        _lineRenderer.SetVertexCount(_lastPositions.Count);
+        _lineRenderer.enabled = true;
     }
 
     private void LateUpdate()
     {
-        if (lineRenderer.enabled)
+        if (_lineRenderer.enabled)
         {
-            if ((lastPositions[1] - lastPositions[0]).sqrMagnitude < DistanceInterval*DistanceInterval)
+            if ((_lastPositions[1] - _lastPositions[0]).sqrMagnitude < DistanceInterval*DistanceInterval)
             {
-                lastPositions[0] = transform.position;
-                intervalTime = Time.time - lastIntervalTime;
-                lastIntervalTime = Time.time;
+                _lastPositions[0] = transform.position;
+                _intervalTime = Time.time - _lastIntervalTime;
+                _lastIntervalTime = Time.time;
             }
             else
             {
-                lastPositions.Insert(0, transform.position);
+                _lastPositions.Insert(0, transform.position);
 
-                if (lastPositions.Count > TotalPoints)
+                if (_lastPositions.Count > TotalPoints)
                 {
-                    lastPositions.RemoveAt(lastPositions.Count - 1);
+                    _lastPositions.RemoveAt(_lastPositions.Count - 1);
                 }
                 else
                 {
-                    lineRenderer.SetVertexCount(lastPositions.Count);
+                    _lineRenderer.SetVertexCount(_lastPositions.Count);
                 }
             }
 
-            for (var i = 0; i < lastPositions.Count; i++)
+            for (var i = 0; i < _lastPositions.Count; i++)
             {
-                lineRenderer.SetPosition(i, lastPositions[i]);
+                _lineRenderer.SetPosition(i, _lastPositions[i]);
             }
         }
     }
 
     public void Stop()
     {
-        lineRenderer.enabled = false;
+        _lineRenderer.enabled = false;
     }
 
     private void Shift(Shiftable sender, Vector3 delta)
     {
-        if (lastPositions != null)
+        if (_lastPositions != null)
         {
-            for (var i = 0; i < lastPositions.Count; i++)
+            for (var i = 0; i < _lastPositions.Count; i++)
             {
-                lastPositions[i] -= delta;
-                lineRenderer.SetPosition(i, lastPositions[i]);
+                _lastPositions[i] -= delta;
+                _lineRenderer.SetPosition(i, _lastPositions[i]);
             }
         }
     }

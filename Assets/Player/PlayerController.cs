@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
 	private bool _controlEnabled;
 
+	private static PlayerController _current;
+
 	public bool InvertY = false;
 	public bool HideMouse = false;
 
@@ -44,14 +46,13 @@ public class PlayerController : MonoBehaviour
 	public float MinAimDistance = 10f;
 	public float MaxAimDistance = 1000f;
 
-	private float aimDistance;
-	private float screenAspect;
-	private int squadronLiveCount;
-	private int threatCount;
-	private float threatCheckInterval = 2f;
-	private float threatCheckCooldown;
+	private float _aimDistance;
+	private float _screenAspect;
+	private int _squadronLiveCount;
+	private int _threatCount;
+	private float _threatCheckCooldown;
 
-	private UniversePosition lastDeathUniversePosition;
+	private UniversePosition _lastDeathUniversePosition;
 
 	private void Awake()
 	{
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour
 		if (HideMouse)
 			Cursor.lockState = CursorLockMode.Locked;
 
-		screenAspect = (float)Screen.height / (float)Screen.width;
+		_screenAspect = (float)Screen.height / (float)Screen.width;
 
 		_playerNpc = gameObject.AddComponent<Fighter>();
 		_playerNpc.Team = Team;
@@ -161,7 +162,7 @@ public class PlayerController : MonoBehaviour
 	{
 		var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 		RaycastHit aimHit;
-		aimDistance = Mathf.Lerp(aimDistance, DefaultAimDistance, Time.deltaTime);
+		_aimDistance = Mathf.Lerp(_aimDistance, DefaultAimDistance, Time.deltaTime);
 		var aimAtPosition = mouseRay.GetPoint(DefaultAimDistance);
 
 		// Fancy System.
@@ -174,14 +175,14 @@ public class PlayerController : MonoBehaviour
 		if (guessTarget != null)
 		{
 			var toGuessTarget = guessTarget.position - viewPortPos;
-			aimDistance = Mathf.Clamp(toGuessTarget.magnitude, MinAimDistance, MaxAimDistance);
-			return mouseRay.GetPoint(aimDistance);
+			_aimDistance = Mathf.Clamp(toGuessTarget.magnitude, MinAimDistance, MaxAimDistance);
+			return mouseRay.GetPoint(_aimDistance);
 		}
 
 		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player", "Detectable", "Distant")))
 		{
-			aimDistance = Mathf.Clamp(aimHit.distance, MinAimDistance, MaxAimDistance);
-			aimAtPosition = mouseRay.GetPoint(aimDistance);
+			_aimDistance = Mathf.Clamp(aimHit.distance, MinAimDistance, MaxAimDistance);
+			aimAtPosition = mouseRay.GetPoint(_aimDistance);
 		}
 		return aimAtPosition;
 	}
@@ -213,10 +214,10 @@ public class PlayerController : MonoBehaviour
 		    if (_playVehicleInstance != null)
 		    {
 		        var mouseHorizontal = AimSensitivity*Input.GetAxis("MouseHorizontal")/Screen.width;
-		        var mouseVertical = AimSensitivity*screenAspect*Input.GetAxis("MouseVertical")/Screen.height;
+		        var mouseVertical = AimSensitivity*_screenAspect*Input.GetAxis("MouseVertical")/Screen.height;
 
 		        var controllerHorizontal = AimSensitivity*Input.GetAxis("Horizontal")/Screen.width;
-		        var controllerVertical = AimSensitivity*screenAspect*Input.GetAxis("Vertical")/Screen.height;
+		        var controllerVertical = AimSensitivity*_screenAspect*Input.GetAxis("Vertical")/Screen.height;
 
 		        var pitchYaw = Vector2.ClampMagnitude(new Vector2(controllerVertical + mouseVertical, controllerHorizontal + mouseHorizontal), MouseMoveClamp);
 
@@ -278,7 +279,7 @@ public class PlayerController : MonoBehaviour
 					_playVehicleInstance.GetComponent<Killable>().Die();
 				Debug.Log("RESPAWN");
 
-				var respawnAt = SpawnManager.FindNearest(lastDeathUniversePosition);
+				var respawnAt = SpawnManager.FindNearest(_lastDeathUniversePosition);
 				respawnAt.Spawn();
 				/*
 	            Universe.Current.WarpTo(RespawnPosition);
@@ -325,7 +326,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		// Update squadron
-		squadronLiveCount = Squadron.Count(s => s.VehicleInstance != null);
+		_squadronLiveCount = Squadron.Count(s => s.VehicleInstance != null);
 
 		Vehicle leaderVehicle;
 		if (_curSquadronIndex == 0)
@@ -347,7 +348,7 @@ public class PlayerController : MonoBehaviour
 
 		if (leaderVehicle != null)
 		{
-			for (var i = 1; i < squadronLiveCount; i++)
+			for (var i = 1; i < _squadronLiveCount; i++)
 			{
 				var formationOffset = Formations.GetArrowOffset(i, 10f);
 				var formationDestination = leaderVehicle.transform.position + leaderVehicle.transform.rotation * formationOffset;
@@ -359,21 +360,21 @@ public class PlayerController : MonoBehaviour
 
 		if (_playVehicleInstance != null)
 		{
-		    if (threatCheckCooldown >= 0f)
+		    if (_threatCheckCooldown >= 0f)
 		    {
-		        threatCheckCooldown -= Time.deltaTime;
-		        if (threatCheckCooldown < 0f)
+		        _threatCheckCooldown -= Time.deltaTime;
+		        if (_threatCheckCooldown < 0f)
 		        {
 		            var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, 2000f, LayerMask.GetMask("Detectable"));
-		            threatCount = detected.Count(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>() != null && d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team));
-		            threatCheckCooldown = 0f;
+		            _threatCount = detected.Count(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>() != null && d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team));
+		            _threatCheckCooldown = 0f;
 		        }
 		    }
 
-		    if (squadronLiveCount < Squadron.Count)
+		    if (_squadronLiveCount < Squadron.Count)
 			{
 				//Debug.Log("REPLENISH CHECK!");
-				if (threatCount == 0)
+				if (_threatCount == 0)
 				{
 					//Debug.Log("REPLENISH!!!");
 					for (var i = 0; i < Squadron.Count; i++)
@@ -472,8 +473,8 @@ public class PlayerController : MonoBehaviour
 
 	private void PlayerController_OnDie(Killable sender)
 	{
-		lastDeathUniversePosition = new UniversePosition(_playVehicleInstance.Shiftable.UniversePosition.CellIndex, _playVehicleInstance.Shiftable.UniversePosition.CellLocalPosition);
-		Debug.Log("PLAYER VEHICLE DESTROYED AT: " + lastDeathUniversePosition.CellIndex);
+		_lastDeathUniversePosition = new UniversePosition(_playVehicleInstance.Shiftable.UniversePosition.CellIndex, _playVehicleInstance.Shiftable.UniversePosition.CellLocalPosition);
+		Debug.Log("PLAYER VEHICLE DESTROYED AT: " + _lastDeathUniversePosition.CellIndex);
 	}
 
 	public bool InPlayerActiveCells(CellIndex checkCell)
@@ -493,8 +494,6 @@ public class PlayerController : MonoBehaviour
 		return false;
 	}
 
-	private static PlayerController _current;
-
 	public static PlayerController Current
 	{
 		get { return _current; }
@@ -510,7 +509,7 @@ public class PlayerController : MonoBehaviour
 		//GUI.Label(new Rect(Screen.width - 100f, Screen.height - 100f, 100f, 25), string.Format("{0:f2} m/s", VehicleInstance.GetVelocity().magnitude));
 		if (_playVehicleInstance == null)
 		{
-			if (squadronLiveCount == 0)
+			if (_squadronLiveCount == 0)
 			{
 				GUI.Label(new Rect(Screen.width / 2f - 100f, Screen.height / 2f + 50f, 200f, 25f), "Press 'R' to respawn.", new GUIStyle { alignment = TextAnchor.MiddleCenter, normal = { textColor = Color.white } });
 			}
@@ -521,11 +520,11 @@ public class PlayerController : MonoBehaviour
 		}
 		var cellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
 		GUI.Label(new Rect(30f, 120f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", cellIndex.X, cellIndex.Y, cellIndex.Z));
-		GUI.Label(new Rect(30f, 150f, 100f, 25f), string.Format("SQUADRON: {0:f0}/{1:f0}", squadronLiveCount, Squadron.Count));
-		GUI.Label(new Rect(30f, 180f, 100f, 25f), string.Format("THREATS: {0}", threatCount));
+		GUI.Label(new Rect(30f, 150f, 100f, 25f), string.Format("SQUADRON: {0:f0}/{1:f0}", _squadronLiveCount, Squadron.Count));
+		GUI.Label(new Rect(30f, 180f, 100f, 25f), string.Format("THREATS: {0}", _threatCount));
 		//GUI.Label(new Rect(30f, 180f, 200f, 25f), string.Format("LOCK: {0} ({1:f2})", lockingTarget != null ? lockingTarget.name : string.Empty, lockingTime));
 		//GUI.Label(new Rect(30f, 210f, 200f, 25f), string.Format("LOCKED: {0}", VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget() != null ? VehicleInstance.SecondaryWeaponInstance.GetLockedOnTarget().name : string.Empty));
-		GUI.Label(new Rect(30f, 240f, 200f, 25f), string.Format("AIM DIST: {0:f2}", aimDistance));
+		GUI.Label(new Rect(30f, 240f, 200f, 25f), string.Format("AIM DIST: {0:f2}", _aimDistance));
 		GUI.Label(new Rect(30f, 270f, 200f, 25f), string.Format("SPACE JUNK: {0:f0}", SpaceJunkCount), new GUIStyle { normal = { textColor = new Color(0f, 0.8f, 0.56f, 1f) } });
 		GUI.Label(new Rect(30f, 300f, 200f, 25f), string.Format("POWER NODES: {0:f0}", PowerNodeCount), new GUIStyle { normal = { textColor = new Color(0.8f, 0.56f, 1f, 1f) } });
     }

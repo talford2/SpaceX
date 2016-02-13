@@ -12,61 +12,61 @@ public class MapCamera : MonoBehaviour
     public delegate void OnCameraMove();
     public OnCameraMove OnMove;
 
-    private Camera controlCamera;
-    private float cameraDistance;
-    private float yawRotate;
-    private float pitchRotate;
+    private Camera _controlCamera;
+    private float _cameraDistance;
+    private float _yawRotate;
+    private float _pitchRotate;
 
-    private Vector3 lookAt = Vector3.zero;
+    private Vector3 _lookAt = Vector3.zero;
     private const float MaxTurnRotate = Mathf.PI;
 
-    private Vector2 pan;
+    private Vector2 _pan;
 
-    private static MapCamera current;
+    private static MapCamera _current;
 
     public static MapCamera Current
     {
-        get { return current; }
+        get { return _current; }
     }
 
     private void Awake()
     {
-        controlCamera = GetComponent<Camera>();
-        controlCamera.transform.forward = -Vector3.one;
+        _controlCamera = GetComponent<Camera>();
+        _controlCamera.transform.forward = -Vector3.one;
 
-        cameraDistance = 100f;
+        _cameraDistance = 100f;
         CameraRotateSpace();
 
-        pan = Vector2.zero;
-        current = this;
+        _pan = Vector2.zero;
+        _current = this;
     }
 
     private void LateUpdate()
     {
         if (Map.Current.IsShown())
         {
-            cameraDistance = Mathf.Lerp(cameraDistance, cameraDistance - Input.GetAxis("MouseScrollWheel") * ZoomSensitivity, 10f * Time.deltaTime);
-            cameraDistance = Mathf.Clamp(cameraDistance, MinCameraDistance, MaxCameraDistance);
+            _cameraDistance = Mathf.Lerp(_cameraDistance, _cameraDistance - Input.GetAxis("MouseScrollWheel") * ZoomSensitivity, 10f * Time.deltaTime);
+            _cameraDistance = Mathf.Clamp(_cameraDistance, MinCameraDistance, MaxCameraDistance);
             if (Input.GetMouseButton(0))
             {
                 //yawRotate += Mathf.Atan(Input.GetAxis("Mouse Steer X") / Mathf.Clamp(cameraDistance, 5f, MaxCameraDistance)) * Mathf.Rad2Deg;
                 //pitchRotate += -Mathf.Atan(Input.GetAxis("Mouse Steer Y")/Mathf.Clamp(cameraDistance, 5f, MaxCameraDistance))*Mathf.Rad2Deg;
-                yawRotate = Input.GetAxis("MouseHorizontal") * RotateSpeed;
-                pitchRotate = -Input.GetAxis("MouseVertical") * RotateSpeed;
+                _yawRotate = Input.GetAxis("MouseHorizontal") * RotateSpeed;
+                _pitchRotate = -Input.GetAxis("MouseVertical") * RotateSpeed;
             }
             else
             {
-                yawRotate = 0f;
-                pitchRotate = 0f;
+                _yawRotate = 0f;
+                _pitchRotate = 0f;
             }
             if (Input.GetMouseButton(1))
             {
-                pan.x = Input.GetAxis("MouseHorizontal") * PanSpeed;
-                pan.y = Input.GetAxis("MouseVertical") * PanSpeed;
+                _pan.x = Input.GetAxis("MouseHorizontal") * PanSpeed;
+                _pan.y = Input.GetAxis("MouseVertical") * PanSpeed;
             }
             else
             {
-                pan = Vector2.zero;
+                _pan = Vector2.zero;
             }
             CameraRotateSpace();
         }
@@ -77,16 +77,16 @@ public class MapCamera : MonoBehaviour
 
     private void CameraRotateSpace()
     {
-        lookAt = Vector3.Lerp(lookAt, lookAt - (controlCamera.transform.right * pan.x + controlCamera.transform.up * pan.y), 10f * Time.deltaTime);
-        controlCamera.transform.RotateAround(lookAt, Vector3.up, yawRotate);
+        _lookAt = Vector3.Lerp(_lookAt, _lookAt - (_controlCamera.transform.right * _pan.x + _controlCamera.transform.up * _pan.y), 10f * Time.deltaTime);
+        _controlCamera.transform.RotateAround(_lookAt, Vector3.up, _yawRotate);
         //controlCamera.transform.RotateAround(lookAt, controlCamera.transform.up, yawRotate);
-        controlCamera.transform.RotateAround(lookAt, controlCamera.transform.right, pitchRotate);
-        controlCamera.transform.position = lookAt - controlCamera.transform.forward * cameraDistance;
+        _controlCamera.transform.RotateAround(_lookAt, _controlCamera.transform.right, _pitchRotate);
+        _controlCamera.transform.position = _lookAt - _controlCamera.transform.forward * _cameraDistance;
     }
 
     public void SetLookAt(Vector3 position)
     {
-        lookAt = position;
+        _lookAt = position;
         CameraRotateSpace();
     }
 }

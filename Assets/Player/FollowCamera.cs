@@ -19,13 +19,13 @@ public class FollowCamera : UniverseCamera
     public float SpringCatchup = 2f;
     public float OffsetCatchup = 5f;
 
-    private float springDistance;
+    private float _springDistance;
     
-    private Vector3 offset;
+    private Vector3 _offset;
 
 	private void Start()
 	{
-	    springDistance = 1f;
+	    _springDistance = 1f;
 	    Target = PlayerController.Current.VehicleInstance.transform;
 	}
 
@@ -46,11 +46,11 @@ public class FollowCamera : UniverseCamera
 	        }
 	    }
 
-        springDistance = Mathf.Lerp(springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);
+        _springDistance = Mathf.Lerp(_springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);
 
-	    offset = Vector3.Lerp(offset, -springDistance*(transform.forward*DistanceBehind) + (transform.up*VerticalDistance), OffsetCatchup*Time.deltaTime);
+	    _offset = Vector3.Lerp(_offset, -_springDistance*(transform.forward*DistanceBehind) + (transform.up*VerticalDistance), OffsetCatchup*Time.deltaTime);
 
-        _shiftable.Translate(Target.position + offset - transform.position);
+        _shiftable.Translate(Target.position + _offset - transform.position);
 
 		BackgroundTransform.transform.position = transform.position;
 	}

@@ -42,11 +42,11 @@ public class Weapon : MonoBehaviour
 
 	private Team _targetTeam;
 
-	private Transform lockingTarget;
-	private Transform lastLockingTarget;
-	private Transform lockedTarget;
-	private float lockingCooldown;
-	private bool isLocked;
+	private Transform _lockingTarget;
+	private Transform _lastLockingTarget;
+	private Transform _lockedTarget;
+	private float _lockingCooldown;
+	private bool _isLocked;
 
 	public void Initialize(GameObject owner, List<ShootPoint> shootPoints, VelocityReference velocityReference, Team ownerTeam)
 	{
@@ -137,17 +137,17 @@ public class Weapon : MonoBehaviour
 
 	public void ClearTargetLock()
 	{
-		isLocked = false;
-		lastLockingTarget = null;
-		lockedTarget = null;
+		_isLocked = false;
+		_lastLockingTarget = null;
+		_lockedTarget = null;
 	}
 
 	private void TargetLocking()
 	{
 		var shootPointsCentre = GetShootPointCentre();
-		if (lockingTarget != null)
+		if (_lockingTarget != null)
 		{
-			var toLockingTarget = lockingTarget.position - shootPointsCentre;
+			var toLockingTarget = _lockingTarget.position - shootPointsCentre;
 			if (toLockingTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
 			{
 				ClearTargetLock();
@@ -157,9 +157,9 @@ public class Weapon : MonoBehaviour
 		{
 			ClearTargetLock();
 		}
-		if (lockedTarget != null)
+		if (_lockedTarget != null)
 		{
-			var toLockedTarget = lockedTarget.position - shootPointsCentre;
+			var toLockedTarget = _lockedTarget.position - shootPointsCentre;
 			if (toLockedTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
 			{
 				ClearTargetLock();
@@ -170,28 +170,28 @@ public class Weapon : MonoBehaviour
 			ClearTargetLock();
 		}
 
-		if (!isLocked)
+		if (!_isLocked)
 		{
-			lockingTarget = null;
+			_lockingTarget = null;
 			if (IsTriggered)
 			{
 				var direction = _aimAt - shootPointsCentre;
-				lockingTarget = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(_targetTeam), shootPointsCentre, direction, TargetLockingMaxDistance);
-				if (lastLockingTarget == null)
-					lastLockingTarget = lockingTarget;
+				_lockingTarget = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(_targetTeam), shootPointsCentre, direction, TargetLockingMaxDistance);
+				if (_lastLockingTarget == null)
+					_lastLockingTarget = _lockingTarget;
 			}
 			else
 			{
-				lastLockingTarget = null;
+				_lastLockingTarget = null;
 			}
 
-			if (lastLockingTarget != null && lastLockingTarget == lockingTarget)
+			if (_lastLockingTarget != null && _lastLockingTarget == _lockingTarget)
 			{
-				lockingCooldown -= Time.deltaTime;
-				if (lockingCooldown < 0f)
+				_lockingCooldown -= Time.deltaTime;
+				if (_lockingCooldown < 0f)
 				{
-					lockedTarget = lockingTarget;
-					isLocked = true;
+					_lockedTarget = _lockingTarget;
+					_isLocked = true;
 					if (LockSound != null)
 					{
 						Utility.PlayOnTransform(LockSound, _owner.transform);
@@ -200,14 +200,14 @@ public class Weapon : MonoBehaviour
 			}
 			else
 			{
-				lockingCooldown = TargetLockTime;
+				_lockingCooldown = TargetLockTime;
 			}
 		}
 		else
 		{
 			if (!IsTriggered)
 			{
-				var lockedVehicle = lockedTarget.GetComponent<Vehicle>();
+				var lockedVehicle = _lockedTarget.GetComponent<Vehicle>();
 				if (lockedVehicle != null)
 				{
 					// Rough Extrapolation
@@ -216,10 +216,10 @@ public class Weapon : MonoBehaviour
 				}
 				else
 				{
-					SetAimAt(lockedTarget.position);
+					SetAimAt(_lockedTarget.position);
 				}
 
-                var targetable = lockedTarget.GetComponent<Targetable>();
+                var targetable = _lockedTarget.GetComponent<Targetable>();
                 if (targetable != null)
                 {
                     targetable.LockedOnBy = _owner.transform;
@@ -227,7 +227,7 @@ public class Weapon : MonoBehaviour
 
                 SetAimAt(GetShootPointCentre() + _velocityReference.Value);
 				var nextMissile = GetNextMissile();
-				nextMissile.GetComponent<Missile>().SetTarget(lockedTarget);
+				nextMissile.GetComponent<Missile>().SetTarget(_lockedTarget);
 				FireMissile(nextMissile);
 				ClearTargetLock();
 			}
@@ -236,12 +236,12 @@ public class Weapon : MonoBehaviour
 
 	public Transform GetLockingOnTarget()
 	{
-		return lockingTarget;
+		return _lockingTarget;
 	}
 
 	public Transform GetLockedOnTarget()
 	{
-		return lockedTarget;
+		return _lockedTarget;
 	}
 
     private void OnDestroy()

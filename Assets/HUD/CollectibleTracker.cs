@@ -12,25 +12,27 @@ public class CollectibleTracker : Tracker
 
 	public Color TrackerColor = Color.white;
 
-	private Vector2 screenCentre;
-	private Rect screenBounds;
-	private Image imageInstance;
+	private Vector2 _screenCentre;
+	private Rect _screenBounds;
+	private Image _imageInstance;
 
-	private Sprite trackerSprite;
-	private Sprite farTrackerSprite;
-	private Sprite veryFarTrackerSprite;
-	private Sprite arrowSprite;
+	private Sprite _trackerSprite;
+	private Sprite _farTrackerSprite;
+	private Sprite _veryFarTrackerSprite;
+	private Sprite _arrowSprite;
 
-	private bool isVisible;
-	private bool isFading;
+	private bool _isVisible;
+	private bool _isFading;
 
 	private float _width;
 
+	private float _fadeStep = 0.02f;
+
 	private void Awake()
 	{
-		screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
+		_screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
 		var boundaryPadding = 20f;
-		screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
+		_screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
 	}
 
 	public override Image CreateInstance()
@@ -41,19 +43,19 @@ public class CollectibleTracker : Tracker
 		trackerImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
 		trackerImg.color = new Color(1f, 1f, 1f, 1f);
 
-		trackerSprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
-		farTrackerSprite = Sprite.Create(FarTrackerCursorImage, new Rect(0, 0, FarTrackerCursorImage.width, FarTrackerCursorImage.height), Vector2.zero);
-		veryFarTrackerSprite = Sprite.Create(VeryFarTrackerCursorImage, new Rect(0, 0, VeryFarTrackerCursorImage.width, VeryFarTrackerCursorImage.height), Vector2.zero);
-		arrowSprite = Sprite.Create(ArrowCursorImage, new Rect(0, 0, ArrowCursorImage.width, ArrowCursorImage.height), Vector2.zero);
+		_trackerSprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
+		_farTrackerSprite = Sprite.Create(FarTrackerCursorImage, new Rect(0, 0, FarTrackerCursorImage.width, FarTrackerCursorImage.height), Vector2.zero);
+		_veryFarTrackerSprite = Sprite.Create(VeryFarTrackerCursorImage, new Rect(0, 0, VeryFarTrackerCursorImage.width, VeryFarTrackerCursorImage.height), Vector2.zero);
+		_arrowSprite = Sprite.Create(ArrowCursorImage, new Rect(0, 0, ArrowCursorImage.width, ArrowCursorImage.height), Vector2.zero);
 
-		trackerImg.sprite = trackerSprite;
+		trackerImg.sprite = _trackerSprite;
 		trackerImg.SetNativeSize();
 
-		imageInstance = trackerImg;
-		imageInstance.color = TrackerColor;
-		_width = imageInstance.rectTransform.rect.width;
+		_imageInstance = trackerImg;
+		_imageInstance.color = TrackerColor;
+		_width = _imageInstance.rectTransform.rect.width;
 
-		isVisible = true;
+		_isVisible = true;
 		return trackerImg;
 	}
 
@@ -64,37 +66,37 @@ public class CollectibleTracker : Tracker
 		if (screenPosition.z < 0f)
 		{
 			screenPosition *= -1f;
-			screenPosition = (screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f)) * Utility.ProjectOffscreenLength + new Vector3(screenCentre.x, screenCentre.y, 0f);
+			screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f)) * Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
 		}
 		screenPosition.z = 0f;
 
-		if (screenBounds.Contains(screenPosition))
+		if (_screenBounds.Contains(screenPosition))
 		{
 			var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
-			var useSprite = trackerSprite;
+			var useSprite = _trackerSprite;
 			if (distanceSquared > 1000f * 1000f)
 			{
-				useSprite = farTrackerSprite;
+				useSprite = _farTrackerSprite;
 				if (distanceSquared > 2000f * 2000f)
 				{
-					useSprite = veryFarTrackerSprite;
+					useSprite = _veryFarTrackerSprite;
 				}
 			}
-			imageInstance.sprite = useSprite;
-			imageInstance.rectTransform.localPosition = screenPosition - new Vector3(screenCentre.x, screenCentre.y, 0f);
-			imageInstance.rectTransform.localRotation = Quaternion.identity;
+			_imageInstance.sprite = useSprite;
+			_imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+			_imageInstance.rectTransform.localRotation = Quaternion.identity;
 		}
 		else
 		{
-			imageInstance.sprite = arrowSprite;
-			imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, screenBounds);
-			imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+			_imageInstance.sprite = _arrowSprite;
+			_imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
+			_imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
 		}
 	}
 
 	public void TriggerFadeIn(float time = 0.5f)
 	{
-		if (!isFading && !isVisible)
+		if (!_isFading && !_isVisible)
 		{
 			StartCoroutine(FadeIn(time));
 		}
@@ -102,7 +104,7 @@ public class CollectibleTracker : Tracker
 
 	public void TriggerFadeOut(float time = 0.5f)
 	{
-		if (!isFading && isVisible)
+		if (!_isFading && _isVisible)
 		{
 			StartCoroutine(FadeOut(time));
 		}
@@ -111,9 +113,9 @@ public class CollectibleTracker : Tracker
 	public void SetColor(Color color)
 	{
 		TrackerColor = color;
-		if (imageInstance != null)
+		if (_imageInstance != null)
 		{
-			imageInstance.color = color;
+			_imageInstance.color = color;
 		}
 	}
 
@@ -124,61 +126,59 @@ public class CollectibleTracker : Tracker
 
 	public void SetScale(float scale)
 	{
-		if (imageInstance != null)
+		if (_imageInstance != null)
 		{
-			imageInstance.rectTransform.sizeDelta = Vector2.one * _width * scale;
+			_imageInstance.rectTransform.sizeDelta = Vector2.one * _width * scale;
 		}
 	}
-
-	private float fadeStep = 0.02f;
 
 	private IEnumerator FadeOut(float duration)
 	{
 		var start = DateTime.Now;
 		var ii = 0;
 
-		var stepFraction = fadeStep / duration;
+		var stepFraction = _fadeStep / duration;
 		for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
 		{
-			imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, fraction);
+			_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, fraction);
 
 			ii++;
 			Debug.Log("Time running: " + DateTime.Now.Subtract(start).TotalSeconds + " (" + ii + ")");
 
-			yield return new WaitForSeconds(fadeStep);
+			yield return new WaitForSeconds(_fadeStep);
 		}
-		imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 0f);
-		isVisible = false;
-		isFading = false;
+		_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 0f);
+		_isVisible = false;
+		_isFading = false;
 	}
 
 	private IEnumerator FadeIn(float duration)
 	{
-		var stepFraction = fadeStep / duration;
+		var stepFraction = _fadeStep / duration;
 		for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
 		{
-			imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f - fraction);
-			yield return new WaitForSeconds(fadeStep);
+			_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f - fraction);
+			yield return new WaitForSeconds(_fadeStep);
 		}
-		imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f);
-		isVisible = true;
-		isFading = false;
+		_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f);
+		_isVisible = true;
+		_isFading = false;
 	}
 
 	public override void DestroyInstance()
 	{
-		if (imageInstance != null)
-			Destroy(imageInstance);
+		if (_imageInstance != null)
+			Destroy(_imageInstance);
 	}
 
 	public override void SetVisible(bool value)
 	{
-		imageInstance.enabled = value;
+		_imageInstance.enabled = value;
 	}
 
 	private float GetScreenAngle(Vector2 point)
 	{
-		var delta = point - screenCentre;
+		var delta = point - _screenCentre;
 		var angle = Mathf.Rad2Deg * Mathf.Atan2(delta.x, -delta.y) + 180f;
 		return angle;
 	}

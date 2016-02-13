@@ -17,13 +17,13 @@ public class UniverseEvent : MonoBehaviour
     public Font LabelFont;
     public bool HasBeenTriggered = false;
 
-    private float triggerRadiusSquared;
-    private float lastDistanceSquared;
-    private float trackerRadiusSquared;
+    private float _triggerRadiusSquared;
+    private float _lastDistanceSquared;
+    private float _trackerRadiusSquared;
 
-    private EventTracker tracker;
+    private EventTracker _tracker;
 
-    private int cellRadius;
+    private int _cellRadius;
 
 	public virtual void Awake()
 	{
@@ -35,12 +35,12 @@ public class UniverseEvent : MonoBehaviour
 		Shiftable = GetComponent<Shiftable>();
 		Shiftable.OnShift += Shiftable_OnShift;
 
-	    triggerRadiusSquared = TriggerRadius*TriggerRadius;
-	    trackerRadiusSquared = TrackerRadius*TrackerRadius;
+	    _triggerRadiusSquared = TriggerRadius*TriggerRadius;
+	    _trackerRadiusSquared = TrackerRadius*TrackerRadius;
 
 		UniverseEvents.Add(this);
 
-	    cellRadius = Mathf.CeilToInt(TriggerRadius/Universe.Current.CellSize);
+	    _cellRadius = Mathf.CeilToInt(TriggerRadius/Universe.Current.CellSize);
 	}
 
 	private void Shiftable_OnShift(Shiftable sender, Vector3 delta)
@@ -49,11 +49,11 @@ public class UniverseEvent : MonoBehaviour
 
 	    var enable = false;
 	    var thisEvent = sender.GetComponent<UniverseEvent>();
-	    for (var i = -cellRadius; i < cellRadius + 1; i++)
+	    for (var i = -_cellRadius; i < _cellRadius + 1; i++)
 	    {
-	        for (var j = -cellRadius; j < cellRadius + 1; j++)
+	        for (var j = -_cellRadius; j < _cellRadius + 1; j++)
 	        {
-	            for (var k = -cellRadius; k < cellRadius + 1; k++)
+	            for (var k = -_cellRadius; k < _cellRadius + 1; k++)
 	            {
 	                if (sender.UniverseCellIndex.IsEqualTo(Universe.Current.ViewPort.Shiftable.UniverseCellIndex + new CellIndex(i, j, k)))
 	                {
@@ -80,43 +80,43 @@ public class UniverseEvent : MonoBehaviour
     private void Update()
     {
         var toViewPortSquared = (Universe.Current.ViewPort.Shiftable.GetAbsoluteUniversePosition() - Shiftable.GetAbsoluteUniversePosition()).sqrMagnitude;
-        if (lastDistanceSquared > triggerRadiusSquared)
+        if (_lastDistanceSquared > _triggerRadiusSquared)
         {
-            if (toViewPortSquared < triggerRadiusSquared)
+            if (toViewPortSquared < _triggerRadiusSquared)
             {
                 Trigger();
             }
         }
-        if (tracker == null)
+        if (_tracker == null)
         {
-            if (lastDistanceSquared > trackerRadiusSquared)
+            if (_lastDistanceSquared > _trackerRadiusSquared)
             {
-                if (toViewPortSquared < trackerRadiusSquared)
+                if (toViewPortSquared < _trackerRadiusSquared)
                 {
-                    tracker = gameObject.AddComponent<EventTracker>();
-                    tracker.ArrowCursorImage = ArrowCursorImage;
-                    tracker.TrackerCursorImage = TrackerCursorImage;
-                    tracker.LabelFont = LabelFont;
+                    _tracker = gameObject.AddComponent<EventTracker>();
+                    _tracker.ArrowCursorImage = ArrowCursorImage;
+                    _tracker.TrackerCursorImage = TrackerCursorImage;
+                    _tracker.LabelFont = LabelFont;
                 }
             }
         }
-        if (tracker != null)
+        if (_tracker != null)
         {
-            if (lastDistanceSquared < trackerRadiusSquared)
+            if (_lastDistanceSquared < _trackerRadiusSquared)
             {
-                if (toViewPortSquared > trackerRadiusSquared)
+                if (toViewPortSquared > _trackerRadiusSquared)
                 {
-                    tracker.SelfDestroy();
+                    _tracker.SelfDestroy();
                 }
             }
         }
-        lastDistanceSquared = toViewPortSquared;
+        _lastDistanceSquared = toViewPortSquared;
     }
 
     private void OnDisable()
     {
-        if (tracker != null)
-            tracker.SelfDestroy();
+        if (_tracker != null)
+            _tracker.SelfDestroy();
     }
 
 	//private void OnDrawGizmos()
@@ -132,8 +132,8 @@ public class UniverseEvent : MonoBehaviour
 	public virtual void Trigger()
 	{
 		Debug.Log("Event triggered");
-        if (tracker != null)
-            tracker.SelfDestroy();
+        if (_tracker != null)
+            _tracker.SelfDestroy();
 	    HasBeenTriggered = true;
 	    enabled = false;
 	}

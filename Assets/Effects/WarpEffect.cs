@@ -14,7 +14,6 @@ public class WarpEffect : MonoBehaviour
 	private UniversePosition _finalDestination;
     
 	private Vector3 _warpPos;
-	private Rigidbody _rigidBody;
     private Shiftable _shiftable;
 
 	void Awake()
