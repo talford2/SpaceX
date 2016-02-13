@@ -105,21 +105,20 @@ public class VehicleTracker : Tracker
 		_imageInstance.color = TrackerColor;
 
         var distanceSquared = (_targetable.transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
+
+        _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 0f);
+        _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 0f);
+        _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 0f);
+
 	    if (distanceSquared < _maxDistanceSquared)
 	    {
-            Debug.Log(_targetable.transform.name + " - YAY - " + distanceSquared);
-            _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 1f);
-            _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 1f);
-            _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 1f);
-        }
+	        fadeDirection = 1;
+	        fadeCooldown = fadeTime;
+	    }
 	    else
 	    {
-            Debug.Log(_targetable.transform.name + " - CUNT - " + distanceSquared);
-            _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 0f);
-            _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 0f);
-            _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 0f);
-        }
-	    fadeCooldown = -1f;
+	        fadeCooldown = -1f;
+	    }
 	    lastDistanceSquared = distanceSquared;
 
         return trackerImg;
