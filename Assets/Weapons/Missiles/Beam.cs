@@ -54,7 +54,7 @@ public class Beam : Missile
 
         var shootRay = new Ray(transform.position, transform.forward);
         RaycastHit missileHit;
-        if (Physics.SphereCast(shootRay, Radius, out missileHit, MissileLength, ~LayerMask.GetMask("Distant", "Universe Background")))
+        if (Physics.SphereCast(shootRay, Radius, out missileHit, MissileLength, ~LayerMask.GetMask("Distant", "Universe Background", "Environment")))
         {
             var killable = missileHit.collider.GetComponentInParent<Killable>();
             if (killable != null)

@@ -39,7 +39,7 @@ public class Laser : Missile
 			{
 				var missileRay = new Ray(transform.position, transform.forward);
 				RaycastHit missileHit;
-				if (Physics.Raycast(missileRay, out missileHit, displacement, ~LayerMask.GetMask("Distant", "Universe Background")))
+				if (Physics.Raycast(missileRay, out missileHit, displacement, ~LayerMask.GetMask("Distant", "Universe Background", "Environment")))
 				{
 				    if (missileHit.collider.gameObject != Owner)
 				    {

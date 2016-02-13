@@ -6,6 +6,7 @@ public class SeekingRocket : Missile
     [Header("Seeking Rocket")]
     public float MinChaseDistance = 50f;
     public float MaxTurnSpeed = 90f;
+    public float Radius = 0.3f;
     public GameObject ExplodePrefab;
     public MeshRenderer Rocket;
     public MeshRenderer ThrusterMesh;
@@ -32,6 +33,13 @@ public class SeekingRocket : Missile
     private float _noTargetCooldown;
 
     private float _turnTime = 2f;
+
+    // Spherecast hit
+    private bool _hasHit;
+	private Vector3 _hitPosition;
+    private Vector3 _observationPosition;
+    private float _rayCheckMaxDistSquared = 25000000f;
+    private float _stopDistanceSquared = 100000000f;
 
     private void Awake()
     {
@@ -98,6 +106,45 @@ public class SeekingRocket : Missile
         _velocity = _offsetVelocity + transform.forward*MissileSpeed;
 
         var displacement = _velocity*Time.deltaTime;
+
+        // Hit objects
+        if (_hasHit)
+        {
+            Explode();
+            return;
+        }
+        _observationPosition = Universe.Current.ViewPort.transform.position;
+        var toOberverSquared = (transform.position - _observationPosition).sqrMagnitude;
+        if (toOberverSquared < _rayCheckMaxDistSquared)
+        {
+            if (!_hasHit)
+            {
+                var missileRay = new Ray(transform.position, _velocity);
+                RaycastHit missileHit;
+                if (Physics.SphereCast(missileRay, Radius, out missileHit, displacement.magnitude, ~LayerMask.GetMask("Distant", "Universe Background", "Environment")))
+                {
+                    if (missileHit.collider.gameObject != Owner)
+                    {
+                        var killable = missileHit.collider.GetComponentInParent<Killable>();
+                        if (killable != null)
+                        {
+                            killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
+                        }
+                        _hasHit = true;
+                        _hitPosition = missileHit.point;
+                        PlaceHitEffects(missileHit.point, missileHit.normal, missileHit.collider.gameObject.transform);
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (toOberverSquared > _stopDistanceSquared)
+            {
+                Stop();
+            }
+        }
+
         _shiftable.Translate(displacement);
     }
 
@@ -139,6 +186,16 @@ public class SeekingRocket : Missile
         explodeInstance.transform.localScale = transform.localScale;
         var explodeShiftable = explodeInstance.GetComponent<Shiftable>();
         var ownerShiftable = GetComponent<Shiftable>();
+
+        if (_target != null)
+        {
+            var targetable = _target.GetComponent<Targetable>();
+            if (targetable != null)
+            {
+                targetable.LockedOnBy = null;
+                Debug.Log("TURN LOCK OFF!");
+            }
+        }
 
         if (explodeShiftable != null && ownerShiftable != null)
         {
