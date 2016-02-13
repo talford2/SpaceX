@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: SpaceMetal
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _DETAIL_MULX2 _NORMALMAP
+  m_ShaderKeywords: _DETAIL_MULX2 _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -47,7 +47,7 @@ Material:
         first:
           name: _OcclusionMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: dffdd5e05893d0a4192e6f4ef4b12390, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -69,13 +69,13 @@ Material:
           name: _DetailAlbedoMap
         second:
           m_Texture: {fileID: 2800000, guid: d732c54a13f0f174db2017b385146990, type: 3}
-          m_Scale: {x: 1.70000005, y: 1.70000005}
+          m_Scale: {x: 1.7, y: 1.7}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _MetallicGlossMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: c095ef7482149ce4dad172d1429a5df5, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -97,11 +97,11 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
       data:
         first:
           name: _ZWrite
@@ -109,11 +109,11 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .829999983
+        second: 0.83
       data:
         first:
           name: _BumpScale
-        second: .100000001
+        second: 0.1
       data:
         first:
           name: _OcclusionStrength
@@ -121,7 +121,7 @@ Material:
       data:
         first:
           name: _DetailNormalMapScale
-        second: .100000001
+        second: 0.1
       data:
         first:
           name: _UVSec
@@ -133,7 +133,7 @@ Material:
       data:
         first:
           name: _Metallic
-        second: .879000008
+        second: 0.879
     m_Colors:
       data:
         first:
@@ -146,4 +146,4 @@ Material:
       data:
         first:
           name: _SpecColor
-        second: {r: .362068951, g: .362068951, b: .362068951, a: 1}
+        second: {r: 0.36206895, g: 0.36206895, b: 0.36206895, a: 1}
