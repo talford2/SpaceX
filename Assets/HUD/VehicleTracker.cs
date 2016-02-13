@@ -14,6 +14,8 @@ public class VehicleTracker : Tracker
     public Targetable Targetable;
     public Killable Killable;
 
+    public float MaxDistance = 3000f;
+
 	public string CallSign;
 	public bool IsDisabled;
 
@@ -35,6 +37,7 @@ public class VehicleTracker : Tracker
 
 	private Targetable _targetable;
     private Killable _killable;
+    private float _maxDistanceSquared;
 	private bool _isLockedOn;
 
 	private void Awake()
@@ -48,6 +51,7 @@ public class VehicleTracker : Tracker
 
 	    _targetable = Targetable ?? GetComponent<Targetable>();
 	    _killable = Killable ?? GetComponent<Killable>();
+	    _maxDistanceSquared = MaxDistance*MaxDistance;
 
 	    _isLockedOn = false;
 	}
@@ -104,89 +108,99 @@ public class VehicleTracker : Tracker
 
 	public override void UpdateInstance()
 	{
-		if (IsDisabled)
-		{
-			_imageInstance.enabled = false;
-			_healthBarBackgroundInstance.enabled = false;
-			_healthBarInstance.enabled = false;
-		}
-		else
-		{
-			_imageInstance.enabled = true;
-			var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
-			if (screenPosition.z < 0f)
-			{
-				screenPosition *= -1f;
-				screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f)) * Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
-			}
-			screenPosition.z = 0f;
+        var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
+	    if (distanceSquared > _maxDistanceSquared)
+	    {
+	        _imageInstance.enabled = false;
+	        _healthBarBackgroundInstance.enabled = false;
+	        _healthBarInstance.enabled = false;
+	    }
+	    else
+	    {
+	        if (IsDisabled)
+	        {
+	            _imageInstance.enabled = false;
+	            _healthBarBackgroundInstance.enabled = false;
+	            _healthBarInstance.enabled = false;
+	        }
+	        else
+	        {
+	            _imageInstance.enabled = true;
+	            var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
+	            if (screenPosition.z < 0f)
+	            {
+	                screenPosition *= -1f;
+	                screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f))*Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+	            }
+	            screenPosition.z = 0f;
 
-			if (_screenBounds.Contains(screenPosition))
-			{
-				var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
-				var useSprite = _trackerSprite;
-				if (distanceSquared > 1000f * 1000f)
-				{
-					useSprite = _farTrackerSprite;
-					if (distanceSquared > 2000f * 2000f)
-					{
-						useSprite = _veryFarTrackerSprite;
-					}
-					_healthBarBackgroundInstance.enabled = false;
-					_healthBarInstance.enabled = false;
-				}
-				else
-				{
-					UpdateHealthBar();
-				}
-				// Locking
-				_isLockedOn = false;
-				var playerVehicle = PlayerController.Current.VehicleInstance;
-				if (playerVehicle != null)
-				{
-					if (playerVehicle.PrimaryWeaponInstance != null)
-					{
-						if (playerVehicle.PrimaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
-							useSprite = _lockingSprite;
-						if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
-							_isLockedOn = true;
-						if (_isLockedOn)
-							useSprite = _lockedSprite;
-					}
-					if (playerVehicle.SecondaryWeaponInstance != null)
-					{
-						if (playerVehicle.SecondaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
-							useSprite = _lockingSprite;
-						if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
-							_isLockedOn = true;
-						if (_isLockedOn)
-							useSprite = _lockedSprite;
-					}
-				}
-                // Dodgey method of colouring locking cursors white.
-			    if (useSprite == _lockingSprite || useSprite == _lockedSprite)
-			    {
-			        _imageInstance.color = Color.white;
-			    }
-			    else
-			    {
-                    _imageInstance.color = TrackerColor;
-                }
-				_imageInstance.sprite = useSprite;
+	            if (_screenBounds.Contains(screenPosition))
+	            {
 
-				_imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
-				_imageInstance.rectTransform.localRotation = Quaternion.identity;
-			}
-			else
-			{
-				_imageInstance.sprite = _arrowSprite;
-				_imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
-				_imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+	                var useSprite = _trackerSprite;
+	                if (distanceSquared > 1000f*1000f)
+	                {
+	                    useSprite = _farTrackerSprite;
+	                    if (distanceSquared > 2000f*2000f)
+	                    {
+	                        useSprite = _veryFarTrackerSprite;
+	                    }
+	                    _healthBarBackgroundInstance.enabled = false;
+	                    _healthBarInstance.enabled = false;
+	                }
+	                else
+	                {
+	                    UpdateHealthBar();
+	                }
+	                // Locking
+	                _isLockedOn = false;
+	                var playerVehicle = PlayerController.Current.VehicleInstance;
+	                if (playerVehicle != null)
+	                {
+	                    if (playerVehicle.PrimaryWeaponInstance != null)
+	                    {
+	                        if (playerVehicle.PrimaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
+	                            useSprite = _lockingSprite;
+	                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
+	                            _isLockedOn = true;
+	                        if (_isLockedOn)
+	                            useSprite = _lockedSprite;
+	                    }
+	                    if (playerVehicle.SecondaryWeaponInstance != null)
+	                    {
+	                        if (playerVehicle.SecondaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
+	                            useSprite = _lockingSprite;
+	                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
+	                            _isLockedOn = true;
+	                        if (_isLockedOn)
+	                            useSprite = _lockedSprite;
+	                    }
+	                }
+	                // Dodgey method of colouring locking cursors white.
+	                if (useSprite == _lockingSprite || useSprite == _lockedSprite)
+	                {
+	                    _imageInstance.color = Color.white;
+	                }
+	                else
+	                {
+	                    _imageInstance.color = TrackerColor;
+	                }
+	                _imageInstance.sprite = useSprite;
 
-				_healthBarBackgroundInstance.enabled = false;
-				_healthBarInstance.enabled = false;
-			}
-		}
+	                _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+	                _imageInstance.rectTransform.localRotation = Quaternion.identity;
+	            }
+	            else
+	            {
+	                _imageInstance.sprite = _arrowSprite;
+	                _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
+	                _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+
+	                _healthBarBackgroundInstance.enabled = false;
+	                _healthBarInstance.enabled = false;
+	            }
+	        }
+	    }
 	}
 
 	private void UpdateHealthBar()
