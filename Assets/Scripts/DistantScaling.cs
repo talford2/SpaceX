@@ -107,7 +107,7 @@ public class DistantScaling : MonoBehaviour
 		        }
 		    }
 		}
-
+        /*
 	    if (isDistant != lastIsDistant)
 	    {
 	        if (isDistant)
@@ -119,9 +119,10 @@ public class DistantScaling : MonoBehaviour
 	            ManageTargtables();
 	        }
 	    }
+        */
 	    lastIsDistant = isDistant;
 
-        ManageTargtables();
+        //ManageTargtables();
 	}
 
     private void ManageTargtables()
