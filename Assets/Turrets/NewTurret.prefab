@@ -183,7 +183,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 961.33905, y: 440.8409, z: 972.21045}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 439918}
@@ -384,11 +384,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowCursorImage: {fileID: 2800000, guid: 6d378ba77f480244ab315a1910910d5e, type: 3}
-  TrackerCursorImage: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
-  FarTrackerCursorImage: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612,
+  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012,
     type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03,
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4,
     type: 3}
   TrackerColor: {r: 1, g: 1, b: 1, a: 1}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c500da126aa939c429ebf252cb7c9d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {fileID: 494184}
+  TargetTransform: {fileID: 401638}
 --- !u!114 &11450328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -497,6 +497,22 @@ Prefab:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ArrowCursorImage
+      value: 
+      objectReference: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: TrackerCursorImage
+      value: 
+      objectReference: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+    - target: {fileID: 0}
+      propertyPath: FarTrackerCursorImage
+      value: 
+      objectReference: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
+    - target: {fileID: 0}
+      propertyPath: VeryFarTrackerCursorImage
+      value: 
+      objectReference: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 136444}

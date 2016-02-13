@@ -346,12 +346,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowCursorImage: {fileID: 2800000, guid: 6d378ba77f480244ab315a1910910d5e, type: 3}
-  TrackerCursorImage: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
-  FarTrackerCursorImage: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612,
+  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  FarTrackerCursorImage: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012,
     type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03,
+  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4,
     type: 3}
+  TrackerColor: {r: 1, g: 1, b: 1, a: 1}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   CallSign: 
@@ -391,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c500da126aa939c429ebf252cb7c9d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {fileID: 407434}
+  TargetTransform: {fileID: 405736}
 --- !u!114 &11454552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -421,6 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Team: 2
+  LockedOnBy: {fileID: 0}
 --- !u!114 &11472348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -441,6 +443,8 @@ MonoBehaviour:
   MaxTargetDistance: 1000
   MinPitch: 25
   MaxPitch: 300
+  MaxPitchSpeed: 360
+  MaxYawSpeed: 90
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
 --- !u!135 &13547558
@@ -557,19 +561,19 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ArrowCursorImage
       value: 
-      objectReference: {fileID: 2800000, guid: 6d378ba77f480244ab315a1910910d5e, type: 3}
+      objectReference: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
     - target: {fileID: 0}
       propertyPath: TrackerCursorImage
       value: 
-      objectReference: {fileID: 2800000, guid: 10c43a3295ca2ac4abd7dcc1d5f91f4d, type: 3}
+      objectReference: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
     - target: {fileID: 0}
       propertyPath: FarTrackerCursorImage
       value: 
-      objectReference: {fileID: 2800000, guid: 3398b9fb473315c449a64a410ec7b612, type: 3}
+      objectReference: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
     - target: {fileID: 0}
       propertyPath: VeryFarTrackerCursorImage
       value: 
-      objectReference: {fileID: 2800000, guid: 417a5f213d2bb8d4fac467c63a3eec03, type: 3}
+      objectReference: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4, type: 3}
     - target: {fileID: 0}
       propertyPath: LockingCursorImage
       value: 
@@ -582,6 +586,14 @@ Prefab:
       propertyPath: DieEffect
       value: 
       objectReference: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+    - target: {fileID: 0}
+      propertyPath: TargetTransform
+      value: 
+      objectReference: {fileID: 405736}
+    - target: {fileID: 0}
+      propertyPath: MaxPitchSpeed
+      value: 360
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 178200}
