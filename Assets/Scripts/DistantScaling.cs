@@ -18,6 +18,8 @@ public class DistantScaling : MonoBehaviour
     private bool isDistant;
     private bool lastIsDistant;
 
+    public GameObject DistantObject;
+    public GameObject NearObject;
     public List<Targetable> TargetableObjects;
     public List<Collider> ManagedColliders;
     public List<Detectable> ManagedDetectables;
@@ -47,8 +49,13 @@ public class DistantScaling : MonoBehaviour
 
 		if (toCamera.sqrMagnitude > _thresholdDistanceSquared)
 		{
-		    isDistant = true;
-			var distance = toCamera.magnitude;
+		    if (!isDistant)
+		    {
+                DistantObject.SetActive(true);
+                NearObject.SetActive(false);
+		        isDistant = true;
+		    }
+		    var distance = toCamera.magnitude;
 
 			// This will only be able to scale objects of a radius up to the _thresholdDistance.
 			// Keep the scaled object 1 unit in front of the camera!
@@ -71,8 +78,13 @@ public class DistantScaling : MonoBehaviour
 		}
 		else
 		{
-		    isDistant = false;
-			transform.localScale = new Vector3(1f, 1f, 1f);
+		    if (isDistant)
+		    {
+                DistantObject.SetActive(false);
+                NearObject.SetActive(true);
+                isDistant = false;
+		    }
+		    transform.localScale = new Vector3(1f, 1f, 1f);
 
 			// Crappy solution
 			foreach (var lineRenderer in LineRenderers)
