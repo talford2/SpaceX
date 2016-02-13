@@ -470,7 +470,7 @@ MonoBehaviour:
     type: 3}
   VeryFarTrackerCursorImage: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4,
     type: 3}
-  TrackerColor: {r: 1, g: 1, b: 1, a: 1}
+  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   CallSign: 
@@ -621,6 +621,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MaxPitchSpeed
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrackerColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrackerColor.b
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
