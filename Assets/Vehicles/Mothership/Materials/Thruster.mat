@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Thruster
-  m_Shader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
+  m_Shader: {fileID: 4800000, guid: ed86a3c6633a5024fa1b061581f76a08, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 3000
@@ -80,6 +80,13 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _ThrustTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 788e771b97aec844b9536d78121645e8, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _SpecGlossMap
         second:
           m_Texture: {fileID: 0}
@@ -138,6 +145,10 @@ Material:
         first:
           name: _EmissionScaleUI
         second: 0
+      data:
+        first:
+          name: _ScrollXSpeed
+        second: 30
     m_Colors:
       data:
         first:
@@ -146,7 +157,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 0.42745098}
+        second: {r: 1, g: 1, b: 1, a: 0}
       data:
         first:
           name: _SpecColor
