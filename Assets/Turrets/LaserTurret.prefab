@@ -368,30 +368,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head: {fileID: 198508}
   Guns: {fileID: 144866}
-  RecoilBarrels: []
+  RecoilBarrels:
+  - {fileID: 192908}
   WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
   ShootPoints:
   - {fileID: 11455984}
   MaxTargetDistance: 1000
-  RecoilDistance: 0.2
-  RecoilTime: 0.5
+  RecoilDistance: 0.4
+  RecoilTime: 0.3
   RecoilCurve:
     serializedVersion: 2
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 8.019723
-      outSlope: 8.019723
-      tangentMode: 0
-    - time: 0.3
+      inSlope: 4.8540425
+      outSlope: 8.806893
+      tangentMode: 1
+    - time: 0.19158879
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.0000016248908
+      outSlope: -0.0000016248908
       tangentMode: 0
     - time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.03864076
+      outSlope: -0.03864076
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -507,6 +508,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: RecoilBarrels.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: RecoilCurve.m_Curve.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -529,6 +534,62 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: RecoilCurve.m_RotationOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[1].time
+      value: 0.19158879
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[1].inSlope
+      value: -0.0000016248908
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[1].outSlope
+      value: -0.0000016248908
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[0].inSlope
+      value: 4.8540425
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[0].outSlope
+      value: 8.806893
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[0].tangentMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilDistance
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[2].inSlope
+      value: -0.03864076
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.data[2].outSlope
+      value: -0.03864076
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -42,6 +42,7 @@ public class Turret : MonoBehaviour
 	private float _pitch;
 
 	private List<float> _recoilCooldowns;
+	private List<Vector3> _barrelOffsets;
 
 	private void Awake()
 	{
@@ -59,15 +60,20 @@ public class Turret : MonoBehaviour
 		_weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
 		_weaponInstance.Initialize(gameObject, ShootPoints, _velocityReference, Targetable.Team);
 
-	    for (var i = 0; i < ShootPoints.Count; i++)
-	    {
-	        _recoilCooldowns.Add(0);
-	    }
-
-        _weaponInstance.OnShoot += (shootPointIndex) => {
-            _recoilCooldowns[shootPointIndex] = 0;
-        };
-    }
+		Debug.Log("Shout points: " + ShootPoints.Count);
+		_recoilCooldowns = new List<float>();
+		_barrelOffsets = new List<Vector3>();
+		for (var i = 0; i < ShootPoints.Count; i++)
+		{
+			_recoilCooldowns.Add(RecoilTime);
+			_barrelOffsets.Add(RecoilBarrels[i].transform.localPosition);
+		}
+		_weaponInstance.OnShoot += (shootPointIndex) =>
+		{
+			Debug.Log("SHOOT: " + shootPointIndex + " / " + _recoilCooldowns.Count + " / " + ShootPoints.Count);
+			_recoilCooldowns[shootPointIndex] = RecoilTime;
+		};
+	}
 
 	private void Update()
 	{
@@ -75,11 +81,10 @@ public class Turret : MonoBehaviour
 
 		for (var i = 0; i < _recoilCooldowns.Count; i++)
 		{
-			_recoilCooldowns[i] += Time.deltaTime;
-			_recoilCooldowns[i] = Mathf.Min(_recoilCooldowns[i], RecoilTime);
-			var frac = _recoilCooldowns[i] / RecoilTime;
-			RecoilBarrels[i].transform.localPosition = Vector3.forward * RecoilCurve.Evaluate(frac);
-
+			_recoilCooldowns[i] -= Time.deltaTime;
+			_recoilCooldowns[i] = Mathf.Max(_recoilCooldowns[i], 0);
+			var frac = 1 - _recoilCooldowns[i] / RecoilTime;
+			RecoilBarrels[i].transform.localPosition = _barrelOffsets[i] - Vector3.forward * RecoilCurve.Evaluate(frac);
 		}
 
 		if (_targetSearchCooldown >= 0f)
