@@ -136,23 +136,32 @@ public class Turret : MonoBehaviour
 			// Shooting
 			var toTarget = _target.position - shootPointsCentre;
 			var angleTo = Vector3.Angle(Guns.transform.forward, toTarget);
-			if (Mathf.Abs(angleTo) < AimTolerance)
-			{
-				_weaponInstance.SetAimAt(shootPointsCentre + Guns.transform.forward * MaxTargetDistance);
-				RaycastHit aimHit;
-				if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance))
-				{
-					var aimAtTargetable = aimHit.collider.GetComponentInParent<Targetable>();
-					if (aimAtTargetable != null)
-					{
-						if (Targetable.Team == aimAtTargetable.Team)
-						{
-							_weaponInstance.IsTriggered = false;
-						}
-					}
-				}
-				_weaponInstance.IsTriggered = true;
-			}
+		    var dontShoot = false;
+		    if (Mathf.Abs(angleTo) < AimTolerance)
+		    {
+		        _weaponInstance.SetAimAt(shootPointsCentre + Guns.transform.forward*MaxTargetDistance);
+		        RaycastHit aimHit;
+		        if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance))
+		        {
+		            var aimAtTargetable = aimHit.collider.GetComponentInParent<Targetable>();
+		            if (aimAtTargetable != null)
+		            {
+		                if (Targetable.Team == aimAtTargetable.Team)
+		                {
+		                    dontShoot = true;
+		                }
+		            }
+		            else
+		            {
+		                var mothership = aimHit.collider.GetComponentInParent<Mothership>();
+		                if (mothership != null)
+		                {
+		                    dontShoot = true;
+		                }
+		            }
+		        }
+		        _weaponInstance.IsTriggered = !dontShoot;
+		    }
 		}
 		else
 		{
