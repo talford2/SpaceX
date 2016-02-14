@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
 
 	public int MissilePoolCount = 20;
 
-	public delegate void OnShootEvent();
+	public delegate void OnShootEvent(int shootPointIndex);
 	public OnShootEvent OnShoot;
 
 	private int _curMissileIndex;
@@ -109,7 +109,7 @@ public class Weapon : MonoBehaviour
 	public void FireMissile(GameObject missile)
 	{
 		if (OnShoot != null)
-			OnShoot();
+			OnShoot(_shootPointIndex);
 
 		var _shootPoint = _shootPoints[_shootPointIndex];
 

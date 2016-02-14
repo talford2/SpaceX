@@ -178,7 +178,7 @@ public class Vehicle : MonoBehaviour
             _secondaryWeaponInstance.SetAimAt(aimAt);
     }
 
-    private void OnShoot()
+    private void OnShoot(int shootPointIndex)
 	{
 	}
 

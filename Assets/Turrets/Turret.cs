@@ -59,14 +59,15 @@ public class Turret : MonoBehaviour
 		_weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
 		_weaponInstance.Initialize(gameObject, ShootPoints, _velocityReference, Targetable.Team);
 
-		for(var i=0; i < ShootPoints.Count; i++)
-		{
-			_recoilCooldowns.Add(0);
-			//_weaponInstance.OnShoot += ... {
-			//	_recoilCooldowns[i] = 0;
-			//}
-		}
-	}
+	    for (var i = 0; i < ShootPoints.Count; i++)
+	    {
+	        _recoilCooldowns.Add(0);
+	    }
+
+        _weaponInstance.OnShoot += (shootPointIndex) => {
+            _recoilCooldowns[shootPointIndex] = 0;
+        };
+    }
 
 	private void Update()
 	{
