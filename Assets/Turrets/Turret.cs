@@ -6,10 +6,15 @@ public class Turret : MonoBehaviour
 	[Header("Parts")]
 	public GameObject Head;
 	public GameObject Guns;
+	public List<GameObject> RecoilBarrels;
 
 	public Weapon WeaponPrefab;
 	public List<ShootPoint> ShootPoints;
 	public float MaxTargetDistance;
+
+	public float RecoilDistance = 0.2f;
+	public float RecoilTime = 0.5f;
+	public AnimationCurve RecoilCurve;
 
 	[Header("Turning")]
 	public float MinPitch;
@@ -36,11 +41,14 @@ public class Turret : MonoBehaviour
 	private float _yaw;
 	private float _pitch;
 
+	private List<float> _recoilCooldowns;
+
 	private void Awake()
 	{
 		foreach (var shootPoint in ShootPoints)
 		{
 			shootPoint.Initialize();
+			_recoilCooldowns.Add(0);
 		}
 
 		_velocityReference = new VelocityReference(Vector3.zero);
@@ -56,6 +64,14 @@ public class Turret : MonoBehaviour
 	private void Update()
 	{
 		var shootPointsCentre = _weaponInstance.GetShootPointCentre();
+
+		for (var i = 0; i < _recoilCooldowns.Count; i++)
+		{
+			_recoilCooldowns[i] += Time.deltaTime;
+			_recoilCooldowns[i] = Mathf.Min(_recoilCooldowns[i], RecoilTime);
+			var frac = _recoilCooldowns[i] / RecoilTime;
+			RecoilBarrels[i].transform.localPosition = Vector3.forward * RecoilCurve.Evaluate(frac);
+		}
 
 		if (_targetSearchCooldown >= 0f)
 		{

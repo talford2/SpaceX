@@ -368,10 +368,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head: {fileID: 198508}
   Guns: {fileID: 144866}
+  RecoilBarrels: []
   WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
   ShootPoints:
   - {fileID: 11455984}
   MaxTargetDistance: 1000
+  RecoilDistance: 0.2
+  RecoilTime: 0.5
+  RecoilCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 8.019723
+      outSlope: 8.019723
+      tangentMode: 0
+    - time: 0.3
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   MinPitch: 50
   MaxPitch: 270
   MaxPitchSpeed: 360
@@ -483,6 +507,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -497,6 +525,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
