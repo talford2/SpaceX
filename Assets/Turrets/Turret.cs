@@ -48,7 +48,6 @@ public class Turret : MonoBehaviour
 		foreach (var shootPoint in ShootPoints)
 		{
 			shootPoint.Initialize();
-			_recoilCooldowns.Add(0);
 		}
 
 		_velocityReference = new VelocityReference(Vector3.zero);
@@ -59,6 +58,14 @@ public class Turret : MonoBehaviour
 
 		_weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
 		_weaponInstance.Initialize(gameObject, ShootPoints, _velocityReference, Targetable.Team);
+
+		for(var i=0; i < ShootPoints.Count; i++)
+		{
+			_recoilCooldowns.Add(0);
+			//_weaponInstance.OnShoot += ... {
+			//	_recoilCooldowns[i] = 0;
+			//}
+		}
 	}
 
 	private void Update()
@@ -71,6 +78,7 @@ public class Turret : MonoBehaviour
 			_recoilCooldowns[i] = Mathf.Min(_recoilCooldowns[i], RecoilTime);
 			var frac = _recoilCooldowns[i] / RecoilTime;
 			RecoilBarrels[i].transform.localPosition = Vector3.forward * RecoilCurve.Evaluate(frac);
+
 		}
 
 		if (_targetSearchCooldown >= 0f)
@@ -136,32 +144,32 @@ public class Turret : MonoBehaviour
 			// Shooting
 			var toTarget = _target.position - shootPointsCentre;
 			var angleTo = Vector3.Angle(Guns.transform.forward, toTarget);
-		    var dontShoot = false;
-		    if (Mathf.Abs(angleTo) < AimTolerance)
-		    {
-		        _weaponInstance.SetAimAt(shootPointsCentre + Guns.transform.forward*MaxTargetDistance);
-		        RaycastHit aimHit;
-		        if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance))
-		        {
-		            var aimAtTargetable = aimHit.collider.GetComponentInParent<Targetable>();
-		            if (aimAtTargetable != null)
-		            {
-		                if (Targetable.Team == aimAtTargetable.Team)
-		                {
-		                    dontShoot = true;
-		                }
-		            }
-		            else
-		            {
-		                var mothership = aimHit.collider.GetComponentInParent<Mothership>();
-		                if (mothership != null)
-		                {
-		                    dontShoot = true;
-		                }
-		            }
-		        }
-		        _weaponInstance.IsTriggered = !dontShoot;
-		    }
+			var dontShoot = false;
+			if (Mathf.Abs(angleTo) < AimTolerance)
+			{
+				_weaponInstance.SetAimAt(shootPointsCentre + Guns.transform.forward * MaxTargetDistance);
+				RaycastHit aimHit;
+				if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance))
+				{
+					var aimAtTargetable = aimHit.collider.GetComponentInParent<Targetable>();
+					if (aimAtTargetable != null)
+					{
+						if (Targetable.Team == aimAtTargetable.Team)
+						{
+							dontShoot = true;
+						}
+					}
+					else
+					{
+						var mothership = aimHit.collider.GetComponentInParent<Mothership>();
+						if (mothership != null)
+						{
+							dontShoot = true;
+						}
+					}
+				}
+				_weaponInstance.IsTriggered = !dontShoot;
+			}
 		}
 		else
 		{
