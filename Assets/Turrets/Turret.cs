@@ -82,7 +82,7 @@ public class Turret : MonoBehaviour
 			_recoilCooldowns[i] -= Time.deltaTime;
 			_recoilCooldowns[i] = Mathf.Max(_recoilCooldowns[i], 0);
 			var frac = 1 - _recoilCooldowns[i] / RecoilTime;
-			RecoilBarrels[i].localPosition = _barrelOffsets[i] - Vector3.forward * RecoilCurve.Evaluate(frac);
+			RecoilBarrels[i].localPosition = _barrelOffsets[i] - Vector3.forward * RecoilCurve.Evaluate(frac) * RecoilDistance;
 		}
 
 		if (_targetSearchCooldown >= 0f)

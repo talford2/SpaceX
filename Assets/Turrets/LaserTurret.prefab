@@ -398,7 +398,7 @@ MonoBehaviour:
   ShootPoints:
   - {fileID: 11438764}
   MaxTargetDistance: 1000
-  RecoilDistance: 0.2
+  RecoilDistance: 0.4
   RecoilTime: 0.5
   RecoilCurve:
     serializedVersion: 2
@@ -533,6 +533,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_CastShadows
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RecoilDistance
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
