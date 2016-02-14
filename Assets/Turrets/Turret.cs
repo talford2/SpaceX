@@ -59,8 +59,7 @@ public class Turret : MonoBehaviour
 
 		_weaponInstance = Utility.InstantiateInParent(WeaponPrefab.gameObject, transform).GetComponent<Weapon>();
 		_weaponInstance.Initialize(gameObject, ShootPoints, _velocityReference, Targetable.Team);
-
-		Debug.Log("Shout points: " + ShootPoints.Count);
+		
 		_recoilCooldowns = new List<float>();
 		_barrelOffsets = new List<Vector3>();
 		for (var i = 0; i < ShootPoints.Count; i++)
@@ -70,7 +69,6 @@ public class Turret : MonoBehaviour
 		}
 		_weaponInstance.OnShoot += (shootPointIndex) =>
 		{
-			Debug.Log("SHOOT: " + shootPointIndex + " / " + _recoilCooldowns.Count + " / " + ShootPoints.Count);
 			_recoilCooldowns[shootPointIndex] = RecoilTime;
 		};
 	}
