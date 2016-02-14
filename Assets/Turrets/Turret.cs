@@ -48,7 +48,7 @@ public class Turret : MonoBehaviour
 	{
 		foreach (var shootPoint in ShootPoints)
 		{
-			shootPoint.Initialize();
+			shootPoint.Initialize(WeaponPrefab.MuzzlePrefab);
 		}
 
 		_velocityReference = new VelocityReference(Vector3.zero);

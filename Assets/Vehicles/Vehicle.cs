@@ -127,11 +127,11 @@ public class Vehicle : MonoBehaviour
 
 		foreach (var shootPoint in PrimaryShootPoints)
 		{
-			shootPoint.Initialize();
+			shootPoint.Initialize(PrimaryWeaponPrefab.MuzzlePrefab);
 		}
 		foreach (var shootPoint in SecondaryShootPoints)
 		{
-			shootPoint.Initialize();
+			shootPoint.Initialize(SecondaryWeaponPrefab.MuzzlePrefab);
 		}
 
 		_velocityReference = new VelocityReference(_velocity);

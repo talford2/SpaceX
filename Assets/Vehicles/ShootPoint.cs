@@ -2,13 +2,11 @@
 
 public class ShootPoint : MonoBehaviour
 {
-    public MuzzleFlash MuzzlePrefab;
-
     private MuzzleFlash _muzzleInstance;
 
-    public void Initialize()
+    public void Initialize(MuzzleFlash muzzlePrefab)
     {
-        _muzzleInstance = Utility.InstantiateInParent(MuzzlePrefab.gameObject, transform).GetComponent<MuzzleFlash>();
+        _muzzleInstance = Utility.InstantiateInParent(muzzlePrefab.gameObject, transform).GetComponent<MuzzleFlash>();
     }
 
     public void Flash()
