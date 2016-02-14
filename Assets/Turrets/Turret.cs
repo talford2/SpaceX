@@ -6,7 +6,7 @@ public class Turret : MonoBehaviour
 	[Header("Parts")]
 	public GameObject Head;
 	public GameObject Guns;
-	public List<GameObject> RecoilBarrels;
+	public List<Transform> RecoilBarrels;
 
 	public Weapon WeaponPrefab;
 	public List<ShootPoint> ShootPoints;
@@ -65,7 +65,7 @@ public class Turret : MonoBehaviour
 		for (var i = 0; i < ShootPoints.Count; i++)
 		{
 			_recoilCooldowns.Add(RecoilTime);
-			_barrelOffsets.Add(RecoilBarrels[i].transform.localPosition);
+			_barrelOffsets.Add(RecoilBarrels[i].localPosition);
 		}
 		_weaponInstance.OnShoot += (shootPointIndex) =>
 		{
@@ -82,7 +82,7 @@ public class Turret : MonoBehaviour
 			_recoilCooldowns[i] -= Time.deltaTime;
 			_recoilCooldowns[i] = Mathf.Max(_recoilCooldowns[i], 0);
 			var frac = 1 - _recoilCooldowns[i] / RecoilTime;
-			RecoilBarrels[i].transform.localPosition = _barrelOffsets[i] - Vector3.forward * RecoilCurve.Evaluate(frac);
+			RecoilBarrels[i].localPosition = _barrelOffsets[i] - Vector3.forward * RecoilCurve.Evaluate(frac);
 		}
 
 		if (_targetSearchCooldown >= 0f)

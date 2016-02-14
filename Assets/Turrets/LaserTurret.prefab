@@ -392,7 +392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head: {fileID: 148000}
   Guns: {fileID: 178440}
-  RecoilBarrels: []
+  RecoilBarrels:
+  - {fileID: 491976}
   WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
   ShootPoints:
   - {fileID: 11438764}
