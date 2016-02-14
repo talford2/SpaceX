@@ -372,8 +372,8 @@ MonoBehaviour:
   ShootPoints:
   - {fileID: 11455984}
   MaxTargetDistance: 1000
-  MinPitch: 25
-  MaxPitch: 300
+  MinPitch: 50
+  MaxPitch: 270
   MaxPitchSpeed: 360
   MaxYawSpeed: 180
   AimTolerance: 5
