@@ -102,6 +102,8 @@ public class Vehicle : MonoBehaviour
 	public Weapon PrimaryWeaponInstance { get { return _primaryWeaponInstance; } }
 	public Weapon SecondaryWeaponInstance { get { return _secondaryWeaponInstance; } }
 
+    public bool IgnoreCollisions;
+
 	public Shiftable Shiftable
 	{
 		get
@@ -182,150 +184,151 @@ public class Vehicle : MonoBehaviour
 	{
 	}
 
-	private void Update()
-	{
-		var acceleration = 0f;
+    private void Update()
+    {
+        var acceleration = 0f;
 
-		if (!TriggerBoost)
-		{
-			// Accelerating
-			if (TriggerAccelerate && CurrentSpeed < MaxSpeed)
-			{
-				acceleration = Acceleration;
-				CurrentSpeed += Acceleration * Time.deltaTime;
-				CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
-			}
+        if (!TriggerBoost)
+        {
+            // Accelerating
+            if (TriggerAccelerate && CurrentSpeed < MaxSpeed)
+            {
+                acceleration = Acceleration;
+                CurrentSpeed += Acceleration*Time.deltaTime;
+                CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
+            }
 
-			// Braking
-			if (TriggerBrake && CurrentSpeed > MinSpeed)
-			{
-				acceleration = -Brake;
-				CurrentSpeed -= Brake * Time.deltaTime;
-				CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
-			}
+            // Braking
+            if (TriggerBrake && CurrentSpeed > MinSpeed)
+            {
+                acceleration = -Brake;
+                CurrentSpeed -= Brake*Time.deltaTime;
+                CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
+            }
 
-			_allowBoost = true;
-		}
+            _allowBoost = true;
+        }
 
-		// Restore boost energy
-		if (_boostEnergyCooldown > 0f)
-		{
-			_boostEnergyCooldown -= Time.deltaTime;
-			if (_boostEnergyCooldown < 0f)
-			{
-				_boostRegenerate = true;
-			}
-		}
+        // Restore boost energy
+        if (_boostEnergyCooldown > 0f)
+        {
+            _boostEnergyCooldown -= Time.deltaTime;
+            if (_boostEnergyCooldown < 0f)
+            {
+                _boostRegenerate = true;
+            }
+        }
 
-		if (_boostRegenerate)
-		{
-			if (BoostEnergy < MaxBoostEnergy)
-			{
-				BoostEnergy += BoostEnergyRegenerateRate * Time.deltaTime;
-				if (BoostEnergy > MaxBoostEnergy)
-					BoostEnergy = MaxBoostEnergy;
-			}
-		}
+        if (_boostRegenerate)
+        {
+            if (BoostEnergy < MaxBoostEnergy)
+            {
+                BoostEnergy += BoostEnergyRegenerateRate*Time.deltaTime;
+                if (BoostEnergy > MaxBoostEnergy)
+                    BoostEnergy = MaxBoostEnergy;
+            }
+        }
 
-		// Boosting
-		if (TriggerBoost)
-		{
-			if (_allowBoost && BoostEnergy > 0f)
-			{
-				if (CurrentSpeed < MaxBoostSpeed)
-				{
-					acceleration = BoostAcceleration;
-					CurrentSpeed += BoostAcceleration * Time.deltaTime;
-					CurrentSpeed = Mathf.Min(CurrentSpeed, MaxBoostSpeed);
-				}
-				BoostEnergy -= BoostCost * Time.deltaTime;
-				if (BoostEnergy < 0f)
-				{
-					BoostEnergy = 0f;
-					_allowBoost = false;
-				}
-				_boostRegenerate = false;
-				_boostEnergyCooldown = BoostEnergyRegenerateDelay;
-			}
-			if (!BoostSound.isPlaying)
-			{
-				BoostSound.Play();
-			}
-		}
+        // Boosting
+        if (TriggerBoost)
+        {
+            if (_allowBoost && BoostEnergy > 0f)
+            {
+                if (CurrentSpeed < MaxBoostSpeed)
+                {
+                    acceleration = BoostAcceleration;
+                    CurrentSpeed += BoostAcceleration*Time.deltaTime;
+                    CurrentSpeed = Mathf.Min(CurrentSpeed, MaxBoostSpeed);
+                }
+                BoostEnergy -= BoostCost*Time.deltaTime;
+                if (BoostEnergy < 0f)
+                {
+                    BoostEnergy = 0f;
+                    _allowBoost = false;
+                }
+                _boostRegenerate = false;
+                _boostEnergyCooldown = BoostEnergyRegenerateDelay;
+            }
+            if (!BoostSound.isPlaying)
+            {
+                BoostSound.Play();
+            }
+        }
 
-		if (!IsBoosting)
-		{
-			if (CurrentSpeed > MaxSpeed)
-			{
-				CurrentSpeed -= BoostBrake * Time.deltaTime;
-			}
-			BoostSound.Stop();
-		}
+        if (!IsBoosting)
+        {
+            if (CurrentSpeed > MaxSpeed)
+            {
+                CurrentSpeed -= BoostBrake*Time.deltaTime;
+            }
+            BoostSound.Stop();
+        }
 
-		// Idling
-		if (!IsAccelerating && !IsBraking && !IsBoosting)
-		{
-			if (CurrentSpeed > IdleSpeed)
-			{
-				acceleration = -Brake;
-				CurrentSpeed -= Brake * Time.deltaTime;
-				CurrentSpeed = Mathf.Max(IdleSpeed, CurrentSpeed);
-			}
+        // Idling
+        if (!IsAccelerating && !IsBraking && !IsBoosting)
+        {
+            if (CurrentSpeed > IdleSpeed)
+            {
+                acceleration = -Brake;
+                CurrentSpeed -= Brake*Time.deltaTime;
+                CurrentSpeed = Mathf.Max(IdleSpeed, CurrentSpeed);
+            }
 
-			if (CurrentSpeed < IdleSpeed)
-			{
-				acceleration = Acceleration;
-				CurrentSpeed += Acceleration * Time.deltaTime;
-				CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
-			}
-		}
+            if (CurrentSpeed < IdleSpeed)
+            {
+                acceleration = Acceleration;
+                CurrentSpeed += Acceleration*Time.deltaTime;
+                CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
+            }
+        }
 
-		_rollSpeed += RollAcceleration * Mathf.Clamp(RollThrottle, -1, 1) * Time.deltaTime;
+        _rollSpeed += RollAcceleration*Mathf.Clamp(RollThrottle, -1, 1)*Time.deltaTime;
 
-		if (Mathf.Abs(RollThrottle) < 0.01f)
-		{
-			_rollSpeed = Mathf.Lerp(_rollSpeed, 0f, 10f * Time.deltaTime);
-		}
+        if (Mathf.Abs(RollThrottle) < 0.01f)
+        {
+            _rollSpeed = Mathf.Lerp(_rollSpeed, 0f, 10f*Time.deltaTime);
+        }
 
-		// Turning
-		var dYaw = YawThrottle * YawSpeed;
-		var dPitch = PitchThotttle * PitchSpeed;
-		var dRoll = -Mathf.Clamp(_rollSpeed, -MaxRollSpeed, MaxRollSpeed) * Time.deltaTime;
+        // Turning
+        var dYaw = YawThrottle*YawSpeed;
+        var dPitch = PitchThotttle*PitchSpeed;
+        var dRoll = -Mathf.Clamp(_rollSpeed, -MaxRollSpeed, MaxRollSpeed)*Time.deltaTime;
 
-		_targetRotation *= Quaternion.Euler(dPitch, dYaw, dRoll);
+        _targetRotation *= Quaternion.Euler(dPitch, dYaw, dRoll);
 
-		transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, 20f * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, 20f*Time.deltaTime);
 
-		_velocity = transform.forward * CurrentSpeed;
+        _velocity = transform.forward*CurrentSpeed;
 
-        UpdateVelocityFromCollisions();
+        if (!IgnoreCollisions)
+            UpdateVelocityFromCollisions();
 
         _velocityReference.Value = _velocity;
-		_shiftable.Translate(_velocity * Time.deltaTime);
+        _shiftable.Translate(_velocity*Time.deltaTime);
 
-		var thrustAmount = acceleration / MaxSpeed;
+        var thrustAmount = acceleration/MaxSpeed;
 
-		if (IsBoosting)
-		{
-			thrustAmount = 1f;
-		}
-		else
-		{
-			if (IsAccelerating)
-			{
-				thrustAmount = 0.08f;
-			}
-			if (IsBraking)
-			{
-				thrustAmount = 0f;
-			}
-		}
-		if (!IsBoosting && !IsAccelerating && !IsBraking)
-		{
-			thrustAmount = 0.02f;
-		}
+        if (IsBoosting)
+        {
+            thrustAmount = 1f;
+        }
+        else
+        {
+            if (IsAccelerating)
+            {
+                thrustAmount = 0.08f;
+            }
+            if (IsBraking)
+            {
+                thrustAmount = 0f;
+            }
+        }
+        if (!IsBoosting && !IsAccelerating && !IsBraking)
+        {
+            thrustAmount = 0.02f;
+        }
 
-		// Reduce flare brightness over distance from camera
+        // Reduce flare brightness over distance from camera
         /*
 		foreach (var thruster in Thrusters)
 		{
@@ -333,7 +336,7 @@ public class Vehicle : MonoBehaviour
 			thruster.UpdateFlare();
 		}
         */
-	}
+    }
 
     private void UpdateVelocityFromCollisions()
     {
@@ -343,6 +346,7 @@ public class Vehicle : MonoBehaviour
         {
             var projVel = Vector3.Project(_velocity, moveHit.normal);
             _velocity -= projVel;
+            Debug.Log("CUNT FUCK FROM: " + moveHit.collider.name);
         }
     }
 
