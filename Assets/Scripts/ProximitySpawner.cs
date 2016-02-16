@@ -5,7 +5,7 @@ public class ProximitySpawner : MonoBehaviour
     public Fighter FighterPrefab;
     public float Radius = 2000f;
     public float Interval = 20f;
-    public Shiftable Shiftable;
+    public Transform PathPoint;
 
     private float _radiusSquared;
     private float _intervalCooldown;
@@ -40,5 +40,9 @@ public class ProximitySpawner : MonoBehaviour
     {
         var fighterInst = Instantiate(FighterPrefab);
         fighterInst.SpawnVehicle(fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position), transform.rotation);
+        if (PathPoint != null)
+        {
+            fighterInst.SetPath(Universe.Current.GetUniversePosition(PathPoint.position));
+        }
     }
 }

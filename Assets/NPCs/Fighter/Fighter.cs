@@ -56,6 +56,8 @@ public class Fighter : Npc<Fighter>
     public FighterSteering Steering { get; set; }
     public Action<Transform> OnVehicleDamage;
 
+    public UniversePosition PathDestination;
+
     private void Awake()
     {
         //_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
@@ -84,6 +86,12 @@ public class Fighter : Npc<Fighter>
             SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)), Quaternion.identity);
             _vehicleInstance.GetComponent<VehicleTracker>().enabled = false;
         }
+    }
+
+    public void SetPath(UniversePosition destPosition)
+    {
+        PathDestination = destPosition;
+        State = new FighterPath(this);
     }
 
     private void Update()
