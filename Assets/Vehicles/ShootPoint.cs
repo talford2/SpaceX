@@ -13,4 +13,10 @@ public class ShootPoint : MonoBehaviour
     {
         _muzzleInstance.Flash();
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, 0.05f);
+    }
 }
