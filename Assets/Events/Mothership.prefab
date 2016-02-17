@@ -740,7 +740,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 459032}
-  - 114: {fileID: 11418400}
   m_Layer: 0
   m_Name: PathDestination (5)
   m_TagString: Untagged
@@ -756,7 +755,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 449742}
-  - 114: {fileID: 11460266}
   m_Layer: 0
   m_Name: PathDestination (3)
   m_TagString: Untagged
@@ -967,7 +965,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 487154}
-  - 114: {fileID: 11431966}
   m_Layer: 0
   m_Name: PathDestination (4)
   m_TagString: Untagged
@@ -3993,6 +3990,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 60
+  MaxLiveCount: 2
   PathPoint: {fileID: 459032}
 --- !u!114 &11412562
 MonoBehaviour:
@@ -4103,22 +4101,8 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 60
+  MaxLiveCount: 2
   PathPoint: {fileID: 440398}
---- !u!114 &11418400
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46d13cc19701ca84cae0379f2a1e18e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
-  Radius: 2000
-  Interval: 20
-  PathPoint: {fileID: 0}
 --- !u!114 &11419120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4190,21 +4174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttachedSpawner: {fileID: 11468152}
---- !u!114 &11431966
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 169424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46d13cc19701ca84cae0379f2a1e18e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
-  Radius: 2000
-  Interval: 20
-  PathPoint: {fileID: 0}
 --- !u!114 &11432592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4219,6 +4188,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 60
+  MaxLiveCount: 2
   PathPoint: {fileID: 443832}
 --- !u!114 &11435192
 MonoBehaviour:
@@ -4373,6 +4343,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 60
+  MaxLiveCount: 2
   PathPoint: {fileID: 449742}
 --- !u!114 &11450942
 MonoBehaviour:
@@ -4470,21 +4441,6 @@ MonoBehaviour:
   DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
---- !u!114 &11460266
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46d13cc19701ca84cae0379f2a1e18e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
-  Radius: 2000
-  Interval: 20
-  PathPoint: {fileID: 0}
 --- !u!114 &11468152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4499,6 +4455,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 60
+  MaxLiveCount: 2
   PathPoint: {fileID: 487154}
 --- !u!114 &11474308
 MonoBehaviour:
@@ -4552,6 +4509,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 60
+  MaxLiveCount: 2
   PathPoint: {fileID: 461550}
 --- !u!114 &11489946
 MonoBehaviour:
