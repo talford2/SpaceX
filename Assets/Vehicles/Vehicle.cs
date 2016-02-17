@@ -346,7 +346,6 @@ public class Vehicle : MonoBehaviour
         {
             var projVel = Vector3.Project(_velocity, moveHit.normal);
             _velocity -= projVel;
-            Debug.Log("CUNT FUCK FROM: " + moveHit.collider.name);
         }
     }
 

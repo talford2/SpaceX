@@ -3993,7 +3993,6 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 20
-  Shiftable: {fileID: 11436692}
   PathPoint: {fileID: 459032}
 --- !u!114 &11412562
 MonoBehaviour:
@@ -4082,6 +4081,14 @@ MonoBehaviour:
   - {fileID: 484430}
   - {fileID: 408910}
   - {fileID: 492828}
+  BayTransforms:
+  - {fileID: 436130}
+  - {fileID: 425046}
+  - {fileID: 448094}
+  - {fileID: 458820}
+  - {fileID: 420066}
+  - {fileID: 406548}
+  Killables: []
 --- !u!114 &11417570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4096,7 +4103,6 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 20
-  Shiftable: {fileID: 11436692}
   PathPoint: {fileID: 440398}
 --- !u!114 &11418400
 MonoBehaviour:
@@ -4112,7 +4118,6 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 20
-  Shiftable: {fileID: 11436692}
   PathPoint: {fileID: 0}
 --- !u!114 &11419120
 MonoBehaviour:
@@ -4199,7 +4204,6 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 20
-  Shiftable: {fileID: 11436692}
   PathPoint: {fileID: 0}
 --- !u!114 &11432592
 MonoBehaviour:
@@ -4215,7 +4219,6 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 20
-  Shiftable: {fileID: 11436692}
   PathPoint: {fileID: 443832}
 --- !u!114 &11435192
 MonoBehaviour:
@@ -4370,7 +4373,6 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 20
-  Shiftable: {fileID: 11436692}
   PathPoint: {fileID: 449742}
 --- !u!114 &11450942
 MonoBehaviour:
@@ -4482,7 +4484,6 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 20
-  Shiftable: {fileID: 11436692}
   PathPoint: {fileID: 0}
 --- !u!114 &11468152
 MonoBehaviour:
@@ -4498,7 +4499,6 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 20
-  Shiftable: {fileID: 11436692}
   PathPoint: {fileID: 487154}
 --- !u!114 &11474308
 MonoBehaviour:
@@ -4552,7 +4552,6 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 20
-  Shiftable: {fileID: 11436692}
   PathPoint: {fileID: 461550}
 --- !u!114 &11489946
 MonoBehaviour:
