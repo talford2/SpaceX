@@ -6,9 +6,10 @@ public class Mothership : MonoBehaviour
     public GameObject TurretPrefab;
     public List<Transform> TurretTransforms;
     public List<Transform> BayTransforms;
-    public List<Killable> Killables;
+    public MapPin MapPin;
 
     private int _liveCount;
+    private List<Killable> _killables;
 
     private void Start()
     {
@@ -16,14 +17,14 @@ public class Mothership : MonoBehaviour
         {
             var turret = (GameObject)Instantiate(TurretPrefab, turretTransform.position, turretTransform.rotation);
             turret.transform.SetParent(turretTransform);
-            Killables.Add(turret.GetComponent<Killable>());
+            _killables.Add(turret.GetComponent<Killable>());
         }
         foreach (var bayTransform in BayTransforms)
         {
-            Killables.Add(bayTransform.GetComponent<Killable>());
+            _killables.Add(bayTransform.GetComponent<Killable>());
         }
-        _liveCount = Killables.Count;
-        foreach (var killable in Killables)
+        _liveCount = _killables.Count;
+        foreach (var killable in _killables)
         {
             killable.OnDie += OnKill;
         }
@@ -36,6 +37,7 @@ public class Mothership : MonoBehaviour
         if (_liveCount <= 0)
         {
             Debug.Log("MOTHERSHIP DESTROYED!!!");
+            MapPin.SetPinState(MapPin.MapPinState.Inactive);
         }
     }
 }

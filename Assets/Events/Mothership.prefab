@@ -4088,6 +4088,7 @@ MonoBehaviour:
   - {fileID: 458820}
   - {fileID: 420066}
   - {fileID: 406548}
+  MapPin: {fileID: 11453700}
   Killables: []
 --- !u!114 &11417570
 MonoBehaviour:
@@ -4678,6 +4679,10 @@ Prefab:
       propertyPath: TurretPrefab
       value: 
       objectReference: {fileID: 126262, guid: 34c7ddf5ad4ced042a2748f17c0f4edb, type: 2}
+    - target: {fileID: 0}
+      propertyPath: MapPin
+      value: 
+      objectReference: {fileID: 11453700}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194116}
