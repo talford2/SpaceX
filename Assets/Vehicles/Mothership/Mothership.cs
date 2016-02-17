@@ -13,6 +13,7 @@ public class Mothership : MonoBehaviour
 
     private void Start()
     {
+        _killables = new List<Killable>();
         foreach (var turretTransform in TurretTransforms)
         {
             var turret = (GameObject)Instantiate(TurretPrefab, turretTransform.position, turretTransform.rotation);
