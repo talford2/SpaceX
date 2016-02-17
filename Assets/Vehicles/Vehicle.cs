@@ -341,11 +341,13 @@ public class Vehicle : MonoBehaviour
     private void UpdateVelocityFromCollisions()
     {
         var moveRay = new Ray(transform.position + CollisionsCentre, _velocity);
-        var moveHits = Physics.SphereCastAll(moveRay, CollisionRadius, _velocity.magnitude * Time.deltaTime, LayerMask.GetMask("Environment"));
+        var moveHits = Physics.SphereCastAll(moveRay, CollisionRadius, _velocity.magnitude*Time.deltaTime, LayerMask.GetMask("Environment"));
         foreach (var moveHit in moveHits)
         {
             var projVel = Vector3.Project(_velocity, moveHit.normal);
-            _velocity -= projVel;
+
+            if ((moveHit.point - Vector3.zero).sqrMagnitude > 0.00001f)
+                _velocity -= projVel;
         }
     }
 
