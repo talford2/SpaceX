@@ -2,10 +2,11 @@
 
 public class MothershipBay : MonoBehaviour
 {
-    public ProximitySpawner AttachedSpanwer;
+    public ProximitySpawner AttachedSpawner;
 
     private void OnDestroy()
     {
-        Destroy(AttachedSpanwer.gameObject);
+        Debug.Log("DESTROY: " + AttachedSpawner.name + "!");
+        Destroy(AttachedSpawner.gameObject);
     }
 }

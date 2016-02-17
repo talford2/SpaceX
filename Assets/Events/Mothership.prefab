@@ -3919,7 +3919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5178d953b55a4846932ca82790f1b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttachedSpanwer: {fileID: 11417570}
+  AttachedSpawner: {fileID: 11417570}
 --- !u!114 &11401320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3992,7 +3992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 20
+  Interval: 60
   PathPoint: {fileID: 459032}
 --- !u!114 &11412562
 MonoBehaviour:
@@ -4089,7 +4089,6 @@ MonoBehaviour:
   - {fileID: 420066}
   - {fileID: 406548}
   MapPin: {fileID: 11453700}
-  Killables: []
 --- !u!114 &11417570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4103,7 +4102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 20
+  Interval: 60
   PathPoint: {fileID: 440398}
 --- !u!114 &11418400
 MonoBehaviour:
@@ -4165,7 +4164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5178d953b55a4846932ca82790f1b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttachedSpanwer: {fileID: 11449372}
+  AttachedSpawner: {fileID: 11449372}
 --- !u!114 &11424952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4190,7 +4189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5178d953b55a4846932ca82790f1b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttachedSpanwer: {fileID: 11468152}
+  AttachedSpawner: {fileID: 11468152}
 --- !u!114 &11431966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4219,7 +4218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 20
+  Interval: 60
   PathPoint: {fileID: 443832}
 --- !u!114 &11435192
 MonoBehaviour:
@@ -4373,7 +4372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 20
+  Interval: 60
   PathPoint: {fileID: 449742}
 --- !u!114 &11450942
 MonoBehaviour:
@@ -4453,7 +4452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5178d953b55a4846932ca82790f1b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttachedSpanwer: {fileID: 11412030}
+  AttachedSpawner: {fileID: 11412030}
 --- !u!114 &11457458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4499,7 +4498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 20
+  Interval: 60
   PathPoint: {fileID: 487154}
 --- !u!114 &11474308
 MonoBehaviour:
@@ -4552,7 +4551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 20
+  Interval: 60
   PathPoint: {fileID: 461550}
 --- !u!114 &11489946
 MonoBehaviour:
@@ -4565,7 +4564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5178d953b55a4846932ca82790f1b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttachedSpanwer: {fileID: 11482602}
+  AttachedSpawner: {fileID: 11482602}
 --- !u!114 &11498834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4577,7 +4576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5178d953b55a4846932ca82790f1b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttachedSpanwer: {fileID: 11432592}
+  AttachedSpawner: {fileID: 11432592}
 --- !u!136 &13655812
 CapsuleCollider:
   m_ObjectHideFlags: 1
