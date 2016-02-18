@@ -76,16 +76,6 @@ public class PlayerSquadron : MonoBehaviour
         squadronTracker.TrackerColor = TrackerColor;
         squadronTracker.LabelFont = SquadronTrackerFont;
         squadronTracker.IsDisabled = false;
-        /*
-        memberTracker.ArrowCursorImage = ArrowCursorImage;
-        memberTracker.TrackerCursorImage = TrackerCurosrImage;
-        memberTracker.FarTrackerCursorImage = FarTrackerCursorImage;
-        memberTracker.VeryFarTrackerCursorImage = VeryFarTrackerCursorImage;
-        memberTracker.LockingCursorImage = LockingTrackerCursorImage;
-        memberTracker.LockedCursorImage = LockedTrackerCursorImage;
-        memberTracker.TrackerColor = TrackerColor;
-        memberTracker.CallSign = member.CallSign;
-        */
         member.IsFollowIdleDestination = true;
         var mapPin = member.VehicleInstance.gameObject.AddComponent<MapPin>();
         mapPin.ActivePin = SquadronPinPrefab;

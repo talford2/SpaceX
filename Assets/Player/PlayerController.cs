@@ -36,12 +36,16 @@ public class PlayerController : MonoBehaviour
 	public float MinAimDistance = 10f;
 	public float MaxAimDistance = 1000f;
 
+    public float NoThreatTime = 5f;
+
 	private float _aimDistance;
 	private float _screenAspect;
 	private int _threatCount;
 	private float _threatCheckCooldown;
+    private float _noThreatCooldown;
 
-	private UniversePosition _lastDeathUniversePosition;
+
+    private UniversePosition _lastDeathUniversePosition;
 
 	private void Awake()
 	{
@@ -311,10 +315,22 @@ public class PlayerController : MonoBehaviour
 		        }
 		    }
 
+		    if (_threatCount > 0)
+		    {
+		        _noThreatCooldown = NoThreatTime;
+		    }
+		    else
+		    {
+		        if (_noThreatCooldown > 0f)
+		        {
+		            _noThreatCooldown -= Time.deltaTime;
+		        }
+		    }
+
             if (Squadron.GetLiveCount() < Squadron.GetMemberCount())
 			{
 				//Debug.Log("REPLENISH CHECK!");
-				if (_threatCount == 0)
+				if (_noThreatCooldown < 0f)
 				{
 					//Debug.Log("REPLENISH!!!");
 					for (var i = 0; i < Squadron.GetMemberCount(); i++)
