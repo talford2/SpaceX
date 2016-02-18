@@ -91,8 +91,8 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
 
-		_playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;
-		_playVehicleInstance.GetComponent<Killable>().OnDie += PlayerController_OnDie;
+		_playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;
+		_playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
 
 		var healthRegenerator = _playVehicleInstance.gameObject.AddComponent<HealthRegenerator>();
 		healthRegenerator.RegenerationDelay = 5f;
@@ -353,8 +353,8 @@ public class PlayerController : MonoBehaviour
                     oldMember.enabled = true;
                     oldMember.VehicleInstance.GetComponent<VehicleTracker>().IsDisabled = false;
 
-                    oldMember.VehicleInstance.GetComponent<Killable>().OnDamage -= PlayerController_OnDamage;
-                    oldMember.VehicleInstance.GetComponent<Killable>().OnDie -= PlayerController_OnDie;
+                    oldMember.VehicleInstance.Killable.OnDamage -= PlayerController_OnDamage;
+                    oldMember.VehicleInstance.Killable.OnDie -= PlayerController_OnDie;
                 }
 
                 // Disable next vehicle NPC control and apply PlayerController
@@ -367,8 +367,8 @@ public class PlayerController : MonoBehaviour
                     _playVehicleInstance.GetComponent<VehicleTracker>().IsDisabled = true;
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
 
-                    _playVehicleInstance.GetComponent<Killable>().OnDamage += PlayerController_OnDamage;
-                    _playVehicleInstance.GetComponent<Killable>().OnDie += PlayerController_OnDie;
+                    _playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;
+                    _playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
 
                     curMember.enabled = false;
 

@@ -40,7 +40,7 @@ public class HeadsUpDisplay : MonoBehaviour
 		if (PlayerController.Current.VehicleInstance != null)
 		{
 			EnergyText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.BoostEnergy);
-			HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.GetComponent<Killable>().Health);
+			HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Health);
 		}
 		if (_squadronPromptCooldown >= 0f)
 		{
@@ -50,8 +50,6 @@ public class HeadsUpDisplay : MonoBehaviour
 				HideSquadronPrompt();
 			}
 		}
-
-	    
 
 	    //RefreshSquadronIcons();
 
@@ -79,7 +77,7 @@ public class HeadsUpDisplay : MonoBehaviour
             if (squadronVehicle != null && squadronVehicle.Killable.IsAlive)
             {
                 _squadronIcons[i].SetSelected(PlayerController.Current.Squadron.GetCurrentIndex() == i);
-                _squadronIcons[i].SetHealthFraction(squadronVehicle.GetComponent<Killable>().Health/squadronVehicle.GetComponent<Killable>().MaxHealth);
+                _squadronIcons[i].SetHealthFraction(squadronVehicle.Killable.Health/squadronVehicle.Killable.MaxHealth);
             }
             else
             {
