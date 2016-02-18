@@ -324,6 +324,7 @@ public class PlayerController : MonoBehaviour
 		        if (_noThreatCooldown > 0f)
 		        {
 		            _noThreatCooldown -= Time.deltaTime;
+                    Debug.Log("NO THREAT: " + _noThreatCooldown);
 		        }
 		    }
 
@@ -431,7 +432,8 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerController_OnDie(Killable sender)
 	{
-		_lastDeathUniversePosition = new UniversePosition(_playVehicleInstance.Shiftable.UniversePosition.CellIndex, _playVehicleInstance.Shiftable.UniversePosition.CellLocalPosition);
+        _noThreatCooldown = NoThreatTime;
+        _lastDeathUniversePosition = new UniversePosition(_playVehicleInstance.Shiftable.UniversePosition.CellIndex, _playVehicleInstance.Shiftable.UniversePosition.CellLocalPosition);
 		Debug.Log("PLAYER VEHICLE DESTROYED AT: " + _lastDeathUniversePosition.CellIndex);
         HeadsUpDisplay.Current.RefreshSquadronIcon(0);
 	}
