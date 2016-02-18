@@ -3,118 +3,142 @@ using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
-	[Header("Vehicle Settings")]
-	public float IdleSpeed = 10f;
+    [Header("Vehicle Settings")]
+    public float IdleSpeed = 10f;
 
-	public float MaxSpeed = 20f;
+    public float MaxSpeed = 20f;
 
-	public float MinSpeed = 3f;
+    public float MinSpeed = 3f;
 
-	public float Acceleration = 5f;
+    public float Acceleration = 5f;
 
-	public float Brake = 7f;
+    public float Brake = 7f;
 
-	public float MaxBoostSpeed = 500f;
+    public float MaxBoostSpeed = 500f;
 
-	public float BoostAcceleration = 500f;
+    public float BoostAcceleration = 500f;
 
-	public float BoostBrake = 150f;
+    public float BoostBrake = 150f;
 
-	public float CurrentSpeed = 0f;
+    public float CurrentSpeed = 0f;
 
-	public float PitchSpeed = 5f;
+    public float PitchSpeed = 5f;
 
-	public float YawSpeed = 5f;
+    public float YawSpeed = 5f;
 
-	public float RollAcceleration = 640f;
+    public float RollAcceleration = 640f;
 
-	public float MaxRollSpeed = 100f;
+    public float MaxRollSpeed = 100f;
 
     [Header("Collisions")]
     public Vector3 CollisionsCentre;
     public float CollisionRadius = 3f;
 
-	[Header("Boost Energy")]
-	public float MaxBoostEnergy = 100f;
+    [Header("Boost Energy")]
+    public float MaxBoostEnergy = 100f;
 
-	public float BoostEnergy = 100f;
+    public float BoostEnergy = 100f;
 
-	public float BoostCost = 50f;
+    public float BoostCost = 50f;
 
-	public float BoostEnergyRegenerateDelay = 5f;
+    public float BoostEnergyRegenerateDelay = 5f;
 
-	public float BoostEnergyRegenerateRate = 1f;
+    public float BoostEnergyRegenerateRate = 1f;
 
-	[Header("Control Settings")]
-	public bool TriggerAccelerate = false;
+    [Header("Control Settings")]
+    public bool TriggerAccelerate = false;
 
-	public bool TriggerBrake = false;
+    public bool TriggerBrake = false;
 
-	public bool TriggerBoost = false;
+    public bool TriggerBoost = false;
 
-	public float YawThrottle = 0f;
+    public float YawThrottle = 0f;
 
-	public float PitchThotttle = 0f;
+    public float PitchThotttle = 0f;
 
-	public float RollThrottle = 0f;
+    public float RollThrottle = 0f;
 
-	public bool IsAccelerating { get { return TriggerAccelerate; } }
+    public bool IsAccelerating
+    {
+        get { return TriggerAccelerate; }
+    }
 
-	public bool IsBraking { get { return TriggerBrake; } }
+    public bool IsBraking
+    {
+        get { return TriggerBrake; }
+    }
 
-	public bool IsBoosting { get { return TriggerBoost && BoostEnergy > 0f && _allowBoost; } }
+    public bool IsBoosting
+    {
+        get { return TriggerBoost && BoostEnergy > 0f && _allowBoost; }
+    }
 
-	[Header("Primary Weapon")]
-	public Weapon PrimaryWeaponPrefab;
+    [Header("Primary Weapon")]
+    public Weapon PrimaryWeaponPrefab;
 
-	public List<ShootPoint> PrimaryShootPoints;
+    public List<ShootPoint> PrimaryShootPoints;
 
-	[Header("Secondary Weapon")]
-	public Weapon SecondaryWeaponPrefab;
+    [Header("Secondary Weapon")]
+    public Weapon SecondaryWeaponPrefab;
 
-	public List<ShootPoint> SecondaryShootPoints;
+    public List<ShootPoint> SecondaryShootPoints;
 
-	[Header("Other")]
-	public List<Thruster> Thrusters;
+    [Header("Other")]
+    public List<Thruster> Thrusters;
 
-	public AudioSource BoostSound;
+    public AudioSource BoostSound;
 
-	private Shiftable _shiftable;
+    private Shiftable _shiftable;
 
-	private Weapon _primaryWeaponInstance;
-	private Weapon _secondaryWeaponInstance;
+    private Weapon _primaryWeaponInstance;
+    private Weapon _secondaryWeaponInstance;
 
-	private Vector3 _velocity;
-	private VelocityReference _velocityReference;
+    private Vector3 _velocity;
+    private VelocityReference _velocityReference;
 
-	private readonly float _aimDistance = 1000f;
+    private readonly float _aimDistance = 1000f;
 
-	// Steering
-	private float _rollSpeed;
-	private Quaternion _targetRotation;
+    // Steering
+    private float _rollSpeed;
+    private Quaternion _targetRotation;
 
-	// Boost
-	private float _boostEnergyCooldown;
-	private bool _boostRegenerate;
-	private bool _allowBoost;
+    // Boost
+    private float _boostEnergyCooldown;
+    private bool _boostRegenerate;
+    private bool _allowBoost;
 
-	private float _maxFlareBrightness = 30f;
-	public Weapon PrimaryWeaponInstance { get { return _primaryWeaponInstance; } }
-	public Weapon SecondaryWeaponInstance { get { return _secondaryWeaponInstance; } }
+    private float _maxFlareBrightness = 30f;
+
+    public Weapon PrimaryWeaponInstance
+    {
+        get { return _primaryWeaponInstance; }
+    }
+
+    public Weapon SecondaryWeaponInstance
+    {
+        get { return _secondaryWeaponInstance; }
+    }
 
     public bool IgnoreCollisions;
 
-	public Shiftable Shiftable
-	{
-		get
-		{
-			if (_shiftable == null)
-			{
-				_shiftable = GetComponent<Shiftable>();
-			}
-			return _shiftable;
-		}
-	}
+    public Killable Killable
+    {
+        get { return _killable; }
+    }
+
+    private Killable _killable;
+
+    public Shiftable Shiftable
+    {
+        get
+        {
+            if (_shiftable == null)
+            {
+                _shiftable = GetComponent<Shiftable>();
+            }
+            return _shiftable;
+        }
+    }
 
     public Vector3 GetAimPosition()
     {
@@ -124,21 +148,21 @@ public class Vehicle : MonoBehaviour
     }
 
     private void Awake()
-	{
-		_shiftable = GetComponent<Shiftable>();
+    {
+        _shiftable = GetComponent<Shiftable>();
 
-		foreach (var shootPoint in PrimaryShootPoints)
-		{
-			shootPoint.Initialize(PrimaryWeaponPrefab.MuzzlePrefab);
-		}
-		foreach (var shootPoint in SecondaryShootPoints)
-		{
-			shootPoint.Initialize(SecondaryWeaponPrefab.MuzzlePrefab);
-		}
+        foreach (var shootPoint in PrimaryShootPoints)
+        {
+            shootPoint.Initialize(PrimaryWeaponPrefab.MuzzlePrefab);
+        }
+        foreach (var shootPoint in SecondaryShootPoints)
+        {
+            shootPoint.Initialize(SecondaryWeaponPrefab.MuzzlePrefab);
+        }
 
-		_velocityReference = new VelocityReference(_velocity);
+        _velocityReference = new VelocityReference(_velocity);
 
-		var targetable = GetComponent<Targetable>();
+        var targetable = GetComponent<Targetable>();
 
         if (PrimaryWeaponPrefab != null)
         {
@@ -154,10 +178,12 @@ public class Vehicle : MonoBehaviour
             _secondaryWeaponInstance.OnShoot += OnShoot;
         }
 
+        _killable = GetComponent<Killable>();
+
         _allowBoost = true;
 
-		_targetRotation = transform.rotation;
-	}
+        _targetRotation = transform.rotation;
+    }
 
     public void SetTargetRotation(Quaternion rotation)
     {
@@ -181,8 +207,8 @@ public class Vehicle : MonoBehaviour
     }
 
     private void OnShoot(int shootPointIndex)
-	{
-	}
+    {
+    }
 
     private void Update()
     {
@@ -352,9 +378,9 @@ public class Vehicle : MonoBehaviour
     }
 
     public Vector3 GetVelocity()
-	{
-		return _velocity;
-	}
+    {
+        return _velocity;
+    }
 
     private void OnDrawGizmos()
     {

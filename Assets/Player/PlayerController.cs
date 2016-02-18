@@ -217,7 +217,7 @@ public class PlayerController : MonoBehaviour
 		    if (Input.GetKeyUp(KeyCode.R))
 			{
 				if (_playVehicleInstance != null)
-					_playVehicleInstance.GetComponent<Killable>().Die();
+					_playVehicleInstance.Killable.Die();
 				Debug.Log("RESPAWN");
 				var respawnAt = SpawnManager.FindNearest(_lastDeathUniversePosition);
 				respawnAt.Spawn();
@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Z))
             {
                 if (_playVehicleInstance != null)
-                    _playVehicleInstance.GetComponent<Killable>().Die();
+                    _playVehicleInstance.Killable.Die();
             }
 
             if (Input.GetKeyUp(KeyCode.E))
@@ -256,9 +256,6 @@ public class PlayerController : MonoBehaviour
 			Map.Current.Toggle();
 		}
 
-		// Update squadron
-		//_squadronLiveCount = Squadron.Count(s => s.VehicleInstance != null);
-        
 		Vehicle leaderVehicle;
 		if (Squadron.GetCurrentIndex() == 0)
 		{
