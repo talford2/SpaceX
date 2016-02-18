@@ -115,7 +115,7 @@ public class SquadronTracker : Tracker
         callsignObj.transform.SetParent(trackerImg.transform);
 
         _callsignInstance = callSignText;
-        _callsignInstance.rectTransform.pivot = new Vector2(0.5f, 1f);
+        _callsignInstance.rectTransform.pivot = new Vector2(0.5f, 0.85f);
 
         _imageInstance = trackerImg;
         _imageInstance.color = TrackerColor;
