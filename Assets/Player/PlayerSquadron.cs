@@ -86,16 +86,19 @@ public class PlayerSquadron : MonoBehaviour
 
     private void SquadronMember_OnRegenerate()
     {
+        // This should on refresh the current squadron member's icon.
         HeadsUpDisplay.Current.RefreshSquadronIcons();
     }
 
     private void SquadronMember_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
     {
+        // This should on refresh the current squadron member's icon.
         HeadsUpDisplay.Current.RefreshSquadronIcons();
     }
 
     private void SquadronMember_OnDie(Killable sender)
     {
+        // This should on refresh the current squadron member's icon.
         HeadsUpDisplay.Current.RefreshSquadronIcons();
         sender.OnDamage -= SquadronMember_OnDamage;
         sender.OnDie -= SquadronMember_OnDie;

@@ -50,9 +50,6 @@ public class HeadsUpDisplay : MonoBehaviour
 				HideSquadronPrompt();
 			}
 		}
-
-	    //RefreshSquadronIcons();
-
 		HitImage.color = new Color(1, 1, 1, _hitCooldown);
 		_hitCooldown -= Time.deltaTime * HitFadeSpeed;
 		_hitCooldown = Mathf.Max(0, _hitCooldown);
@@ -76,6 +73,7 @@ public class HeadsUpDisplay : MonoBehaviour
             : PlayerController.Current.Squadron.GetMember(index).VehicleInstance;
 
         var squadronIcon = _squadronIcons[index];
+        squadronIcon.SetCallSign(PlayerController.Current.Squadron.GetMember(index).CallSign);
         if (squadronVehicle != null && squadronVehicle.Killable.IsAlive)
         {
             squadronIcon.SetSelected(PlayerController.Current.Squadron.GetCurrentIndex() == index);

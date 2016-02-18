@@ -5,6 +5,7 @@ public class SquadronIcon : MonoBehaviour
 {
     public Image Icon;
     public Image HealthBar;
+    public Text CallSignLabel;
 
     public Texture2D Default;
     public Texture2D Selected;
@@ -23,6 +24,11 @@ public class SquadronIcon : MonoBehaviour
         {
             AssignLivingIcons();
         }
+    }
+
+    public void SetCallSign(string value)
+    {
+        CallSignLabel.text = value;
     }
 
     public void SetSelected(bool selected)
