@@ -14,6 +14,7 @@ public class PlayerSquadron : MonoBehaviour
     public Texture2D LockingTrackerCursorImage;
     public Texture2D LockedTrackerCursorImage;
     public Color TrackerColor = Color.white;
+    public Font SquadronTrackerFont;
 
     public GameObject SquadronPinPrefab;
 
@@ -62,6 +63,20 @@ public class PlayerSquadron : MonoBehaviour
     {
         member.SpawnVehicle(member.VehiclePrefab, position, rotation);
         var memberTracker = member.VehicleInstance.GetComponent<VehicleTracker>();
+
+        var squadronTracker = member.VehicleInstance.gameObject.AddComponent<SquadronTracker>();
+        squadronTracker.ArrowCursorImage = memberTracker.ArrowCursorImage;
+        squadronTracker.TrackerCursorImage = memberTracker.TrackerCursorImage;
+        squadronTracker.FarTrackerCursorImage = memberTracker.FarTrackerCursorImage;
+        squadronTracker.VeryFarTrackerCursorImage = memberTracker.VeryFarTrackerCursorImage;
+        squadronTracker.LockingCursorImage = memberTracker.LockingCursorImage;
+        squadronTracker.LockedCursorImage = memberTracker.LockedCursorImage;
+        Destroy(memberTracker);
+        squadronTracker.CallSign = member.CallSign;
+        squadronTracker.TrackerColor = TrackerColor;
+        squadronTracker.LabelFont = SquadronTrackerFont;
+        squadronTracker.IsDisabled = false;
+        /*
         memberTracker.ArrowCursorImage = ArrowCursorImage;
         memberTracker.TrackerCursorImage = TrackerCurosrImage;
         memberTracker.FarTrackerCursorImage = FarTrackerCursorImage;
@@ -70,6 +85,7 @@ public class PlayerSquadron : MonoBehaviour
         memberTracker.LockedCursorImage = LockedTrackerCursorImage;
         memberTracker.TrackerColor = TrackerColor;
         memberTracker.CallSign = member.CallSign;
+        */
         member.IsFollowIdleDestination = true;
         var mapPin = member.VehicleInstance.gameObject.AddComponent<MapPin>();
         mapPin.ActivePin = SquadronPinPrefab;

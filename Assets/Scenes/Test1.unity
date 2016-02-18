@@ -2015,6 +2015,8 @@ MonoBehaviour:
   LockedTrackerCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2,
     type: 3}
   TrackerColor: {r: 0, g: 0.46206903, b: 1, a: 1}
+  SquadronTrackerFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba,
+    type: 3}
   SquadronPinPrefab: {fileID: 133228, guid: 4537303a7240d1d49a3e4dcf875bc48a, type: 2}
 --- !u!1 &1097665388
 GameObject:
