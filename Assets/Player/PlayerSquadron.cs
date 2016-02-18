@@ -24,13 +24,15 @@ public class PlayerSquadron : MonoBehaviour
         var playerVehicleInstance = PlayerController.Current.VehicleInstance;
         var playerNpc = PlayerController.Current.GetComponent<Fighter>();
 
+        Members.Insert(0, playerNpc);
+
         for (var i = 0; i < Members.Count; i++)
         {
             var member = Members[i];
             if (member != playerNpc)
             {
-                var univPos = playerVehicleInstance.Shiftable.UniversePosition;
-                univPos.CellLocalPosition += Formations.GetArrowOffset(i, 10f);
+                var formationOffset = Formations.GetArrowOffset(i, 10f);
+                var univPos = Universe.Current.GetUniversePosition(playerVehicleInstance.transform.position + playerVehicleInstance.transform.rotation* formationOffset);
                 member.IsSquadronMember = true;
 
                 // Give squadron members better aiming!
@@ -38,8 +40,6 @@ public class PlayerSquadron : MonoBehaviour
                 SpawnSquadronVehicle(member, univPos, transform.rotation);
             }
         }
-
-        Members.Insert(0, playerNpc);
     }
 
     public int CycleSquadronIndex(int dir)

@@ -383,12 +383,13 @@ public class PlayerController : MonoBehaviour
                     cam.Reset();
                 }
             }
+            HeadsUpDisplay.Current.RefreshSquadronIcon(Squadron.GetCurrentIndex());
+            HeadsUpDisplay.Current.RefreshSquadronIcon(oldSquadronIndex);
         }
         else
         {
             Debug.Log("ALL DEAD!");
         }
-        HeadsUpDisplay.Current.RefreshSquadronIcons();
     }
 
     private void PlayerController_OnRegenerate()
