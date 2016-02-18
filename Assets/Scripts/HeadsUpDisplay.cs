@@ -69,20 +69,29 @@ public class HeadsUpDisplay : MonoBehaviour
         }
     }
 
+    public void RefreshSquadronIcon(int index)
+    {
+        var squadronVehicle = index == PlayerController.Current.Squadron.GetCurrentIndex()
+            ? PlayerController.Current.VehicleInstance
+            : PlayerController.Current.Squadron.GetMember(index).VehicleInstance;
+
+        var squadronIcon = _squadronIcons[index];
+        if (squadronVehicle != null && squadronVehicle.Killable.IsAlive)
+        {
+            squadronIcon.SetSelected(PlayerController.Current.Squadron.GetCurrentIndex() == index);
+            squadronIcon.SetHealthFraction(squadronVehicle.Killable.Health / squadronVehicle.Killable.MaxHealth);
+        }
+        else
+        {
+            squadronIcon.SetHealthFraction(0f);
+        }
+    }
+
     public void RefreshSquadronIcons()
     {
         for (var i = 0; i < PlayerController.Current.Squadron.GetMemberCount(); i++)
         {
-            var squadronVehicle = PlayerController.Current.Squadron.GetMember(i).VehicleInstance;
-            if (squadronVehicle != null && squadronVehicle.Killable.IsAlive)
-            {
-                _squadronIcons[i].SetSelected(PlayerController.Current.Squadron.GetCurrentIndex() == i);
-                _squadronIcons[i].SetHealthFraction(squadronVehicle.Killable.Health/squadronVehicle.Killable.MaxHealth);
-            }
-            else
-            {
-                _squadronIcons[i].SetHealthFraction(0f);
-            }
+            RefreshSquadronIcon(i);
         }
     }
 
