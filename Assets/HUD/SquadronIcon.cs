@@ -17,7 +17,7 @@ public class SquadronIcon : MonoBehaviour
         HealthBar.fillAmount = fraction;
         if (fraction <= 0f)
         {
-            Icon.overrideSprite = Sprite.Create(Dead, new Rect(0, 0, 70f, 70f), new Vector2(0.5f, 0.5f));
+            Icon.overrideSprite = Sprite.Create(Dead, new Rect(0, 0, Dead.width, Dead.height), new Vector2(0.5f, 0.5f));
         }
         else
         {
@@ -36,6 +36,6 @@ public class SquadronIcon : MonoBehaviour
         var texture = Default;
         if (_isSelected)
             texture = Selected;
-        Icon.overrideSprite = Sprite.Create(texture, new Rect(0, 0, 70f, 70f), new Vector2(0.5f, 0.5f));
+        Icon.overrideSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
     }
 }

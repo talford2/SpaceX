@@ -62,7 +62,7 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void LazyCreateSquadronIcons()
     {
-        while (_squadronIcons.Count < PlayerController.Current.Squadron.Count)
+        while (_squadronIcons.Count < PlayerController.Current.Squadron.GetMemberCount())
         {
             var icon = Instantiate(SquadronIcon);
             icon.transform.SetParent(SquadronIconContainer.transform);
@@ -73,13 +73,13 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void RefreshSquadronIcons()
     {
-        for (var i = 0; i < PlayerController.Current.Squadron.Count; i++)
+        for (var i = 0; i < PlayerController.Current.Squadron.GetMemberCount(); i++)
         {
-            var squadronVehicle = PlayerController.Current.Squadron[i].VehicleInstance;
+            var squadronVehicle = PlayerController.Current.Squadron.GetMember(i).VehicleInstance;
 
             if (squadronVehicle != null)
             {
-                _squadronIcons[i].SetSelected(PlayerController.Current.GetSquadronSelectedIndex() == i);
+                _squadronIcons[i].SetSelected(PlayerController.Current.Squadron.GetCurrentIndex() == i);
                 _squadronIcons[i].SetHealthFraction(squadronVehicle.GetComponent<Killable>().Health/squadronVehicle.GetComponent<Killable>().MaxHealth);
             }
             else
