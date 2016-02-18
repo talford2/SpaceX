@@ -97,7 +97,8 @@ public class PlayerController : MonoBehaviour
 		var healthRegenerator = _playVehicleInstance.gameObject.AddComponent<HealthRegenerator>();
 		healthRegenerator.RegenerationDelay = 5f;
 		healthRegenerator.RegenerationRate = 5f;
-    }
+	    healthRegenerator.OnRegenerate += PlayerController_OnRegenerate;
+	}
 
 	private Vector3 GetAimAt()
 	{
@@ -215,15 +216,16 @@ public class PlayerController : MonoBehaviour
 		    }
 
 		    if (Input.GetKeyUp(KeyCode.R))
-			{
-				if (_playVehicleInstance != null)
-					_playVehicleInstance.Killable.Die();
-				Debug.Log("RESPAWN");
-				var respawnAt = SpawnManager.FindNearest(_lastDeathUniversePosition);
-				respawnAt.Spawn();
-			}
+		    {
+		        if (_playVehicleInstance != null)
+		            _playVehicleInstance.Killable.Die();
+		        Debug.Log("RESPAWN");
+		        var respawnAt = SpawnManager.FindNearest(_lastDeathUniversePosition);
+		        respawnAt.Spawn();
+		        HeadsUpDisplay.Current.RefreshSquadronIcons();
+		    }
 
-			if (Input.GetKeyUp(KeyCode.Escape))
+		    if (Input.GetKeyUp(KeyCode.Escape))
 			{
 				Menus.Current.ToggleQuitMenu();
 			}
@@ -355,6 +357,7 @@ public class PlayerController : MonoBehaviour
 
                     oldMember.VehicleInstance.Killable.OnDamage -= PlayerController_OnDamage;
                     oldMember.VehicleInstance.Killable.OnDie -= PlayerController_OnDie;
+                    oldMember.VehicleInstance.GetComponent<HealthRegenerator>().OnRegenerate -= PlayerController_OnRegenerate;
                 }
 
                 // Disable next vehicle NPC control and apply PlayerController
@@ -369,6 +372,7 @@ public class PlayerController : MonoBehaviour
 
                     _playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;
                     _playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
+                    _playVehicleInstance.GetComponent<HealthRegenerator>().OnRegenerate += PlayerController_OnRegenerate;
 
                     curMember.enabled = false;
 
@@ -384,6 +388,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("ALL DEAD!");
         }
+        HeadsUpDisplay.Current.RefreshSquadronIcons();
+    }
+
+    private void PlayerController_OnRegenerate()
+    {
         HeadsUpDisplay.Current.RefreshSquadronIcons();
     }
 

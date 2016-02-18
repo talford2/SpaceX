@@ -5,6 +5,9 @@ public class HealthRegenerator : MonoBehaviour
 {
     public float RegenerationRate;
     public float RegenerationDelay;
+    public OnRegeneratorRegenerate OnRegenerate;
+
+    public delegate void OnRegeneratorRegenerate();
 
     private Killable _killable;
     private float _delayCooldown;
@@ -30,6 +33,8 @@ public class HealthRegenerator : MonoBehaviour
                     _killable.StopWoundEffect();
                 if (_killable.Health > _killable.MaxHealth)
                     _killable.Health = _killable.MaxHealth;
+                if (OnRegenerate != null)
+                    OnRegenerate();
             }
         }
     }

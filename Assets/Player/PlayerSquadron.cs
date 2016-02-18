@@ -77,10 +77,16 @@ public class PlayerSquadron : MonoBehaviour
         var squadronHealthRegenerator = member.VehicleInstance.gameObject.AddComponent<HealthRegenerator>();
         squadronHealthRegenerator.RegenerationDelay = 5f;
         squadronHealthRegenerator.RegenerationRate = 5f;
+        squadronHealthRegenerator.OnRegenerate += SquadronMember_OnRegenerate;
         var memberKillable = member.VehicleInstance.GetComponent<Killable>();
         memberKillable.OnDamage += SquadronMember_OnDamage;
         memberKillable.OnDie += SquadronMember_OnDie;
         member.enabled = true;
+    }
+
+    private void SquadronMember_OnRegenerate()
+    {
+        HeadsUpDisplay.Current.RefreshSquadronIcons();
     }
 
     private void SquadronMember_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
@@ -93,6 +99,9 @@ public class PlayerSquadron : MonoBehaviour
         HeadsUpDisplay.Current.RefreshSquadronIcons();
         sender.OnDamage -= SquadronMember_OnDamage;
         sender.OnDie -= SquadronMember_OnDie;
+        var healthRegenerator = sender.GetComponent<HealthRegenerator>();
+        if (healthRegenerator != null)
+            healthRegenerator.OnRegenerate -= SquadronMember_OnRegenerate;
     }
 
     public int GetLiveCount()

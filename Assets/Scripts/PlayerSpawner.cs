@@ -19,7 +19,6 @@ public class PlayerSpawner : MonoBehaviour
         var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
         cam.Target = PlayerController.Current.VehicleInstance;
         cam.Reset();
-        HeadsUpDisplay.Current.RefreshSquadronIcons();
     }
 
     private void OnDestroy()
