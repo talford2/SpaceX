@@ -88,14 +88,17 @@ public class PlayerController : MonoBehaviour
 				var univPos = _playVehicleInstance.Shiftable.UniversePosition;
 				univPos.CellLocalPosition += Formations.GetArrowOffset(i, 10f);
 				member.IsSquadronMember = true;
+			    
                 // Give squadron members better aiming!
                 member.AimOffsetRadius = 1.5f;
                 SpawnSquadronVehicle(member, univPos, transform.rotation);
 			}
 		}
-	}
+        HeadsUpDisplay.Current.LazyCreateSquadronIcons();
+        HeadsUpDisplay.Current.RefreshSquadronIcons();
+    }
 
-	private void SpawnSquadronVehicle(Fighter member, UniversePosition position, Quaternion rotation)
+    private void SpawnSquadronVehicle(Fighter member, UniversePosition position, Quaternion rotation)
 	{
 		member.SpawnVehicle(member.VehiclePrefab, position, rotation);
 		var memberTracker = member.VehicleInstance.GetComponent<VehicleTracker>();
@@ -114,10 +117,25 @@ public class PlayerController : MonoBehaviour
 		var squadronHealthRegenerator = member.VehicleInstance.gameObject.AddComponent<HealthRegenerator>();
 		squadronHealthRegenerator.RegenerationDelay = 5f;
 		squadronHealthRegenerator.RegenerationRate = 5f;
-		member.enabled = true;
+        var memberKillable = member.VehicleInstance.GetComponent<Killable>();
+        memberKillable.OnDamage += SquadronMember_OnDamage;
+        memberKillable.OnDie += SquadronMember_OnDie;
+        member.enabled = true;
 	}
 
-	public void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
+    private void SquadronMember_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
+    {
+        HeadsUpDisplay.Current.RefreshSquadronIcons();
+    }
+
+    private void SquadronMember_OnDie(Killable sender)
+    {
+        HeadsUpDisplay.Current.RefreshSquadronIcons();
+        sender.OnDamage -= SquadronMember_OnDamage;
+        sender.OnDie -= SquadronMember_OnDie;
+    }
+
+    public void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
 	{
 		SpawnVehicle(vehiclePrefab, spawner.UniversePosition, spawner.transform.rotation);
 	}
@@ -145,17 +163,11 @@ public class PlayerController : MonoBehaviour
 		var healthRegenerator = _playVehicleInstance.gameObject.AddComponent<HealthRegenerator>();
 		healthRegenerator.RegenerationDelay = 5f;
 		healthRegenerator.RegenerationRate = 5f;
-	}
+    }
 
-	public int GetSquadronSelectedIndex()
+    public int GetSquadronSelectedIndex()
 	{
 		return _curSquadronIndex;
-	}
-
-	private void PlayerController_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
-	{
-		HeadsUpDisplay.Current.Hit();
-		Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.1f);
 	}
 
 	private Vector3 GetAimAt()
@@ -278,18 +290,9 @@ public class PlayerController : MonoBehaviour
 				if (_playVehicleInstance != null)
 					_playVehicleInstance.GetComponent<Killable>().Die();
 				Debug.Log("RESPAWN");
-
+			    _curSquadronIndex = 0;
 				var respawnAt = SpawnManager.FindNearest(_lastDeathUniversePosition);
 				respawnAt.Spawn();
-				/*
-	            Universe.Current.WarpTo(RespawnPosition);
-	            _curSquadronIndex = 0;
-	            SpawnVehicle(VehiclePrefab, RespawnPosition);
-
-	            var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
-	            cam.Target = _playVehicleInstance;
-	            cam.Reset();
-                */
 			}
 
 			if (Input.GetKeyUp(KeyCode.Escape))
@@ -367,7 +370,7 @@ public class PlayerController : MonoBehaviour
 		        {
 		            var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, 2000f, LayerMask.GetMask("Detectable"));
 		            _threatCount = detected.Count(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>() != null && d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team));
-		            _threatCheckCooldown = 0f;
+		            _threatCheckCooldown = 1f;
 		        }
 		    }
 
@@ -385,6 +388,7 @@ public class PlayerController : MonoBehaviour
 							{
 								var spawnPos = Universe.Current.GetUniversePosition(Utility.GetRandomDirection(-Universe.Current.ViewPort.transform.forward, 80f) * 2000f);
 								SpawnSquadronVehicle(Squadron[i], spawnPos, Quaternion.identity);
+                                HeadsUpDisplay.Current.RefreshSquadronIcons();
 							}
 						}
 					}
@@ -469,12 +473,22 @@ public class PlayerController : MonoBehaviour
 		{
 			Debug.Log("ALL DEAD!");
 		}
-	}
+        HeadsUpDisplay.Current.RefreshSquadronIcons();
+    }
 
-	private void PlayerController_OnDie(Killable sender)
+    private void PlayerController_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
+    {
+        HeadsUpDisplay.Current.Hit();
+        Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.1f);
+        HeadsUpDisplay.Current.RefreshSquadronIcons();
+    }
+
+    private void PlayerController_OnDie(Killable sender)
 	{
 		_lastDeathUniversePosition = new UniversePosition(_playVehicleInstance.Shiftable.UniversePosition.CellIndex, _playVehicleInstance.Shiftable.UniversePosition.CellLocalPosition);
 		Debug.Log("PLAYER VEHICLE DESTROYED AT: " + _lastDeathUniversePosition.CellIndex);
+        //Squadron[_curSquadronIndex].VehicleInstance.GetComponent<Killable>().Die();
+        HeadsUpDisplay.Current.RefreshSquadronIcons();
 	}
 
 	public bool InPlayerActiveCells(CellIndex checkCell)

@@ -51,34 +51,43 @@ public class HeadsUpDisplay : MonoBehaviour
 			}
 		}
 
-	    while (_squadronIcons.Count < PlayerController.Current.Squadron.Count)
-	    {
-            var icon = Instantiate(SquadronIcon);
-            icon.transform.SetParent(SquadronIconContainer.transform);
-	        icon.rectTransform.localScale = Vector3.one;
-            _squadronIcons.Add(icon.GetComponent<SquadronIcon>());
-	    }
+	    
 
-	    for (var i = 0; i < PlayerController.Current.Squadron.Count; i++)
-	    {
-	        var squadronVehicle = !PlayerController.Current.Squadron[i].enabled
-                ? PlayerController.Current.VehicleInstance
-                : PlayerController.Current.Squadron[i].VehicleInstance;
-	        if (squadronVehicle != null)
-	        {
-	            _squadronIcons[i].SetSelected(PlayerController.Current.GetSquadronSelectedIndex() == i);
-	            _squadronIcons[i].SetHealthFraction(squadronVehicle.GetComponent<Killable>().Health/squadronVehicle.GetComponent<Killable>().MaxHealth);
-	        }
-	        else
-	        {
-	            _squadronIcons[i].SetHealthFraction(0f);
-	        }
-	    }
+	    //RefreshSquadronIcons();
 
 		HitImage.color = new Color(1, 1, 1, _hitCooldown);
 		_hitCooldown -= Time.deltaTime * HitFadeSpeed;
 		_hitCooldown = Mathf.Max(0, _hitCooldown);
 	}
+
+    public void LazyCreateSquadronIcons()
+    {
+        while (_squadronIcons.Count < PlayerController.Current.Squadron.Count)
+        {
+            var icon = Instantiate(SquadronIcon);
+            icon.transform.SetParent(SquadronIconContainer.transform);
+            icon.rectTransform.localScale = Vector3.one;
+            _squadronIcons.Add(icon.GetComponent<SquadronIcon>());
+        }
+    }
+
+    public void RefreshSquadronIcons()
+    {
+        for (var i = 0; i < PlayerController.Current.Squadron.Count; i++)
+        {
+            var squadronVehicle = PlayerController.Current.Squadron[i].VehicleInstance;
+
+            if (squadronVehicle != null)
+            {
+                _squadronIcons[i].SetSelected(PlayerController.Current.GetSquadronSelectedIndex() == i);
+                _squadronIcons[i].SetHealthFraction(squadronVehicle.GetComponent<Killable>().Health/squadronVehicle.GetComponent<Killable>().MaxHealth);
+            }
+            else
+            {
+                _squadronIcons[i].SetHealthFraction(0f);
+            }
+        }
+    }
 
 	public void Hit()
 	{

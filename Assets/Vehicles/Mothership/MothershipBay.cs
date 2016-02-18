@@ -6,7 +6,7 @@ public class MothershipBay : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("DESTROY: " + AttachedSpawner.name + "!");
+        //Debug.Log("DESTROY: " + AttachedSpawner.name + "!");
         Destroy(AttachedSpawner.gameObject);
     }
 }
