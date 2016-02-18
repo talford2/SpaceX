@@ -167,7 +167,6 @@ public class SquadronTracker : Tracker
                 fadeCooldown = fadeTime;
             }
         }
-
         if (fadeCooldown >= 0f)
         {
             fadeCooldown -= Time.deltaTime;
@@ -191,6 +190,7 @@ public class SquadronTracker : Tracker
             _imageInstance.enabled = false;
             _healthBarBackgroundInstance.enabled = false;
             _healthBarInstance.enabled = false;
+            _callsignInstance.enabled = false;
         }
         else
         {
