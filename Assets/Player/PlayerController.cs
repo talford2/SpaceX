@@ -316,11 +316,11 @@ public class PlayerController : MonoBehaviour
 							{
 								var spawnPos = Universe.Current.GetUniversePosition(Utility.GetRandomDirection(-Universe.Current.ViewPort.transform.forward, 80f) * 2000f);
 								Squadron.SpawnSquadronVehicle(Squadron.GetMember(i), spawnPos, Quaternion.identity);
-                                HeadsUpDisplay.Current.RefreshSquadronIcons();
 							}
 						}
 					}
-				}
+                    HeadsUpDisplay.Current.RefreshSquadronIcons();
+                }
 			}
 		}
 
@@ -393,21 +393,21 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerController_OnRegenerate()
     {
-        HeadsUpDisplay.Current.RefreshSquadronIcons();
+        HeadsUpDisplay.Current.RefreshSquadronIcon(0);
     }
 
     private void PlayerController_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
     {
         HeadsUpDisplay.Current.Hit();
         Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.1f);
-        HeadsUpDisplay.Current.RefreshSquadronIcons();
+        HeadsUpDisplay.Current.RefreshSquadronIcon(0);
     }
 
     private void PlayerController_OnDie(Killable sender)
 	{
 		_lastDeathUniversePosition = new UniversePosition(_playVehicleInstance.Shiftable.UniversePosition.CellIndex, _playVehicleInstance.Shiftable.UniversePosition.CellLocalPosition);
 		Debug.Log("PLAYER VEHICLE DESTROYED AT: " + _lastDeathUniversePosition.CellIndex);
-        HeadsUpDisplay.Current.RefreshSquadronIcons();
+        HeadsUpDisplay.Current.RefreshSquadronIcon(0);
 	}
 
 	public bool InPlayerActiveCells(CellIndex checkCell)
