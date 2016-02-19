@@ -16,7 +16,6 @@ public class VehicleTracker : Tracker
 
     public float MaxDistance = 3000f;
 
-	public string CallSign;
 	public bool IsDisabled;
 
 	private Vector2 _screenCentre;
