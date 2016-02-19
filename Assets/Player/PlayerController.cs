@@ -113,8 +113,8 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
 
 		var shieldRegenerator = _playVehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
-		shieldRegenerator.RegenerationDelay = 5f;
-		shieldRegenerator.RegenerationRate = 5f;
+		shieldRegenerator.RegenerationDelay = Squadron.ShieldRegenerateDelay;
+		shieldRegenerator.RegenerationRate = Squadron.ShieldRegenerateRate;
 	    shieldRegenerator.OnRegenerate += PlayerController_OnRegenerate;
 	}
 

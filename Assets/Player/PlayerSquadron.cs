@@ -5,6 +5,8 @@ using System.Linq;
 public class PlayerSquadron : MonoBehaviour
 {
     public List<Fighter> Members;
+    public float ShieldRegenerateDelay = 5f;
+    public float ShieldRegenerateRate = 5f;
 
     [Header("Trackers")]
     public Texture2D ArrowCursorImage;
@@ -82,8 +84,8 @@ public class PlayerSquadron : MonoBehaviour
         mapPin.ActivePin = SquadronPinPrefab;
         mapPin.InactivePin = SquadronPinPrefab;
         var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
-        squadronShieldRegenerator.RegenerationDelay = 5f;
-        squadronShieldRegenerator.RegenerationRate = 5f;
+        squadronShieldRegenerator.RegenerationDelay = ShieldRegenerateDelay;
+        squadronShieldRegenerator.RegenerationRate = ShieldRegenerateRate;
 
         member.enabled = true;
     }
