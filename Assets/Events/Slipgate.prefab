@@ -156,6 +156,8 @@ GameObject:
   - 114: {fileID: 11402720}
   - 114: {fileID: 11470108}
   - 114: {fileID: 11422702}
+  - 114: {fileID: 11428942}
+  - 65: {fileID: 6578312}
   m_Layer: 0
   m_Name: Slipgate
   m_TagString: Untagged
@@ -416,6 +418,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108410}
   m_Mesh: {fileID: 4300002, guid: b164d455500aba749bee5cc4bd5d2599, type: 3}
+--- !u!65 &6578312
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169094}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 16, y: 16, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11402720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -449,6 +463,18 @@ MonoBehaviour:
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
   CurrentInstance: {fileID: 0}
+--- !u!114 &11428942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3020d5a469478b45a2d6afbf02747b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelIndex: 1
 --- !u!114 &11470108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -465,6 +491,7 @@ MonoBehaviour:
   TrackerCursorImage: {fileID: 2800000, guid: a0c6281620ee7a64681a5e67a81b32b9, type: 3}
   ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
   LabelFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba, type: 3}
+  HasBeenTriggered: 0
 --- !u!123 &12304444
 LensFlare:
   m_ObjectHideFlags: 1

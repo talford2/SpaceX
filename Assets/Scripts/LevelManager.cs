@@ -17,8 +17,12 @@ public class LevelManager : MonoBehaviour
 
 	private int _viewIndex = 0;
 
+	private static LevelManager _current;
+
 	void Start()
 	{
+		_current = this;
+
 		LevelBackgrounds = new List<Material>();
 		_uGenLevels = new List<UniverseGenerator>();
 		foreach (var go in Levels)
@@ -66,10 +70,18 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	private void ChangeLevel(int index)
+	public void ChangeLevel(int index)
 	{
 		RenderSettings.skybox = _uGenLevels[index].Background;
 		DirectionLight.transform.forward = _uGenLevels[index].SunDirection;
 		_reflectionProbe.RenderProbe();
+	}
+
+	public static LevelManager Current
+	{
+		get
+		{
+			return _current;
+		}
 	}
 }

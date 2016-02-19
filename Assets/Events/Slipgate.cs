@@ -1,0 +1,18 @@
+﻿using UnityEngine;
+
+public class Slipgate : MonoBehaviour
+{
+	public int LevelIndex = 0;
+
+	private bool _isTriggered = false;
+
+	void Update()
+	{
+		if (!_isTriggered && PlayerController.Current != null && (PlayerController.Current.transform.position - transform.position).sqrMagnitude < 9)
+		{
+			Debug.Log("WARP!");
+			_isTriggered = true;
+			LevelManager.Current.ChangeLevel(LevelIndex);
+		}
+	}
+}
