@@ -40,6 +40,7 @@ public class PlayerSquadron : MonoBehaviour
                 member.AimOffsetRadius = 1.5f;
                 SpawnSquadronVehicle(member, univPos, transform.rotation);
             }
+            BindMemberEvents(member);
         }
     }
 
@@ -83,11 +84,17 @@ public class PlayerSquadron : MonoBehaviour
         var squadronHealthRegenerator = member.VehicleInstance.gameObject.AddComponent<HealthRegenerator>();
         squadronHealthRegenerator.RegenerationDelay = 5f;
         squadronHealthRegenerator.RegenerationRate = 5f;
+
+        member.enabled = true;
+    }
+
+    private void BindMemberEvents(Fighter member)
+    {
+        var squadronHealthRegenerator = member.VehicleInstance.GetComponent<HealthRegenerator>();
         squadronHealthRegenerator.OnRegenerate += SquadronMember_OnRegenerate;
-        var memberKillable = member.VehicleInstance.GetComponent<Killable>();
+        var memberKillable = member.VehicleInstance.Killable;
         memberKillable.OnDamage += SquadronMember_OnDamage;
         memberKillable.OnDie += SquadronMember_OnDie;
-        member.enabled = true;
     }
 
     private void SquadronMember_OnRegenerate()
