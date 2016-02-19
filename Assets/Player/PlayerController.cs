@@ -248,7 +248,11 @@ public class PlayerController : MonoBehaviour
 
 		    if (_isAllowRespawn)
 		    {
-		        if (Input.GetAxis("FireTrigger") > 0f)
+		        if ((Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0)
+		        {
+		            Respawn();
+		        }
+		        if ((Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0)
 		        {
 		            Respawn();
 		        }
@@ -517,12 +521,12 @@ public class PlayerController : MonoBehaviour
 	        if (Squadron.GetLiveCount() == 0)
 	        {
 	            if (_isAllowRespawn)
-	                GUI.Label(new Rect(Screen.width/2f - 100f, Screen.height/2f + 50f, 200f, 25f), "Press 'R' to respawn.", new GUIStyle {alignment = TextAnchor.MiddleCenter, normal = {textColor = Color.white}});
+	                GUI.Label(new Rect(Screen.width/2f - 100f, Screen.height/2f + 50f, 200f, 25f), "Press 'Fire' to respawn.", new GUIStyle {alignment = TextAnchor.MiddleCenter, normal = {textColor = Color.white}});
 	        }
 	        else
 	        {
                 if (_isAllowRespawn)
-                    GUI.Label(new Rect(Screen.width/2f - 100f, Screen.height/2f + 50f, 200f, 25f), "Press 'E' to select next Squadron Member.", new GUIStyle {alignment = TextAnchor.MiddleCenter, normal = {textColor = Color.white}});
+                    GUI.Label(new Rect(Screen.width/2f - 100f, Screen.height/2f + 50f, 200f, 25f), "Press 'Next' or 'Previous' to select another Squadron Member.", new GUIStyle {alignment = TextAnchor.MiddleCenter, normal = {textColor = Color.white}});
 	        }
 	    }
 	    var cellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
