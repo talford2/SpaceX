@@ -360,7 +360,7 @@ public class PlayerController : MonoBehaviour
 		        if (_noThreatCooldown > 0f)
 		        {
 		            _noThreatCooldown -= Time.deltaTime;
-                    Debug.Log("NO THREAT: " + _noThreatCooldown);
+                    //Debug.Log("NO THREAT: " + _noThreatCooldown);
 		        }
 		    }
 

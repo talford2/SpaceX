@@ -322,6 +322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400180a1392aeb44ea85504bc0e59fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Levels:
+  - {fileID: 1097665388}
+  - {fileID: 1117886433}
+  - {fileID: 1807080963}
 --- !u!1 &128853634
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,7 +2357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1117886434
 Transform:
   m_ObjectHideFlags: 0
@@ -2466,7 +2470,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1117886433}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
   m_Name: 
@@ -3748,7 +3752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1807080964
 Transform:
   m_ObjectHideFlags: 0
@@ -3861,7 +3865,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1807080963}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
   m_Name: 
