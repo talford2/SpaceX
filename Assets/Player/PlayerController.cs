@@ -36,13 +36,18 @@ public class PlayerController : MonoBehaviour
 	public float MinAimDistance = 10f;
 	public float MaxAimDistance = 1000f;
 
+    [Header("Other")]
     public float NoThreatTime = 5f;
+    public float DeathOptionTime = 1f;
 
 	private float _aimDistance;
 	private float _screenAspect;
 	private int _threatCount;
 	private float _threatCheckCooldown;
     private float _noThreatCooldown;
+
+    private float _deathCooldown;
+    private bool _isAllowRespawn;
 
 
     private UniversePosition _lastDeathUniversePosition;
@@ -226,16 +231,43 @@ public class PlayerController : MonoBehaviour
 		        }
 
 		        PickupCollectibles();
+		        _isAllowRespawn = false;
+		    }
+		    else
+		    {
+		        if (_deathCooldown >= 0f)
+		        {
+		            _deathCooldown -= Time.deltaTime;
+		            if (_deathCooldown < 0f)
+		            {
+		                Debug.Log("ALLOW RESPAWN");
+		                _isAllowRespawn = true;
+		            }
+		        }
+		    }
+
+		    if (_isAllowRespawn)
+		    {
+		        if (Input.GetAxis("FireTrigger") > 0f)
+		        {
+		            Respawn();
+		        }
+		        if (Squadron.GetLiveCount() == 0)
+		        {
+		            if (Input.GetButtonUp("SquadronNext"))
+		            {
+		                Respawn();
+		            }
+		            if (Input.GetButtonUp("SquadronPrevious"))
+		            {
+		                Respawn();
+		            }
+		        }
 		    }
 
 		    if (Input.GetKeyUp(KeyCode.R))
 		    {
-		        if (_playVehicleInstance != null)
-		            _playVehicleInstance.Killable.Die();
-		        Debug.Log("RESPAWN");
-		        var respawnAt = SpawnManager.FindNearest(_lastDeathUniversePosition);
-		        respawnAt.Spawn();
-		        HeadsUpDisplay.Current.RefreshSquadronIcons();
+		        Respawn();
 		    }
 
 		    if (Input.GetKeyUp(KeyCode.Escape))
@@ -249,12 +281,12 @@ public class PlayerController : MonoBehaviour
                     _playVehicleInstance.Killable.Die();
             }
 
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetButtonUp("SquadronNext"))
 			{
 				CycleSquadron(1);
 			}
 
-            if (Input.GetKeyUp(KeyCode.Q))
+            if (Input.GetButtonUp("SquadronPrevious"))
             {
 				CycleSquadron(-1);
             }
@@ -356,6 +388,17 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+    private void Respawn()
+    {
+        if (_playVehicleInstance != null)
+            _playVehicleInstance.Killable.Die();
+        Debug.Log("RESPAWN");
+        var respawnAt = SpawnManager.FindNearest(_lastDeathUniversePosition);
+        respawnAt.Spawn();
+        _isAllowRespawn = false;
+        HeadsUpDisplay.Current.RefreshSquadronIcons();
+    }
+
     private void CycleSquadron(int dir)
     {
         var oldSquadronIndex = Squadron.GetCurrentIndex();
@@ -427,12 +470,13 @@ public class PlayerController : MonoBehaviour
     {
         HeadsUpDisplay.Current.Hit();
         Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.1f);
-        HeadsUpDisplay.Current.RefreshSquadronIcon(0);
+        HeadsUpDisplay.Current.RefreshSquadronIcons();
     }
 
     private void PlayerController_OnDie(Killable sender)
 	{
         _noThreatCooldown = NoThreatTime;
+        _deathCooldown = DeathOptionTime;
         _lastDeathUniversePosition = new UniversePosition(_playVehicleInstance.Shiftable.UniversePosition.CellIndex, _playVehicleInstance.Shiftable.UniversePosition.CellLocalPosition);
 		Debug.Log("PLAYER VEHICLE DESTROYED AT: " + _lastDeathUniversePosition.CellIndex);
         HeadsUpDisplay.Current.RefreshSquadronIcon(0);
@@ -468,18 +512,20 @@ public class PlayerController : MonoBehaviour
 	private void OnGUI()
 	{
 		//GUI.Label(new Rect(Screen.width - 100f, Screen.height - 100f, 100f, 25), string.Format("{0:f2} m/s", VehicleInstance.GetVelocity().magnitude));
-		if (_playVehicleInstance == null)
-		{
-			if (Squadron.GetLiveCount() == 0)
-			{
-				GUI.Label(new Rect(Screen.width / 2f - 100f, Screen.height / 2f + 50f, 200f, 25f), "Press 'R' to respawn.", new GUIStyle { alignment = TextAnchor.MiddleCenter, normal = { textColor = Color.white } });
-			}
-			else
-			{
-				GUI.Label(new Rect(Screen.width / 2f - 100f, Screen.height / 2f + 50f, 200f, 25f), "Press 'E' to select next Squadron Member.", new GUIStyle { alignment = TextAnchor.MiddleCenter, normal = { textColor = Color.white } });
-			}
-		}
-		var cellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
+	    if (_playVehicleInstance == null)
+	    {
+	        if (Squadron.GetLiveCount() == 0)
+	        {
+	            if (_isAllowRespawn)
+	                GUI.Label(new Rect(Screen.width/2f - 100f, Screen.height/2f + 50f, 200f, 25f), "Press 'R' to respawn.", new GUIStyle {alignment = TextAnchor.MiddleCenter, normal = {textColor = Color.white}});
+	        }
+	        else
+	        {
+                if (_isAllowRespawn)
+                    GUI.Label(new Rect(Screen.width/2f - 100f, Screen.height/2f + 50f, 200f, 25f), "Press 'E' to select next Squadron Member.", new GUIStyle {alignment = TextAnchor.MiddleCenter, normal = {textColor = Color.white}});
+	        }
+	    }
+	    var cellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
 		GUI.Label(new Rect(30f, 120f, 200f, 20f), string.Format("CELL ({0}, {1}, {2})", cellIndex.X, cellIndex.Y, cellIndex.Z));
 		GUI.Label(new Rect(30f, 150f, 100f, 25f), string.Format("SQUADRON: {0:f0}/{1:f0}", Squadron.GetLiveCount(), Squadron.GetMemberCount()));
 		GUI.Label(new Rect(30f, 180f, 100f, 25f), string.Format("THREATS: {0}", _threatCount));
