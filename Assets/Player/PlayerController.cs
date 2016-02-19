@@ -470,7 +470,7 @@ public class PlayerController : MonoBehaviour
     {
         HeadsUpDisplay.Current.Hit();
         Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.1f);
-        HeadsUpDisplay.Current.RefreshSquadronIcons();
+        HeadsUpDisplay.Current.RefreshSquadronIcon(0);
     }
 
     private void PlayerController_OnDie(Killable sender)
