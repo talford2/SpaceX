@@ -2038,7 +2038,7 @@ MonoBehaviour:
   SpaceJunkCount: 0
   PowerNodeCount: 0
   CollectRadius: 50
-  TrackerColor: {r: 0, g: 0.45882353, b: 1, a: 1}
+  TrackerColor: {r: 0, g: 0.7517242, b: 1, a: 1}
   ThreatRadius: 2000
   Squadron: {fileID: 1064748906}
   InvertY: 1
@@ -2080,6 +2080,9 @@ MonoBehaviour:
   - {fileID: 989789834}
   - {fileID: 1739396245}
   - {fileID: 1829101715}
+  ShieldRegenerateDelay: 5
+  ShieldRegenerateRate: 5
+  CollectRadius: 50
   ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
   TrackerCurosrImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
   FarTrackerCursorImage: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012,
@@ -2090,7 +2093,7 @@ MonoBehaviour:
     type: 3}
   LockedTrackerCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2,
     type: 3}
-  TrackerColor: {r: 0, g: 0.46206903, b: 1, a: 1}
+  TrackerColor: {r: 0, g: 0.7517242, b: 1, a: 1}
   SquadronTrackerFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba,
     type: 3}
   SquadronPinPrefab: {fileID: 133228, guid: 4537303a7240d1d49a3e4dcf875bc48a, type: 2}
