@@ -11,7 +11,7 @@ Flare:
   m_Elements:
   - m_ImageIndex: 0
     m_Position: 0
-    m_Size: 0.25
+    m_Size: 1
     m_Color: {r: 0.037441183, g: 0, b: 0.038, a: 0}
     m_UseLightColor: 1
     m_Rotate: 0
@@ -19,16 +19,16 @@ Flare:
     m_Fade: 1
   - m_ImageIndex: 1
     m_Position: 0
-    m_Size: 0.27
-    m_Color: {r: 0.141, g: 0.141, b: 0.141, a: 0}
+    m_Size: 0.2
+    m_Color: {r: 0.204, g: 0.204, b: 0.204, a: 0}
     m_UseLightColor: 1
     m_Rotate: 0
     m_Zoom: 1
     m_Fade: 1
   - m_ImageIndex: 2
     m_Position: 0
-    m_Size: 0.78
-    m_Color: {r: 0.010956001, g: 0.012574943, b: 0.066, a: 1}
+    m_Size: 0.7
+    m_Color: {r: 0.029214, g: 0.029943002, b: 0.054, a: 1}
     m_UseLightColor: 1
     m_Rotate: 0
     m_Zoom: 1
@@ -36,7 +36,7 @@ Flare:
   - m_ImageIndex: 3
     m_Position: 0
     m_Size: 0.2
-    m_Color: {r: 0.778, g: 0.778, b: 0.778, a: 1}
+    m_Color: {r: 1, g: 1, b: 1, a: 1}
     m_UseLightColor: 1
     m_Rotate: 0
     m_Zoom: 1
