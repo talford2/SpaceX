@@ -13,12 +13,6 @@ public class UniverseGenerator : MonoBehaviour
 
 	private Camera _renderCamera;
 
-	private GameObject _reflectionProbeObj;
-
-	private ReflectionProbe _sceneRelfectionProbe;
-
-	private int _reflectionProbeRenderId;
-
 	private bool _hasGenerated = false;
 
 	private Material _mat;
@@ -27,7 +21,7 @@ public class UniverseGenerator : MonoBehaviour
 
 	private bool _hasStartedGenerating = false;
 
-	private Texture _probeText;
+	private RenderTexture _probeRenderTexture;
 
 	#endregion
 
@@ -82,19 +76,11 @@ public class UniverseGenerator : MonoBehaviour
 		}
 	}
 
-	public GameObject ReflectionProbe
-	{
-		get
-		{
-			return _reflectionProbeObj;
-		}
-	}
-
 	public Texture ProbeTexture
 	{
 		get
 		{
-			return _probeText;
+			return _probeRenderTexture;
 		}
 	}
 
@@ -117,23 +103,19 @@ public class UniverseGenerator : MonoBehaviour
 		//Generate();
 	}
 
-	void Update()
+	void LateUpdate()
 	{
+		Debug.Log("I was called!");
+
 		if (_hasStartedGenerating)
 		{
-			if (_sceneRelfectionProbe.IsFinishedRendering(_reflectionProbeRenderId))
+			Debug.Log("Done: " + gameObject.name);
+			DestroyImmediate(_parent.gameObject);
+			_hasGenerated = true;
+			_hasStartedGenerating = false;
+			if (FinishedRendering != null)
 			{
-				_probeText = _sceneRelfectionProbe.bakedTexture;
-
-				Debug.Log("Done: " + gameObject.name);
-				//Destroy(_parent.gameObject);
-				DestroyImmediate(_parent.gameObject);
-				_hasGenerated = true;
-				_hasStartedGenerating = false;
-				if (FinishedRendering != null)
-				{
-					FinishedRendering();
-				}
+				FinishedRendering();
 			}
 		}
 	}
@@ -185,7 +167,6 @@ public class UniverseGenerator : MonoBehaviour
 	public Material GetMaterial()
 	{
 		Debug.Log("Get material : " + gameObject.name);
-		//_hasGenerated = true;
 		Generate();
 		Flatten();
 		_hasStartedGenerating = true;
@@ -209,35 +190,17 @@ public class UniverseGenerator : MonoBehaviour
 
 		_renderCamera.RenderToCubemap(renderTexture);
 
-		_renderCamera.enabled = false;
-
-		if (_reflectionProbeObj != null)
-		{
-			Destroy(_reflectionProbeObj);
-		}
-
 		// Reflection probe
-		_reflectionProbeObj = new GameObject();
-		_reflectionProbeObj.name = "Reflection Probe";
-		_sceneRelfectionProbe = _reflectionProbeObj.AddComponent<ReflectionProbe>();
-		_sceneRelfectionProbe.size = Vector3.one * 1500f;
-		_sceneRelfectionProbe.timeSlicingMode = UnityEngine.Rendering.ReflectionProbeTimeSlicingMode.AllFacesAtOnce;
+		_probeRenderTexture = new RenderTexture(256, 256, 24);
+		_probeRenderTexture.wrapMode = TextureWrapMode.Repeat;
+		_probeRenderTexture.antiAliasing = 2;
+		_probeRenderTexture.anisoLevel = 9;
+		_probeRenderTexture.filterMode = FilterMode.Trilinear;
+		_probeRenderTexture.generateMips = false;
+		_probeRenderTexture.isCubemap = true;
+		_renderCamera.RenderToCubemap(_probeRenderTexture);
 
-		//sceneRelfectionProbe.mode = UnityEngine.Rendering.ReflectionProbeMode.Custom;
-		//sceneRelfectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
-		//sceneRelfectionProbe.customBakedTexture = renderTexture;
-
-		_sceneRelfectionProbe.backgroundColor = Color.red;
-		_sceneRelfectionProbe.mode = UnityEngine.Rendering.ReflectionProbeMode.Realtime;
-		_sceneRelfectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
-		_sceneRelfectionProbe.cullingMask = LayerMask.GetMask(BackgroundLayerName);
-		//sceneRelfectionProbe.resolution = 2048;
-		_sceneRelfectionProbe.resolution = 512;
-		_reflectionProbeRenderId = _sceneRelfectionProbe.RenderProbe();
-		_sceneRelfectionProbe.hdr = true;
-
-		//_parent.gameObject.SetActive(false);
-		//Destroy(_parent.gameObject);
+		_renderCamera.enabled = false;
 	}
 
 	#endregion

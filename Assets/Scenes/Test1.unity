@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400180a1392aeb44ea85504bc0e59fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DirectionLight: {fileID: 1376424185}
   Levels:
   - {fileID: 1097665388}
   - {fileID: 1117886433}
