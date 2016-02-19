@@ -6,6 +6,7 @@ public class HeadsUpDisplay : MonoBehaviour
 {
 	public GameObject Crosshair;
 	public Text EnergyText;
+    public Text ShieldText;
 	public Text HealthText;
 
 	public GameObject SquadronPrompt;
@@ -40,7 +41,8 @@ public class HeadsUpDisplay : MonoBehaviour
 		if (PlayerController.Current.VehicleInstance != null)
 		{
 			EnergyText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.BoostEnergy);
-			HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Health);
+            ShieldText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Shield);
+            HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Health);
 		}
 		if (_squadronPromptCooldown >= 0f)
 		{
@@ -77,11 +79,11 @@ public class HeadsUpDisplay : MonoBehaviour
         if (squadronVehicle != null && squadronVehicle.Killable.IsAlive)
         {
             squadronIcon.SetSelected(PlayerController.Current.Squadron.GetCurrentIndex() == index);
-            squadronIcon.SetHealthFraction(squadronVehicle.Killable.Health / squadronVehicle.Killable.MaxHealth);
+            squadronIcon.SetFractions(squadronVehicle.Killable.Shield/squadronVehicle.Killable.MaxShield, squadronVehicle.Killable.Health/squadronVehicle.Killable.MaxHealth);
         }
         else
         {
-            squadronIcon.SetHealthFraction(0f);
+            squadronIcon.SetFractions(0f, 0f);
         }
     }
 

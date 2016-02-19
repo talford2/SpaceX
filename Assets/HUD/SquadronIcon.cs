@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class SquadronIcon : MonoBehaviour
 {
     public Image Icon;
+    public Image ShieldBar;
     public Image HealthBar;
     public Text CallSignLabel;
 
@@ -13,10 +14,11 @@ public class SquadronIcon : MonoBehaviour
 
     private bool _isSelected;
 
-    public void SetHealthFraction(float fraction)
+    public void SetFractions(float shieldFraction, float healthFraction)
     {
-        HealthBar.fillAmount = fraction;
-        if (fraction <= 0f)
+        ShieldBar.fillAmount = shieldFraction;
+        HealthBar.fillAmount = healthFraction;
+        if (healthFraction <= 0f)
         {
             Icon.overrideSprite = Sprite.Create(Dead, new Rect(0, 0, Dead.width, Dead.height), new Vector2(0.5f, 0.5f));
         }

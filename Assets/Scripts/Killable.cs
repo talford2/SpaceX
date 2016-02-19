@@ -5,6 +5,9 @@ public class Killable : MonoBehaviour
 	public float Health;
 	public float MaxHealth;
 
+    public float Shield;
+    public float MaxShield;
+
 	public GameObject DamageEffect;
 	public GameObject DieEffect;
 
@@ -30,7 +33,16 @@ public class Killable : MonoBehaviour
     {
         if (IsAlive)
         {
-            Health -= damage;
+            if (Shield > 0f)
+            {
+                Shield -= damage;
+                if (Shield < 0f)
+                    Shield = 0f;
+            }
+            else
+            {
+                Health -= damage;
+            }
             if (OnDamage != null)
                 OnDamage(position, normal, attacker);
             if (DamageEffect != null)

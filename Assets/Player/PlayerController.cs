@@ -112,10 +112,10 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;
 		_playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
 
-		var healthRegenerator = _playVehicleInstance.gameObject.AddComponent<HealthRegenerator>();
-		healthRegenerator.RegenerationDelay = 5f;
-		healthRegenerator.RegenerationRate = 5f;
-	    healthRegenerator.OnRegenerate += PlayerController_OnRegenerate;
+		var shieldRegenerator = _playVehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
+		shieldRegenerator.RegenerationDelay = 5f;
+		shieldRegenerator.RegenerationRate = 5f;
+	    shieldRegenerator.OnRegenerate += PlayerController_OnRegenerate;
 	}
 
 	private Vector3 GetAimAt()
@@ -430,7 +430,7 @@ public class PlayerController : MonoBehaviour
 
                     oldMember.VehicleInstance.Killable.OnDamage -= PlayerController_OnDamage;
                     oldMember.VehicleInstance.Killable.OnDie -= PlayerController_OnDie;
-                    oldMember.VehicleInstance.GetComponent<HealthRegenerator>().OnRegenerate -= PlayerController_OnRegenerate;
+                    oldMember.VehicleInstance.GetComponent<ShieldRegenerator>().OnRegenerate -= PlayerController_OnRegenerate;
                 }
 
                 // Disable next vehicle NPC control and apply PlayerController
@@ -445,7 +445,7 @@ public class PlayerController : MonoBehaviour
 
                     _playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;
                     _playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
-                    _playVehicleInstance.GetComponent<HealthRegenerator>().OnRegenerate += PlayerController_OnRegenerate;
+                    _playVehicleInstance.GetComponent<ShieldRegenerator>().OnRegenerate += PlayerController_OnRegenerate;
 
                     curMember.enabled = false;
 

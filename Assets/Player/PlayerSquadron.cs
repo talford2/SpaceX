@@ -81,17 +81,17 @@ public class PlayerSquadron : MonoBehaviour
         var mapPin = member.VehicleInstance.gameObject.AddComponent<MapPin>();
         mapPin.ActivePin = SquadronPinPrefab;
         mapPin.InactivePin = SquadronPinPrefab;
-        var squadronHealthRegenerator = member.VehicleInstance.gameObject.AddComponent<HealthRegenerator>();
-        squadronHealthRegenerator.RegenerationDelay = 5f;
-        squadronHealthRegenerator.RegenerationRate = 5f;
+        var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
+        squadronShieldRegenerator.RegenerationDelay = 5f;
+        squadronShieldRegenerator.RegenerationRate = 5f;
 
         member.enabled = true;
     }
 
     private void BindMemberEvents(Fighter member)
     {
-        var squadronHealthRegenerator = member.VehicleInstance.GetComponent<HealthRegenerator>();
-        squadronHealthRegenerator.OnRegenerate += SquadronMember_OnRegenerate;
+        var squadronShieldRegenerator = member.VehicleInstance.GetComponent<ShieldRegenerator>();
+        squadronShieldRegenerator.OnRegenerate += SquadronMember_OnRegenerate;
         var memberKillable = member.VehicleInstance.Killable;
         memberKillable.OnDamage += SquadronMember_OnDamage;
         memberKillable.OnDie += SquadronMember_OnDie;
@@ -115,9 +115,9 @@ public class PlayerSquadron : MonoBehaviour
         HeadsUpDisplay.Current.RefreshSquadronIcons();
         sender.OnDamage -= SquadronMember_OnDamage;
         sender.OnDie -= SquadronMember_OnDie;
-        var healthRegenerator = sender.GetComponent<HealthRegenerator>();
-        if (healthRegenerator != null)
-            healthRegenerator.OnRegenerate -= SquadronMember_OnRegenerate;
+        var shieldRegenerator = sender.GetComponent<ShieldRegenerator>();
+        if (shieldRegenerator != null)
+            shieldRegenerator.OnRegenerate -= SquadronMember_OnRegenerate;
     }
 
     public int GetLiveCount()

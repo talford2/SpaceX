@@ -493,7 +493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd44330a49bb5348bf12e52bb74c3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
 --- !u!114 &11422806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -546,7 +545,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd44330a49bb5348bf12e52bb74c3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
 --- !u!114 &11436884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -594,6 +592,9 @@ MonoBehaviour:
   TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  Targetable: {fileID: 0}
+  Killable: {fileID: 0}
+  MaxDistance: 3000
   CallSign: 
   IsDisabled: 0
 --- !u!114 &11461534
@@ -619,8 +620,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 40
-  MaxHealth: 40
+  Health: 30
+  MaxHealth: 30
+  Shield: 10
+  MaxShield: 10
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
@@ -687,6 +690,7 @@ MonoBehaviour:
   Thrusters:
   - {fileID: 11405410}
   BoostSound: {fileID: 8236044}
+  IgnoreCollisions: 0
 --- !u!114 &11491306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -823,6 +827,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: TrackerColor.b
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Health
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Shield
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxShield
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
