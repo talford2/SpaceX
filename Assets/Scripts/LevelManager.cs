@@ -13,7 +13,9 @@ public class LevelManager : MonoBehaviour
 
 	private ReflectionProbe _reflectionProbe;
 
-	private int _levelIndex = 0;
+	private int _buildIndex = 0;
+
+	private int _viewIndex = 0;
 
 	void Start()
 	{
@@ -37,32 +39,30 @@ public class LevelManager : MonoBehaviour
 		_reflectionProbe.cullingMask = LayerMask.GetMask("Universe Backgrouund");
 		_reflectionProbe.size = Vector3.one * (Universe.Current.CellSize + 100);
 		_reflectionProbe.transform.position = Vector3.zero;
-
-		
 	}
 
 	private void UGen_FinishedRendering()
 	{
-		_levelIndex++;
-		if (_levelIndex < Levels.Count)
+		_buildIndex++;
+		if (_buildIndex < Levels.Count)
 		{
-			var uGen = Levels[_levelIndex].GetComponent<UniverseGenerator>();
+			var uGen = Levels[_buildIndex].GetComponent<UniverseGenerator>();
 			uGen.FinishedRendering += UGen_FinishedRendering;
 			LevelBackgrounds.Add(uGen.GetMaterial());
 		}
-		ChangeLevel(0);
+		ChangeLevel(_viewIndex);
 	}
 
 	void Update()
 	{
 		if (Input.GetKeyUp(KeyCode.N))
 		{
-			_levelIndex++;
-			if (_levelIndex > Levels.Count - 1)
+			_viewIndex++;
+			if (_viewIndex > Levels.Count - 1)
 			{
-				_levelIndex = 0;
+				_viewIndex = 0;
 			}
-			ChangeLevel(_levelIndex);
+			ChangeLevel(_viewIndex);
 		}
 	}
 
