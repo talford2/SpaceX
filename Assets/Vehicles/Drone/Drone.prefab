@@ -475,7 +475,9 @@ MonoBehaviour:
   TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  CallSign: 
+  Targetable: {fileID: 0}
+  Killable: {fileID: 0}
+  MaxDistance: 3000
   IsDisabled: 0
 --- !u!114 &11423764
 MonoBehaviour:
@@ -513,6 +515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed9b078a58fe604694fff0328ea19ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Drone
+  Power: 20
   IdleSpeed: 10
   MaxSpeed: 30
   MinSpeed: 3
@@ -550,6 +554,7 @@ MonoBehaviour:
   Thrusters:
   - {fileID: 11482076}
   BoostSound: {fileID: 8260914}
+  IgnoreCollisions: 0
 --- !u!114 &11442730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -614,7 +619,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd44330a49bb5348bf12e52bb74c3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
 --- !u!114 &11481212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -628,6 +632,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 4
   MaxHealth: 4
+  Shield: 0
+  MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
@@ -961,6 +967,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: TrackerColor.b
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Name
+      value: Drone
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Power
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

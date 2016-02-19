@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Red Laser Cannon
   MissilePrefab: {fileID: 180512, guid: adb276e13f8472b4ab9d9878efaa0049, type: 2}
   MuzzlePrefab: {fileID: 11408760, guid: db0bd28387b791d4ea43fd188b23d353, type: 2}
   FireSound: {fileID: 8259540}
@@ -218,6 +219,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Name
+      value: Red Laser Cannon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

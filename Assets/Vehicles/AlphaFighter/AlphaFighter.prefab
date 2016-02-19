@@ -671,7 +671,6 @@ MonoBehaviour:
   Targetable: {fileID: 0}
   Killable: {fileID: 0}
   MaxDistance: 3000
-  CallSign: 
   IsDisabled: 0
 --- !u!114 &11423764
 MonoBehaviour:
@@ -723,6 +722,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed9b078a58fe604694fff0328ea19ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Alpha Fighter
+  Power: 100
+  PreviewPrefab: {fileID: 190414, guid: 81138525fc3e13f4595aeb007f885cd5, type: 2}
   IdleSpeed: 20
   MaxSpeed: 50
   MinSpeed: 3
@@ -1229,6 +1231,18 @@ Prefab:
       propertyPath: MaxShield
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Name
+      value: Alpha Fighter
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Power
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: PreviewPrefab
+      value: 
+      objectReference: {fileID: 190414, guid: 81138525fc3e13f4595aeb007f885cd5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}

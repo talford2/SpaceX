@@ -3,31 +3,24 @@ using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
+    [Header("Description")]
+    public string Name;
+    public float Power;
+    public GameObject PreviewPrefab;
+
     [Header("Vehicle Settings")]
     public float IdleSpeed = 10f;
-
     public float MaxSpeed = 20f;
-
     public float MinSpeed = 3f;
-
     public float Acceleration = 5f;
-
     public float Brake = 7f;
-
     public float MaxBoostSpeed = 500f;
-
     public float BoostAcceleration = 500f;
-
     public float BoostBrake = 150f;
-
     public float CurrentSpeed = 0f;
-
     public float PitchSpeed = 5f;
-
     public float YawSpeed = 5f;
-
     public float RollAcceleration = 640f;
-
     public float MaxRollSpeed = 100f;
 
     [Header("Collisions")]
@@ -36,26 +29,17 @@ public class Vehicle : MonoBehaviour
 
     [Header("Boost Energy")]
     public float MaxBoostEnergy = 100f;
-
     public float BoostEnergy = 100f;
-
     public float BoostCost = 50f;
-
     public float BoostEnergyRegenerateDelay = 5f;
-
     public float BoostEnergyRegenerateRate = 1f;
 
     [Header("Control Settings")]
     public bool TriggerAccelerate = false;
-
     public bool TriggerBrake = false;
-
     public bool TriggerBoost = false;
-
     public float YawThrottle = 0f;
-
     public float PitchThotttle = 0f;
-
     public float RollThrottle = 0f;
 
     public bool IsAccelerating

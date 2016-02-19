@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [Header("Description")]
+    public string Name;
+
+    [Header("Weapon Settings")]
 	public GameObject MissilePrefab;
 
 	public MuzzleFlash MuzzlePrefab;
