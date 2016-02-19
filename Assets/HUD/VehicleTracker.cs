@@ -310,7 +310,7 @@ public class VehicleTracker : Tracker
             var shieldFraction = Mathf.Clamp01(_killable.Shield/_killable.MaxShield);
             var healthFraction = Mathf.Clamp01(_killable.Health/_killable.MaxHealth);
 
-            if (shieldFraction < 1f)
+            if (shieldFraction < 1f || healthFraction < 1f)
             {
                 _shieldBarInstance.fillAmount = shieldFraction;
                 _shieldBarBackgroundInstance.enabled = true;
