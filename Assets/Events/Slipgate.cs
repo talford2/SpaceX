@@ -8,7 +8,7 @@ public class Slipgate : MonoBehaviour
 
     void Update()
     {
-        if (!_isTriggered && PlayerController.Current != null && (PlayerController.Current.VehicleInstance.Shiftable.GetWorldPosition() - transform.position).sqrMagnitude < 9)
+        if (!_isTriggered && PlayerController.Current.VehicleInstance != null && (PlayerController.Current.VehicleInstance.Shiftable.GetWorldPosition() - transform.position).sqrMagnitude < 9)
         {
             Debug.Log("WARP!");
             _isTriggered = true;
