@@ -27,25 +27,29 @@ public class ShipProfileScreen : MonoBehaviour
     private void Update()
     {
         if (Input.GetButtonUp("SquadronNext"))
-        {
-            _curIndex++;
-            if (_curIndex > Vehicles.Count-1)
-                _curIndex = 0;
-            Populate(Vehicles[_curIndex]);
-        }
+            ShowNext();
 
         if (Input.GetButtonUp("SquadronPrevious"))
-        {
-            _curIndex--;
-            if (_curIndex < 0)
-                _curIndex = Vehicles.Count - 1;
-            Populate(Vehicles[_curIndex]);
-        }
+            ShowPrevious();
 
         if (_preview != null)
-        {
             _preview.transform.Rotate(Vector3.up, 15f*Time.deltaTime);
-        }
+    }
+
+    public void ShowNext()
+    {
+        _curIndex++;
+        if (_curIndex > Vehicles.Count - 1)
+            _curIndex = 0;
+        Populate(Vehicles[_curIndex]);
+    }
+
+    public void ShowPrevious()
+    {
+        _curIndex--;
+        if (_curIndex < 0)
+            _curIndex = Vehicles.Count - 1;
+        Populate(Vehicles[_curIndex]);
     }
 
     public void Populate(Vehicle vehicle)
