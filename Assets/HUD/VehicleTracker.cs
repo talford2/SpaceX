@@ -22,7 +22,9 @@ public class VehicleTracker : Tracker
 	private Vector2 _screenCentre;
 	private Rect _screenBounds;
 	private Image _imageInstance;
-	private Image _healthBarBackgroundInstance;
+    private Image _shieldBarBackgroundInstance;
+    private Image _shieldBarInstance;
+    private Image _healthBarBackgroundInstance;
 	private Image _healthBarInstance;
 
 	private Sprite _trackerSprite;
@@ -32,6 +34,7 @@ public class VehicleTracker : Tracker
 	private Sprite _lockingSprite;
 	private Sprite _lockedSprite;
 
+    private Texture2D _shieldBarTexture;
 	private Texture2D _healthBarTexture;
 	private Texture2D _healthBarBackgroundTexture;
 
@@ -46,7 +49,8 @@ public class VehicleTracker : Tracker
 		var boundaryPadding = 20f;
 		_screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
 
-		_healthBarTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 1f));
+        _shieldBarTexture = Utility.ColouredTexture(48, 2, new Color(0.8f, 0.8f, 1f, 1f));
+        _healthBarTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 1f));
 		_healthBarBackgroundTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 0.05f));
 
 	    _targetable = Targetable ?? GetComponent<Targetable>();
@@ -74,8 +78,29 @@ public class VehicleTracker : Tracker
 		trackerImg.sprite = _trackerSprite;
 		trackerImg.SetNativeSize();
 
-		// Healthbar background
-		var healthBarBackgroundObj = new GameObject(string.Format("{0}_HealthBackground", transform.name));
+        // Shieldbar background
+        var shieldBarBackgroundObj = new GameObject(string.Format("{0}_ShieldBackground", transform.name));
+        var shieldBarBackgroundImg = shieldBarBackgroundObj.AddComponent<Image>();
+        shieldBarBackgroundImg.rectTransform.pivot = new Vector2(0.5f, -17f);
+        shieldBarBackgroundImg.color = new Color(1f, 1f, 1f, 1f);
+        shieldBarBackgroundImg.sprite = Sprite.Create(_healthBarBackgroundTexture, new Rect(0, 0, _healthBarBackgroundTexture.width, _healthBarBackgroundTexture.height), Vector2.zero);
+        shieldBarBackgroundImg.SetNativeSize();
+
+        // Shieldbar
+        var shieldBarObj = new GameObject(string.Format("{0}_Shield", transform.name));
+        var shieldBarImg = shieldBarObj.AddComponent<Image>();
+        shieldBarImg.rectTransform.pivot = new Vector2(0.5f, -17f);
+        shieldBarImg.color = new Color(1f, 1f, 1f, 1f);
+        shieldBarImg.sprite = Sprite.Create(_shieldBarTexture, new Rect(0, 0, _shieldBarTexture.width, _shieldBarTexture.height), Vector2.zero);
+
+        shieldBarImg.type = Image.Type.Filled;
+        shieldBarImg.fillMethod = Image.FillMethod.Horizontal;
+        shieldBarImg.fillAmount = 1f;
+
+        shieldBarImg.SetNativeSize();
+
+        // Healthbar background
+        var healthBarBackgroundObj = new GameObject(string.Format("{0}_HealthBackground", transform.name));
 		var healthBarBackgroundImg = healthBarBackgroundObj.AddComponent<Image>();
 		healthBarBackgroundImg.rectTransform.pivot = new Vector2(0.5f, -15f);
 		healthBarBackgroundImg.color = new Color(1f, 1f, 1f, 1f);
@@ -83,7 +108,7 @@ public class VehicleTracker : Tracker
 		healthBarBackgroundImg.SetNativeSize();
 
 		// Healthbar
-		var healthBarObj = new GameObject(string.Format("{0}_HealthBackground", transform.name));
+		var healthBarObj = new GameObject(string.Format("{0}_Health", transform.name));
 		var healthBarImg = healthBarObj.AddComponent<Image>();
 		healthBarImg.rectTransform.pivot = new Vector2(0.5f, -15f);
 		healthBarImg.color = new Color(1f, 1f, 1f, 1f);
@@ -95,10 +120,20 @@ public class VehicleTracker : Tracker
 
 		healthBarImg.SetNativeSize();
 
-		healthBarBackgroundObj.transform.SetParent(trackerImg.transform);
+        // Stuff
+        shieldBarBackgroundObj.transform.SetParent(trackerImg.transform);
+        shieldBarObj.transform.SetParent(trackerImg.transform);
+
+	    _shieldBarBackgroundInstance = shieldBarBackgroundImg;
+	    _shieldBarInstance = shieldBarImg;
+
+        healthBarBackgroundObj.transform.SetParent(trackerImg.transform);
 		healthBarObj.transform.SetParent(trackerImg.transform);
 
-		_healthBarBackgroundInstance = healthBarBackgroundImg;
+        _healthBarBackgroundInstance = healthBarBackgroundImg;
+        _healthBarInstance = healthBarImg;
+
+        _healthBarBackgroundInstance = healthBarBackgroundImg;
 		_healthBarInstance = healthBarImg;
 
 		_imageInstance = trackerImg;
@@ -107,6 +142,8 @@ public class VehicleTracker : Tracker
         var distanceSquared = (_targetable.transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
 
         _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 0f);
+        _shieldBarBackgroundInstance.color = Utility.SetColorAlpha(_shieldBarBackgroundInstance.color, 0f);
+        _shieldBarInstance.color = Utility.SetColorAlpha(_shieldBarInstance.color, 0f);
         _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 0f);
         _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 0f);
 
@@ -159,12 +196,16 @@ public class VehicleTracker : Tracker
             if (fadeDirection > 0)
             {
                 _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 1f- fadeFraction);
+                _shieldBarBackgroundInstance.color = Utility.SetColorAlpha(_shieldBarBackgroundInstance.color, 1f - fadeFraction);
+                _shieldBarInstance.color = Utility.SetColorAlpha(_shieldBarInstance.color, 1f - fadeFraction);
                 _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 1f- fadeFraction);
                 _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 1f- fadeFraction);
             }
             else
             {
                 _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, fadeFraction);
+                _shieldBarBackgroundInstance.color = Utility.SetColorAlpha(_shieldBarBackgroundInstance.color, fadeFraction);
+                _shieldBarInstance.color = Utility.SetColorAlpha(_shieldBarInstance.color, fadeFraction);
                 _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, fadeFraction);
                 _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, fadeFraction);
             }
@@ -173,6 +214,8 @@ public class VehicleTracker : Tracker
         if (IsDisabled)
         {
             _imageInstance.enabled = false;
+            _shieldBarBackgroundInstance.enabled = false;
+            _shieldBarInstance.enabled = false;
             _healthBarBackgroundInstance.enabled = false;
             _healthBarInstance.enabled = false;
         }
@@ -198,6 +241,8 @@ public class VehicleTracker : Tracker
                     {
                         useSprite = _veryFarTrackerSprite;
                     }
+                    _shieldBarBackgroundInstance.enabled = false;
+                    _shieldBarInstance.enabled = false;
                     _healthBarBackgroundInstance.enabled = false;
                     _healthBarInstance.enabled = false;
                 }
@@ -249,6 +294,8 @@ public class VehicleTracker : Tracker
                 _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
                 _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
 
+                _shieldBarBackgroundInstance.enabled = false;
+                _shieldBarInstance.enabled = false;
                 _healthBarBackgroundInstance.enabled = false;
                 _healthBarInstance.enabled = false;
             }
@@ -258,25 +305,34 @@ public class VehicleTracker : Tracker
     }
 
     private void UpdateHealthBar()
-	{
-		if (_killable != null)
-		{
-			var healthFraction = Mathf.Clamp01(_killable.Health / _killable.MaxHealth);
-			if (healthFraction < 1f)
-			{
-				_healthBarInstance.fillAmount = healthFraction;
-				_healthBarBackgroundInstance.enabled = true;
-				_healthBarInstance.enabled = true;
-			}
-			else
-			{
-				_healthBarBackgroundInstance.enabled = false;
-				_healthBarInstance.enabled = false;
-			}
-		}
-	}
+    {
+        if (_killable != null)
+        {
+            var shieldFraction = Mathf.Clamp01(_killable.Shield/_killable.MaxShield);
+            var healthFraction = Mathf.Clamp01(_killable.Health/_killable.MaxHealth);
 
-	public override void DestroyInstance()
+            if (shieldFraction < 1f)
+            {
+                _shieldBarInstance.fillAmount = shieldFraction;
+                _shieldBarBackgroundInstance.enabled = true;
+                _shieldBarInstance.enabled = true;
+
+                _healthBarInstance.fillAmount = healthFraction;
+                _healthBarBackgroundInstance.enabled = true;
+                _healthBarInstance.enabled = true;
+            }
+            else
+            {
+                _shieldBarBackgroundInstance.enabled = false;
+                _shieldBarInstance.enabled = false;
+
+                _healthBarBackgroundInstance.enabled = false;
+                _healthBarInstance.enabled = false;
+            }
+        }
+    }
+
+    public override void DestroyInstance()
 	{
 		if (_imageInstance != null)
 			Destroy(_imageInstance.gameObject);
