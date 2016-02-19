@@ -1,58 +1,69 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-	//public List<GameObject> Levels;
+	public Light DirectionLight;
 
-	//public List<Material> LevelBackgrounds;
+	public List<GameObject> Levels;
 
-	//private int _levelIndex = 0;
+	private List<UniverseGenerator> _uGenLevels;
 
-	//void Start()
-	//{
-	//	LevelBackgrounds = new List<Material>();
-	//	//foreach (var level in Levels)
-	//	//{
-	//	//	var uGen = level.GetComponent<UniverseGenerator>();
-	//	//	LevelBackgrounds.Add(uGen.GetMaterial());
-	//	//}
-	//	//ChangeLevel(0);
-	//}
+	private List<Material> LevelBackgrounds;
 
-	//int index = 0;
+	private int _levelIndex = 0;
 
-	//private float _systemGenTime = 2;
-	//private float _systemGenCooldown = 0;
+	void Start()
+	{
+		_uGenLevels = new List<UniverseGenerator>();
+		foreach (var go in Levels)
+		{
+			_uGenLevels.Add(go.GetComponent<UniverseGenerator>());
+		}
+		LevelBackgrounds = new List<Material>();
 
-	////void Update()
-	////{
-	////	if (index < Levels.Count)
-	////	{
-	////		_systemGenCooldown -= Time.deltaTime;
-	////		if (_systemGenCooldown < 0)
-	////		{
-	////			Debug.Log("Render system " + index);
-	////			_systemGenCooldown = _systemGenTime;
-	////			var uGen = Levels[index].GetComponent<UniverseGenerator>();
-	////			LevelBackgrounds.Add(uGen.GetMaterial());	
-	////			index++;
-	////		}
-	////	}
+		var uGen = Levels[0].GetComponent<UniverseGenerator>();
+		uGen.FinishedRendering += UGen_FinishedRendering;
+		LevelBackgrounds.Add(uGen.GetMaterial());
 
-	////	if (Input.GetKeyUp(KeyCode.N))
-	////	{
-	////		_levelIndex++;
-	////		if (_levelIndex > Levels.Count - 1)
-	////		{
-	////			_levelIndex = 0;
-	////		}
-	////		ChangeLevel(_levelIndex);
-	////	}
-	////}
+		//ChangeLevel(0);
+	}
 
-	//private void ChangeLevel(int index)
-	//{
+	private void UGen_FinishedRendering()
+	{
+		_levelIndex++;
+		if (_levelIndex < Levels.Count)
+		{
+			var uGen = Levels[_levelIndex].GetComponent<UniverseGenerator>();
+			uGen.FinishedRendering += UGen_FinishedRendering;
+			LevelBackgrounds.Add(uGen.GetMaterial());
+		}
 
-	//	RenderSettings.skybox = LevelBackgrounds[index];
-	//}
+	}
+
+	void Update()
+	{
+		if (Input.GetKeyUp(KeyCode.N))
+		{
+			_levelIndex++;
+			if (_levelIndex > Levels.Count - 1)
+			{
+				_levelIndex = 0;
+			}
+			ChangeLevel(_levelIndex);
+		}
+	}
+
+	private void ChangeLevel(int index)
+	{
+		RenderSettings.skybox = _uGenLevels[index].Background;
+		DirectionLight.transform.forward = _uGenLevels[index].SunDirection;
+
+		//foreach (var lvl in _uGenLevels)
+		//{
+		//	lvl.ReflectionProbe.SetActive(false);
+		//}
+		//_uGenLevels[index].ReflectionProbe.SetActive(true);
+		//_uGenLevels[index].ReflectionProbe.GetComponent<ReflectionProbe>().bakedTexture = _uGenLevels[index].ProbeTexture;
+	}
 }
