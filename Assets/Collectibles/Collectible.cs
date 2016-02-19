@@ -49,17 +49,14 @@ public class Collectible : MonoBehaviour
 		_collectibleTracker = GetComponent<CollectibleTracker>();
 	}
 
-	public void Collect(GameObject collector)
-	{
-		if (collector.transform == PlayerController.Current.VehicleInstance.transform)
-		{
-			_isCollected = true;
-			_collectorTransform = collector.transform;
-			_inheritVelocityFraction = 0.6f;
-		}
-	}
+    public void Collect(GameObject collector)
+    {
+        _isCollected = true;
+        _collectorTransform = collector.transform;
+        _inheritVelocityFraction = 0.6f;
+    }
 
-	private bool isFinished = false;
+    private bool isFinished = false;
 
 	private void Update()
 	{
@@ -72,7 +69,7 @@ public class Collectible : MonoBehaviour
 		}
 		if (!isFinished && _isCollected && _collectorTransform != null)
 		{
-			if (PlayerController.Current.VehicleInstance != null)
+			if (_collectorTransform != null)
 			{
 				if (_inheritVelocityFraction < 1f)
 				{
@@ -80,7 +77,7 @@ public class Collectible : MonoBehaviour
 					if (_inheritVelocityFraction > 1f)
 						_inheritVelocityFraction = 1f;
 				}
-				_velocity = _inheritVelocityFraction * PlayerController.Current.VehicleInstance.GetVelocity();
+				_velocity = _inheritVelocityFraction * _collectorTransform.GetComponent<Vehicle>().GetVelocity();
 			}
 
 			var toCollector = transform.position - _collectorTransform.position;
@@ -94,7 +91,7 @@ public class Collectible : MonoBehaviour
 				isFinished = true;
 				if (SoundClip != null)
 				{
-					Utility.PlayOnTransform(SoundClip, PlayerController.Current.VehicleInstance.transform);
+					Utility.PlayOnTransform(SoundClip, _collectorTransform);
 				}
 				if (PlayerController.Current != null)
 				{

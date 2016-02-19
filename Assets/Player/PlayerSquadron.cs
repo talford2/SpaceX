@@ -7,6 +7,7 @@ public class PlayerSquadron : MonoBehaviour
     public List<Fighter> Members;
     public float ShieldRegenerateDelay = 5f;
     public float ShieldRegenerateRate = 5f;
+    public float CollectRadius = 50f;
 
     [Header("Trackers")]
     public Texture2D ArrowCursorImage;
@@ -35,7 +36,7 @@ public class PlayerSquadron : MonoBehaviour
             if (member != playerNpc)
             {
                 var formationOffset = Formations.GetArrowOffset(i, 10f);
-                var univPos = Universe.Current.GetUniversePosition(playerVehicleInstance.transform.position + playerVehicleInstance.transform.rotation* formationOffset);
+                var univPos = Universe.Current.GetUniversePosition(playerVehicleInstance.transform.position + playerVehicleInstance.transform.rotation*formationOffset);
                 member.IsSquadronMember = true;
 
                 // Give squadron members better aiming!
@@ -88,6 +89,28 @@ public class PlayerSquadron : MonoBehaviour
         squadronShieldRegenerator.RegenerationRate = ShieldRegenerateRate;
 
         member.enabled = true;
+    }
+
+    private void Update()
+    {
+        foreach (var member in Members)
+        {
+            if (member.VehicleInstance != null)
+            {
+                PickupCollectibles(member);
+            }
+        }
+    }
+
+    private void PickupCollectibles(Fighter member)
+    {
+        var hitColliders = Physics.OverlapSphere(member.VehicleInstance.transform.position, CollectRadius, LayerMask.GetMask("Collectible"));
+        foreach (var hitCollider in hitColliders)
+        {
+            var collectible = hitCollider.GetComponent<CollectibleTrigger>();
+            if (collectible != null)
+                collectible.Pickup(member.VehicleInstance.gameObject, member.VehicleInstance.GetVelocity());
+        }
     }
 
     private void BindMemberEvents(Fighter member)
