@@ -37,6 +37,8 @@ public class LevelManager : MonoBehaviour
 		_reflectionProbe.cullingMask = LayerMask.GetMask("Universe Backgrouund");
 		_reflectionProbe.size = Vector3.one * (Universe.Current.CellSize + 100);
 		_reflectionProbe.transform.position = Vector3.zero;
+
+		
 	}
 
 	private void UGen_FinishedRendering()
@@ -48,7 +50,7 @@ public class LevelManager : MonoBehaviour
 			uGen.FinishedRendering += UGen_FinishedRendering;
 			LevelBackgrounds.Add(uGen.GetMaterial());
 		}
-
+		ChangeLevel(0);
 	}
 
 	void Update()
@@ -68,7 +70,6 @@ public class LevelManager : MonoBehaviour
 	{
 		RenderSettings.skybox = _uGenLevels[index].Background;
 		DirectionLight.transform.forward = _uGenLevels[index].SunDirection;
-		
 		_reflectionProbe.RenderProbe();
 	}
 }
