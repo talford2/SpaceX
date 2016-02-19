@@ -80,16 +80,16 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Flames
+          name: _ThrustTex
         second:
-          m_Texture: {fileID: 2800000, guid: 206b0ac501c505b46b8e981ec357895e, type: 3}
+          m_Texture: {fileID: 2800000, guid: e945809859d9d7643a06361236846150, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _ThrustTex
+          name: _Flames
         second:
-          m_Texture: {fileID: 2800000, guid: e945809859d9d7643a06361236846150, type: 3}
+          m_Texture: {fileID: 2800000, guid: 206b0ac501c505b46b8e981ec357895e, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -159,16 +159,16 @@ Material:
         second: 80
       data:
         first:
-          name: _InvFade
-        second: 1
-      data:
-        first:
           name: _ScrollXSpeed
         second: 50
       data:
         first:
           name: _ScrollYSpeed
         second: -9.4
+      data:
+        first:
+          name: _InvFade
+        second: 1
     m_Colors:
       data:
         first:
@@ -177,7 +177,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.928, g: 0.928, b: 0.928, a: 0.716}
+        second: {r: 1, g: 1, b: 1, a: 0.716}
       data:
         first:
           name: _Bolor
