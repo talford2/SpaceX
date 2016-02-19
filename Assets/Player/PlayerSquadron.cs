@@ -43,8 +43,8 @@ public class PlayerSquadron : MonoBehaviour
                 member.AimOffsetRadius = 1.5f;
                 SpawnSquadronVehicle(member, univPos, transform.rotation);
             }
-            BindMemberEvents(member);
         }
+        BindMemberEvents(playerNpc);
     }
 
     public int CycleSquadronIndex(int dir)
@@ -87,6 +87,8 @@ public class PlayerSquadron : MonoBehaviour
         var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
         squadronShieldRegenerator.RegenerationDelay = ShieldRegenerateDelay;
         squadronShieldRegenerator.RegenerationRate = ShieldRegenerateRate;
+
+        BindMemberEvents(member);
 
         member.enabled = true;
     }
