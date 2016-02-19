@@ -138,6 +138,7 @@ public class PlayerSquadron : MonoBehaviour
 
     private void SquadronMember_OnDie(Killable sender)
     {
+        PlayerController.Current.ResetThreatCooldown();
         // This should on refresh the current squadron member's icon.
         HeadsUpDisplay.Current.RefreshSquadronIcons();
         sender.OnDamage -= SquadronMember_OnDamage;

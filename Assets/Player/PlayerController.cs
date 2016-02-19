@@ -486,7 +486,12 @@ public class PlayerController : MonoBehaviour
         HeadsUpDisplay.Current.RefreshSquadronIcon(0);
 	}
 
-	public bool InPlayerActiveCells(CellIndex checkCell)
+    public void ResetThreatCooldown()
+    {
+        _noThreatCooldown = NoThreatTime;
+    }
+
+    public bool InPlayerActiveCells(CellIndex checkCell)
 	{
 		var playerCellIndex = _playVehicleInstance.Shiftable.UniverseCellIndex;
 		for (var x = -1; x < 2; x++)
