@@ -28,9 +28,15 @@ public class LevelManager : MonoBehaviour
 		uGen.FinishedRendering += UGen_FinishedRendering;
 		LevelBackgrounds.Add(uGen.GetMaterial());
 
+		// Reflection probe
 		var g = new GameObject();
+		g.name = "System Reflection Probe";
 		_reflectionProbe = g.AddComponent<ReflectionProbe>();
-		_reflectionProbe.mode = UnityEngine.Rendering.ReflectionProbeMode.Custom;
+		_reflectionProbe.mode = UnityEngine.Rendering.ReflectionProbeMode.Realtime;// UnityEngine.Rendering.ReflectionProbeMode.Custom;
+		_reflectionProbe.refreshMode = UnityEngine.Rendering.ReflectionProbeRefreshMode.ViaScripting;
+		_reflectionProbe.cullingMask = LayerMask.GetMask("Universe Backgrouund");
+		_reflectionProbe.size = Vector3.one * (Universe.Current.CellSize + 100);
+		_reflectionProbe.transform.position = Vector3.zero;
 	}
 
 	private void UGen_FinishedRendering()
@@ -62,8 +68,7 @@ public class LevelManager : MonoBehaviour
 	{
 		RenderSettings.skybox = _uGenLevels[index].Background;
 		DirectionLight.transform.forward = _uGenLevels[index].SunDirection;
-
-		_reflectionProbe.customBakedTexture = _uGenLevels[index].ProbeTexture;
-		_reflectionProbe.size = Vector3.one * 1500;
+		
+		_reflectionProbe.RenderProbe();
 	}
 }

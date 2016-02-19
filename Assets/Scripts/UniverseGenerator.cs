@@ -20,9 +20,7 @@ public class UniverseGenerator : MonoBehaviour
 	private Vector3 _sunDirection;
 
 	private bool _hasStartedGenerating = false;
-
-	private RenderTexture _probeRenderTexture;
-
+	
 	#endregion
 
 	#region Public Variables
@@ -76,14 +74,6 @@ public class UniverseGenerator : MonoBehaviour
 		}
 	}
 
-	public Texture ProbeTexture
-	{
-		get
-		{
-			return _probeRenderTexture;
-		}
-	}
-
 	#endregion
 
 	public UniverseGenerator()
@@ -105,11 +95,9 @@ public class UniverseGenerator : MonoBehaviour
 
 	void LateUpdate()
 	{
-		Debug.Log("I was called!");
-
 		if (_hasStartedGenerating)
 		{
-			Debug.Log("Done: " + gameObject.name);
+			//Debug.Log("Done: " + gameObject.name);
 			DestroyImmediate(_parent.gameObject);
 			_hasGenerated = true;
 			_hasStartedGenerating = false;
@@ -189,16 +177,6 @@ public class UniverseGenerator : MonoBehaviour
 		RenderSettings.skybox = _mat;
 
 		_renderCamera.RenderToCubemap(renderTexture);
-
-		// Reflection probe
-		_probeRenderTexture = new RenderTexture(256, 256, 24);
-		_probeRenderTexture.wrapMode = TextureWrapMode.Repeat;
-		_probeRenderTexture.antiAliasing = 2;
-		_probeRenderTexture.anisoLevel = 9;
-		_probeRenderTexture.filterMode = FilterMode.Trilinear;
-		_probeRenderTexture.generateMips = false;
-		_probeRenderTexture.isCubemap = true;
-		_renderCamera.RenderToCubemap(_probeRenderTexture);
 
 		_renderCamera.enabled = false;
 	}
