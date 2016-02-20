@@ -74,6 +74,10 @@ public class UniverseGenerator : MonoBehaviour
 		}
 	}
 
+	public float SunIntensity;
+
+	public Color SunColour;
+
 	#endregion
 
 	public UniverseGenerator()
