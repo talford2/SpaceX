@@ -310,29 +310,33 @@ public class VehicleTracker : Tracker
             var shieldFraction = Mathf.Clamp01(_killable.Shield/_killable.MaxShield);
             var healthFraction = Mathf.Clamp01(_killable.Health/_killable.MaxHealth);
 
-            if (shieldFraction < 1f || healthFraction < 1f)
+            if (_killable.MaxShield > 0f)
             {
-                if (_killable.MaxHealth > 0f)
+                if (shieldFraction < 1f || healthFraction < 1f)
                 {
                     _shieldBarInstance.fillAmount = shieldFraction;
                     _shieldBarBackgroundInstance.enabled = true;
                     _shieldBarInstance.enabled = true;
                 }
-                else
-                {
-                    _shieldBarBackgroundInstance.enabled = false;
-                    _shieldBarInstance.enabled = false;
-                }
-
-                _healthBarInstance.fillAmount = healthFraction;
-                _healthBarBackgroundInstance.enabled = true;
-                _healthBarInstance.enabled = true;
             }
             else
             {
                 _shieldBarBackgroundInstance.enabled = false;
                 _shieldBarInstance.enabled = false;
+            }
 
+
+            if (_killable.MaxHealth > 0f)
+            {
+                if (shieldFraction < 1f || healthFraction < 1f)
+                {
+                    _healthBarInstance.fillAmount = healthFraction;
+                    _healthBarBackgroundInstance.enabled = true;
+                    _healthBarInstance.enabled = true;
+                }
+            }
+            else
+            {
                 _healthBarBackgroundInstance.enabled = false;
                 _healthBarInstance.enabled = false;
             }
