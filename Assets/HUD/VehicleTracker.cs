@@ -312,9 +312,17 @@ public class VehicleTracker : Tracker
 
             if (shieldFraction < 1f || healthFraction < 1f)
             {
-                _shieldBarInstance.fillAmount = shieldFraction;
-                _shieldBarBackgroundInstance.enabled = true;
-                _shieldBarInstance.enabled = true;
+                if (_killable.MaxHealth > 0f)
+                {
+                    _shieldBarInstance.fillAmount = shieldFraction;
+                    _shieldBarBackgroundInstance.enabled = true;
+                    _shieldBarInstance.enabled = true;
+                }
+                else
+                {
+                    _shieldBarBackgroundInstance.enabled = false;
+                    _shieldBarInstance.enabled = false;
+                }
 
                 _healthBarInstance.fillAmount = healthFraction;
                 _healthBarBackgroundInstance.enabled = true;
