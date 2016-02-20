@@ -97,7 +97,7 @@ public class UniverseGenerator : MonoBehaviour
 	{
 		if (_hasStartedGenerating)
 		{
-			//Debug.Log("Done: " + gameObject.name);
+			Debug.Log("Done: " + gameObject.name);
 			DestroyImmediate(_parent.gameObject);
 			_hasGenerated = true;
 			_hasStartedGenerating = false;

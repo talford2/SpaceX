@@ -54,7 +54,11 @@ public class LevelManager : MonoBehaviour
 			uGen.FinishedRendering += UGen_FinishedRendering;
 			LevelBackgrounds.Add(uGen.GetMaterial());
 		}
-		ChangeLevel(_viewIndex);
+
+		if (_buildIndex == Levels.Count - 1)
+		{
+			ChangeLevel(_viewIndex);
+		}
 	}
 
 	void Update()
