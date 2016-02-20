@@ -78,6 +78,9 @@ public class LevelManager : MonoBehaviour
 	{
 		RenderSettings.skybox = _uGenLevels[index].Background;
 		DirectionLight.transform.forward = _uGenLevels[index].SunDirection;
+		DirectionLight.color = _uGenLevels[index].SunColour;
+		DirectionLight.intensity = _uGenLevels[index].SunIntensity;
+
 		_reflectionProbe.RenderProbe();
 	}
 

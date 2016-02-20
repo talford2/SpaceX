@@ -30,6 +30,8 @@ public class UniverseGeneratorEditor : Editor
 			universeGen.SunLight = EditorExtensions.ObjectField<Light>("Sun Light", universeGen.SunLight, true);
 			universeGen.SunModel = EditorExtensions.ObjectField<GameObject>("Sun Model", universeGen.SunModel, false);
 			universeGen.SunTexture = EditorExtensions.ObjectField<Texture>("Sun Texture", universeGen.SunTexture, false);
+			universeGen.SunIntensity = EditorGUILayout.FloatField("Intensity", universeGen.SunIntensity);
+			universeGen.SunColour = EditorGUILayout.ColorField("Colour", universeGen.SunColour);
 
 			EditorGUILayout.LabelField(string.Format("Scatter Groups ({0})", universeGen.ScatterObjects.Count), EditorStyles.boldLabel);
 			EditorGUILayout.Separator();
