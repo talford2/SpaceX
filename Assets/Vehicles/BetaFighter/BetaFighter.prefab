@@ -559,7 +559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalPoints: 10
   DistanceInterval: 1
-  Shiftable: {fileID: 0}
+  Shiftable: {fileID: 11422806}
 --- !u!114 &11460988
 MonoBehaviour:
   m_ObjectHideFlags: 1
