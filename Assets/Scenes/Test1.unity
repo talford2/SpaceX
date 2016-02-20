@@ -2240,7 +2240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UniverseEvents:
   - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
-    Count: 120
+    Count: 90
   - Prefab: {fileID: 106982, guid: 5a884d383dd2b9a499efaa7d524b6e27, type: 2}
     Count: 5
   - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
@@ -2248,13 +2248,17 @@ MonoBehaviour:
   - Prefab: {fileID: 165154, guid: 41b92538d3829bf458b16c1a01d0c9ff, type: 2}
     Count: 120
   - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
-    Count: 300
+    Count: 250
   - Prefab: {fileID: 169094, guid: 495b3be0ae38dea4da8f84a5e915e065, type: 2}
     Count: 1
   - Prefab: {fileID: 177598, guid: 403d1749b7521ff4a91ca598f46fca10, type: 2}
     Count: 8
   - Prefab: {fileID: 171458, guid: 9c89b4a47868dce4f9b2c24c321570d6, type: 2}
     Count: 120
+  - Prefab: {fileID: 132262, guid: 5f1525592c4034c40884035c33ef9350, type: 2}
+    Count: 50
+  - Prefab: {fileID: 120712, guid: 88624c7de30b80a46a9fd5fc2131be98, type: 2}
+    Count: 80
   CellRadius: 10
 --- !u!1 &1109137749
 GameObject:
