@@ -48,7 +48,7 @@ public class VehicleTracker : Tracker
 		var boundaryPadding = 20f;
 		_screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
 
-        _shieldBarTexture = Utility.ColouredTexture(48, 2, new Color(0.8f, 0.8f, 1f, 1f));
+        _shieldBarTexture = Utility.ColouredTexture(48, 2, new Color(0.6f, 0.6f, 1f, 1f));
         _healthBarTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 1f));
 		_healthBarBackgroundTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 0.05f));
 
@@ -80,7 +80,7 @@ public class VehicleTracker : Tracker
         // Shieldbar background
         var shieldBarBackgroundObj = new GameObject(string.Format("{0}_ShieldBackground", transform.name));
         var shieldBarBackgroundImg = shieldBarBackgroundObj.AddComponent<Image>();
-        shieldBarBackgroundImg.rectTransform.pivot = new Vector2(0.5f, -17f);
+        shieldBarBackgroundImg.rectTransform.pivot = new Vector2(0.5f, -16.5f);
         shieldBarBackgroundImg.color = new Color(1f, 1f, 1f, 1f);
         shieldBarBackgroundImg.sprite = Sprite.Create(_healthBarBackgroundTexture, new Rect(0, 0, _healthBarBackgroundTexture.width, _healthBarBackgroundTexture.height), Vector2.zero);
         shieldBarBackgroundImg.SetNativeSize();
@@ -88,7 +88,7 @@ public class VehicleTracker : Tracker
         // Shieldbar
         var shieldBarObj = new GameObject(string.Format("{0}_Shield", transform.name));
         var shieldBarImg = shieldBarObj.AddComponent<Image>();
-        shieldBarImg.rectTransform.pivot = new Vector2(0.5f, -17f);
+        shieldBarImg.rectTransform.pivot = new Vector2(0.5f, -16.5f);
         shieldBarImg.color = new Color(1f, 1f, 1f, 1f);
         shieldBarImg.sprite = Sprite.Create(_shieldBarTexture, new Rect(0, 0, _shieldBarTexture.width, _shieldBarTexture.height), Vector2.zero);
 
