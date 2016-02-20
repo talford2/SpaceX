@@ -279,6 +279,18 @@ public class PlayerController : MonoBehaviour
 				Menus.Current.ToggleQuitMenu();
 			}
 
+            // Shortcut to hangar screen
+		    if (Input.GetKeyUp(KeyCode.H))
+		    {
+                ShipProfileScreen.Current.Fighters.Clear();
+		        foreach (var member in Squadron.Members)
+		        {
+                    ShipProfileScreen.Current.Fighters.Add(member);
+		        }
+                ShipProfileScreen.Current.Populate(Squadron.GetCurrentIndex());
+                ShipProfileScreen.Current.Show();
+		    }
+
             if (Input.GetKeyUp(KeyCode.Z))
             {
                 if (_playVehicleInstance != null)
