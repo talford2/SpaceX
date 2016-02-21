@@ -42,8 +42,8 @@ public class ResourcePool : MonoBehaviour
             if (poolItem.IsAvailable)
             {
                 var instance = _pool[i];
-                var expl = instance.GetComponent<Explosion>();
-                expl.Reset();
+                if (poolItem.OnGetAvaiable != null)
+                    poolItem.OnGetAvaiable();
                 return instance;
             }
         }

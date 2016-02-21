@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Explosion : MonoBehaviour
 {
@@ -16,7 +15,19 @@ public class Explosion : MonoBehaviour
 		}
 	}
 
-	public void Reset()
+    void Start()
+    {
+        var poolItem = GetComponent<ResourcePoolItem>();
+        if (poolItem != null)
+        {
+            poolItem.OnGetAvaiable = () =>
+            {
+                Reset();
+            };
+        }
+    }
+
+    public void Reset()
 	{
 		foreach (var ps in _shiftable.ShiftParticleSystems)
 		{
