@@ -7,6 +7,8 @@ public class LevelManager : MonoBehaviour
 
 	public List<GameObject> Levels;
 
+	public Material NextPortalMaterial;
+
 	private List<UniverseGenerator> _uGenLevels;
 
 	private List<Material> LevelBackgrounds;
@@ -82,6 +84,18 @@ public class LevelManager : MonoBehaviour
 		DirectionLight.intensity = _uGenLevels[index].SunIntensity;
 
 		_reflectionProbe.RenderProbe();
+
+		if (NextPortalMaterial != null)
+		{
+			if (index < Levels.Count - 1)
+			{
+				NextPortalMaterial.SetTexture("_Cube", _uGenLevels[index + 1].Background.GetTexture("_Tex"));
+			}
+			else
+			{
+				NextPortalMaterial.SetTexture("_Cube", _uGenLevels[0].Background.GetTexture("_Tex"));
+			}
+		}
 	}
 
 	public static LevelManager Current
