@@ -14,6 +14,7 @@ public class ResourcePool : MonoBehaviour
 
     private void Awake()
     {
+        _current = this;
         CreatePool(Prefab, PoolSize);
     }
 
@@ -38,7 +39,10 @@ public class ResourcePool : MonoBehaviour
             if (poolItem != null)
             {
                 if (poolItem.IsAvailable)
+                {
+                    // Reset instance here.
                     return item;
+                }
             }
         }
         Debug.Log("No Available Items!");
