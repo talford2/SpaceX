@@ -11,6 +11,7 @@ public class Beam : Missile
 
     private Shiftable _shiftable;
     private LineRenderer _lineRenderer;
+    private ResourcePoolItem _resourcePoolItem;
 
     private Quaternion _dirRotate;
     private float _length;
@@ -22,6 +23,11 @@ public class Beam : Missile
         _shiftable.OnShift += Shift;
         _lineRenderer = GetComponent<LineRenderer>();
         _length = MissileLength;
+    }
+
+    private void Start()
+    {
+        _resourcePoolItem = GetComponent<ResourcePoolItem>();
     }
 
     public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
@@ -36,6 +42,7 @@ public class Beam : Missile
 
         transform.forward = direction;
         UpdateLineRenderer();
+        _resourcePoolItem.IsAvailable = false;
     }
 
     public override void LiveUpdate()
@@ -76,15 +83,6 @@ public class Beam : Missile
         _lineRenderer.SetPosition(1, transform.position + transform.forward* _length);
     }
 
-    public void LateUpdate()
-    {
-        if (!IsLive)
-        {
-            if (Owner == null)
-                Destroy(gameObject);
-        }
-    }
-
     private void Shift(Shiftable sender, Vector3 delta)
     {
         UpdateLineRenderer();
@@ -94,7 +92,6 @@ public class Beam : Missile
     {
         base.Stop();
         _lineRenderer.enabled = false;
-        if (Owner == null)
-            Destroy(gameObject);
+        _resourcePoolItem.IsAvailable = true;
     }
 }

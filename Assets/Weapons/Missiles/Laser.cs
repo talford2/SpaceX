@@ -73,17 +73,10 @@ public class Laser : Missile
 
 	public void LateUpdate()
 	{
-		if (IsLive)
-		{
-			UpdateLineRenderer();
-		}
-		else
-		{
-            /*
-			if (Owner == null)
-				Destroy(gameObject);
-            */
-		}
+        if (IsLive)
+        {
+            UpdateLineRenderer();
+        }
 	}
 
 	public void UpdateLineRenderer()
@@ -120,10 +113,6 @@ public class Laser : Missile
 		Tracer.enabled = false;
 		_hasHit = false;
         _resourcePoolItem.IsAvailable = true;
-        /*
-		if (Owner == null)
-			Destroy(gameObject);
-        */
     }
 
     public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)

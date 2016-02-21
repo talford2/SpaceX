@@ -43,7 +43,6 @@ public class ResourcePool : MonoBehaviour
                 return instance;
             }
         }
-		Debug.Log("No Available Items!");
 		return null;
 	}
 }
