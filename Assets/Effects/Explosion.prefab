@@ -25,9 +25,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 444050}
-  - 114: {fileID: 11450094}
   - 114: {fileID: 11434974}
   - 114: {fileID: 11409030}
+  - 114: {fileID: 11480612}
   m_Layer: 1
   m_Name: Explosion
   m_TagString: Untagged
@@ -414,7 +414,7 @@ MonoBehaviour:
   - {fileID: 19845260}
   - {fileID: 19872994}
   - {fileID: 19824484}
---- !u!114 &11450094
+--- !u!114 &11480612
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -422,11 +422,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 127098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 670c40cbcc89a784b93fddab3be12e1b, type: 3}
+  m_Script: {fileID: 11500000, guid: f0f08438f1163174ab76a2927571d136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Cooldown: 15
-  StartOn: 1
+  StartOn: 0
 --- !u!198 &19809798
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -12619,6 +12619,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MaxAmplitude
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Cooldown
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: StartOn
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

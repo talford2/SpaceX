@@ -80,7 +80,10 @@ public class Killable : MonoBehaviour
 	{
 		if (DieEffect != null)
 		{
-			var dieInst = Utility.InstantiateInParent(DieEffect, transform.position, transform.rotation, transform.parent);
+            //var dieInst = Utility.InstantiateInParent(DieEffect, transform.position, transform.rotation, transform.parent);
+            var dieInst = ResourcePool.Current.GetAvailable();
+            dieInst.transform.position = transform.position;
+            dieInst.transform.rotation = transform.rotation;
 
 			dieInst.transform.localScale = transform.localScale;
 			var dieShiftable = dieInst.GetComponent<Shiftable>();
