@@ -640,7 +640,7 @@ MonoBehaviour:
   - {fileID: 11493480}
   - {fileID: 11417462}
   Thrusters:
-  - {fileID: 0}
+  - {fileID: 11415998}
   BoostSound: {fileID: 8216614}
   IgnoreCollisions: 0
 --- !u!114 &11493480
