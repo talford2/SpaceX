@@ -16,7 +16,6 @@ public class EventGenerator : MonoBehaviour
 	{
 		var go = new GameObject("UniverseEvents");
 		var parent = go.transform;
-
 		foreach (var ue in UniverseEvents)
 		{
 			for (var i = 0; i < ue.Count; i++)
@@ -31,6 +30,13 @@ public class EventGenerator : MonoBehaviour
 			}
 		}
 	}
+
+    public void Generate(int seed)
+    {
+        Random.seed = seed;
+        Debug.Log("EVENTS FROM SEED: " + Random.seed);
+        Generate();
+    }
 }
 
 [System.Serializable]
