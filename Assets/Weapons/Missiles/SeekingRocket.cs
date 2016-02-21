@@ -14,6 +14,7 @@ public class SeekingRocket : Missile
     public FlareDistanceBrightness Flare;
 
     private Shiftable _shiftable;
+    private ResourcePoolItem _resourcePoolItem;
 
     private Transform _target;
     private Vector3 _shootFrom;
@@ -44,7 +45,11 @@ public class SeekingRocket : Missile
     private void Awake()
     {
         _shiftable = GetComponent<Shiftable>();
-        //_shiftable.OnShift += Shift;
+    }
+
+    private void Start()
+    {
+        _resourcePoolItem = GetComponent<ResourcePoolItem>();
     }
 
     public override void LiveUpdate()
@@ -155,6 +160,7 @@ public class SeekingRocket : Missile
 
         _vehicle = _target.GetComponent<Vehicle>();
         _isVehicleTarget = _vehicle != null;
+        _resourcePoolItem.IsAvailable = false;
     }
 
     public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
@@ -177,11 +183,16 @@ public class SeekingRocket : Missile
 
         _noTargetCooldown = _noTargetTime;
         _travelStraightCooldown = _travelStraightTime + _turnTime;
+        _hasHit = false;
+
+        _resourcePoolItem.IsAvailable = false;
     }
 
     private void Explode()
     {
-        var explodeInstance = (GameObject)Instantiate(ExplodePrefab, transform.position, transform.rotation);
+        var explodeInstance = ResourcePoolManager.GetAvailable(ExplodePrefab); //(GameObject)Instantiate(ExplodePrefab, transform.position, transform.rotation);
+        explodeInstance.transform.position = transform.position;
+        explodeInstance.transform.rotation = transform.rotation;
 
         explodeInstance.transform.localScale = transform.localScale;
         var explodeShiftable = explodeInstance.GetComponent<Shiftable>();
@@ -230,13 +241,11 @@ public class SeekingRocket : Missile
     public override void Stop()
     {
         base.Stop();
+        _target = null;
         Rocket.enabled = false;
         ThrusterMesh.enabled = false;
         Tracer.Stop();
         Flare.SetVisible(false);
-    }
-
-    private void Shift(Shiftable sender, Vector3 delta)
-    {
+        _resourcePoolItem.IsAvailable = true;
     }
 }

@@ -6,17 +6,13 @@ public class ResourcePool : MonoBehaviour
 	public GameObject Prefab;
 	public int PoolSize;
 
-	private static ResourcePool _current;
-
-	public static ResourcePool Current { get { return _current; } }
-
 	private List<GameObject> _pool;
     private List<ResourcePoolItem> _poolItems;
 
     private void Awake()
 	{
-		_current = this;
 		CreatePool(Prefab, PoolSize);
+        ResourcePoolManager.AddResourcePool(this);
 	}
 
 	public void CreatePool(GameObject item, int count)

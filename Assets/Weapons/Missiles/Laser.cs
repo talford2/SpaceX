@@ -7,9 +7,10 @@ public class Laser : Missile
 
 	public LineRenderer Tracer;
 	private Shiftable _shiftable;
-	private bool _hasHit;
+    private ResourcePoolItem _resourcePoolItem;
+    private bool _hasHit;
 
-	private Vector3 _shootFrom;
+    private Vector3 _shootFrom;
 	private Vector3 _initVelocity;
 	private float _initSpeed;
 	private Vector3 _hitPosition;
@@ -27,6 +28,11 @@ public class Laser : Missile
 			Tracer.useWorldSpace = true;
 		}
 	}
+
+    private void Start()
+    {
+        _resourcePoolItem = GetComponent<ResourcePoolItem>();
+    }
 
 	public override void LiveUpdate()
 	{
@@ -73,8 +79,10 @@ public class Laser : Missile
 		}
 		else
 		{
+            /*
 			if (Owner == null)
 				Destroy(gameObject);
+            */
 		}
 	}
 
@@ -111,11 +119,14 @@ public class Laser : Missile
 		base.Stop();
 		Tracer.enabled = false;
 		_hasHit = false;
+        _resourcePoolItem.IsAvailable = true;
+        /*
 		if (Owner == null)
 			Destroy(gameObject);
-	}
+        */
+    }
 
-	public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
+    public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
 	{
 		base.Shoot(shootFrom, direction, initVelocity);
 		Tracer.enabled = true;
@@ -127,7 +138,8 @@ public class Laser : Missile
 		transform.position += initVelocity * Time.deltaTime;
 		transform.forward = direction;
 		UpdateLineRenderer();
-	}
+        _resourcePoolItem.IsAvailable = false;
+    }
 
 	private void Shift(Shiftable sender, Vector3 delta)
 	{

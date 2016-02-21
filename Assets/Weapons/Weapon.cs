@@ -38,8 +38,8 @@ public class Weapon : MonoBehaviour
 	public delegate void OnShootEvent(int shootPointIndex);
 	public OnShootEvent OnShoot;
 
-	private int _curMissileIndex;
-	private List<GameObject> _missileInstances;
+	//private int _curMissileIndex;
+	//private List<GameObject> _missileInstances;
 
 	private GameObject _owner;
 	private Team _ownerTeam;
@@ -55,6 +55,7 @@ public class Weapon : MonoBehaviour
 	public void Initialize(GameObject owner, List<ShootPoint> shootPoints, VelocityReference velocityReference, Team ownerTeam)
 	{
 		_owner = owner;
+        /*
 		_curMissileIndex = 0;
 		_missileInstances = new List<GameObject>();
 		var missilesContainer = Utility.FindOrCreateContainer("Missiles");
@@ -64,6 +65,7 @@ public class Weapon : MonoBehaviour
 			missileInstance.GetComponent<Missile>().Initialize(owner, MissileDamage);
 			_missileInstances.Add(missileInstance);
 		}
+        */
 		_shootPoints = shootPoints;
 		_shootPointIndex = 0;
 		_velocityReference = velocityReference;
@@ -103,11 +105,16 @@ public class Weapon : MonoBehaviour
 
 	private GameObject GetNextMissile()
 	{
+        /*
 		var missile = _missileInstances[_curMissileIndex];
 		_curMissileIndex++;
 		if (_curMissileIndex >= _missileInstances.Count)
 			_curMissileIndex = 0;
 		return missile;
+        */
+        var missileInstance = ResourcePoolManager.GetAvailable(MissilePrefab);
+        missileInstance.GetComponent<Missile>().Initialize(_owner, MissileDamage);
+        return missileInstance;
 	}
 
 	public void FireMissile(GameObject missile)
