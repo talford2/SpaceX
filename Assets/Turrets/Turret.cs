@@ -25,7 +25,8 @@ public class Turret : MonoBehaviour
 	[Header("Aiming")]
 	public float AimTolerance = 5f;
 	public float ExtrapolationTimeError = 0.5f;
-	public Targetable Targetable;
+    public float AimOffsetRadius = 5f;
+    public Targetable Targetable;
 
 	private VelocityReference _velocityReference;
 	private Weapon _weaponInstance;
@@ -108,8 +109,10 @@ public class Turret : MonoBehaviour
 					_aimPosition = _target.transform.position;
 
 					var targetVehicle = _target.GetComponent<Vehicle>();
-					if (targetVehicle != null)
-						_aimPosition = Utility.GetVehicleExtrapolatedPosition(targetVehicle, _weaponInstance, 0f); //Random.Range(-ExtrapolationTimeError, ExtrapolationTimeError));
+                    if (targetVehicle != null)
+                    {
+                        _aimPosition = Utility.GetVehicleExtrapolatedPosition(targetVehicle, _weaponInstance, 0f) + Random.insideUnitSphere * AimOffsetRadius;
+                    }
 
 					_aimCooldown = _aimInterval;
 				}
