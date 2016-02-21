@@ -324,11 +324,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DirectionLight: {fileID: 1376424185}
   Levels:
-  - {fileID: 1097665388}
-  - {fileID: 1117886433}
-  - {fileID: 1807080963}
-  - {fileID: 1985480833}
+  - {fileID: 1097665389}
+  - {fileID: 1117886435}
+  - {fileID: 1807080965}
+  - {fileID: 1985480835}
   NextPortalMaterial: {fileID: 2100000, guid: 5d125a0aee40b984abd9460cd79ff64e, type: 2}
+  CubeMapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &128853634
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,347 +2054,347 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22467622, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22467622, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22467622, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 22467622, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 22467622, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 22413510, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22413510, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22413510, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 22413510, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 22413510, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 22413510, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 22431766, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22431766, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22431766, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 22431766, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 22431766, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 22473218, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22473218, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22473218, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 22473218, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 22473218, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 22473218, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 22428128, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22428128, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22428128, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 22428128, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 22428128, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 22457248, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22457248, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22457248, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 22457248, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 22457248, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 22457248, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 22401766, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22401766, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22401766, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 22401766, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 22401766, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 22437908, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22437908, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22437908, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 22437908, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 22437908, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 22437908, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 22466006, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22466006, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22466006, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 22466006, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 22466006, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 22466006, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 22426210, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22426210, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22426210, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 22426210, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -55
       objectReference: {fileID: 0}
     - target: {fileID: 22426210, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 22426210, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 22479718, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22479718, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22479718, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 22479718, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -85
       objectReference: {fileID: 0}
     - target: {fileID: 22479718, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 22479718, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 22403258, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22403258, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22403258, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 22403258, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -115
       objectReference: {fileID: 0}
     - target: {fileID: 22403258, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 22403258, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 22451542, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22451542, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22451542, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 22451542, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 22451542, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 22451542, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 22439794, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22439794, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22439794, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 22439794, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -71
       objectReference: {fileID: 0}
     - target: {fileID: 22439794, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 22439794, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 22416256, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22416256, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22416256, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 22416256, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -136
       objectReference: {fileID: 0}
     - target: {fileID: 22416256, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 22416256, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 12469886, guid: 18ef34a18903a904eb73310a3df30e14, type: 2}
       propertyPath: m_Enabled
@@ -2522,94 +2523,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1097665388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fcc537c0b90f2a4496ecf8f4abcc37c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5234c39bba712504aa3b05c2386a781c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackgroundLayerName: Universe Background
-  FlatResolution: 4096
-  BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
-  CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
-  BackgroundColor: {r: 0.11770889, g: 0.024088217, b: 0.234, a: 1}
-  ScatterObjects:
-  - Name: Clouds
-    IsActive: 1
-    CountMin: 100
-    CountMax: 200
-    ScaleMin: 100
-    ScaleMax: 400
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
-    Colors:
-    - Color1: {r: 0, g: 0.06591212, b: 0.42799997, a: 0.019607844}
-      Color2: {r: 0.44099998, g: 0, b: 0.420714, a: 0.011764706}
-    UseMaterials: 0
-    Materials: []
-  - Name: Stars
-    IsActive: 1
-    CountMin: 20
-    CountMax: 50
-    ScaleMin: 200
-    ScaleMax: 250
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
-    Colors:
-    - Color1: {r: 0.329, g: 0.329, b: 0.329, a: 1}
-      Color2: {r: 1, g: 1, b: 1, a: 1}
-    UseMaterials: 0
-    Materials: []
-  - Name: Planets
-    IsActive: 1
-    CountMin: 3
-    CountMax: 5
-    ScaleMin: 1
-    ScaleMax: 10
-    RadiusMin: 50
-    RadiusMax: 60
-    Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
-    LookAtCenter: 0
-    Textures: []
-    Colors:
-    - Color1: {r: 1, g: 1, b: 1, a: 1}
-      Color2: {r: 1, g: 1, b: 1, a: 1}
-    UseMaterials: 1
-    Materials:
-    - {fileID: 2100000, guid: 600e83dc5ac989b4ba772d3942eb6faa, type: 2}
-    - {fileID: 2100000, guid: db3ff9d7a31efaa4599df592ca4fd892, type: 2}
-    - {fileID: 2100000, guid: f8b5f601b4c405b42ae6b49ba2aa7fe8, type: 2}
-    - {fileID: 2100000, guid: 621619c5b9f03b744a3c0bde134bcfba, type: 2}
-    - {fileID: 2100000, guid: 16f1ca9e95c13b44c8ad1e25e2dc1633, type: 2}
-    - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
-    - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
-  - Name: Nebula
-    IsActive: 1
-    CountMin: 5
-    CountMax: 10
-    ScaleMin: 300
-    ScaleMax: 500
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
-    Colors:
-    - Color1: {r: 0.26858783, g: 0, b: 0.809, a: 0.11764706}
-      Color2: {r: 0.7413793, g: 0, b: 0.70727587, a: 0.019607844}
-    UseMaterials: 0
-    Materials: []
-  SunLight: {fileID: 1376424185}
-  SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
-  SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-  SunIntensity: 1.2
-  SunColour: {r: 0.71599996, g: 0.8621764, b: 1, a: 1}
+  Background: {fileID: 8900000, guid: f9c7b6888cdb6584d8a70b87fea5b24c, type: 3}
+  LighColour: {r: 0.8765, g: 0.753, b: 1, a: 1}
+  LightDirection: {x: -0.2, y: -1, z: 0.1}
 --- !u!4 &1097665390
 Transform:
   m_ObjectHideFlags: 0
@@ -2780,94 +2699,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1117886433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fcc537c0b90f2a4496ecf8f4abcc37c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5234c39bba712504aa3b05c2386a781c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackgroundLayerName: Universe Background
-  FlatResolution: 4096
-  BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
-  CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
-  BackgroundColor: {r: 0.15294118, g: 0.011764706, b: 0, a: 1}
-  ScatterObjects:
-  - Name: Clouds
-    IsActive: 1
-    CountMin: 100
-    CountMax: 200
-    ScaleMin: 100
-    ScaleMax: 400
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
-    Colors:
-    - Color1: {r: 0.42799997, g: 0.207152, b: 0.30255845, a: 0.019607844}
-      Color2: {r: 0.44099998, g: 0.2897167, b: 0.21917698, a: 0.011764706}
-    UseMaterials: 0
-    Materials: []
-  - Name: Stars
-    IsActive: 1
-    CountMin: 20
-    CountMax: 50
-    ScaleMin: 200
-    ScaleMax: 250
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
-    Colors:
-    - Color1: {r: 0.329, g: 0.329, b: 0.329, a: 1}
-      Color2: {r: 1, g: 1, b: 1, a: 1}
-    UseMaterials: 0
-    Materials: []
-  - Name: Planets
-    IsActive: 1
-    CountMin: 3
-    CountMax: 5
-    ScaleMin: 1
-    ScaleMax: 10
-    RadiusMin: 50
-    RadiusMax: 60
-    Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
-    LookAtCenter: 0
-    Textures: []
-    Colors:
-    - Color1: {r: 1, g: 1, b: 1, a: 1}
-      Color2: {r: 1, g: 1, b: 1, a: 1}
-    UseMaterials: 1
-    Materials:
-    - {fileID: 2100000, guid: 600e83dc5ac989b4ba772d3942eb6faa, type: 2}
-    - {fileID: 2100000, guid: db3ff9d7a31efaa4599df592ca4fd892, type: 2}
-    - {fileID: 2100000, guid: f8b5f601b4c405b42ae6b49ba2aa7fe8, type: 2}
-    - {fileID: 2100000, guid: 621619c5b9f03b744a3c0bde134bcfba, type: 2}
-    - {fileID: 2100000, guid: 16f1ca9e95c13b44c8ad1e25e2dc1633, type: 2}
-    - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
-    - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
-  - Name: Nebula
-    IsActive: 1
-    CountMin: 5
-    CountMax: 10
-    ScaleMin: 300
-    ScaleMax: 500
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
-    Colors:
-    - Color1: {r: 0.659, g: 0.216152, b: 0.35697737, a: 0.11764706}
-      Color2: {r: 1, g: 0.571704, b: 0.37199998, a: 0.019607844}
-    UseMaterials: 0
-    Materials: []
-  SunLight: {fileID: 1376424185}
-  SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
-  SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-  SunIntensity: 1.4
-  SunColour: {r: 1, g: 0.76145196, b: 0.691, a: 1}
+  Background: {fileID: 8900000, guid: 9af2460b756ab914aaebe281fdb4bdfe, type: 3}
+  LighColour: {r: 1, g: 0.83241177, b: 0.741, a: 1}
+  LightDirection: {x: 0, y: 1, z: 0}
 --- !u!114 &1117886436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4182,94 +4019,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1807080963}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fcc537c0b90f2a4496ecf8f4abcc37c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5234c39bba712504aa3b05c2386a781c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackgroundLayerName: Universe Background
-  FlatResolution: 4096
-  BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
-  CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
-  BackgroundColor: {r: 0, g: 0.228, b: 0.22389603, a: 1}
-  ScatterObjects:
-  - Name: Clouds
-    IsActive: 1
-    CountMin: 100
-    CountMax: 200
-    ScaleMin: 100
-    ScaleMax: 400
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
-    Colors:
-    - Color1: {r: 0.15584801, g: 0.322, b: 0.3060494, a: 0.019607844}
-      Color2: {r: 0.17245899, g: 0.347, b: 0.18677136, a: 0.011764706}
-    UseMaterials: 0
-    Materials: []
-  - Name: Stars
-    IsActive: 1
-    CountMin: 20
-    CountMax: 50
-    ScaleMin: 200
-    ScaleMax: 250
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
-    Colors:
-    - Color1: {r: 0.329, g: 0.329, b: 0.329, a: 1}
-      Color2: {r: 1, g: 1, b: 1, a: 1}
-    UseMaterials: 0
-    Materials: []
-  - Name: Planets
-    IsActive: 1
-    CountMin: 3
-    CountMax: 5
-    ScaleMin: 1
-    ScaleMax: 10
-    RadiusMin: 50
-    RadiusMax: 60
-    Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
-    LookAtCenter: 0
-    Textures: []
-    Colors:
-    - Color1: {r: 1, g: 1, b: 1, a: 1}
-      Color2: {r: 1, g: 1, b: 1, a: 1}
-    UseMaterials: 1
-    Materials:
-    - {fileID: 2100000, guid: 600e83dc5ac989b4ba772d3942eb6faa, type: 2}
-    - {fileID: 2100000, guid: db3ff9d7a31efaa4599df592ca4fd892, type: 2}
-    - {fileID: 2100000, guid: f8b5f601b4c405b42ae6b49ba2aa7fe8, type: 2}
-    - {fileID: 2100000, guid: 621619c5b9f03b744a3c0bde134bcfba, type: 2}
-    - {fileID: 2100000, guid: 16f1ca9e95c13b44c8ad1e25e2dc1633, type: 2}
-    - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
-    - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
-  - Name: Nebula
-    IsActive: 1
-    CountMin: 5
-    CountMax: 10
-    ScaleMin: 300
-    ScaleMax: 500
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
-    Colors:
-    - Color1: {r: 0.202048, g: 0.49926552, b: 0.616, a: 0.11764706}
-      Color2: {r: 0.7005919, g: 0.791, b: 0.29425198, a: 0.019607844}
-    UseMaterials: 0
-    Materials: []
-  SunLight: {fileID: 1376424185}
-  SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
-  SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-  SunIntensity: 1.4
-  SunColour: {r: 0.50874805, g: 0.772, b: 0.7139297, a: 1}
+  Background: {fileID: 8900000, guid: 5efd03d61d9f03240914ecde44fd5adf, type: 3}
+  LighColour: {r: 0.684, g: 1, b: 0.9302941, a: 1}
+  LightDirection: {x: 0, y: 0, z: 1}
 --- !u!114 &1807080966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4638,94 +4393,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1985480833}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fcc537c0b90f2a4496ecf8f4abcc37c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5234c39bba712504aa3b05c2386a781c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackgroundLayerName: Universe Background
-  FlatResolution: 4096
-  BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
-  CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
-  BackgroundColor: {r: 0.25862068, g: 0, b: 0.17114602, a: 1}
-  ScatterObjects:
-  - Name: Clouds
-    IsActive: 1
-    CountMin: 100
-    CountMax: 200
-    ScaleMin: 100
-    ScaleMax: 400
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
-    Colors:
-    - Color1: {r: 0.24191467, g: 0.15584801, b: 0.322, a: 0.019607844}
-      Color2: {r: 0.347, g: 0.17245899, b: 0.21539614, a: 0.011764706}
-    UseMaterials: 0
-    Materials: []
-  - Name: Stars
-    IsActive: 1
-    CountMin: 20
-    CountMax: 50
-    ScaleMin: 200
-    ScaleMax: 250
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
-    Colors:
-    - Color1: {r: 0.329, g: 0.329, b: 0.329, a: 1}
-      Color2: {r: 1, g: 1, b: 1, a: 1}
-    UseMaterials: 0
-    Materials: []
-  - Name: Planets
-    IsActive: 1
-    CountMin: 3
-    CountMax: 5
-    ScaleMin: 1
-    ScaleMax: 10
-    RadiusMin: 50
-    RadiusMax: 60
-    Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
-    LookAtCenter: 0
-    Textures: []
-    Colors:
-    - Color1: {r: 1, g: 1, b: 1, a: 1}
-      Color2: {r: 1, g: 1, b: 1, a: 1}
-    UseMaterials: 1
-    Materials:
-    - {fileID: 2100000, guid: 600e83dc5ac989b4ba772d3942eb6faa, type: 2}
-    - {fileID: 2100000, guid: db3ff9d7a31efaa4599df592ca4fd892, type: 2}
-    - {fileID: 2100000, guid: f8b5f601b4c405b42ae6b49ba2aa7fe8, type: 2}
-    - {fileID: 2100000, guid: 621619c5b9f03b744a3c0bde134bcfba, type: 2}
-    - {fileID: 2100000, guid: 16f1ca9e95c13b44c8ad1e25e2dc1633, type: 2}
-    - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
-    - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
-  - Name: Nebula
-    IsActive: 1
-    CountMin: 5
-    CountMax: 10
-    ScaleMin: 300
-    ScaleMax: 500
-    RadiusMin: 100
-    RadiusMax: 100
-    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-    LookAtCenter: 1
-    Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
-    Colors:
-    - Color1: {r: 0.401573, g: 0.202048, b: 0.616, a: 0.11764706}
-      Color2: {r: 0.791, g: 0.29425198, b: 0.35982272, a: 0.019607844}
-    UseMaterials: 0
-    Materials: []
-  SunLight: {fileID: 1376424185}
-  SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
-  SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-  SunIntensity: 1.3
-  SunColour: {r: 1, g: 0.847, b: 0.96175003, a: 1}
+  Background: {fileID: 8900000, guid: acf7baf307716f04e95433e6b7bd65bf, type: 3}
+  LighColour: {r: 1, g: 0.741, b: 0.9238235, a: 1}
+  LightDirection: {x: 1, y: 1, z: 0}
 --- !u!114 &1985480836
 MonoBehaviour:
   m_ObjectHideFlags: 0

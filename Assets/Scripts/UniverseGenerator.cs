@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class UniverseGenerator : MonoBehaviour
 	private Vector3 _sunDirection;
 
 	private bool _hasStartedGenerating = false;
-	
+
 	#endregion
 
 	#region Public Variables
@@ -95,6 +96,7 @@ public class UniverseGenerator : MonoBehaviour
 			ScatterObjects = new List<ScatterSettings>();
 		}
 		//Generate();
+		var s = GetMaterial();
 	}
 
 	void LateUpdate()
@@ -109,6 +111,14 @@ public class UniverseGenerator : MonoBehaviour
 			{
 				FinishedRendering();
 			}
+			// Save it to a file.
+			Debug.Log("Start saving file..." + Application.dataPath);
+
+			//var rrr = Random.Range(0, 999999);
+			SaveCubemap(Path.Combine(Application.dataPath, @"Environment\Backgrounds\" + gameObject.name + ".png"), 4096);
+			Debug.Log("Sun direction = " + SunDirection);
+			Debug.Log(SunDirection);
+			Debug.Log(SunLight.transform.forward);
 		}
 	}
 
@@ -252,7 +262,56 @@ public class UniverseGenerator : MonoBehaviour
 		return mat;
 	}
 
+	public void SaveCubemap(string filename, int faceResolution)
+	{
+		var camObj = new GameObject("BackgroundCamera");
+		var cam = camObj.AddComponent<Camera>();
+		cam.name = "CaptureCam1";
+		//cam.cullingMask = LayerMask.GetMask("Universe Background");
+		cam.fieldOfView = 90;
+		cam.transform.position = Vector3.zero;
+
+		var cubeMapImage = new Texture2D(faceResolution * 4, faceResolution * 3);
+
+		var t1 = GetTexture2D(cam, faceResolution);
+		cubeMapImage.SetPixels32(0, faceResolution, faceResolution, faceResolution, t1.GetPixels32());
+
+		cam.transform.Rotate(0, 90, 0);
+		var t2 = GetTexture2D(cam, faceResolution);
+		cubeMapImage.SetPixels32(faceResolution, faceResolution, faceResolution, faceResolution, t2.GetPixels32());
+
+		cam.transform.Rotate(0, 90, 0);
+		cubeMapImage.SetPixels32(faceResolution * 2, faceResolution, faceResolution, faceResolution, GetTexture2D(cam, faceResolution).GetPixels32());
+
+		cam.transform.Rotate(0, 90, 0);
+		cubeMapImage.SetPixels32(faceResolution * 3, faceResolution, faceResolution, faceResolution, GetTexture2D(cam, faceResolution).GetPixels32());
+
+		cam.transform.Rotate(0, 180, 0);
+		cam.transform.Rotate(90, 0, 0);
+		cubeMapImage.SetPixels32(faceResolution, 0, faceResolution, faceResolution, GetTexture2D(cam, faceResolution).GetPixels32());
+
+		cam.transform.Rotate(-180, 0, 0);
+		cubeMapImage.SetPixels32(faceResolution, faceResolution * 2, faceResolution, faceResolution, GetTexture2D(cam, faceResolution).GetPixels32());
+
+		File.WriteAllBytes(filename, cubeMapImage.EncodeToPNG());
+	}
+
 	#endregion
+
+	private Texture2D GetTexture2D(Camera cam, int res)
+	{
+		cam.orthographic = true;
+		var renTex = new RenderTexture(res, res, 24);
+		cam.targetTexture = renTex;
+		cam.targetTexture = renTex;
+		var text2d = new Texture2D(res, res, TextureFormat.ARGB32, false);
+		cam.Render();
+		RenderTexture.active = renTex;
+		text2d.ReadPixels(new Rect(0, 0, res, res), 0, 0);
+		//var b = text2d.EncodeToPNG();
+		//RenderTexture.active = null;
+		return text2d;
+	}
 }
 
 [System.Serializable]
