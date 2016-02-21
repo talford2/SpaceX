@@ -10,9 +10,10 @@ public class ResourcePool : MonoBehaviour
 
 	public static ResourcePool Current { get { return _current; } }
 
-	private static List<GameObject> _pool;
+	private List<GameObject> _pool;
+    private List<ResourcePoolItem> _poolItems;
 
-	private void Awake()
+    private void Awake()
 	{
 		_current = this;
 		CreatePool(Prefab, PoolSize);
@@ -21,6 +22,7 @@ public class ResourcePool : MonoBehaviour
 	public void CreatePool(GameObject item, int count)
 	{
 		_pool = new List<GameObject>();
+        _poolItems = new List<ResourcePoolItem>();
 		for (var i = 0; i < count; i++)
 		{
 			var instance = Object.Instantiate(item);
@@ -28,25 +30,23 @@ public class ResourcePool : MonoBehaviour
 			poolItem.IsAvailable = true;
 			instance.transform.SetParent(transform);
 			_pool.Add(instance);
-		}
-	}
+            _poolItems.Add(poolItem);
+        }
+    }
 
 	public GameObject GetAvailable()
 	{
-		foreach (var item in _pool)
-		{
-			var poolItem = item.GetComponent<ResourcePoolItem>();
-			if (poolItem != null)
-			{
-				if (poolItem.IsAvailable)
-				{
-					// Reset instance here.
-					var expl = item.GetComponent<Explosion>();
-					expl.Reset();
-					return item;
-				}
-			}
-		}
+        for(var i =0; i< _poolItems.Count; i++)
+        {
+            var poolItem = _poolItems[i];
+            if (poolItem.IsAvailable)
+            {
+                var instance = _pool[i];
+                var expl = instance.GetComponent<Explosion>();
+                expl.Reset();
+                return instance;
+            }
+        }
 		Debug.Log("No Available Items!");
 		return null;
 	}
