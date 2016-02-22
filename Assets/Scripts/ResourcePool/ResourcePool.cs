@@ -15,18 +15,13 @@ public class ResourcePool : MonoBehaviour
         ResourcePoolManager.AddResourcePool(this);
 	}
 
-	public void CreatePool(GameObject item, int count)
+	public void CreatePool(GameObject prefab, int count)
 	{
 		_pool = new List<GameObject>();
         _poolItems = new List<ResourcePoolItem>();
 		for (var i = 0; i < count; i++)
 		{
-			var instance = Object.Instantiate(item);
-			var poolItem = instance.AddComponent<ResourcePoolItem>();
-			poolItem.IsAvailable = true;
-			instance.transform.SetParent(transform);
-			_pool.Add(instance);
-            _poolItems.Add(poolItem);
+            AddItem(prefab);
         }
     }
 
@@ -43,6 +38,18 @@ public class ResourcePool : MonoBehaviour
                 return instance;
             }
         }
-		return null;
+        PoolSize++;
+        return AddItem(Prefab);
 	}
+
+    private GameObject AddItem(GameObject prefab)
+    {
+        var instance = Object.Instantiate(prefab);
+        var poolItem = instance.AddComponent<ResourcePoolItem>();
+        poolItem.IsAvailable = true;
+        instance.transform.SetParent(transform);
+        _pool.Add(instance);
+        _poolItems.Add(poolItem);
+        return instance;
+    }
 }
