@@ -18,6 +18,8 @@ public class CommMessaging : MonoBehaviour
     private void Awake()
     {
         _current = this;
+
+        PlayerController.Current.OnChangeSquadronMember += OnChangeSquadronMember;
     }
 
     private void Start()
@@ -31,31 +33,35 @@ public class CommMessaging : MonoBehaviour
         {
             if (_messageCooldown < 4f)
             {
+                Canvas.enabled = true;
                 AuthorText.text = author;
                 MessageText.text = message;
                 _messageCooldown = 5f;
                 if (Sound != null)
                     AudioSource.PlayClipAtPoint(Sound, Universe.Current.ViewPort.transform.position);
-                enabled = true;
             }
         }
-        else
-        {
-            Canvas.enabled = false;
-            enabled = false;
-        }
+    }
+
+    private void HideMessage()
+    {
+        Canvas.enabled = false;
+    }
+
+    private void OnChangeSquadronMember(GameObject from, GameObject to)
+    {
+        Debug.Log("CALL THIS SHIT!");
+        HideMessage();
     }
 
     private void Update()
     {
         if (_messageCooldown >= 0f)
         {
-            Canvas.enabled = true;
             _messageCooldown -= Time.deltaTime;
             if (_messageCooldown < 0f)
             {
-                Canvas.enabled = false;
-                enabled = false;
+                HideMessage();
             }
         }
     }

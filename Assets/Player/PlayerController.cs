@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
 
 	public GameObject PlayerPinPrefab;
 
+    public delegate void OnPlayerControllerChangeSquadronMember(GameObject from, GameObject to);
+    public OnPlayerControllerChangeSquadronMember OnChangeSquadronMember;
+
     [Header("Aiming")]
 	public float AimSensitivity = 10f;
 	public float MouseMoveClamp = 0.02f;
@@ -477,6 +480,8 @@ public class PlayerController : MonoBehaviour
                     cam.Target = _playVehicleInstance;
                     cam.Reset();
                 }
+                if (OnChangeSquadronMember != null)
+                    OnChangeSquadronMember(oldMember.gameObject, gameObject);
             }
             HeadsUpDisplay.Current.RefreshSquadronIcon(Squadron.GetCurrentIndex());
             HeadsUpDisplay.Current.RefreshSquadronIcon(oldSquadronIndex);
