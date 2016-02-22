@@ -25,9 +25,11 @@ public class Beam : Missile
         _length = MissileLength;
     }
 
-    private void Start()
+    public override void Initialize(GameObject owner, float damage)
     {
-        _resourcePoolItem = GetComponent<ResourcePoolItem>();
+        if (_resourcePoolItem == null)
+            _resourcePoolItem = GetComponent<ResourcePoolItem>();
+        base.Initialize(owner, damage);
     }
 
     public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)

@@ -47,9 +47,11 @@ public class SeekingRocket : Missile
         _shiftable = GetComponent<Shiftable>();
     }
 
-    private void Start()
+    public override void Initialize(GameObject owner, float damage)
     {
-        _resourcePoolItem = GetComponent<ResourcePoolItem>();
+        if (_resourcePoolItem == null)
+            _resourcePoolItem = GetComponent<ResourcePoolItem>();
+        base.Initialize(owner, damage);
     }
 
     public override void LiveUpdate()

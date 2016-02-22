@@ -29,12 +29,14 @@ public class Laser : Missile
 		}
 	}
 
-    private void Start()
+    public override void Initialize(GameObject owner, float damage)
     {
-        _resourcePoolItem = GetComponent<ResourcePoolItem>();
+        if (_resourcePoolItem == null)
+            _resourcePoolItem = GetComponent<ResourcePoolItem>();
+        base.Initialize(owner, damage);
     }
 
-	public override void LiveUpdate()
+    public override void LiveUpdate()
 	{
 		var displacement = (_initSpeed + MissileSpeed) * Time.deltaTime;
 		_observationPosition = Universe.Current.ViewPort.transform.position;
