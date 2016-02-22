@@ -325,6 +325,9 @@ MonoBehaviour:
   DirectionLight: {fileID: 1376424185}
   Levels:
   - {fileID: 1097665389}
+  - {fileID: 1117886435}
+  - {fileID: 1807080965}
+  - {fileID: 1985480835}
   NextPortalMaterial: {fileID: 2100000, guid: 5d125a0aee40b984abd9460cd79ff64e, type: 2}
   CubeMapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &128853634
@@ -2879,7 +2882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1117886434
 Transform:
   m_ObjectHideFlags: 0
@@ -4281,7 +4284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1807080964
 Transform:
   m_ObjectHideFlags: 0
@@ -4655,7 +4658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1985480834
 Transform:
   m_ObjectHideFlags: 0
