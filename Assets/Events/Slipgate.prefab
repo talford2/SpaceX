@@ -458,8 +458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c4ddec4abcfd448bf35628836b2578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePin: {fileID: 133228, guid: 4537303a7240d1d49a3e4dcf875bc48a, type: 2}
-  InactivePin: {fileID: 133228, guid: 4537303a7240d1d49a3e4dcf875bc48a, type: 2}
+  ActivePin: {fileID: 133228, guid: e6bdec991ee630f4b88c588a75101080, type: 2}
+  InactivePin: {fileID: 133228, guid: e6bdec991ee630f4b88c588a75101080, type: 2}
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
   CurrentInstance: {fileID: 0}
@@ -475,6 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelIndex: 1
+  TriggerRadius: 20
 --- !u!114 &11470108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -640,6 +641,14 @@ Prefab:
       propertyPath: TrackerRadius
       value: 1200
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ActivePin
+      value: 
+      objectReference: {fileID: 133228, guid: e6bdec991ee630f4b88c588a75101080, type: 2}
+    - target: {fileID: 0}
+      propertyPath: InactivePin
+      value: 
+      objectReference: {fileID: 133228, guid: e6bdec991ee630f4b88c588a75101080, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 169094}
