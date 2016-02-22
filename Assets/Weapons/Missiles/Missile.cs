@@ -53,11 +53,8 @@ public abstract class Missile : MonoBehaviour
                 var univPos = Universe.Current.GetUniversePosition(position);
                 hitEffectShiftable.SetShiftPosition(univPos);
             }
-            else
-            {
-                hitEffectInstance.transform.position = position;
-            }
 
+            hitEffectInstance.transform.position = position;
             hitEffectInstance.transform.forward = normal;
         }
 
