@@ -152,7 +152,7 @@ public class PlayerSquadron : MonoBehaviour
             "Stop It {0}!",
             "{0}!!!",
             "Why are you hurting me!?",
-            "What did I do you you, {0}?",
+            "What did I do to you, {0}?",
             "Don't shoot at your friends!",
             "Friendly Fire!",
             "{0}, I'm FRIENDLY!",
