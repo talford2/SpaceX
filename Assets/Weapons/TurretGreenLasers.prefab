@@ -147,7 +147,7 @@ MonoBehaviour:
   MuzzlePrefab: {fileID: 11408760, guid: db0bd28387b791d4ea43fd188b23d353, type: 2}
   FireSound: {fileID: 8259540}
   FireRate: 0.5
-  MissilesPerShot: 2
+  MissilesPerShot: 1
   MissileDamage: 5
   MissilesConverge: 0
   IsTargetLocking: 0
@@ -223,6 +223,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Name
       value: Red Laser Cannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MissilesPerShot
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

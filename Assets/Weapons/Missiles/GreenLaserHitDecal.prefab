@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11401728}
   - 114: {fileID: 11470286}
   m_Layer: 0
-  m_Name: LaserGreenHitDecal
+  m_Name: GreenLaserHitDecal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
