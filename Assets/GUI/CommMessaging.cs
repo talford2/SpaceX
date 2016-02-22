@@ -7,6 +7,7 @@ public class CommMessaging : MonoBehaviour
     public Canvas Canvas;
     public Text AuthorText;
     public Text MessageText;
+    public AudioClip Sound;
 
     private static CommMessaging _current;
 
@@ -24,14 +25,24 @@ public class CommMessaging : MonoBehaviour
         Canvas.enabled = false;
     }
 
-    public void ShowMessage(string author, string message)
+    public void ShowMessage(GameObject to, string author, string message)
     {
-        if (_messageCooldown < 4f)
+        if (PlayerController.Current.VehicleInstance != null && PlayerController.Current.VehicleInstance.gameObject == to)
         {
-            AuthorText.text = author;
-            MessageText.text = message;
-            _messageCooldown = 5f;
-            enabled = true;
+            if (_messageCooldown < 4f)
+            {
+                AuthorText.text = author;
+                MessageText.text = message;
+                _messageCooldown = 5f;
+                if (Sound != null)
+                    AudioSource.PlayClipAtPoint(Sound, Universe.Current.ViewPort.transform.position);
+                enabled = true;
+            }
+        }
+        else
+        {
+            Canvas.enabled = false;
+            enabled = false;
         }
     }
 

@@ -137,7 +137,7 @@ public class PlayerSquadron : MonoBehaviour
         {
             if (attacker == PlayerController.Current.VehicleInstance.gameObject) {
                 var member = sender.GetComponent<Vehicle>().Controller.GetComponent<Fighter>();
-                CommMessaging.Current.ShowMessage(member.CallSign, GetFriendlyFireMessage());
+                CommMessaging.Current.ShowMessage(attacker, member.CallSign, GetFriendlyFireMessage());
             }
         }
         // This should on refresh the current squadron member's icon.
