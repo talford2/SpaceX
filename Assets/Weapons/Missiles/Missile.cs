@@ -45,7 +45,7 @@ public abstract class Missile : MonoBehaviour
         // TODO: Should pull this effect from a pool or something...
         if (HitEffectPrefab != null)
         {
-            var hitEffectInstance = Instantiate(HitEffectPrefab);
+            var hitEffectInstance = ResourcePoolManager.GetAvailable(HitEffectPrefab);
 
             var hitEffectShiftable = hitEffectInstance.GetComponent<Shiftable>();
             if (hitEffectShiftable != null)
