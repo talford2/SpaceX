@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour
 
 	public float FireRate = 0.2f;
 	public int MissilesPerShot = 2;
+    public float Spread = 0f;
 	public float MissileDamage;
 	public bool MissilesConverge;
 	public bool IsTargetLocking;
@@ -96,26 +97,26 @@ public class Weapon : MonoBehaviour
         return missileInstance;
 	}
 
-	public void FireMissile(GameObject missile)
-	{
-		if (OnShoot != null)
-			OnShoot(_shootPointIndex);
+    public void FireMissile(GameObject missile)
+    {
+        if (OnShoot != null)
+            OnShoot(_shootPointIndex);
 
-		var _shootPoint = _shootPoints[_shootPointIndex];
+        var _shootPoint = _shootPoints[_shootPointIndex];
 
-		var direction = _aimAt - _shootPoint.transform.position;
-		if (!MissilesConverge)
-			direction += _shootPoint.transform.position - GetShootPointCentre();
-		missile.GetComponent<Missile>().FromReference = _shootPoint.transform;
-		missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, direction, _velocityReference.Value);
+        var direction = _aimAt - _shootPoint.transform.position;
+        if (!MissilesConverge)
+            direction += _shootPoint.transform.position - GetShootPointCentre();
+        missile.GetComponent<Missile>().FromReference = _shootPoint.transform;
+        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, Quaternion.Euler(Random.Range(-0.5f*Spread, 0.5f*Spread), Random.Range(-0.5f * Spread, 0.5f * Spread), 0f) * direction, _velocityReference.Value);
 
-		_shootPoint.Flash();
-		FireSound.Play();
+        _shootPoint.Flash();
+        FireSound.Play();
 
-		_shootPointIndex++;
-		if (_shootPointIndex >= _shootPoints.Count)
-			_shootPointIndex = 0;
-	}
+        _shootPointIndex++;
+        if (_shootPointIndex >= _shootPoints.Count)
+            _shootPointIndex = 0;
+    }
 
 	public void Fire()
 	{
