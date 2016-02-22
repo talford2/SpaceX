@@ -38,7 +38,8 @@ public class Fighter : Npc<Fighter>
     public float BurstTime = 0.5f;
     public float BurstWaitTime = 0.7f;
     public float ExrapolationTimeError = 0.5f;
-    public float AimOffsetRadius = 5f;
+    public float MinAimOffsetRadius = 5f;
+    public float MaxAimOffsetRadius = 20f;
 
 	[Header("Evade")]
 	public float EvadeDistance = 200f;

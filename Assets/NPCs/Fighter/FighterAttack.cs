@@ -94,7 +94,15 @@ public class FighterAttack :NpcState<Fighter>
                 _allowShoot = true;
                 _burstAmount = 0f;
                 _burstTimeoffset = Random.Range(-Npc.ExrapolationTimeError, Npc.ExrapolationTimeError);
-                _targetOffset = Random.insideUnitSphere*Npc.AimOffsetRadius;
+
+                if (dotTarget > Npc.AttackRange)
+                {
+                    _targetOffset = Random.insideUnitSphere * Npc.MaxAimOffsetRadius;
+                }
+                else
+                {
+                    _targetOffset = Mathf.Max((dotTarget/ Npc.AttackRange)* Npc.MaxAimOffsetRadius, Npc.MinAimOffsetRadius)* Random.insideUnitSphere;
+                }
             }
         }
 

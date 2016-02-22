@@ -40,7 +40,8 @@ public class PlayerSquadron : MonoBehaviour
                 member.IsSquadronMember = true;
 
                 // Give squadron members better aiming!
-                member.AimOffsetRadius = 1.5f;
+                member.MinAimOffsetRadius = 1.5f;
+                member.MaxAimOffsetRadius = 5f;
                 SpawnSquadronVehicle(member, univPos, transform.rotation);
             }
         }
