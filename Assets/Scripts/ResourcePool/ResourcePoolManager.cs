@@ -12,9 +12,9 @@ public class ResourcePoolManager
         _resourcePools.Add(pool.Prefab, pool);
     }
 
-    public static GameObject GetAvailable(GameObject obj)
+    public static GameObject GetAvailable(GameObject obj, Vector3 position, Quaternion rotation)
     {
-        var instance = _resourcePools[obj].GetAvailable();
+        var instance = _resourcePools[obj].GetAvailable(position, rotation);
         if (instance == null)
             Debug.LogWarning("Insufficient " + obj.name + "s in resource pool.");
         return instance;

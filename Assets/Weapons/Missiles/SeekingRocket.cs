@@ -192,9 +192,7 @@ public class SeekingRocket : Missile
 
     private void Explode()
     {
-        var explodeInstance = ResourcePoolManager.GetAvailable(ExplodePrefab); //(GameObject)Instantiate(ExplodePrefab, transform.position, transform.rotation);
-        explodeInstance.transform.position = transform.position;
-        explodeInstance.transform.rotation = transform.rotation;
+        var explodeInstance = ResourcePoolManager.GetAvailable(ExplodePrefab, transform.position, transform.rotation); //(GameObject)Instantiate(ExplodePrefab, transform.position, transform.rotation);
 
         explodeInstance.transform.localScale = transform.localScale;
         var explodeShiftable = explodeInstance.GetComponent<Shiftable>();

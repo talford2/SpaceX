@@ -25,14 +25,16 @@ public class ResourcePool : MonoBehaviour
         }
     }
 
-	public GameObject GetAvailable()
-	{
-        for(var i =0; i< _poolItems.Count; i++)
+    public GameObject GetAvailable(Vector3 position, Quaternion rotation)
+    {
+        for (var i = 0; i < _poolItems.Count; i++)
         {
             var poolItem = _poolItems[i];
             if (poolItem.IsAvailable)
             {
                 var instance = _pool[i];
+                instance.transform.position = position;
+                instance.transform.rotation = rotation;
                 if (poolItem.OnGetAvaiable != null)
                     poolItem.OnGetAvaiable();
                 return instance;
@@ -40,7 +42,7 @@ public class ResourcePool : MonoBehaviour
         }
         PoolSize++;
         return AddItem(Prefab);
-	}
+    }
 
     private GameObject AddItem(GameObject prefab)
     {

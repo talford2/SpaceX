@@ -92,7 +92,7 @@ public class Weapon : MonoBehaviour
 
 	private GameObject GetNextMissile()
 	{
-        var missileInstance = ResourcePoolManager.GetAvailable(MissilePrefab);
+        var missileInstance = ResourcePoolManager.GetAvailable(MissilePrefab, Vector3.zero, Quaternion.identity);
         missileInstance.GetComponent<Missile>().Initialize(_owner, MissileDamage);
         return missileInstance;
 	}
