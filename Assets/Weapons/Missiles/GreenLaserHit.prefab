@@ -42,8 +42,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 499528}
-  - 114: {fileID: 11497292}
   - 114: {fileID: 11465994}
+  - 114: {fileID: 11462030}
+  - 114: {fileID: 11486344}
   - 82: {fileID: 8265656}
   m_Layer: 0
   m_Name: GreenLaserHit
@@ -164,6 +165,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11462030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5924364568a2c47489071d2f73af9368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sound: {fileID: 8265656}
 --- !u!114 &11465994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,7 +196,7 @@ MonoBehaviour:
   ShiftParticleSystems:
   - {fileID: 19833032}
   - {fileID: 19843718}
---- !u!114 &11497292
+--- !u!114 &11486344
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -191,7 +204,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 198982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 670c40cbcc89a784b93fddab3be12e1b, type: 3}
+  m_Script: {fileID: 11500000, guid: f0f08438f1163174ab76a2927571d136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Cooldown: 1
@@ -3417,6 +3430,10 @@ Prefab:
       propertyPath: m_Volume
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Sound
+      value: 
+      objectReference: {fileID: 8265656}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 198982}
