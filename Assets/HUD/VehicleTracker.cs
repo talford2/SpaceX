@@ -42,8 +42,10 @@ public class VehicleTracker : Tracker
     private Killable _killable;
     private float _maxDistanceSquared;
 	private bool _isLockedOn;
+    private bool _oldLockedOn;
 
-	private void Awake()
+
+    private void Awake()
 	{
 		_screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
 		var boundaryPadding = 20f;
@@ -193,6 +195,7 @@ public class VehicleTracker : Tracker
                 fadeCooldown = fadeTime;
             }
         }
+
         if (lastDistanceSquared > _maxDistanceSquared)
         {
             if (distanceSquared < _maxDistanceSquared)
@@ -263,6 +266,7 @@ public class VehicleTracker : Tracker
                 {
                     UpdateHealthBar();
                 }
+
                 // Locking
                 _isLockedOn = false;
                 var playerVehicle = PlayerController.Current.VehicleInstance;
@@ -270,52 +274,43 @@ public class VehicleTracker : Tracker
                 {
                     if (playerVehicle.PrimaryWeaponInstance != null)
                     {
-                        if (playerVehicle.PrimaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
+                        if (IsPlayerWeaponLocking(playerVehicle.PrimaryWeaponInstance))
                         {
                             _lockInstance.sprite = _lockingSprite;
                             _isLockedOn = true;
                         }
-                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
+                        if (IsPlayerWeaponLocked(playerVehicle, playerVehicle.PrimaryWeaponInstance))
                         {
                             _lockInstance.sprite = _lockedSprite;
                             _isLockedOn = true;
                         }
-                        /*
-                        if (_isLockedOn)
-                            _lockInstance.sprite = _lockedSprite;
-                        */
                     }
                     if (playerVehicle.SecondaryWeaponInstance != null)
                     {
-                        if (playerVehicle.SecondaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
+                        if (IsPlayerWeaponLocking(playerVehicle.SecondaryWeaponInstance))
                         {
                             _lockInstance.sprite = _lockingSprite;
                             _isLockedOn = true;
                         }
-                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
+                        if (IsPlayerWeaponLocked(playerVehicle, playerVehicle.SecondaryWeaponInstance))
                         {
                             _lockInstance.sprite = _lockedSprite;
                             _isLockedOn = true;
                         }
-                        /*
-                        if (_isLockedOn)
-                            _lockInstance.sprite = _lockedSprite;
-                        */
                     }
                 }
-                if (oldLockedOn != _isLockedOn)
+
+                if (_oldLockedOn != _isLockedOn)
                 {
                     _lockInstance.rectTransform.localScale = Vector3.one * 3f;
                     _lockInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, 180f);
                 }
 
-                // Dodgey method of colouring locking cursors white.
                 var scale = Vector3.one;
                 var rotation = Quaternion.identity;
                 if (_isLockedOn)
                 {
                     _imageInstance.enabled = false;
-
                     _lockInstance.enabled = true;
                     rotation = Quaternion.RotateTowards(_lockInstance.rectTransform.localRotation, Quaternion.identity, 480f * Time.deltaTime);
                     scale = Vector3.Lerp(_lockInstance.rectTransform.localScale, Vector3.one, Time.deltaTime * 5f);
@@ -348,13 +343,21 @@ public class VehicleTracker : Tracker
                 _healthBarBackgroundInstance.enabled = false;
                 _healthBarInstance.enabled = false;
             }
-            oldLockedOn = _isLockedOn;
+            _oldLockedOn = _isLockedOn;
         }
 
         lastDistanceSquared = distanceSquared;
     }
 
-    private bool oldLockedOn;
+    private bool IsPlayerWeaponLocking(Weapon weapon)
+    {
+        return weapon.GetLockingOnTarget() == _targetable.transform;
+    }
+
+    private bool IsPlayerWeaponLocked(Vehicle playerVehicle, Weapon weapon)
+    {
+        return _targetable != null && _targetable.LockedOnBy == playerVehicle.transform || weapon.GetLockedOnTarget() == _targetable.transform;
+    }
 
     private void UpdateHealthBar()
     {
