@@ -392,7 +392,7 @@ MonoBehaviour:
   - {fileID: 1793718006}
   DistanceBehind: 15
   VerticalDistance: 3
-  SpringCompression: 0.5
+  SpringCompression: 0.7
   SpringExpansion: 1.5
   SpringBoostExpansion: 3
   RotationCatchup: 5
@@ -1542,7 +1542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 180512, guid: adb276e13f8472b4ab9d9878efaa0049, type: 2}
-  PoolSize: 200
+  PoolSize: 500
 --- !u!4 &643625537
 Transform:
   m_ObjectHideFlags: 0
