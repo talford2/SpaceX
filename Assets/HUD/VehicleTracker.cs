@@ -25,6 +25,7 @@ public class VehicleTracker : Tracker
     private Image _shieldBarInstance;
     private Image _healthBarBackgroundInstance;
 	private Image _healthBarInstance;
+    private Image _lockInstance;
 
 	private Sprite _trackerSprite;
 	private Sprite _farTrackerSprite;
@@ -71,11 +72,21 @@ public class VehicleTracker : Tracker
 		_farTrackerSprite = Sprite.Create(FarTrackerCursorImage, new Rect(0, 0, FarTrackerCursorImage.width, FarTrackerCursorImage.height), Vector2.zero);
 		_veryFarTrackerSprite = Sprite.Create(VeryFarTrackerCursorImage, new Rect(0, 0, VeryFarTrackerCursorImage.width, VeryFarTrackerCursorImage.height), Vector2.zero);
 		_arrowSprite = Sprite.Create(ArrowCursorImage, new Rect(0, 0, ArrowCursorImage.width, ArrowCursorImage.height), Vector2.zero);
+
 		_lockingSprite = Sprite.Create(LockingCursorImage, new Rect(0, 0, LockingCursorImage.width, LockingCursorImage.height), Vector2.zero);
 		_lockedSprite = Sprite.Create(LockedCursorImage, new Rect(0, 0, LockedCursorImage.width, LockedCursorImage.height), Vector2.zero);
 
 		trackerImg.sprite = _trackerSprite;
 		trackerImg.SetNativeSize();
+
+        // Locking tracker
+        var lockObj = new GameObject(string.Format("{0}_LockTracker", transform.name));
+        var lockImg = lockObj.AddComponent<Image>();
+
+        lockImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        lockImg.color = new Color(1f, 1f, 1f, 1f);
+        lockImg.sprite = _lockingSprite;
+        lockImg.SetNativeSize();
 
         // Shieldbar background
         var shieldBarBackgroundObj = new GameObject(string.Format("{0}_ShieldBackground", transform.name));
@@ -137,6 +148,10 @@ public class VehicleTracker : Tracker
 
 		_imageInstance = trackerImg;
 		_imageInstance.color = TrackerColor;
+
+        _lockInstance = lockImg;
+        _lockInstance.transform.SetParent(trackerImg.transform);
+        _lockInstance.enabled = false;
 
         var distanceSquared = (_targetable.transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
 
@@ -225,18 +240,17 @@ public class VehicleTracker : Tracker
             if (screenPosition.z < 0f)
             {
                 screenPosition *= -1f;
-                screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f))*Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+                screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f)) * Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
             }
             screenPosition.z = 0f;
 
             if (_screenBounds.Contains(screenPosition))
             {
-
                 var useSprite = _trackerSprite;
-                if (distanceSquared > 1000f*1000f)
+                if (distanceSquared > 1000f * 1000f)
                 {
                     useSprite = _farTrackerSprite;
-                    if (distanceSquared > 2000f*2000f)
+                    if (distanceSquared > 2000f * 2000f)
                     {
                         useSprite = _veryFarTrackerSprite;
                     }
@@ -257,38 +271,74 @@ public class VehicleTracker : Tracker
                     if (playerVehicle.PrimaryWeaponInstance != null)
                     {
                         if (playerVehicle.PrimaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
-                            useSprite = _lockingSprite;
-                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
+                        {
+                            _lockInstance.sprite = _lockingSprite;
                             _isLockedOn = true;
+                        }
+                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.PrimaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
+                        {
+                            _lockInstance.sprite = _lockedSprite;
+                            _isLockedOn = true;
+                        }
+                        /*
                         if (_isLockedOn)
-                            useSprite = _lockedSprite;
+                            _lockInstance.sprite = _lockedSprite;
+                        */
                     }
                     if (playerVehicle.SecondaryWeaponInstance != null)
                     {
                         if (playerVehicle.SecondaryWeaponInstance.GetLockingOnTarget() == _targetable.transform)
-                            useSprite = _lockingSprite;
-                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
+                        {
+                            _lockInstance.sprite = _lockingSprite;
                             _isLockedOn = true;
+                        }
+                        if (_targetable != null && _targetable.LockedOnBy == playerVehicle.transform || playerVehicle.SecondaryWeaponInstance.GetLockedOnTarget() == _targetable.transform)
+                        {
+                            _lockInstance.sprite = _lockedSprite;
+                            _isLockedOn = true;
+                        }
+                        /*
                         if (_isLockedOn)
-                            useSprite = _lockedSprite;
+                            _lockInstance.sprite = _lockedSprite;
+                        */
                     }
                 }
-                // Dodgey method of colouring locking cursors white.
-                if (useSprite == _lockingSprite || useSprite == _lockedSprite)
+                if (oldLockedOn != _isLockedOn)
                 {
-                    _imageInstance.color = Color.white;
+                    _lockInstance.rectTransform.localScale = Vector3.one * 3f;
+                    _lockInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, 180f);
+                }
+
+                // Dodgey method of colouring locking cursors white.
+                var scale = Vector3.one;
+                var rotation = Quaternion.identity;
+                if (_isLockedOn)
+                {
+                    _imageInstance.enabled = false;
+
+                    _lockInstance.enabled = true;
+                    rotation = Quaternion.RotateTowards(_lockInstance.rectTransform.localRotation, Quaternion.identity, 480f * Time.deltaTime);
+                    scale = Vector3.Lerp(_lockInstance.rectTransform.localScale, Vector3.one, Time.deltaTime * 5f);
                 }
                 else
                 {
-                    _imageInstance.color = Utility.SetColorAlpha(TrackerColor, _imageInstance.color.a);
+                    _imageInstance.enabled = true;
+                    _lockInstance.enabled = false;
                 }
+                
                 _imageInstance.sprite = useSprite;
 
                 _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
                 _imageInstance.rectTransform.localRotation = Quaternion.identity;
+
+                _lockInstance.rectTransform.localScale = scale;
+                _lockInstance.rectTransform.localRotation = rotation;
             }
             else
             {
+                _lockInstance.enabled = false;
+                _imageInstance.enabled = true;
+
                 _imageInstance.sprite = _arrowSprite;
                 _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
                 _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
@@ -298,10 +348,13 @@ public class VehicleTracker : Tracker
                 _healthBarBackgroundInstance.enabled = false;
                 _healthBarInstance.enabled = false;
             }
+            oldLockedOn = _isLockedOn;
         }
 
         lastDistanceSquared = distanceSquared;
     }
+
+    private bool oldLockedOn;
 
     private void UpdateHealthBar()
     {
