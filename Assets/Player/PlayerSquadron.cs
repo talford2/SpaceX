@@ -137,27 +137,40 @@ public class PlayerSquadron : MonoBehaviour
         {
             if (attacker == PlayerController.Current.VehicleInstance.gameObject) {
                 var member = sender.GetComponent<Vehicle>().Controller.GetComponent<Fighter>();
-                CommMessaging.Current.ShowMessage(attacker, member.CallSign, GetFriendlyFireMessage());
+                CommMessaging.Current.ShowMessage(attacker, member.CallSign, GetFriendlyFireMessage(PlayerController.Current.GetCallSign()));
             }
         }
         // This should on refresh the current squadron member's icon.
         HeadsUpDisplay.Current.RefreshSquadronIcons();
     }
 
-    private string GetFriendlyFireMessage()
+    private string GetFriendlyFireMessage(string addressCallSign)
     {
         string[] friendlyFireMessages = new[] {
-            "Hey! I'm on your side!",
-            "Stop It!",
+            "Hey {0}! I'm on your side!",
+            "STOP IT!",
+            "Stop It {0}!",
+            "{0}!!!",
             "Why are you hurting me!?",
+            "What did I do you you, {0}?",
             "Don't shoot at your friends!",
+            "Friendly Fire!",
+            "{0}, I'm FRIENDLY!",
             "Hey wise guy, I'm on your side!",
             "Save it for the enemy!",
-            "You Fucker!",
+            "YOU FUCKER!",
+            "Fuck Off {0}!",
             "You're going to regret that!",
-            "What is wrong with you?!"
+            "What is wrong with you?!",
+            "What's wrong with you {0}?!",
+            "{0}, what the hell?!!",
+            "{0} Don't!",
+            "{0} don't you like me?",
+            "Try it again {0}, I dare you!",
+            "I was always nice to You {0}!",
+            "Watch your aim {0}!"
         };
-        return friendlyFireMessages[Random.Range(0, friendlyFireMessages.Length)];
+        return string.Format(friendlyFireMessages[Random.Range(0, friendlyFireMessages.Length)], addressCallSign);
     }
 
     private void SquadronMember_OnDie(Killable sender)

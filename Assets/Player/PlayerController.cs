@@ -416,6 +416,13 @@ public class PlayerController : MonoBehaviour
         HeadsUpDisplay.Current.RefreshSquadronIcons();
     }
 
+    private string _curCallSlign;
+
+    public string GetCallSign()
+    {
+        return _curCallSlign;
+    }
+
     private void CycleSquadron(int dir)
     {
         var oldSquadronIndex = Squadron.GetCurrentIndex();
@@ -461,6 +468,7 @@ public class PlayerController : MonoBehaviour
                     _playVehicleInstance.GetComponent<ShieldRegenerator>().OnRegenerate += PlayerController_OnRegenerate;
                     _playVehicleInstance.Controller = gameObject;
 
+                    _curCallSlign = curMember.CallSign;
                     curMember.enabled = false;
 
                     Universe.Current.WarpTo(_playVehicleInstance.Shiftable);
