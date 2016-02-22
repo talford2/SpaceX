@@ -66,7 +66,7 @@ public class PlayerSquadron : MonoBehaviour
 
     public void SpawnSquadronVehicle(Fighter member, UniversePosition position, Quaternion rotation)
     {
-        member.SpawnVehicle(member.VehiclePrefab, position, rotation);
+        member.SpawnVehicle(member.gameObject, member.VehiclePrefab, position, rotation);
         var memberTracker = member.VehicleInstance.GetComponent<VehicleTracker>();
 
         var squadronTracker = member.VehicleInstance.gameObject.AddComponent<SquadronTracker>();
@@ -131,10 +131,33 @@ public class PlayerSquadron : MonoBehaviour
         HeadsUpDisplay.Current.RefreshSquadronIcons();
     }
 
-    private void SquadronMember_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
+    private void SquadronMember_OnDamage(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
     {
+        if (PlayerController.Current.VehicleInstance != null)
+        {
+            if (attacker == PlayerController.Current.VehicleInstance.gameObject) {
+                var member = sender.GetComponent<Vehicle>().Controller.GetComponent<Fighter>();
+                CommMessaging.Current.ShowMessage(member.CallSign, GetFriendlyFireMessage());
+            }
+        }
         // This should on refresh the current squadron member's icon.
         HeadsUpDisplay.Current.RefreshSquadronIcons();
+    }
+
+    private string GetFriendlyFireMessage()
+    {
+        string[] friendlyFireMessages = new[] {
+            "Hey! I'm on your side!",
+            "Stop It!",
+            "Why are you hurting me!?",
+            "Don't shoot at your friends!",
+            "Hey wise guy, I'm on your side!",
+            "Save it for the enemy!",
+            "You Fucker!",
+            "You're going to regret that!",
+            "What is wrong with you?!"
+        };
+        return friendlyFireMessages[Random.Range(0, friendlyFireMessages.Length)];
     }
 
     private void SquadronMember_OnDie(Killable sender)

@@ -14,7 +14,7 @@ public class Killable : MonoBehaviour
 	public GameObject WoundEffect;
 	private GameObject _woundObj;
 
-	public delegate void OnDamageEvent(Vector3 position, Vector3 normal, GameObject attacker);
+	public delegate void OnDamageEvent(Killable sender, Vector3 position, Vector3 normal, GameObject attacker);
 	public event OnDamageEvent OnDamage;
 
 	public delegate void OnDieEvent(Killable sender);
@@ -44,7 +44,7 @@ public class Killable : MonoBehaviour
                 Health -= damage;
             }
             if (OnDamage != null)
-                OnDamage(position, normal, attacker);
+                OnDamage(this, position, normal, attacker);
             if (DamageEffect != null)
                 Instantiate(DamageEffect, position, Quaternion.LookRotation(normal));
             if (Health <= 0f)

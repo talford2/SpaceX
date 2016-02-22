@@ -35,6 +35,7 @@ public class Vehicle : MonoBehaviour
     public float BoostEnergyRegenerateRate = 1f;
 
     [Header("Control Settings")]
+    public GameObject Controller;
     public bool TriggerAccelerate = false;
     public bool TriggerBrake = false;
     public bool TriggerBoost = false;

@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour
 	public void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition, Quaternion rotation)
 	{
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, universePosition.CellLocalPosition, rotation)).GetComponent<Vehicle>();
+        _playVehicleInstance.Controller = gameObject;
 		_playVehicleInstance.Shiftable.SetShiftPosition(universePosition);
         //Destroy(_playVehicleInstance.GetComponent<Tracker>());
 
@@ -458,6 +459,7 @@ public class PlayerController : MonoBehaviour
                     _playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;
                     _playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
                     _playVehicleInstance.GetComponent<ShieldRegenerator>().OnRegenerate += PlayerController_OnRegenerate;
+                    _playVehicleInstance.Controller = gameObject;
 
                     curMember.enabled = false;
 
@@ -482,7 +484,7 @@ public class PlayerController : MonoBehaviour
         HeadsUpDisplay.Current.RefreshSquadronIcon(0);
     }
 
-    private void PlayerController_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
+    private void PlayerController_OnDamage(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
     {
         HeadsUpDisplay.Current.Hit();
         Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.1f);

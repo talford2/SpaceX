@@ -47,7 +47,7 @@ public class Spawner : MonoBehaviour
 		if (!_hasSpawned)
 		{
 			_fighterInst = Instantiate<Fighter>(FighterPrefab);
-            _fighterInst.SpawnVehicle(_fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position), transform.rotation);
+            _fighterInst.SpawnVehicle(_fighterInst.gameObject, _fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position), transform.rotation);
 
 		    if (AddWarpEffect)
 		    {

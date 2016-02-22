@@ -47,7 +47,7 @@ public class ProximitySpawner : MonoBehaviour
     public void Spawn()
     {
         var fighterInst = Instantiate(FighterPrefab);
-        fighterInst.SpawnVehicle(fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position), transform.rotation);
+        fighterInst.SpawnVehicle(fighterInst.gameObject, fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position), transform.rotation);
         var spawnedKillable = fighterInst.VehicleInstance.GetComponent<Killable>();
         spawnedKillable.OnDie += OnSpawnedDie;
         if (PathPoint != null)

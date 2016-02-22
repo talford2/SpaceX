@@ -37,7 +37,7 @@ public class ShieldRegenerator : MonoBehaviour
         }
     }
 
-    private void ShieldRegenerator_OnDamage(Vector3 position, Vector3 normal, GameObject attacker)
+    private void ShieldRegenerator_OnDamage(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
     {
         _delayCooldown = RegenerationDelay;
     }

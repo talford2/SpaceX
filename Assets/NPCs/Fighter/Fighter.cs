@@ -84,7 +84,7 @@ public class Fighter : Npc<Fighter>
 
         if (IsDebugSpawn)
         {
-            SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)), Quaternion.identity);
+            SpawnVehicle(gameObject, VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)), Quaternion.identity);
             _vehicleInstance.GetComponent<VehicleTracker>().enabled = false;
         }
     }
@@ -113,7 +113,7 @@ public class Fighter : Npc<Fighter>
         }
     }
 
-    public void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition, Quaternion rotation)
+    public void SpawnVehicle(GameObject controller, Vehicle vehiclePrefab, UniversePosition universePosition, Quaternion rotation)
     {
         _vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
         _vehicleInstance.GetComponent<Targetable>().Team = Team;
@@ -123,6 +123,7 @@ public class Fighter : Npc<Fighter>
         _vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();
         _vehicleInstance.SetTargetRotation(rotation);
         _vehicleInstance.transform.rotation = rotation;
+        _vehicleInstance.Controller = controller;
         ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
     }
 
@@ -131,6 +132,7 @@ public class Fighter : Npc<Fighter>
         _vehicleInstance = vehicleInstance;
         //_vehicleInstance.GetComponent<Targetable>().Team = Team;
         _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+        _vehicleInstance.Controller = gameObject;
         ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
     }
 
@@ -142,7 +144,7 @@ public class Fighter : Npc<Fighter>
 		return new Vector2(pitchAmount, yawAmount);
 	}
 
-    private void OnVehicleDamaged(Vector3 position, Vector3 normal, GameObject attacker)
+    private void OnVehicleDamaged(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
     {
         if (attacker != null)
         {
