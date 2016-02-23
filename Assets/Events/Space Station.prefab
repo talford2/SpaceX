@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 439666}
   - 33: {fileID: 3374314}
   - 23: {fileID: 2308274}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpaceStation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 489988}
   - 114: {fileID: 11405672}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Distant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -432.09338, y: 40.919823, z: 341.2156}
+  m_LocalPosition: {x: 1.661737, y: -1.3910313, z: -0.46310568}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432110}

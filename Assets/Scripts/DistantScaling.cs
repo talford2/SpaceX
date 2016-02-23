@@ -20,9 +20,6 @@ public class DistantScaling : MonoBehaviour
 
     public GameObject DistantObject;
     public GameObject NearObject;
-    public List<Targetable> TargetableObjects;
-    public List<Collider> ManagedColliders;
-    public List<Detectable> ManagedDetectables;
 
 	private void Awake()
 	{
@@ -73,8 +70,10 @@ public class DistantScaling : MonoBehaviour
 
 			// Positioning
             transform.position = Universe.Current.ViewPort.AttachedCamera.transform.position + toCamera.normalized * scaledDistance;
+            /*
 			if (gameObject.layer != _distantLayer)
 				Utility.SetLayerRecursively(gameObject, _distantLayer);
+            */
 		}
 		else
 		{
@@ -93,6 +92,7 @@ public class DistantScaling : MonoBehaviour
 			}
 
 			transform.position = worldDestination;
+            /*
 			if (gameObject.layer != _defaultLayer)
 				Utility.SetLayerRecursively(gameObject, _defaultLayer);
 		    foreach (var managedCollider in ManagedColliders)
@@ -106,6 +106,7 @@ public class DistantScaling : MonoBehaviour
 		            detectable.gameObject.layer = LayerMask.NameToLayer("Detectable");
 		        }
 		    }
+            */
 		}
         /*
 	    if (isDistant != lastIsDistant)
@@ -125,6 +126,7 @@ public class DistantScaling : MonoBehaviour
         //ManageTargtables();
 	}
 
+    /*
     private void ManageTargtables()
     {
         SetTargetablesEnabled(!_isDistant);
@@ -133,7 +135,9 @@ public class DistantScaling : MonoBehaviour
             managedCollider.enabled = !_isDistant;
         }
     }
+    */
 
+    /*
     private void SetTargetablesEnabled(bool value)
     {
         foreach (var targetable in TargetableObjects)
@@ -150,4 +154,5 @@ public class DistantScaling : MonoBehaviour
             }
         }
     }
+    */
 }
