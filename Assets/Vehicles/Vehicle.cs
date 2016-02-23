@@ -23,6 +23,7 @@ public class Vehicle : MonoBehaviour
     public float YawSpeed = 5f;
     public float RollAcceleration = 640f;
     public float MaxRollSpeed = 100f;
+    public float MaxBankingAngle = 60f;
 
     [Header("Collisions")]
     public Vector3 CollisionsCentre;
@@ -310,7 +311,7 @@ public class Vehicle : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, _targetRotation, 5f * Time.deltaTime);
 
         // Banking
-        _targetBankRotation = Quaternion.Lerp(_targetBankRotation, Quaternion.AngleAxis(-YawThrottle*90f, Vector3.forward), 5f*Time.deltaTime);
+        _targetBankRotation = Quaternion.Lerp(_targetBankRotation, Quaternion.AngleAxis(-YawThrottle*MaxBankingAngle, Vector3.forward), 5f*Time.deltaTime);
         MeshTransform.localRotation = Quaternion.Lerp(MeshTransform.localRotation, _targetBankRotation, 5f * Time.deltaTime);
 
         _velocity = transform.forward * CurrentSpeed;
