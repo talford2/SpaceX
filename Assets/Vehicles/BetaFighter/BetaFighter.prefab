@@ -16,22 +16,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &107494
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 489914}
-  - 114: {fileID: 11422850}
-  m_Layer: 0
-  m_Name: GreenLasers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &111694
 GameObject:
   m_ObjectHideFlags: 1
@@ -349,7 +333,6 @@ Transform:
   - {fileID: 443368}
   - {fileID: 490584}
   - {fileID: 474998}
-  - {fileID: 489914}
   m_Father: {fileID: 441860}
   m_RootOrder: 0
 --- !u!4 &441860
@@ -490,18 +473,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 427110}
   m_RootOrder: 6
---- !u!4 &489914
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 107494}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 427110}
-  m_RootOrder: 7
 --- !u!4 &490584
 Transform:
   m_ObjectHideFlags: 1
@@ -688,32 +659,6 @@ MonoBehaviour:
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
   ShiftParticleSystems: []
---- !u!114 &11422850
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 107494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: 
-  MissilePrefab: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
-  MuzzlePrefab: {fileID: 0}
-  FireSound: {fileID: 0}
-  FireRate: 0.2
-  MissilesPerShot: 2
-  Spread: 0
-  MissileDamage: 0
-  MissilesConverge: 0
-  IsTargetLocking: 0
-  TargetLockTime: 1.5
-  TargetLockingMaxDistance: 2000
-  LockSound: {fileID: 0}
-  IsTriggered: 0
-  MissilePoolCount: 20
 --- !u!114 &11436884
 MonoBehaviour:
   m_ObjectHideFlags: 1

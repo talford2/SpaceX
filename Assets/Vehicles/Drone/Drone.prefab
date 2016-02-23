@@ -118,22 +118,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &165608
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 406838}
-  - 114: {fileID: 11442730}
-  m_Layer: 0
-  m_Name: GreenLasers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &182838
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,18 +168,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 458250}
   m_RootOrder: 0
---- !u!4 &406838
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165608}
-  m_LocalRotation: {x: -0.000000021855694, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 482680}
-  m_RootOrder: 3
 --- !u!4 &413396
 Transform:
   m_ObjectHideFlags: 1
@@ -242,7 +214,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.0601225, y: -2.245721, z: 2.1001062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482680}
@@ -259,7 +231,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 482680}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!4 &482680
 Transform:
   m_ObjectHideFlags: 1
@@ -273,7 +245,6 @@ Transform:
   - {fileID: 498982}
   - {fileID: 485528}
   - {fileID: 458250}
-  - {fileID: 406838}
   - {fileID: 475640}
   m_Father: {fileID: 474404}
   m_RootOrder: 0
@@ -573,32 +544,6 @@ MonoBehaviour:
   - {fileID: 11482076}
   BoostSound: {fileID: 8260914}
   IgnoreCollisions: 0
---- !u!114 &11442730
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: 
-  MissilePrefab: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
-  MuzzlePrefab: {fileID: 0}
-  FireSound: {fileID: 0}
-  FireRate: 0.2
-  MissilesPerShot: 2
-  Spread: 0
-  MissileDamage: 0
-  MissilesConverge: 0
-  IsTargetLocking: 0
-  TargetLockTime: 1.5
-  TargetLockingMaxDistance: 2000
-  LockSound: {fileID: 0}
-  IsTriggered: 0
-  MissilePoolCount: 20
 --- !u!114 &11442732
 MonoBehaviour:
   m_ObjectHideFlags: 1
