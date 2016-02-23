@@ -70,11 +70,11 @@ public class Shiftable : MonoBehaviour
 		if (OnShift != null)
 			OnShift(this, shiftAmount);
 
-		var particleShift = Vector3.zero - shiftAmount;
-		foreach (var ps in ShiftParticleSystems)
-		{
-			Utility.MoveParticles(ps, particleShift);
-		}
+		//var particleShift = Vector3.zero - shiftAmount;
+		//foreach (var ps in ShiftParticleSystems)
+		//{
+		//	Utility.MoveParticles(ps, particleShift);
+		//}
 	}
 
 	public void SetShiftPosition(UniversePosition position)
