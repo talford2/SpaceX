@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class CommMessaging : MonoBehaviour
 {
@@ -50,7 +49,6 @@ public class CommMessaging : MonoBehaviour
 
     private void OnChangeSquadronMember(GameObject from, GameObject to)
     {
-        Debug.Log("CALL THIS SHIT!");
         HideMessage();
     }
 
