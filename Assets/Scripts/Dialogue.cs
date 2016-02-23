@@ -38,7 +38,7 @@ public class Dialogue
 			}
 			else
 			{
-				dictionary[key].Add(line.TrimStart('"').TrimEnd('"'));
+				dictionary[key].Add(line.TrimStart('"').TrimEnd(',').TrimEnd('"'));
 			}
 		}
 		return dictionary;
