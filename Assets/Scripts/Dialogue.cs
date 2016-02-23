@@ -18,9 +18,9 @@ public class Dialogue
 		}
 	}
 
-	public static string GetRandomDialogue(string key)
+	public static string GetRandomDialogue(string key, params object[] args)
 	{
-		return DialogueDictionary[key][UnityEngine.Random.Range(0, DialogueDictionary[key].Count)];
+		return string.Format(DialogueDictionary[key][UnityEngine.Random.Range(0, DialogueDictionary[key].Count)], args);
 	}
 
 	private static Dictionary<string, List<string>> Parse(string text)

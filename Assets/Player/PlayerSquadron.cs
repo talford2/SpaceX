@@ -147,7 +147,7 @@ public class PlayerSquadron : MonoBehaviour
 
 	private string GetFriendlyFireMessage(string addressCallSign)
 	{
-		return string.Format(Dialogue.GetRandomDialogue("FriendlyFire"), addressCallSign);
+		return Dialogue.GetRandomDialogue("FriendlyFire", addressCallSign);
 	}
 
 	private void SquadronMember_OnDie(Killable sender)
