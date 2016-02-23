@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour
 
         HeadsUpDisplay.Current.LazyCreateSquadronIcons();
         HeadsUpDisplay.Current.RefreshSquadronIcons();
+
+        CycleSquadron(0);
     }
 
     public void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
@@ -448,6 +450,7 @@ public class PlayerController : MonoBehaviour
                     if (_playVehicleInstance.SecondaryWeaponInstance != null)
                         _playVehicleInstance.SecondaryWeaponInstance.ClearTargetLock();
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
+                    _playVehicleInstance.MeshTransform.gameObject.layer = LayerMask.NameToLayer("Default");
 
                     oldMember.SetVehicleInstance(_playVehicleInstance);
                     oldMember.enabled = true;
@@ -467,6 +470,7 @@ public class PlayerController : MonoBehaviour
                     _playVehicleInstance = curMember.VehicleInstance;
                     _playVehicleInstance.GetComponent<SquadronTracker>().IsDisabled = true;
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
+                    _playVehicleInstance.MeshTransform.gameObject.layer = LayerMask.NameToLayer("Player");
 
                     _playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;
                     _playVehicleInstance.Killable.OnDie += PlayerController_OnDie;

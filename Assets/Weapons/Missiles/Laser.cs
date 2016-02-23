@@ -43,25 +43,25 @@ public class Laser : Missile
 		var toOberverSquared = (transform.position - _observationPosition).sqrMagnitude;
 		if (toOberverSquared < _rayCheckMaxDistSquared)
 		{
-			if (!_hasHit)
-			{
-				var missileRay = new Ray(transform.position, transform.forward);
-				RaycastHit missileHit;
-				if (Physics.Raycast(missileRay, out missileHit, displacement, ~LayerMask.GetMask("Distant", "Universe Background", "Environment")))
-				{
-				    if (missileHit.collider.gameObject != Owner)
-				    {
-				        var killable = missileHit.collider.GetComponentInParent<Killable>();
-				        if (killable != null)
-				        {
-				            killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
-				        }
+            if (!_hasHit)
+            {
+                var missileRay = new Ray(transform.position, transform.forward);
+                RaycastHit missileHit;
+                if (Physics.Raycast(missileRay, out missileHit, displacement, ~LayerMask.GetMask("Distant", "Universe Background", "Environment", "Player")))
+                {
+                    if (missileHit.collider.gameObject != Owner)
+                    {
+                        var killable = missileHit.collider.GetComponentInParent<Killable>();
+                        if (killable != null)
+                        {
+                            killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
+                        }
                         _hasHit = true;
                         _hitPosition = missileHit.point;
                         PlaceHitEffects(missileHit.point, missileHit.normal, missileHit.collider.gameObject.transform);
-				    }
-				}
-			}
+                    }
+                }
+            }
 		}
 		else
 		{
