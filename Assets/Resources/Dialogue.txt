@@ -23,4 +23,4 @@ FriendlyFire:
 "Watch your aim {0}!";
 EnemyHate:
 "I hate you very much {0}!",
-"I will kill you!;"
+"I will kill you!"
