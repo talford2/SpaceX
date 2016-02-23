@@ -108,8 +108,8 @@ public class Fighter : Npc<Fighter>
                 // Give random value to resolve zero pitchYaw issue.
                 pitchYaw = Random.insideUnitCircle;
             }
-            VehicleInstance.YawThrottle = pitchYaw.y*Time.deltaTime;
-            VehicleInstance.PitchThotttle = pitchYaw.x*Time.deltaTime;
+            VehicleInstance.YawThrottle = pitchYaw.y;
+            VehicleInstance.PitchThotttle = pitchYaw.x;
         }
     }
 
