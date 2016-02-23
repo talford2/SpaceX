@@ -7,9 +7,6 @@ public class DistantScaling : MonoBehaviour
 	private float _thresholdDistanceSquared;
 	private float _distantScale;
 
-	private int _distantLayer;
-	private int _defaultLayer;
-
 	// Crappy solution
     public Shiftable FocusShiftable;
 	public float LineRendererWidth = 35f;
@@ -27,8 +24,6 @@ public class DistantScaling : MonoBehaviour
 		_distantScale = 1000f;
 
 		_thresholdDistanceSquared = _thresholdDistance * _thresholdDistance;
-		_distantLayer = LayerMask.NameToLayer("Distant");
-		_defaultLayer = LayerMask.NameToLayer("Default");
 	}
 
 	private void Start()
@@ -70,10 +65,6 @@ public class DistantScaling : MonoBehaviour
 
 			// Positioning
             transform.position = Universe.Current.ViewPort.AttachedCamera.transform.position + toCamera.normalized * scaledDistance;
-            /*
-			if (gameObject.layer != _distantLayer)
-				Utility.SetLayerRecursively(gameObject, _distantLayer);
-            */
 		}
 		else
 		{
@@ -92,67 +83,7 @@ public class DistantScaling : MonoBehaviour
 			}
 
 			transform.position = worldDestination;
-            /*
-			if (gameObject.layer != _defaultLayer)
-				Utility.SetLayerRecursively(gameObject, _defaultLayer);
-		    foreach (var managedCollider in ManagedColliders)
-		    {
-		        managedCollider.gameObject.layer = LayerMask.NameToLayer("Environment");
-		    }
-		    foreach (var detectable in ManagedDetectables)
-		    {
-		        if (detectable != null)
-		        {
-		            detectable.gameObject.layer = LayerMask.NameToLayer("Detectable");
-		        }
-		    }
-            */
 		}
-        /*
-	    if (isDistant != lastIsDistant)
-	    {
-	        if (isDistant)
-	        {
-	            ManageTargtables();
-	        }
-	        else
-	        {
-	            ManageTargtables();
-	        }
-	    }
-        */
 	    _lastIsDistant = _isDistant;
-
-        //ManageTargtables();
 	}
-
-    /*
-    private void ManageTargtables()
-    {
-        SetTargetablesEnabled(!_isDistant);
-        foreach (var managedCollider in ManagedColliders)
-        {
-            managedCollider.enabled = !_isDistant;
-        }
-    }
-    */
-
-    /*
-    private void SetTargetablesEnabled(bool value)
-    {
-        foreach (var targetable in TargetableObjects)
-        {
-            if (targetable != null)
-            {
-                targetable.SetEnabled(value);
-                targetable.gameObject.SetActive(value);
-                var tracker = targetable.GetComponent<Tracker>();
-                if (tracker != null)
-                {
-                    tracker.SetVisible(value);
-                }
-            }
-        }
-    }
-    */
 }
