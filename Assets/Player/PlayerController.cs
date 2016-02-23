@@ -32,8 +32,8 @@ public class PlayerController : MonoBehaviour
     public OnPlayerControllerChangeSquadronMember OnChangeSquadronMember;
 
     [Header("Aiming")]
-	public float AimSensitivity = 10f;
-	public float MouseMoveClamp = 0.02f;
+	//public float AimSensitivity = 10f;
+    public float MouseMoveClamp = 1f;// 0.02f;
 
 	public float DefaultAimDistance = 200f;
 	public float MinAimDistance = 10f;
@@ -177,11 +177,13 @@ public class PlayerController : MonoBehaviour
 		{
 		    if (_playVehicleInstance != null)
 		    {
-		        var mouseHorizontal = AimSensitivity*Input.GetAxis("MouseHorizontal")/Screen.width;
-		        var mouseVertical = AimSensitivity*_screenAspect*Input.GetAxis("MouseVertical")/Screen.height;
+                var mouseHorizontal = Input.GetAxis("MouseHorizontal");
+                //AimSensitivity*Input.GetAxis("MouseHorizontal")/Screen.width;
+                var mouseVertical = Input.GetAxis("MouseVertical");
+                //AimSensitivity*_screenAspect*Input.GetAxis("MouseVertical")/Screen.height;
 
-		        var controllerHorizontal = AimSensitivity*Input.GetAxis("Horizontal")/Screen.width;
-		        var controllerVertical = AimSensitivity*_screenAspect*Input.GetAxis("Vertical")/Screen.height;
+                var controllerHorizontal = 0f;// AimSensitivity*Input.GetAxis("Horizontal")/Screen.width;
+                var controllerVertical = 0f;// AimSensitivity*_screenAspect*Input.GetAxis("Vertical")/Screen.height;
 
 		        var pitchYaw = Vector2.ClampMagnitude(new Vector2(controllerVertical + mouseVertical, controllerHorizontal + mouseHorizontal), MouseMoveClamp);
 

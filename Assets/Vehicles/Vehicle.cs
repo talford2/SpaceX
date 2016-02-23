@@ -9,6 +9,7 @@ public class Vehicle : MonoBehaviour
     public GameObject PreviewPrefab;
 
     [Header("Vehicle Settings")]
+    public Transform MeshTransform;
     public float IdleSpeed = 10f;
     public float MaxSpeed = 20f;
     public float MinSpeed = 3f;
@@ -86,6 +87,7 @@ public class Vehicle : MonoBehaviour
     // Steering
     private float _rollSpeed;
     private Quaternion _targetRotation;
+    private Quaternion _targetBankRotation;
 
     // Boost
     private float _boostEnergyCooldown;
@@ -205,7 +207,7 @@ public class Vehicle : MonoBehaviour
             if (TriggerAccelerate && CurrentSpeed < MaxSpeed)
             {
                 acceleration = Acceleration;
-                CurrentSpeed += Acceleration*Time.deltaTime;
+                CurrentSpeed += Acceleration * Time.deltaTime;
                 CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
             }
 
@@ -213,7 +215,7 @@ public class Vehicle : MonoBehaviour
             if (TriggerBrake && CurrentSpeed > MinSpeed)
             {
                 acceleration = -Brake;
-                CurrentSpeed -= Brake*Time.deltaTime;
+                CurrentSpeed -= Brake * Time.deltaTime;
                 CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
             }
 
@@ -234,7 +236,7 @@ public class Vehicle : MonoBehaviour
         {
             if (BoostEnergy < MaxBoostEnergy)
             {
-                BoostEnergy += BoostEnergyRegenerateRate*Time.deltaTime;
+                BoostEnergy += BoostEnergyRegenerateRate * Time.deltaTime;
                 if (BoostEnergy > MaxBoostEnergy)
                     BoostEnergy = MaxBoostEnergy;
             }
@@ -248,10 +250,10 @@ public class Vehicle : MonoBehaviour
                 if (CurrentSpeed < MaxBoostSpeed)
                 {
                     acceleration = BoostAcceleration;
-                    CurrentSpeed += BoostAcceleration*Time.deltaTime;
+                    CurrentSpeed += BoostAcceleration * Time.deltaTime;
                     CurrentSpeed = Mathf.Min(CurrentSpeed, MaxBoostSpeed);
                 }
-                BoostEnergy -= BoostCost*Time.deltaTime;
+                BoostEnergy -= BoostCost * Time.deltaTime;
                 if (BoostEnergy < 0f)
                 {
                     BoostEnergy = 0f;
@@ -270,7 +272,7 @@ public class Vehicle : MonoBehaviour
         {
             if (CurrentSpeed > MaxSpeed)
             {
-                CurrentSpeed -= BoostBrake*Time.deltaTime;
+                CurrentSpeed -= BoostBrake * Time.deltaTime;
             }
             BoostSound.Stop();
         }
@@ -281,43 +283,45 @@ public class Vehicle : MonoBehaviour
             if (CurrentSpeed > IdleSpeed)
             {
                 acceleration = -Brake;
-                CurrentSpeed -= Brake*Time.deltaTime;
+                CurrentSpeed -= Brake * Time.deltaTime;
                 CurrentSpeed = Mathf.Max(IdleSpeed, CurrentSpeed);
             }
 
             if (CurrentSpeed < IdleSpeed)
             {
                 acceleration = Acceleration;
-                CurrentSpeed += Acceleration*Time.deltaTime;
+                CurrentSpeed += Acceleration * Time.deltaTime;
                 CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
             }
         }
 
-        _rollSpeed += RollAcceleration*Mathf.Clamp(RollThrottle, -1, 1)*Time.deltaTime;
+        _rollSpeed += RollAcceleration * Mathf.Clamp(RollThrottle, -1, 1) * Time.deltaTime;
 
         if (Mathf.Abs(RollThrottle) < 0.01f)
         {
-            _rollSpeed = Mathf.Lerp(_rollSpeed, 0f, 10f*Time.deltaTime);
+            _rollSpeed = Mathf.Lerp(_rollSpeed, 0f, 10f * Time.deltaTime);
         }
 
         // Turning
-        var dYaw = YawThrottle*YawSpeed;
-        var dPitch = PitchThotttle*PitchSpeed;
-        var dRoll = -Mathf.Clamp(_rollSpeed, -MaxRollSpeed, MaxRollSpeed)*Time.deltaTime;
+        var pitchYawRoll = new Vector3(PitchSpeed * PitchThotttle, YawSpeed * YawThrottle, -Mathf.Clamp(_rollSpeed, -MaxRollSpeed, MaxRollSpeed));
 
-        _targetRotation *= Quaternion.Euler(dPitch, dYaw, dRoll);
+        _targetRotation *= Quaternion.Euler(pitchYawRoll * Time.deltaTime);
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, 20f*Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, _targetRotation, 5f * Time.deltaTime);
 
-        _velocity = transform.forward*CurrentSpeed;
+        // Banking
+        _targetBankRotation = Quaternion.Lerp(_targetBankRotation, Quaternion.AngleAxis(-YawThrottle*90f, Vector3.forward), 5f*Time.deltaTime);
+        MeshTransform.localRotation = Quaternion.Lerp(MeshTransform.localRotation, _targetBankRotation, 5f * Time.deltaTime);
+
+        _velocity = transform.forward * CurrentSpeed;
 
         if (!IgnoreCollisions)
             UpdateVelocityFromCollisions();
 
         _velocityReference.Value = _velocity;
-        _shiftable.Translate(_velocity*Time.deltaTime);
+        _shiftable.Translate(_velocity * Time.deltaTime);
 
-        var thrustAmount = acceleration/MaxSpeed;
+        var thrustAmount = acceleration / MaxSpeed;
 
         if (IsBoosting)
         {
