@@ -16,8 +16,8 @@ public class Laser : Missile
 	private Vector3 _hitPosition;
 
 	private Vector3 _observationPosition;
-	private float _rayCheckMaxDistSquared = 25000000f;
-	private float _stopDistanceSquared = 100000000f;
+	private float _rayCheckMaxDistSquared = 25000000f; // 5,000
+	private float _stopDistanceSquared = 100000000f; // 10,000
 
 	private void Awake()
 	{
@@ -115,6 +115,7 @@ public class Laser : Missile
 		Tracer.enabled = false;
 		_hasHit = false;
         _resourcePoolItem.IsAvailable = true;
+        Universe.ShiftableItems.Remove(_shiftable);
     }
 
     public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
@@ -130,6 +131,7 @@ public class Laser : Missile
 		transform.forward = direction;
 		UpdateLineRenderer();
         _resourcePoolItem.IsAvailable = false;
+        Universe.ShiftableItems.Add(_shiftable);
     }
 
 	private void Shift(Shiftable sender, Vector3 delta)
