@@ -22,18 +22,18 @@ public class Laser : Missile
 	private void Awake()
 	{
 		_shiftable = GetComponent<Shiftable>();
+        _shiftable.OnShift += Shift;
 		if (Tracer != null)
 		{
 			Tracer.useWorldSpace = true;
 		}
-	}
+    }
 
     public override void Initialize(GameObject owner, float damage)
     {
         if (_resourcePoolItem == null)
             _resourcePoolItem = GetComponent<ResourcePoolItem>();
         base.Initialize(owner, damage);
-        _shiftable.OnShift += Shift;
     }
 
     public override void LiveUpdate()
@@ -115,7 +115,6 @@ public class Laser : Missile
 		Tracer.enabled = false;
 		_hasHit = false;
         _resourcePoolItem.IsAvailable = true;
-        _shiftable.OnShift -= Shift;
     }
 
     public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
