@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cooldown: 15
-  StartOn: 0
+  StartOn: 1
 --- !u!198 &19809798
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -12702,7 +12702,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: StartOn
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled

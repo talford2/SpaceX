@@ -1,37 +1,42 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class ResourceReseter : MonoBehaviour {
+public class ResourceReseter : MonoBehaviour
+{
+	public float Cooldown;
 
-    private ResourcePoolItem _resourcePoolItem;
+	private float _cool;
 
-    public float Cooldown;
+	public bool StartOn;
 
-    public bool StartOn;
+	public ResourcePoolItem ResourcePoolItem
+	{
+		get; set;
+	}
 
-    public void StartCooldown()
-    {
-        StartOn = true;
-    }
+	public void StartCooldown()
+	{
+		StartOn = true;
+	}
 
-    private void Awake()
-    {
-        _resourcePoolItem = GetComponent<ResourcePoolItem>();
-    }
+	private void Awake()
+	{
+		ResourcePoolItem = GetComponent<ResourcePoolItem>();
+	}
 
-    private void Update()
-    {
-        if (StartOn)
-        {
-            if (Cooldown >= 0)
-            {
-                Cooldown -= Time.deltaTime;
-            }
+	private void Update()
+	{
+		if (StartOn)
+		{
+			if (_cool >= 0)
+			{
+				_cool -= Time.deltaTime;
+			}
 
-            if (Cooldown < 0)
-            {
-                _resourcePoolItem.IsAvailable = true;
-            }
-        }
-    }
+			if (_cool < 0)
+			{
+				ResourcePoolItem.IsAvailable = true;
+				_cool = Cooldown;
+			}
+		}
+	}
 }
