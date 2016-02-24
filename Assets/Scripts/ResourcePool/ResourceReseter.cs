@@ -4,18 +4,11 @@ public class ResourceReseter : MonoBehaviour
 {
 	public float Cooldown;
 
-	private float _cool;
-
-	public bool StartOn;
+	private float _cooldown;
 
 	public ResourcePoolItem ResourcePoolItem
 	{
 		get; set;
-	}
-
-	public void StartCooldown()
-	{
-		StartOn = true;
 	}
 
 	private void Awake()
@@ -25,17 +18,17 @@ public class ResourceReseter : MonoBehaviour
 
 	private void Update()
 	{
-		if (StartOn)
+		if (!ResourcePoolItem.IsAvailable)
 		{
-			if (_cool >= 0)
+			if (_cooldown >= 0)
 			{
-				_cool -= Time.deltaTime;
+				_cooldown -= Time.deltaTime;
 			}
 
-			if (_cool < 0)
+			if (_cooldown < 0)
 			{
 				ResourcePoolItem.IsAvailable = true;
-				_cool = Cooldown;
+				_cooldown = Cooldown;
 			}
 		}
 	}
