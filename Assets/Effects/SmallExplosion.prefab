@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cooldown: 15
-  StartOn: 0
+  StartOn: 1
 --- !u!114 &11499230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9469,6 +9469,10 @@ Prefab:
       propertyPath: Sound
       value: 
       objectReference: {fileID: 8201072}
+    - target: {fileID: 0}
+      propertyPath: StartOn
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 113586}
