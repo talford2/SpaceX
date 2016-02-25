@@ -24,6 +24,8 @@ public class UniverseEvent : MonoBehaviour
     private EventTracker _tracker;
 
     private int _cellRadius;
+    private CellIndex _universeCellIndex;
+    private CellIndex _checkCellIndex;
 
 	public virtual void Awake()
 	{
@@ -41,40 +43,36 @@ public class UniverseEvent : MonoBehaviour
 		UniverseEvents.Add(this);
 
 	    _cellRadius = Mathf.CeilToInt(TriggerRadius/Universe.Current.CellSize);
+        _universeCellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
+        _checkCellIndex = new CellIndex();
 	}
 
-	private void Shiftable_OnShift(Shiftable sender, Vector3 delta)
-	{
-		//Debug.Log(sender.UniverseCellIndex + " ==? " + Universe.Current.ViewPort.Shiftable.UniverseCellIndex);
+    private void Shiftable_OnShift(Shiftable sender, Vector3 delta)
+    {
+        _universeCellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
 
-	    var enable = false;
-	    var thisEvent = sender.GetComponent<UniverseEvent>();
-	    for (var i = -_cellRadius; i < _cellRadius + 1; i++)
-	    {
-	        for (var j = -_cellRadius; j < _cellRadius + 1; j++)
-	        {
-	            for (var k = -_cellRadius; k < _cellRadius + 1; k++)
-	            {
-	                if (sender.UniverseCellIndex.IsEqualTo(Universe.Current.ViewPort.Shiftable.UniverseCellIndex + new CellIndex(i, j, k)))
-	                {
-	                    if (!thisEvent.HasBeenTriggered)
-	                    {
-	                        enable = true;
-	                    }
-	                }
-	            }
-	        }
-	    }
+        var enable = false;
+        var thisEvent = sender.GetComponent<UniverseEvent>();
+        for (var i = -_cellRadius; i < _cellRadius + 1; i++)
+        {
+            for (var j = -_cellRadius; j < _cellRadius + 1; j++)
+            {
+                for (var k = -_cellRadius; k < _cellRadius + 1; k++)
+                {
+                    _checkCellIndex.X = _universeCellIndex.X + i;
+                    _checkCellIndex.Y = _universeCellIndex.Y + j;
+                    _checkCellIndex.Z = _universeCellIndex.Z + k;
+                    if (sender.UniverseCellIndex.IsEqualTo(_checkCellIndex))
+                    {
+                        if (!thisEvent.HasBeenTriggered)
+                        {
+                            enable = true;
+                        }
+                    }
+                }
+            }
+        }
         thisEvent.enabled = enable;
-
-        /*
-		if (sender.UniverseCellIndex.IsEqualTo(Universe.Current.ViewPort.Shiftable.UniverseCellIndex))
-		{
-			//Debug.Log("Go!");
-
-			Initialise();
-		}
-        */
     }
 
     private void Update()
