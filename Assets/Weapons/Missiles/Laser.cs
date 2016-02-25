@@ -114,8 +114,9 @@ public class Laser : Missile
         base.Stop();
         Tracer.enabled = false;
         _hasHit = false;
-        _resourcePoolItem.IsAvailable = true;
-        Universe.Current.ShiftableItems.Remove(_shiftable);
+        if (_resourcePoolItem != null)
+            _resourcePoolItem.IsAvailable = true;
+        //Universe.Current.ShiftableItems.Remove(_shiftable);
     }
 
     public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
@@ -131,7 +132,7 @@ public class Laser : Missile
         transform.forward = direction;
         UpdateLineRenderer();
         _resourcePoolItem.IsAvailable = false;
-        Universe.Current.ShiftableItems.Add(_shiftable);
+        //Universe.Current.ShiftableItems.Add(_shiftable);
     }
 
     private void Shift(Shiftable sender, Vector3 delta)

@@ -246,6 +246,7 @@ public class SeekingRocket : Missile
         ThrusterMesh.enabled = false;
         Tracer.Stop();
         Flare.SetVisible(false);
-        _resourcePoolItem.IsAvailable = true;
+        if (_resourcePoolItem != null)
+            _resourcePoolItem.IsAvailable = true;
     }
 }

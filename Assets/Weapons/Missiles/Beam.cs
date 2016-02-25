@@ -95,6 +95,7 @@ public class Beam : Missile
     {
         base.Stop();
         _lineRenderer.enabled = false;
-        _resourcePoolItem.IsAvailable = true;
+        if (_resourcePoolItem != null)
+            _resourcePoolItem.IsAvailable = true;
     }
 }

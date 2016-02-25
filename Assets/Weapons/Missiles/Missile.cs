@@ -20,6 +20,11 @@ public abstract class Missile : MonoBehaviour
         Stop();
     }
 
+    private void Start()
+    {
+        Stop();
+    }
+
     public void Update()
 	{
         if (IsLive)
