@@ -177,6 +177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sound: {fileID: 8265656}
+  ShiftParticleSystems:
+  - {fileID: 19833032}
+  - {fileID: 19843718}
 --- !u!114 &11465994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -193,9 +196,6 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  ShiftParticleSystems:
-  - {fileID: 19833032}
-  - {fileID: 19843718}
 --- !u!114 &11486344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,7 +208,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cooldown: 1
-  StartOn: 0
 --- !u!198 &19833032
 ParticleSystem:
   m_ObjectHideFlags: 1

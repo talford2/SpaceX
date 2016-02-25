@@ -325,6 +325,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sound: {fileID: 8201072}
+  ShiftParticleSystems:
+  - {fileID: 19804530}
+  - {fileID: 19883646}
+  - {fileID: 19897422}
+  - {fileID: 19823012}
+  - {fileID: 19843372}
+  - {fileID: 19833118}
 --- !u!114 &11463082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -337,7 +344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cooldown: 15
-  StartOn: 1
 --- !u!114 &11499230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -354,13 +360,6 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  ShiftParticleSystems:
-  - {fileID: 19804530}
-  - {fileID: 19883646}
-  - {fileID: 19897422}
-  - {fileID: 19823012}
-  - {fileID: 19843372}
-  - {fileID: 19833118}
 --- !u!198 &19804530
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -9473,6 +9472,22 @@ Prefab:
       propertyPath: StartOn
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ShiftParticleSystems.Array.data[0]
+      value: 
+      objectReference: {fileID: 19804530}
+    - target: {fileID: 0}
+      propertyPath: ShiftParticleSystems.Array.data[1]
+      value: 
+      objectReference: {fileID: 19883646}
+    - target: {fileID: 0}
+      propertyPath: ShiftParticleSystems.Array.data[2]
+      value: 
+      objectReference: {fileID: 19897422}
+    - target: {fileID: 0}
+      propertyPath: ShiftParticleSystems.Array.data[3]
+      value: 
+      objectReference: {fileID: 19823012}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 113586}

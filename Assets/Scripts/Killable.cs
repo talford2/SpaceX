@@ -64,7 +64,6 @@ public class Killable : MonoBehaviour
             _woundObj = Instantiate(WoundEffect);
             _woundObj.transform.parent = transform;
             _woundObj.transform.localPosition = Vector3.zero;
-            GetComponent<Shiftable>().ShiftParticleSystems.Add(_woundObj.GetComponent<ParticleSystem>());
         }
     }
 
