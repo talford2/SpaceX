@@ -136,8 +136,11 @@ public class Laser : Missile
 
     private void Shift(Shiftable sender, Vector3 delta)
     {
-        _shootFrom -= delta;
-        _hitPosition -= delta;
-        UpdateLineRenderer();
+        if (IsLive)
+        {
+            _shootFrom -= delta;
+            _hitPosition -= delta;
+            UpdateLineRenderer();
+        }
     }
 }

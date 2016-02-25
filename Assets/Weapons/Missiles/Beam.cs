@@ -87,7 +87,8 @@ public class Beam : Missile
 
     private void Shift(Shiftable sender, Vector3 delta)
     {
-        UpdateLineRenderer();
+        if (IsLive)
+            UpdateLineRenderer();
     }
 
     public override void Stop()
