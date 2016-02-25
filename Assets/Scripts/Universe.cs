@@ -11,7 +11,7 @@ public class Universe : MonoBehaviour
 
 	public UniverseCamera ViewPort;
 
-	public static List<Shiftable> ShiftableItems;
+	public List<Shiftable> ShiftableItems;
 
 	private static Universe _current;
 

@@ -43,7 +43,7 @@ public class Shiftable : MonoBehaviour
 
 	private void Awake()
 	{
-		Universe.ShiftableItems.Add(this);
+		Universe.Current.ShiftableItems.Add(this);
 		//_particleSystems = GetComponentsInChildren<ParticleSystem>();
 	}
 
@@ -60,7 +60,7 @@ public class Shiftable : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		Universe.ShiftableItems.Remove(this);
+		Universe.Current.ShiftableItems.Remove(this);
 	}
 
 	public void Shift(Vector3 shiftAmount)

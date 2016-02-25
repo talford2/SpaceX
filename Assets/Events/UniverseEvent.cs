@@ -25,7 +25,6 @@ public class UniverseEvent : MonoBehaviour
 
     private int _cellRadius;
     private CellIndex _universeCellIndex;
-    private CellIndex _checkCellIndex;
 
 	public virtual void Awake()
 	{
@@ -44,33 +43,34 @@ public class UniverseEvent : MonoBehaviour
 
 	    _cellRadius = Mathf.CeilToInt(TriggerRadius/Universe.Current.CellSize);
         _universeCellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
-        _checkCellIndex = new CellIndex();
 	}
+
+    private bool InRange(Shiftable sender)
+    {
+        _universeCellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
+        var dX = sender.UniverseCellIndex.X - _universeCellIndex.X;
+        if (dX >= -_cellRadius && dX <= _cellRadius)
+        {
+            var dY = sender.UniverseCellIndex.Y - _universeCellIndex.Y;
+            if (dY >= -_cellRadius && dY <= _cellRadius)
+            {
+                var dZ = sender.UniverseCellIndex.Z - _universeCellIndex.Z;
+                if (dZ >= -_cellRadius && dZ <= _cellRadius)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     private void Shiftable_OnShift(Shiftable sender, Vector3 delta)
     {
-        _universeCellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
-
-        var enable = false;
         var thisEvent = sender.GetComponent<UniverseEvent>();
-        for (var i = -_cellRadius; i < _cellRadius + 1; i++)
+        var enable = false;
+        if (!thisEvent.HasBeenTriggered)
         {
-            for (var j = -_cellRadius; j < _cellRadius + 1; j++)
-            {
-                for (var k = -_cellRadius; k < _cellRadius + 1; k++)
-                {
-                    _checkCellIndex.X = _universeCellIndex.X + i;
-                    _checkCellIndex.Y = _universeCellIndex.Y + j;
-                    _checkCellIndex.Z = _universeCellIndex.Z + k;
-                    if (sender.UniverseCellIndex.IsEqualTo(_checkCellIndex))
-                    {
-                        if (!thisEvent.HasBeenTriggered)
-                        {
-                            enable = true;
-                        }
-                    }
-                }
-            }
+            enable = InRange(sender);
         }
         thisEvent.enabled = enable;
     }
