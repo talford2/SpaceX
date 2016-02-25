@@ -320,14 +320,16 @@ public class VehicleTracker : Tracker
                     _imageInstance.enabled = true;
                     _lockInstance.enabled = false;
                 }
-                
+
                 _imageInstance.sprite = useSprite;
 
                 _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
                 _imageInstance.rectTransform.localRotation = Quaternion.identity;
-
-                _lockInstance.rectTransform.localScale = scale;
-                _lockInstance.rectTransform.localRotation = rotation;
+                if (_lockInstance.enabled)
+                {
+                    _lockInstance.rectTransform.localScale = scale;
+                    _lockInstance.rectTransform.localRotation = rotation;
+                }
             }
             else
             {
