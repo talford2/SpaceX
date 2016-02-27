@@ -65,7 +65,8 @@ public class LevelManager : MonoBehaviour
 		}
 
 		DirectionLight.color = lvl.LighColour;
-		DirectionLight.transform.forward = lvl.LightDirection;
+		//DirectionLight.transform.forward = lvl.LightDirection;
+		DirectionLight.transform.rotation = Quaternion.Euler(lvl.LightDirection);
 		_reflectionProbe.RenderProbe();
 	}
 
