@@ -44,6 +44,7 @@ public class VehicleTracker : Tracker
 	private bool _isLockedOn;
     private bool _oldLockedOn;
 
+    protected bool InScreenBounds;
 
     private void Awake()
 	{
@@ -185,7 +186,6 @@ public class VehicleTracker : Tracker
     public override void UpdateInstance()
     {
         var distanceSquared = (_targetable.transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
-
         if (lastDistanceSquared < _maxDistanceSquared)
         {
             if (distanceSquared > _maxDistanceSquared)
@@ -228,6 +228,7 @@ public class VehicleTracker : Tracker
             }
         }
 
+        InScreenBounds = false;
         if (IsDisabled)
         {
             _imageInstance.enabled = false;
@@ -246,8 +247,8 @@ public class VehicleTracker : Tracker
                 screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f)) * Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
             }
             screenPosition.z = 0f;
-
-            if (_screenBounds.Contains(screenPosition))
+            InScreenBounds = _screenBounds.Contains(screenPosition);
+            if (InScreenBounds)
             {
                 var useSprite = _trackerSprite;
                 if (distanceSquared > 1000f * 1000f)

@@ -31,6 +31,15 @@ public class SquadronTracker : VehicleTracker
     public override void UpdateInstance()
     {
         base.UpdateInstance();
-        _callsignInstance.enabled = !IsDisabled;
+
+        var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
+        if (distanceSquared < 1000000f && InScreenBounds)
+        {
+            _callsignInstance.enabled = !IsDisabled;
+        }
+        else
+        {
+            _callsignInstance.enabled = false;
+        }
     }
 }
