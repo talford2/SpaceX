@@ -15,7 +15,7 @@ public class Map : MonoBehaviour
 	private Canvas _mapCanvas;
 	private static Map _current;
 
-	private GameObject _playerPin;
+	//private GameObject _playerPin;
 	private List<MapPin> _pins;
 
 	private bool isDestinationSet;
@@ -31,7 +31,7 @@ public class Map : MonoBehaviour
 		_mapCamera = GetComponentInChildren<Camera>();
 		_mapCanvas = GetComponentInChildren<Canvas>();
 		_current = this;
-		_playerPin = CreatePin(PlayerController.Current.PlayerPinPrefab);
+		//_playerPin = CreatePin(PlayerController.Current.PlayerPinPrefab);
 		_destination = Instantiate(DestinationPrefab);
 		_destination.SetActive(false);
 		isDestinationSet = false;
@@ -74,15 +74,6 @@ public class Map : MonoBehaviour
     {
         if (IsShown())
         {
-            if (PlayerController.Current.VehicleInstance != null)
-            {
-                _playerPin.transform.position = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
-                _playerPin.transform.rotation = PlayerController.Current.VehicleInstance.transform.rotation;
-
-                var playerToCamera = _playerPin.transform.position - MapCamera.Current.transform.position;
-                _playerPin.transform.localScale = Vector3.one * playerToCamera.magnitude * 0.4f;
-
-            }
             foreach (var pin in _pins)
             {
                 pin.RenderState();
@@ -104,6 +95,10 @@ public class Map : MonoBehaviour
                     isDestinationSet = true;
                     _destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);
                     _destination.transform.position = clickedPin.Shiftable.GetWorldPosition();
+                }
+                else
+                {
+
                 }
             }
         }
@@ -127,9 +122,8 @@ public class Map : MonoBehaviour
         Time.timeScale = 0f;
 		PlayerController.Current.SetControlEnabled(false);
 
-		if (PlayerController.Current.VehicleInstance != null)
-			_playerPin.transform.position = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
-		MapCamera.Current.SetLookAt(_playerPin.transform.position);
+        var centre = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
+		MapCamera.Current.SetLookAt(centre);
 
 		_mapCamera.enabled = true;
 		Cursor.visible = true;

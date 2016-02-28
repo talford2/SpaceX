@@ -112,7 +112,11 @@ public class PlayerController : MonoBehaviour
 	    squadronTracker.LabelFont = Squadron.SquadronTrackerFont;
         squadronTracker.IsDisabled = true;
 
-		_playVehicleInstance.GetComponent<Targetable>().Team = Team;
+        var mapPin = VehicleInstance.gameObject.AddComponent<MapPin>();
+        mapPin.ActivePin = PlayerPinPrefab;
+        mapPin.InactivePin = PlayerPinPrefab;
+
+        _playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
 
 		_playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;

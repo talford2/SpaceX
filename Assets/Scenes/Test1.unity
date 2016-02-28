@@ -2270,7 +2270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e36ebc43a2e7c44ac7291689efbaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ZoomSensitivity: 10
+  ZoomSensitivity: 2000
   MinCameraDistance: 0.5
   MaxCameraDistance: 10000
   RotateSpeed: 3
