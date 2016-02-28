@@ -79,9 +79,18 @@ public class Map : MonoBehaviour
                 pin.RenderState();
                 pin.CurrentInstance.transform.position = MapScale * pin.Shiftable.GetAbsoluteUniversePosition();
                 pin.CurrentInstance.transform.rotation = pin.transform.rotation;
-
+                
                 var toCamera = pin.CurrentInstance.transform.position - MapCamera.Current.transform.position;
-                pin.CurrentInstance.transform.localScale = Vector3.one * toCamera.magnitude * 0.4f;
+                if (toCamera.sqrMagnitude > 10000f)
+                {
+                    pin.CurrentInstance.transform.localScale = Vector3.one * toCamera.magnitude /100f;
+                    //= Vector3.one * toCamera.magnitude * 0.01f;
+                }
+                else
+                {
+                    pin.CurrentInstance.transform.localScale = Vector3.one;
+                }
+                
             }
 
             var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
