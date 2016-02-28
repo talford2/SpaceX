@@ -2812,7 +2812,7 @@ MonoBehaviour:
   InvertY: 1
   HideMouse: 1
   RespawnPosition: {fileID: 761010713}
-  PlayerPinPrefab: {fileID: 133228, guid: 4537303a7240d1d49a3e4dcf875bc48a, type: 2}
+  PlayerPinPrefab: {fileID: 121348, guid: 87d85e49fcb77c546ada889ced089d5c, type: 2}
   MouseMoveClamp: 1
   DefaultAimDistance: 500
   MinAimDistance: 5
@@ -2936,6 +2936,7 @@ MonoBehaviour:
   Background: {fileID: 8900000, guid: f9c7b6888cdb6584d8a70b87fea5b24c, type: 3}
   LighColour: {r: 0.8765, g: 0.753, b: 1, a: 1}
   LightDirection: {x: 20.44, y: 322.4, z: 0}
+  SystemName: 
 --- !u!4 &1097665390
 Transform:
   m_ObjectHideFlags: 0
@@ -3112,6 +3113,7 @@ MonoBehaviour:
   Background: {fileID: 8900000, guid: 9af2460b756ab914aaebe281fdb4bdfe, type: 3}
   LighColour: {r: 1, g: 0.83241177, b: 0.741, a: 1}
   LightDirection: {x: 2.48, y: 206.54, z: 24.09}
+  SystemName: 
 --- !u!114 &1117886436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4822,6 +4824,7 @@ MonoBehaviour:
   Background: {fileID: 8900000, guid: 5efd03d61d9f03240914ecde44fd5adf, type: 3}
   LighColour: {r: 0.684, g: 1, b: 0.9302941, a: 1}
   LightDirection: {x: 0.5, y: 44, z: 0}
+  SystemName: 
 --- !u!114 &1807080966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5284,6 +5287,7 @@ MonoBehaviour:
   Background: {fileID: 8900000, guid: acf7baf307716f04e95433e6b7bd65bf, type: 3}
   LighColour: {r: 1, g: 0.741, b: 0.9238235, a: 1}
   LightDirection: {x: 46.7, y: 74.4, z: 0}
+  SystemName: 
 --- !u!114 &1985480836
 MonoBehaviour:
   m_ObjectHideFlags: 0

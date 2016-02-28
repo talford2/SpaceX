@@ -74,8 +74,11 @@ public class Map : MonoBehaviour
 	{
 		if (IsShown())
 		{
-			if (PlayerController.Current.VehicleInstance != null)
-				_playerPin.transform.position = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
+            if (PlayerController.Current.VehicleInstance != null)
+            {
+                _playerPin.transform.position = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
+                _playerPin.transform.rotation = PlayerController.Current.VehicleInstance.transform.rotation;
+            }
 			foreach (var pin in _pins)
 			{
 				pin.RenderState();
