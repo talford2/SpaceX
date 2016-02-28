@@ -214,7 +214,8 @@ public class SeekingRocket : Missile
             explodeShiftable.SetShiftPosition(univPos);
         }
 
-        var damageColliders = Physics.OverlapSphere(transform.position, 15f, LayerMask.GetMask("Detectable"));
+		// TODO: Use non allocated Physics.OverlapSphereNonAlloc
+		var damageColliders = Physics.OverlapSphere(transform.position, 15f, LayerMask.GetMask("Detectable"));
         foreach (var damageCollider in damageColliders)
         {
             var detectable = damageCollider.GetComponent<Detectable>();

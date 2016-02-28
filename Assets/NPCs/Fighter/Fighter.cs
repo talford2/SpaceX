@@ -137,12 +137,14 @@ public class Fighter : Npc<Fighter>
 		ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
 	}
 
+	private Vector2 pitchYaw;
 	public Vector2 GetPitchYawToPoint(Vector3 point)
 	{
 		var toPoint = point - VehicleInstance.transform.position;
 		var yawAmount = Vector3.Dot(toPoint.normalized, VehicleInstance.transform.right);
 		var pitchAmount = Vector3.Dot(-toPoint.normalized, VehicleInstance.transform.up);
-		return new Vector2(pitchAmount, yawAmount);
+		pitchYaw.Set(pitchAmount, yawAmount);
+		return pitchYaw;
 	}
 
 	private void OnVehicleDamaged(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)

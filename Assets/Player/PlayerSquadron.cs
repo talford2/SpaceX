@@ -105,14 +105,14 @@ public class PlayerSquadron : MonoBehaviour
 			}
 		}
 	}
-
-	private int _collectibleMask = LayerMask.GetMask("Collectible");
+	
 	private CollectibleTrigger collectibleTrigger;
 	private Collider[] hitColliders;
 
 	private void PickupCollectibles(Fighter member)
 	{
-		hitColliders = Physics.OverlapSphere(member.VehicleInstance.transform.position, CollectRadius, _collectibleMask);
+		// TODO: Use non allocated Physics.OverlapSphereNonAlloc
+		hitColliders = Physics.OverlapSphere(member.VehicleInstance.transform.position, CollectRadius, LayerMask.GetMask("Collectible"));
 		foreach (var hitCollider in hitColliders)
 		{
 			collectibleTrigger = hitCollider.GetComponent<CollectibleTrigger>();

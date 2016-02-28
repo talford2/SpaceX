@@ -360,18 +360,21 @@ public class Vehicle : MonoBehaviour
 
 	// Performance variables
 	private Ray _moveRay;
-	private RaycastHit[] _moveHits;
+	private RaycastHit[] _moveHits = new RaycastHit[20];
 	private Vector3 _projVel;
+	private int _castCount = 0;
+	private int _i = 0;
 
 	private void UpdateVelocityFromCollisions()
 	{
 		_moveRay = new Ray(transform.position + CollisionsCentre, _velocity);
-		_moveHits = Physics.SphereCastAll(_moveRay, CollisionRadius, _velocity.magnitude * Time.deltaTime, LayerMask.GetMask("Environment"));
-		foreach (var moveHit in _moveHits)
-		{
-			_projVel = Vector3.Project(_velocity, moveHit.normal);
 
-			if ((moveHit.point - Vector3.zero).sqrMagnitude > 0.00001f)
+		_castCount = Physics.SphereCastNonAlloc(_moveRay, CollisionRadius, _moveHits, _velocity.magnitude * Time.deltaTime, LayerMask.GetMask("Environment"));
+
+		for (_i = 0; _i < _castCount; _i++)
+		{
+			_projVel = Vector3.Project(_velocity, _moveHits[_i].normal);
+			if ((_moveHits[_i].point - Vector3.zero).sqrMagnitude > 0.00001f)
 				_velocity -= _projVel;
 		}
 	}

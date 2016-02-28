@@ -163,12 +163,16 @@ public class PlayerController : MonoBehaviour
 	}
 
 	private CollectibleTrigger _collectible;
+	private int castCount = 0;
+	private Collider[] hitColliders = new Collider[20];
+	private int i = 0;
+
 	private void PickupCollectibles()
 	{
-		var hitColliders = Physics.OverlapSphere(VehicleInstance.transform.position, CollectRadius, LayerMask.GetMask("Collectible"));
-		foreach (var hitCollider in hitColliders)
+		castCount = Physics.OverlapSphereNonAlloc(VehicleInstance.transform.position, CollectRadius, hitColliders, LayerMask.GetMask("Collectible"));
+		for (i = 0; i < castCount; i++)
 		{
-			_collectible = hitCollider.GetComponent<CollectibleTrigger>();
+			_collectible = hitColliders[i].GetComponent<CollectibleTrigger>();
 			if (_collectible != null)
 				_collectible.Pickup(VehicleInstance.gameObject, VehicleInstance.GetVelocity());
 		}
@@ -383,6 +387,7 @@ public class PlayerController : MonoBehaviour
 				_threatCheckCooldown -= Time.deltaTime;
 				if (_threatCheckCooldown < 0f)
 				{
+					// TODO: Use non allocated Physics.OverlapSphereNonAlloc
 					var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, ThreatRadius, LayerMask.GetMask("Detectable"));
 					_threatCount = detected.Count(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>() != null && d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team));
 					_threatCheckCooldown = 1f;

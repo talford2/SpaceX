@@ -13,10 +13,10 @@ public class Spawner : MonoBehaviour
 	public GameObject SpawnEffect;
 
 	public bool SpawnOnAwake = false;
-    public bool AddWarpEffect = true;
+	public bool AddWarpEffect = true;
 
 	private bool _hasSpawned = false;
-	
+
 	private void Awake()
 	{
 		if (SpawnOnAwake)
@@ -30,16 +30,17 @@ public class Spawner : MonoBehaviour
 		StartCoroutine(DoSpawn(delay, null));
 	}
 
-    public void Spawn(float delay, Action callback)
-    {
-        StartCoroutine(DoSpawn(delay, callback));
-    }
+	public void Spawn(float delay, Action callback)
+	{
+		StartCoroutine(DoSpawn(delay, callback));
+	}
 
-    public void Reset()
-    {
-        _hasSpawned = false;
-    }
+	public void Reset()
+	{
+		_hasSpawned = false;
+	}
 
+	private WarpEffect _warpEffect;
 	private IEnumerator DoSpawn(float delay, Action callback)
 	{
 		yield return new WaitForSeconds(delay);
@@ -47,21 +48,21 @@ public class Spawner : MonoBehaviour
 		if (!_hasSpawned)
 		{
 			_fighterInst = Instantiate<Fighter>(FighterPrefab);
-            _fighterInst.SpawnVehicle(_fighterInst.gameObject, _fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position), transform.rotation);
+			_fighterInst.SpawnVehicle(_fighterInst.gameObject, _fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position), transform.rotation);
 
-		    if (AddWarpEffect)
-		    {
-		        var s = _fighterInst.VehicleInstance.gameObject.AddComponent<WarpEffect>();
-		        s.transform.position = transform.position;
-		        s.transform.forward = transform.forward;
+			if (AddWarpEffect)
+			{
+				_warpEffect = _fighterInst.VehicleInstance.gameObject.AddComponent<WarpEffect>();
+				_warpEffect.transform.position = transform.position;
+				_warpEffect.transform.forward = transform.forward;
 
-		        s.WarpEffectPrefab = SpawnEffect;
-		        s.Timeout = 0.4f;
-		        s.Distance = 20f;
-		    }
-		    _hasSpawned = true;
-		    if (callback != null)
-		        callback();
+				_warpEffect.WarpEffectPrefab = SpawnEffect;
+				_warpEffect.Timeout = 0.4f;
+				_warpEffect.Distance = 20f;
+			}
+			_hasSpawned = true;
+			if (callback != null)
+				callback();
 		}
 	}
 }
