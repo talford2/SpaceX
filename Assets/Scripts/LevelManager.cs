@@ -31,6 +31,11 @@ public class LevelManager : MonoBehaviour
 		_reflectionProbe.size = Vector3.one * (Universe.Current.CellSize + 100);
 		_reflectionProbe.transform.position = Vector3.zero;
 
+        foreach(var level in Levels)
+        {
+            level.SystemName = NameGenerator.GetRandomSystemName();
+        }
+
 		ChangeLevel(0);
 	}
 
@@ -69,6 +74,11 @@ public class LevelManager : MonoBehaviour
 		DirectionLight.transform.rotation = Quaternion.Euler(lvl.LightDirection);
 		_reflectionProbe.RenderProbe();
 	}
+
+    public Level GetLevel()
+    {
+        return Levels[_levelIndex];
+    }
 
 	public static LevelManager Current
 	{

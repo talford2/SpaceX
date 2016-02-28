@@ -6,7 +6,9 @@ public static class NameGenerator
 {
 	private static List<string> _callSigns;
 
-	public static List<string> CallSigns
+    private static List<string> _systemNames;
+
+	private static List<string> CallSigns
 	{
 		get
 		{
@@ -20,6 +22,20 @@ public static class NameGenerator
 		}
 	}
 
+    private static List<string> SystemNames
+    {
+        get
+        {
+            if (_systemNames == null)
+            {
+                var txt = Resources.Load<TextAsset>("SystemNames");
+                _systemNames = txt.text.Split(',').ToList();
+                Debug.Log(_systemNames);
+            }
+            return _systemNames;
+        }
+    }
+
 	public static string GetRandomCallSign()
 	{
 		if (CallSigns.Any())
@@ -31,4 +47,16 @@ public static class NameGenerator
 		}
 		return "Unknown";
 	}
+
+    public static string GetRandomSystemName()
+    {
+        if (SystemNames.Any())
+        {
+            var index = Random.Range(0, SystemNames.Count);
+            var name = SystemNames[index].Trim();
+            SystemNames.RemoveAt(index);
+            return name;
+        }
+        return "Unknown";
+    }
 }

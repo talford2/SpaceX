@@ -123,6 +123,9 @@ public class Map : MonoBehaviour
 		Cursor.visible = true;
 		Cursor.lockState = CursorLockMode.None;
 		_mapCanvas.enabled = true;
+
+        MapSystemText.text = LevelManager.Current.GetLevel().SystemName;
+
 		if (TrackerManager.Current != null)
 			TrackerManager.Current.SetTrackersVisibility(false);
 	}

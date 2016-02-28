@@ -8,6 +8,8 @@ public class Level : MonoBehaviour
 
 	public Vector3 LightDirection;
 
+    public string SystemName;
+
 	private Material _mat;
 
 	public Material Material
