@@ -185,6 +185,8 @@ public class VehicleTracker : Tracker
 
     public override void UpdateInstance()
     {
+		Profiler.BeginSample("Vehicle Tracker Update Instance");
+
         var distanceSquared = (_targetable.transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
         if (lastDistanceSquared < _maxDistanceSquared)
         {
@@ -350,6 +352,8 @@ public class VehicleTracker : Tracker
         }
 
         lastDistanceSquared = distanceSquared;
+
+		Profiler.EndSample();
     }
 
     private bool IsPlayerWeaponLocking(Weapon weapon)

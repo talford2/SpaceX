@@ -85,7 +85,7 @@ public class PlayerSquadron : MonoBehaviour
 		var mapPin = member.VehicleInstance.gameObject.AddComponent<MapPin>();
 		mapPin.ActivePin = PlayerController.Current.PlayerPinPrefab;
 		mapPin.InactivePin = SquadronPinPrefab;
-        mapPin.SetPinState(MapPin.MapPinState.Inactive);
+		mapPin.SetPinState(MapPin.MapPinState.Inactive);
 		var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
 		squadronShieldRegenerator.RegenerationDelay = ShieldRegenerateDelay;
 		squadronShieldRegenerator.RegenerationRate = ShieldRegenerateRate;
@@ -106,14 +106,18 @@ public class PlayerSquadron : MonoBehaviour
 		}
 	}
 
+	private int _collectibleMask = LayerMask.GetMask("Collectible");
+	private CollectibleTrigger collectibleTrigger;
+	private Collider[] hitColliders;
+
 	private void PickupCollectibles(Fighter member)
 	{
-		var hitColliders = Physics.OverlapSphere(member.VehicleInstance.transform.position, CollectRadius, LayerMask.GetMask("Collectible"));
+		hitColliders = Physics.OverlapSphere(member.VehicleInstance.transform.position, CollectRadius, _collectibleMask);
 		foreach (var hitCollider in hitColliders)
 		{
-			var collectible = hitCollider.GetComponent<CollectibleTrigger>();
-			if (collectible != null)
-				collectible.Pickup(member.VehicleInstance.gameObject, member.VehicleInstance.GetVelocity());
+			collectibleTrigger = hitCollider.GetComponent<CollectibleTrigger>();
+			if (collectibleTrigger != null)
+				collectibleTrigger.Pickup(member.VehicleInstance.gameObject, member.VehicleInstance.GetVelocity());
 		}
 	}
 

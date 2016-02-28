@@ -45,7 +45,7 @@ public class LineParticleDust : MonoBehaviour
 		var particlePrefab = new GameObject();
 		particlePrefab.transform.SetParent(transform);
 		particlePrefab.transform.position = transform.position;
-	    var lineRender = particlePrefab.AddComponent<LineRenderer>();
+		var lineRender = particlePrefab.AddComponent<LineRenderer>();
 		lineRender.useWorldSpace = false;
 		particlePrefab.hideFlags = HideFlags.HideInHierarchy;
 
@@ -75,7 +75,7 @@ public class LineParticleDust : MonoBehaviour
 			});
 		}
 
-        Destroy(lineRender);
+		Destroy(lineRender);
 	}
 
 	private void _shiftable_OnShift(Shiftable sender, Vector3 delta)
@@ -83,20 +83,30 @@ public class LineParticleDust : MonoBehaviour
 		_lastPos -= delta;
 	}
 
+
+	private Vector3 _targetPos = Vector3.zero;
+	private Vector3 _particlePos = Vector3.zero;
+
 	void Update()
 	{
-		Velocity = _lastPos - Target.transform.position;
+		_targetPos = Target.transform.position;
+
+		Velocity = _lastPos - _targetPos;
 		_lastPos = Target.transform.position;
 
 		foreach (var particle in _particles)
 		{
-			particle.Object.transform.position += Velocity * Time.deltaTime;
+			_particlePos = particle.Object.transform.position;
+			_particlePos += Velocity * Time.deltaTime;
 
-			if ((particle.Object.transform.position - Target.transform.position).sqrMagnitude > (Radius * Radius))
+			if ((_particlePos - _targetPos).sqrMagnitude > (Radius * Radius))
 			{
-				particle.Object.transform.position = Target.transform.position + Random.onUnitSphere * Radius;
-
+				_particlePos = _targetPos + Random.onUnitSphere * Radius;
 			}
+
+
+			particle.Object.transform.position = _particlePos;
+
 			particle.LineRenderer.SetPosition(1, Velocity.normalized * ParticleLength + SpeedMultiplier * Velocity);
 		}
 	}

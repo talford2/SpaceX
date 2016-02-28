@@ -21,7 +21,7 @@ public abstract class Tracker : MonoBehaviour
         TrackerManager.Current.RemoveTracker(this);
         DestroyInstance();
     }
-
+	
     public static Vector2 GetBoundsIntersection(Vector2 point, Rect bounds)
     {
         var anchor = new Vector2(bounds.xMin + (bounds.xMax - bounds.xMin) / 2f, bounds.yMin + (bounds.yMax - bounds.yMin) / 2f);

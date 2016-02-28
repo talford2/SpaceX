@@ -3,37 +3,37 @@
 public abstract class Missile : MonoBehaviour
 {
 	protected bool IsLive;
-    protected GameObject Owner;
-    protected float Damage;
+	protected GameObject Owner;
+	protected float Damage;
 
-    [Header("Missile")]
-    public float MissileSpeed = 150f;
-    public Transform FromReference;
+	[Header("Missile")]
+	public float MissileSpeed = 150f;
+	public Transform FromReference;
 
-    public GameObject HitEffectPrefab;
-    public GameObject HitDecalPrefab;
+	public GameObject HitEffectPrefab;
+	public GameObject HitDecalPrefab;
 
-    public virtual void Initialize(GameObject owner, float damage)
-    {
-        Owner = owner;
-        Damage = damage;
-        Stop();
-    }
-
-    private void Start()
-    {
-        Stop();
-    }
-
-    public void Update()
+	public virtual void Initialize(GameObject owner, float damage)
 	{
-        if (IsLive)
-        {
-            LiveUpdate();
-        }
+		Owner = owner;
+		Damage = damage;
+		Stop();
 	}
 
-    public abstract void LiveUpdate();
+	private void Start()
+	{
+		Stop();
+	}
+
+	public void Update()
+	{
+		if (IsLive)
+		{
+			LiveUpdate();
+		}
+	}
+
+	public abstract void LiveUpdate();
 
 	public virtual void Stop()
 	{
@@ -45,34 +45,35 @@ public abstract class Missile : MonoBehaviour
 		IsLive = true;
 	}
 
-    public void PlaceHitEffects(Vector3 position, Vector3 normal, Transform parent)
-    {
-        // TODO: Should pull this effect from a pool or something...
-        if (HitEffectPrefab != null)
-        {
-            var hitEffectInstance = ResourcePoolManager.GetAvailable(HitEffectPrefab, position, transform.rotation);
+	private GameObject _hitEffectInstance;
+	public void PlaceHitEffects(Vector3 position, Vector3 normal, Transform parent)
+	{
+		// TODO: Should pull this effect from a pool or something...
+		if (HitEffectPrefab != null)
+		{
+			_hitEffectInstance = ResourcePoolManager.GetAvailable(HitEffectPrefab, position, transform.rotation);
 
-            var hitEffectShiftable = hitEffectInstance.GetComponent<Shiftable>();
-            if (hitEffectShiftable != null)
-            {
-                var univPos = Universe.Current.GetUniversePosition(position);
-                hitEffectShiftable.SetShiftPosition(univPos);
-            }
+			var hitEffectShiftable = _hitEffectInstance.GetComponent<Shiftable>();
+			if (hitEffectShiftable != null)
+			{
+				var univPos = Universe.Current.GetUniversePosition(position);
+				hitEffectShiftable.SetShiftPosition(univPos);
+			}
 
-            hitEffectInstance.transform.position = position;
-            hitEffectInstance.transform.forward = normal;
-        }
+			_hitEffectInstance.transform.position = position;
+			_hitEffectInstance.transform.forward = normal;
+		}
 
-        if (HitDecalPrefab != null)
-        {
-            var hitDecal = Instantiate(HitDecalPrefab);
-            hitDecal.transform.position = position;
-            hitDecal.transform.SetParent(parent);
-            hitDecal.transform.forward = normal;
-        }
-    }
+		//if (HitDecalPrefab != null)
+		//{
+		//    var hitDecal = Instantiate(HitDecalPrefab);
+		//    hitDecal.transform.position = position;
+		//    hitDecal.transform.SetParent(parent);
+		//    hitDecal.transform.forward = normal;
+		//}
+	}
 
-    public virtual void SetTarget(Transform target)
-    {
-    }
+	public virtual void SetTarget(Transform target)
+	{
+	}
 }

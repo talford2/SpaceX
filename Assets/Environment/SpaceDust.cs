@@ -33,17 +33,20 @@ public class SpaceDust : MonoBehaviour
 			_particles.Add(inst);
 		}
 
-	    CentreTransform = Universe.Current.ViewPort.transform;
+		CentreTransform = Universe.Current.ViewPort.transform;
+		System.GC.Collect();
 	}
+
+	float _sqrMag = 0f;
 
 	public void LateUpdate()
 	{
-        var camTrans = Universe.Current.ViewPort.transform;
+		var camTrans = Universe.Current.ViewPort.transform;
 
 		foreach (var dustParticle in _particles)
 		{
-			var sqrMag = (CentreTransform.position - dustParticle.transform.position).sqrMagnitude;
-			if (sqrMag > _radiusSqr)
+			_sqrMag = (CentreTransform.position - dustParticle.transform.position).sqrMagnitude;
+			if (_sqrMag > _radiusSqr)
 			{
 				dustParticle.transform.position = Random.onUnitSphere * Radius + CentreTransform.position;
 			}

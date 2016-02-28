@@ -26,14 +26,23 @@ public class CellIndex
 		Z = z;
 	}
 
+	public void Set(int x, int y, int z)
+	{
+		X = x;
+		Y = y;
+		Z = z;
+	}
+
 	public override string ToString()
 	{
 		return string.Format("({0},{1},{2})", X, Y, Z);
 	}
 
+	private Vector3 vector = Vector3.zero;
 	public Vector3 ToVector3()
 	{
-		return new Vector3(X, Y, Z);
+		vector.Set(X, Y, Z);
+		return vector;
 	}
 
 	public bool IsEqualTo(CellIndex other)
@@ -46,12 +55,12 @@ public class CellIndex
 		return X == 0 && Y == 0 && Z == 0;
 	}
 
-    public int SquareMagnitude()
-    {
-        return X*X + Y*Y + Z*Z;
-    }
+	public int SquareMagnitude()
+	{
+		return X * X + Y * Y + Z * Z;
+	}
 
-    public static CellIndex operator +(CellIndex c1, CellIndex c2)
+	public static CellIndex operator +(CellIndex c1, CellIndex c2)
 	{
 		return new CellIndex(c1.X + c2.X, c1.Y + c2.Y, c1.Z + c2.Z);
 	}
@@ -66,13 +75,13 @@ public class CellIndex
 		return new CellIndex(Mathf.CeilToInt(s * c1.X), Mathf.CeilToInt(s * c1.Y), Mathf.CeilToInt(s * c1.Z));
 	}
 
-    public static CellIndex operator *(CellIndex c1, float s)
-    {
-        return new CellIndex(Mathf.CeilToInt(s * c1.X), Mathf.CeilToInt(s * c1.Y), Mathf.CeilToInt(s * c1.Z));
-    }
+	public static CellIndex operator *(CellIndex c1, float s)
+	{
+		return new CellIndex(Mathf.CeilToInt(s * c1.X), Mathf.CeilToInt(s * c1.Y), Mathf.CeilToInt(s * c1.Z));
+	}
 
-    public static CellIndex operator -(CellIndex c1)
-    {
-        return new CellIndex(-c1.X, -c1.Y, -c1.Z);
-    }
+	public static CellIndex operator -(CellIndex c1)
+	{
+		return new CellIndex(-c1.X, -c1.Y, -c1.Z);
+	}
 }

@@ -18,11 +18,14 @@ public class Shiftable : MonoBehaviour
 	public delegate void OnShiftEvent(Shiftable sender, Vector3 delta);
 
 	public event OnShiftEvent OnShift;
-	
+
+	// Performance variables
+	private Vector3 destination = Vector3.zero;
+	private CellIndex cellDelta;
 	public void Translate(Vector3 translation)
 	{
-		var destination = (CellLocalPosition + translation);
-		var cellDelta = CellIndexDeltaFromPosition(destination);
+		destination = (CellLocalPosition + translation);
+		cellDelta = CellIndexDeltaFromPosition(destination);
 
 		if (!cellDelta.IsZero())
 		{
@@ -48,10 +51,16 @@ public class Shiftable : MonoBehaviour
 		transform.position = GetWorldPosition();
 	}
 
+	//private static Vector3 _cellDeltaCalc = Vector3.one * Universe.Current.HalfCellSize;
+	private Vector3 _cellZero;
+
+	private CellIndex _curCellIndex = new CellIndex();
+
 	private CellIndex CellIndexDeltaFromPosition(Vector3 position)
 	{
-		var cellZero = (position - Vector3.one * Universe.Current.HalfCellSize) / Universe.Current.CellSize;
-		return new CellIndex(Mathf.CeilToInt(cellZero.x), Mathf.CeilToInt(cellZero.y), Mathf.CeilToInt(cellZero.z));
+		_cellZero = (position - Vector3.one * Universe.Current.HalfCellSize) / Universe.Current.CellSize;
+		_curCellIndex.Set(Mathf.CeilToInt(_cellZero.x), Mathf.CeilToInt(_cellZero.y), Mathf.CeilToInt(_cellZero.z));
+		return _curCellIndex;
 	}
 
 	private void OnDestroy()
