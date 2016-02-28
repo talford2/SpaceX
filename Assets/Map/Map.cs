@@ -83,6 +83,7 @@ public class Map : MonoBehaviour
 			{
 				pin.RenderState();
 				pin.CurrentInstance.transform.position = MapScale * pin.Shiftable.GetAbsoluteUniversePosition();
+                pin.CurrentInstance.transform.rotation = pin.transform.rotation;
 			}
 
 			var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
