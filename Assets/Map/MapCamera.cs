@@ -3,7 +3,7 @@
 [RequireComponent(typeof(Camera))]
 public class MapCamera : MonoBehaviour
 {
-    public float ZoomSensitivity;
+    public float ZoomSensitivity = 2000f;
     public float MinCameraDistance;
     public float MaxCameraDistance;
     public float RotateSpeed = 3f;
@@ -47,7 +47,8 @@ public class MapCamera : MonoBehaviour
     {
         if (Map.Current.IsShown())
         {
-            _cameraDistance = Mathf.Lerp(_cameraDistance, _cameraDistance - Input.GetAxis("MouseScrollWheel") * ZoomSensitivity, 10f * Time.unscaledDeltaTime);
+            var sensitivity = Mathf.Clamp(ZoomSensitivity * _cameraDistance / MaxCameraDistance, 2f, 100f);
+            _cameraDistance = Mathf.Lerp(_cameraDistance, _cameraDistance - Input.GetAxis("MouseScrollWheel") * sensitivity, 10f * Time.unscaledDeltaTime);
             _cameraDistance = Mathf.Clamp(_cameraDistance, MinCameraDistance, MaxCameraDistance);
             if (Input.GetMouseButton(0))
             {
