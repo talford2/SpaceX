@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [Header("Description")]
-    public string Name;
+	[Header("Description")]
+	public string Name;
 
-    [Header("Weapon Settings")]
+	[Header("Weapon Settings")]
 	public GameObject MissilePrefab;
 
 	public MuzzleFlash MuzzlePrefab;
@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
 
 	public float FireRate = 0.2f;
 	public int MissilesPerShot = 2;
-    public float Spread = 0f;
+	public float Spread = 0f;
 	public float MissileDamage;
 	public bool MissilesConverge;
 	public bool IsTargetLocking;
@@ -90,33 +90,36 @@ public class Weapon : MonoBehaviour
 		_aimAt = aimAt;
 	}
 
+	private GameObject _missileInstance;
 	private GameObject GetNextMissile()
 	{
-        var missileInstance = ResourcePoolManager.GetAvailable(MissilePrefab, Vector3.zero, Quaternion.identity);
-        missileInstance.GetComponent<Missile>().Initialize(_owner, MissileDamage);
-        return missileInstance;
+		_missileInstance = ResourcePoolManager.GetAvailable(MissilePrefab, Vector3.zero, Quaternion.identity);
+		_missileInstance.GetComponent<Missile>().Initialize(_owner, MissileDamage);
+		return _missileInstance;
 	}
 
-    public void FireMissile(GameObject missile)
-    {
-        if (OnShoot != null)
-            OnShoot(_shootPointIndex);
+	private ShootPoint _shootPoint;
+	private Vector3 _direction;
+	public void FireMissile(GameObject missile)
+	{
+		if (OnShoot != null)
+			OnShoot(_shootPointIndex);
 
-        var _shootPoint = _shootPoints[_shootPointIndex];
+		_shootPoint = _shootPoints[_shootPointIndex];
 
-        var direction = _aimAt - _shootPoint.transform.position;
-        if (!MissilesConverge)
-            direction += _shootPoint.transform.position - GetShootPointCentre();
-        missile.GetComponent<Missile>().FromReference = _shootPoint.transform;
-        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, Quaternion.Euler(Random.Range(-0.5f*Spread, 0.5f*Spread), Random.Range(-0.5f * Spread, 0.5f * Spread), 0f) * direction, _velocityReference.Value);
+		_direction = _aimAt - _shootPoint.transform.position;
+		if (!MissilesConverge)
+			_direction += _shootPoint.transform.position - GetShootPointCentre();
+		missile.GetComponent<Missile>().FromReference = _shootPoint.transform;
+		missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, Quaternion.Euler(Random.Range(-0.5f * Spread, 0.5f * Spread), Random.Range(-0.5f * Spread, 0.5f * Spread), 0f) * _direction, _velocityReference.Value);
 
-        _shootPoint.Flash();
-        FireSound.Play();
+		_shootPoint.Flash();
+		FireSound.Play();
 
-        _shootPointIndex++;
-        if (_shootPointIndex >= _shootPoints.Count)
-            _shootPointIndex = 0;
-    }
+		_shootPointIndex++;
+		if (_shootPointIndex >= _shootPoints.Count)
+			_shootPointIndex = 0;
+	}
 
 	public void Fire()
 	{
@@ -133,13 +136,22 @@ public class Weapon : MonoBehaviour
 		_lockedTarget = null;
 	}
 
+	private Vector3 _shootPointsCentre;
+	private Vector3 _toLockingTarget;
+	private Vector3 _toLockedTarget;
+	private Vector3 _targetLockingDir;
+	private Vehicle _lockedVehicle;
+	private Vector3 _extrapolatePosition;
+	private GameObject _nextMissile;
+	private Targetable _targetable;
+
 	private void TargetLocking()
 	{
-		var shootPointsCentre = GetShootPointCentre();
+		_shootPointsCentre = GetShootPointCentre();
 		if (_lockingTarget != null)
 		{
-			var toLockingTarget = _lockingTarget.position - shootPointsCentre;
-			if (toLockingTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
+			_toLockingTarget = _lockingTarget.position - _shootPointsCentre;
+			if (_toLockingTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
 			{
 				ClearTargetLock();
 			}
@@ -150,8 +162,8 @@ public class Weapon : MonoBehaviour
 		}
 		if (_lockedTarget != null)
 		{
-			var toLockedTarget = _lockedTarget.position - shootPointsCentre;
-			if (toLockedTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
+			_toLockedTarget = _lockedTarget.position - _shootPointsCentre;
+			if (_toLockedTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
 			{
 				ClearTargetLock();
 			}
@@ -166,8 +178,8 @@ public class Weapon : MonoBehaviour
 			_lockingTarget = null;
 			if (IsTriggered)
 			{
-				var direction = _aimAt - shootPointsCentre;
-				_lockingTarget = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(_targetTeam), shootPointsCentre, direction, TargetLockingMaxDistance);
+				_targetLockingDir = _aimAt - _shootPointsCentre;
+				_lockingTarget = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(_targetTeam), _shootPointsCentre, _targetLockingDir, TargetLockingMaxDistance);
 				if (_lastLockingTarget == null)
 					_lastLockingTarget = _lockingTarget;
 			}
@@ -198,28 +210,28 @@ public class Weapon : MonoBehaviour
 		{
 			if (!IsTriggered)
 			{
-				var lockedVehicle = _lockedTarget.GetComponent<Vehicle>();
-				if (lockedVehicle != null)
+				_lockedVehicle = _lockedTarget.GetComponent<Vehicle>();
+				if (_lockedVehicle != null)
 				{
 					// Rough Extrapolation
-					var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(lockedVehicle, this, 0f);
-					SetAimAt(extrapolatePosition);
+					_extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(_lockedVehicle, this, 0f);
+					SetAimAt(_extrapolatePosition);
 				}
 				else
 				{
 					SetAimAt(_lockedTarget.position);
 				}
 
-                var targetable = _lockedTarget.GetComponent<Targetable>();
-                if (targetable != null)
-                {
-                    targetable.LockedOnBy = _owner.transform;
-                }
+				_targetable = _lockedTarget.GetComponent<Targetable>();
+				if (_targetable != null)
+				{
+					_targetable.LockedOnBy = _owner.transform;
+				}
 
-                SetAimAt(GetShootPointCentre() + _velocityReference.Value);
-				var nextMissile = GetNextMissile();
-				nextMissile.GetComponent<Missile>().SetTarget(_lockedTarget);
-				FireMissile(nextMissile);
+				SetAimAt(GetShootPointCentre() + _velocityReference.Value);
+				_nextMissile = GetNextMissile();
+				_nextMissile.GetComponent<Missile>().SetTarget(_lockedTarget);
+				FireMissile(_nextMissile);
 				ClearTargetLock();
 			}
 		}
@@ -235,8 +247,8 @@ public class Weapon : MonoBehaviour
 		return _lockedTarget;
 	}
 
-    private void OnDestroy()
-    {
-        ClearTargetLock();
-    }
+	private void OnDestroy()
+	{
+		ClearTargetLock();
+	}
 }

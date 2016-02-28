@@ -6,9 +6,14 @@ public class Shiftable : MonoBehaviour
 	public CellIndex UniverseCellIndex;
 	public Vector3 CellLocalPosition;
 
+	private UniversePosition _universePosition = new UniversePosition(new CellIndex(), Vector3.zero);
 	public UniversePosition UniversePosition
 	{
-		get { return new UniversePosition(UniverseCellIndex, CellLocalPosition); }
+		get
+		{
+			_universePosition.Set(UniverseCellIndex, CellLocalPosition);
+			return _universePosition;
+		}
 	}
 
 	public delegate void OnCellIndexChangeEvent(Shiftable sender, CellIndex delta);

@@ -6,40 +6,40 @@ using Random = UnityEngine.Random;
 public class Fighter : Npc<Fighter>
 {
 	public Vehicle VehiclePrefab;
-    public Team Team;
-    public bool IsSquadronMember;
-    public string CallSign;
-    [Header("Drop Item on Death")]
-    public List<Collectible> DropItems;
-    public int MaxDropAmount = 5;
+	public Team Team;
+	public bool IsSquadronMember;
+	public string CallSign;
+	[Header("Drop Item on Death")]
+	public List<Collectible> DropItems;
+	public int MaxDropAmount = 5;
 
-    private Vehicle _vehicleInstance;
+	private Vehicle _vehicleInstance;
 
-    [Header("Movement")]
+	[Header("Movement")]
 	public Vector3 Destination;
 
 	public Transform Target;
-    public float MaxTargetDistance = 2000f;
+	public float MaxTargetDistance = 2000f;
 
 	public float SteerMultiplier = 0.3f;
 
-    public ProximitySensor ProximitySensor;
-    public bool IsDebugSpawn;
+	public ProximitySensor ProximitySensor;
+	public bool IsDebugSpawn;
 
-    [Header("Idle Destination")]
-    public bool IsFollowIdleDestination;
-    public Vector3 IdleDestination;
-    public Vector3 IdleUpDestination;
+	[Header("Idle Destination")]
+	public bool IsFollowIdleDestination;
+	public Vector3 IdleDestination;
+	public Vector3 IdleUpDestination;
 
 	[Header("Attack")]
 	public float AttackRange = 100f;
 	public float ShootAngleTolerance = 5f;
 	public float OvertakeDistance = 50f;
-    public float BurstTime = 0.5f;
-    public float BurstWaitTime = 0.7f;
-    public float ExrapolationTimeError = 0.5f;
-    public float MinAimOffsetRadius = 5f;
-    public float MaxAimOffsetRadius = 20f;
+	public float BurstTime = 0.5f;
+	public float BurstWaitTime = 0.7f;
+	public float ExrapolationTimeError = 0.5f;
+	public float MinAimOffsetRadius = 5f;
+	public float MaxAimOffsetRadius = 20f;
 
 	[Header("Evade")]
 	public float EvadeDistance = 200f;
@@ -54,87 +54,88 @@ public class Fighter : Npc<Fighter>
 	public float SightRange = 50f;
 
 	public Vehicle VehicleInstance { get { return _vehicleInstance; } }
-    public FighterSteering Steering { get; set; }
-    public Action<Transform> OnVehicleDamage;
+	public FighterSteering Steering { get; set; }
+	public Action<Transform> OnVehicleDamage;
 
-    public UniversePosition PathDestination;
+	public UniversePosition PathDestination;
 
-    private void Awake()
-    {
-        //_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
+	private void Awake()
+	{
+		//_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
 
-        if (VehiclePrefab != null)
-        {
-            var parentShifter = transform.GetComponentInParent<Shiftable>();
-            if (parentShifter != null)
-            {
-                //SpawnVehicle(VehiclePrefab, parentShifter.UniversePosition);
-            }
-            else
-            {
-                // This isn't right!
-                //SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0,0,0), new Vector3()));
-            }
-        }
-		
+		if (VehiclePrefab != null)
+		{
+			var parentShifter = transform.GetComponentInParent<Shiftable>();
+			if (parentShifter != null)
+			{
+				//SpawnVehicle(VehiclePrefab, parentShifter.UniversePosition);
+			}
+			else
+			{
+				// This isn't right!
+				//SpawnVehicle(VehiclePrefab, new UniversePosition(new CellIndex(0,0,0), new Vector3()));
+			}
+		}
+
 		CallSign = NameGenerator.GetRandomCallSign();
 
-        Steering = new FighterSteering(this);
-        State = new FighterIdle(this);
+		Steering = new FighterSteering(this);
+		State = new FighterIdle(this);
 
-        if (IsDebugSpawn)
-        {
-            SpawnVehicle(gameObject, VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)), Quaternion.identity);
-            _vehicleInstance.GetComponent<VehicleTracker>().enabled = false;
-        }
-    }
+		if (IsDebugSpawn)
+		{
+			SpawnVehicle(gameObject, VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)), Quaternion.identity);
+			_vehicleInstance.GetComponent<VehicleTracker>().enabled = false;
+		}
+	}
 
-    public void SetPath(UniversePosition destPosition)
-    {
-        PathDestination = destPosition;
-        State = new FighterPath(this);
-    }
+	public void SetPath(UniversePosition destPosition)
+	{
+		PathDestination = destPosition;
+		State = new FighterPath(this);
+	}
 
-    private void Update()
-    {
-        if (VehicleInstance != null)
-            UpdateState();
+	private Vector2 _pitchYaw;
+	private void Update()
+	{
+		if (VehicleInstance != null)
+			UpdateState();
 
-        if (VehicleInstance != null)
-        {
-            var pitchYaw = GetPitchYawToPoint(Destination);
-            if (pitchYaw.sqrMagnitude <= 0f)
-            {
-                // Give random value to resolve zero pitchYaw issue.
-                pitchYaw = Random.insideUnitCircle;
-            }
-            VehicleInstance.YawThrottle = pitchYaw.y;
-            VehicleInstance.PitchThotttle = pitchYaw.x;
-        }
-    }
+		if (VehicleInstance != null)
+		{
+			_pitchYaw = GetPitchYawToPoint(Destination);
+			if (_pitchYaw.sqrMagnitude <= 0f)
+			{
+				// Give random value to resolve zero pitchYaw issue.
+				_pitchYaw = Random.insideUnitCircle;
+			}
+			VehicleInstance.YawThrottle = _pitchYaw.y;
+			VehicleInstance.PitchThotttle = _pitchYaw.x;
+		}
+	}
 
-    public void SpawnVehicle(GameObject controller, Vehicle vehiclePrefab, UniversePosition universePosition, Quaternion rotation)
-    {
-        _vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
-        _vehicleInstance.GetComponent<Targetable>().Team = Team;
-        _vehicleInstance.GetComponent<Killable>().OnDamage += OnVehicleDamaged;
-        _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
-        _vehicleInstance.Shiftable.SetShiftPosition(universePosition);
-        _vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();
-        _vehicleInstance.SetTargetRotation(rotation);
-        _vehicleInstance.transform.rotation = rotation;
-        _vehicleInstance.Controller = controller;
-        ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
-    }
+	public void SpawnVehicle(GameObject controller, Vehicle vehiclePrefab, UniversePosition universePosition, Quaternion rotation)
+	{
+		_vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
+		_vehicleInstance.GetComponent<Targetable>().Team = Team;
+		_vehicleInstance.GetComponent<Killable>().OnDamage += OnVehicleDamaged;
+		_vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+		_vehicleInstance.Shiftable.SetShiftPosition(universePosition);
+		_vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();
+		_vehicleInstance.SetTargetRotation(rotation);
+		_vehicleInstance.transform.rotation = rotation;
+		_vehicleInstance.Controller = controller;
+		ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
+	}
 
-    public void SetVehicleInstance(Vehicle vehicleInstance)
-    {
-        _vehicleInstance = vehicleInstance;
-        //_vehicleInstance.GetComponent<Targetable>().Team = Team;
-        _vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
-        _vehicleInstance.Controller = gameObject;
-        ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
-    }
+	public void SetVehicleInstance(Vehicle vehicleInstance)
+	{
+		_vehicleInstance = vehicleInstance;
+		//_vehicleInstance.GetComponent<Targetable>().Team = Team;
+		_vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+		_vehicleInstance.Controller = gameObject;
+		ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
+	}
 
 	public Vector2 GetPitchYawToPoint(Vector3 point)
 	{
@@ -144,38 +145,38 @@ public class Fighter : Npc<Fighter>
 		return new Vector2(pitchAmount, yawAmount);
 	}
 
-    private void OnVehicleDamaged(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
-    {
-        if (attacker != null)
-        {
-            if (attacker.transform != null)
-            {
-                if (Target == null)
-                    Target = attacker.transform;
-                if (OnVehicleDamage != null)
-                    OnVehicleDamage(attacker.transform);
-            }
-        }
-    }
+	private void OnVehicleDamaged(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
+	{
+		if (attacker != null)
+		{
+			if (attacker.transform != null)
+			{
+				if (Target == null)
+					Target = attacker.transform;
+				if (OnVehicleDamage != null)
+					OnVehicleDamage(attacker.transform);
+			}
+		}
+	}
 
-    private void OnVehicleDestroyed(Killable sender)
-    {
-        Target = null;
-        if (DropItems != null && DropItems.Count > 0)
-        {
-            var dropAmount = Random.Range(0, MaxDropAmount + 1);
-            for (var i = 0f; i < dropAmount; i++)
-            {
-                var dropPosition = VehicleInstance.transform.position + Random.onUnitSphere*1.5f;
-                var collectible = DropItems[Random.Range(0, DropItems.Count)].gameObject;
-                var dropItem = ((GameObject) Instantiate(collectible, VehicleInstance.transform.position + Random.onUnitSphere*1.5f, Quaternion.identity)).GetComponent<Collectible>();
-                dropItem.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(dropPosition));
-                dropItem.SetVelocity(VehicleInstance.GetVelocity() + Random.onUnitSphere*5f);
-            }
-        }
-        if (!IsSquadronMember)
-            Destroy(gameObject);
-    }
+	private void OnVehicleDestroyed(Killable sender)
+	{
+		Target = null;
+		if (DropItems != null && DropItems.Count > 0)
+		{
+			var dropAmount = Random.Range(0, MaxDropAmount + 1);
+			for (var i = 0f; i < dropAmount; i++)
+			{
+				var dropPosition = VehicleInstance.transform.position + Random.onUnitSphere * 1.5f;
+				var collectible = DropItems[Random.Range(0, DropItems.Count)].gameObject;
+				var dropItem = ((GameObject)Instantiate(collectible, VehicleInstance.transform.position + Random.onUnitSphere * 1.5f, Quaternion.identity)).GetComponent<Collectible>();
+				dropItem.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(dropPosition));
+				dropItem.SetVelocity(VehicleInstance.GetVelocity() + Random.onUnitSphere * 5f);
+			}
+		}
+		if (!IsSquadronMember)
+			Destroy(gameObject);
+	}
 
 	private void OnDrawGizmos()
 	{
@@ -183,9 +184,9 @@ public class Fighter : Npc<Fighter>
 		{
 			switch (State.Name)
 			{
-                case "Idle":
-			        Gizmos.color = Color.white;
-			        break;
+				case "Idle":
+					Gizmos.color = Color.white;
+					break;
 				case "Evade":
 					Gizmos.color = Color.magenta;
 					break;
@@ -198,7 +199,7 @@ public class Fighter : Npc<Fighter>
 			}
 			Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
 			Gizmos.DrawSphere(Destination, 2f);
-            /*
+			/*
 			Gizmos.color = Color.blue;
 			Gizmos.DrawWireSphere(VehicleInstance.transform.position, SightRange);
 
@@ -207,6 +208,6 @@ public class Fighter : Npc<Fighter>
             */
 			Gizmos.color = Color.green;
 			Gizmos.DrawLine(VehicleInstance.transform.position, VehicleInstance.transform.position + VehicleInstance.transform.forward * 100f);
-        }
+		}
 	}
 }

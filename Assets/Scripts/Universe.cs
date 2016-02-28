@@ -15,24 +15,24 @@ public class Universe : MonoBehaviour
 
 	private static Universe _current;
 
-    private List<UniverseEvent> _universeEvents;
+	private List<UniverseEvent> _universeEvents;
 
 	public static Universe Current
 	{
 		get { return _current; }
 	}
 
-    public List<UniverseEvent> UniverseEvents
-    {
-        get
-        {
-            if (_universeEvents == null)
-                _universeEvents = new List<UniverseEvent>();
-            return _universeEvents;
-        }
-    }
+	public List<UniverseEvent> UniverseEvents
+	{
+		get
+		{
+			if (_universeEvents == null)
+				_universeEvents = new List<UniverseEvent>();
+			return _universeEvents;
+		}
+	}
 
-    public void Awake()
+	public void Awake()
 	{
 		ShiftableItems = new List<Shiftable>();
 		_current = this;
@@ -56,28 +56,27 @@ public class Universe : MonoBehaviour
 		Shift(delta);
 	}
 
-    public void Shift(CellIndex delta)
-    {
-        for (var i = 0; i < ShiftableItems.Count; i++)
-        {
-            var shiftableItem = ShiftableItems[i];
-            shiftableItem.Shift(delta.ToVector3()*CellSize);
-        }
-    }
+	public void Shift(CellIndex delta)
+	{
+		for (var i = 0; i < ShiftableItems.Count; i++)
+		{
+			ShiftableItems[i].Shift(delta.ToVector3() * CellSize);
+		}
+	}
 
-    public void WarpTo(Shiftable spawner)
+	public void WarpTo(Shiftable spawner)
 	{
 		WarpTo(spawner.UniversePosition);
 	}
 
-    public void WarpTo(UniversePosition universePosition)
-    {
-        var shiftDelta = universePosition.CellIndex - ViewPort.Shiftable.UniverseCellIndex;
-        ViewPort.Shiftable.SetShiftPosition(universePosition);
-        Shift(shiftDelta);
-    }
+	public void WarpTo(UniversePosition universePosition)
+	{
+		dCell = universePosition.CellIndex - ViewPort.Shiftable.UniverseCellIndex;
+		ViewPort.Shiftable.SetShiftPosition(universePosition);
+		Shift(dCell);
+	}
 
-    public void OnDrawGizmos()
+	public void OnDrawGizmos()
 	{
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireCube(Vector3.zero, Vector3.one * CellSize);
@@ -93,27 +92,30 @@ public class Universe : MonoBehaviour
 		return new UniversePosition(CellIndexFromWorldPosition(worldPosition), CellLocalPositionFromWorldPosition(worldPosition));
 	}
 
-    public Vector3 GetAbsoluteUniversePosition(UniversePosition universePosition)
-    {
-        var dCell = universePosition.CellIndex;
-        return dCell.ToVector3() * CellSize + universePosition.CellLocalPosition;
-    }
+	public Vector3 GetAbsoluteUniversePosition(UniversePosition universePosition)
+	{
+		dCell = universePosition.CellIndex;
+		return dCell.ToVector3() * CellSize + universePosition.CellLocalPosition;
+	}
 
+	private CellIndex dCell;
 	private Vector3 GetWorldPosition(CellIndex cellIndex, Vector3 positionInCell)
 	{
-		var dCell = cellIndex - ViewPort.Shiftable.UniverseCellIndex;
+		dCell = cellIndex - ViewPort.Shiftable.UniverseCellIndex;
 		return dCell.ToVector3() * CellSize + positionInCell;
 	}
 
+	private Vector3 dCellV;
 	private CellIndex CellIndexFromWorldPosition(Vector3 worldPosition)
 	{
-		var dCell = (worldPosition - Vector3.one * HalfCellSize) / CellSize;
-		return new CellIndex(Mathf.CeilToInt(dCell.x), Mathf.CeilToInt(dCell.y), Mathf.CeilToInt(dCell.z)) + ViewPort.Shiftable.UniverseCellIndex;
+		dCellV = (worldPosition - Vector3.one * HalfCellSize) / CellSize;
+		return new CellIndex(Mathf.CeilToInt(dCellV.x), Mathf.CeilToInt(dCellV.y), Mathf.CeilToInt(dCellV.z)) + ViewPort.Shiftable.UniverseCellIndex;
+		//return dCell.Set(Mathf.CeilToInt(dCellV.x), Mathf.CeilToInt(dCellV.y), Mathf.CeilToInt(dCellV.z)) + ViewPort.Shiftable.UniverseCellIndex;
 	}
 
 	private Vector3 CellLocalPositionFromWorldPosition(Vector3 worldPosition)
 	{
-		var cell = CellIndexFromWorldPosition(worldPosition);
-		return worldPosition - cell.ToVector3() * CellSize + ViewPort.Shiftable.UniverseCellIndex.ToVector3() * CellSize;
+		dCell = CellIndexFromWorldPosition(worldPosition);
+		return worldPosition - dCell.ToVector3() * CellSize + ViewPort.Shiftable.UniverseCellIndex.ToVector3() * CellSize;
 	}
 }

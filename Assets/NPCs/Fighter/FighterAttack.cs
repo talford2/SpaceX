@@ -1,181 +1,188 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class FighterAttack :NpcState<Fighter>
+public class FighterAttack : NpcState<Fighter>
 {
-    // Neighbors
-    private float _neighborDetectInterval = 0.2f;
-    private float _neighborDetectCooldown;
-    private List<Transform> _neighbors;
+	// Neighbors
+	private float _neighborDetectInterval = 0.2f;
+	private float _neighborDetectCooldown;
+	private List<Transform> _neighbors;
 
-    private bool _allowShoot;
-    private float _burstCooldown;
-    private float _burstAmount;
-    private float _burstTimeoffset;
+	private bool _allowShoot;
+	private float _burstCooldown;
+	private float _burstAmount;
+	private float _burstTimeoffset;
 
-    private Vector3 _targetOffset;
+	private Vector3 _targetOffset;
 
-    public FighterAttack(Fighter npc) : base(npc)
-    {
-        Name = "Attack";
-        _allowShoot = true;
-    }
+	public FighterAttack(Fighter npc) : base(npc)
+	{
+		Name = "Attack";
+		_allowShoot = true;
+	}
 
-    private void CheckSensors()
-    {
-        if (_neighborDetectCooldown >= 0f)
-        {
-            _neighbors = new List<Transform>();
-            _neighborDetectCooldown -= Time.deltaTime;
-            if (_neighborDetectCooldown < 0f)
-            {
-                Npc.ProximitySensor.Detect(DetectNeighbor);
-                _neighborDetectCooldown = _neighborDetectInterval;
-            }
-        }
-    }
+	private void CheckSensors()
+	{
+		if (_neighborDetectCooldown >= 0f)
+		{
+			_neighbors = new List<Transform>();
+			_neighborDetectCooldown -= Time.deltaTime;
+			if (_neighborDetectCooldown < 0f)
+			{
+				Npc.ProximitySensor.Detect(DetectNeighbor);
+				_neighborDetectCooldown = _neighborDetectInterval;
+			}
+		}
+	}
 
-    public Vector3 GetSteerForce(Vector3 targetDestination)
-    {
-        var steerForce = Vector3.zero;
+	private Vector3 _steerForce;
+	public Vector3 GetSteerForce(Vector3 targetDestination)
+	{
+		_steerForce = Vector3.zero;
 
-        steerForce += 0.8f * Npc.Steering.GetSeparationForce(_neighbors);
-        if (steerForce.sqrMagnitude > 1f)
-            return steerForce.normalized;
+		_steerForce += 0.8f * Npc.Steering.GetSeparationForce(_neighbors);
+		if (_steerForce.sqrMagnitude > 1f)
+			return _steerForce.normalized;
 
-        steerForce += 0.2f * Npc.Steering.GetSeekForce(targetDestination);
-        if (steerForce.sqrMagnitude > 1f)
-            return steerForce.normalized;
+		_steerForce += 0.2f * Npc.Steering.GetSeekForce(targetDestination);
+		if (_steerForce.sqrMagnitude > 1f)
+			return _steerForce.normalized;
 
-        return steerForce.normalized;
-    }
+		return _steerForce.normalized;
+	}
 
-    public override void Update()
-    {
-        if (Npc.Target == null)
-        {
-            if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
-                Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
-            Npc.State = new FighterIdle(Npc);
-            return;
-        }
+	// Performance variables
+	private Vector3 _toTarget;
+	private float _dotTarget;
+	private Vector3 _targetDestination;
+	private Vehicle _targetVehicle;
+	private float _angleToTarget;
+	private float _dotTargetFacing;
 
-        var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
+	public override void Update()
+	{
+		if (Npc.Target == null)
+		{
+			if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
+				Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
+			Npc.State = new FighterIdle(Npc);
+			return;
+		}
 
-        if (toTarget.sqrMagnitude > Npc.AttackRange*Npc.AttackRange)
-        {
-            if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
-                Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
-            Npc.State = new FighterChase(Npc);
-            return;
-        }
+		_toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
 
-        CheckSensors();
+		if (_toTarget.sqrMagnitude > Npc.AttackRange * Npc.AttackRange)
+		{
+			if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
+				Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
+			Npc.State = new FighterChase(Npc);
+			return;
+		}
 
-        var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
+		CheckSensors();
 
-        Vector3 targetDestination;
-        var targetVehicle = Npc.Target.GetComponent<Vehicle>();
-        if (targetVehicle != null && Npc.VehicleInstance.PrimaryWeaponInstance != null)
-        {
-            var extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(Npc.Target.GetComponent<Vehicle>(), Npc.VehicleInstance.PrimaryWeaponInstance, _burstTimeoffset);
-            targetDestination = extrapolatePosition;
-        }
-        else
-        {
-            targetDestination = Npc.Target.position;
-        }
+		_dotTarget = Vector3.Dot(_toTarget, Npc.VehicleInstance.transform.forward);
 
-        if (_burstCooldown >= 0f)
-        {
-            _burstCooldown -= Time.deltaTime;
-            if (_burstCooldown < 0f)
-            {
-                _allowShoot = true;
-                _burstAmount = 0f;
-                _burstTimeoffset = Random.Range(-Npc.ExrapolationTimeError, Npc.ExrapolationTimeError);
+		_targetVehicle = Npc.Target.GetComponent<Vehicle>();
+		if (_targetVehicle != null && Npc.VehicleInstance.PrimaryWeaponInstance != null)
+		{
+			_targetDestination = Utility.GetVehicleExtrapolatedPosition(Npc.Target.GetComponent<Vehicle>(), Npc.VehicleInstance.PrimaryWeaponInstance, _burstTimeoffset);
+		}
+		else
+		{
+			_targetDestination = Npc.Target.position;
+		}
 
-                if (dotTarget > Npc.AttackRange)
-                {
-                    _targetOffset = Random.insideUnitSphere * Npc.MaxAimOffsetRadius;
-                }
-                else
-                {
-                    _targetOffset = Mathf.Max((dotTarget/ Npc.AttackRange)* Npc.MaxAimOffsetRadius, Npc.MinAimOffsetRadius)* Random.insideUnitSphere;
-                }
-            }
-        }
+		if (_burstCooldown >= 0f)
+		{
+			_burstCooldown -= Time.deltaTime;
+			if (_burstCooldown < 0f)
+			{
+				_allowShoot = true;
+				_burstAmount = 0f;
+				_burstTimeoffset = Random.Range(-Npc.ExrapolationTimeError, Npc.ExrapolationTimeError);
 
-        Npc.Destination = Npc.VehicleInstance.transform.position + GetSteerForce(targetDestination + _targetOffset);
+				if (_dotTarget > Npc.AttackRange)
+				{
+					_targetOffset = Random.insideUnitSphere * Npc.MaxAimOffsetRadius;
+				}
+				else
+				{
+					_targetOffset = Mathf.Max((_dotTarget / Npc.AttackRange) * Npc.MaxAimOffsetRadius, Npc.MinAimOffsetRadius) * Random.insideUnitSphere;
+				}
+			}
+		}
 
-        Npc.VehicleInstance.TriggerBrake = false;
-        Npc.VehicleInstance.TriggerAccelerate = false;
+		Npc.Destination = Npc.VehicleInstance.transform.position + GetSteerForce(_targetDestination + _targetOffset);
 
-        if (dotTarget > 10f)
-        {
-            if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
-            {
-                if (_allowShoot)
-                {
-                    var angleToTarget = Vector3.Angle(toTarget.normalized, Npc.VehicleInstance.transform.forward.normalized);
-                    if (Mathf.Abs(angleToTarget) < Npc.ShootAngleTolerance)
-                    {
-                        Npc.VehicleInstance.SetAimAt(Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward*100f);
+		Npc.VehicleInstance.TriggerBrake = false;
+		Npc.VehicleInstance.TriggerAccelerate = false;
 
-                        Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = true;
-                        _burstAmount += Time.deltaTime;
-                        if (_burstAmount > Npc.BurstTime)
-                        {
-                            _burstCooldown = Npc.BurstWaitTime;
-                            _allowShoot = false;
-                        }
-                    }
-                    else
-                    {
-                        Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
-                    }
-                }
-                else
-                {
-                    Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
-                }
-            }
+		if (_dotTarget > 10f)
+		{
+			if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
+			{
+				if (_allowShoot)
+				{
+					_angleToTarget = Vector3.Angle(_toTarget.normalized, Npc.VehicleInstance.transform.forward.normalized);
+					if (Mathf.Abs(_angleToTarget) < Npc.ShootAngleTolerance)
+					{
+						Npc.VehicleInstance.SetAimAt(Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward * 100f);
 
-            if (toTarget.sqrMagnitude < Npc.OvertakeDistance*Npc.OvertakeDistance)
-            {
-                Debug.Log("OVERTAKE!");
-                Npc.VehicleInstance.TriggerAccelerate = true;
-                if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
-                    Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
-                Npc.State = new FighterEvade(Npc);
-            }
-        }
-        else
-        {
-            if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
-                Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
+						Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = true;
+						_burstAmount += Time.deltaTime;
+						if (_burstAmount > Npc.BurstTime)
+						{
+							_burstCooldown = Npc.BurstWaitTime;
+							_allowShoot = false;
+						}
+					}
+					else
+					{
+						Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
+					}
+				}
+				else
+				{
+					Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
+				}
+			}
 
-            var dotTargetFacing = Vector3.Dot(toTarget, Npc.Target.forward);
-            if (dotTargetFacing > 0f)
-            {
-                // Target isn't looking at me!
-                Npc.State = new FighterChase(Npc);
-                return;
-            }
+			if (_toTarget.sqrMagnitude < Npc.OvertakeDistance * Npc.OvertakeDistance)
+			{
+				Debug.Log("OVERTAKE!");
+				Npc.VehicleInstance.TriggerAccelerate = true;
+				if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
+					Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
+				Npc.State = new FighterEvade(Npc);
+			}
+		}
+		else
+		{
+			if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
+				Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
 
-            if (dotTarget < 0f)
-                Npc.State = new FighterEvade(Npc);
-        }
-    }
+			_dotTargetFacing = Vector3.Dot(_toTarget, Npc.Target.forward);
+			if (_dotTargetFacing > 0f)
+			{
+				// Target isn't looking at me!
+				Npc.State = new FighterChase(Npc);
+				return;
+			}
 
-    private void DetectNeighbor(Transform neighbor)
-    {
-        if (neighbor != Npc.VehicleInstance.transform)
-        {
-            if (!_neighbors.Contains(neighbor))
-            {
-                _neighbors.Add(neighbor);
-            }
-        }
-    }
+			if (_dotTarget < 0f)
+				Npc.State = new FighterEvade(Npc);
+		}
+	}
+
+	private void DetectNeighbor(Transform neighbor)
+	{
+		if (neighbor != Npc.VehicleInstance.transform)
+		{
+			if (!_neighbors.Contains(neighbor))
+			{
+				_neighbors.Add(neighbor);
+			}
+		}
+	}
 }

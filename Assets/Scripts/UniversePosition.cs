@@ -9,6 +9,11 @@ public class UniversePosition
 
 	public UniversePosition(CellIndex cellIndex, Vector3 localPosition)
 	{
+		Set(cellIndex, localPosition);
+	}
+
+	public void Set(CellIndex cellIndex, Vector3 localPosition)
+	{
 		CellIndex = cellIndex;
 		CellLocalPosition = localPosition;
 	}
