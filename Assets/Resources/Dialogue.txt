@@ -34,7 +34,7 @@ FriendlyFire:
 "{0} what the hell are you doing?!"
 "Hey it's me {1}",
 "You make {1} very angry!",
-"Whose team are you on {0}",
+"Whose team are you on {0}?",
 "{0} what are you playing at?!",
 "Cut it out {0}",
 "{0} trying shooting straight!",
@@ -47,7 +47,17 @@ FriendlyFire:
 "Are you blind {0}",
 "Get lost {0}!",
 "Not funny {0}",
-"That wasn't very nice {0}"
+"That wasn't very nice {0}",
+"Leave me be {0}!",
+"Not cool {0}.",
+"{0}?",
+"Hey!",
+"Look before you shoot {0}",
+"It's me {1}, I'm on your side!",
+"Careful buddy...",
+"Really {0}...?",
+"I'm not laughing {0}",
+"Same team {0}!"
 EnemyHate:
 "I hate you very much {0}!",
 "I will kill you!"
