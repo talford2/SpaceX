@@ -451,9 +451,6 @@ MonoBehaviour:
   LineRenderers: []
   DistantObject: {fileID: 0}
   NearObject: {fileID: 0}
-  TargetableObjects: []
-  ManagedColliders: []
-  ManagedDetectables: []
 --- !u!114 &11405748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -470,7 +467,6 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  ShiftParticleSystems: []
 --- !u!114 &11422108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -504,8 +500,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c4ddec4abcfd448bf35628836b2578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePin: {fileID: 133228, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
-  InactivePin: {fileID: 133228, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
+  ActivePin: {fileID: 101850, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
+  InactivePin: {fileID: 101850, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
   CurrentInstance: {fileID: 0}
@@ -554,7 +550,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: ActivePin
+      value: 
+      objectReference: {fileID: 101850, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: InactivePin
+      value: 
+      objectReference: {fileID: 101850, guid: afe9e12da6b41d4419909e353740bbd8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 184406}

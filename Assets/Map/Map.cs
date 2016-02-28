@@ -43,7 +43,7 @@ public class Map : MonoBehaviour
 
 	private void Start()
 	{
-		CreateGrid();
+		//CreateGrid();
 	}
 
 	public void AddPin(MapPin pin)
@@ -70,37 +70,44 @@ public class Map : MonoBehaviour
 			Destroy(pin.ActiveInstance);
 	}
 
-	private void Update()
-	{
-		if (IsShown())
-		{
+    private void UpdateMap()
+    {
+        if (IsShown())
+        {
             if (PlayerController.Current.VehicleInstance != null)
             {
                 _playerPin.transform.position = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
                 _playerPin.transform.rotation = PlayerController.Current.VehicleInstance.transform.rotation;
-            }
-			foreach (var pin in _pins)
-			{
-				pin.RenderState();
-				pin.CurrentInstance.transform.position = MapScale * pin.Shiftable.GetAbsoluteUniversePosition();
-                pin.CurrentInstance.transform.rotation = pin.transform.rotation;
-			}
 
-			var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
-			RaycastHit mouseHit;
-			if (Physics.Raycast(mouseRay, out mouseHit, Mathf.Infinity, LayerMask.GetMask("Map")))
-			{
-				if (Input.GetMouseButtonUp(0))
-				{
-					var clickedPin = _pins.First(p => p.CurrentInstance.transform == mouseHit.collider.transform.parent.transform);
-					_destination.SetActive(true);
-					isDestinationSet = true;
-					_destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);
-					_destination.transform.position = clickedPin.Shiftable.GetWorldPosition();
-				}
-			}
-		}
-	}
+                var playerToCamera = _playerPin.transform.position - MapCamera.Current.transform.position;
+                _playerPin.transform.localScale = Vector3.one * playerToCamera.magnitude * 0.4f;
+
+            }
+            foreach (var pin in _pins)
+            {
+                pin.RenderState();
+                pin.CurrentInstance.transform.position = MapScale * pin.Shiftable.GetAbsoluteUniversePosition();
+                pin.CurrentInstance.transform.rotation = pin.transform.rotation;
+
+                var toCamera = pin.CurrentInstance.transform.position - MapCamera.Current.transform.position;
+                pin.CurrentInstance.transform.localScale = Vector3.one * toCamera.magnitude * 0.4f;
+            }
+
+            var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit mouseHit;
+            if (Physics.Raycast(mouseRay, out mouseHit, Mathf.Infinity, LayerMask.GetMask("Map")))
+            {
+                if (Input.GetMouseButtonUp(0))
+                {
+                    var clickedPin = _pins.First(p => p.CurrentInstance.transform == mouseHit.collider.transform.parent.transform);
+                    _destination.SetActive(true);
+                    isDestinationSet = true;
+                    _destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);
+                    _destination.transform.position = clickedPin.Shiftable.GetWorldPosition();
+                }
+            }
+        }
+    }
 
 	private void UpdateDestination()
 	{
@@ -117,6 +124,7 @@ public class Map : MonoBehaviour
 
 	public void Show()
 	{
+        Time.timeScale = 0f;
 		PlayerController.Current.SetControlEnabled(false);
 
 		if (PlayerController.Current.VehicleInstance != null)
@@ -132,20 +140,26 @@ public class Map : MonoBehaviour
 
 		if (TrackerManager.Current != null)
 			TrackerManager.Current.SetTrackersVisibility(false);
+
+        MapCamera.Current.OnMove += UpdateMap;
 	}
 
-	public void Hide()
-	{
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
-		_mapCamera.enabled = false;
-		PlayerController.Current.SetControlEnabled(true);
-		_mapCanvas.enabled = false;
-		if (TrackerManager.Current != null)
-			TrackerManager.Current.SetTrackersVisibility(true);
-	}
+    public void Hide()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        _mapCamera.enabled = false;
+        PlayerController.Current.SetControlEnabled(true);
+        _mapCanvas.enabled = false;
+        if (TrackerManager.Current != null)
+            TrackerManager.Current.SetTrackersVisibility(true);
 
-	public void Toggle()
+        Time.timeScale = 1f;
+        if (MapCamera.Current != null)
+            MapCamera.Current.OnMove -= UpdateMap;
+    }
+
+    public void Toggle()
 	{
 		if (_mapCamera.enabled)
 		{

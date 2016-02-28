@@ -29,6 +29,8 @@ public class MapCamera : MonoBehaviour
         get { return _current; }
     }
 
+    public float ZoomDistance { get { return _cameraDistance; } }
+
     private void Awake()
     {
         _controlCamera = GetComponent<Camera>();
@@ -45,7 +47,7 @@ public class MapCamera : MonoBehaviour
     {
         if (Map.Current.IsShown())
         {
-            _cameraDistance = Mathf.Lerp(_cameraDistance, _cameraDistance - Input.GetAxis("MouseScrollWheel") * ZoomSensitivity, 10f * Time.deltaTime);
+            _cameraDistance = Mathf.Lerp(_cameraDistance, _cameraDistance - Input.GetAxis("MouseScrollWheel") * ZoomSensitivity, 10f * Time.unscaledDeltaTime);
             _cameraDistance = Mathf.Clamp(_cameraDistance, MinCameraDistance, MaxCameraDistance);
             if (Input.GetMouseButton(0))
             {
@@ -77,7 +79,7 @@ public class MapCamera : MonoBehaviour
 
     private void CameraRotateSpace()
     {
-        _lookAt = Vector3.Lerp(_lookAt, _lookAt - (_controlCamera.transform.right * _pan.x + _controlCamera.transform.up * _pan.y), 10f * Time.deltaTime);
+        _lookAt = Vector3.Lerp(_lookAt, _lookAt - (_controlCamera.transform.right * _pan.x + _controlCamera.transform.up * _pan.y), 10f * Time.unscaledDeltaTime);
         _controlCamera.transform.RotateAround(_lookAt, Vector3.up, _yawRotate);
         //controlCamera.transform.RotateAround(lookAt, controlCamera.transform.up, yawRotate);
         _controlCamera.transform.RotateAround(_lookAt, _controlCamera.transform.right, _pitchRotate);

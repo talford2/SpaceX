@@ -4792,8 +4792,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c4ddec4abcfd448bf35628836b2578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePin: {fileID: 133228, guid: da416f80ff52a4c41ab588e73d0e57a2, type: 2}
-  InactivePin: {fileID: 133228, guid: e60460a5db76a7842a14febd8542e701, type: 2}
+  ActivePin: {fileID: 176366, guid: da416f80ff52a4c41ab588e73d0e57a2, type: 2}
+  InactivePin: {fileID: 176366, guid: da416f80ff52a4c41ab588e73d0e57a2, type: 2}
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
   CurrentInstance: {fileID: 0}
@@ -5026,6 +5026,14 @@ Prefab:
       propertyPath: MapPin
       value: 
       objectReference: {fileID: 11453700}
+    - target: {fileID: 0}
+      propertyPath: ActivePin
+      value: 
+      objectReference: {fileID: 176366, guid: da416f80ff52a4c41ab588e73d0e57a2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: InactivePin
+      value: 
+      objectReference: {fileID: 176366, guid: da416f80ff52a4c41ab588e73d0e57a2, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194116}
