@@ -20,6 +20,9 @@ public class Map : MonoBehaviour
 
 	private bool isDestinationSet;
 	private GameObject _destination;
+
+    private float _scaleDistance = 100f;
+    private float _scaleDistanceSquared;
 	
 	public static Map Current
 	{
@@ -37,6 +40,8 @@ public class Map : MonoBehaviour
 		isDestinationSet = false;
 
 		GetComponentInChildren<MapCamera>().OnMove += UpdateDestination;
+
+        _scaleDistanceSquared = _scaleDistance * _scaleDistance;
 
 		Hide();
 	}
@@ -79,18 +84,16 @@ public class Map : MonoBehaviour
                 pin.RenderState();
                 pin.CurrentInstance.transform.position = MapScale * pin.Shiftable.GetAbsoluteUniversePosition();
                 pin.CurrentInstance.transform.rotation = pin.transform.rotation;
-                
+
                 var toCamera = pin.CurrentInstance.transform.position - MapCamera.Current.transform.position;
-                if (toCamera.sqrMagnitude > 10000f)
+                if (toCamera.sqrMagnitude > _scaleDistanceSquared)
                 {
-                    pin.CurrentInstance.transform.localScale = Vector3.one * toCamera.magnitude /100f;
-                    //= Vector3.one * toCamera.magnitude * 0.01f;
+                    pin.CurrentInstance.transform.localScale = Vector3.one * toCamera.magnitude / _scaleDistance;
                 }
                 else
                 {
                     pin.CurrentInstance.transform.localScale = Vector3.one;
                 }
-                
             }
 
             var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
