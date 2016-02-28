@@ -138,16 +138,16 @@ public class PlayerSquadron : MonoBehaviour
 			if (attacker == PlayerController.Current.VehicleInstance.gameObject)
 			{
 				var member = sender.GetComponent<Vehicle>().Controller.GetComponent<Fighter>();
-				CommMessaging.Current.ShowMessage(attacker, member.CallSign, GetFriendlyFireMessage(PlayerController.Current.GetCallSign()));
+				CommMessaging.Current.ShowMessage(attacker, member.CallSign, GetFriendlyFireMessage(PlayerController.Current.GetCallSign(), member.CallSign));
 			}
 		}
 		// This should on refresh the current squadron member's icon.
 		HeadsUpDisplay.Current.RefreshSquadronIcons();
 	}
 
-	private string GetFriendlyFireMessage(string addressCallSign)
+	private string GetFriendlyFireMessage(string toCallSign, string fromCallSign)
 	{
-		return Dialogue.GetRandomDialogue("FriendlyFire", addressCallSign);
+		return Dialogue.GetRandomDialogue("FriendlyFire", toCallSign, fromCallSign);
 	}
 
 	private void SquadronMember_OnDie(Killable sender)
