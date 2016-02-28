@@ -4793,7 +4793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActivePin: {fileID: 176366, guid: da416f80ff52a4c41ab588e73d0e57a2, type: 2}
-  InactivePin: {fileID: 176366, guid: da416f80ff52a4c41ab588e73d0e57a2, type: 2}
+  InactivePin: {fileID: 121040, guid: e1b79fcd56723b04f93222d36140ed5a, type: 2}
   ActiveInstance: {fileID: 0}
   InactiveInstance: {fileID: 0}
   CurrentInstance: {fileID: 0}
@@ -5033,7 +5033,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: InactivePin
       value: 
-      objectReference: {fileID: 176366, guid: da416f80ff52a4c41ab588e73d0e57a2, type: 2}
+      objectReference: {fileID: 121040, guid: e1b79fcd56723b04f93222d36140ed5a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194116}
