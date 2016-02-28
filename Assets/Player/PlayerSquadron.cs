@@ -83,8 +83,9 @@ public class PlayerSquadron : MonoBehaviour
 		squadronTracker.IsDisabled = false;
 		member.IsFollowIdleDestination = true;
 		var mapPin = member.VehicleInstance.gameObject.AddComponent<MapPin>();
-		mapPin.ActivePin = SquadronPinPrefab;
+		mapPin.ActivePin = PlayerController.Current.PlayerPinPrefab;
 		mapPin.InactivePin = SquadronPinPrefab;
+        mapPin.SetPinState(MapPin.MapPinState.Inactive);
 		var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
 		squadronShieldRegenerator.RegenerationDelay = ShieldRegenerateDelay;
 		squadronShieldRegenerator.RegenerationRate = ShieldRegenerateRate;

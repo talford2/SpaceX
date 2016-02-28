@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
         var mapPin = VehicleInstance.gameObject.AddComponent<MapPin>();
         mapPin.ActivePin = PlayerPinPrefab;
-        mapPin.InactivePin = PlayerPinPrefab;
+        mapPin.InactivePin = Squadron.SquadronPinPrefab;
 
         _playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
@@ -460,6 +460,8 @@ public class PlayerController : MonoBehaviour
                     oldMember.enabled = true;
                     oldMember.VehicleInstance.GetComponent<SquadronTracker>().IsDisabled = false;
 
+                    oldMember.VehicleInstance.GetComponent<MapPin>().SetPinState(MapPin.MapPinState.Inactive);
+
                     oldMember.VehicleInstance.Killable.OnDamage -= PlayerController_OnDamage;
                     oldMember.VehicleInstance.Killable.OnDie -= PlayerController_OnDie;
                     oldMember.VehicleInstance.GetComponent<ShieldRegenerator>().OnRegenerate -= PlayerController_OnRegenerate;
@@ -475,6 +477,8 @@ public class PlayerController : MonoBehaviour
                     _playVehicleInstance.GetComponent<SquadronTracker>().IsDisabled = true;
                     _playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
                     _playVehicleInstance.MeshTransform.gameObject.layer = LayerMask.NameToLayer("Player");
+
+                    _playVehicleInstance.GetComponent<MapPin>().SetPinState(MapPin.MapPinState.Active);
 
                     _playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;
                     _playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
