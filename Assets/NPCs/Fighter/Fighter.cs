@@ -8,7 +8,7 @@ public class Fighter : Npc<Fighter>
 	public Vehicle VehiclePrefab;
 	public Team Team;
 	public bool IsSquadronMember;
-	public string CallSign;
+
 	[Header("Drop Item on Death")]
 	public List<Collectible> DropItems;
 	public int MaxDropAmount = 5;
@@ -77,7 +77,7 @@ public class Fighter : Npc<Fighter>
 			}
 		}
 
-		CallSign = NameGenerator.GetRandomCallSign();
+		GetComponent<ShipProfile>().CallSign = NameGenerator.GetRandomCallSign();
 
 		Steering = new FighterSteering(this);
 		State = new FighterIdle(this);
@@ -122,7 +122,7 @@ public class Fighter : Npc<Fighter>
         killable.OnDie += OnVehicleDestroyed;
 
         // Apply power profile
-        var powerProfile = GetComponent<PowerProfile>();
+        var powerProfile = GetComponent<ShipProfile>();
         killable.MaxShield = powerProfile.GetShield();
         killable.Shield = killable.MaxShield;
         _vehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();

@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 		_playerNpc = gameObject.AddComponent<Fighter>();
 		_playerNpc.Team = Team;
 		_playerNpc.IsSquadronMember = true;
-		_playerNpc.CallSign = CallSign;
+        _playerNpc.GetComponent<ShipProfile>().CallSign = CallSign;
 		_playerNpc.VehiclePrefab = VehiclePrefab;
 		_playerNpc.enabled = false;
 		SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
 
         // Apply power profile
-        var powerProfile = GetComponent<PowerProfile>();
+        var powerProfile = GetComponent<ShipProfile>();
         _playVehicleInstance.Killable.MaxShield = powerProfile.GetShield();
         _playVehicleInstance.Killable.Shield = _playVehicleInstance.Killable.MaxShield;
         _playVehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
@@ -496,7 +496,8 @@ public class PlayerController : MonoBehaviour
 				var curMember = Squadron.GetCurrentMember();
 				if (curMember.VehicleInstance != null)
 				{
-					HeadsUpDisplay.Current.ShowSquadronPrompt(curMember.CallSign);
+                    var profile = curMember.GetComponent<ShipProfile>();
+					HeadsUpDisplay.Current.ShowSquadronPrompt(profile.CallSign);
 
 					_playVehicleInstance = curMember.VehicleInstance;
 					_playVehicleInstance.GetComponent<SquadronTracker>().IsDisabled = true;
@@ -510,7 +511,7 @@ public class PlayerController : MonoBehaviour
 					_playVehicleInstance.GetComponent<ShieldRegenerator>().OnRegenerate += PlayerController_OnRegenerate;
 					_playVehicleInstance.Controller = gameObject;
 
-					_curCallSlign = curMember.CallSign;
+					_curCallSlign = profile.CallSign;
 					curMember.enabled = false;
 
 					Universe.Current.WarpTo(_playVehicleInstance.Shiftable);

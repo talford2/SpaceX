@@ -70,7 +70,10 @@ public class PlayerSquadron : MonoBehaviour
 		member.SpawnVehicle(member.gameObject, member.VehiclePrefab, position, rotation);
 		var memberTracker = member.VehicleInstance.GetComponent<VehicleTracker>();
 
-		var squadronTracker = member.VehicleInstance.gameObject.AddComponent<SquadronTracker>();
+        var profile = member.GetComponent<ShipProfile>();
+
+
+        var squadronTracker = member.VehicleInstance.gameObject.AddComponent<SquadronTracker>();
 		squadronTracker.ArrowCursorImage = memberTracker.ArrowCursorImage;
 		squadronTracker.TrackerCursorImage = memberTracker.TrackerCursorImage;
 		squadronTracker.FarTrackerCursorImage = memberTracker.FarTrackerCursorImage;
@@ -78,7 +81,7 @@ public class PlayerSquadron : MonoBehaviour
 		squadronTracker.LockingCursorImage = memberTracker.LockingCursorImage;
 		squadronTracker.LockedCursorImage = memberTracker.LockedCursorImage;
 		Destroy(memberTracker);
-		squadronTracker.CallSign = member.CallSign;
+		squadronTracker.CallSign = profile.CallSign;
 		squadronTracker.TrackerColor = TrackerColor;
 		squadronTracker.LabelFont = SquadronTrackerFont;
 		squadronTracker.IsDisabled = false;
@@ -89,10 +92,9 @@ public class PlayerSquadron : MonoBehaviour
 		mapPin.SetPinState(MapPin.MapPinState.Inactive);
 
         // Apply power profile
-        var powerProfile = member.GetComponent<PowerProfile>();
-        member.VehicleInstance.Killable.MaxShield = powerProfile.GetShield();
+        member.VehicleInstance.Killable.MaxShield = profile.GetShield();
         member.VehicleInstance.Killable.Shield = member.VehicleInstance.Killable.MaxShield;
-        member.VehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
+        member.VehicleInstance.MaxBoostEnergy = profile.GetBoostEnergy();
         member.VehicleInstance.BoostEnergy = member.VehicleInstance.MaxBoostEnergy;
 
         var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
@@ -155,7 +157,8 @@ public class PlayerSquadron : MonoBehaviour
 			if (attacker == PlayerController.Current.VehicleInstance.gameObject)
 			{
 				var member = sender.GetComponent<Vehicle>().Controller.GetComponent<Fighter>();
-				CommMessaging.Current.ShowMessage(attacker, member.CallSign, GetFriendlyFireMessage(PlayerController.Current.GetCallSign(), member.CallSign));
+                var profile = member.GetComponent<ShipProfile>();
+				CommMessaging.Current.ShowMessage(attacker, profile.CallSign, GetFriendlyFireMessage(PlayerController.Current.GetCallSign(), profile.CallSign));
 			}
 		}
 		// This should on refresh the current squadron member's icon.

@@ -75,7 +75,7 @@ public class HeadsUpDisplay : MonoBehaviour
             : PlayerController.Current.Squadron.GetMember(index).VehicleInstance;
 
         var squadronIcon = _squadronIcons[index];
-        squadronIcon.SetCallSign(PlayerController.Current.Squadron.GetMember(index).CallSign);
+        squadronIcon.SetCallSign(PlayerController.Current.Squadron.GetMember(index).GetComponent<ShipProfile>().CallSign);
         if (squadronVehicle != null && squadronVehicle.Killable.IsAlive)
         {
             squadronIcon.SetSelected(PlayerController.Current.Squadron.GetCurrentIndex() == index);

@@ -353,6 +353,13 @@ public class Vehicle : MonoBehaviour
         */
 	}
 
+    public void TriggerBoostRegeneration()
+    {
+        _boostRegenerate = true;
+        if (_boostEnergyCooldown < 0f)
+            _boostEnergyCooldown = BoostEnergyRegenerateDelay;
+    }
+
 	private RaycastHit[] _moveHits = new RaycastHit[20];
 
 	private void UpdateVelocityFromCollisions()

@@ -112,14 +112,13 @@ public class ShipProfileScreen : MonoBehaviour
         _preview = (GameObject) Instantiate(fighter.VehiclePrefab.PreviewPrefab, new Vector3(0, 0.5f, 1f), Quaternion.Euler(25f, 200f, 10f));
         _preview.layer = LayerMask.NameToLayer("Preview");
         _preview.transform.SetParent(Preview.transform);
-        CallSignValue.text = fighter.CallSign;
 
-        var powerProfile = fighter.GetComponent<PowerProfile>();
-
-        PopulatePowerBar(powerProfile);
-        PopulateBar(WeaponValueContainer, powerProfile.Weapons);
-        PopulateBar(ShieldValueContainer, powerProfile.Shields);
-        PopulateBar(SpecialValueContainer, powerProfile.Special);
+        var profile = fighter.GetComponent<ShipProfile>();
+        CallSignValue.text = profile.CallSign;
+        PopulatePowerBar(profile);
+        PopulateBar(WeaponValueContainer, profile.Weapons);
+        PopulateBar(ShieldValueContainer, profile.Shields);
+        PopulateBar(SpecialValueContainer, profile.Special);
 
         ShipNameValue.text = fighter.VehiclePrefab.Name;
         //PowerValue.text = string.Format("{0:f0}", powerProfile.TotalPower);
@@ -135,7 +134,7 @@ public class ShipProfileScreen : MonoBehaviour
     public void AddPower()
     {
         var member = PlayerController.Current.Squadron.Members[_curIndex];
-        var powerProfile = member.GetComponent<PowerProfile>();
+        var powerProfile = member.GetComponent<ShipProfile>();
         if (PlayerController.Current.PowerNodeCount > 0)
         {
             powerProfile.TotalPower++;
@@ -148,7 +147,7 @@ public class ShipProfileScreen : MonoBehaviour
     public void SubtractPower()
     {
         var member = PlayerController.Current.Squadron.Members[_curIndex];
-        var powerProfile = member.GetComponent<PowerProfile>();
+        var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.PowerRemaining > 0)
         {
             powerProfile.TotalPower--;
@@ -161,7 +160,7 @@ public class ShipProfileScreen : MonoBehaviour
     public void AddWeaponPower()
     {
         var member = PlayerController.Current.Squadron.Members[_curIndex];
-        var powerProfile = member.GetComponent<PowerProfile>();
+        var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.PowerRemaining > 0)
         {
             powerProfile.Weapons++;
@@ -174,7 +173,7 @@ public class ShipProfileScreen : MonoBehaviour
     public void SubtractWeaponPower()
     {
         var member = PlayerController.Current.Squadron.Members[_curIndex];
-        var powerProfile = member.GetComponent<PowerProfile>();
+        var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.Weapons > 0)
         {
             powerProfile.Weapons--;
@@ -187,7 +186,7 @@ public class ShipProfileScreen : MonoBehaviour
     public void AddShieldPower()
     {
         var member = PlayerController.Current.Squadron.Members[_curIndex];
-        var powerProfile = member.GetComponent<PowerProfile>();
+        var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.PowerRemaining > 0)
         {
             powerProfile.Shields++;
@@ -200,7 +199,7 @@ public class ShipProfileScreen : MonoBehaviour
     public void SubtractShieldPower()
     {
         var member = PlayerController.Current.Squadron.Members[_curIndex];
-        var powerProfile = member.GetComponent<PowerProfile>();
+        var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.Shields > 0)
         {
             powerProfile.Shields--;
@@ -213,7 +212,7 @@ public class ShipProfileScreen : MonoBehaviour
     public void AddSpecialPower()
     {
         var member = PlayerController.Current.Squadron.Members[_curIndex];
-        var powerProfile = member.GetComponent<PowerProfile>();
+        var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.PowerRemaining > 0)
         {
             powerProfile.Special++;
@@ -226,7 +225,7 @@ public class ShipProfileScreen : MonoBehaviour
     public void SubtractSpecialPower()
     {
         var member = PlayerController.Current.Squadron.Members[_curIndex];
-        var powerProfile = member.GetComponent<PowerProfile>();
+        var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.Special > 0)
         {
             powerProfile.Special--;
@@ -236,7 +235,7 @@ public class ShipProfileScreen : MonoBehaviour
         }
     }
 
-    private void PopulatePowerBar(PowerProfile profile)
+    private void PopulatePowerBar(ShipProfile profile)
     {
         foreach (Transform t in PowerValueContainer.transform)
         {
@@ -313,7 +312,7 @@ public class ShipProfileScreen : MonoBehaviour
         }
     }
 
-    private void ApplyPowerProfile(Fighter member, PowerProfile profile)
+    private void ApplyPowerProfile(Fighter member, ShipProfile profile)
     {
         member.VehicleInstance.Killable.MaxShield = profile.GetShield();
         member.VehicleInstance.MaxBoostEnergy = profile.GetBoostEnergy();
@@ -321,6 +320,7 @@ public class ShipProfileScreen : MonoBehaviour
             member.VehicleInstance.Killable.Shield = member.VehicleInstance.Killable.MaxShield;
         if (member.VehicleInstance.BoostEnergy > member.VehicleInstance.MaxBoostEnergy)
             member.VehicleInstance.BoostEnergy = member.VehicleInstance.MaxBoostEnergy;
+        member.VehicleInstance.TriggerBoostRegeneration();
     }
 
     public void Show()
