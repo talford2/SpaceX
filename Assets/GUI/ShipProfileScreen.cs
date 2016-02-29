@@ -141,6 +141,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.TotalPower++;
             PlayerController.Current.PowerNodeCount--;
             PopulatePowerBar(powerProfile);
+            ApplyPowerProfile(member);
         }
     }
 
@@ -153,6 +154,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.TotalPower--;
             PlayerController.Current.PowerNodeCount++;
             PopulatePowerBar(powerProfile);
+            ApplyPowerProfile(member);
         }
     }
 
@@ -165,6 +167,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Weapons++;
             PopulateBar(WeaponValueContainer, powerProfile.Weapons);
             PopulatePowerBar(powerProfile);
+            ApplyPowerProfile(member);
         }
     }
 
@@ -177,6 +180,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Weapons--;
             PopulateBar(WeaponValueContainer, powerProfile.Weapons);
             PopulatePowerBar(powerProfile);
+            ApplyPowerProfile(member);
         }
     }
 
@@ -189,6 +193,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Shields++;
             PopulateBar(ShieldValueContainer, powerProfile.Shields);
             PopulatePowerBar(powerProfile);
+            ApplyPowerProfile(member);
         }
     }
 
@@ -201,6 +206,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Shields--;
             PopulateBar(ShieldValueContainer, powerProfile.Shields);
             PopulatePowerBar(powerProfile);
+            ApplyPowerProfile(member);
         }
     }
 
@@ -213,6 +219,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Special++;
             PopulateBar(SpecialValueContainer, powerProfile.Special);
             PopulatePowerBar(powerProfile);
+            ApplyPowerProfile(member);
         }
     }
 
@@ -225,6 +232,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Special--;
             PopulateBar(SpecialValueContainer, powerProfile.Special);
             PopulatePowerBar(powerProfile);
+            ApplyPowerProfile(member);
         }
     }
 
@@ -303,6 +311,13 @@ public class ShipProfileScreen : MonoBehaviour
             counterImage.rectTransform.localScale = Vector3.one;
             //counterImage.rectTransform.localRotation = Quaternion.identity;
         }
+    }
+
+    private void ApplyPowerProfile(Fighter member)
+    {
+        var powerProfile = member.GetComponent<PowerProfile>();
+        member.VehicleInstance.Killable.MaxShield = powerProfile.GetShield();
+        member.VehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
     }
 
     public void Show()
