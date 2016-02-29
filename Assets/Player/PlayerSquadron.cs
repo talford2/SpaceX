@@ -42,6 +42,7 @@ public class PlayerSquadron : MonoBehaviour
 				// Give squadron members better aiming!
 				member.MinAimOffsetRadius = 1.5f;
 				member.MaxAimOffsetRadius = 5f;
+
 				SpawnSquadronVehicle(member, univPos, transform.rotation);
 			}
 		}
@@ -86,7 +87,15 @@ public class PlayerSquadron : MonoBehaviour
 		mapPin.ActivePin = PlayerController.Current.PlayerPinPrefab;
 		mapPin.InactivePin = SquadronPinPrefab;
 		mapPin.SetPinState(MapPin.MapPinState.Inactive);
-		var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
+
+        // Apply power profile
+        var powerProfile = member.GetComponent<PowerProfile>();
+        member.VehicleInstance.Killable.MaxShield = powerProfile.GetShield();
+        member.VehicleInstance.Killable.Shield = member.VehicleInstance.Killable.MaxShield;
+        member.VehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
+        member.VehicleInstance.BoostEnergy = member.VehicleInstance.MaxBoostEnergy;
+
+        var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
 		squadronShieldRegenerator.RegenerationDelay = ShieldRegenerateDelay;
 		squadronShieldRegenerator.RegenerationRate = ShieldRegenerateRate;
 

@@ -5,7 +5,6 @@ public class Vehicle : MonoBehaviour
 {
 	[Header("Description")]
 	public string Name;
-	public float Power;
 	public GameObject PreviewPrefab;
 
 	[Header("Vehicle Settings")]

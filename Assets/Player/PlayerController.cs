@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, universePosition.CellLocalPosition, rotation)).GetComponent<Vehicle>();
 		_playVehicleInstance.Controller = gameObject;
 		_playVehicleInstance.Shiftable.SetShiftPosition(universePosition);
-		//Destroy(_playVehicleInstance.GetComponent<Tracker>());
+        //Destroy(_playVehicleInstance.GetComponent<Tracker>());
 
 		Destroy(_playVehicleInstance.GetComponent<VehicleTracker>());
 		var squadronTracker = _playVehicleInstance.gameObject.AddComponent<SquadronTracker>();
@@ -122,7 +122,14 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;
 		_playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
 
-		var shieldRegenerator = _playVehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
+        // Apply power profile
+        var powerProfile = GetComponent<PowerProfile>();
+        _playVehicleInstance.Killable.MaxShield = powerProfile.GetShield();
+        _playVehicleInstance.Killable.Shield = _playVehicleInstance.Killable.MaxShield;
+        _playVehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
+        _playVehicleInstance.BoostEnergy = _playVehicleInstance.MaxBoostEnergy;
+
+        var shieldRegenerator = _playVehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
 		shieldRegenerator.RegenerationDelay = Squadron.ShieldRegenerateDelay;
 		shieldRegenerator.RegenerationRate = Squadron.ShieldRegenerateRate;
 		shieldRegenerator.OnRegenerate += PlayerController_OnRegenerate;

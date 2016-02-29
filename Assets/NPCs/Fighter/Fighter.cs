@@ -117,8 +117,17 @@ public class Fighter : Npc<Fighter>
 	{
 		_vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
 		_vehicleInstance.GetComponent<Targetable>().Team = Team;
-		_vehicleInstance.GetComponent<Killable>().OnDamage += OnVehicleDamaged;
-		_vehicleInstance.GetComponent<Killable>().OnDie += OnVehicleDestroyed;
+        var killable = _vehicleInstance.GetComponent<Killable>();
+        killable.OnDamage += OnVehicleDamaged;
+        killable.OnDie += OnVehicleDestroyed;
+
+        // Apply power profile
+        var powerProfile = GetComponent<PowerProfile>();
+        killable.MaxShield = powerProfile.GetShield();
+        killable.Shield = killable.MaxShield;
+        _vehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
+        _vehicleInstance.BoostEnergy = _vehicleInstance.MaxBoostEnergy;
+
 		_vehicleInstance.Shiftable.SetShiftPosition(universePosition);
 		_vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();
 		_vehicleInstance.SetTargetRotation(rotation);

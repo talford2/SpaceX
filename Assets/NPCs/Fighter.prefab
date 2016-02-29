@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 428646}
   - 114: {fileID: 11452850}
+  - 114: {fileID: 11469966}
   m_Layer: 0
   m_Name: Fighter
   m_TagString: Untagged
@@ -61,7 +62,8 @@ MonoBehaviour:
   BurstTime: 0.3
   BurstWaitTime: 0.7
   ExrapolationTimeError: 0.5
-  AimOffsetRadius: 6
+  MinAimOffsetRadius: 5
+  MaxAimOffsetRadius: 20
   EvadeDistance: 400
   TurnAroundDistance: 250
   AcclerateDistance: 100
@@ -70,6 +72,21 @@ MonoBehaviour:
   DodgeRadius: 50
   DodgeArcAngle: 180
   SightRange: 50
+--- !u!114 &11469966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53151bd6f245ef34d849fbe215ad99f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TotalPower: 20
+  Weapons: 1
+  Shields: 6
+  Special: 6
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -119,6 +136,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: BurstTime
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Special
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TotalPower
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Shields
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Weapons
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
