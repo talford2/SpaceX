@@ -59,9 +59,31 @@ public class ShipProfileScreen : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Escape)) // || Input.GetKeyUp(KeyCode.H))
                 Hide();
 
+            /*
             if (_preview != null)
                 _preview.transform.Rotate(Vector3.up, 15f*Time.unscaledDeltaTime);
+            */
+
+            if (_preview != null)
+            {
+                PreviewMovement();
+            }
         }
+    }
+
+    private Vector2 swivelVelocity;
+
+    private void PreviewMovement()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            swivelVelocity = 180f * new Vector2(-Input.GetAxis("MouseHorizontal"), -Input.GetAxis("MouseVertical")) * Time.unscaledDeltaTime;
+        }
+        else
+        {
+            swivelVelocity = Vector2.Lerp(swivelVelocity, Vector2.zero, 5f*Time.unscaledDeltaTime);
+        }
+        _preview.transform.rotation *= Quaternion.AngleAxis(swivelVelocity.x, Vector3.up);
     }
 
     public void ShowNext()
