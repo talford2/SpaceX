@@ -8,4 +8,14 @@ public class PowerProfile : MonoBehaviour
     public int Special = 1;
 
     public int PowerRemaining { get { return TotalPower - Weapons - Shields - Special; } }
+
+    public float GetShield()
+    {
+        return 15f * Shields;
+    }
+
+    public float GetBoostEnergy()
+    {
+        return 15f * Special;
+    }
 }

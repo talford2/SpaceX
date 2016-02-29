@@ -22,7 +22,6 @@ public class PlayerSquadron : MonoBehaviour
 	public GameObject SquadronPinPrefab;
 
 	private int _curSquadronIndex;
-    private List<PowerProfile> _squadronPower;
 
 	public void Initialize()
 	{
@@ -30,9 +29,6 @@ public class PlayerSquadron : MonoBehaviour
 		var playerNpc = PlayerController.Current.GetComponent<Fighter>();
 
 		Members.Insert(0, playerNpc);
-
-        _squadronPower = new List<PowerProfile>();
-        _squadronPower.Add(playerNpc.gameObject.AddComponent<PowerProfile>());
 
 		for (var i = 0; i < Members.Count; i++)
 		{
@@ -46,8 +42,6 @@ public class PlayerSquadron : MonoBehaviour
 				// Give squadron members better aiming!
 				member.MinAimOffsetRadius = 1.5f;
 				member.MaxAimOffsetRadius = 5f;
-
-                _squadronPower.Add(member.gameObject.AddComponent<PowerProfile>());
 
 				SpawnSquadronVehicle(member, univPos, transform.rotation);
 			}
@@ -93,7 +87,15 @@ public class PlayerSquadron : MonoBehaviour
 		mapPin.ActivePin = PlayerController.Current.PlayerPinPrefab;
 		mapPin.InactivePin = SquadronPinPrefab;
 		mapPin.SetPinState(MapPin.MapPinState.Inactive);
-		var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
+
+        // Apply power profile
+        var powerProfile = member.GetComponent<PowerProfile>();
+        member.VehicleInstance.Killable.MaxShield = powerProfile.GetShield();
+        member.VehicleInstance.Killable.Shield = member.VehicleInstance.Killable.MaxShield;
+        member.VehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
+        member.VehicleInstance.BoostEnergy = member.VehicleInstance.MaxBoostEnergy;
+
+        var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
 		squadronShieldRegenerator.RegenerationDelay = ShieldRegenerateDelay;
 		squadronShieldRegenerator.RegenerationRate = ShieldRegenerateRate;
 
