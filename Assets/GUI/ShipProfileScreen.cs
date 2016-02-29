@@ -12,6 +12,7 @@ public class ShipProfileScreen : MonoBehaviour
 
     public Text CallSignValue;
     public Text ShipNameValue;
+    public Text UnusedPowerNodes;
     //public Text PowerValue;
 
     public Image PowerValueContainer;
@@ -261,6 +262,15 @@ public class ShipProfileScreen : MonoBehaviour
             counterImage.rectTransform.localPosition = Vector3.zero;
             counterImage.rectTransform.localScale = Vector3.one;
             //counterImage.rectTransform.localRotation = Quaternion.identity;
+        }
+        if (PlayerController.Current.PowerNodeCount > 0)
+        {
+            UnusedPowerNodes.text = string.Format("{0:f0}", PlayerController.Current.PowerNodeCount);
+            UnusedPowerNodes.enabled = true;
+        }
+        else
+        {
+            UnusedPowerNodes.enabled = false;
         }
     }
 
