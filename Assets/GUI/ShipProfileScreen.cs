@@ -317,6 +317,10 @@ public class ShipProfileScreen : MonoBehaviour
     {
         member.VehicleInstance.Killable.MaxShield = profile.GetShield();
         member.VehicleInstance.MaxBoostEnergy = profile.GetBoostEnergy();
+        if (member.VehicleInstance.Killable.Shield > member.VehicleInstance.Killable.MaxShield)
+            member.VehicleInstance.Killable.Shield = member.VehicleInstance.Killable.MaxShield;
+        if (member.VehicleInstance.BoostEnergy > member.VehicleInstance.MaxBoostEnergy)
+            member.VehicleInstance.BoostEnergy = member.VehicleInstance.MaxBoostEnergy;
     }
 
     public void Show()
