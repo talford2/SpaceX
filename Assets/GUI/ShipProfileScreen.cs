@@ -131,6 +131,30 @@ public class ShipProfileScreen : MonoBehaviour
         SecondaryWeaponText.text = fighter.VehiclePrefab.SecondaryWeaponPrefab.Name;
     }
 
+    public void AddPower()
+    {
+        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var powerProfile = member.GetComponent<PowerProfile>();
+        if (PlayerController.Current.PowerNodeCount > 0)
+        {
+            powerProfile.TotalPower++;
+            PlayerController.Current.PowerNodeCount--;
+            PopulateBar(WeaponValueContainer, powerProfile.Weapons);
+        }
+    }
+
+    public void SubtractPower()
+    {
+        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var powerProfile = member.GetComponent<PowerProfile>();
+        if (powerProfile.PowerRemaining > 0)
+        {
+            powerProfile.TotalPower--;
+            PlayerController.Current.PowerNodeCount++;
+            PopulatePowerBar(powerProfile);
+        }
+    }
+
     public void AddWeaponPower()
     {
         var member = PlayerController.Current.Squadron.Members[_curIndex];
