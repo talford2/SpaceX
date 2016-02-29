@@ -36,31 +36,22 @@ public class Laser : Missile
 		base.Initialize(owner, damage);
 	}
 
-	private Ray missileRay = new Ray();
-	private RaycastHit missileHit;
-
-	// Perfromance variables
-	private float _displacement;
-	private float _toOberverSquared;
 	private Killable _killable;
-	private int _mask = ~LayerMask.GetMask("Distant", "Universe Background", "Environment", "Player");
-
+	
 	public override void LiveUpdate()
 	{
-		_displacement = (_initSpeed + MissileSpeed) * Time.deltaTime;
-		_observationPosition = Universe.Current.ViewPort.transform.position;
-		_toOberverSquared = (transform.position - _observationPosition).sqrMagnitude;
-		if (_toOberverSquared < _rayCheckMaxDistSquared)
+		var displacement = (_initSpeed + MissileSpeed) * Time.deltaTime;
+		var observationPosition = Universe.Current.ViewPort.transform.position;
+		var toOberverSquared = (transform.position - observationPosition).sqrMagnitude;
+		if (toOberverSquared < _rayCheckMaxDistSquared)
 		{
 			if (!_hasHit)
 			{
-				//missileRay = new Ray(transform.position, transform.forward);
+				var missileRay = new Ray(transform.position, transform.forward);
 
-				missileRay.origin = transform.position;
-				missileRay.direction = transform.forward;
+				RaycastHit missileHit;
 
-				//RaycastHit missileHit;
-				if (Physics.Raycast(missileRay, out missileHit, _displacement, _mask))
+				if (Physics.Raycast(missileRay, out missileHit, displacement, ~LayerMask.GetMask("Distant", "Universe Background", "Environment", "Player")))
 				{
 					if (missileHit.collider.gameObject != Owner)
 					{
@@ -78,12 +69,12 @@ public class Laser : Missile
 		}
 		else
 		{
-			if (_toOberverSquared > _stopDistanceSquared)
+			if (toOberverSquared > _stopDistanceSquared)
 			{
 				Stop();
 			}
 		}
-		_shiftable.Translate(transform.forward * _displacement);
+		_shiftable.Translate(transform.forward * displacement);
 	}
 
 	public void LateUpdate()
@@ -94,39 +85,32 @@ public class Laser : Missile
 		}
 	}
 
-	// Performance variables
-	private Vector3 _headPosition;
-	private Vector3 _tailPosition;
-	private float _tailDotProd;
-	private float _headHitDotProd;
-	private float _tailHitDotProd;
-
 	public void UpdateLineRenderer()
 	{
-		_headPosition = transform.position;
-		_tailPosition = _headPosition - transform.forward * MissileLength;
+		var headPosition = transform.position;
+		var tailPosition = headPosition - transform.forward * MissileLength;
 
-		_tailDotProd = Vector3.Dot(_tailPosition - _shootFrom, transform.forward);
-		_headHitDotProd = Vector3.Dot(_headPosition - _hitPosition, transform.forward);
+		var tailDotProd = Vector3.Dot(tailPosition - _shootFrom, transform.forward);
+		var headHitDotProd = Vector3.Dot(headPosition - _hitPosition, transform.forward);
 
-		if (_hasHit && _headHitDotProd > 0f)
+		if (_hasHit && headHitDotProd > 0f)
 		{
-			_headPosition = _hitPosition;
-			_tailHitDotProd = Vector3.Dot(_tailPosition - _hitPosition, transform.forward);
-			if (_tailHitDotProd > 0f)
+			headPosition = _hitPosition;
+			var tailHitDotProd = Vector3.Dot(tailPosition - _hitPosition, transform.forward);
+			if (tailHitDotProd > 0f)
 			{
 				Stop();
 				return;
 			}
 		}
 
-		if (_tailDotProd < 0f)
+		if (tailDotProd < 0f)
 		{
-			_tailPosition = _shootFrom;
+			tailPosition = _shootFrom;
 		}
 
-		Tracer.SetPosition(0, _headPosition);
-		Tracer.SetPosition(1, _tailPosition);
+		Tracer.SetPosition(0, headPosition);
+		Tracer.SetPosition(1, tailPosition);
 	}
 
 	public override void Stop()

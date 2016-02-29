@@ -99,7 +99,6 @@ public class Weapon : MonoBehaviour
 	}
 
 	private ShootPoint _shootPoint;
-	private Vector3 _direction;
 	public void FireMissile(GameObject missile)
 	{
 		if (OnShoot != null)
@@ -107,11 +106,11 @@ public class Weapon : MonoBehaviour
 
 		_shootPoint = _shootPoints[_shootPointIndex];
 
-		_direction = _aimAt - _shootPoint.transform.position;
+		var direction = _aimAt - _shootPoint.transform.position;
 		if (!MissilesConverge)
-			_direction += _shootPoint.transform.position - GetShootPointCentre();
+			direction += _shootPoint.transform.position - GetShootPointCentre();
 		missile.GetComponent<Missile>().FromReference = _shootPoint.transform;
-		missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, Quaternion.Euler(Random.Range(-0.5f * Spread, 0.5f * Spread), Random.Range(-0.5f * Spread, 0.5f * Spread), 0f) * _direction, _velocityReference.Value);
+		missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, Quaternion.Euler(Random.Range(-0.5f * Spread, 0.5f * Spread), Random.Range(-0.5f * Spread, 0.5f * Spread), 0f) * direction, _velocityReference.Value);
 
 		_shootPoint.Flash();
 		FireSound.Play();
@@ -136,22 +135,17 @@ public class Weapon : MonoBehaviour
 		_lockedTarget = null;
 	}
 
-	private Vector3 _shootPointsCentre;
-	private Vector3 _toLockingTarget;
-	private Vector3 _toLockedTarget;
-	private Vector3 _targetLockingDir;
 	private Vehicle _lockedVehicle;
-	private Vector3 _extrapolatePosition;
 	private GameObject _nextMissile;
 	private Targetable _targetable;
 
 	private void TargetLocking()
 	{
-		_shootPointsCentre = GetShootPointCentre();
+		var shootPointsCentre = GetShootPointCentre();
 		if (_lockingTarget != null)
 		{
-			_toLockingTarget = _lockingTarget.position - _shootPointsCentre;
-			if (_toLockingTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
+			var toLockingTarget = _lockingTarget.position - shootPointsCentre;
+			if (toLockingTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
 			{
 				ClearTargetLock();
 			}
@@ -162,8 +156,8 @@ public class Weapon : MonoBehaviour
 		}
 		if (_lockedTarget != null)
 		{
-			_toLockedTarget = _lockedTarget.position - _shootPointsCentre;
-			if (_toLockedTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
+			var toLockedTarget = _lockedTarget.position - shootPointsCentre;
+			if (toLockedTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
 			{
 				ClearTargetLock();
 			}
@@ -178,8 +172,8 @@ public class Weapon : MonoBehaviour
 			_lockingTarget = null;
 			if (IsTriggered)
 			{
-				_targetLockingDir = _aimAt - _shootPointsCentre;
-				_lockingTarget = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(_targetTeam), _shootPointsCentre, _targetLockingDir, TargetLockingMaxDistance);
+				var targetLockingDir = _aimAt - shootPointsCentre;
+				_lockingTarget = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(_targetTeam), shootPointsCentre, targetLockingDir, TargetLockingMaxDistance);
 				if (_lastLockingTarget == null)
 					_lastLockingTarget = _lockingTarget;
 			}
@@ -214,8 +208,7 @@ public class Weapon : MonoBehaviour
 				if (_lockedVehicle != null)
 				{
 					// Rough Extrapolation
-					_extrapolatePosition = Utility.GetVehicleExtrapolatedPosition(_lockedVehicle, this, 0f);
-					SetAimAt(_extrapolatePosition);
+					SetAimAt(Utility.GetVehicleExtrapolatedPosition(_lockedVehicle, this, 0f));
 				}
 				else
 				{

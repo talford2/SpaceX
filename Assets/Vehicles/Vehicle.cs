@@ -198,20 +198,16 @@ public class Vehicle : MonoBehaviour
 	{
 	}
 
-	private float _acceleration;
-	private Vector3 _pitchYawRoll = Vector3.zero;
-	private float _thrustAmount;
-
 	private void Update()
 	{
-		_acceleration = 0f;
+		var acceleration = 0f;
 
 		if (!TriggerBoost)
 		{
 			// Accelerating
 			if (TriggerAccelerate && CurrentSpeed < MaxSpeed)
 			{
-				_acceleration = Acceleration;
+				acceleration = Acceleration;
 				CurrentSpeed += Acceleration * Time.deltaTime;
 				CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
 			}
@@ -219,7 +215,7 @@ public class Vehicle : MonoBehaviour
 			// Braking
 			if (TriggerBrake && CurrentSpeed > MinSpeed)
 			{
-				_acceleration = -Brake;
+				acceleration = -Brake;
 				CurrentSpeed -= Brake * Time.deltaTime;
 				CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
 			}
@@ -254,7 +250,7 @@ public class Vehicle : MonoBehaviour
 			{
 				if (CurrentSpeed < MaxBoostSpeed)
 				{
-					_acceleration = BoostAcceleration;
+					acceleration = BoostAcceleration;
 					CurrentSpeed += BoostAcceleration * Time.deltaTime;
 					CurrentSpeed = Mathf.Min(CurrentSpeed, MaxBoostSpeed);
 				}
@@ -287,14 +283,14 @@ public class Vehicle : MonoBehaviour
 		{
 			if (CurrentSpeed > IdleSpeed)
 			{
-				_acceleration = -Brake;
+				acceleration = -Brake;
 				CurrentSpeed -= Brake * Time.deltaTime;
 				CurrentSpeed = Mathf.Max(IdleSpeed, CurrentSpeed);
 			}
 
 			if (CurrentSpeed < IdleSpeed)
 			{
-				_acceleration = Acceleration;
+				acceleration = Acceleration;
 				CurrentSpeed += Acceleration * Time.deltaTime;
 				CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
 			}
@@ -308,9 +304,9 @@ public class Vehicle : MonoBehaviour
 		}
 
 		// Turning
-		_pitchYawRoll.Set(PitchSpeed * PitchThotttle, YawSpeed * YawThrottle, -Mathf.Clamp(_rollSpeed, -MaxRollSpeed, MaxRollSpeed));
+		var pitchYawRoll = new Vector3(PitchSpeed * PitchThotttle, YawSpeed * YawThrottle, -Mathf.Clamp(_rollSpeed, -MaxRollSpeed, MaxRollSpeed));
 
-		_targetRotation *= Quaternion.Euler(_pitchYawRoll * Time.deltaTime);
+		_targetRotation *= Quaternion.Euler(pitchYawRoll * Time.deltaTime);
 
 		transform.rotation = Quaternion.Lerp(transform.rotation, _targetRotation, 5f * Time.deltaTime);
 
@@ -326,26 +322,26 @@ public class Vehicle : MonoBehaviour
 		_velocityReference.Value = _velocity;
 		_shiftable.Translate(_velocity * Time.deltaTime);
 
-		_thrustAmount = _acceleration / MaxSpeed;
+		var thrustAmount = acceleration / MaxSpeed;
 
 		if (IsBoosting)
 		{
-			_thrustAmount = 1f;
+			thrustAmount = 1f;
 		}
 		else
 		{
 			if (IsAccelerating)
 			{
-				_thrustAmount = 0.08f;
+				thrustAmount = 0.08f;
 			}
 			if (IsBraking)
 			{
-				_thrustAmount = 0f;
+				thrustAmount = 0f;
 			}
 		}
 		if (!IsBoosting && !IsAccelerating && !IsBraking)
 		{
-			_thrustAmount = 0.02f;
+			thrustAmount = 0.02f;
 		}
 
 		// Reduce flare brightness over distance from camera
@@ -358,24 +354,19 @@ public class Vehicle : MonoBehaviour
         */
 	}
 
-	// Performance variables
-	private Ray _moveRay;
 	private RaycastHit[] _moveHits = new RaycastHit[20];
-	private Vector3 _projVel;
-	private int _castCount = 0;
-	private int _i = 0;
 
 	private void UpdateVelocityFromCollisions()
 	{
-		_moveRay = new Ray(transform.position + CollisionsCentre, _velocity);
+		var moveRay = new Ray(transform.position + CollisionsCentre, _velocity);
 
-		_castCount = Physics.SphereCastNonAlloc(_moveRay, CollisionRadius, _moveHits, _velocity.magnitude * Time.deltaTime, LayerMask.GetMask("Environment"));
+		var castCount = Physics.SphereCastNonAlloc(moveRay, CollisionRadius, _moveHits, _velocity.magnitude * Time.deltaTime, LayerMask.GetMask("Environment"));
 
-		for (_i = 0; _i < _castCount; _i++)
+		for (var i = 0; i < castCount; i++)
 		{
-			_projVel = Vector3.Project(_velocity, _moveHits[_i].normal);
-			if ((_moveHits[_i].point - Vector3.zero).sqrMagnitude > 0.00001f)
-				_velocity -= _projVel;
+			var projVel = Vector3.Project(_velocity, _moveHits[i].normal);
+			if ((_moveHits[i].point - Vector3.zero).sqrMagnitude > 0.00001f)
+				_velocity -= projVel;
 		}
 	}
 

@@ -37,12 +37,10 @@ public class CellIndex
 	{
 		return string.Format("({0},{1},{2})", X, Y, Z);
 	}
-
-	private Vector3 vector = Vector3.zero;
+	
 	public Vector3 ToVector3()
 	{
-		vector.Set(X, Y, Z);
-		return vector;
+		return new Vector3(X, Y, Z);
 	}
 
 	public bool IsEqualTo(CellIndex other)

@@ -179,17 +179,10 @@ public class PlayerController : MonoBehaviour
 	}
 
 	// Performance variables
-	private float _mouseHorizontal;
-	private float _mouseVertical;
-	private float _controllerHorizontal;
-	private float _controllerVertical;
-	private Vector2 _pitchYaw;
 	private Fighter _leader;
 	private DroneHive _droneHive;
-	private Vector3 _formationOffset;
-	private Vector3 _formationDestination;
-	private Vector3 _leaderToPlayer;
 	private UniversePosition _spawnPos;
+	private Collider[] colliders = new Collider[10];
 
 	private void Update()
 	{
@@ -201,15 +194,15 @@ public class PlayerController : MonoBehaviour
 		{
 			if (_playVehicleInstance != null)
 			{
-				_mouseHorizontal = Input.GetAxis("MouseHorizontal");
+				var mouseHorizontal = Input.GetAxis("MouseHorizontal");
 				//AimSensitivity*Input.GetAxis("MouseHorizontal")/Screen.width;
-				_mouseVertical = Input.GetAxis("MouseVertical");
+				var mouseVertical = Input.GetAxis("MouseVertical");
 				//AimSensitivity*_screenAspect*Input.GetAxis("MouseVertical")/Screen.height;
 
-				_controllerHorizontal = 0f;// AimSensitivity*Input.GetAxis("Horizontal")/Screen.width;
-				_controllerVertical = 0f;// AimSensitivity*_screenAspect*Input.GetAxis("Vertical")/Screen.height;
+				var controllerHorizontal = 0f;// AimSensitivity*Input.GetAxis("Horizontal")/Screen.width;
+				var controllerVertical = 0f;// AimSensitivity*_screenAspect*Input.GetAxis("Vertical")/Screen.height;
 
-				_pitchYaw = Vector2.ClampMagnitude(new Vector2(_controllerVertical + _mouseVertical, _controllerHorizontal + _mouseHorizontal), MouseMoveClamp);
+				var _pitchYaw = Vector2.ClampMagnitude(new Vector2(controllerVertical + mouseVertical, controllerHorizontal + mouseHorizontal), MouseMoveClamp);
 
 				if (InvertY)
 				{
@@ -361,8 +354,8 @@ public class PlayerController : MonoBehaviour
 			if (leaderVehicle != null && _playVehicleInstance != null)
 			{
 				_leader.IdleDestination = leaderVehicle.transform.position + leaderVehicle.transform.forward * 10f;
-				_leaderToPlayer = leaderVehicle.Shiftable.transform.position - _playVehicleInstance.transform.position;
-				if (_leaderToPlayer.sqrMagnitude > 1000f * 1000f)
+				var leaderToPlayer = leaderVehicle.Shiftable.transform.position - _playVehicleInstance.transform.position;
+				if (leaderToPlayer.sqrMagnitude > 1000f * 1000f)
 					_leader.IdleDestination = _playVehicleInstance.transform.position;
 				_leader.IdleUpDestination = leaderVehicle.transform.up;
 			}
@@ -372,9 +365,9 @@ public class PlayerController : MonoBehaviour
 		{
 			for (var i = 1; i < Squadron.GetLiveCount(); i++)
 			{
-				_formationOffset = Formations.GetArrowOffset(i, 10f);
-				_formationDestination = leaderVehicle.transform.position + leaderVehicle.transform.rotation * _formationOffset;
-				Squadron.GetMember(i).IdleDestination = _formationDestination;
+				var formationOffset = Formations.GetArrowOffset(i, 10f);
+				var formationDestination = leaderVehicle.transform.position + leaderVehicle.transform.rotation * formationOffset;
+				Squadron.GetMember(i).IdleDestination = formationDestination;
 				Squadron.GetMember(i).IdleUpDestination = leaderVehicle.transform.up;
 				//Debug.DrawLine(formationDestination, formationDestination + Vector3.up*100f, Color.white);
 			}
@@ -388,6 +381,12 @@ public class PlayerController : MonoBehaviour
 				if (_threatCheckCooldown < 0f)
 				{
 					// TODO: Use non allocated Physics.OverlapSphereNonAlloc
+					//var count = Physics.OverlapSphereNonAlloc(_playVehicleInstance.transform.position, ThreatRadius, colliders, LayerMask.GetMask("Detectable"));
+					//for (var i=0; i<count;i++)
+					//{
+					//	var 
+					//}
+
 					var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, ThreatRadius, LayerMask.GetMask("Detectable"));
 					_threatCount = detected.Count(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>() != null && d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team));
 					_threatCheckCooldown = 1f;

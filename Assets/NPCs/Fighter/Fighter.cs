@@ -95,7 +95,6 @@ public class Fighter : Npc<Fighter>
 		State = new FighterPath(this);
 	}
 
-	private Vector2 _pitchYaw;
 	private void Update()
 	{
 		if (VehicleInstance != null)
@@ -103,14 +102,14 @@ public class Fighter : Npc<Fighter>
 
 		if (VehicleInstance != null)
 		{
-			_pitchYaw = GetPitchYawToPoint(Destination);
-			if (_pitchYaw.sqrMagnitude <= 0f)
+			var pitchYaw = GetPitchYawToPoint(Destination);
+			if (pitchYaw.sqrMagnitude <= 0f)
 			{
 				// Give random value to resolve zero pitchYaw issue.
-				_pitchYaw = Random.insideUnitCircle;
+				pitchYaw = Random.insideUnitCircle;
 			}
-			VehicleInstance.YawThrottle = _pitchYaw.y;
-			VehicleInstance.PitchThotttle = _pitchYaw.x;
+			VehicleInstance.YawThrottle = pitchYaw.y;
+			VehicleInstance.PitchThotttle = pitchYaw.x;
 		}
 	}
 
@@ -136,15 +135,13 @@ public class Fighter : Npc<Fighter>
 		_vehicleInstance.Controller = gameObject;
 		ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
 	}
-
-	private Vector2 pitchYaw;
+	
 	public Vector2 GetPitchYawToPoint(Vector3 point)
 	{
 		var toPoint = point - VehicleInstance.transform.position;
 		var yawAmount = Vector3.Dot(toPoint.normalized, VehicleInstance.transform.right);
 		var pitchAmount = Vector3.Dot(-toPoint.normalized, VehicleInstance.transform.up);
-		pitchYaw.Set(pitchAmount, yawAmount);
-		return pitchYaw;
+		return new Vector2(pitchAmount, yawAmount);
 	}
 
 	private void OnVehicleDamaged(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)

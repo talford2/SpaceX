@@ -105,20 +105,23 @@ public class PlayerSquadron : MonoBehaviour
 			}
 		}
 	}
-	
-	private CollectibleTrigger collectibleTrigger;
-	private Collider[] hitColliders;
+
+	private CollectibleTrigger _collectibleTrigger;
+	private Collider[] _hitColliders = new Collider[10];
 
 	private void PickupCollectibles(Fighter member)
 	{
 		// TODO: Use non allocated Physics.OverlapSphereNonAlloc
-		hitColliders = Physics.OverlapSphere(member.VehicleInstance.transform.position, CollectRadius, LayerMask.GetMask("Collectible"));
-		foreach (var hitCollider in hitColliders)
+		//hitColliders = Physics.OverlapSphere(member.VehicleInstance.transform.position, CollectRadius, LayerMask.GetMask("Collectible"));
+		var count = Physics.OverlapSphereNonAlloc(member.VehicleInstance.transform.position, CollectRadius, _hitColliders, LayerMask.GetMask("Collectible"));
+
+		for (var i = 0; i < count; i++)
 		{
-			collectibleTrigger = hitCollider.GetComponent<CollectibleTrigger>();
-			if (collectibleTrigger != null)
-				collectibleTrigger.Pickup(member.VehicleInstance.gameObject, member.VehicleInstance.GetVelocity());
+			_collectibleTrigger = _hitColliders[i].GetComponent<CollectibleTrigger>();
+			if (_collectibleTrigger != null)
+				_collectibleTrigger.Pickup(member.VehicleInstance.gameObject, member.VehicleInstance.GetVelocity());
 		}
+
 	}
 
 	private void BindMemberEvents(Fighter member)

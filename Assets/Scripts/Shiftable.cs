@@ -23,13 +23,12 @@ public class Shiftable : MonoBehaviour
 	public delegate void OnShiftEvent(Shiftable sender, Vector3 delta);
 
 	public event OnShiftEvent OnShift;
-
-	// Performance variables
-	private Vector3 destination = Vector3.zero;
+	
 	private CellIndex cellDelta;
+
 	public void Translate(Vector3 translation)
 	{
-		destination = (CellLocalPosition + translation);
+		var destination = (CellLocalPosition + translation);
 		cellDelta = CellIndexDeltaFromPosition(destination);
 
 		if (!cellDelta.IsZero())

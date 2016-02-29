@@ -71,9 +71,9 @@ public class Universe : MonoBehaviour
 
 	public void WarpTo(UniversePosition universePosition)
 	{
-		dCell = universePosition.CellIndex - ViewPort.Shiftable.UniverseCellIndex;
+		_cell = universePosition.CellIndex - ViewPort.Shiftable.UniverseCellIndex;
 		ViewPort.Shiftable.SetShiftPosition(universePosition);
-		Shift(dCell);
+		Shift(_cell);
 	}
 
 	public void OnDrawGizmos()
@@ -94,28 +94,27 @@ public class Universe : MonoBehaviour
 
 	public Vector3 GetAbsoluteUniversePosition(UniversePosition universePosition)
 	{
-		dCell = universePosition.CellIndex;
-		return dCell.ToVector3() * CellSize + universePosition.CellLocalPosition;
+		_cell = universePosition.CellIndex;
+		return _cell.ToVector3() * CellSize + universePosition.CellLocalPosition;
 	}
 
-	private CellIndex dCell;
+	private CellIndex _cell;
 	private Vector3 GetWorldPosition(CellIndex cellIndex, Vector3 positionInCell)
 	{
-		dCell = cellIndex - ViewPort.Shiftable.UniverseCellIndex;
-		return dCell.ToVector3() * CellSize + positionInCell;
+		_cell = cellIndex - ViewPort.Shiftable.UniverseCellIndex;
+		return _cell.ToVector3() * CellSize + positionInCell;
 	}
-
-	private Vector3 dCellV;
+	
 	private CellIndex CellIndexFromWorldPosition(Vector3 worldPosition)
 	{
-		dCellV = (worldPosition - Vector3.one * HalfCellSize) / CellSize;
+		var dCellV = (worldPosition - Vector3.one * HalfCellSize) / CellSize;
 		return new CellIndex(Mathf.CeilToInt(dCellV.x), Mathf.CeilToInt(dCellV.y), Mathf.CeilToInt(dCellV.z)) + ViewPort.Shiftable.UniverseCellIndex;
 		//return dCell.Set(Mathf.CeilToInt(dCellV.x), Mathf.CeilToInt(dCellV.y), Mathf.CeilToInt(dCellV.z)) + ViewPort.Shiftable.UniverseCellIndex;
 	}
 
 	private Vector3 CellLocalPositionFromWorldPosition(Vector3 worldPosition)
 	{
-		dCell = CellIndexFromWorldPosition(worldPosition);
-		return worldPosition - dCell.ToVector3() * CellSize + ViewPort.Shiftable.UniverseCellIndex.ToVector3() * CellSize;
+		_cell = CellIndexFromWorldPosition(worldPosition);
+		return worldPosition - _cell.ToVector3() * CellSize + ViewPort.Shiftable.UniverseCellIndex.ToVector3() * CellSize;
 	}
 }
