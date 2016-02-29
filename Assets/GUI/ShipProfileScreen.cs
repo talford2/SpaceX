@@ -93,9 +93,7 @@ public class ShipProfileScreen : MonoBehaviour
 
         var powerProfile = fighter.GetComponent<PowerProfile>();
 
-        var powerRemaining = powerProfile.TotalPower - powerProfile.Weapons - powerProfile.Shields - powerProfile.Special;
-
-        PopulateBar(PowerValueContainer, powerRemaining);
+        PopulatePowerBar(powerProfile);
         PopulateBar(WeaponValueContainer, powerProfile.Weapons);
         PopulateBar(ShieldValueContainer, powerProfile.Shields);
         PopulateBar(SpecialValueContainer, powerProfile.Special);
@@ -111,8 +109,122 @@ public class ShipProfileScreen : MonoBehaviour
         SecondaryWeaponText.text = fighter.VehiclePrefab.SecondaryWeaponPrefab.Name;
     }
 
+    public void AddWeaponPower()
+    {
+        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var powerProfile = member.GetComponent<PowerProfile>();
+        if (powerProfile.PowerRemaining > 0)
+        {
+            powerProfile.Weapons++;
+            PopulateBar(WeaponValueContainer, powerProfile.Weapons);
+            PopulatePowerBar(powerProfile);
+        }
+    }
+
+    public void SubtractWeaponPower()
+    {
+        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var powerProfile = member.GetComponent<PowerProfile>();
+        if (powerProfile.Weapons > 0)
+        {
+            powerProfile.Weapons--;
+            PopulateBar(WeaponValueContainer, powerProfile.Weapons);
+            PopulatePowerBar(powerProfile);
+        }
+    }
+
+    public void AddShieldPower()
+    {
+        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var powerProfile = member.GetComponent<PowerProfile>();
+        if (powerProfile.PowerRemaining > 0)
+        {
+            powerProfile.Shields++;
+            PopulateBar(ShieldValueContainer, powerProfile.Shields);
+            PopulatePowerBar(powerProfile);
+        }
+    }
+
+    public void SubtractShieldPower()
+    {
+        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var powerProfile = member.GetComponent<PowerProfile>();
+        if (powerProfile.Shields > 0)
+        {
+            powerProfile.Shields--;
+            PopulateBar(ShieldValueContainer, powerProfile.Shields);
+            PopulatePowerBar(powerProfile);
+        }
+    }
+
+    public void AddSpecialPower()
+    {
+        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var powerProfile = member.GetComponent<PowerProfile>();
+        if (powerProfile.PowerRemaining > 0)
+        {
+            powerProfile.Special++;
+            PopulateBar(SpecialValueContainer, powerProfile.Special);
+            PopulatePowerBar(powerProfile);
+        }
+    }
+
+    public void SubtractSpecialPower()
+    {
+        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var powerProfile = member.GetComponent<PowerProfile>();
+        if (powerProfile.Special > 0)
+        {
+            powerProfile.Special--;
+            PopulateBar(SpecialValueContainer, powerProfile.Special);
+            PopulatePowerBar(powerProfile);
+        }
+    }
+
+    private void PopulatePowerBar(PowerProfile profile)
+    {
+        foreach (Transform t in PowerValueContainer.transform)
+        {
+            if (t != PowerValueContainer.transform)
+                Destroy(t.gameObject);
+        }
+        for (var i = 0; i < 20; i++)
+        {
+            var counterObj = new GameObject(string.Format("counter_{0}", i));
+            var counterImage = counterObj.AddComponent<Image>();
+            var layoutElem = counterObj.AddComponent<LayoutElement>();
+            layoutElem.preferredWidth = 5f;
+            layoutElem.minHeight = 20f;
+
+            if (i < profile.PowerRemaining)
+            {
+                counterImage.color = Color.white;
+            }
+            else
+            {
+                if (i < profile.TotalPower)
+                {
+                    counterImage.color = new Color(1f, 1f, 1f, 0.3f);
+                }
+                else {
+                    counterImage.color = new Color(1f, 1f, 1f, 0.1f);
+                }
+            }
+
+            counterObj.transform.SetParent(PowerValueContainer.transform);
+            counterImage.rectTransform.localPosition = Vector3.zero;
+            counterImage.rectTransform.localScale = Vector3.one;
+            //counterImage.rectTransform.localRotation = Quaternion.identity;
+        }
+    }
+
     private void PopulateBar(Image bar, int value)
     {
+        foreach (Transform t in bar.transform)
+        {
+            if (t != bar.transform)
+                Destroy(t.gameObject);
+        }
         for (var i = 0; i < 20; i++)
         {
             var counterObj = new GameObject(string.Format("counter_{0}", i));
