@@ -12,8 +12,14 @@ public class ShipProfileScreen : MonoBehaviour
 
     public Text CallSignValue;
     public Text ShipNameValue;
-    public Text PowerValue;
-    public Text ShieldValue;
+    //public Text PowerValue;
+
+    public Image PowerValueContainer;
+    public Image WeaponValueContainer;
+    public Image ShieldValueContainer;
+    public Image SpecialValueContainer;
+
+    //public Text ShieldValue;
     public Text HullValue;
 
     public Text PrimaryWeaponText;
@@ -85,15 +91,50 @@ public class ShipProfileScreen : MonoBehaviour
         _preview.transform.SetParent(Preview.transform);
         CallSignValue.text = fighter.CallSign;
 
+        var powerProfile = fighter.GetComponent<PowerProfile>();
+
+        var powerRemaining = powerProfile.TotalPower - powerProfile.Weapons - powerProfile.Shields - powerProfile.Special;
+
+        PopulateBar(PowerValueContainer, powerRemaining);
+        PopulateBar(WeaponValueContainer, powerProfile.Weapons);
+        PopulateBar(ShieldValueContainer, powerProfile.Shields);
+        PopulateBar(SpecialValueContainer, powerProfile.Special);
+
         ShipNameValue.text = fighter.VehiclePrefab.Name;
-        PowerValue.text = string.Format("{0:f0}", fighter.VehiclePrefab.Power);
+        //PowerValue.text = string.Format("{0:f0}", powerProfile.TotalPower);
 
         var vehicleKillable = fighter.VehiclePrefab.GetComponent<Killable>();
-        ShieldValue.text = string.Format("{0:f0}", vehicleKillable.MaxShield);
+        //ShieldValue.text = string.Format("{0:f0}", vehicleKillable.MaxShield);
         HullValue.text = string.Format("{0:f0}", vehicleKillable.MaxHealth);
 
         PrimaryWeaponText.text = fighter.VehiclePrefab.PrimaryWeaponPrefab.Name;
         SecondaryWeaponText.text = fighter.VehiclePrefab.SecondaryWeaponPrefab.Name;
+    }
+
+    private void PopulateBar(Image bar, int value)
+    {
+        for (var i = 0; i < 20; i++)
+        {
+            var counterObj = new GameObject(string.Format("counter_{0}", i));
+            var counterImage = counterObj.AddComponent<Image>();
+            var layoutElem = counterObj.AddComponent<LayoutElement>();
+            layoutElem.preferredWidth = 5f;
+            layoutElem.minHeight = 20f;
+
+            if (i < value)
+            {
+                counterImage.color = Color.white;
+            }
+            else
+            {
+                counterImage.color = new Color(1f, 1f, 1f, 0.1f);
+            }
+
+            counterObj.transform.SetParent(bar.transform);
+            counterImage.rectTransform.localPosition = Vector3.zero;
+            counterImage.rectTransform.localScale = Vector3.one;
+            //counterImage.rectTransform.localRotation = Quaternion.identity;
+        }
     }
 
     public void Show()
