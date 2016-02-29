@@ -125,7 +125,7 @@ public class ShipProfileScreen : MonoBehaviour
 
         var vehicleKillable = fighter.VehiclePrefab.GetComponent<Killable>();
         //ShieldValue.text = string.Format("{0:f0}", vehicleKillable.MaxShield);
-        HullValue.text = string.Format("{0:f0}", vehicleKillable.MaxHealth);
+        HullValue.text = string.Format("{0:f0}/{1:f0}", vehicleKillable.Health, vehicleKillable.MaxHealth);
 
         PrimaryWeaponText.text = fighter.VehiclePrefab.PrimaryWeaponPrefab.Name;
         SecondaryWeaponText.text = fighter.VehiclePrefab.SecondaryWeaponPrefab.Name;
