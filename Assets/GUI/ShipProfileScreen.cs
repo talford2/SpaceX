@@ -141,7 +141,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.TotalPower++;
             PlayerController.Current.PowerNodeCount--;
             PopulatePowerBar(powerProfile);
-            ApplyPowerProfile(member);
+            ApplyPowerProfile(member, powerProfile);
         }
     }
 
@@ -154,7 +154,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.TotalPower--;
             PlayerController.Current.PowerNodeCount++;
             PopulatePowerBar(powerProfile);
-            ApplyPowerProfile(member);
+            ApplyPowerProfile(member, powerProfile);
         }
     }
 
@@ -167,7 +167,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Weapons++;
             PopulateBar(WeaponValueContainer, powerProfile.Weapons);
             PopulatePowerBar(powerProfile);
-            ApplyPowerProfile(member);
+            ApplyPowerProfile(member, powerProfile);
         }
     }
 
@@ -180,7 +180,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Weapons--;
             PopulateBar(WeaponValueContainer, powerProfile.Weapons);
             PopulatePowerBar(powerProfile);
-            ApplyPowerProfile(member);
+            ApplyPowerProfile(member, powerProfile);
         }
     }
 
@@ -193,7 +193,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Shields++;
             PopulateBar(ShieldValueContainer, powerProfile.Shields);
             PopulatePowerBar(powerProfile);
-            ApplyPowerProfile(member);
+            ApplyPowerProfile(member, powerProfile);
         }
     }
 
@@ -206,7 +206,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Shields--;
             PopulateBar(ShieldValueContainer, powerProfile.Shields);
             PopulatePowerBar(powerProfile);
-            ApplyPowerProfile(member);
+            ApplyPowerProfile(member, powerProfile);
         }
     }
 
@@ -219,7 +219,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Special++;
             PopulateBar(SpecialValueContainer, powerProfile.Special);
             PopulatePowerBar(powerProfile);
-            ApplyPowerProfile(member);
+            ApplyPowerProfile(member, powerProfile);
         }
     }
 
@@ -232,7 +232,7 @@ public class ShipProfileScreen : MonoBehaviour
             powerProfile.Special--;
             PopulateBar(SpecialValueContainer, powerProfile.Special);
             PopulatePowerBar(powerProfile);
-            ApplyPowerProfile(member);
+            ApplyPowerProfile(member, powerProfile);
         }
     }
 
@@ -313,11 +313,10 @@ public class ShipProfileScreen : MonoBehaviour
         }
     }
 
-    private void ApplyPowerProfile(Fighter member)
+    private void ApplyPowerProfile(Fighter member, PowerProfile profile)
     {
-        var powerProfile = member.GetComponent<PowerProfile>();
-        member.VehicleInstance.Killable.MaxShield = powerProfile.GetShield();
-        member.VehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
+        member.VehicleInstance.Killable.MaxShield = profile.GetShield();
+        member.VehicleInstance.MaxBoostEnergy = profile.GetBoostEnergy();
     }
 
     public void Show()
