@@ -139,7 +139,7 @@ public class ShipProfileScreen : MonoBehaviour
         {
             powerProfile.TotalPower++;
             PlayerController.Current.PowerNodeCount--;
-            PopulateBar(WeaponValueContainer, powerProfile.Weapons);
+            PopulatePowerBar(powerProfile);
         }
     }
 
