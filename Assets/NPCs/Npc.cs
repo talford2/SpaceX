@@ -2,10 +2,16 @@
 
 public abstract class Npc<T> : MonoBehaviour
 {
-    public NpcState<T> State;
+	private NpcState<T> _state;
 
-    public void UpdateState()
-    {
-        State.Update();
-    }
+	public void UpdateState()
+	{
+		_state.Update();
+	}
+
+	public void SetState(NpcState<T> state)
+	{
+		_state = state;
+		_state.Initialize();
+	}
 }

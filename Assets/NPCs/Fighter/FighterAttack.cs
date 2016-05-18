@@ -65,7 +65,7 @@ public class FighterAttack : NpcState<Fighter>
 		{
 			if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
 				Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
-			Npc.State = new FighterIdle(Npc);
+			Npc.SetState(Npc.Idle);
 			return;
 		}
 
@@ -75,7 +75,7 @@ public class FighterAttack : NpcState<Fighter>
 		{
 			if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
 				Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
-			Npc.State = new FighterChase(Npc);
+			Npc.SetState(Npc.Chase);
 			return;
 		}
 
@@ -154,7 +154,7 @@ public class FighterAttack : NpcState<Fighter>
 				Npc.VehicleInstance.TriggerAccelerate = true;
 				if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
 					Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
-				Npc.State = new FighterEvade(Npc);
+				Npc.SetState(Npc.Evade);
 			}
 		}
 		else
@@ -166,12 +166,15 @@ public class FighterAttack : NpcState<Fighter>
 			if (_dotTargetFacing > 0f)
 			{
 				// Target isn't looking at me!
-				Npc.State = new FighterChase(Npc);
+				//Npc.State = new FighterChase(Npc);
+				Npc.SetState(Npc.Chase);
 				return;
 			}
 
 			if (_dotTarget < 0f)
-				Npc.State = new FighterEvade(Npc);
+			{
+				Npc.SetState(Npc.Evade);
+			}
 		}
 	}
 
@@ -184,5 +187,9 @@ public class FighterAttack : NpcState<Fighter>
 				_neighbors.Add(neighbor);
 			}
 		}
+	}
+
+	public override void Initialize()
+	{
 	}
 }

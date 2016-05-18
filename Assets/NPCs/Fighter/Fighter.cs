@@ -59,6 +59,13 @@ public class Fighter : Npc<Fighter>
 
 	public UniversePosition PathDestination;
 
+	// States
+	public FighterIdle Idle;
+	public FighterChase Chase;
+	public FighterAttack Attack;
+	public FighterEvade Evade;
+	public FighterPath Path;
+
 	private void Awake()
 	{
 		//_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
@@ -79,9 +86,12 @@ public class Fighter : Npc<Fighter>
 
 		GetComponent<ShipProfile>().CallSign = NameGenerator.GetRandomCallSign();
 
-		Steering = new FighterSteering(this);
-		State = new FighterIdle(this);
-
+		Idle = new FighterIdle(this);
+		Chase = new FighterChase(this);
+		Attack = new FighterAttack(this);
+		Evade = new FighterEvade(this);
+		Path = new FighterPath(this);
+		
 		if (IsDebugSpawn)
 		{
 			SpawnVehicle(gameObject, VehiclePrefab, new UniversePosition(new CellIndex(0, 0, 0), new Vector3(0, 0, 0)), Quaternion.identity);
@@ -92,7 +102,7 @@ public class Fighter : Npc<Fighter>
 	public void SetPath(UniversePosition destPosition)
 	{
 		PathDestination = destPosition;
-		State = new FighterPath(this);
+		SetState(Path);
 	}
 
 	private void Update()
@@ -117,16 +127,16 @@ public class Fighter : Npc<Fighter>
 	{
 		_vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
 		_vehicleInstance.GetComponent<Targetable>().Team = Team;
-        var killable = _vehicleInstance.GetComponent<Killable>();
-        killable.OnDamage += OnVehicleDamaged;
-        killable.OnDie += OnVehicleDestroyed;
+		var killable = _vehicleInstance.GetComponent<Killable>();
+		killable.OnDamage += OnVehicleDamaged;
+		killable.OnDie += OnVehicleDestroyed;
 
-        // Apply power profile
-        var powerProfile = GetComponent<ShipProfile>();
-        killable.MaxShield = powerProfile.GetShield();
-        killable.Shield = killable.MaxShield;
-        _vehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
-        _vehicleInstance.BoostEnergy = _vehicleInstance.MaxBoostEnergy;
+		// Apply power profile
+		var powerProfile = GetComponent<ShipProfile>();
+		killable.MaxShield = powerProfile.GetShield();
+		killable.Shield = killable.MaxShield;
+		_vehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
+		_vehicleInstance.BoostEnergy = _vehicleInstance.MaxBoostEnergy;
 
 		_vehicleInstance.Shiftable.SetShiftPosition(universePosition);
 		_vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();
@@ -144,7 +154,7 @@ public class Fighter : Npc<Fighter>
 		_vehicleInstance.Controller = gameObject;
 		ProximitySensor = _vehicleInstance.GetComponent<ProximitySensor>();
 	}
-	
+
 	public Vector2 GetPitchYawToPoint(Vector3 point)
 	{
 		var toPoint = point - VehicleInstance.transform.position;
@@ -186,36 +196,36 @@ public class Fighter : Npc<Fighter>
 			Destroy(gameObject);
 	}
 
-	private void OnDrawGizmos()
-	{
-		if (VehicleInstance != null)
-		{
-			switch (State.Name)
-			{
-				case "Idle":
-					Gizmos.color = Color.white;
-					break;
-				case "Evade":
-					Gizmos.color = Color.magenta;
-					break;
-				case "Chase":
-					Gizmos.color = Color.red;
-					break;
-				case "Attack":
-					Gizmos.color = Color.yellow;
-					break;
-			}
-			Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
-			Gizmos.DrawSphere(Destination, 2f);
-			/*
-			Gizmos.color = Color.blue;
-			Gizmos.DrawWireSphere(VehicleInstance.transform.position, SightRange);
+	//private void OnDrawGizmos()
+	//{
+	//	if (VehicleInstance != null)
+	//	{
+	//		switch (State.Name)
+	//		{
+	//			case "Idle":
+	//				Gizmos.color = Color.white;
+	//				break;
+	//			case "Evade":
+	//				Gizmos.color = Color.magenta;
+	//				break;
+	//			case "Chase":
+	//				Gizmos.color = Color.red;
+	//				break;
+	//			case "Attack":
+	//				Gizmos.color = Color.yellow;
+	//				break;
+	//		}
+	//		Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
+	//		Gizmos.DrawSphere(Destination, 2f);
+	//		/*
+	//		Gizmos.color = Color.blue;
+	//		Gizmos.DrawWireSphere(VehicleInstance.transform.position, SightRange);
 
-			Gizmos.color = Color.red;
-			Gizmos.DrawWireSphere(VehicleInstance.transform.position, AttackRange);
-            */
-			Gizmos.color = Color.green;
-			Gizmos.DrawLine(VehicleInstance.transform.position, VehicleInstance.transform.position + VehicleInstance.transform.forward * 100f);
-		}
-	}
+	//		Gizmos.color = Color.red;
+	//		Gizmos.DrawWireSphere(VehicleInstance.transform.position, AttackRange);
+ //           */
+	//		Gizmos.color = Color.green;
+	//		Gizmos.DrawLine(VehicleInstance.transform.position, VehicleInstance.transform.position + VehicleInstance.transform.forward * 100f);
+	//	}
+	//}
 }
