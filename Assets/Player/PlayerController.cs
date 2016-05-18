@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 	public int SpaceJunkCount;
 	public int PowerNodeCount;
 	public float CollectRadius = 8f;
+    public float DoubleTapTime = 0.2f;
 
 	private Vehicle _playVehicleInstance;
 	private Fighter _playerNpc;
@@ -57,7 +58,12 @@ public class PlayerController : MonoBehaviour
 	private int _collectableMask;
 	private UniversePosition _lastDeathUniversePosition;
 
-	private void Awake()
+    // Barrel Roll Trigger
+    private int lastRollSign;
+    private float lastLeftTime;
+    private float lastRightTime;
+
+    private void Awake()
 	{
 		_current = this;
 		Cursor.visible = !HideMouse;
@@ -197,11 +203,6 @@ public class PlayerController : MonoBehaviour
 	private UniversePosition _spawnPos;
 	private Collider[] colliders = new Collider[10];
 
-    private int lastRollSign;
-    private float doubleTapTime = 0.2f;
-    private float lastLeftTime;
-    private float lastRightTime;
-
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -247,13 +248,13 @@ public class PlayerController : MonoBehaviour
                     {
                         if (curRollSign == -1)
                         {
-                            if (Time.time - lastLeftTime < doubleTapTime)
+                            if (Time.time - lastLeftTime < DoubleTapTime)
                                 _playVehicleInstance.TriggerBarrelRoll(curRollSign);
                             lastLeftTime = Time.time;
                         }
                         if (curRollSign == 1)
                         {
-                            if (Time.time - lastRightTime < doubleTapTime)
+                            if (Time.time - lastRightTime < DoubleTapTime)
                                 _playVehicleInstance.TriggerBarrelRoll(curRollSign);
                             lastRightTime = Time.time;
                         }
