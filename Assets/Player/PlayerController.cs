@@ -197,6 +197,11 @@ public class PlayerController : MonoBehaviour
 	private UniversePosition _spawnPos;
 	private Collider[] colliders = new Collider[10];
 
+    private int lastRollSign;
+    private float doubleTapTime = 0.2f;
+    private float lastLeftTime;
+    private float lastRightTime;
+
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -234,7 +239,33 @@ public class PlayerController : MonoBehaviour
 
 				_playVehicleInstance.SetAimAt(GetAimAt());
 
-				_playVehicleInstance.TriggerAccelerate = false;
+                // Barrel roll trigger
+                var curRollSign = Mathf.RoundToInt(_playVehicleInstance.RollThrottle);
+                if (curRollSign != lastRollSign)
+                {
+                    if (lastRollSign == 0)
+                    {
+                        if (curRollSign == -1)
+                        {
+                            if (Time.time - lastLeftTime < doubleTapTime)
+                            {
+                                Debug.Log("BARREL ROLL LEFT!");
+                            }
+                            lastLeftTime = Time.time;
+                        }
+                        if (curRollSign == 1)
+                        {
+                            if (Time.time - lastRightTime < doubleTapTime)
+                            {
+                                Debug.Log("BARREL ROLL RIGHT!");
+                            }
+                            lastRightTime = Time.time;
+                        }
+                    }
+                }
+                lastRollSign = curRollSign;
+
+                _playVehicleInstance.TriggerAccelerate = false;
 				if (Input.GetButton("Accelerate") || Input.GetButton("KeyboardAccelerate"))
 				{
 					_playVehicleInstance.TriggerAccelerate = true;
