@@ -27,6 +27,8 @@ public class Laser : Missile
 		{
 			Tracer.useWorldSpace = true;
 		}
+
+		_mask = ~LayerMask.GetMask("Distant", "Universe Background", "Environment", "Player");
 	}
 
 	public override void Initialize(GameObject owner, float damage)
@@ -37,7 +39,9 @@ public class Laser : Missile
 	}
 
 	private Killable _killable;
-	
+
+	private int _mask;
+
 	public override void LiveUpdate()
 	{
 		var displacement = (_initSpeed + MissileSpeed) * Time.deltaTime;
@@ -51,7 +55,7 @@ public class Laser : Missile
 
 				RaycastHit missileHit;
 
-				if (Physics.Raycast(missileRay, out missileHit, displacement, ~LayerMask.GetMask("Distant", "Universe Background", "Environment", "Player")))
+				if (Physics.Raycast(missileRay, out missileHit, displacement, _mask))
 				{
 					if (missileHit.collider.gameObject != Owner)
 					{

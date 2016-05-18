@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 	private float _deathCooldown;
 	private bool _isAllowRespawn;
 
-
+	private int _aimMask;
 	private UniversePosition _lastDeathUniversePosition;
 
 	private void Awake()
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 		_playerNpc = gameObject.AddComponent<Fighter>();
 		_playerNpc.Team = Team;
 		_playerNpc.IsSquadronMember = true;
-        _playerNpc.GetComponent<ShipProfile>().CallSign = CallSign;
+		_playerNpc.GetComponent<ShipProfile>().CallSign = CallSign;
 		_playerNpc.VehiclePrefab = VehiclePrefab;
 		_playerNpc.enabled = false;
 		SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
@@ -75,6 +75,8 @@ public class PlayerController : MonoBehaviour
 		_playerNpc.IsFollowIdleDestination = true;
 
 		SetControlEnabled(true);
+
+		_aimMask = ~LayerMask.GetMask("Player", "Detectable", "Distant");
 	}
 
 	private void Start()
@@ -97,7 +99,7 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, universePosition.CellLocalPosition, rotation)).GetComponent<Vehicle>();
 		_playVehicleInstance.Controller = gameObject;
 		_playVehicleInstance.Shiftable.SetShiftPosition(universePosition);
-        //Destroy(_playVehicleInstance.GetComponent<Tracker>());
+		//Destroy(_playVehicleInstance.GetComponent<Tracker>());
 
 		Destroy(_playVehicleInstance.GetComponent<VehicleTracker>());
 		var squadronTracker = _playVehicleInstance.gameObject.AddComponent<SquadronTracker>();
@@ -122,14 +124,14 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;
 		_playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
 
-        // Apply power profile
-        var powerProfile = GetComponent<ShipProfile>();
-        _playVehicleInstance.Killable.MaxShield = powerProfile.GetShield();
-        _playVehicleInstance.Killable.Shield = _playVehicleInstance.Killable.MaxShield;
-        _playVehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
-        _playVehicleInstance.BoostEnergy = _playVehicleInstance.MaxBoostEnergy;
+		// Apply power profile
+		var powerProfile = GetComponent<ShipProfile>();
+		_playVehicleInstance.Killable.MaxShield = powerProfile.GetShield();
+		_playVehicleInstance.Killable.Shield = _playVehicleInstance.Killable.MaxShield;
+		_playVehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
+		_playVehicleInstance.BoostEnergy = _playVehicleInstance.MaxBoostEnergy;
 
-        var shieldRegenerator = _playVehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
+		var shieldRegenerator = _playVehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
 		shieldRegenerator.RegenerationDelay = Squadron.ShieldRegenerateDelay;
 		shieldRegenerator.RegenerationRate = Squadron.ShieldRegenerateRate;
 		shieldRegenerator.OnRegenerate += PlayerController_OnRegenerate;
@@ -156,7 +158,7 @@ public class PlayerController : MonoBehaviour
 			return mouseRay.GetPoint(_aimDistance);
 		}
 
-		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, ~LayerMask.GetMask("Player", "Detectable", "Distant")))
+		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, _aimMask))
 		{
 			_aimDistance = Mathf.Clamp(aimHit.distance, MinAimDistance, MaxAimDistance);
 			aimAtPosition = mouseRay.GetPoint(_aimDistance);
@@ -496,7 +498,7 @@ public class PlayerController : MonoBehaviour
 				var curMember = Squadron.GetCurrentMember();
 				if (curMember.VehicleInstance != null)
 				{
-                    var profile = curMember.GetComponent<ShipProfile>();
+					var profile = curMember.GetComponent<ShipProfile>();
 					HeadsUpDisplay.Current.ShowSquadronPrompt(profile.CallSign);
 
 					_playVehicleInstance = curMember.VehicleInstance;

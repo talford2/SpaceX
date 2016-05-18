@@ -42,9 +42,11 @@ public class SeekingRocket : Missile
 	private float _rayCheckMaxDistSquared = 25000000f;
 	private float _stopDistanceSquared = 100000000f;
 
+	private int _mask;
 	private void Awake()
 	{
 		_shiftable = GetComponent<Shiftable>();
+		_mask = ~LayerMask.GetMask("Distant", "Universe Background", "Environment");
 	}
 
 	public override void Initialize(GameObject owner, float damage)
@@ -128,7 +130,7 @@ public class SeekingRocket : Missile
 			{
 				var missileRay = new Ray(transform.position, _velocity);
 				RaycastHit missileHit;
-				if (Physics.SphereCast(missileRay, Radius, out missileHit, displacement.magnitude, ~LayerMask.GetMask("Distant", "Universe Background", "Environment")))
+				if (Physics.SphereCast(missileRay, Radius, out missileHit, displacement.magnitude, _mask))
 				{
 					if (missileHit.collider.gameObject != Owner)
 					{
@@ -216,7 +218,7 @@ public class SeekingRocket : Missile
 			var univPos = Universe.Current.GetUniversePosition(transform.position);
 			explodeShiftable.SetShiftPosition(univPos);
 		}
-		
+
 		var count = Physics.OverlapSphereNonAlloc(transform.position, 15f, _damageColliders, LayerMask.GetMask("Detectable"));
 		for (var i = 0; i < count; i++)
 		{
