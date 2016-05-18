@@ -91,6 +91,9 @@ public class Fighter : Npc<Fighter>
 		Attack = new FighterAttack(this);
 		Evade = new FighterEvade(this);
 		Path = new FighterPath(this);
+
+        Steering = new FighterSteering(this);
+        SetState(Idle);
 		
 		if (IsDebugSpawn)
 		{
