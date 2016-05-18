@@ -98,7 +98,13 @@ public class Vehicle : MonoBehaviour
 
 	private int _environmentMask;
 
-	public Weapon PrimaryWeaponInstance
+    // Barrel Roll
+    private bool isBarrelRolling;
+    private int barrelRollDir;
+    private float barrelRollCooldown;
+    private float barrelRollDuration = 0.5f;
+
+    public Weapon PrimaryWeaponInstance
 	{
 		get { return _primaryWeaponInstance; }
 	}
@@ -197,165 +203,196 @@ public class Vehicle : MonoBehaviour
 			_secondaryWeaponInstance.SetAimAt(aimAt);
 	}
 
+    public void TriggerBarrelRoll(int dir)
+    {
+        if (!isBarrelRolling)
+        {
+            isBarrelRolling = true;
+            barrelRollDir = dir;
+            barrelRollCooldown = barrelRollDuration;
+        }
+    }
+
 	private void OnShoot(int shootPointIndex)
 	{
 	}
 
-	private void Update()
-	{
-		var acceleration = 0f;
+    private void Update()
+    {
+        var acceleration = 0f;
 
-		if (!TriggerBoost)
-		{
-			// Accelerating
-			if (TriggerAccelerate && CurrentSpeed < MaxSpeed)
-			{
-				acceleration = Acceleration;
-				CurrentSpeed += Acceleration * Time.deltaTime;
-				CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
-			}
+        if (!TriggerBoost)
+        {
+            // Accelerating
+            if (TriggerAccelerate && CurrentSpeed < MaxSpeed)
+            {
+                acceleration = Acceleration;
+                CurrentSpeed += Acceleration * Time.deltaTime;
+                CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
+            }
 
-			// Braking
-			if (TriggerBrake && CurrentSpeed > MinSpeed)
-			{
-				acceleration = -Brake;
-				CurrentSpeed -= Brake * Time.deltaTime;
-				CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
-			}
+            // Braking
+            if (TriggerBrake && CurrentSpeed > MinSpeed)
+            {
+                acceleration = -Brake;
+                CurrentSpeed -= Brake * Time.deltaTime;
+                CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
+            }
 
-			_allowBoost = true;
-		}
+            _allowBoost = true;
+        }
 
-		// Restore boost energy
-		if (_boostEnergyCooldown > 0f)
-		{
-			_boostEnergyCooldown -= Time.deltaTime;
-			if (_boostEnergyCooldown < 0f)
-			{
-				_boostRegenerate = true;
-			}
-		}
+        // Restore boost energy
+        if (_boostEnergyCooldown > 0f)
+        {
+            _boostEnergyCooldown -= Time.deltaTime;
+            if (_boostEnergyCooldown < 0f)
+            {
+                _boostRegenerate = true;
+            }
+        }
 
-		if (_boostRegenerate)
-		{
-			if (BoostEnergy < MaxBoostEnergy)
-			{
-				BoostEnergy += BoostEnergyRegenerateRate * Time.deltaTime;
-				if (BoostEnergy > MaxBoostEnergy)
-					BoostEnergy = MaxBoostEnergy;
-			}
-		}
+        if (_boostRegenerate)
+        {
+            if (BoostEnergy < MaxBoostEnergy)
+            {
+                BoostEnergy += BoostEnergyRegenerateRate * Time.deltaTime;
+                if (BoostEnergy > MaxBoostEnergy)
+                    BoostEnergy = MaxBoostEnergy;
+            }
+        }
 
-		// Boosting
-		if (TriggerBoost)
-		{
-			if (_allowBoost && BoostEnergy > 0f)
-			{
-				if (CurrentSpeed < MaxBoostSpeed)
-				{
-					acceleration = BoostAcceleration;
-					CurrentSpeed += BoostAcceleration * Time.deltaTime;
-					CurrentSpeed = Mathf.Min(CurrentSpeed, MaxBoostSpeed);
-				}
-				BoostEnergy -= BoostCost * Time.deltaTime;
-				if (BoostEnergy < 0f)
-				{
-					BoostEnergy = 0f;
-					_allowBoost = false;
-				}
-				_boostRegenerate = false;
-				_boostEnergyCooldown = BoostEnergyRegenerateDelay;
-			}
-			if (!BoostSound.isPlaying)
-			{
-				BoostSound.Play();
-			}
-		}
+        // Boosting
+        if (TriggerBoost)
+        {
+            if (_allowBoost && BoostEnergy > 0f)
+            {
+                if (CurrentSpeed < MaxBoostSpeed)
+                {
+                    acceleration = BoostAcceleration;
+                    CurrentSpeed += BoostAcceleration * Time.deltaTime;
+                    CurrentSpeed = Mathf.Min(CurrentSpeed, MaxBoostSpeed);
+                }
+                BoostEnergy -= BoostCost * Time.deltaTime;
+                if (BoostEnergy < 0f)
+                {
+                    BoostEnergy = 0f;
+                    _allowBoost = false;
+                }
+                _boostRegenerate = false;
+                _boostEnergyCooldown = BoostEnergyRegenerateDelay;
+            }
+            if (!BoostSound.isPlaying)
+            {
+                BoostSound.Play();
+            }
+        }
 
-		if (!IsBoosting)
-		{
-			if (CurrentSpeed > MaxSpeed)
-			{
-				CurrentSpeed -= BoostBrake * Time.deltaTime;
-			}
-			BoostSound.Stop();
-		}
+        if (!IsBoosting)
+        {
+            if (CurrentSpeed > MaxSpeed)
+            {
+                CurrentSpeed -= BoostBrake * Time.deltaTime;
+            }
+            BoostSound.Stop();
+        }
 
-		// Idling
-		if (!IsAccelerating && !IsBraking && !IsBoosting)
-		{
-			if (CurrentSpeed > IdleSpeed)
-			{
-				acceleration = -Brake;
-				CurrentSpeed -= Brake * Time.deltaTime;
-				CurrentSpeed = Mathf.Max(IdleSpeed, CurrentSpeed);
-			}
+        // Idling
+        if (!IsAccelerating && !IsBraking && !IsBoosting)
+        {
+            if (CurrentSpeed > IdleSpeed)
+            {
+                acceleration = -Brake;
+                CurrentSpeed -= Brake * Time.deltaTime;
+                CurrentSpeed = Mathf.Max(IdleSpeed, CurrentSpeed);
+            }
 
-			if (CurrentSpeed < IdleSpeed)
-			{
-				acceleration = Acceleration;
-				CurrentSpeed += Acceleration * Time.deltaTime;
-				CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
-			}
-		}
+            if (CurrentSpeed < IdleSpeed)
+            {
+                acceleration = Acceleration;
+                CurrentSpeed += Acceleration * Time.deltaTime;
+                CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
+            }
+        }
 
-		_rollSpeed += RollAcceleration * Mathf.Clamp(RollThrottle, -1, 1) * Time.deltaTime;
+        _rollSpeed += RollAcceleration * Mathf.Clamp(RollThrottle, -1, 1) * Time.deltaTime;
 
-		if (Mathf.Abs(RollThrottle) < 0.01f)
-		{
-			_rollSpeed = Mathf.Lerp(_rollSpeed, 0f, 10f * Time.deltaTime);
-		}
+        if (Mathf.Abs(RollThrottle) < 0.01f)
+        {
+            _rollSpeed = Mathf.Lerp(_rollSpeed, 0f, 10f * Time.deltaTime);
+        }
 
-		// Turning
-		var pitchYawRoll = new Vector3(PitchSpeed * PitchThotttle, YawSpeed * YawThrottle, -Mathf.Clamp(_rollSpeed, -MaxRollSpeed, MaxRollSpeed));
+        // Turning
+        var pitchYawRoll = new Vector3(PitchSpeed * PitchThotttle, YawSpeed * YawThrottle, -Mathf.Clamp(_rollSpeed, -MaxRollSpeed, MaxRollSpeed));
 
-		_targetRotation *= Quaternion.Euler(pitchYawRoll * Time.deltaTime);
+        _targetRotation *= Quaternion.Euler(pitchYawRoll * Time.deltaTime);
 
-		transform.rotation = Quaternion.Lerp(transform.rotation, _targetRotation, 5f * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, _targetRotation, 5f * Time.deltaTime);
 
-		// Banking
-		_targetBankRotation = Quaternion.Lerp(_targetBankRotation, Quaternion.AngleAxis(-YawThrottle * MaxBankingAngle, Vector3.forward), 5f * Time.deltaTime);
-		MeshTransform.localRotation = Quaternion.Lerp(MeshTransform.localRotation, _targetBankRotation, 5f * Time.deltaTime);
+        if (isBarrelRolling)
+        {
+            barrelRollCooldown -= Time.deltaTime;
+            if (barrelRollCooldown < 0f)
+                isBarrelRolling = false;
+        }
 
-		_velocity = transform.forward * CurrentSpeed;
+        // Banking
+        if (!isBarrelRolling)
+        {
+            _targetBankRotation = Quaternion.Lerp(_targetBankRotation, Quaternion.AngleAxis(-YawThrottle * MaxBankingAngle, Vector3.forward), 5f * Time.deltaTime);
+        }
+        else
+        {
+            var barrelRollFraction = barrelRollCooldown / barrelRollDuration;
+            _targetBankRotation = Quaternion.AngleAxis(barrelRollDir * barrelRollFraction * 360f, Vector3.forward);
+        }
+        MeshTransform.localRotation = Quaternion.Lerp(MeshTransform.localRotation, _targetBankRotation, 5f * Time.deltaTime);
 
-		if (!IgnoreCollisions)
-			UpdateVelocityFromCollisions();
+        _velocity = transform.forward * CurrentSpeed;
+        if (isBarrelRolling)
+        {
+            var barrelRollFraction = barrelRollCooldown / barrelRollDuration;
+            var cosSpeed = (-Mathf.Cos(Mathf.Deg2Rad * barrelRollFraction * 360f) + 1f) / 2f;
+            _velocity += transform.right * 100f * barrelRollDir * cosSpeed;
+        }
 
-		_velocityReference.Value = _velocity;
-		_shiftable.Translate(_velocity * Time.deltaTime);
+        if (!IgnoreCollisions)
+            UpdateVelocityFromCollisions();
 
-		var thrustAmount = acceleration / MaxSpeed;
+        _velocityReference.Value = _velocity;
+        _shiftable.Translate(_velocity * Time.deltaTime);
 
-		if (IsBoosting)
-		{
-			thrustAmount = 1f;
-		}
-		else
-		{
-			if (IsAccelerating)
-			{
-				thrustAmount = 0.08f;
-			}
-			if (IsBraking)
-			{
-				thrustAmount = 0f;
-			}
-		}
-		if (!IsBoosting && !IsAccelerating && !IsBraking)
-		{
-			thrustAmount = 0.02f;
-		}
+        var thrustAmount = acceleration / MaxSpeed;
 
-		// Reduce flare brightness over distance from camera
-		/*
+        if (IsBoosting)
+        {
+            thrustAmount = 1f;
+        }
+        else
+        {
+            if (IsAccelerating)
+            {
+                thrustAmount = 0.08f;
+            }
+            if (IsBraking)
+            {
+                thrustAmount = 0f;
+            }
+        }
+        if (!IsBoosting && !IsAccelerating && !IsBraking)
+        {
+            thrustAmount = 0.02f;
+        }
+
+        // Reduce flare brightness over distance from camera
+        /*
 		foreach (var thruster in Thrusters)
 		{
 			thruster.SetAmount(thrustAmount);
 			thruster.UpdateFlare();
 		}
         */
-	}
+    }
 
 	public void TriggerBoostRegeneration()
 	{

@@ -248,17 +248,13 @@ public class PlayerController : MonoBehaviour
                         if (curRollSign == -1)
                         {
                             if (Time.time - lastLeftTime < doubleTapTime)
-                            {
-                                Debug.Log("BARREL ROLL LEFT!");
-                            }
+                                _playVehicleInstance.TriggerBarrelRoll(curRollSign);
                             lastLeftTime = Time.time;
                         }
                         if (curRollSign == 1)
                         {
                             if (Time.time - lastRightTime < doubleTapTime)
-                            {
-                                Debug.Log("BARREL ROLL RIGHT!");
-                            }
+                                _playVehicleInstance.TriggerBarrelRoll(curRollSign);
                             lastRightTime = Time.time;
                         }
                     }
