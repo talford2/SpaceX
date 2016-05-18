@@ -21,9 +21,11 @@ public class Map : MonoBehaviour
 	private bool isDestinationSet;
 	private GameObject _destination;
 
-    private float _scaleDistance = 100f;
-    private float _scaleDistanceSquared;
-	
+	private float _scaleDistance = 100f;
+	private float _scaleDistanceSquared;
+
+	private int _mapMask;
+
 	public static Map Current
 	{
 		get { return _current; }
@@ -41,8 +43,8 @@ public class Map : MonoBehaviour
 
 		GetComponentInChildren<MapCamera>().OnMove += UpdateDestination;
 
-        _scaleDistanceSquared = _scaleDistance * _scaleDistance;
-
+		_scaleDistanceSquared = _scaleDistance * _scaleDistance;
+		_mapMask = LayerMask.GetMask("Map");
 		Hide();
 	}
 
@@ -75,46 +77,46 @@ public class Map : MonoBehaviour
 			Destroy(pin.ActiveInstance);
 	}
 
-    private void UpdateMap()
-    {
-        if (IsShown())
-        {
-            foreach (var pin in _pins)
-            {
-                pin.RenderState();
-                pin.CurrentInstance.transform.position = MapScale * pin.Shiftable.GetAbsoluteUniversePosition();
-                pin.CurrentInstance.transform.rotation = pin.transform.rotation;
+	private void UpdateMap()
+	{
+		if (IsShown())
+		{
+			foreach (var pin in _pins)
+			{
+				pin.RenderState();
+				pin.CurrentInstance.transform.position = MapScale * pin.Shiftable.GetAbsoluteUniversePosition();
+				pin.CurrentInstance.transform.rotation = pin.transform.rotation;
 
-                var toCamera = pin.CurrentInstance.transform.position - MapCamera.Current.transform.position;
-                if (toCamera.sqrMagnitude > _scaleDistanceSquared)
-                {
-                    pin.CurrentInstance.transform.localScale = Vector3.one * toCamera.magnitude / _scaleDistance;
-                }
-                else
-                {
-                    pin.CurrentInstance.transform.localScale = Vector3.one;
-                }
-            }
+				var toCamera = pin.CurrentInstance.transform.position - MapCamera.Current.transform.position;
+				if (toCamera.sqrMagnitude > _scaleDistanceSquared)
+				{
+					pin.CurrentInstance.transform.localScale = Vector3.one * toCamera.magnitude / _scaleDistance;
+				}
+				else
+				{
+					pin.CurrentInstance.transform.localScale = Vector3.one;
+				}
+			}
 
-            var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit mouseHit;
-            if (Physics.Raycast(mouseRay, out mouseHit, Mathf.Infinity, LayerMask.GetMask("Map")))
-            {
-                if (Input.GetMouseButtonUp(0))
-                {
-                    var clickedPin = _pins.First(p => p.CurrentInstance.transform == mouseHit.collider.transform.parent.transform);
-                    _destination.SetActive(true);
-                    isDestinationSet = true;
-                    _destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);
-                    _destination.transform.position = clickedPin.Shiftable.GetWorldPosition();
-                }
-                else
-                {
+			var mouseRay = _mapCamera.ScreenPointToRay(Input.mousePosition);
+			RaycastHit mouseHit;
+			if (Physics.Raycast(mouseRay, out mouseHit, Mathf.Infinity, _mapMask))
+			{
+				if (Input.GetMouseButtonUp(0))
+				{
+					var clickedPin = _pins.First(p => p.CurrentInstance.transform == mouseHit.collider.transform.parent.transform);
+					_destination.SetActive(true);
+					isDestinationSet = true;
+					_destination.GetComponent<Shiftable>().SetShiftPosition(clickedPin.Shiftable.UniversePosition);
+					_destination.transform.position = clickedPin.Shiftable.GetWorldPosition();
+				}
+				else
+				{
 
-                }
-            }
-        }
-    }
+				}
+			}
+		}
+	}
 
 	private void UpdateDestination()
 	{
@@ -131,10 +133,10 @@ public class Map : MonoBehaviour
 
 	public void Show()
 	{
-        Time.timeScale = 0f;
+		Time.timeScale = 0f;
 		PlayerController.Current.SetControlEnabled(false);
 
-        var centre = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
+		var centre = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
 		MapCamera.Current.SetLookAt(centre);
 
 		_mapCamera.enabled = true;
@@ -142,30 +144,30 @@ public class Map : MonoBehaviour
 		Cursor.lockState = CursorLockMode.None;
 		_mapCanvas.enabled = true;
 
-        MapSystemText.text = LevelManager.Current.GetLevel().SystemName;
+		MapSystemText.text = LevelManager.Current.GetLevel().SystemName;
 
 		if (TrackerManager.Current != null)
 			TrackerManager.Current.SetTrackersVisibility(false);
 
-        MapCamera.Current.OnMove += UpdateMap;
+		MapCamera.Current.OnMove += UpdateMap;
 	}
 
-    public void Hide()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        _mapCamera.enabled = false;
-        PlayerController.Current.SetControlEnabled(true);
-        _mapCanvas.enabled = false;
-        if (TrackerManager.Current != null)
-            TrackerManager.Current.SetTrackersVisibility(true);
+	public void Hide()
+	{
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+		_mapCamera.enabled = false;
+		PlayerController.Current.SetControlEnabled(true);
+		_mapCanvas.enabled = false;
+		if (TrackerManager.Current != null)
+			TrackerManager.Current.SetTrackersVisibility(true);
 
-        Time.timeScale = 1f;
-        if (MapCamera.Current != null)
-            MapCamera.Current.OnMove -= UpdateMap;
-    }
+		Time.timeScale = 1f;
+		if (MapCamera.Current != null)
+			MapCamera.Current.OnMove -= UpdateMap;
+	}
 
-    public void Toggle()
+	public void Toggle()
 	{
 		if (_mapCamera.enabled)
 		{

@@ -23,6 +23,13 @@ public class PlayerSquadron : MonoBehaviour
 
 	private int _curSquadronIndex;
 
+	private int _collectableMask;
+
+	public void Awake()
+	{
+		_collectableMask = LayerMask.GetMask("Collectible");
+	}
+
 	public void Initialize()
 	{
 		var playerVehicleInstance = PlayerController.Current.VehicleInstance;
@@ -70,10 +77,10 @@ public class PlayerSquadron : MonoBehaviour
 		member.SpawnVehicle(member.gameObject, member.VehiclePrefab, position, rotation);
 		var memberTracker = member.VehicleInstance.GetComponent<VehicleTracker>();
 
-        var profile = member.GetComponent<ShipProfile>();
+		var profile = member.GetComponent<ShipProfile>();
 
 
-        var squadronTracker = member.VehicleInstance.gameObject.AddComponent<SquadronTracker>();
+		var squadronTracker = member.VehicleInstance.gameObject.AddComponent<SquadronTracker>();
 		squadronTracker.ArrowCursorImage = memberTracker.ArrowCursorImage;
 		squadronTracker.TrackerCursorImage = memberTracker.TrackerCursorImage;
 		squadronTracker.FarTrackerCursorImage = memberTracker.FarTrackerCursorImage;
@@ -91,13 +98,13 @@ public class PlayerSquadron : MonoBehaviour
 		mapPin.InactivePin = SquadronPinPrefab;
 		mapPin.SetPinState(MapPin.MapPinState.Inactive);
 
-        // Apply power profile
-        member.VehicleInstance.Killable.MaxShield = profile.GetShield();
-        member.VehicleInstance.Killable.Shield = member.VehicleInstance.Killable.MaxShield;
-        member.VehicleInstance.MaxBoostEnergy = profile.GetBoostEnergy();
-        member.VehicleInstance.BoostEnergy = member.VehicleInstance.MaxBoostEnergy;
+		// Apply power profile
+		member.VehicleInstance.Killable.MaxShield = profile.GetShield();
+		member.VehicleInstance.Killable.Shield = member.VehicleInstance.Killable.MaxShield;
+		member.VehicleInstance.MaxBoostEnergy = profile.GetBoostEnergy();
+		member.VehicleInstance.BoostEnergy = member.VehicleInstance.MaxBoostEnergy;
 
-        var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
+		var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
 		squadronShieldRegenerator.RegenerationDelay = ShieldRegenerateDelay;
 		squadronShieldRegenerator.RegenerationRate = ShieldRegenerateRate;
 
@@ -123,8 +130,8 @@ public class PlayerSquadron : MonoBehaviour
 	private void PickupCollectibles(Fighter member)
 	{
 		// TODO: Use non allocated Physics.OverlapSphereNonAlloc
-		//hitColliders = Physics.OverlapSphere(member.VehicleInstance.transform.position, CollectRadius, LayerMask.GetMask("Collectible"));
-		var count = Physics.OverlapSphereNonAlloc(member.VehicleInstance.transform.position, CollectRadius, _hitColliders, LayerMask.GetMask("Collectible"));
+		//hitColliders = Physics.OverlapSphere(member.VehicleInstance.transform.position, CollectRadius, _collectableMask);
+		var count = Physics.OverlapSphereNonAlloc(member.VehicleInstance.transform.position, CollectRadius, _hitColliders, _collectableMask);
 
 		for (var i = 0; i < count; i++)
 		{
@@ -157,7 +164,7 @@ public class PlayerSquadron : MonoBehaviour
 			if (attacker == PlayerController.Current.VehicleInstance.gameObject)
 			{
 				var member = sender.GetComponent<Vehicle>().Controller.GetComponent<Fighter>();
-                var profile = member.GetComponent<ShipProfile>();
+				var profile = member.GetComponent<ShipProfile>();
 				CommMessaging.Current.ShowMessage(attacker, profile.CallSign, GetFriendlyFireMessage(PlayerController.Current.GetCallSign(), profile.CallSign));
 			}
 		}

@@ -394,7 +394,7 @@ public class PlayerController : MonoBehaviour
 				if (_threatCheckCooldown < 0f)
 				{
 					// TODO: Use non allocated Physics.OverlapSphereNonAlloc
-					//var count = Physics.OverlapSphereNonAlloc(_playVehicleInstance.transform.position, ThreatRadius, colliders, LayerMask.GetMask("Detectable"));
+					//var count = Physics.OverlapSphereNonAlloc(_playVehicleInstance.transform.position, ThreatRadius, colliders, _detectableMask);
 					//for (var i=0; i<count;i++)
 					//{
 					//	var 

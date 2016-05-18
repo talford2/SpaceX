@@ -26,7 +26,6 @@ public class Beam : Missile
 		_lineRenderer = GetComponent<LineRenderer>();
 		_length = MissileLength;
 		_hitMask = ~LayerMask.GetMask("Distant", "Universe Background", "Environment");
-
 	}
 
 	public override void Initialize(GameObject owner, float damage)

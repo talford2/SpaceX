@@ -43,10 +43,14 @@ public class SeekingRocket : Missile
 	private float _stopDistanceSquared = 100000000f;
 
 	private int _mask;
+
+	private int _detectableMask;
+
 	private void Awake()
 	{
 		_shiftable = GetComponent<Shiftable>();
 		_mask = ~LayerMask.GetMask("Distant", "Universe Background", "Environment");
+		_detectableMask = LayerMask.GetMask("Detectable");
 	}
 
 	public override void Initialize(GameObject owner, float damage)
@@ -219,7 +223,7 @@ public class SeekingRocket : Missile
 			explodeShiftable.SetShiftPosition(univPos);
 		}
 
-		var count = Physics.OverlapSphereNonAlloc(transform.position, 15f, _damageColliders, LayerMask.GetMask("Detectable"));
+		var count = Physics.OverlapSphereNonAlloc(transform.position, 15f, _damageColliders, _detectableMask);
 		for (var i = 0; i < count; i++)
 		{
 			_detectable = _damageColliders[i].GetComponent<Detectable>();

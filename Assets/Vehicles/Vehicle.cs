@@ -96,6 +96,8 @@ public class Vehicle : MonoBehaviour
 
 	private float _maxFlareBrightness = 30f;
 
+	private int _environmentMask;
+
 	public Weapon PrimaryWeaponInstance
 	{
 		get { return _primaryWeaponInstance; }
@@ -170,6 +172,8 @@ public class Vehicle : MonoBehaviour
 		_allowBoost = true;
 
 		_targetRotation = transform.rotation;
+
+		_environmentMask = LayerMask.GetMask("Environment");
 	}
 
 	public void SetTargetRotation(Quaternion rotation)
@@ -353,12 +357,12 @@ public class Vehicle : MonoBehaviour
         */
 	}
 
-    public void TriggerBoostRegeneration()
-    {
-        _boostRegenerate = true;
-        if (_boostEnergyCooldown < 0f)
-            _boostEnergyCooldown = BoostEnergyRegenerateDelay;
-    }
+	public void TriggerBoostRegeneration()
+	{
+		_boostRegenerate = true;
+		if (_boostEnergyCooldown < 0f)
+			_boostEnergyCooldown = BoostEnergyRegenerateDelay;
+	}
 
 	private RaycastHit[] _moveHits = new RaycastHit[20];
 
@@ -366,7 +370,7 @@ public class Vehicle : MonoBehaviour
 	{
 		var moveRay = new Ray(transform.position + CollisionsCentre, _velocity);
 
-		var castCount = Physics.SphereCastNonAlloc(moveRay, CollisionRadius, _moveHits, _velocity.magnitude * Time.deltaTime, LayerMask.GetMask("Environment"));
+		var castCount = Physics.SphereCastNonAlloc(moveRay, CollisionRadius, _moveHits, _velocity.magnitude * Time.deltaTime, _environmentMask);
 
 		for (var i = 0; i < castCount; i++)
 		{
