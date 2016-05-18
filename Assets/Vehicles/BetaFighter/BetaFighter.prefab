@@ -658,7 +658,6 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  ShiftParticleSystems: []
 --- !u!114 &11436884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -778,7 +777,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Beta Fighter
-  Power: 100
   PreviewPrefab: {fileID: 103598, guid: ff93cb93ddec30b4c972e20494dcd563, type: 2}
   MeshTransform: {fileID: 427110}
   IdleSpeed: 20
@@ -793,7 +791,8 @@ MonoBehaviour:
   PitchSpeed: 120
   YawSpeed: 120
   RollAcceleration: 640
-  MaxRollSpeed: 360
+  MaxRollSpeed: 180
+  MaxBankingAngle: 60
   CollisionsCentre: {x: 0, y: 0, z: 0}
   CollisionRadius: 3
   MaxBoostEnergy: 100
@@ -1050,7 +1049,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxRollSpeed
-      value: 360
+      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
