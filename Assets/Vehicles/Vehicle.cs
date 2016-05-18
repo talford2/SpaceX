@@ -103,6 +103,8 @@ public class Vehicle : MonoBehaviour
     private int barrelRollDir;
     private float barrelRollCooldown;
     private float barrelRollDuration = 0.5f;
+    private float barrelStrafeSpeed = 100f;
+    private float barrelStrafeVelocity;
 
     public Weapon PrimaryWeaponInstance
 	{
@@ -349,12 +351,11 @@ public class Vehicle : MonoBehaviour
         MeshTransform.localRotation = Quaternion.Lerp(MeshTransform.localRotation, _targetBankRotation, 5f * Time.deltaTime);
 
         _velocity = transform.forward * CurrentSpeed;
+        var targetBarrelVelocity = 0f;
         if (isBarrelRolling)
-        {
-            var barrelRollFraction = barrelRollCooldown / barrelRollDuration;
-            var cosSpeed = (-Mathf.Cos(Mathf.Deg2Rad * barrelRollFraction * 360f) + 1f) / 2f;
-            _velocity += transform.right * 100f * barrelRollDir * cosSpeed;
-        }
+            targetBarrelVelocity = barrelRollDir * barrelStrafeSpeed;
+        barrelStrafeVelocity = Mathf.Lerp(barrelStrafeVelocity, targetBarrelVelocity, 5f * Time.deltaTime);
+        _velocity += transform.right * barrelStrafeVelocity;
 
         if (!IgnoreCollisions)
             UpdateVelocityFromCollisions();
