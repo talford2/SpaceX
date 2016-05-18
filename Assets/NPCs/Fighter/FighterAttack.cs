@@ -15,13 +15,15 @@ public class FighterAttack : NpcState<Fighter>
 
 	private Vector3 _targetOffset;
 
-	public FighterAttack(Fighter npc) : base(npc)
-	{
-		Name = "Attack";
-		_allowShoot = true;
-	}
+    public FighterAttack(Fighter npc) : base(npc) { }
 
-	private void CheckSensors()
+    public override void Initialize()
+    {
+        Name = "Attack";
+        _allowShoot = true;
+    }
+
+    private void CheckSensors()
 	{
 		if (_neighborDetectCooldown >= 0f)
 		{
@@ -187,9 +189,5 @@ public class FighterAttack : NpcState<Fighter>
 				_neighbors.Add(neighbor);
 			}
 		}
-	}
-
-	public override void Initialize()
-	{
 	}
 }

@@ -1,15 +1,16 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FighterPath : NpcState<Fighter>
 {
-	public FighterPath(Fighter npc) : base(npc)
-	{
-		Name = "Path";
-		Npc.VehicleInstance.IgnoreCollisions = true;
-	}
+    public FighterPath(Fighter npc) : base(npc) { }
 
-	public Vector3 GetSteerForce(Vector3 targetDestination)
+    public override void Initialize()
+    {
+        Name = "Path";
+        Npc.VehicleInstance.IgnoreCollisions = true;
+    }
+
+    public Vector3 GetSteerForce(Vector3 targetDestination)
 	{
 		var steerForce = Vector3.zero;
 
@@ -18,11 +19,6 @@ public class FighterPath : NpcState<Fighter>
 			return steerForce.normalized;
 
 		return steerForce.normalized;
-	}
-
-	public override void Initialize()
-	{
-		throw new NotImplementedException();
 	}
 
 	public override void Update()
