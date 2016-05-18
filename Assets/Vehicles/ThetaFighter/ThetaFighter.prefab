@@ -639,7 +639,7 @@ MonoBehaviour:
   CurrentSpeed: 0
   PitchSpeed: 60
   YawSpeed: 60
-  RollAcceleration: 640
+  RollAcceleration: 940
   MaxRollSpeed: 100
   MaxBankingAngle: 60
   CollisionsCentre: {x: 0, y: -0.2, z: 0}
@@ -821,6 +821,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MaxRollSpeed
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RollAcceleration
+      value: 940
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
