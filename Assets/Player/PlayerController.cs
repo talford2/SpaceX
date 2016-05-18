@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
 	private bool _isAllowRespawn;
 
 	private int _aimMask;
+	private int _detectableMask;
+	private int _collectableMask;
 	private UniversePosition _lastDeathUniversePosition;
 
 	private void Awake()
@@ -77,6 +79,8 @@ public class PlayerController : MonoBehaviour
 		SetControlEnabled(true);
 
 		_aimMask = ~LayerMask.GetMask("Player", "Detectable", "Distant");
+		_detectableMask = LayerMask.GetMask("Detectable");
+		_collectableMask = LayerMask.GetMask("Collectible");
 	}
 
 	private void Start()
@@ -178,7 +182,7 @@ public class PlayerController : MonoBehaviour
 
 	private void PickupCollectibles()
 	{
-		castCount = Physics.OverlapSphereNonAlloc(VehicleInstance.transform.position, CollectRadius, hitColliders, LayerMask.GetMask("Collectible"));
+		castCount = Physics.OverlapSphereNonAlloc(VehicleInstance.transform.position, CollectRadius, hitColliders, _collectableMask);
 		for (i = 0; i < castCount; i++)
 		{
 			_collectible = hitColliders[i].GetComponent<CollectibleTrigger>();
@@ -396,7 +400,7 @@ public class PlayerController : MonoBehaviour
 					//	var 
 					//}
 
-					var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, ThreatRadius, LayerMask.GetMask("Detectable"));
+					var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, ThreatRadius, _detectableMask);
 					_threatCount = detected.Count(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>() != null && d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team));
 					_threatCheckCooldown = 1f;
 				}
