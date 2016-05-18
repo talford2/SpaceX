@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class CellIndex
+public struct CellIndex
 {
 	public int X;
 
@@ -10,7 +10,7 @@ public class CellIndex
 
 	public int Z;
 
-	public CellIndex() { }
+	//public CellIndex() { }
 
 	public CellIndex(Vector3 vec)
 	{
