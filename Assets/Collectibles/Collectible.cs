@@ -95,8 +95,11 @@ public class Collectible : MonoBehaviour
 				}
 				if (PlayerController.Current != null)
 				{
-				    if (GiveType == CollectType.SpaceJunk)
-				        PlayerController.Current.SpaceJunkCount++;
+                    if (GiveType == CollectType.SpaceJunk)
+                    {
+                        PlayerController.Current.SpaceJunkCount++;
+                        HeadsUpDisplay.Current.IncreaseSpaceJunk();
+                    }
 				    if (GiveType == CollectType.PowerNode)
 				        PlayerController.Current.PowerNodeCount++;
 				}

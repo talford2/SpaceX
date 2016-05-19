@@ -8,6 +8,7 @@ public class HeadsUpDisplay : MonoBehaviour
 	public Text EnergyText;
     public Text ShieldText;
 	public Text HealthText;
+    public Text SpaceJunkText;
 
 	public GameObject SquadronPrompt;
 	public Text SquadronNameText;
@@ -29,7 +30,11 @@ public class HeadsUpDisplay : MonoBehaviour
 
 	public static HeadsUpDisplay Current { get { return _current; } }
 
-	private void Awake()
+    // Space Junk label pulse
+    private float spaceJunkPulseCooldown;
+    private float spaceJunkPulseDuration = 0.3f;
+
+    private void Awake()
 	{
 		_current = this;
 		HitImage.color = new Color(1, 1, 1, 0);
@@ -38,13 +43,13 @@ public class HeadsUpDisplay : MonoBehaviour
 
 	private void Update()
 	{
-		if (PlayerController.Current.VehicleInstance != null)
-		{
-			EnergyText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.BoostEnergy);
+        if (PlayerController.Current.VehicleInstance != null)
+        {
+            EnergyText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.BoostEnergy);
             ShieldText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Shield);
             HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Health);
-		}
-		if (_squadronPromptCooldown >= 0f)
+        }
+        if (_squadronPromptCooldown >= 0f)
 		{
 			_squadronPromptCooldown -= Time.deltaTime;
 			if (_squadronPromptCooldown < 0f)
@@ -55,6 +60,20 @@ public class HeadsUpDisplay : MonoBehaviour
 		HitImage.color = new Color(1, 1, 1, _hitCooldown);
 		_hitCooldown -= Time.deltaTime * HitFadeSpeed;
 		_hitCooldown = Mathf.Max(0, _hitCooldown);
+
+        if (spaceJunkPulseCooldown >= 0f)
+        {
+            spaceJunkPulseCooldown -= Time.deltaTime;
+            if (spaceJunkPulseCooldown < 0f)
+            {
+                SpaceJunkText.fontSize = 30;
+            }
+            else
+            {
+                var pulseFraction = spaceJunkPulseCooldown / spaceJunkPulseDuration;
+                SpaceJunkText.fontSize = Mathf.RoundToInt(Mathf.Lerp(50, 30, 1f - pulseFraction));
+            }
+        }
 	}
 
     public void LazyCreateSquadronIcons()
@@ -125,4 +144,11 @@ public class HeadsUpDisplay : MonoBehaviour
 		SquadronPrompt.GetComponent<Image>().CrossFadeAlpha(0f, 0.5f, false);
 		SquadronNameText.CrossFadeAlpha(0f, 0.5f, false);
 	}
+
+    public void IncreaseSpaceJunk()
+    {
+        SpaceJunkText.text = string.Format("{0:f0}", PlayerController.Current.SpaceJunkCount);
+        spaceJunkPulseCooldown = spaceJunkPulseDuration;
+        SpaceJunkText.fontSize = 50;
+    }
 }
