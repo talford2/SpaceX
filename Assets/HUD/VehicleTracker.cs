@@ -149,7 +149,9 @@ public class VehicleTracker : Tracker
         _healthBarBackgroundInstance = healthBarBackgroundImg;
 		_healthBarInstance = healthBarImg;
 
-		_imageInstance = trackerImg;
+        trackerImg.type = Image.Type.Sliced;
+
+        _imageInstance = trackerImg;
 		_imageInstance.color = TrackerColor;
 
         _lockInstance = lockImg;
@@ -262,10 +264,13 @@ public class VehicleTracker : Tracker
                     _shieldBarInstance.enabled = false;
                     _healthBarBackgroundInstance.enabled = false;
                     _healthBarInstance.enabled = false;
+
+                    _imageInstance.rectTransform.sizeDelta = 64f * Vector2.one;
                 }
                 else
                 {
                     UpdateHealthBar();
+                    _imageInstance.rectTransform.sizeDelta = Mathf.Clamp(1000f / distanceSquared, 1f, 10f) * 64f * Vector2.one;
                 }
 
                 // Locking
@@ -326,6 +331,7 @@ public class VehicleTracker : Tracker
 
                 _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
                 _imageInstance.rectTransform.localRotation = Quaternion.identity;
+
                 if (_lockInstance.enabled)
                 {
                     _lockInstance.rectTransform.localScale = scale;
@@ -340,6 +346,7 @@ public class VehicleTracker : Tracker
                 _imageInstance.sprite = _arrowSprite;
                 _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
                 _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+                _imageInstance.rectTransform.sizeDelta = 64f * Vector2.one;
 
                 _shieldBarBackgroundInstance.enabled = false;
                 _shieldBarInstance.enabled = false;
