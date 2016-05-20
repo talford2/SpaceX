@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 public class VehicleTracker : Tracker
 {
-	public Texture2D ArrowCursorImage;
-	public Texture2D TrackerCursorImage;
-	public Texture2D FarTrackerCursorImage;
-	public Texture2D VeryFarTrackerCursorImage;
-	public Color TrackerColor = Color.white;
-	public Texture2D LockingCursorImage;
-	public Texture2D LockedCursorImage;
+	public Sprite ArrowSprite;
+    public Sprite TrackerSprite;
+    public Sprite FarTrackerSprite;
+    public Sprite VeryFarTrackerSprite;
+    public Color TrackerColor = Color.white;
+	public Sprite LockingSprite;
+	public Sprite LockedSprite;
 
     public Targetable Targetable;
     public Killable Killable;
@@ -71,15 +71,15 @@ public class VehicleTracker : Tracker
 		trackerImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
 		trackerImg.color = new Color(1f, 1f, 1f, 1f);
 
-		_trackerSprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
-		_farTrackerSprite = Sprite.Create(FarTrackerCursorImage, new Rect(0, 0, FarTrackerCursorImage.width, FarTrackerCursorImage.height), Vector2.zero);
-		_veryFarTrackerSprite = Sprite.Create(VeryFarTrackerCursorImage, new Rect(0, 0, VeryFarTrackerCursorImage.width, VeryFarTrackerCursorImage.height), Vector2.zero);
-		_arrowSprite = Sprite.Create(ArrowCursorImage, new Rect(0, 0, ArrowCursorImage.width, ArrowCursorImage.height), Vector2.zero);
+        _trackerSprite = TrackerSprite;
+        _farTrackerSprite = FarTrackerSprite;
+        _veryFarTrackerSprite = VeryFarTrackerSprite;
+        _arrowSprite = ArrowSprite;
 
-		_lockingSprite = Sprite.Create(LockingCursorImage, new Rect(0, 0, LockingCursorImage.width, LockingCursorImage.height), Vector2.zero);
-		_lockedSprite = Sprite.Create(LockedCursorImage, new Rect(0, 0, LockedCursorImage.width, LockedCursorImage.height), Vector2.zero);
+        _lockingSprite = LockingSprite;
+        _lockedSprite = LockedSprite;
 
-		trackerImg.sprite = _trackerSprite;
+        trackerImg.sprite = _trackerSprite;
 		trackerImg.SetNativeSize();
 
         // Locking tracker

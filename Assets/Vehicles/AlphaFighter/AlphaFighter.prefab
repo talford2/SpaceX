@@ -658,15 +658,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
-  FarTrackerCursorImage: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012,
-    type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4,
+  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  TrackerSprite: {fileID: 21300000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  FarTrackerSprite: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
+  VeryFarTrackerSprite: {fileID: 21300000, guid: 4652c2f3d26040a44aae2194d83683d4,
     type: 3}
   TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingCursorImage: {fileID: 2800000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedCursorImage: {fileID: 2800000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
+  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   Targetable: {fileID: 0}
   Killable: {fileID: 0}
   MaxDistance: 3000
@@ -1223,6 +1222,41 @@ Prefab:
       propertyPath: RollAcceleration
       value: 840
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrackerCursorSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 18b393c943d7bc943beedcd8cf905c19,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: TrackerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 18b393c943d7bc943beedcd8cf905c19,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: FarTrackerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: VeryFarTrackerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4652c2f3d26040a44aae2194d83683d4,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: ArrowSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: LockingSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: LockedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182838}

@@ -113,12 +113,12 @@ public class PlayerController : MonoBehaviour
 
 		Destroy(_playVehicleInstance.GetComponent<VehicleTracker>());
 		var squadronTracker = _playVehicleInstance.gameObject.AddComponent<SquadronTracker>();
-		squadronTracker.ArrowCursorImage = Squadron.ArrowCursorImage;
-		squadronTracker.TrackerCursorImage = Squadron.TrackerCurosrImage;
-		squadronTracker.FarTrackerCursorImage = Squadron.FarTrackerCursorImage;
-		squadronTracker.VeryFarTrackerCursorImage = Squadron.VeryFarTrackerCursorImage;
-		squadronTracker.LockingCursorImage = Squadron.LockingTrackerCursorImage;
-		squadronTracker.LockedCursorImage = Squadron.LockedTrackerCursorImage;
+		squadronTracker.ArrowSprite = Squadron.ArrowSprite;
+		squadronTracker.TrackerSprite = Squadron.TrackerSprite;
+		squadronTracker.FarTrackerSprite = Squadron.FarTrackerSprite;
+		squadronTracker.VeryFarTrackerSprite = Squadron.VeryFarTrackerSprite;
+		squadronTracker.LockingSprite = Squadron.LockingTrackerSprite;
+		squadronTracker.LockedSprite = Squadron.LockedTrackerSprite;
 		squadronTracker.CallSign = CallSign;
 		squadronTracker.TrackerColor = TrackerColor;
 		squadronTracker.LabelFont = Squadron.SquadronTrackerFont;
