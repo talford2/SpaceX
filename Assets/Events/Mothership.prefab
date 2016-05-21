@@ -4383,9 +4383,10 @@ MonoBehaviour:
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
+  TrackerPlaneScale: 100
   Targetable: {fileID: 11450942}
   Killable: {fileID: 11443084}
-  MaxDistance: 3000
+  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11412030
 MonoBehaviour:
@@ -4623,9 +4624,10 @@ MonoBehaviour:
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
+  TrackerPlaneScale: 100
   Targetable: {fileID: 11449178}
   Killable: {fileID: 11401320}
-  MaxDistance: 3000
+  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11442272
 MonoBehaviour:
@@ -4643,9 +4645,10 @@ MonoBehaviour:
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
+  TrackerPlaneScale: 100
   Targetable: {fileID: 11424952}
   Killable: {fileID: 11403496}
-  MaxDistance: 3000
+  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11443084
 MonoBehaviour:
@@ -4682,9 +4685,10 @@ MonoBehaviour:
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
+  TrackerPlaneScale: 100
   Targetable: {fileID: 11480984}
   Killable: {fileID: 11435192}
-  MaxDistance: 3000
+  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11449178
 MonoBehaviour:
@@ -4757,9 +4761,10 @@ MonoBehaviour:
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
+  TrackerPlaneScale: 100
   Targetable: {fileID: 11451026}
   Killable: {fileID: 11419606}
-  MaxDistance: 3000
+  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11453700
 MonoBehaviour:
@@ -4840,9 +4845,10 @@ MonoBehaviour:
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
+  TrackerPlaneScale: 100
   Targetable: {fileID: 11414990}
   Killable: {fileID: 11457458}
-  MaxDistance: 3000
+  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11480984
 MonoBehaviour:
