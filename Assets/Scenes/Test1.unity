@@ -3135,6 +3135,7 @@ MonoBehaviour:
   TrackerColor: {r: 0, g: 0.7517242, b: 1, a: 1}
   SquadronTrackerFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba,
     type: 3}
+  TrackerPlanePrefab: {fileID: 118416, guid: 35c25a75711e3c54e9e5c0892d0c3632, type: 2}
   SquadronPinPrefab: {fileID: 121348, guid: d86f9b16d8bd65f4582387c06551568e, type: 2}
 --- !u!114 &1064748907
 MonoBehaviour:

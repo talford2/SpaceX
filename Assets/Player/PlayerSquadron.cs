@@ -18,6 +18,7 @@ public class PlayerSquadron : MonoBehaviour
     public Sprite LockedTrackerSprite;
     public Color TrackerColor = Color.white;
     public Font SquadronTrackerFont;
+    public GameObject TrackerPlanePrefab;
 
     public GameObject SquadronPinPrefab;
 
@@ -87,6 +88,7 @@ public class PlayerSquadron : MonoBehaviour
         squadronTracker.VeryFarTrackerSprite = memberTracker.VeryFarTrackerSprite;
         squadronTracker.LockingSprite = memberTracker.LockingSprite;
         squadronTracker.LockedSprite = memberTracker.LockedSprite;
+        squadronTracker.TrackerPlanePrefab = TrackerPlanePrefab;
         Destroy(memberTracker);
         squadronTracker.CallSign = profile.CallSign;
         squadronTracker.TrackerColor = TrackerColor;
