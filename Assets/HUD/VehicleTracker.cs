@@ -235,7 +235,7 @@ public class VehicleTracker : Tracker
                 _trackerPlaneRenderer.enabled = true;
 
                 var dist = (Universe.Current.ViewPort.transform.position - _targetable.transform.position).magnitude;
-                var frac = 1f - Utility.LinearBetween(dist, 20f, 1000f);
+                var frac = 1f - Utility.LinearBetween(dist, 20f, 500f);
                 _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(frac, 0.25f, 1f));
             }
             else
@@ -373,7 +373,7 @@ public class VehicleTracker : Tracker
                 _imageInstance.enabled = false;
 
                 _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
-                //_imageInstance.rectTransform.localRotation = Quaternion.identity;
+                _imageInstance.rectTransform.localRotation = Quaternion.identity;
 
                 if (_lockInstance.enabled)
                 {
