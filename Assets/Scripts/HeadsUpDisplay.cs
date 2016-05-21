@@ -40,6 +40,18 @@ public class HeadsUpDisplay : MonoBehaviour
     private float spaceJunkPulseCooldown;
     private float spaceJunkPulseDuration = 0.3f;
 
+    // Shield hit effect
+    private float shieldHitDuration = 0.3f;
+    private float shieldHitCooldown;
+
+    // Health hit effect
+    private float healthHitDuration = 0.3f;
+    private float healthHitCooldown;
+
+    // Regenerate Energy effect
+    private float energyRegenDuration = 0.3f;
+    private float energyRegenCooldown;
+
     private void Awake()
 	{
 		_current = this;
@@ -47,8 +59,8 @@ public class HeadsUpDisplay : MonoBehaviour
         _squadronIcons = new List<SquadronIcon>();
 	}
 
-	private void Update()
-	{
+    private void Update()
+    {
         if (PlayerController.Current.VehicleInstance != null)
         {
             EnergyText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.BoostEnergy);
@@ -64,16 +76,16 @@ public class HeadsUpDisplay : MonoBehaviour
             BoostBar.fillAmount = energyFraction;
         }
         if (_squadronPromptCooldown >= 0f)
-		{
-			_squadronPromptCooldown -= Time.deltaTime;
-			if (_squadronPromptCooldown < 0f)
-			{
-				HideSquadronPrompt();
-			}
-		}
-		HitImage.color = new Color(1, 1, 1, _hitCooldown);
-		_hitCooldown -= Time.deltaTime * HitFadeSpeed;
-		_hitCooldown = Mathf.Max(0, _hitCooldown);
+        {
+            _squadronPromptCooldown -= Time.deltaTime;
+            if (_squadronPromptCooldown < 0f)
+            {
+                HideSquadronPrompt();
+            }
+        }
+        HitImage.color = new Color(1, 1, 1, _hitCooldown);
+        _hitCooldown -= Time.deltaTime * HitFadeSpeed;
+        _hitCooldown = Mathf.Max(0, _hitCooldown);
 
         if (spaceJunkPulseCooldown >= 0f)
         {
@@ -88,7 +100,49 @@ public class HeadsUpDisplay : MonoBehaviour
                 SpaceJunkText.fontSize = Mathf.RoundToInt(Mathf.Lerp(50, 30, 1f - pulseFraction));
             }
         }
-	}
+
+        if (shieldHitCooldown >= 0f)
+        {
+            shieldHitCooldown -= Time.deltaTime;
+            if (shieldHitCooldown < 0f)
+            {
+                ShieldBar.color = Utility.SetColorAlpha(ShieldBar.color, 0.5f);
+            }
+            else
+            {
+                var pulseFraction = shieldHitCooldown / shieldHitDuration;
+                ShieldBar.color = Utility.SetColorAlpha(ShieldBar.color, 0.5f * pulseFraction + 0.5f);
+            }
+        }
+
+        if (healthHitCooldown >= 0f)
+        {
+            healthHitCooldown -= Time.deltaTime;
+            if (healthHitCooldown < 0f)
+            {
+                HealthBar.color = Utility.SetColorAlpha(HealthBar.color, 0.5f);
+            }
+            else
+            {
+                var pulseFraction = healthHitCooldown / healthHitDuration;
+                HealthBar.color = Utility.SetColorAlpha(HealthBar.color, 0.5f * pulseFraction + 0.5f);
+            }
+        }
+
+        if (energyRegenCooldown >= 0f)
+        {
+            energyRegenCooldown -= Time.deltaTime;
+            if (energyRegenCooldown < 0f)
+            {
+                BoostBar.color = Utility.SetColorAlpha(BoostBar.color, 0.5f);
+            }
+            else
+            {
+                var pulseFraction = energyRegenCooldown / energyRegenDuration;
+                BoostBar.color = Utility.SetColorAlpha(BoostBar.color, 0.5f * pulseFraction + 0.5f);
+            }
+        }
+    }
 
     public void LazyCreateSquadronIcons()
     {
@@ -164,5 +218,23 @@ public class HeadsUpDisplay : MonoBehaviour
         SpaceJunkText.text = string.Format("{0:f0}", PlayerController.Current.SpaceJunkCount);
         spaceJunkPulseCooldown = spaceJunkPulseDuration;
         SpaceJunkText.fontSize = 50;
+    }
+
+    public void TriggerShieldHit()
+    {
+        ShieldBar.color = Utility.SetColorAlpha(ShieldBar.color, 1f);
+        shieldHitCooldown = shieldHitDuration;
+    }
+
+    public void TriggerHealthHit()
+    {
+        HealthBar.color = Utility.SetColorAlpha(HealthBar.color, 1f);
+        healthHitCooldown = healthHitDuration;
+    }
+
+    public void TriggerPuslEnergy()
+    {
+        BoostBar.color = Utility.SetColorAlpha(BoostBar.color, 1f);
+        energyRegenCooldown = energyRegenDuration;
     }
 }
