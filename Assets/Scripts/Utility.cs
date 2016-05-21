@@ -264,6 +264,11 @@ public class Utility
 			selfDes.StartCooldown();
 		}
 	}
+
+    public static float LinearBetween(float value, float min, float max)
+    {
+        return (value - min) / (max - min);
+    }
 }
 
 public class HSVColor

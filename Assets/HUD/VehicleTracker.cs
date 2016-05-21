@@ -230,15 +230,13 @@ public class VehicleTracker : Tracker
                 cameraPlane.Raycast(toCamRay, out planeDist);
                 _trackerPlaneInstance.transform.position = toCamRay.GetPoint(planeDist);
 
-                //_trackerPlaneInstance.transform.up = Universe.Current.ViewPort.transform.up;
-                //_trackerPlaneInstance.transform.forward = -Universe.Current.ViewPort.transform.forward;
-
                 _trackerPlaneInstance.transform.localRotation = Quaternion.LookRotation(-Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.up) * Quaternion.Euler(0, 0, 45f);
 
                 _trackerPlaneRenderer.enabled = true;
 
                 var dist = (Universe.Current.ViewPort.transform.position - _targetable.transform.position).magnitude;
-                _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(100f / dist, 0.25f, 1f));
+                var frac = 1f - Utility.LinearBetween(dist, 100f, 1000f);
+                _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(frac, 0.25f, 1f));
             }
             else
             {
