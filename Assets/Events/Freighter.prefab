@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 407230}
   - 114: {fileID: 11465312}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Distant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 478552}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Freighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - 4: {fileID: 464974}
   - 33: {fileID: 3347234}
   - 23: {fileID: 2318140}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - 4: {fileID: 487190}
   - 33: {fileID: 3310006}
   - 23: {fileID: 2312838}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - 4: {fileID: 424590}
   - 33: {fileID: 3384986}
   - 23: {fileID: 2304104}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - 4: {fileID: 406556}
   - 33: {fileID: 3314302}
   - 23: {fileID: 2327248}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - 4: {fileID: 449152}
   - 33: {fileID: 3365392}
   - 23: {fileID: 2346356}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ GameObject:
   - 4: {fileID: 408530}
   - 33: {fileID: 3314296}
   - 23: {fileID: 2391182}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   - 4: {fileID: 468862}
   - 33: {fileID: 3373350}
   - 23: {fileID: 2326020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +445,7 @@ GameObject:
   - 4: {fileID: 499982}
   - 33: {fileID: 3339826}
   - 23: {fileID: 2336424}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +462,7 @@ GameObject:
   - 4: {fileID: 456304}
   - 33: {fileID: 3361534}
   - 23: {fileID: 2382732}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - 4: {fileID: 437194}
   - 33: {fileID: 3392634}
   - 23: {fileID: 2326442}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   - 4: {fileID: 457054}
   - 33: {fileID: 3332898}
   - 23: {fileID: 2301956}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +530,7 @@ GameObject:
   - 4: {fileID: 420042}
   - 33: {fileID: 3347354}
   - 23: {fileID: 2350706}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +547,7 @@ GameObject:
   - 4: {fileID: 465634}
   - 33: {fileID: 3366408}
   - 23: {fileID: 2334116}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Freighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +564,7 @@ GameObject:
   - 4: {fileID: 467922}
   - 33: {fileID: 3340550}
   - 23: {fileID: 2360400}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   - 4: {fileID: 424746}
   - 33: {fileID: 3359922}
   - 23: {fileID: 2392764}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   - 4: {fileID: 496120}
   - 33: {fileID: 3340314}
   - 23: {fileID: 2336660}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -632,7 +632,7 @@ GameObject:
   - 4: {fileID: 488288}
   - 33: {fileID: 3337718}
   - 23: {fileID: 2384292}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
