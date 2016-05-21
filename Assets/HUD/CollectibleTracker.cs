@@ -188,7 +188,12 @@ public class CollectibleTracker : Tracker
 
 	public override void DestroyInstance()
 	{
-		if (_imageInstance != null)
+        if (_trackerPlaneInstance != null)
+        {
+            Destroy(_trackerPlaneInstance);
+            Destroy(_trackerPlaneRenderer);
+        }
+        if (_imageInstance != null)
 			Destroy(_imageInstance);
 	}
 
