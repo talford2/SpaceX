@@ -423,7 +423,7 @@ MonoBehaviour:
   MaxYawSpeed: 180
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
-  AimOffsetRadius: 1.5
+  AimOffsetRadius: 1
   Targetable: {fileID: 0}
 --- !u!114 &11491946
 MonoBehaviour:
@@ -573,7 +573,7 @@ Prefab:
       objectReference: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
     - target: {fileID: 0}
       propertyPath: AimOffsetRadius
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
