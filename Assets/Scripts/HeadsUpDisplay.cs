@@ -10,6 +10,11 @@ public class HeadsUpDisplay : MonoBehaviour
 	public Text HealthText;
     public Text SpaceJunkText;
 
+    [Header("Bars")]
+    public Image HealthBar;
+    public Image BoostBar;
+
+    [Header("Squadron")]
 	public GameObject SquadronPrompt;
 	public Text SquadronNameText;
 	public float SquadronPromptTime = 1.5f;
@@ -48,6 +53,12 @@ public class HeadsUpDisplay : MonoBehaviour
             EnergyText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.BoostEnergy);
             ShieldText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Shield);
             HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Health);
+
+            var healthFraction = PlayerController.Current.VehicleInstance.Killable.Health / PlayerController.Current.VehicleInstance.Killable.MaxHealth;
+            var energyFraction = PlayerController.Current.VehicleInstance.BoostEnergy / PlayerController.Current.VehicleInstance.MaxBoostEnergy;
+
+            HealthBar.fillAmount = healthFraction;
+            BoostBar.fillAmount = energyFraction;
         }
         if (_squadronPromptCooldown >= 0f)
 		{
