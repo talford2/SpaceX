@@ -237,8 +237,8 @@ public class VehicleTracker : Tracker
                 _trackerPlaneRenderer.enabled = true;
 
                 var dist = (Universe.Current.ViewPort.transform.position - _targetable.transform.position).magnitude;
-                var frac = 100f / Mathf.Clamp(dist, 100f, 2000f);
-                _trackerPlaneRenderer.material.SetFloat("_Expand", frac);
+                var frac = 100f / dist;
+                _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(frac, 0.25f, 1f));
             }
             else
             {
