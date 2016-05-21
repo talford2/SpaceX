@@ -370,6 +370,7 @@ MonoBehaviour:
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
+  TrackerPlaneScale: 100
   Targetable: {fileID: 11423750}
   Killable: {fileID: 11491946}
   MaxDistance: 3000
@@ -422,7 +423,7 @@ MonoBehaviour:
   MaxYawSpeed: 180
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
-  AimOffsetRadius: 5
+  AimOffsetRadius: 1.5
   Targetable: {fileID: 0}
 --- !u!114 &11491946
 MonoBehaviour:
@@ -570,6 +571,10 @@ Prefab:
       propertyPath: TrackerPlanePrefab
       value: 
       objectReference: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
+    - target: {fileID: 0}
+      propertyPath: AimOffsetRadius
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 126262}
