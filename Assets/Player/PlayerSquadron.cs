@@ -83,9 +83,9 @@ public class PlayerSquadron : MonoBehaviour
 
         var squadronTracker = member.VehicleInstance.gameObject.AddComponent<SquadronTracker>();
         squadronTracker.ArrowSprite = memberTracker.ArrowSprite;
-        squadronTracker.TrackerSprite = memberTracker.TrackerSprite;
-        squadronTracker.FarTrackerSprite = memberTracker.FarTrackerSprite;
-        squadronTracker.VeryFarTrackerSprite = memberTracker.VeryFarTrackerSprite;
+        //squadronTracker.TrackerSprite = memberTracker.TrackerSprite;
+        //squadronTracker.FarTrackerSprite = memberTracker.FarTrackerSprite;
+        //squadronTracker.VeryFarTrackerSprite = memberTracker.VeryFarTrackerSprite;
         squadronTracker.LockingSprite = memberTracker.LockingSprite;
         squadronTracker.LockedSprite = memberTracker.LockedSprite;
         squadronTracker.TrackerPlanePrefab = TrackerPlanePrefab;

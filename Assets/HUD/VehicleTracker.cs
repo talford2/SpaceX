@@ -4,9 +4,9 @@ using UnityEngine.UI;
 public class VehicleTracker : Tracker
 {
 	public Sprite ArrowSprite;
-    public Sprite TrackerSprite;
-    public Sprite FarTrackerSprite;
-    public Sprite VeryFarTrackerSprite;
+    //public Sprite TrackerSprite;
+    //public Sprite FarTrackerSprite;
+    //public Sprite VeryFarTrackerSprite;
     public Color TrackerColor = Color.white;
 	public Sprite LockingSprite;
 	public Sprite LockedSprite;
@@ -29,9 +29,9 @@ public class VehicleTracker : Tracker
 	private Image _healthBarInstance;
     private Image _lockInstance;
 
-	private Sprite _trackerSprite;
-	private Sprite _farTrackerSprite;
-	private Sprite _veryFarTrackerSprite;
+	//private Sprite _trackerSprite;
+	//private Sprite _farTrackerSprite;
+	//private Sprite _veryFarTrackerSprite;
 	private Sprite _arrowSprite;
 	private Sprite _lockingSprite;
 	private Sprite _lockedSprite;
@@ -76,15 +76,15 @@ public class VehicleTracker : Tracker
 		trackerImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
 		trackerImg.color = new Color(1f, 1f, 1f, 1f);
 
-        _trackerSprite = TrackerSprite;
-        _farTrackerSprite = FarTrackerSprite;
-        _veryFarTrackerSprite = VeryFarTrackerSprite;
+        //_trackerSprite = TrackerSprite;
+        //_farTrackerSprite = FarTrackerSprite;
+        //_veryFarTrackerSprite = VeryFarTrackerSprite;
         _arrowSprite = ArrowSprite;
 
         _lockingSprite = LockingSprite;
         _lockedSprite = LockedSprite;
 
-        trackerImg.sprite = _trackerSprite;
+        trackerImg.sprite = null; // _trackerSprite;
 		trackerImg.SetNativeSize();
 
         // Locking tracker
@@ -235,7 +235,7 @@ public class VehicleTracker : Tracker
                 _trackerPlaneRenderer.enabled = true;
 
                 var dist = (Universe.Current.ViewPort.transform.position - _targetable.transform.position).magnitude;
-                var frac = 1f - Utility.LinearBetween(dist, 50f, 1000f);
+                var frac = 1f - Utility.LinearBetween(dist, 20f, 1000f);
                 _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(frac, 0.25f, 1f));
             }
             else
@@ -288,14 +288,16 @@ public class VehicleTracker : Tracker
             InScreenBounds = _screenBounds.Contains(screenPosition);
             if (InScreenBounds)
             {
-                var useSprite = _trackerSprite;
+                //Sprite useSprite = null;// _trackerSprite;
                 if (distanceSquared > 1000f * 1000f)
                 {
+                    /*
                     useSprite = _farTrackerSprite;
                     if (distanceSquared > 2000f * 2000f)
                     {
                         useSprite = _veryFarTrackerSprite;
                     }
+                    */
                     _shieldBarBackgroundInstance.enabled = false;
                     _shieldBarInstance.enabled = false;
                     _healthBarBackgroundInstance.enabled = false;
@@ -308,9 +310,9 @@ public class VehicleTracker : Tracker
                 {
                     UpdateHealthBar();
 
-                    _imageInstance.rectTransform.localRotation = Quaternion.Euler(0, 0, 45f);
+                    //_imageInstance.rectTransform.localRotation = Quaternion.Euler(0, 0, 45f);
                     //_imageInstance.rectTransform.sizeDelta = Mathf.Clamp(100f / Mathf.Sqrt(distanceSquared), 1f, 10f) * 64f * Vector2.one;
-                    _imageInstance.color = new Color(0f, 0f, 0f, 0f);
+                    //_imageInstance.color = new Color(0f, 0f, 0f, 0f);
                 }
 
                 // Locking
@@ -367,7 +369,8 @@ public class VehicleTracker : Tracker
                     _lockInstance.enabled = false;
                 }
 
-                _imageInstance.sprite = useSprite;
+                //_imageInstance.sprite = useSprite;
+                _imageInstance.enabled = false;
 
                 _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
                 //_imageInstance.rectTransform.localRotation = Quaternion.identity;

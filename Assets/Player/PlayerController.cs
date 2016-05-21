@@ -114,9 +114,9 @@ public class PlayerController : MonoBehaviour
 		Destroy(_playVehicleInstance.GetComponent<VehicleTracker>());
 		var squadronTracker = _playVehicleInstance.gameObject.AddComponent<SquadronTracker>();
 		squadronTracker.ArrowSprite = Squadron.ArrowSprite;
-		squadronTracker.TrackerSprite = Squadron.TrackerSprite;
-		squadronTracker.FarTrackerSprite = Squadron.FarTrackerSprite;
-		squadronTracker.VeryFarTrackerSprite = Squadron.VeryFarTrackerSprite;
+		//squadronTracker.TrackerSprite = Squadron.TrackerSprite;
+		//squadronTracker.FarTrackerSprite = Squadron.FarTrackerSprite;
+		//squadronTracker.VeryFarTrackerSprite = Squadron.VeryFarTrackerSprite;
 		squadronTracker.LockingSprite = Squadron.LockingTrackerSprite;
 		squadronTracker.LockedSprite = Squadron.LockedTrackerSprite;
 		squadronTracker.CallSign = CallSign;

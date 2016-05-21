@@ -4379,13 +4379,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerSprite: {fileID: 21300000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
-  FarTrackerSprite: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
-  VeryFarTrackerSprite: {fileID: 21300000, guid: 4652c2f3d26040a44aae2194d83683d4,
-    type: 3}
   TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
   Targetable: {fileID: 11450942}
   Killable: {fileID: 11443084}
   MaxDistance: 3000
@@ -4622,13 +4619,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerSprite: {fileID: 21300000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
-  FarTrackerSprite: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
-  VeryFarTrackerSprite: {fileID: 21300000, guid: 4652c2f3d26040a44aae2194d83683d4,
-    type: 3}
   TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
   Targetable: {fileID: 11449178}
   Killable: {fileID: 11401320}
   MaxDistance: 3000
@@ -4645,13 +4639,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerSprite: {fileID: 21300000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
-  FarTrackerSprite: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
-  VeryFarTrackerSprite: {fileID: 21300000, guid: 4652c2f3d26040a44aae2194d83683d4,
-    type: 3}
   TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
   Targetable: {fileID: 11424952}
   Killable: {fileID: 11403496}
   MaxDistance: 3000
@@ -4687,13 +4678,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerSprite: {fileID: 21300000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
-  FarTrackerSprite: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
-  VeryFarTrackerSprite: {fileID: 21300000, guid: 4652c2f3d26040a44aae2194d83683d4,
-    type: 3}
   TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
   Targetable: {fileID: 11480984}
   Killable: {fileID: 11435192}
   MaxDistance: 3000
@@ -4765,13 +4753,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerSprite: {fileID: 21300000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
-  FarTrackerSprite: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
-  VeryFarTrackerSprite: {fileID: 21300000, guid: 4652c2f3d26040a44aae2194d83683d4,
-    type: 3}
   TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
   Targetable: {fileID: 11451026}
   Killable: {fileID: 11419606}
   MaxDistance: 3000
@@ -4851,13 +4836,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerSprite: {fileID: 21300000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
-  FarTrackerSprite: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
-  VeryFarTrackerSprite: {fileID: 21300000, guid: 4652c2f3d26040a44aae2194d83683d4,
-    type: 3}
   TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
   Targetable: {fileID: 11414990}
   Killable: {fileID: 11457458}
   MaxDistance: 3000
