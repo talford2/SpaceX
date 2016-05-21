@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Freighter : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class Freighter : MonoBehaviour
             var containerRenderer = container.GetComponent<MeshRenderer>();
             if (containerRenderer != null)
             {
-                containerRenderer.material = ContainerMaterials[Random.Range(0, ContainerMaterials.Count - 1)];
+                containerRenderer.material = ContainerMaterials[Random.Range(0, ContainerMaterials.Count)];
             }
         }
         // Match Materials
@@ -62,5 +63,7 @@ public class Freighter : MonoBehaviour
             dropItem.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(dropPosition));
             dropItem.SetVelocity(Random.onUnitSphere * 5f);
         }
+        var distantHitContainer = DistantContainers.First(c => c.name == sender.name);
+        distantHitContainer.GetComponent<MeshRenderer>().enabled = false;
     }
 }
