@@ -80,7 +80,6 @@ public class PlayerSquadron : MonoBehaviour
 
         var profile = member.GetComponent<ShipProfile>();
 
-
         var squadronTracker = member.VehicleInstance.gameObject.AddComponent<SquadronTracker>();
         squadronTracker.ArrowSprite = memberTracker.ArrowSprite;
         //squadronTracker.TrackerSprite = memberTracker.TrackerSprite;
@@ -141,7 +140,6 @@ public class PlayerSquadron : MonoBehaviour
             if (_collectibleTrigger != null)
                 _collectibleTrigger.Pickup(member.VehicleInstance.gameObject, member.VehicleInstance.GetVelocity());
         }
-
     }
 
     private void BindMemberEvents(Fighter member)

@@ -281,9 +281,13 @@ public class VehicleTracker : Tracker
             _shieldBarInstance.enabled = false;
             _healthBarBackgroundInstance.enabled = false;
             _healthBarInstance.enabled = false;
+            if (_trackerPlaneInstance != null)
+                _trackerPlaneRenderer.enabled = false;
         }
         else
         {
+            if (_trackerPlaneInstance != null)
+                _trackerPlaneRenderer.enabled = true;
             _imageInstance.enabled = true;
             var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
             if (screenPosition.z < 0f)
