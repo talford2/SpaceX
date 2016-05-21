@@ -222,16 +222,19 @@ public class VehicleTracker : Tracker
         if (_trackerPlaneInstance != null)
         {
             var cameraPlane = new Plane(Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.position + 5f * Universe.Current.ViewPort.transform.forward);
-            float dist;
+            float planeDist;
             var toCamRay = new Ray(_targetable.transform.position, Universe.Current.ViewPort.transform.position - _targetable.transform.position);
             var dotCam = Vector3.Dot(_targetable.transform.position - Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward);
             if (dotCam > 0f)
             {
-                cameraPlane.Raycast(toCamRay, out dist);
-                _trackerPlaneInstance.transform.position = toCamRay.GetPoint(dist);
+                cameraPlane.Raycast(toCamRay, out planeDist);
+                _trackerPlaneInstance.transform.position = toCamRay.GetPoint(planeDist);
 
                 _trackerPlaneInstance.transform.forward = -Universe.Current.ViewPort.transform.forward;
                 _trackerPlaneRenderer.enabled = true;
+
+                var dist = (Universe.Current.ViewPort.transform.position - _targetable.transform.position).magnitude;
+                _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(100f / dist, 0.25f, 1f));
             }
             else
             {
