@@ -11,6 +11,7 @@ public class HeadsUpDisplay : MonoBehaviour
     public Text SpaceJunkText;
 
     [Header("Bars")]
+    public Image ShieldBar;
     public Image HealthBar;
     public Image BoostBar;
 
@@ -54,9 +55,11 @@ public class HeadsUpDisplay : MonoBehaviour
             ShieldText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Shield);
             HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Health);
 
+            var shieldFraction = PlayerController.Current.VehicleInstance.Killable.Shield / PlayerController.Current.VehicleInstance.Killable.MaxShield;
             var healthFraction = PlayerController.Current.VehicleInstance.Killable.Health / PlayerController.Current.VehicleInstance.Killable.MaxHealth;
             var energyFraction = PlayerController.Current.VehicleInstance.BoostEnergy / PlayerController.Current.VehicleInstance.MaxBoostEnergy;
 
+            ShieldBar.fillAmount = shieldFraction;
             HealthBar.fillAmount = healthFraction;
             BoostBar.fillAmount = energyFraction;
         }
