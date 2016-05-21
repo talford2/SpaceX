@@ -11,6 +11,8 @@ public class VehicleTracker : Tracker
 	public Sprite LockingSprite;
 	public Sprite LockedSprite;
 
+    public GameObject TrackerPlanePrefab;
+
     public Targetable Targetable;
     public Killable Killable;
 
@@ -33,6 +35,8 @@ public class VehicleTracker : Tracker
 	private Sprite _arrowSprite;
 	private Sprite _lockingSprite;
 	private Sprite _lockedSprite;
+
+    private GameObject _trackerPlaneInstance;
 
     private Texture2D _shieldBarTexture;
 	private Texture2D _healthBarTexture;
@@ -111,6 +115,16 @@ public class VehicleTracker : Tracker
         shieldBarImg.fillAmount = 1f;
 
         shieldBarImg.SetNativeSize();
+
+        if (TrackerPlanePrefab != null)
+        {
+            _trackerPlaneInstance = Instantiate(TrackerPlanePrefab);
+            Debug.Log("ITS NOT NULL FOR " + transform.name);
+        }
+        else
+        {
+            Debug.Log("WHY THE FUCK IS IT NULL CUNT! (" + transform.name + ")");
+        }
 
         // Healthbar background
         var healthBarBackgroundObj = new GameObject(string.Format("{0}_HealthBackground", transform.name));
@@ -206,6 +220,17 @@ public class VehicleTracker : Tracker
                 fadeDirection = 1;
                 fadeCooldown = fadeTime;
             }
+        }
+
+        if (_trackerPlaneInstance != null)
+        {
+            var cameraPlane = new Plane(Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.position + 5f * Universe.Current.ViewPort.transform.forward);
+            float dist;
+            var toCamRay = new Ray(_targetable.transform.position, Universe.Current.ViewPort.transform.position - _targetable.transform.position);
+            cameraPlane.Raycast(toCamRay, out dist);
+            _trackerPlaneInstance.transform.position = toCamRay.GetPoint(dist);
+
+            _trackerPlaneInstance.transform.forward = -Universe.Current.ViewPort.transform.forward;
         }
 
         if (fadeCooldown >= 0f)
