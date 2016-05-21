@@ -289,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
   TrackerPlanePrefab: {fileID: 118416, guid: 6bce8cf2f114c8241a585234858034b4, type: 2}
+  TrackerPlaneScale: 20
   TrackerColor: {r: 0, g: 0.7921569, b: 0.56078434, a: 1}
 --- !u!114 &11499834
 MonoBehaviour:
