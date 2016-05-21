@@ -2509,6 +2509,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 481696cfc254aeb42977bdbfd2187d88, type: 2}
   - {fileID: 2100000, guid: 14593fc1ae78f5d41b2cadd9d50730cd, type: 2}
   - {fileID: 2100000, guid: 23f5844ca08658d49b1d9bc9a57892c4, type: 2}
+  - {fileID: 2100000, guid: b13dec40cccacb14bb93fe688f9afd51, type: 2}
+  - {fileID: 2100000, guid: bee72ced3d5f5bc46b8f7ef0ac87eaee, type: 2}
   DropItemPrefab: {fileID: 163398, guid: 816f10aa082864542b4127328f007432, type: 2}
   MinDropCount: 3
   MaxDropCount: 10
