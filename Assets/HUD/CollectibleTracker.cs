@@ -10,8 +10,9 @@ public class CollectibleTracker : Tracker
     //public Texture2D FarTrackerCursorImage;
     //public Texture2D VeryFarTrackerCursorImage;
     public GameObject TrackerPlanePrefab;
+    public float TrackerPlaneScale = 100f;
 
-	public Color TrackerColor = Color.white;
+    public Color TrackerColor = Color.white;
 
 	private Vector2 _screenCentre;
 	private Rect _screenBounds;
@@ -91,7 +92,7 @@ public class CollectibleTracker : Tracker
             _trackerPlaneRenderer.enabled = true;
 
             var dist = (Universe.Current.ViewPort.transform.position - transform.position).magnitude;
-            var frac = 100f / dist;
+            var frac = TrackerPlaneScale / dist;
             _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(frac, 0.25f, 1f));
         }
         else
@@ -188,7 +189,12 @@ public class CollectibleTracker : Tracker
 
 	public override void DestroyInstance()
 	{
-		if (_imageInstance != null)
+        if (_trackerPlaneInstance != null)
+        {
+            Destroy(_trackerPlaneInstance);
+            Destroy(_trackerPlaneRenderer);
+        }
+        if (_imageInstance != null)
 			Destroy(_imageInstance);
 	}
 
