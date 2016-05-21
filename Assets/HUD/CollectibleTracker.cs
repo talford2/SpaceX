@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class CollectibleTracker : Tracker
 {
-	public Texture2D ArrowCursorImage;
-	public Texture2D TrackerCursorImage;
-	public Texture2D FarTrackerCursorImage;
-	public Texture2D VeryFarTrackerCursorImage;
+	public Sprite ArrowSprite;
+    //public Texture2D TrackerCursorImage;
+    //public Texture2D FarTrackerCursorImage;
+    //public Texture2D VeryFarTrackerCursorImage;
+    public GameObject TrackerPlanePrefab;
 
 	public Color TrackerColor = Color.white;
 
@@ -16,10 +17,12 @@ public class CollectibleTracker : Tracker
 	private Rect _screenBounds;
 	private Image _imageInstance;
 
-	private Sprite _trackerSprite;
-	private Sprite _farTrackerSprite;
-	private Sprite _veryFarTrackerSprite;
+	//private Sprite _trackerSprite;
+	//private Sprite _farTrackerSprite;
+	//private Sprite _veryFarTrackerSprite;
 	private Sprite _arrowSprite;
+    private GameObject _trackerPlaneInstance;
+    private MeshRenderer _trackerPlaneRenderer;
 
 	private bool _isVisible;
 	private bool _isFading;
@@ -35,64 +38,82 @@ public class CollectibleTracker : Tracker
 		_screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
 	}
 
-	public override Image CreateInstance()
-	{
-		var trackerObj = new GameObject(string.Format("{0}_Tracker", transform.name));
-		var trackerImg = trackerObj.AddComponent<Image>();
+    public override Image CreateInstance()
+    {
+        var trackerObj = new GameObject(string.Format("{0}_Tracker", transform.name));
+        var trackerImg = trackerObj.AddComponent<Image>();
 
-		trackerImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
-		trackerImg.color = new Color(1f, 1f, 1f, 1f);
+        trackerImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        trackerImg.color = new Color(1f, 1f, 1f, 1f);
 
-		_trackerSprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
-		_farTrackerSprite = Sprite.Create(FarTrackerCursorImage, new Rect(0, 0, FarTrackerCursorImage.width, FarTrackerCursorImage.height), Vector2.zero);
-		_veryFarTrackerSprite = Sprite.Create(VeryFarTrackerCursorImage, new Rect(0, 0, VeryFarTrackerCursorImage.width, VeryFarTrackerCursorImage.height), Vector2.zero);
-		_arrowSprite = Sprite.Create(ArrowCursorImage, new Rect(0, 0, ArrowCursorImage.width, ArrowCursorImage.height), Vector2.zero);
+        //_trackerSprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
+        //_farTrackerSprite = Sprite.Create(FarTrackerCursorImage, new Rect(0, 0, FarTrackerCursorImage.width, FarTrackerCursorImage.height), Vector2.zero);
+        //_veryFarTrackerSprite = Sprite.Create(VeryFarTrackerCursorImage, new Rect(0, 0, VeryFarTrackerCursorImage.width, VeryFarTrackerCursorImage.height), Vector2.zero);
+        _arrowSprite = ArrowSprite;
+        //Sprite.Create(ArrowSprite, new Rect(0, 0, ArrowSprite.width, ArrowSprite.height), Vector2.zero);
 
-		trackerImg.sprite = _trackerSprite;
-		trackerImg.SetNativeSize();
+        //trackerImg.sprite = _trackerSprite;
+        trackerImg.SetNativeSize();
 
-		_imageInstance = trackerImg;
-		_imageInstance.color = TrackerColor;
-		_width = _imageInstance.rectTransform.rect.width;
+        _imageInstance = trackerImg;
+        _imageInstance.color = TrackerColor;
+        _width = _imageInstance.rectTransform.rect.width;
 
-		_isVisible = true;
-		return trackerImg;
-	}
+        _trackerPlaneInstance = Instantiate(TrackerPlanePrefab);
+        _trackerPlaneRenderer = _trackerPlaneInstance.GetComponent<MeshRenderer>();
 
-	public override void UpdateInstance()
-	{
+        _isVisible = true;
+        return trackerImg;
+    }
 
-		var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
-		if (screenPosition.z < 0f)
-		{
-			screenPosition *= -1f;
-			screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f)) * Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
-		}
-		screenPosition.z = 0f;
+    public override void UpdateInstance()
+    {
+        var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
+        if (screenPosition.z < 0f)
+        {
+            screenPosition *= -1f;
+            screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f)) * Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+        }
+        screenPosition.z = 0f;
 
-		if (_screenBounds.Contains(screenPosition))
-		{
-			var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
-			var useSprite = _trackerSprite;
-			if (distanceSquared > 1000f * 1000f)
-			{
-				useSprite = _farTrackerSprite;
-				if (distanceSquared > 2000f * 2000f)
-				{
-					useSprite = _veryFarTrackerSprite;
-				}
-			}
-			_imageInstance.sprite = useSprite;
-			_imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
-			_imageInstance.rectTransform.localRotation = Quaternion.identity;
-		}
-		else
-		{
-			_imageInstance.sprite = _arrowSprite;
-			_imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
-			_imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
-		}
-	}
+        // Update TrackerPlane
+        var cameraPlane = new Plane(Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.position + 5f * Universe.Current.ViewPort.transform.forward);
+        float planeDist;
+        var toCamRay = new Ray(transform.position, Universe.Current.ViewPort.transform.position - transform.position);
+        var dotCam = Vector3.Dot(transform.position - Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward);
+        if (dotCam > 0f)
+        {
+            cameraPlane.Raycast(toCamRay, out planeDist);
+            _trackerPlaneInstance.transform.position = toCamRay.GetPoint(planeDist);
+
+            _trackerPlaneInstance.transform.localRotation = Quaternion.LookRotation(-Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.up) * Quaternion.Euler(0, 0, 45f);
+
+            _trackerPlaneRenderer.enabled = true;
+
+            var dist = (Universe.Current.ViewPort.transform.position - transform.position).magnitude;
+            var frac = 100f / dist;
+            _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(frac, 0.25f, 1f));
+        }
+        else
+        {
+            _trackerPlaneRenderer.enabled = false;
+        }
+
+        if (_screenBounds.Contains(screenPosition))
+        {
+            var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
+            _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+            _imageInstance.rectTransform.localRotation = Quaternion.identity;
+            _imageInstance.enabled = false;
+        }
+        else
+        {
+            _imageInstance.sprite = _arrowSprite;
+            _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
+            _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+            _imageInstance.enabled = true;
+        }
+    }
 
 	public void TriggerFadeIn(float time = 0.5f)
 	{

@@ -285,7 +285,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  Shiftable: {fileID: 11455812}
 --- !u!114 &11448732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,12 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4e32afd8ecb214fa3ac6713f43d160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowCursorImage: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerCursorImage: {fileID: 2800000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
-  FarTrackerCursorImage: {fileID: 2800000, guid: 9b26117e66080cc41b0d4398dbabb012,
-    type: 3}
-  VeryFarTrackerCursorImage: {fileID: 2800000, guid: 4652c2f3d26040a44aae2194d83683d4,
-    type: 3}
+  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  TrackerPlanePrefab: {fileID: 118416, guid: 6bce8cf2f114c8241a585234858034b4, type: 2}
   TrackerColor: {r: 0.82400036, g: 0, b: 1, a: 1}
 --- !u!114 &11455812
 MonoBehaviour:
@@ -320,7 +315,6 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
-  ShiftParticleSystems: []
 --- !u!135 &13590832
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -492,6 +486,15 @@ Prefab:
       propertyPath: Shiftable
       value: 
       objectReference: {fileID: 11455812}
+    - target: {fileID: 0}
+      propertyPath: ArrowSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: TrackerPlanePrefab
+      value: 
+      objectReference: {fileID: 118416, guid: 6bce8cf2f114c8241a585234858034b4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 121892}
