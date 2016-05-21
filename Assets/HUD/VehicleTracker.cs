@@ -12,6 +12,7 @@ public class VehicleTracker : Tracker
 	public Sprite LockedSprite;
 
     public GameObject TrackerPlanePrefab;
+    public float TrackerPlaneScale = 100f;
 
     public Targetable Targetable;
     public Killable Killable;
@@ -237,7 +238,7 @@ public class VehicleTracker : Tracker
                 _trackerPlaneRenderer.enabled = true;
 
                 var dist = (Universe.Current.ViewPort.transform.position - _targetable.transform.position).magnitude;
-                var frac = 100f / dist;
+                var frac = TrackerPlaneScale / dist;
                 _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(frac, 0.25f, 1f));
             }
             else
