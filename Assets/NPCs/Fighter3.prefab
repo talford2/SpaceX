@@ -77,7 +77,7 @@ MonoBehaviour:
   BurstTime: 0.3
   BurstWaitTime: 0.7
   ExrapolationTimeError: 0.5
-  MinAimOffsetRadius: 3
+  MinAimOffsetRadius: 1
   MaxAimOffsetRadius: 12
   EvadeDistance: 400
   TurnAroundDistance: 250
@@ -164,7 +164,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MinAimOffsetRadius
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
