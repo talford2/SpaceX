@@ -230,7 +230,11 @@ public class VehicleTracker : Tracker
                 cameraPlane.Raycast(toCamRay, out planeDist);
                 _trackerPlaneInstance.transform.position = toCamRay.GetPoint(planeDist);
 
-                _trackerPlaneInstance.transform.forward = -Universe.Current.ViewPort.transform.forward;
+                //_trackerPlaneInstance.transform.up = Universe.Current.ViewPort.transform.up;
+                //_trackerPlaneInstance.transform.forward = -Universe.Current.ViewPort.transform.forward;
+
+                _trackerPlaneInstance.transform.localRotation = Quaternion.LookRotation(-Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.up) * Quaternion.Euler(0, 0, 45f);
+
                 _trackerPlaneRenderer.enabled = true;
 
                 var dist = (Universe.Current.ViewPort.transform.position - _targetable.transform.position).magnitude;
@@ -307,7 +311,8 @@ public class VehicleTracker : Tracker
                     UpdateHealthBar();
 
                     _imageInstance.rectTransform.localRotation = Quaternion.Euler(0, 0, 45f);
-                    _imageInstance.rectTransform.sizeDelta = Mathf.Clamp(100f / Mathf.Sqrt(distanceSquared), 1f, 10f) * 64f * Vector2.one;
+                    //_imageInstance.rectTransform.sizeDelta = Mathf.Clamp(100f / Mathf.Sqrt(distanceSquared), 1f, 10f) * 64f * Vector2.one;
+                    _imageInstance.color = new Color(0f, 0f, 0f, 0f);
                 }
 
                 // Locking
