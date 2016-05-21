@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: c554c546936b7344e91e9637af618526
-timeCreated: 1463851981
+guid: 45d5bb4b2e744a3459215a5a6aad6760
+timeCreated: 1463853381
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -75,7 +75,7 @@ ModelImporter:
     3300028: Container 8
     3300030: Container 9
     3300032: Freighter
-    4300000: Freighter
+    4300000: Container
     4300002: Container
     4300004: Container
     4300006: Container
@@ -91,7 +91,7 @@ ModelImporter:
     4300026: Container
     4300028: Container
     4300030: Container
-    4300032: Container
+    4300032: Freighter
   materials:
     importMaterials: 1
     materialName: 0
