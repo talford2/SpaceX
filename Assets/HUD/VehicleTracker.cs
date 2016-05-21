@@ -161,8 +161,6 @@ public class VehicleTracker : Tracker
         _healthBarBackgroundInstance = healthBarBackgroundImg;
         _healthBarInstance = healthBarImg;
 
-        trackerImg.type = Image.Type.Sliced;
-
         _imageInstance = trackerImg;
         _imageInstance.color = TrackerColor;
 

@@ -6,9 +6,6 @@ using UnityEngine.UI;
 public class CollectibleTracker : Tracker
 {
 	public Sprite ArrowSprite;
-    //public Texture2D TrackerCursorImage;
-    //public Texture2D FarTrackerCursorImage;
-    //public Texture2D VeryFarTrackerCursorImage;
     public GameObject TrackerPlanePrefab;
     public float TrackerPlaneScale = 100f;
 
@@ -18,9 +15,6 @@ public class CollectibleTracker : Tracker
 	private Rect _screenBounds;
 	private Image _imageInstance;
 
-	//private Sprite _trackerSprite;
-	//private Sprite _farTrackerSprite;
-	//private Sprite _veryFarTrackerSprite;
 	private Sprite _arrowSprite;
     private GameObject _trackerPlaneInstance;
     private MeshRenderer _trackerPlaneRenderer;
@@ -47,13 +41,8 @@ public class CollectibleTracker : Tracker
         trackerImg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
         trackerImg.color = new Color(1f, 1f, 1f, 1f);
 
-        //_trackerSprite = Sprite.Create(TrackerCursorImage, new Rect(0, 0, TrackerCursorImage.width, TrackerCursorImage.height), Vector2.zero);
-        //_farTrackerSprite = Sprite.Create(FarTrackerCursorImage, new Rect(0, 0, FarTrackerCursorImage.width, FarTrackerCursorImage.height), Vector2.zero);
-        //_veryFarTrackerSprite = Sprite.Create(VeryFarTrackerCursorImage, new Rect(0, 0, VeryFarTrackerCursorImage.width, VeryFarTrackerCursorImage.height), Vector2.zero);
         _arrowSprite = ArrowSprite;
-        //Sprite.Create(ArrowSprite, new Rect(0, 0, ArrowSprite.width, ArrowSprite.height), Vector2.zero);
 
-        //trackerImg.sprite = _trackerSprite;
         trackerImg.SetNativeSize();
 
         _imageInstance = trackerImg;
@@ -112,6 +101,7 @@ public class CollectibleTracker : Tracker
             _imageInstance.sprite = _arrowSprite;
             _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
             _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+            _imageInstance.rectTransform.sizeDelta = 64f * Vector2.one;
             _imageInstance.enabled = true;
         }
     }
