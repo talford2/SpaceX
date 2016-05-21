@@ -37,6 +37,7 @@ public class VehicleTracker : Tracker
 	private Sprite _lockedSprite;
 
     private GameObject _trackerPlaneInstance;
+    private MeshRenderer _trackerPlaneRenderer;
 
     private Texture2D _shieldBarTexture;
 	private Texture2D _healthBarTexture;
@@ -119,11 +120,7 @@ public class VehicleTracker : Tracker
         if (TrackerPlanePrefab != null)
         {
             _trackerPlaneInstance = Instantiate(TrackerPlanePrefab);
-            Debug.Log("ITS NOT NULL FOR " + transform.name);
-        }
-        else
-        {
-            Debug.Log("WHY THE FUCK IS IT NULL CUNT! (" + transform.name + ")");
+            _trackerPlaneRenderer = _trackerPlaneInstance.GetComponent<MeshRenderer>();
         }
 
         // Healthbar background
@@ -227,10 +224,19 @@ public class VehicleTracker : Tracker
             var cameraPlane = new Plane(Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.position + 5f * Universe.Current.ViewPort.transform.forward);
             float dist;
             var toCamRay = new Ray(_targetable.transform.position, Universe.Current.ViewPort.transform.position - _targetable.transform.position);
-            cameraPlane.Raycast(toCamRay, out dist);
-            _trackerPlaneInstance.transform.position = toCamRay.GetPoint(dist);
+            var dotCam = Vector3.Dot(_targetable.transform.position - Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward);
+            if (dotCam > 0f)
+            {
+                cameraPlane.Raycast(toCamRay, out dist);
+                _trackerPlaneInstance.transform.position = toCamRay.GetPoint(dist);
 
-            _trackerPlaneInstance.transform.forward = -Universe.Current.ViewPort.transform.forward;
+                _trackerPlaneInstance.transform.forward = -Universe.Current.ViewPort.transform.forward;
+                _trackerPlaneRenderer.enabled = true;
+            }
+            else
+            {
+                _trackerPlaneRenderer.enabled = false;
+            }
         }
 
         if (fadeCooldown >= 0f)
@@ -432,6 +438,11 @@ public class VehicleTracker : Tracker
 
     public override void DestroyInstance()
 	{
+        if (_trackerPlaneInstance!=null)
+        {
+            Destroy(_trackerPlaneInstance);
+            Destroy(_trackerPlaneRenderer);
+        }
 		if (_imageInstance != null)
 			Destroy(_imageInstance.gameObject);
 	}
