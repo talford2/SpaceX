@@ -499,6 +499,7 @@ GameObject:
   - 4: {fileID: 459196}
   - 114: {fileID: 11483582}
   - 114: {fileID: 11435996}
+  - 114: {fileID: 11489568}
   m_Layer: 0
   m_Name: Freighter
   m_TagString: Untagged
@@ -2717,6 +2718,19 @@ MonoBehaviour:
   DieEffect: {fileID: 0}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
+--- !u!114 &11489568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c829c4783ba0766458a86b5444a198c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shiftable: {fileID: 11483582}
+  Speed: 10
 --- !u!114 &11497734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2767,6 +2781,10 @@ Prefab:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Shiftable
+      value: 
+      objectReference: {fileID: 11483582}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181714}
