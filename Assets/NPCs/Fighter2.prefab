@@ -43,7 +43,6 @@ MonoBehaviour:
   VehiclePrefab: {fileID: 11490646, guid: 8bbf55beb8aad884c88e0e8d057e3f4f, type: 2}
   Team: 2
   IsSquadronMember: 0
-  CallSign: 
   DropItems:
   - {fileID: 11400274, guid: 816f10aa082864542b4127328f007432, type: 2}
   MaxDropAmount: 3
@@ -62,8 +61,8 @@ MonoBehaviour:
   BurstTime: 0.3
   BurstWaitTime: 0.7
   ExrapolationTimeError: 0.5
-  MinAimOffsetRadius: 5
-  MaxAimOffsetRadius: 20
+  MinAimOffsetRadius: 3
+  MaxAimOffsetRadius: 12
   EvadeDistance: 400
   TurnAroundDistance: 250
   AcclerateDistance: 100
@@ -83,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53151bd6f245ef34d849fbe215ad99f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CallSign: 
   TotalPower: 8
   Weapons: 1
   Shields: 1
@@ -157,6 +157,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Weapons
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxAimOffsetRadius
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MinAimOffsetRadius
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

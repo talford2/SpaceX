@@ -838,8 +838,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 50
-  MaxHealth: 50
+  Health: 30
+  MaxHealth: 30
   Shield: 50
   MaxShield: 50
   DamageEffect: {fileID: 0}
@@ -1040,11 +1040,11 @@ Prefab:
       objectReference: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
     - target: {fileID: 0}
       propertyPath: Health
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxHealth
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
