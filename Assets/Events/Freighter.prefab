@@ -83,7 +83,7 @@ GameObject:
   - 4: {fileID: 424746}
   - 33: {fileID: 3348502}
   - 23: {fileID: 2331142}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - 4: {fileID: 433326}
   - 33: {fileID: 3345144}
   - 23: {fileID: 2302382}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 435192}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Freighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - 4: {fileID: 448274}
   - 33: {fileID: 3331320}
   - 23: {fileID: 2386494}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Freighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - 4: {fileID: 401540}
   - 33: {fileID: 3323476}
   - 23: {fileID: 2398836}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   - 4: {fileID: 429524}
   - 33: {fileID: 3321804}
   - 23: {fileID: 2386204}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   - 4: {fileID: 417794}
   - 33: {fileID: 3360972}
   - 23: {fileID: 2310126}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   - 4: {fileID: 453320}
   - 33: {fileID: 3311398}
   - 23: {fileID: 2327324}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   - 4: {fileID: 480656}
   - 33: {fileID: 3362348}
   - 23: {fileID: 2318494}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   - 4: {fileID: 426502}
   - 33: {fileID: 3363584}
   - 23: {fileID: 2300252}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ GameObject:
   - 4: {fileID: 454430}
   - 33: {fileID: 3379910}
   - 23: {fileID: 2315652}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   - 4: {fileID: 403876}
   - 33: {fileID: 3311130}
   - 23: {fileID: 2314342}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ GameObject:
   - 4: {fileID: 464834}
   - 33: {fileID: 3367426}
   - 23: {fileID: 2397062}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -589,7 +589,7 @@ GameObject:
   - 4: {fileID: 486698}
   - 33: {fileID: 3381180}
   - 23: {fileID: 2309998}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,7 +622,7 @@ GameObject:
   - 4: {fileID: 474476}
   - 33: {fileID: 3394464}
   - 23: {fileID: 2301480}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -658,7 +658,7 @@ GameObject:
   - 4: {fileID: 481612}
   - 33: {fileID: 3305278}
   - 23: {fileID: 2372368}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2487,7 +2487,28 @@ MonoBehaviour:
   - {fileID: 469104}
   - {fileID: 429296}
   - {fileID: 482390}
+  DistantContainers:
+  - {fileID: 481612}
+  - {fileID: 454430}
+  - {fileID: 464834}
+  - {fileID: 426502}
+  - {fileID: 486698}
+  - {fileID: 474476}
+  - {fileID: 480656}
+  - {fileID: 403876}
+  - {fileID: 424746}
+  - {fileID: 429524}
+  - {fileID: 453320}
+  - {fileID: 433326}
+  - {fileID: 401540}
+  - {fileID: 417794}
   ContainerHealth: 50
+  ContainerMaterials:
+  - {fileID: 2100000, guid: d2cf3e167b4870c459c9a757bf777fd3, type: 2}
+  - {fileID: 2100000, guid: 7252b4e5ddc545b48951a4b621b681de, type: 2}
+  - {fileID: 2100000, guid: 481696cfc254aeb42977bdbfd2187d88, type: 2}
+  - {fileID: 2100000, guid: 14593fc1ae78f5d41b2cadd9d50730cd, type: 2}
+  - {fileID: 2100000, guid: 23f5844ca08658d49b1d9bc9a57892c4, type: 2}
   DropItemPrefab: {fileID: 163398, guid: 816f10aa082864542b4127328f007432, type: 2}
   MinDropCount: 3
   MaxDropCount: 10
@@ -2740,6 +2761,10 @@ Prefab:
       propertyPath: ArrowCursorImage
       value: 
       objectReference: {fileID: 2800000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181714}

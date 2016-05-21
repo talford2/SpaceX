@@ -4,7 +4,9 @@ using System.Collections.Generic;
 public class Freighter : MonoBehaviour
 {
     public List<Transform> Containers;
+    public List<Transform> DistantContainers;
     public float ContainerHealth = 50f;
+    public List<Material> ContainerMaterials;
 
     [Header("Container Drop Items")]
     public GameObject DropItemPrefab;
@@ -15,16 +17,27 @@ public class Freighter : MonoBehaviour
 
     void Start()
     {
-        foreach(var container in Containers)
+        foreach (var container in Containers)
         {
             var killable = container.GetComponent<Killable>();
-            if (killable!=null)
+            if (killable != null)
             {
                 killable.MaxHealth = ContainerHealth;
                 killable.Health = killable.MaxHealth;
                 killable.OnDamage += OnDamage;
                 killable.OnDie += OnContainerDie;
             }
+            var containerRenderer = container.GetComponent<MeshRenderer>();
+            if (containerRenderer != null)
+            {
+                containerRenderer.material = ContainerMaterials[Random.Range(0, ContainerMaterials.Count - 1)];
+            }
+        }
+        // Match Materials
+        for (var i = 0; i < Containers.Count; i++)
+        {
+            var distantContainerRenderer = DistantContainers[i].GetComponent<MeshRenderer>();
+            distantContainerRenderer.material = Containers[i].GetComponent<MeshRenderer>().material;
         }
         hasBeenShot = false;
     }
