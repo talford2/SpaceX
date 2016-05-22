@@ -155,6 +155,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &119206
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 484374}
+  - 65: {fileID: 6521632}
+  m_Layer: 0
+  m_Name: BodyCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &121036
 GameObject:
   m_ObjectHideFlags: 1
@@ -182,7 +198,7 @@ GameObject:
   - 4: {fileID: 473952}
   - 65: {fileID: 6521420}
   m_Layer: 14
-  m_Name: BridgeCollider
+  m_Name: BridgeCollider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,6 +377,38 @@ GameObject:
   - 4: {fileID: 436684}
   m_Layer: 0
   m_Name: Near
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &150990
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 439886}
+  - 65: {fileID: 6566678}
+  m_Layer: 0
+  m_Name: BridgeCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &151474
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 408162}
+  - 65: {fileID: 6514488}
+  m_Layer: 0
+  m_Name: StemCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -555,7 +603,7 @@ GameObject:
   - 4: {fileID: 409200}
   - 65: {fileID: 6504738}
   m_Layer: 14
-  m_Name: StemCollider
+  m_Name: StemCollider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -607,7 +655,7 @@ GameObject:
   - 4: {fileID: 440600}
   - 65: {fileID: 6525910}
   m_Layer: 14
-  m_Name: BodyCollider
+  m_Name: BodyCollider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -703,9 +751,12 @@ Transform:
   - {fileID: 429296}
   - {fileID: 482390}
   - {fileID: 414978}
+  - {fileID: 408162}
+  - {fileID: 484374}
+  - {fileID: 439886}
+  - {fileID: 473952}
   - {fileID: 409200}
   - {fileID: 440600}
-  - {fileID: 473952}
   m_Father: {fileID: 436684}
   m_RootOrder: 0
 --- !u!4 &403876
@@ -733,6 +784,18 @@ Transform:
   - {fileID: 435192}
   m_Father: {fileID: 459196}
   m_RootOrder: 1
+--- !u!4 &408162
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151474}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.5, z: 4.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 403342}
+  m_RootOrder: 15
 --- !u!4 &409200
 Transform:
   m_ObjectHideFlags: 1
@@ -744,7 +807,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403342}
-  m_RootOrder: 15
+  m_RootOrder: 19
 --- !u!4 &414978
 Transform:
   m_ObjectHideFlags: 1
@@ -922,6 +985,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 403342}
   m_RootOrder: 2
+--- !u!4 &439886
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150990}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 18, z: -83.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 403342}
+  m_RootOrder: 17
 --- !u!4 &440600
 Transform:
   m_ObjectHideFlags: 1
@@ -933,7 +1008,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403342}
-  m_RootOrder: 16
+  m_RootOrder: 20
 --- !u!4 &447106
 Transform:
   m_ObjectHideFlags: 1
@@ -1085,7 +1160,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403342}
-  m_RootOrder: 17
+  m_RootOrder: 18
 --- !u!4 &474476
 Transform:
   m_ObjectHideFlags: 1
@@ -1162,6 +1237,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 403342}
   m_RootOrder: 13
+--- !u!4 &484374
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4, z: -83.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 403342}
+  m_RootOrder: 16
 --- !u!4 &486698
 Transform:
   m_ObjectHideFlags: 1
@@ -2189,6 +2276,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.645487, y: 9.46299, z: 15.9846}
   m_Center: {x: 0.00000023841858, y: -0.000002861023, z: -0.000008106232}
+--- !u!65 &6514488
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151474}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 17, y: 18, z: 150}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6521420
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2200,6 +2299,18 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 20, y: 15, z: 20}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6521632
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119206}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 30, y: 28, z: 26}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6525910
 BoxCollider:
@@ -2285,6 +2396,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.645487, y: 9.46299, z: 15.9846}
   m_Center: {x: -0.00003027916, y: 0.000027656555, z: -0.0000042915344}
+--- !u!65 &6566678
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150990}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 15, z: 20}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6572586
 BoxCollider:
   m_ObjectHideFlags: 1
