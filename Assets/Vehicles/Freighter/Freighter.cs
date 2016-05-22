@@ -51,7 +51,14 @@ public class Freighter : MonoBehaviour
         if (!hasBeenShot)
         {
             hasBeenShot = true;
-            // Trigger enemies
+
+            var fromPoint = transform.position + Random.onUnitSphere * 500f;
+            var rotFacing = Quaternion.LookRotation(fromPoint - transform.position);
+
+            for (var i = 0; i < Spawners.Count; i++)
+            {
+                Spawners[i].transform.position = fromPoint + rotFacing * Formations.GetArrowOffset(i, 5f);
+            }
 
             foreach (var spawner in Spawners)
             {
