@@ -166,6 +166,11 @@ public class Fighter : Npc<Fighter>
 		return new Vector2(pitchAmount, yawAmount);
 	}
 
+    public void SetTarget(Transform target)
+    {
+        Target = target;
+    }
+
 	private void OnVehicleDamaged(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
 	{
 		if (attacker != null)

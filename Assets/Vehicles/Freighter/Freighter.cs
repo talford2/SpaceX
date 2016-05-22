@@ -14,6 +14,9 @@ public class Freighter : MonoBehaviour
     public int MinDropCount = 3;
     public int MaxDropCount = 10;
 
+    [Header("Spawners")]
+    public List<Spawner> Spawners;
+
     private bool hasBeenShot;
 
     void Start()
@@ -49,6 +52,11 @@ public class Freighter : MonoBehaviour
         {
             hasBeenShot = true;
             // Trigger enemies
+
+            foreach (var spawner in Spawners)
+            {
+                spawner.Spawn(Random.Range(0.2f, 0.5f), attacker.transform);
+            }
         }
     }
 

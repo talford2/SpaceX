@@ -27,13 +27,18 @@ public class Spawner : MonoBehaviour
 
 	public void Spawn(float delay = 0)
 	{
-		StartCoroutine(DoSpawn(delay, null));
+		StartCoroutine(DoSpawn(delay, null, null));
 	}
 
 	public void Spawn(float delay, Action callback)
 	{
-		StartCoroutine(DoSpawn(delay, callback));
+		StartCoroutine(DoSpawn(delay, callback, null));
 	}
+
+    public void Spawn(float delay, Transform targetTransform)
+    {
+        StartCoroutine(DoSpawn(delay, null, targetTransform));
+    }
 
 	public void Reset()
 	{
@@ -41,7 +46,7 @@ public class Spawner : MonoBehaviour
 	}
 
 	private WarpEffect _warpEffect;
-	private IEnumerator DoSpawn(float delay, Action callback)
+	private IEnumerator DoSpawn(float delay, Action callback, Transform targetTransform)
 	{
 		yield return new WaitForSeconds(delay);
 
@@ -49,7 +54,8 @@ public class Spawner : MonoBehaviour
 		{
 			_fighterInst = Instantiate<Fighter>(FighterPrefab);
 			_fighterInst.SpawnVehicle(_fighterInst.gameObject, _fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position), transform.rotation);
-
+            if (targetTransform != null)
+                _fighterInst.SetTarget(targetTransform);
 			if (AddWarpEffect)
 			{
 				_warpEffect = _fighterInst.VehicleInstance.gameObject.AddComponent<WarpEffect>();
