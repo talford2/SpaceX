@@ -95,7 +95,7 @@ public class FighterAttack : NpcState<Fighter>
 			_targetDestination = Npc.Target.position;
 		}
 
-		if (_burstCooldown >= 0f)
+        if (_burstCooldown >= 0f)
 		{
 			_burstCooldown -= Time.deltaTime;
 			if (_burstCooldown < 0f)
@@ -129,7 +129,7 @@ public class FighterAttack : NpcState<Fighter>
 					_angleToTarget = Vector3.Angle(_toTarget.normalized, Npc.VehicleInstance.transform.forward.normalized);
 					if (Mathf.Abs(_angleToTarget) < Npc.ShootAngleTolerance)
 					{
-						Npc.VehicleInstance.SetAimAt(Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward * 100f);
+                        Npc.VehicleInstance.SetAimAt(_targetDestination + _targetOffset);
 
 						Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = true;
 						_burstAmount += Time.deltaTime;
