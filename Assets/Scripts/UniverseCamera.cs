@@ -10,6 +10,8 @@ public abstract class UniverseCamera : MonoBehaviour
 
     protected Shiftable _shiftable;
 
+    private bool isFree;
+
     public Shiftable Shiftable
     {
         get { return _shiftable; }
@@ -18,12 +20,21 @@ public abstract class UniverseCamera : MonoBehaviour
     private void Awake()
     {
         _shiftable = GetComponent<Shiftable>();
+        SetFree(false);
     }
 
     private void LateUpdate()
     {
-        Move();
-        if (OnMove != null)
-            OnMove();
+        if (!isFree)
+        {
+            Move();
+            if (OnMove != null)
+                OnMove();
+        }
+    }
+
+    public void SetFree(bool value)
+    {
+        isFree = value;
     }
 }

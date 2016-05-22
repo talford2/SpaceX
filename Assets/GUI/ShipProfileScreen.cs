@@ -129,6 +129,11 @@ public class ShipProfileScreen : MonoBehaviour
 
         PrimaryWeaponText.text = fighter.VehiclePrefab.PrimaryWeaponPrefab.Name;
         SecondaryWeaponText.text = fighter.VehiclePrefab.SecondaryWeaponPrefab.Name;
+
+        Universe.Current.ViewPort.SetFree(true);
+        var playerVehicle = fighter.VehicleInstance;
+        Universe.Current.ViewPort.transform.position = playerVehicle.transform.position + 10f * playerVehicle.transform.forward + 5f * playerVehicle.transform.up + 5f * playerVehicle.transform.right;
+        Universe.Current.ViewPort.transform.rotation = Quaternion.LookRotation(playerVehicle.transform.position - Universe.Current.ViewPort.transform.position, playerVehicle.transform.up);
     }
 
     public void AddPower()
@@ -347,5 +352,7 @@ public class ShipProfileScreen : MonoBehaviour
         HeadsUpDisplay.Current.gameObject.SetActive(true);
         TrackerManager.Current.SetTrackersVisibility(true);
         _isVisible = false;
+
+        Universe.Current.ViewPort.SetFree(false);
     }
 }
