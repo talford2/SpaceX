@@ -103,6 +103,8 @@ public class ShipProfileScreen : MonoBehaviour
         Populate(_curIndex);
     }
 
+    private Vehicle focusVehicle;
+
     public void Populate(int index)
     {
         _curIndex = index;
@@ -131,9 +133,16 @@ public class ShipProfileScreen : MonoBehaviour
         SecondaryWeaponText.text = fighter.VehiclePrefab.SecondaryWeaponPrefab.Name;
 
         Universe.Current.ViewPort.SetFree(true);
-        var playerVehicle = fighter.VehicleInstance;
-        Universe.Current.ViewPort.transform.position = playerVehicle.transform.position + 10f * playerVehicle.transform.forward + 5f * playerVehicle.transform.up + 5f * playerVehicle.transform.right;
-        Universe.Current.ViewPort.transform.rotation = Quaternion.LookRotation(playerVehicle.transform.position - Universe.Current.ViewPort.transform.position, playerVehicle.transform.up);
+        focusVehicle = fighter.VehicleInstance;
+    }
+
+    private void LateUpdate()
+    {
+        if (_isVisible)
+        {
+            Universe.Current.ViewPort.transform.position = focusVehicle.transform.position + 10f * focusVehicle.transform.forward + 5f * focusVehicle.transform.up + 5f * focusVehicle.transform.right;
+            Universe.Current.ViewPort.transform.rotation = Quaternion.LookRotation(focusVehicle.transform.position - Universe.Current.ViewPort.transform.position, focusVehicle.transform.up);
+        }
     }
 
     public void AddPower()
@@ -332,7 +341,7 @@ public class ShipProfileScreen : MonoBehaviour
     {
         HeadsUpDisplay.Current.gameObject.SetActive(false);
         TrackerManager.Current.SetTrackersVisibility(false);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         PlayerController.Current.SetControlEnabled(false);
         Canvas.gameObject.SetActive(true);
         Preview.SetActive(true);
@@ -348,7 +357,7 @@ public class ShipProfileScreen : MonoBehaviour
         Preview.SetActive(false);
         Canvas.gameObject.SetActive(false);
         PlayerController.Current.SetControlEnabled(true);
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         HeadsUpDisplay.Current.gameObject.SetActive(true);
         TrackerManager.Current.SetTrackersVisibility(true);
         _isVisible = false;
