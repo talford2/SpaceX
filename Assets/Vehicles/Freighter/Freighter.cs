@@ -15,7 +15,8 @@ public class Freighter : MonoBehaviour
     public int MaxDropCount = 10;
 
     [Header("Spawners")]
-    public List<Spawner> Spawners;
+    public Shiftable Shiftable;
+    public Spawner SpawnerPrefab;
 
     private bool hasBeenShot;
 
@@ -52,6 +53,20 @@ public class Freighter : MonoBehaviour
         {
             hasBeenShot = true;
 
+            for (var i = 0; i < 3; i++)
+            {
+                var fromPoint = transform.position + Random.onUnitSphere * 500f;
+                var rotFacing = Quaternion.LookRotation(fromPoint - transform.position);
+                for (var j = 0; j < 7; j++)
+                {
+                    var spawner = Instantiate(SpawnerPrefab);
+                    spawner.Shifter = Shiftable;
+                    spawner.transform.position = fromPoint + rotFacing * Formations.GetArrowOffset(j, 5f);
+                    spawner.Spawn(i * 1.5f + Random.Range(0.2f, 0.5f));
+                }
+            }
+
+            /*
             var fromPoint = transform.position + Random.onUnitSphere * 500f;
             var rotFacing = Quaternion.LookRotation(fromPoint - transform.position);
 
@@ -59,11 +74,11 @@ public class Freighter : MonoBehaviour
             {
                 Spawners[i].transform.position = fromPoint + rotFacing * Formations.GetArrowOffset(i, 5f);
             }
-
             foreach (var spawner in Spawners)
             {
                 spawner.Spawn(Random.Range(0.2f, 0.5f), attacker.transform);
             }
+            */
         }
     }
 
