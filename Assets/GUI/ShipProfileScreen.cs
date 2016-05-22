@@ -73,6 +73,7 @@ public class ShipProfileScreen : MonoBehaviour
     }
 
     private Vector2 swivelVelocity;
+    private float swivel;
 
     private void PreviewMovement()
     {
@@ -84,6 +85,7 @@ public class ShipProfileScreen : MonoBehaviour
         {
             swivelVelocity = Vector2.Lerp(swivelVelocity, Vector2.zero, 5f*Time.unscaledDeltaTime);
         }
+        swivel -= swivelVelocity.x;
         _preview.transform.rotation *= Quaternion.AngleAxis(swivelVelocity.x, Vector3.up);
     }
 
@@ -140,8 +142,11 @@ public class ShipProfileScreen : MonoBehaviour
     {
         if (_isVisible)
         {
-            Universe.Current.ViewPort.transform.position = focusVehicle.transform.position + 10f * focusVehicle.transform.forward + 5f * focusVehicle.transform.up + 5f * focusVehicle.transform.right;
-            Universe.Current.ViewPort.transform.rotation = Quaternion.LookRotation(focusVehicle.transform.position - Universe.Current.ViewPort.transform.position, focusVehicle.transform.up);
+            if (focusVehicle != null)
+            {
+                Universe.Current.ViewPort.transform.position = focusVehicle.transform.position + Quaternion.AngleAxis(swivel, focusVehicle.transform.up) * (10f * focusVehicle.transform.forward + 5f * focusVehicle.transform.up + 5f * focusVehicle.transform.right);
+                Universe.Current.ViewPort.transform.rotation = Quaternion.LookRotation(focusVehicle.transform.position - Universe.Current.ViewPort.transform.position, focusVehicle.transform.up);
+            }
         }
     }
 
