@@ -82,7 +82,7 @@ public class CollectibleTracker : Tracker
 
             var dist = (Universe.Current.ViewPort.transform.position - transform.position).magnitude;
             var frac = TrackerPlaneScale / dist;
-            _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(frac, 0.25f, 1f));
+            _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(frac, 0.18f, 1f));
         }
         else
         {
