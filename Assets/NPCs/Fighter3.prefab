@@ -76,7 +76,7 @@ MonoBehaviour:
   OvertakeDistance: 50
   BurstTime: 0.3
   BurstWaitTime: 0.7
-  ExrapolationTimeError: 0.5
+  ExrapolationTimeError: 0.2
   MinAimOffsetRadius: 0.5
   MaxAimOffsetRadius: 4
   EvadeDistance: 400
@@ -165,6 +165,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MinAimOffsetRadius
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ExrapolationTimeError
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

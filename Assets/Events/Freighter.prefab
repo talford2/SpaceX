@@ -1092,7 +1092,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.6605814, y: -17.35424, z: -5.935959}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 436684}
@@ -2626,7 +2626,7 @@ MonoBehaviour:
   - {fileID: 433326}
   - {fileID: 401540}
   - {fileID: 417794}
-  ContainerHealth: 50
+  ContainerHealth: 100
   ContainerMaterials:
   - {fileID: 2100000, guid: d2cf3e167b4870c459c9a757bf777fd3, type: 2}
   - {fileID: 2100000, guid: 7252b4e5ddc545b48951a4b621b681de, type: 2}
