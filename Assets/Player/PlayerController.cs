@@ -395,7 +395,12 @@ public class PlayerController : MonoBehaviour
             _playVehicleInstance.TriggerUTurn();
         }
 
-		Vehicle leaderVehicle;
+        if (Input.GetKeyUp(KeyCode.I))
+        {
+            InventoryScreen.Current.Toggle();
+        }
+
+        Vehicle leaderVehicle;
 		if (Squadron.GetCurrentIndex() == 0)
 		{
 			leaderVehicle = VehicleInstance;
