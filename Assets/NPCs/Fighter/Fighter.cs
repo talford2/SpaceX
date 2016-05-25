@@ -12,7 +12,6 @@ public class Fighter : Npc<Fighter>
 	[Header("Drop Item on Death")]
 	public List<Collectible> DropItems;
 	public int MaxDropAmount = 5;
-    public GameObject SpaceBox;
 
 	private Vehicle _vehicleInstance;
 
@@ -199,17 +198,6 @@ public class Fighter : Npc<Fighter>
                 var dropItem = ((GameObject)Instantiate(collectible, VehicleInstance.transform.position + Random.onUnitSphere * 1.5f, Quaternion.identity)).GetComponent<Collectible>();
                 dropItem.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(dropPosition));
                 dropItem.SetVelocity(VehicleInstance.GetVelocity() + Random.onUnitSphere * 5f);
-            }
-            if (true)
-            {
-                if (SpaceBox != null)
-                {
-                    var dropPosition = VehicleInstance.transform.position;
-                    var dropBox = ((GameObject)Instantiate(SpaceBox, dropPosition, Random.rotation)).GetComponent<SpaceBox>();
-                    dropBox.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(dropPosition));
-                    dropBox.SetVelocity(VehicleInstance.GetVelocity() * 0.5f);
-                    dropBox.SetAngularVelocity(Random.onUnitSphere*90f);
-                }
             }
 		}
 		if (!IsSquadronMember)

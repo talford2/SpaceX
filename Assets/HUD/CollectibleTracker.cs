@@ -10,6 +10,7 @@ public class CollectibleTracker : Tracker
     public float TrackerPlaneScale = 100f;
 
     public Color TrackerColor = Color.white;
+    public float MaxDistance = 2000f;
 
 	private Vector2 _screenCentre;
 	private Rect _screenBounds;
@@ -26,11 +27,15 @@ public class CollectibleTracker : Tracker
 
 	private float _fadeStep = 0.02f;
 
+    private float _maxDistanceSquared;
+    private float _lastDistanceSquared;
+
 	private void Awake()
 	{
 		_screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
 		var boundaryPadding = 20f;
 		_screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
+        _maxDistanceSquared = MaxDistance * MaxDistance;
 	}
 
     public override Image CreateInstance()
@@ -58,6 +63,23 @@ public class CollectibleTracker : Tracker
 
     public override void UpdateInstance()
     {
+        var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
+        if (_lastDistanceSquared < _maxDistanceSquared)
+        {
+            if (distanceSquared > _maxDistanceSquared)
+            {
+                TriggerFadeOut();
+            }
+        }
+
+        if (_lastDistanceSquared > _maxDistanceSquared)
+        {
+            if (distanceSquared < _maxDistanceSquared)
+            {
+                TriggerFadeIn();
+            }
+        }
+
         var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
         if (screenPosition.z < 0f)
         {
@@ -91,7 +113,6 @@ public class CollectibleTracker : Tracker
 
         if (_screenBounds.Contains(screenPosition))
         {
-            var distanceSquared = (transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
             _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
             _imageInstance.rectTransform.localRotation = Quaternion.identity;
             _imageInstance.enabled = false;
@@ -104,9 +125,11 @@ public class CollectibleTracker : Tracker
             _imageInstance.rectTransform.sizeDelta = 64f * Vector2.one;
             _imageInstance.enabled = true;
         }
+        _lastDistanceSquared = distanceSquared;
+
     }
 
-	public void TriggerFadeIn(float time = 0.5f)
+    public void TriggerFadeIn(float time = 0.5f)
 	{
 		if (!_isFading && !_isVisible)
 		{
@@ -122,14 +145,14 @@ public class CollectibleTracker : Tracker
 		}
 	}
 
-	public void SetColor(Color color)
-	{
-		TrackerColor = color;
-		if (_imageInstance != null)
-		{
-			_imageInstance.color = color;
-		}
-	}
+    public void SetColor(Color color)
+    {
+        TrackerColor = color;
+        if (_imageInstance != null)
+            _imageInstance.color = color;
+        if (_trackerPlaneRenderer != null)
+            _trackerPlaneRenderer.material.color = color;
+    }
 
 	public void SetAlpha(float alpha)
 	{
@@ -152,14 +175,16 @@ public class CollectibleTracker : Tracker
 		var stepFraction = _fadeStep / duration;
 		for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
 		{
-			_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, fraction);
+			//_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, fraction);
+            SetAlpha(fraction);
 
 			ii++;
-			Debug.Log("Time running: " + DateTime.Now.Subtract(start).TotalSeconds + " (" + ii + ")");
+			//Debug.Log("Time running: " + DateTime.Now.Subtract(start).TotalSeconds + " (" + ii + ")");
 
 			yield return new WaitForSeconds(_fadeStep);
 		}
-		_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 0f);
+        //_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 0f);
+        SetAlpha(0f);
 		_isVisible = false;
 		_isFading = false;
 	}
@@ -169,10 +194,12 @@ public class CollectibleTracker : Tracker
 		var stepFraction = _fadeStep / duration;
 		for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
 		{
-			_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f - fraction);
+            //_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f - fraction);
+            SetAlpha(1f - fraction);
 			yield return new WaitForSeconds(_fadeStep);
 		}
-		_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f);
+        //_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f);
+        SetAlpha(1f);
 		_isVisible = true;
 		_isFading = false;
 	}

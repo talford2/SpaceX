@@ -5,6 +5,8 @@ public class SpaceBox : MonoBehaviour
     public Shiftable Shiftable;
     public Killable Killable;
 
+    public float InitialAngularSpeed = 90f;
+
     public GameObject DropItem;
     public int DropCount;
 
@@ -14,6 +16,7 @@ public class SpaceBox : MonoBehaviour
     private void Awake()
     {
         Killable.OnDie += OnDie;
+        SetAngularVelocity(Random.onUnitSphere * InitialAngularSpeed);
     }
 
     public void SetVelocity(Vector3 value)
