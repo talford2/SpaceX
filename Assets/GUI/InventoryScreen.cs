@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryScreen : MonoBehaviour
@@ -7,6 +6,15 @@ public class InventoryScreen : MonoBehaviour
     public Canvas Canvas;
     public Text CallSignText;
     public Text CreditsText;
+
+    [Header("Equipped Panel")]
+    public Button PrimaryButton;
+    public Button SecondaryButton;
+    public Button ShieldButton;
+    public Button EngineButton;
+
+    [Header("Item Panel")]
+    public Text ItemNameText;
 
     private static InventoryScreen _current;
 
@@ -123,6 +131,49 @@ public class InventoryScreen : MonoBehaviour
 
         CallSignText.text = profile.CallSign;
         CreditsText.text = string.Format("{0}c", PlayerController.Current.SpaceJunkCount);
+    }
+
+    private void EnableEquippedButtons()
+    {
+        var isEnabled = true;
+        PrimaryButton.enabled = isEnabled;
+        SecondaryButton.enabled = isEnabled;
+        ShieldButton.enabled = isEnabled;
+        EngineButton.enabled = isEnabled;
+    }
+
+    public void PopulatePrimary()
+    {
+        var primaryWeapon = focusVehicle.PrimaryWeaponInstance;
+        ItemNameText.text = primaryWeapon.Name;
+
+        EnableEquippedButtons();
+        PrimaryButton.enabled = false;
+    }
+
+    public void PopulateSecondary()
+    {
+        var secondaryWeapon = focusVehicle.SecondaryWeaponInstance;
+        ItemNameText.text = secondaryWeapon.Name;
+
+        EnableEquippedButtons();
+        SecondaryButton.enabled = false;
+    }
+
+    public void PopulateShield()
+    {
+        ItemNameText.text = "Shield";
+
+        EnableEquippedButtons();
+        ShieldButton.enabled = false;
+    }
+
+    public void PopulateEngine()
+    {
+        ItemNameText.text = "Engine";
+
+        EnableEquippedButtons();
+        EngineButton.enabled = false;
     }
 
     public void Next()
