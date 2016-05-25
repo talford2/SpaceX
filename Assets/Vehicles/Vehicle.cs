@@ -228,7 +228,9 @@ public class Vehicle : MonoBehaviour
         {
             isUTurning = true;
             uTurnCooldown = UTurnDuration;
+            var camPos = Universe.Current.ViewPort.transform.position;
             Universe.Current.ViewPort.SetFree(true);
+            Universe.Current.ViewPort.transform.position = camPos;
         }
     }
 
