@@ -3,9 +3,18 @@
 public class SpaceBox : MonoBehaviour
 {
     public Shiftable Shiftable;
+    public Killable Killable;
+
+    public GameObject DropItem;
+    public int DropCount;
 
     private Vector3 _velocity;
     private Vector3 _angularVelocity;
+
+    private void Awake()
+    {
+        Killable.OnDie += OnDie;
+    }
 
     public void SetVelocity(Vector3 value)
     {
@@ -24,5 +33,18 @@ public class SpaceBox : MonoBehaviour
 
         transform.rotation *= Quaternion.Euler(angularDisplacement);
         Shiftable.Translate(displacement);
+    }
+
+    private void OnDie(Killable sender)
+    {
+        Killable.OnDie -= OnDie;
+        for (var i = 0; i < DropCount; i++)
+        {
+            var dropPosition = transform.position + Random.onUnitSphere * 1.5f;
+            var fromCentre = dropPosition - transform.position;
+            var dropItem = ((GameObject)Instantiate(DropItem, transform.position + Random.onUnitSphere * 1.5f, Quaternion.identity)).GetComponent<Collectible>();
+            dropItem.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(dropPosition));
+            dropItem.SetVelocity(_velocity + fromCentre.normalized * Random.Range(5f, 15f));
+        }
     }
 }
