@@ -29,6 +29,7 @@ GameObject:
   - 114: {fileID: 11422124}
   - 114: {fileID: 11469264}
   - 114: {fileID: 11471622}
+  - 114: {fileID: 11432620}
   m_Layer: 0
   m_Name: SpaceLoot
   m_TagString: Untagged
@@ -118,6 +119,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shiftable: {fileID: 11469264}
+--- !u!114 &11432620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 50
+  MaxHealth: 50
+  Shield: 0
+  MaxShield: 0
+  DamageEffect: {fileID: 0}
+  DieEffect: {fileID: 0}
+  WoundEffect: {fileID: 0}
+  DestroyOnDie: 1
 --- !u!114 &11469264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,9 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerPlanePrefab: {fileID: 118416, guid: 6bce8cf2f114c8241a585234858034b4, type: 2}
-  TrackerPlaneScale: 30
-  TrackerColor: {r: 0, g: 0.7921569, b: 0.56078434, a: 1}
+  TrackerPlanePrefab: {fileID: 118416, guid: 19a885139abaeb7488e2857044d8fcdf, type: 2}
+  TrackerPlaneScale: 70
+  TrackerColor: {r: 1, g: 0.8896551, b: 0, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -160,6 +180,34 @@ Prefab:
       propertyPath: Shiftable
       value: 
       objectReference: {fileID: 11469264}
+    - target: {fileID: 0}
+      propertyPath: TrackerPlaneScale
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Health
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrackerColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrackerColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrackerColor.g
+      value: 0.8896551
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TrackerPlanePrefab
+      value: 
+      objectReference: {fileID: 118416, guid: 19a885139abaeb7488e2857044d8fcdf, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174812}
