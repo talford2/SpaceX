@@ -16,6 +16,20 @@ public class InventoryScreen : MonoBehaviour
     [Header("Item Panel")]
     public Text ItemNameText;
 
+    [Header("Primary Panel")]
+    public CanvasGroup PrimaryPanel;
+    public Text PrimaryDamageValueText;
+    public Text PrimaryFireRateValueText;
+    public Text PrimaryCoolingRateValueText;
+    public Text PrimaryHeatCapacityValueText;
+
+    [Header("Secondary Panel")]
+    public CanvasGroup SecondaryPanel;
+    public Text SecondaryDamageValueText;
+    public Text SecondaryFireRateValueText;
+    public Text SecondaryCoolingRateValueText;
+    public Text SecondaryHeatCapacityValueText;
+
     private static InventoryScreen _current;
 
     public static InventoryScreen Current { get { return _current; } }
@@ -143,10 +157,22 @@ public class InventoryScreen : MonoBehaviour
         EngineButton.enabled = isEnabled;
     }
 
+    private void HideItemPanels()
+    {
+        PrimaryPanel.gameObject.SetActive(false);
+
+        SecondaryPanel.gameObject.SetActive(false);
+    }
+
     public void PopulatePrimary()
     {
         var primaryWeapon = focusVehicle.PrimaryWeaponInstance;
         ItemNameText.text = primaryWeapon.Name;
+        PrimaryDamageValueText.text = string.Format("{0:f1}", primaryWeapon.MissileDamage);
+        PrimaryFireRateValueText.text = string.Format("{0:f1}", primaryWeapon.FireRate);
+
+        HideItemPanels();
+        PrimaryPanel.gameObject.SetActive(true);
 
         EnableEquippedButtons();
         PrimaryButton.enabled = false;
@@ -156,6 +182,11 @@ public class InventoryScreen : MonoBehaviour
     {
         var secondaryWeapon = focusVehicle.SecondaryWeaponInstance;
         ItemNameText.text = secondaryWeapon.Name;
+        SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.MissileDamage);
+        SecondaryFireRateValueText.text = string.Format("{0:f1}", secondaryWeapon.FireRate);
+
+        HideItemPanels();
+        SecondaryPanel.gameObject.SetActive(true);
 
         EnableEquippedButtons();
         SecondaryButton.enabled = false;
@@ -165,6 +196,8 @@ public class InventoryScreen : MonoBehaviour
     {
         ItemNameText.text = "Shield";
 
+        HideItemPanels();
+
         EnableEquippedButtons();
         ShieldButton.enabled = false;
     }
@@ -172,6 +205,8 @@ public class InventoryScreen : MonoBehaviour
     public void PopulateEngine()
     {
         ItemNameText.text = "Engine";
+
+        HideItemPanels();
 
         EnableEquippedButtons();
         EngineButton.enabled = false;
