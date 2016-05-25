@@ -14,7 +14,7 @@ public class SpaceBox : MonoBehaviour
 
     public void SetAngularVelocity(Vector3 value)
     {
-
+        _angularVelocity = value;
     }
 
     private void Update()

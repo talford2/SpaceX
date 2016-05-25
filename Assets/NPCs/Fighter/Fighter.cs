@@ -208,7 +208,7 @@ public class Fighter : Npc<Fighter>
                     var dropBox = ((GameObject)Instantiate(SpaceBox, dropPosition, Random.rotation)).GetComponent<SpaceBox>();
                     dropBox.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(dropPosition));
                     dropBox.SetVelocity(VehicleInstance.GetVelocity() * 0.5f);
-                    dropBox.SetAngularVelocity(Random.onUnitSphere*45f);
+                    dropBox.SetAngularVelocity(Random.onUnitSphere*90f);
                 }
             }
 		}
