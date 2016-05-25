@@ -44,6 +44,10 @@ public class PlayerController : MonoBehaviour
 	public float NoThreatTime = 5f;
 	public float DeathOptionTime = 1f;
 
+    [Header("UTurn")]
+    public SplinePath UTurnPath;
+    public float UTurnDuration = 5f;
+
 	private float _aimDistance;
 	private float _screenAspect;
 	private int _threatCount;
@@ -109,6 +113,9 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, universePosition.CellLocalPosition, rotation)).GetComponent<Vehicle>();
 		_playVehicleInstance.Controller = gameObject;
 		_playVehicleInstance.Shiftable.SetShiftPosition(universePosition);
+
+        _playVehicleInstance.UTurnPath = UTurnPath;
+        _playVehicleInstance.UTurnDuration = UTurnDuration;
 		//Destroy(_playVehicleInstance.GetComponent<Tracker>());
 
 		Destroy(_playVehicleInstance.GetComponent<VehicleTracker>());
@@ -382,6 +389,11 @@ public class PlayerController : MonoBehaviour
 		{
 			Map.Current.Toggle();
 		}
+
+        if (Input.GetKeyUp(KeyCode.T))
+        {
+            _playVehicleInstance.TriggerUTurn();
+        }
 
 		Vehicle leaderVehicle;
 		if (Squadron.GetCurrentIndex() == 0)

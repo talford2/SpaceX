@@ -44,6 +44,10 @@ public class Vehicle : MonoBehaviour
 	public float PitchThotttle = 0f;
 	public float RollThrottle = 0f;
 
+    [Header("U-Turn")]
+    public SplinePath UTurnPath;
+    public float UTurnDuration;
+
 	public bool IsAccelerating
 	{
 		get { return TriggerAccelerate; }
@@ -215,6 +219,19 @@ public class Vehicle : MonoBehaviour
         }
     }
 
+    private bool isUTurning;
+    private float uTurnCooldown;
+
+    public void TriggerUTurn()
+    {
+        if (!isUTurning)
+        {
+            isUTurning = true;
+            uTurnCooldown = UTurnDuration;
+            Universe.Current.ViewPort.SetFree(true);
+        }
+    }
+
 	private void OnShoot(int shootPointIndex)
 	{
 	}
@@ -360,8 +377,25 @@ public class Vehicle : MonoBehaviour
         if (!IgnoreCollisions)
             UpdateVelocityFromCollisions();
 
-        _velocityReference.Value = _velocity;
-        _shiftable.Translate(_velocity * Time.deltaTime);
+        if (isUTurning)
+        {
+            uTurnCooldown -= Time.deltaTime;
+            if (uTurnCooldown > 0f)
+            {
+                var uTurnFraction = Mathf.Clamp01(uTurnCooldown / UTurnDuration);
+                transform.localPosition = UTurnPath.GetPoint(uTurnFraction);
+            }
+            else
+            {
+                isUTurning = false;
+                Universe.Current.ViewPort.SetFree(false);
+            }
+        }
+        else
+        {
+            _velocityReference.Value = _velocity;
+            _shiftable.Translate(_velocity * Time.deltaTime);
+        }
 
         var thrustAmount = acceleration / MaxSpeed;
 
