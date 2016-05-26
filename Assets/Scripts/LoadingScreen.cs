@@ -9,6 +9,9 @@ public class LoadingScreen : MonoBehaviour
 
     private bool isLoading;
 
+    private float period = 180f;
+    private float theta;
+
     private void Start()
     {
         StartCoroutine(LoadScene("Test1"));
@@ -16,7 +19,14 @@ public class LoadingScreen : MonoBehaviour
 
     private void Update()
     {
-        LoadingText.color = Utility.SetColorAlpha(LoadingText.color, Mathf.PingPong(Time.time, 1f));
+        theta += period * Mathf.Deg2Rad * Time.deltaTime;
+        var frac = 0.9f * Sin01(theta) + 0.1f;
+        LoadingText.color = Utility.SetColorAlpha(LoadingText.color, frac);
+    }
+
+    private float Sin01(float angle)
+    {
+        return 0.5f * Mathf.Sin(angle) + 0.5f;
     }
 
     private IEnumerator LoadScene(string sceneName)
