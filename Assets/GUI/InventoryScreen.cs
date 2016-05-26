@@ -46,6 +46,9 @@ public class InventoryScreen : MonoBehaviour
     private Vector2 _swivelVelocity;
     private Vector2 _swivel;
 
+    // Double click
+    private int _selectedItemIndex;
+
     private void Awake()
     {
         _current = this;
@@ -155,9 +158,21 @@ public class InventoryScreen : MonoBehaviour
         for (var i = 0; i < ItemButtons.Count; i++)
         {
             ItemButtons[i].image.sprite = null;
+            var index = i+0;
+            ItemButtons[i].onClick.AddListener(() => SelectItem(index));
             if (items[i] != null)
+            {
                 ItemButtons[i].image.sprite = items[i].GetComponent<InventoryItem>().InventorySprite;
+            }
         }
+    }
+
+    private void SelectItem(int index)
+    {
+        ItemButtons[_selectedItemIndex].enabled = true;
+        _selectedItemIndex = index;
+        ItemButtons[index].enabled = false;
+        Debug.Log("SELECT ITEM " + _selectedItemIndex);
     }
 
     private void EnableEquippedButtons()
