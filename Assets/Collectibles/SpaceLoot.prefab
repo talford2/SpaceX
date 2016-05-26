@@ -122,6 +122,7 @@ MonoBehaviour:
   TrackerPlanePrefab: {fileID: 118416, guid: 19a885139abaeb7488e2857044d8fcdf, type: 2}
   TrackerPlaneScale: 70
   TrackerColor: {r: 1, g: 0.8862745, b: 0, a: 1}
+  MaxDistance: 2000
 --- !u!114 &11422124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,8 +137,8 @@ MonoBehaviour:
   Shiftable: {fileID: 11469264}
   Killable: {fileID: 11432620}
   InitialAngularSpeed: 90
-  DropItem: {fileID: 163398, guid: 816f10aa082864542b4127328f007432, type: 2}
-  DropCount: 10
+  DropItem: {fileID: 141952, guid: 03dbc59e7d518244385fa84aec66a22b, type: 2}
+  DropCount: 1
 --- !u!114 &11432620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -215,14 +216,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: DropItem
       value: 
-      objectReference: {fileID: 163398, guid: 816f10aa082864542b4127328f007432, type: 2}
+      objectReference: {fileID: 141952, guid: 03dbc59e7d518244385fa84aec66a22b, type: 2}
     - target: {fileID: 0}
       propertyPath: Killable
       value: 
       objectReference: {fileID: 11432620}
     - target: {fileID: 0}
       propertyPath: DropCount
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled

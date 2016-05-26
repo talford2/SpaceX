@@ -1,4 +1,5 @@
 ﻿public enum CollectType {
     SpaceJunk,
-    PowerNode
+    PowerNode,
+    Other
 }

@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 490488}
   - 114: {fileID: 11492802}
+  - 114: {fileID: 11462616}
   m_Layer: 0
   m_Name: RedLasers
   m_TagString: Untagged
@@ -131,6 +132,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11462616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdbb7f25e717fd499c6f238cf3acb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventorySprite: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
 --- !u!114 &11492802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,15 +155,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Killer Laser Cannon
+  Name: Red Laser Cannon
   MissilePrefab: {fileID: 180512, guid: 39a77c32b5194a6459af7f3fcd94f8af, type: 2}
   MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
   FireSound: {fileID: 8259540}
   FireRate: 0.1
   MissilesPerShot: 2
-  MissileDamage: 50
-  MissilesConverge: 1
-  IsTargetLocking: 1
+  Spread: 0
+  MissileDamage: 5
+  MissilesConverge: 0
+  IsTargetLocking: 0
   TargetLockTime: 0.5
   TargetLockingMaxDistance: 2000
   LockSound: {fileID: 0}
@@ -210,11 +224,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissilesConverge
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: IsTargetLocking
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TargetLockTime
@@ -222,7 +236,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissileDamage
-      value: 50
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: panLevelCustomCurve.m_RotationOrder
@@ -238,8 +252,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Name
-      value: Killer Laser Cannon
+      value: Red Laser Cannon
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InventorySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187448}
