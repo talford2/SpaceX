@@ -4,6 +4,8 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     public CollectType GiveType;
+    public GameObject GiveItem;
+    public Sprite InventorySprite;
 	public AudioClip SoundClip;
 	public float RotateSpeed;
 
@@ -102,6 +104,8 @@ public class Collectible : MonoBehaviour
                     }
 				    if (GiveType == CollectType.PowerNode)
 				        PlayerController.Current.PowerNodeCount++;
+                    if (GiveType == CollectType.Other)
+                        PlayerController.Current.Give(GiveItem);
 				}
 			    if (OnCollect != null)
 			        OnCollect();

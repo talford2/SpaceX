@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 490488}
   - 114: {fileID: 11492802}
+  - 114: {fileID: 11462616}
   m_Layer: 0
   m_Name: RedLasers
   m_TagString: Untagged
@@ -131,6 +132,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11462616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdbb7f25e717fd499c6f238cf3acb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventorySprite: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
 --- !u!114 &11492802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,6 +254,11 @@ Prefab:
       propertyPath: Name
       value: Red Laser Cannon
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InventorySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187448}

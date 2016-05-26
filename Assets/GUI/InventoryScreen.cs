@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryScreen : MonoBehaviour
@@ -29,6 +30,9 @@ public class InventoryScreen : MonoBehaviour
     public Text SecondaryFireRateValueText;
     public Text SecondaryCoolingRateValueText;
     public Text SecondaryHeatCapacityValueText;
+
+    [Header("Inventory Panel")]
+    public List<Button> ItemButtons;
 
     private static InventoryScreen _current;
 
@@ -146,6 +150,14 @@ public class InventoryScreen : MonoBehaviour
 
         CallSignText.text = profile.CallSign;
         CreditsText.text = string.Format("{0}c", PlayerController.Current.SpaceJunkCount);
+
+        var items = PlayerController.Current.GetInventory().Items;
+        for (var i = 0; i < ItemButtons.Count; i++)
+        {
+            ItemButtons[i].image.sprite = null;
+            if (items[i] != null)
+                ItemButtons[i].image.sprite = items[i].GetComponent<InventoryItem>().InventorySprite;
+        }
     }
 
     private void EnableEquippedButtons()

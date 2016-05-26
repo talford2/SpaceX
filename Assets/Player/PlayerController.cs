@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
 		if (HideMouse)
 			Cursor.lockState = CursorLockMode.Locked;
 
+        _inventory = new PlayerInventory(15);
+
 		_screenAspect = (float)Screen.height / (float)Screen.width;
 
 		_playerNpc = gameObject.AddComponent<Fighter>();
@@ -582,6 +584,19 @@ public class PlayerController : MonoBehaviour
 			Debug.Log("ALL DEAD!");
 		}
 	}
+
+    private PlayerInventory _inventory;
+
+    public void Give(GameObject item)
+    {
+        _inventory.AddItem(item);
+        Debug.Log("COLLECTED: " + item.name);
+    }
+
+    public PlayerInventory GetInventory()
+    {
+        return _inventory;
+    }
 
 	private void PlayerController_OnRegenerate()
 	{
