@@ -804,12 +804,14 @@ MonoBehaviour:
   YawThrottle: 0
   PitchThotttle: 0
   RollThrottle: 0
+  UTurnPath: {fileID: 0}
+  UTurnDuration: 0
   PrimaryWeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93,
     type: 2}
   PrimaryShootPoints:
   - {fileID: 11401126}
   - {fileID: 11498334}
-  SecondaryWeaponPrefab: {fileID: 11492802, guid: 8d1335b2fcad39d469234af6d4b7f5f2,
+  SecondaryWeaponPrefab: {fileID: 11451118, guid: 578e28cbf04200247b2ca20b4f60e91c,
     type: 2}
   SecondaryShootPoints:
   - {fileID: 11401126}
@@ -1087,6 +1089,11 @@ Prefab:
       propertyPath: TrackerPlanePrefab
       value: 
       objectReference: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
+    - target: {fileID: 0}
+      propertyPath: SecondaryWeaponPrefab
+      value: 
+      objectReference: {fileID: 11451118, guid: 578e28cbf04200247b2ca20b4f60e91c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 113112}

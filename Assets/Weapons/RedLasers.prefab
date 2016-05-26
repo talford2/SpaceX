@@ -142,15 +142,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Killer Laser Cannon
+  Name: Red Laser Cannon
   MissilePrefab: {fileID: 180512, guid: 39a77c32b5194a6459af7f3fcd94f8af, type: 2}
   MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
   FireSound: {fileID: 8259540}
   FireRate: 0.1
   MissilesPerShot: 2
-  MissileDamage: 50
-  MissilesConverge: 1
-  IsTargetLocking: 1
+  Spread: 0
+  MissileDamage: 5
+  MissilesConverge: 0
+  IsTargetLocking: 0
   TargetLockTime: 0.5
   TargetLockingMaxDistance: 2000
   LockSound: {fileID: 0}
@@ -210,11 +211,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissilesConverge
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: IsTargetLocking
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TargetLockTime
@@ -222,7 +223,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissileDamage
-      value: 50
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: panLevelCustomCurve.m_RotationOrder
@@ -238,7 +239,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Name
-      value: Killer Laser Cannon
+      value: Red Laser Cannon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
