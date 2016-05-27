@@ -25,6 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 462046}
   - 114: {fileID: 11451118}
+  - 114: {fileID: 11478360}
   m_Layer: 0
   m_Name: BeamGun
   m_TagString: Untagged
@@ -157,6 +158,18 @@ MonoBehaviour:
   LockSound: {fileID: 0}
   IsTriggered: 0
   MissilePoolCount: 10
+--- !u!114 &11478360
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdbb7f25e717fd499c6f238cf3acb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventorySprite: {fileID: 21300000, guid: 40f84609801fab443a4895e769c8dc03, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -200,6 +213,11 @@ Prefab:
       propertyPath: Name
       value: Particle Beam
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InventorySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 40f84609801fab443a4895e769c8dc03,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182288}
