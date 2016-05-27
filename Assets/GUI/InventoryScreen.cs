@@ -201,14 +201,16 @@ public class InventoryScreen : MonoBehaviour
             if (_doubleClickCooldown > 0f)
             {
                 Debug.Log("DOUBLE CLICK!");
-                var equippedItem = PlayerController.Current.VehicleInstance.PrimaryWeaponPrefab.gameObject;
+                var equippedItem = PlayerController.Current.VehicleInstance.PrimaryWeaponInstance.gameObject;
+                Debug.Log("EQUIPPED: " + equippedItem.name);
                 var equipItem = PlayerController.Current.GetInventoryItem(index);
+                Debug.Log("EQUIP: " + equipItem.name);
 
-                PlayerController.Current.RemoveFromInventory(index);
-                Debug.Log("EQUIPPED: " + equipItem.name + " TO: " + index);
-                PlayerController.Current.AddToInventory(equippedItem, index);
+                //PlayerController.Current.RemoveFromInventory(index);
+                PlayerController.Current.SetInventoryItem(index, equippedItem);
 
-                Debug.Log("CHECK: " + PlayerController.Current.GetInventoryItem(index).name);
+                Debug.Log("VERIFY: " + PlayerController.Current.GetInventoryItem(index));
+
                 // For replacing primary weapon
                 PlayerController.Current.VehicleInstance.SetPrimaryWeapon(equipItem);
 

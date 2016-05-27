@@ -593,7 +593,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("COLLECTED: " + item.name);
     }
 
-    public void AddToInventory(GameObject item, int index)
+    public void SetInventoryItem(int index, GameObject item)
     {
         _inventory.AddItemAt(item, index);
     }
