@@ -128,6 +128,7 @@ public class Vehicle : MonoBehaviour
 	}
 
 	private Killable _killable;
+    private Targetable _targetable;
 
 	public Shiftable Shiftable
 	{
@@ -163,19 +164,19 @@ public class Vehicle : MonoBehaviour
 
 		_velocityReference = new VelocityReference(_velocity);
 
-		var targetable = GetComponent<Targetable>();
+        _targetable = GetComponent<Targetable>();
 
 		if (PrimaryWeaponPrefab != null)
 		{
 			_primaryWeaponInstance = Utility.InstantiateInParent(PrimaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
-			_primaryWeaponInstance.Initialize(gameObject, PrimaryShootPoints, _velocityReference, targetable.Team);
+			_primaryWeaponInstance.Initialize(gameObject, PrimaryShootPoints, _velocityReference, _targetable.Team);
 			_primaryWeaponInstance.OnShoot += OnShoot;
 		}
 
 		if (SecondaryWeaponPrefab != null)
 		{
 			_secondaryWeaponInstance = Utility.InstantiateInParent(SecondaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
-			_secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference, targetable.Team);
+			_secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference, _targetable.Team);
 			_secondaryWeaponInstance.OnShoot += OnShoot;
 		}
 
@@ -187,6 +188,21 @@ public class Vehicle : MonoBehaviour
 
 		_environmentMask = LayerMask.GetMask("Environment");
 	}
+
+    public void SetPrimaryWeapon(GameObject primaryWeapon)
+    {
+        if (_primaryWeaponInstance!=null)
+        {
+            _primaryWeaponInstance.OnShoot -= OnShoot;
+            Destroy(_primaryWeaponInstance);
+        }
+        if (primaryWeapon != null)
+        {
+            _primaryWeaponInstance = Utility.InstantiateInParent(primaryWeapon.gameObject, transform).GetComponent<Weapon>();
+            _primaryWeaponInstance.Initialize(gameObject, PrimaryShootPoints, _velocityReference, _targetable.Team);
+            _primaryWeaponInstance.OnShoot += OnShoot;
+        }
+    }
 
 	public void SetTargetRotation(Quaternion rotation)
 	{

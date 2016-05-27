@@ -50,6 +50,8 @@ public class InventoryScreen : MonoBehaviour
 
     // Double click
     private int _selectedItemIndex;
+    private int _lastClickedIndex;
+    private float _doubleClickCooldown;
 
     private void Awake()
     {
@@ -74,6 +76,10 @@ public class InventoryScreen : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Escape))
                 Hide();
             PreviewMovement();
+        }
+        if (_doubleClickCooldown >=0)
+        {
+            _doubleClickCooldown -= Time.deltaTime;
         }
     }
 
@@ -186,10 +192,32 @@ public class InventoryScreen : MonoBehaviour
 
     private void SelectItem(int index)
     {
-        ItemButtons[_selectedItemIndex].enabled = true;
+        //ItemButtons[_selectedItemIndex].enabled = true;
         _selectedItemIndex = index;
-        ItemButtons[index].enabled = false;
+        //ItemButtons[index].enabled = false;
         Debug.Log("SELECT ITEM " + _selectedItemIndex);
+        if (index == _lastClickedIndex)
+        {
+            if (_doubleClickCooldown > 0f)
+            {
+                Debug.Log("DOUBLE CLICK!");
+                var equippedItem = PlayerController.Current.VehicleInstance.PrimaryWeaponPrefab.gameObject;
+                var equipItem = PlayerController.Current.GetInventory().Items[index];
+
+                PlayerController.Current.GetInventory().RemoveItemAt(index);
+                PlayerController.Current.GetInventory().AddItemAt(equippedItem, index);
+
+                // For replacing primary weapon
+                PlayerController.Current.VehicleInstance.SetPrimaryWeapon(equipItem);
+
+                var inventoryItem = equipItem.GetComponent<InventoryItem>();
+                ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+
+                PopulatePrimary();
+            }
+        }
+        _doubleClickCooldown = 0.5f;
+        _lastClickedIndex = index;
     }
 
     private void EnableEquippedButtons()
@@ -214,6 +242,10 @@ public class InventoryScreen : MonoBehaviour
         ItemNameText.text = primaryWeapon.Name;
         PrimaryDamageValueText.text = string.Format("{0:f1}", primaryWeapon.MissileDamage);
         PrimaryFireRateValueText.text = string.Format("{0:f1}", primaryWeapon.FireRate);
+
+        var inventoryItem = primaryWeapon.GetComponent<InventoryItem>();
+        if (inventoryItem != null)
+            PrimaryButton.image.sprite = inventoryItem.InventorySprite;
 
         HideItemPanels();
         PrimaryPanel.gameObject.SetActive(true);
