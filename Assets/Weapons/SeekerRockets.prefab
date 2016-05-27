@@ -25,6 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 450098}
   - 114: {fileID: 11413680}
+  - 114: {fileID: 11442032}
   m_Layer: 0
   m_Name: SeekerRockets
   m_TagString: Untagged
@@ -148,6 +149,7 @@ MonoBehaviour:
   FireSound: {fileID: 8297298}
   FireRate: 0.2
   MissilesPerShot: 2
+  Spread: 0
   MissileDamage: 20
   MissilesConverge: 0
   IsTargetLocking: 1
@@ -156,6 +158,18 @@ MonoBehaviour:
   LockSound: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
   IsTriggered: 0
   MissilePoolCount: 20
+--- !u!114 &11442032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdbb7f25e717fd499c6f238cf3acb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventorySprite: {fileID: 21300000, guid: a17cfd0612758854395f53981d9b516e, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -211,6 +225,11 @@ Prefab:
       propertyPath: Name
       value: Seeker Rockets
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InventorySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a17cfd0612758854395f53981d9b516e,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 168282}

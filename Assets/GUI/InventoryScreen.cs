@@ -41,6 +41,8 @@ public class InventoryScreen : MonoBehaviour
     private bool _isVisible;
     private int _currentIndex;
 
+    private Equippedcontext _equippedContext;
+
     // Mouse Swivel
     private Vehicle focusVehicle;
     private Vector2 _swivelVelocity;
@@ -158,13 +160,28 @@ public class InventoryScreen : MonoBehaviour
         for (var i = 0; i < ItemButtons.Count; i++)
         {
             ItemButtons[i].image.sprite = null;
-            var index = i+0;
+            var index = i + 0;
             ItemButtons[i].onClick.AddListener(() => SelectItem(index));
             if (items[i] != null)
             {
                 ItemButtons[i].image.sprite = items[i].GetComponent<InventoryItem>().InventorySprite;
             }
         }
+
+        var primaryItem = focusVehicle.PrimaryWeaponPrefab.GetComponent<InventoryItem>();
+        var secondaryItem = focusVehicle.SecondaryWeaponPrefab.GetComponent<InventoryItem>();
+
+        PrimaryButton.image.sprite = primaryItem != null ? primaryItem.InventorySprite : null;
+        SecondaryButton.image.sprite = secondaryItem != null ? secondaryItem.InventorySprite : null;
+
+        if (_equippedContext == Equippedcontext.Primary)
+            PopulatePrimary();
+        if (_equippedContext == Equippedcontext.Secondary)
+            PopulateSecondary();
+        if (_equippedContext == Equippedcontext.Shield)
+            PopulateShield();
+        if (_equippedContext == Equippedcontext.Engine)
+            PopulateEngine();
     }
 
     private void SelectItem(int index)
@@ -201,6 +218,7 @@ public class InventoryScreen : MonoBehaviour
         HideItemPanels();
         PrimaryPanel.gameObject.SetActive(true);
 
+        _equippedContext = Equippedcontext.Primary;
         EnableEquippedButtons();
         PrimaryButton.enabled = false;
     }
@@ -215,6 +233,7 @@ public class InventoryScreen : MonoBehaviour
         HideItemPanels();
         SecondaryPanel.gameObject.SetActive(true);
 
+        _equippedContext = Equippedcontext.Secondary;
         EnableEquippedButtons();
         SecondaryButton.enabled = false;
     }
@@ -225,6 +244,7 @@ public class InventoryScreen : MonoBehaviour
 
         HideItemPanels();
 
+        _equippedContext = Equippedcontext.Shield;
         EnableEquippedButtons();
         ShieldButton.enabled = false;
     }
@@ -235,6 +255,7 @@ public class InventoryScreen : MonoBehaviour
 
         HideItemPanels();
 
+        _equippedContext = Equippedcontext.Engine;
         EnableEquippedButtons();
         EngineButton.enabled = false;
     }
@@ -253,5 +274,13 @@ public class InventoryScreen : MonoBehaviour
         if (_currentIndex < 0)
             _currentIndex = PlayerController.Current.Squadron.Members.Count - 1;
         Populate(_currentIndex);
+    }
+
+    private enum Equippedcontext
+    {
+        Primary,
+        Secondary,
+        Shield,
+        Engine
     }
 }

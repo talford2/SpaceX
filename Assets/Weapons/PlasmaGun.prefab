@@ -148,6 +148,7 @@ MonoBehaviour:
   FireSound: {fileID: 8209866}
   FireRate: 0.2
   MissilesPerShot: 1
+  Spread: 0
   MissileDamage: 20
   MissilesConverge: 0
   IsTargetLocking: 0
