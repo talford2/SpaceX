@@ -593,9 +593,29 @@ public class PlayerController : MonoBehaviour
         Debug.Log("COLLECTED: " + item.name);
     }
 
-    public PlayerInventory GetInventory()
+    public void AddToInventory(GameObject item, int index)
     {
-        return _inventory;
+        _inventory.AddItemAt(item, index);
+    }
+
+    public void AddToInventory(GameObject item)
+    {
+        _inventory.AddItem(item);
+    }
+
+    public void RemoveFromInventory(int index)
+    {
+        _inventory.RemoveItemAt(index);
+    }
+
+    public GameObject GetInventoryItem(int index)
+    {
+        return _inventory.Items[index];
+    }
+
+    public GameObject[] GetInventoryItems()
+    {
+        return _inventory.Items;
     }
 
 	private void PlayerController_OnRegenerate()

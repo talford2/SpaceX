@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class PlayerInventory {
+public class PlayerInventory
+{
 
     private GameObject[] _items;
 
@@ -14,7 +15,7 @@ public class PlayerInventory {
     public void AddItem(GameObject item)
     {
         var availableIndex = 0;
-        for(var i =0; i<_items.Length; i++)
+        for (var i = 0; i < _items.Length; i++)
         {
             if (_items[i] == null)
             {

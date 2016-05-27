@@ -166,12 +166,7 @@ public class Vehicle : MonoBehaviour
 
         _targetable = GetComponent<Targetable>();
 
-		if (PrimaryWeaponPrefab != null)
-		{
-			_primaryWeaponInstance = Utility.InstantiateInParent(PrimaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
-			_primaryWeaponInstance.Initialize(gameObject, PrimaryShootPoints, _velocityReference, _targetable.Team);
-			_primaryWeaponInstance.OnShoot += OnShoot;
-		}
+        SetPrimaryWeapon(PrimaryWeaponPrefab.gameObject);
 
 		if (SecondaryWeaponPrefab != null)
 		{
@@ -191,10 +186,11 @@ public class Vehicle : MonoBehaviour
 
     public void SetPrimaryWeapon(GameObject primaryWeapon)
     {
-        if (_primaryWeaponInstance!=null)
+        if (_primaryWeaponInstance != null)
         {
+            _primaryWeaponInstance.ClearTargetLock();
             _primaryWeaponInstance.OnShoot -= OnShoot;
-            Destroy(_primaryWeaponInstance);
+            Destroy(_primaryWeaponInstance.gameObject);
         }
         if (primaryWeapon != null)
         {

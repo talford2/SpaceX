@@ -162,7 +162,7 @@ public class InventoryScreen : MonoBehaviour
         CallSignText.text = profile.CallSign;
         CreditsText.text = string.Format("{0}c", PlayerController.Current.SpaceJunkCount);
 
-        var items = PlayerController.Current.GetInventory().Items;
+        var items = PlayerController.Current.GetInventoryItems();
         for (var i = 0; i < ItemButtons.Count; i++)
         {
             ItemButtons[i].image.sprite = null;
@@ -202,15 +202,17 @@ public class InventoryScreen : MonoBehaviour
             {
                 Debug.Log("DOUBLE CLICK!");
                 var equippedItem = PlayerController.Current.VehicleInstance.PrimaryWeaponPrefab.gameObject;
-                var equipItem = PlayerController.Current.GetInventory().Items[index];
+                var equipItem = PlayerController.Current.GetInventoryItem(index);
 
-                PlayerController.Current.GetInventory().RemoveItemAt(index);
-                PlayerController.Current.GetInventory().AddItemAt(equippedItem, index);
+                PlayerController.Current.RemoveFromInventory(index);
+                Debug.Log("EQUIPPED: " + equipItem.name + " TO: " + index);
+                PlayerController.Current.AddToInventory(equippedItem, index);
 
+                Debug.Log("CHECK: " + PlayerController.Current.GetInventoryItem(index).name);
                 // For replacing primary weapon
                 PlayerController.Current.VehicleInstance.SetPrimaryWeapon(equipItem);
 
-                var inventoryItem = equipItem.GetComponent<InventoryItem>();
+                var inventoryItem = equippedItem.GetComponent<InventoryItem>();
                 ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
 
                 PopulatePrimary();
