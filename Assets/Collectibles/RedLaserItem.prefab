@@ -241,7 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
   TrackerPlanePrefab: {fileID: 118416, guid: 6bce8cf2f114c8241a585234858034b4, type: 2}
-  TrackerPlaneScale: 100
+  TrackerPlaneScale: 25
   TrackerColor: {r: 1, g: 1, b: 1, a: 1}
   MaxDistance: 2000
 --- !u!114 &11462036
