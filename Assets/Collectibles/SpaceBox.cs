@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class SpaceBox : MonoBehaviour
 {
@@ -8,12 +9,13 @@ public class SpaceBox : MonoBehaviour
 
     public float InitialAngularSpeed = 90f;
 
-    public GameObject DropItem;
+    public List<GameObject> DropItems;
 
     public GameObject DropJunk;
     public int DropJunkMinCount;
     public int DropJunkMaxCount;
 
+    private GameObject _dropItem;
     private Vector3 _velocity;
     private Vector3 _angularVelocity;
 
@@ -21,6 +23,7 @@ public class SpaceBox : MonoBehaviour
     {
         Killable.OnDie += OnDie;
         SetAngularVelocity(Random.onUnitSphere * InitialAngularSpeed);
+        _dropItem = DropItems[Random.Range(0, DropItems.Count)];
     }
 
     public void SetVelocity(Vector3 value)
@@ -46,7 +49,7 @@ public class SpaceBox : MonoBehaviour
     {
         Killable.OnDie -= OnDie;
         // Drop valuable
-        var dropItem = ((GameObject)Instantiate(DropItem, transform.position, Quaternion.identity)).GetComponent<Collectible>();
+        var dropItem = ((GameObject)Instantiate(_dropItem, transform.position, Quaternion.identity)).GetComponent<Collectible>();
         dropItem.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(transform.position));
         dropItem.SetVelocity(_velocity * Random.Range(-0.5f, 0.5f));
 
