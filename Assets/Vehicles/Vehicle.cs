@@ -188,6 +188,7 @@ public class Vehicle : MonoBehaviour
     {
         if (_primaryWeaponInstance != null)
         {
+            _primaryWeaponInstance.IsTriggered = false;
             _primaryWeaponInstance.ClearTargetLock();
             _primaryWeaponInstance.OnShoot -= OnShoot;
             Destroy(_primaryWeaponInstance.gameObject);
