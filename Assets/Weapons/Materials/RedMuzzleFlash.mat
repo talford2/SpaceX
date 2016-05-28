@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: c43c4258367b8b740be1556d8d74278b, type: 3}
+          m_Texture: {fileID: 2800000, guid: 08e0ae7772299b74ca8fb381408f8f5e, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -97,6 +97,10 @@ Material:
         second: 0.02
       data:
         first:
+          name: _InvFade
+        second: 1
+      data:
+        first:
           name: _ZWrite
         second: 1
       data:
@@ -127,10 +131,6 @@ Material:
         first:
           name: _Metallic
         second: 0
-      data:
-        first:
-          name: _InvFade
-        second: 1
     m_Colors:
       data:
         first:
@@ -139,7 +139,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 0, b: 0, a: 1}
+        second: {r: 1, g: 0.2205882, b: 0.2205882, a: 1}
       data:
         first:
           name: _TintColor

@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MissileSpeed: 550
   FromReference: {fileID: 0}
-  HitEffectPrefab: {fileID: 0}
+  HitEffectPrefab: {fileID: 198982, guid: da573dd68d650ae449ac24f82b9bf1f8, type: 2}
   HitDecalPrefab: {fileID: 0}
   MissileLength: 6
   Tracer: {fileID: 12011222}
