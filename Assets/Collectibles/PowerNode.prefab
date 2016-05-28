@@ -94,7 +94,7 @@ Transform:
   m_GameObject: {fileID: 143246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 498662}
   m_RootOrder: 0
@@ -263,6 +263,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GiveType: 1
+  GiveItem: {fileID: 0}
+  InventorySprite: {fileID: 0}
   SoundClip: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
   RotateSpeed: 360
   MinLifetime: 14.5
@@ -298,7 +300,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
   TrackerPlanePrefab: {fileID: 118416, guid: 6bce8cf2f114c8241a585234858034b4, type: 2}
+  TrackerPlaneScale: 100
   TrackerColor: {r: 0.82400036, g: 0, b: 1, a: 1}
+  MaxDistance: 2000
 --- !u!114 &11455812
 MonoBehaviour:
   m_ObjectHideFlags: 1
