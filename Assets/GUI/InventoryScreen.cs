@@ -201,11 +201,12 @@ public class InventoryScreen : MonoBehaviour
             if (_doubleClickCooldown > 0f)
             {
                 Debug.Log("DOUBLE CLICK!");
-                var equippedItemIndex = PlayerController.Current.VehicleInstance.PrimaryWeaponInstance.LootIndex;
+                var equippedItemIndex = focusVehicle.PrimaryWeaponInstance.LootIndex;
                 var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
 
                 PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
-                PlayerController.Current.VehicleInstance.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex]);
+
+                focusVehicle.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex]);
 
                 var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
                 ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
