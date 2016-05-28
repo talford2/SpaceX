@@ -179,7 +179,7 @@ public class InventoryScreen : MonoBehaviour
         {
             KiaText.enabled = false;
             var primaryItem = focusVehicle.PrimaryWeaponInstance.GetComponent<InventoryItem>();
-            var secondaryItem = focusVehicle.PrimaryWeaponInstance.GetComponent<InventoryItem>();
+            var secondaryItem = focusVehicle.SecondaryWeaponInstance.GetComponent<InventoryItem>();
 
             PrimaryButton.image.sprite = primaryItem != null ? primaryItem.InventorySprite : null;
             SecondaryButton.image.sprite = secondaryItem != null ? secondaryItem.InventorySprite : null;
