@@ -9,7 +9,10 @@ public class SpaceBox : MonoBehaviour
     public float InitialAngularSpeed = 90f;
 
     public GameObject DropItem;
-    public int DropCount;
+
+    public GameObject DropJunk;
+    public int DropJunkMinCount;
+    public int DropJunkMaxCount;
 
     private Vector3 _velocity;
     private Vector3 _angularVelocity;
@@ -42,13 +45,20 @@ public class SpaceBox : MonoBehaviour
     private void OnDie(Killable sender)
     {
         Killable.OnDie -= OnDie;
-        for (var i = 0; i < DropCount; i++)
+        // Drop valuable
+        var dropItem = ((GameObject)Instantiate(DropItem, transform.position, Quaternion.identity)).GetComponent<Collectible>();
+        dropItem.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(transform.position));
+        dropItem.SetVelocity(_velocity * Random.Range(-0.5f, 0.5f));
+
+        // Drop junk
+        var dropCount = Random.Range(DropJunkMinCount, DropJunkMaxCount);
+        for (var i = 0; i < DropJunkMaxCount; i++)
         {
             var dropPosition = transform.position + Random.onUnitSphere * 1.5f;
             var fromCentre = dropPosition - transform.position;
-            var dropItem = ((GameObject)Instantiate(DropItem, transform.position + Random.onUnitSphere * 1.5f, Quaternion.identity)).GetComponent<Collectible>();
-            dropItem.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(dropPosition));
-            dropItem.SetVelocity(_velocity + fromCentre.normalized * Random.Range(5f, 15f));
+            var dropJunk = ((GameObject)Instantiate(DropJunk, transform.position + Random.onUnitSphere * 1.5f, Quaternion.identity)).GetComponent<Collectible>();
+            dropJunk.Shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(dropPosition));
+            dropJunk.SetVelocity(_velocity + fromCentre.normalized * Random.Range(5f, 15f));
         }
     }
 }

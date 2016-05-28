@@ -276,7 +276,9 @@ MonoBehaviour:
   RBody: {fileID: 5427882}
   InitialAngularSpeed: 90
   DropItem: {fileID: 141952, guid: 03dbc59e7d518244385fa84aec66a22b, type: 2}
-  DropCount: 1
+  DropJunk: {fileID: 163398, guid: 816f10aa082864542b4127328f007432, type: 2}
+  DropJunkMinCount: 5
+  DropJunkMaxCount: 10
 --- !u!114 &11479302
 MonoBehaviour:
   m_ObjectHideFlags: 1

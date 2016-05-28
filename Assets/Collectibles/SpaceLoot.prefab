@@ -219,7 +219,9 @@ MonoBehaviour:
   RBody: {fileID: 5470600}
   InitialAngularSpeed: 90
   DropItem: {fileID: 141952, guid: 03dbc59e7d518244385fa84aec66a22b, type: 2}
-  DropCount: 1
+  DropJunk: {fileID: 187448, guid: 8d1335b2fcad39d469234af6d4b7f5f2, type: 2}
+  DropJunkMinCount: 5
+  DropJunkMaxCount: 10
 --- !u!114 &11422126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,6 +343,18 @@ Prefab:
       propertyPath: RBody
       value: 
       objectReference: {fileID: 5470600}
+    - target: {fileID: 0}
+      propertyPath: DropJunk
+      value: 
+      objectReference: {fileID: 187448, guid: 8d1335b2fcad39d469234af6d4b7f5f2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DropJunkMinCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DropJunkMaxCount
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174812}
