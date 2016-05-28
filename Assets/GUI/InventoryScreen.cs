@@ -7,6 +7,7 @@ public class InventoryScreen : MonoBehaviour
     public Canvas Canvas;
     public Text CallSignText;
     public Text CreditsText;
+    public Text KiaText;
 
     [Header("Equipped Panel")]
     public Button PrimaryButton;
@@ -174,44 +175,58 @@ public class InventoryScreen : MonoBehaviour
             }
         }
 
-        var primaryItem = focusVehicle.PrimaryWeaponPrefab.GetComponent<InventoryItem>();
-        var secondaryItem = focusVehicle.SecondaryWeaponPrefab.GetComponent<InventoryItem>();
+        if (focusVehicle != null)
+        {
+            KiaText.enabled = false;
+            var primaryItem = focusVehicle.PrimaryWeaponInstance.GetComponent<InventoryItem>();
+            var secondaryItem = focusVehicle.PrimaryWeaponInstance.GetComponent<InventoryItem>();
 
-        PrimaryButton.image.sprite = primaryItem != null ? primaryItem.InventorySprite : null;
-        SecondaryButton.image.sprite = secondaryItem != null ? secondaryItem.InventorySprite : null;
+            PrimaryButton.image.sprite = primaryItem != null ? primaryItem.InventorySprite : null;
+            SecondaryButton.image.sprite = secondaryItem != null ? secondaryItem.InventorySprite : null;
 
-        if (_equippedContext == Equippedcontext.Primary)
-            PopulatePrimary();
-        if (_equippedContext == Equippedcontext.Secondary)
-            PopulateSecondary();
-        if (_equippedContext == Equippedcontext.Shield)
-            PopulateShield();
-        if (_equippedContext == Equippedcontext.Engine)
-            PopulateEngine();
+            if (_equippedContext == Equippedcontext.Primary)
+                PopulatePrimary();
+            if (_equippedContext == Equippedcontext.Secondary)
+                PopulateSecondary();
+            if (_equippedContext == Equippedcontext.Shield)
+                PopulateShield();
+            if (_equippedContext == Equippedcontext.Engine)
+                PopulateEngine();
+        }
+        else
+        {
+            KiaText.enabled = true;
+
+            PrimaryButton.image.sprite = null;
+            SecondaryButton.image.sprite = null;
+
+            HideItemPanels();
+        }
     }
 
     private void SelectItem(int index)
     {
-        //ItemButtons[_selectedItemIndex].enabled = true;
         _selectedItemIndex = index;
-        //ItemButtons[index].enabled = false;
         Debug.Log("SELECT ITEM " + _selectedItemIndex);
         if (index == _lastClickedIndex)
         {
             if (_doubleClickCooldown > 0f)
             {
-                Debug.Log("DOUBLE CLICK!");
-                var equippedItemIndex = focusVehicle.PrimaryWeaponInstance.LootIndex;
-                var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
+                if (focusVehicle != null)
+                {
+                    Debug.Log("DOUBLE CLICK!");
+                    var equippedItemIndex = focusVehicle.PrimaryWeaponInstance.LootIndex;
+                    var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
 
-                PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+                    PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
 
-                focusVehicle.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex]);
+                    focusVehicle.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex]);
 
-                var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
-                ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+                    var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
+                    ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
 
-                PopulatePrimary();
+                    PopulatePrimary();
+                }
             }
         }
         _doubleClickCooldown = 0.5f;
