@@ -158,7 +158,7 @@ MonoBehaviour:
   Name: Plasma Cannon
   LootIndex: 2
   MissilePrefab: {fileID: 195130, guid: 78bf010bbd3d8d4429e04e9ab9cfb409, type: 2}
-  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
+  MuzzlePrefab: {fileID: 11413894, guid: 0b630620908faae4db51a824d4b1e5e1, type: 2}
   FireSound: {fileID: 8209866}
   FireRate: 0.2
   MissilesPerShot: 1
