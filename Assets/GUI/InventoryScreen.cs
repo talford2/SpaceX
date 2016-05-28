@@ -201,20 +201,13 @@ public class InventoryScreen : MonoBehaviour
             if (_doubleClickCooldown > 0f)
             {
                 Debug.Log("DOUBLE CLICK!");
-                var equippedItem = PlayerController.Current.VehicleInstance.PrimaryWeaponInstance.gameObject;
-                Debug.Log("EQUIPPED: " + equippedItem.name);
-                var equipItem = PlayerController.Current.GetInventoryItem(index);
-                Debug.Log("EQUIP: " + equipItem.name);
+                var equippedItemIndex = PlayerController.Current.VehicleInstance.PrimaryWeaponInstance.LootIndex;
+                var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
 
-                //PlayerController.Current.RemoveFromInventory(index);
-                PlayerController.Current.SetInventoryItem(index, equippedItem);
+                PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+                PlayerController.Current.VehicleInstance.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex]);
 
-                Debug.Log("VERIFY: " + PlayerController.Current.GetInventoryItem(index));
-
-                // For replacing primary weapon
-                PlayerController.Current.VehicleInstance.SetPrimaryWeapon(equipItem);
-
-                var inventoryItem = equippedItem.GetComponent<InventoryItem>();
+                var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
                 ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
 
                 PopulatePrimary();

@@ -6480,6 +6480,51 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &1002618553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1002618555}
+  - 114: {fileID: 1002618554}
+  m_Layer: 0
+  m_Name: LootManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1002618554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1002618553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d7095d8d9f22194394fb7a299756ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Items:
+  - {fileID: 187448, guid: 8d1335b2fcad39d469234af6d4b7f5f2, type: 2}
+  - {fileID: 187448, guid: 72177eff6e428814c941aace35ca0f93, type: 2}
+  - {fileID: 116878, guid: 7566ec183c3fcfb4fbe0397de99578c0, type: 2}
+  - {fileID: 182288, guid: 578e28cbf04200247b2ca20b4f60e91c, type: 2}
+  - {fileID: 168282, guid: 4063efe36c8729246a44aec50d7e1406, type: 2}
+--- !u!4 &1002618555
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1002618553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!1 &1007611283
 GameObject:
   m_ObjectHideFlags: 0
@@ -7329,7 +7374,7 @@ MonoBehaviour:
   - Prefab: {fileID: 181714, guid: 075a14e6623618140bb749bc25ab34b0, type: 2}
     Count: 20
   - Prefab: {fileID: 145142, guid: 9a605769420d6ae4987fb273fa318c14, type: 2}
-    Count: 20
+    Count: 200
   CellRadius: 10
 --- !u!1 &1109137749
 GameObject:

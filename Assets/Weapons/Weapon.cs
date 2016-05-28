@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
 {
 	[Header("Description")]
 	public string Name;
+    public int LootIndex;
 
 	[Header("Weapon Settings")]
 	public GameObject MissilePrefab;
