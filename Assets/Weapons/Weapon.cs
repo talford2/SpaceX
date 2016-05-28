@@ -59,6 +59,10 @@ public class Weapon : MonoBehaviour
 		_velocityReference = velocityReference;
 		_ownerTeam = ownerTeam;
 		_targetTeam = Targeting.GetEnemyTeam(_ownerTeam);
+        foreach(var shootPoint in shootPoints)
+        {
+            shootPoint.Initialize(MuzzlePrefab);
+        }
 	}
 
 	private void Update()

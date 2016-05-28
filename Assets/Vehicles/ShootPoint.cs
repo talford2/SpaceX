@@ -6,6 +6,8 @@ public class ShootPoint : MonoBehaviour
 
     public void Initialize(MuzzleFlash muzzlePrefab)
     {
+        if (_muzzleInstance != null)
+            Destroy(_muzzleInstance.gameObject);
         _muzzleInstance = Utility.InstantiateInParent(muzzlePrefab.gameObject, transform).GetComponent<MuzzleFlash>();
     }
 
