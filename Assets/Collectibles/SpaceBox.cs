@@ -4,6 +4,7 @@ public class SpaceBox : MonoBehaviour
 {
     public Shiftable Shiftable;
     public Killable Killable;
+    public Rigidbody RBody;
 
     public float InitialAngularSpeed = 90f;
 
@@ -34,7 +35,7 @@ public class SpaceBox : MonoBehaviour
         var displacement = _velocity * Time.deltaTime;
         var angularDisplacement = _angularVelocity * Time.deltaTime;
 
-        transform.rotation *= Quaternion.Euler(angularDisplacement);
+        RBody.rotation *= Quaternion.Euler(angularDisplacement);
         Shiftable.Translate(displacement);
     }
 
