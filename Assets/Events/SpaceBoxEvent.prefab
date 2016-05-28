@@ -44,6 +44,7 @@ GameObject:
   - 114: {fileID: 11466230}
   - 114: {fileID: 11406612}
   - 114: {fileID: 11461088}
+  - 54: {fileID: 5427882}
   m_Layer: 0
   m_Name: SpaceLoot
   m_TagString: Untagged
@@ -90,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.8709092, y: -5.5967026, z: -3.1978135}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 499014}
@@ -180,6 +181,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111248}
   m_Mesh: {fileID: 4300000, guid: 620ac3efb685a6045a1a13e4b9314696, type: 3}
+--- !u!54 &5427882
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137698}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!64 &6400574
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -257,6 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shiftable: {fileID: 11479302}
   Killable: {fileID: 11406612}
+  RBody: {fileID: 5427882}
   InitialAngularSpeed: 90
   DropItem: {fileID: 141952, guid: 03dbc59e7d518244385fa84aec66a22b, type: 2}
   DropCount: 1
