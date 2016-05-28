@@ -218,7 +218,9 @@ MonoBehaviour:
   Killable: {fileID: 11432620}
   RBody: {fileID: 5470600}
   InitialAngularSpeed: 90
-  DropItem: {fileID: 141952, guid: 03dbc59e7d518244385fa84aec66a22b, type: 2}
+  DropItems:
+  - {fileID: 141952, guid: 03dbc59e7d518244385fa84aec66a22b, type: 2}
+  - {fileID: 141952, guid: 149419646566ccf40bcd0c7b79be6fb7, type: 2}
   DropJunk: {fileID: 187448, guid: 8d1335b2fcad39d469234af6d4b7f5f2, type: 2}
   DropJunkMinCount: 5
   DropJunkMaxCount: 10
@@ -278,6 +280,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: DropItems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Shiftable
       value: 
@@ -355,6 +361,14 @@ Prefab:
       propertyPath: DropJunkMaxCount
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DropItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 141952, guid: 03dbc59e7d518244385fa84aec66a22b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DropItems.Array.data[1]
+      value: 
+      objectReference: {fileID: 141952, guid: 149419646566ccf40bcd0c7b79be6fb7, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174812}

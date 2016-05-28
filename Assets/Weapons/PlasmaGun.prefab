@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 467582}
   - 114: {fileID: 11444764}
+  - 114: {fileID: 11401400}
   m_Layer: 0
   m_Name: PlasmaGun
   m_TagString: Untagged
@@ -131,6 +132,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11401400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdbb7f25e717fd499c6f238cf3acb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventorySprite: {fileID: 21300000, guid: d2fc058ec4f7c8146962d6cf3837254f, type: 3}
 --- !u!114 &11444764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Plasma Cannon
+  LootIndex: 2
   MissilePrefab: {fileID: 195130, guid: 78bf010bbd3d8d4429e04e9ab9cfb409, type: 2}
   MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
   FireSound: {fileID: 8209866}
@@ -172,6 +186,11 @@ Prefab:
       propertyPath: Name
       value: Plasma Cannon
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InventorySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d2fc058ec4f7c8146962d6cf3837254f,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 116878}
