@@ -339,7 +339,7 @@ MonoBehaviour:
   DropItems:
   - {fileID: 141952, guid: 03dbc59e7d518244385fa84aec66a22b, type: 2}
   - {fileID: 141952, guid: 149419646566ccf40bcd0c7b79be6fb7, type: 2}
-  - {fileID: 187448, guid: 76cdaeb8c4c3acc49ba3d07c7ccad643, type: 2}
+  - {fileID: 141952, guid: 7779d0e26da83514f96e8f152bd876e5, type: 2}
   DropJunk: {fileID: 163398, guid: 816f10aa082864542b4127328f007432, type: 2}
   DropJunkMinCount: 5
   DropJunkMaxCount: 10
