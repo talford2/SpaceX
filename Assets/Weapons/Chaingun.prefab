@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Green Laser Cannon
+  Name: Chain Gun
   LootIndex: 5
   MissilePrefab: {fileID: 180512, guid: 486174ed4f2bfaa4ea9633384cc46aaf, type: 2}
   MuzzlePrefab: {fileID: 11496450, guid: 2af108f533a9b214ca70f588ecaaf5f7, type: 2}
@@ -163,7 +163,7 @@ MonoBehaviour:
   FireRate: 0.03
   MissilesPerShot: 1
   Spread: 2
-  MissileDamage: 3
+  MissileDamage: 3.8
   MissilesConverge: 0
   IsTargetLocking: 0
   TargetLockTime: 1.5

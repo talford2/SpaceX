@@ -163,7 +163,7 @@ MonoBehaviour:
   FireRate: 0.1
   MissilesPerShot: 1
   Spread: 0
-  MissileDamage: 5
+  MissileDamage: 5.5
   MissilesConverge: 0
   IsTargetLocking: 0
   TargetLockTime: 0.5

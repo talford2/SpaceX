@@ -156,13 +156,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Green Laser Cannon
+  LootIndex: 0
   MissilePrefab: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
   MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
   FireSound: {fileID: 8259540}
   FireRate: 0.1
   MissilesPerShot: 2
   Spread: 0
-  MissileDamage: 5
+  MissileDamage: 4.5
   MissilesConverge: 0
   IsTargetLocking: 0
   TargetLockTime: 1.5
