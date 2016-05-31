@@ -417,8 +417,9 @@ public class PlayerController : MonoBehaviour
 		}
 		else
 		{
-			_leader = Squadron.GetMember(0);
-			leaderVehicle = Squadron.GetMember(0).VehicleInstance;
+            _leader = Squadron.GetMember(0);
+            leaderVehicle = Squadron.GetMember(0).VehicleInstance;
+
 			if (leaderVehicle != null && _playVehicleInstance != null)
 			{
 				_leader.IdleDestination = leaderVehicle.transform.position + leaderVehicle.transform.forward * 10f;
@@ -439,6 +440,14 @@ public class PlayerController : MonoBehaviour
 				Squadron.GetMember(i).IdleUpDestination = leaderVehicle.transform.up;
 				//Debug.DrawLine(formationDestination, formationDestination + Vector3.up*100f, Color.white);
 			}
+
+            // Swap player controlled vehicle as leader.
+            var playerSquadronIndex = Squadron.GetCurrentIndex();
+            if (playerSquadronIndex != 0)
+            {
+                var formationOffset = Formations.GetArrowOffset(playerSquadronIndex, 10f);
+                Squadron.GetMember(0).IdleDestination = leaderVehicle.transform.position + leaderVehicle.transform.rotation * formationOffset;
+            }
 		}
 
 		if (_playVehicleInstance != null)
