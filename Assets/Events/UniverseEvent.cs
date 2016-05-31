@@ -11,6 +11,7 @@ public class UniverseEvent : MonoBehaviour
     public float TriggerRadius;
 
     [Header("Tracker")]
+    public bool UseTracker;
     public float TrackerRadius = 1000f;
     public Texture2D TrackerCursorImage;
     public Texture2D ArrowCursorImage;
@@ -85,26 +86,29 @@ public class UniverseEvent : MonoBehaviour
                 Trigger();
             }
         }
-        if (_tracker == null)
+        if (UseTracker)
         {
-            if (_lastDistanceSquared > _trackerRadiusSquared)
+            if (_tracker == null)
             {
-                if (toViewPortSquared < _trackerRadiusSquared)
+                if (_lastDistanceSquared > _trackerRadiusSquared)
                 {
-                    _tracker = gameObject.AddComponent<EventTracker>();
-                    _tracker.ArrowCursorImage = ArrowCursorImage;
-                    _tracker.TrackerCursorImage = TrackerCursorImage;
-                    _tracker.LabelFont = LabelFont;
+                    if (toViewPortSquared < _trackerRadiusSquared)
+                    {
+                        _tracker = gameObject.AddComponent<EventTracker>();
+                        _tracker.ArrowCursorImage = ArrowCursorImage;
+                        _tracker.TrackerCursorImage = TrackerCursorImage;
+                        _tracker.LabelFont = LabelFont;
+                    }
                 }
             }
-        }
-        if (_tracker != null)
-        {
-            if (_lastDistanceSquared < _trackerRadiusSquared)
+            if (_tracker != null)
             {
-                if (toViewPortSquared > _trackerRadiusSquared)
+                if (_lastDistanceSquared < _trackerRadiusSquared)
                 {
-                    _tracker.SelfDestroy();
+                    if (toViewPortSquared > _trackerRadiusSquared)
+                    {
+                        _tracker.SelfDestroy();
+                    }
                 }
             }
         }
