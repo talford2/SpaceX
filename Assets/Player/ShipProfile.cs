@@ -8,6 +8,9 @@ public class ShipProfile : MonoBehaviour
     public int Shields = 5;
     public int Special = 1;
 
+    public Weapon PrimaryWeapon;
+    public Weapon SecondaryWeapon;
+
     public int PowerRemaining { get { return TotalPower - Weapons - Shields - Special; } }
 
     public float GetShield()

@@ -80,6 +80,11 @@ public class PlayerSquadron : MonoBehaviour
 
         var profile = member.GetComponent<ShipProfile>();
 
+        if (profile.PrimaryWeapon != null)
+            member.VehicleInstance.SetPrimaryWeapon(profile.PrimaryWeapon.gameObject);
+        if (profile.SecondaryWeapon != null)
+            member.VehicleInstance.SetSecondaryWeapon(profile.SecondaryWeapon.gameObject);
+        
         var squadronTracker = member.VehicleInstance.gameObject.AddComponent<SquadronTracker>();
         squadronTracker.ArrowSprite = memberTracker.ArrowSprite;
         //squadronTracker.TrackerSprite = memberTracker.TrackerSprite;

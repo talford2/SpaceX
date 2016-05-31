@@ -220,6 +220,7 @@ public class InventoryScreen : MonoBehaviour
 
                     PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
 
+                    focusVehicle.Controller.GetComponent<ShipProfile>().PrimaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
                     focusVehicle.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex]);
 
                     var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();

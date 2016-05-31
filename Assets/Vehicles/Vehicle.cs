@@ -167,13 +167,16 @@ public class Vehicle : MonoBehaviour
         _targetable = GetComponent<Targetable>();
 
         SetPrimaryWeapon(PrimaryWeaponPrefab.gameObject);
+        SetSecondaryWeapon(SecondaryWeaponPrefab.gameObject);
 
+        /*
 		if (SecondaryWeaponPrefab != null)
 		{
 			_secondaryWeaponInstance = Utility.InstantiateInParent(SecondaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
 			_secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference, _targetable.Team);
 			_secondaryWeaponInstance.OnShoot += OnShoot;
 		}
+        */
 
 		_killable = GetComponent<Killable>();
 
@@ -201,7 +204,25 @@ public class Vehicle : MonoBehaviour
         }
     }
 
-	public void SetTargetRotation(Quaternion rotation)
+    public void SetSecondaryWeapon(GameObject secondaryWeapon)
+    {
+        
+        if (_secondaryWeaponInstance != null)
+        {
+            _secondaryWeaponInstance.IsTriggered = false;
+            _secondaryWeaponInstance.ClearTargetLock();
+            _secondaryWeaponInstance.OnShoot -= OnShoot;
+            Destroy(_secondaryWeaponInstance.gameObject);
+        }
+        if (secondaryWeapon != null)
+        {
+            _secondaryWeaponInstance = Utility.InstantiateInParent(secondaryWeapon.gameObject, transform).GetComponent<Weapon>();
+            _secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference, _targetable.Team);
+            _secondaryWeaponInstance.OnShoot += OnShoot;
+        }
+    }
+
+    public void SetTargetRotation(Quaternion rotation)
 	{
 		_targetRotation = rotation;
 	}

@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
     public SplinePath UTurnPath;
     public float UTurnDuration = 5f;
 
+    private ShipProfile _profile;
+
 	private float _aimDistance;
 	private float _screenAspect;
 	private int _threatCount;
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour
 		if (HideMouse)
 			Cursor.lockState = CursorLockMode.Locked;
 
+        _profile = GetComponent<ShipProfile>();
         _inventory = new PlayerInventory(15);
 
 		_screenAspect = (float)Screen.height / (float)Screen.width;
@@ -115,6 +118,11 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, universePosition.CellLocalPosition, rotation)).GetComponent<Vehicle>();
 		_playVehicleInstance.Controller = gameObject;
 		_playVehicleInstance.Shiftable.SetShiftPosition(universePosition);
+
+        if (_profile.PrimaryWeapon != null)
+            _playVehicleInstance.SetPrimaryWeapon(_profile.PrimaryWeapon.gameObject);
+        if (_profile.SecondaryWeapon != null)
+            _playVehicleInstance.SetSecondaryWeapon(_profile.SecondaryWeapon.gameObject);
 
         _playVehicleInstance.UTurnPath = UTurnPath;
         _playVehicleInstance.UTurnDuration = UTurnDuration;
