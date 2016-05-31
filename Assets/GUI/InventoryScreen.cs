@@ -126,7 +126,6 @@ public class InventoryScreen : MonoBehaviour
     {
         _currentIndex = PlayerController.Current.Squadron.GetCurrentIndex();
         Populate(_currentIndex);
-        PopulatePrimary();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

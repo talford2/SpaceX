@@ -412,14 +412,13 @@ public class PlayerController : MonoBehaviour
 
         Vehicle leaderVehicle;
         var playerSquadronIndex = Squadron.GetCurrentIndex();
-        if (Squadron.GetCurrentIndex() == 0)
+        if (playerSquadronIndex == 0)
 		{
 			leaderVehicle = VehicleInstance;
 		}
 		else
 		{
             _leader = Squadron.GetMember(playerSquadronIndex);
-                //Squadron.GetMember(0);
             leaderVehicle = _leader.VehicleInstance;
 
 			if (leaderVehicle != null && _playVehicleInstance != null)
@@ -444,7 +443,6 @@ public class PlayerController : MonoBehaviour
 			}
 
             // Swap player controlled vehicle as leader.
-            
             if (playerSquadronIndex != 0)
             {
                 var formationOffset = Formations.GetArrowOffset(playerSquadronIndex, 10f);
