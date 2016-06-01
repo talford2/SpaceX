@@ -470,9 +470,13 @@ public class PlayerController : MonoBehaviour
 					var detected = Physics.OverlapSphere(_playVehicleInstance.transform.position, ThreatRadius, _detectableMask);
 					_threatCount = detected.Count(d => d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>() != null && d.GetComponent<Detectable>().TargetTransform.GetComponent<Targetable>().Team == Targeting.GetEnemyTeam(Team));
 					_threatCheckCooldown = 1f;
+
+                    if (_threatCount == 0)
+                        _noThreatCooldown = 0f;
 				}
 			}
 
+            /*
 			if (_threatCount > 0)
 			{
 				_noThreatCooldown = NoThreatTime;
@@ -482,11 +486,14 @@ public class PlayerController : MonoBehaviour
 				if (_noThreatCooldown > 0f)
 				{
 					_noThreatCooldown -= Time.deltaTime;
-					//Debug.Log("NO THREAT: " + _noThreatCooldown);
 				}
 			}
+            */
 
-			if (Squadron.GetLiveCount() < Squadron.GetMemberCount())
+            if (_noThreatCooldown >= 0f)
+                _noThreatCooldown -= Time.deltaTime;
+
+            if (Squadron.GetLiveCount() < Squadron.GetMemberCount())
 			{
 				//Debug.Log("REPLENISH CHECK!");
 				if (_noThreatCooldown < 0f)
