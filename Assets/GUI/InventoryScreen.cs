@@ -213,8 +213,9 @@ public class InventoryScreen : MonoBehaviour
             {
                 if (focusVehicle != null)
                 {
-                    var selectedInvenotyItem = LootManager.Current.Items[index].GetComponent<InventoryItem>();
+                    var selectedInvenotyItem = PlayerController.Current.GetInventoryItem(index).GetComponent<InventoryItem>();
                     Debug.Log("DOUBLE CLICK!");
+                    Debug.Log("ITEM: " + selectedInvenotyItem.name + " TYPE: " + selectedInvenotyItem.Type);
 
                     // Primary Weapon
                     if (selectedInvenotyItem.Type == ItemType.PrimaryWeapon)
@@ -296,6 +297,10 @@ public class InventoryScreen : MonoBehaviour
         ItemNameText.text = secondaryWeapon.Name;
         SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.MissileDamage);
         SecondaryFireRateValueText.text = string.Format("{0:f1}", secondaryWeapon.FireRate);
+
+        var inventoryItem = secondaryWeapon.GetComponent<InventoryItem>();
+        if (inventoryItem != null)
+            SecondaryButton.image.sprite = inventoryItem.InventorySprite;
 
         HideItemPanels();
         SecondaryPanel.gameObject.SetActive(true);

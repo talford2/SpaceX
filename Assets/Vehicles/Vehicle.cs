@@ -172,15 +172,6 @@ public class Vehicle : MonoBehaviour
         SetPrimaryWeapon(PrimaryWeaponPrefab.gameObject);
         SetSecondaryWeapon(SecondaryWeaponPrefab.gameObject);
 
-        /*
-		if (SecondaryWeaponPrefab != null)
-		{
-			_secondaryWeaponInstance = Utility.InstantiateInParent(SecondaryWeaponPrefab.gameObject, transform).GetComponent<Weapon>();
-			_secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference, _targetable.Team);
-			_secondaryWeaponInstance.OnShoot += OnShoot;
-		}
-        */
-
 		_killable = GetComponent<Killable>();
 
 		_allowBoost = true;
@@ -209,7 +200,6 @@ public class Vehicle : MonoBehaviour
 
     public void SetSecondaryWeapon(GameObject secondaryWeapon)
     {
-        
         if (_secondaryWeaponInstance != null)
         {
             _secondaryWeaponInstance.IsTriggered = false;
