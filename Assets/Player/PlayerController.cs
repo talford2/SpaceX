@@ -166,34 +166,34 @@ public class PlayerController : MonoBehaviour
 		shieldRegenerator.OnRegenerate += PlayerController_OnRegenerate;
 	}
 
-	private Vector3 GetAimAt()
-	{
-		var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-		RaycastHit aimHit;
-		_aimDistance = Mathf.Lerp(_aimDistance, DefaultAimDistance, Time.deltaTime);
-		var aimAtPosition = mouseRay.GetPoint(DefaultAimDistance);
+    private Vector3 GetAimAt()
+    {
+        var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        RaycastHit aimHit;
+        _aimDistance = Mathf.Lerp(_aimDistance, DefaultAimDistance, Time.deltaTime);
+        var aimAtPosition = mouseRay.GetPoint(DefaultAimDistance);
 
-		// Fancy System.
-		var viewPortPos = Universe.Current.ViewPort.transform.position;
-		var viewPortForward = Universe.Current.ViewPort.transform.forward;
-		var dotViewPort = VehicleInstance.PrimaryWeaponInstance != null
-			? Vector3.Dot(VehicleInstance.PrimaryWeaponInstance.GetShootPointCentre() - viewPortPos, viewPortForward)
-			: Vector3.Dot(VehicleInstance.transform.position - viewPortPos, viewPortForward);
-		var guessTarget = Targeting.FindFacingAngleAny(viewPortPos + dotViewPort * viewPortForward, viewPortForward, MaxAimDistance, 5f);
-		if (guessTarget != null)
-		{
-			var toGuessTarget = guessTarget.position - viewPortPos;
-			_aimDistance = Mathf.Clamp(toGuessTarget.magnitude, MinAimDistance, MaxAimDistance);
-			return mouseRay.GetPoint(_aimDistance);
-		}
+        // Fancy System.
+        var viewPortPos = Universe.Current.ViewPort.transform.position;
+        var viewPortForward = Universe.Current.ViewPort.transform.forward;
+        var dotViewPort = VehicleInstance.PrimaryWeaponInstance != null
+            ? Vector3.Dot(VehicleInstance.PrimaryWeaponInstance.GetShootPointCentre() - viewPortPos, viewPortForward)
+            : Vector3.Dot(VehicleInstance.transform.position - viewPortPos, viewPortForward);
+        var guessTarget = Targeting.FindFacingAngleAny(viewPortPos + dotViewPort * viewPortForward, viewPortForward, MaxAimDistance, 5f);
+        if (guessTarget != null)
+        {
+            var toGuessTarget = guessTarget.position - viewPortPos;
+            _aimDistance = Mathf.Clamp(toGuessTarget.magnitude + 0.5f, MinAimDistance, MaxAimDistance);
+            return mouseRay.GetPoint(_aimDistance);
+        }
 
-		if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, _aimMask))
-		{
-			_aimDistance = Mathf.Clamp(aimHit.distance, MinAimDistance, MaxAimDistance);
-			aimAtPosition = mouseRay.GetPoint(_aimDistance);
-		}
-		return aimAtPosition;
-	}
+        if (Physics.Raycast(mouseRay, out aimHit, MaxAimDistance, _aimMask))
+        {
+            _aimDistance = Mathf.Clamp(aimHit.distance + 0.5f, MinAimDistance, MaxAimDistance);
+            aimAtPosition = mouseRay.GetPoint(_aimDistance);
+        }
+        return aimAtPosition;
+    }
 
 	public void SetControlEnabled(bool value)
 	{
