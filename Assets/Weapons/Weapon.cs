@@ -35,8 +35,6 @@ public class Weapon : MonoBehaviour
 
 	public bool IsTriggered;
 
-	public int MissilePoolCount = 20;
-
 	public delegate void OnShootEvent(int shootPointIndex);
 	public OnShootEvent OnShoot;
 
