@@ -213,19 +213,41 @@ public class InventoryScreen : MonoBehaviour
             {
                 if (focusVehicle != null)
                 {
+                    var selectedInvenotyItem = LootManager.Current.Items[index].GetComponent<InventoryItem>();
                     Debug.Log("DOUBLE CLICK!");
-                    var equippedItemIndex = focusVehicle.PrimaryWeaponInstance.LootIndex;
-                    var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
 
-                    PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+                    // Primary Weapon
+                    if (selectedInvenotyItem.Type == ItemType.PrimaryWeapon)
+                    {
+                        var equippedItemIndex = focusVehicle.PrimaryWeaponInstance.LootIndex;
+                        var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
 
-                    focusVehicle.Controller.GetComponent<ShipProfile>().PrimaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
-                    focusVehicle.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex]);
+                        PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
 
-                    var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
-                    ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+                        focusVehicle.Controller.GetComponent<ShipProfile>().PrimaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
+                        focusVehicle.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex]);
 
-                    PopulatePrimary();
+                        var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
+                        ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+
+                        PopulatePrimary();
+                    }
+                    // Secondary Weapon
+                    if (selectedInvenotyItem.Type == ItemType.SecondaryWeapon)
+                    {
+                        var equippedItemIndex = focusVehicle.SecondaryWeaponInstance.LootIndex;
+                        var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
+
+                        PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+
+                        focusVehicle.Controller.GetComponent<ShipProfile>().SecondaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
+                        focusVehicle.SetSecondaryWeapon(LootManager.Current.Items[equipItemIndex]);
+
+                        var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
+                        ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+
+                        PopulateSecondary();
+                    }
                 }
             }
         }

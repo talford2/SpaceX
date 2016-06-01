@@ -65,6 +65,7 @@ Transform:
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: -0.000000013113416}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 444858}
   m_RootOrder: 1
@@ -77,6 +78,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 468534}
   - {fileID: 400128}
@@ -91,6 +93,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 16, y: 16, z: 16}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 444858}
   m_RootOrder: 0
@@ -222,6 +225,8 @@ MonoBehaviour:
   - {fileID: 141952, guid: 03dbc59e7d518244385fa84aec66a22b, type: 2}
   - {fileID: 141952, guid: 149419646566ccf40bcd0c7b79be6fb7, type: 2}
   - {fileID: 141952, guid: 7779d0e26da83514f96e8f152bd876e5, type: 2}
+  - {fileID: 141952, guid: 62a754571653c324e80e0be47d6b1713, type: 2}
+  - {fileID: 141952, guid: 5ee17808ad6ea2b419a2eaad783edf28, type: 2}
   DropJunk: {fileID: 163398, guid: 816f10aa082864542b4127328f007432, type: 2}
   DropJunkMinCount: 5
   DropJunkMaxCount: 10

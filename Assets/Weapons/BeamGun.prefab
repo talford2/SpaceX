@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventorySprite: {fileID: 21300000, guid: 40f84609801fab443a4895e769c8dc03, type: 3}
+  Type: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
