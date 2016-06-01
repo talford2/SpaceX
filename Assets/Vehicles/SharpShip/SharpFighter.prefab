@@ -109,6 +109,7 @@ GameObject:
   - 4: {fileID: 435378}
   - 33: {fileID: 3370382}
   - 23: {fileID: 2362192}
+  - 64: {fileID: 6415766}
   m_Layer: 0
   m_Name: SharpShip
   m_TagString: Untagged
@@ -420,6 +421,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &6415766
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138418}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_Mesh: {fileID: 4300000, guid: 00cffd70bbf996a48898017cdc128e92, type: 3}
 --- !u!82 &8252254
 AudioSource:
   m_ObjectHideFlags: 1
@@ -691,8 +704,8 @@ MonoBehaviour:
   MaxBoostEnergy: 100
   BoostEnergy: 100
   BoostCost: 50
-  BoostEnergyRegenerateDelay: 5
-  BoostEnergyRegenerateRate: 1
+  BoostEnergyRegenerateDelay: 2
+  BoostEnergyRegenerateRate: 10
   Controller: {fileID: 0}
   TriggerAccelerate: 0
   TriggerBrake: 0
@@ -700,7 +713,7 @@ MonoBehaviour:
   YawThrottle: 0
   PitchThotttle: 0
   RollThrottle: 0
-  CameraDistance: 15
+  CameraDistance: 20
   UTurnPath: {fileID: 0}
   UTurnDuration: 0
   PrimaryWeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93,
