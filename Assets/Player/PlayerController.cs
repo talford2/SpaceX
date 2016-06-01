@@ -598,6 +598,7 @@ public class PlayerController : MonoBehaviour
 
 					var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
 					cam.Target = _playVehicleInstance;
+                    cam.DistanceBehind = _playVehicleInstance.CameraDistance;
 					cam.Reset();
 				}
 				if (OnChangeSquadronMember != null)

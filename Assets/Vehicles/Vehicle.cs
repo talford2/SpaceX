@@ -44,6 +44,9 @@ public class Vehicle : MonoBehaviour
 	public float PitchThotttle = 0f;
 	public float RollThrottle = 0f;
 
+    [Header("Camera")]
+    public float CameraDistance = 15f;
+
     [Header("U-Turn")]
     public SplinePath UTurnPath;
     public float UTurnDuration;
