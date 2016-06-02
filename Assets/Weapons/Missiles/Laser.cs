@@ -62,6 +62,8 @@ public class Laser : Missile
 						_killable = missileHit.collider.GetComponentInParent<Killable>();
 						if (_killable != null)
 						{
+                            if (Owner == PlayerController.Current.VehicleInstance.gameObject)
+                                HeadsUpDisplay.Current.TriggerCrosshairPulse();
 							_killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
 						}
 						_hasHit = true;

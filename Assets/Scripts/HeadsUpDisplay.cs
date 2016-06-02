@@ -52,6 +52,11 @@ public class HeadsUpDisplay : MonoBehaviour
 	private float _energyRegenDuration = 0.4f;
 	private float _energyRegenCooldown;
 
+    // Crosshair pulse effct
+    private Image _crosshairImage;
+    private float _crosshairPulseDuration = 0.5f;
+    private float _crosshairPulseCooldown;
+
 	private float _healthOpacity;
 	private float _shieldOpacity;
 	private float _boostOpacity;
@@ -61,6 +66,7 @@ public class HeadsUpDisplay : MonoBehaviour
 		_current = this;
 		HitImage.color = new Color(1, 1, 1, 0);
 		_squadronIcons = new List<SquadronIcon>();
+        _crosshairImage = Crosshair.GetComponent<Image>();
 
 		_healthOpacity = HealthBar.color.a;
 		_shieldOpacity = ShieldBar.color.a;
@@ -150,6 +156,20 @@ public class HeadsUpDisplay : MonoBehaviour
 				BoostBar.color = Utility.SetColorAlpha(BoostBar.color, (1 - _boostOpacity) * pulseFraction + _boostOpacity);
 			}
 		}
+
+        if (_crosshairPulseCooldown >= 0f)
+        {
+            _crosshairPulseCooldown -= Time.deltaTime;
+            if (_crosshairPulseCooldown < 0f)
+            {
+                _crosshairImage.rectTransform.sizeDelta = new Vector2(64f, 64f);
+            }
+            else
+            {
+                var pulseFraction = _crosshairPulseCooldown / _crosshairPulseDuration;
+                _crosshairImage.rectTransform.sizeDelta = Vector2.Lerp(new Vector2(90f, 90f), new Vector2(64f, 64f), 1f - pulseFraction);
+            }
+        }
 	}
 
 	public void LazyCreateSquadronIcons()
@@ -245,4 +265,10 @@ public class HeadsUpDisplay : MonoBehaviour
 		BoostBar.color = Utility.SetColorAlpha(BoostBar.color, 1f);
 		_energyRegenCooldown = _energyRegenDuration;
 	}
+
+    public void TriggerCrosshairPulse()
+    {
+        _crosshairImage.rectTransform.sizeDelta = new Vector2(90f, 90f);
+        _crosshairPulseCooldown = _crosshairPulseDuration;
+    }
 }
