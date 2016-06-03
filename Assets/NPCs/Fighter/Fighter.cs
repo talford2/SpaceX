@@ -134,6 +134,8 @@ public class Fighter : Npc<Fighter>
 		killable.OnDamage += OnVehicleDamaged;
 		killable.OnDie += OnVehicleDestroyed;
 
+        _vehicleInstance.Initialize();
+
 		// Apply power profile
 		var powerProfile = GetComponent<ShipProfile>();
 		killable.MaxShield = powerProfile.GetShield();

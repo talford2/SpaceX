@@ -176,7 +176,7 @@ public class Weapon : MonoBehaviour
 			if (IsTriggered)
 			{
 				var targetLockingDir = _aimAt - shootPointsCentre;
-				_lockingTarget = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(_targetTeam), shootPointsCentre, targetLockingDir, TargetLockingMaxDistance);
+				_lockingTarget = Targeting.FindFacingAngleTeam(_targetTeam, shootPointsCentre, targetLockingDir, TargetLockingMaxDistance);
 				if (_lastLockingTarget == null)
 					_lastLockingTarget = _lockingTarget;
 			}

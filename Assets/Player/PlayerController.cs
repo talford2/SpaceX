@@ -118,6 +118,9 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, universePosition.CellLocalPosition, rotation)).GetComponent<Vehicle>();
 		_playVehicleInstance.Controller = gameObject;
 		_playVehicleInstance.Shiftable.SetShiftPosition(universePosition);
+        _playVehicleInstance.GetComponent<Targetable>().Team = Team;
+
+        _playVehicleInstance.Initialize();
 
         var playerCurrent = Squadron.GetMember(Squadron.GetCurrentIndex()).GetComponent<ShipProfile>();
 
@@ -147,7 +150,6 @@ public class PlayerController : MonoBehaviour
 		mapPin.ActivePin = PlayerPinPrefab;
 		mapPin.InactivePin = Squadron.SquadronPinPrefab;
 
-		_playVehicleInstance.GetComponent<Targetable>().Team = Team;
 		_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
 
 		_playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;

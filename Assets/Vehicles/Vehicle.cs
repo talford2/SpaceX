@@ -167,11 +167,6 @@ public class Vehicle : MonoBehaviour
 
 		_velocityReference = new VelocityReference(_velocity);
 
-        _targetable = GetComponent<Targetable>();
-
-        SetPrimaryWeapon(PrimaryWeaponPrefab.gameObject);
-        SetSecondaryWeapon(SecondaryWeaponPrefab.gameObject);
-
 		_killable = GetComponent<Killable>();
 
 		_allowBoost = true;
@@ -180,6 +175,14 @@ public class Vehicle : MonoBehaviour
 
 		_environmentMask = LayerMask.GetMask("Environment");
 	}
+
+    public void Initialize()
+    {
+        _targetable = GetComponent<Targetable>();
+
+        SetPrimaryWeapon(PrimaryWeaponPrefab.gameObject);
+        SetSecondaryWeapon(SecondaryWeaponPrefab.gameObject);
+    }
 
     public void SetPrimaryWeapon(GameObject primaryWeapon)
     {
