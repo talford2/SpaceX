@@ -172,10 +172,11 @@ MonoBehaviour:
   TargetLockTime: 0.5
   TargetLockingMaxDistance: 2000
   IsOverheat: 1
-  HeatPerMissile: 2
+  HeatPerMissile: 0.8
   OverheatValue: 100
   OverheatDelay: 2
   CoolingRate: 30
+  CoolDelay: 0.5
   LockSound: {fileID: 0}
   IsTriggered: 0
 --- !u!1001 &100100000

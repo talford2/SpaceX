@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Seeker Rockets
-  LootIndex: 0
+  LootIndex: 4
   MissilePrefab: {fileID: 176048, guid: fea4fea29e620614cab88fa9549f8ae9, type: 2}
   MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
   FireSound: {fileID: 8297298}
@@ -159,10 +159,11 @@ MonoBehaviour:
   TargetLockTime: 0.5
   TargetLockingMaxDistance: 1000
   IsOverheat: 1
-  HeatPerMissile: 50
+  HeatPerMissile: 110
   OverheatValue: 100
   OverheatDelay: 5
   CoolingRate: 50
+  CoolDelay: 0.5
   LockSound: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
   IsTriggered: 0
 --- !u!114 &11442032
