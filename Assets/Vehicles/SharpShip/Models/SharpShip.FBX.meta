@@ -10,14 +10,25 @@ ModelImporter:
     100004: ShootFrontRight
     100006: ShootRearLeft
     100008: ShootRearRight
+    100010: Box002
+    100012: SharpShip
+    100014: SharpShipHigh
     400000: //RootNode
     400002: ShootFrontLeft
     400004: ShootFrontRight
     400006: ShootRearLeft
     400008: ShootRearRight
+    400010: Box002
+    400012: SharpShip
+    400014: SharpShipHigh
     2300000: //RootNode
+    2300002: SharpShip
+    2300004: SharpShipHigh
     3300000: //RootNode
+    3300002: SharpShip
+    3300004: SharpShipHigh
     4300000: SharpShip
+    4300002: SharpShipHigh
   materials:
     importMaterials: 1
     materialName: 0
