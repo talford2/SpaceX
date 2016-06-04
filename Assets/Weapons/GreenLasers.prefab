@@ -42,6 +42,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 491988}
   m_Father: {fileID: 0}
@@ -55,6 +56,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 490488}
   m_RootOrder: 0
@@ -144,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventorySprite: {fileID: 21300000, guid: 53c8d39213fa7c54fa87b72d2e1ad40e, type: 3}
+  Type: 0
 --- !u!114 &11492802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Green Laser Cannon
-  LootIndex: 0
+  LootIndex: 1
   MissilePrefab: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
   MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
   FireSound: {fileID: 8259540}
@@ -168,9 +171,13 @@ MonoBehaviour:
   IsTargetLocking: 0
   TargetLockTime: 1.5
   TargetLockingMaxDistance: 2000
+  IsOverheat: 1
+  HeatPerMissile: 5
+  OverheatValue: 100
+  OverheatDelay: 2
+  CoolingRate: 30
   LockSound: {fileID: 0}
   IsTriggered: 0
-  MissilePoolCount: 50
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -4,83 +4,126 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-	[Header("Description")]
-	public string Name;
+    [Header("Description")]
+    public string Name;
     public int LootIndex;
 
-	[Header("Weapon Settings")]
-	public GameObject MissilePrefab;
+    [Header("Weapon Settings")]
+    public GameObject MissilePrefab;
 
-	public MuzzleFlash MuzzlePrefab;
+    public MuzzleFlash MuzzlePrefab;
 
-	public AudioSource FireSound;
+    public AudioSource FireSound;
 
-	public float FireRate = 0.2f;
-	public int MissilesPerShot = 2;
-	public float Spread = 0f;
-	public float MissileDamage;
-	public bool MissilesConverge;
-	public bool IsTargetLocking;
-	public float TargetLockTime = 1.5f;
-	public float TargetLockingMaxDistance = 2000f;
+    public float FireRate = 0.2f;
+    public int MissilesPerShot = 2;
+    public float Spread = 0f;
+    public float MissileDamage;
+    public bool MissilesConverge;
 
-	public AudioClip LockSound;
+    // Targeting
+    public bool IsTargetLocking;
+    public float TargetLockTime = 1.5f;
+    public float TargetLockingMaxDistance = 2000f;
 
-	private float _fireCooldown = 0f;
-	private List<ShootPoint> _shootPoints;
-	private int _shootPointIndex;
-	private Vector3 _aimAt;
+    // Overheating
+    public bool IsOverheat;
+    public float HeatPerMissile;
+    public float OverheatValue;
+    public float OverheatDelay;
+    public float CoolingRate;
 
-	private VelocityReference _velocityReference;
+    public AudioClip LockSound;
 
-	public bool IsTriggered;
+    private float _fireCooldown = 0f;
+    private List<ShootPoint> _shootPoints;
+    private int _shootPointIndex;
+    private Vector3 _aimAt;
 
-	public delegate void OnShootEvent(int shootPointIndex);
-	public OnShootEvent OnShoot;
+    private VelocityReference _velocityReference;
 
-	private GameObject _owner;
-	private Team _ownerTeam;
+    public bool IsTriggered;
 
-	private Team _targetTeam;
+    public delegate void OnShootEvent(int shootPointIndex);
+    public OnShootEvent OnShoot;
 
-	private Transform _lockingTarget;
-	private Transform _lastLockingTarget;
-	private Transform _lockedTarget;
-	private float _lockingCooldown;
-	private bool _isLocked;
+    private GameObject _owner;
+    private Team _ownerTeam;
 
-	public void Initialize(GameObject owner, List<ShootPoint> shootPoints, VelocityReference velocityReference, Team ownerTeam)
-	{
-		_owner = owner;
-		_shootPoints = shootPoints;
-		_shootPointIndex = 0;
-		_velocityReference = velocityReference;
-		_ownerTeam = ownerTeam;
-		_targetTeam = Targeting.GetEnemyTeam(_ownerTeam);
-        foreach(var shootPoint in shootPoints)
+    private Team _targetTeam;
+
+    private Transform _lockingTarget;
+    private Transform _lastLockingTarget;
+    private Transform _lockedTarget;
+    private float _lockingCooldown;
+    private bool _isLocked;
+
+    private float heatValue;
+    private float heatCooldown;
+    private bool isCoolingDown;
+
+    public void Initialize(GameObject owner, List<ShootPoint> shootPoints, VelocityReference velocityReference, Team ownerTeam)
+    {
+        _owner = owner;
+        _shootPoints = shootPoints;
+        _shootPointIndex = 0;
+        _velocityReference = velocityReference;
+        _ownerTeam = ownerTeam;
+        _targetTeam = Targeting.GetEnemyTeam(_ownerTeam);
+        foreach (var shootPoint in shootPoints)
         {
             shootPoint.Initialize(MuzzlePrefab);
         }
-	}
+        heatValue = 0f;
+        isCoolingDown = false;
+        heatCooldown = 0f;
 
-	private void Update()
-	{
-		//Debug.LogFormat("{0} ===", IsTriggered);
+    }
 
-		if (!IsTargetLocking)
-		{
-			_fireCooldown -= Time.deltaTime;
-			if (IsTriggered && _fireCooldown < 0)
-			{
-				//Debug.Log("Shoot!");
-				_fireCooldown = FireRate;
-				Fire();
-			}
-		}
-		else
-		{
-			TargetLocking();
-		}
+    private void Update()
+    {
+        //Debug.LogFormat("{0} ===", IsTriggered);
+
+        var isOverheated = false;
+        if (heatCooldown >= 0f)
+        {
+            isOverheated = true;
+            heatCooldown -= Time.deltaTime;
+            if (heatCooldown < 0f)
+            {
+                isCoolingDown = true;
+                isOverheated = false;
+            }
+        }
+
+        if (isCoolingDown)
+        {
+            heatValue -= CoolingRate * Time.deltaTime;
+            if (heatValue < 0f)
+            {
+                heatValue = 0f;
+                isOverheated = false;
+                isCoolingDown = false;
+            }
+        }
+
+        if ((IsOverheat && !isOverheated) || !IsOverheat)
+        {
+            if (!IsTargetLocking)
+            {
+                _fireCooldown -= Time.deltaTime;
+                if (IsTriggered && _fireCooldown < 0)
+                {
+                    //Debug.Log("Shoot!");
+                    _fireCooldown = FireRate;
+                    Fire();
+                }
+            }
+            else
+            {
+                TargetLocking();
+            }
+        }
 	}
 
 	public Vector3 GetShootPointCentre()
@@ -117,6 +160,15 @@ public class Weapon : MonoBehaviour
 
 		_shootPoint.Flash();
 		FireSound.Play();
+
+        if (IsOverheat)
+        {
+            heatValue += HeatPerMissile;
+            if (heatValue >= OverheatValue)
+            {
+                heatCooldown = OverheatDelay;
+            }
+        }
 
 		_shootPointIndex++;
 		if (_shootPointIndex >= _shootPoints.Count)
@@ -242,6 +294,11 @@ public class Weapon : MonoBehaviour
 	{
 		return _lockedTarget;
 	}
+
+    public float GetHeatFraction()
+    {
+        return heatValue / OverheatValue;
+    }
 
 	private void OnDestroy()
 	{

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class HeadsUpDisplay : MonoBehaviour
 {
 	public GameObject Crosshair;
+    public Image LeftHeatBar;
+    public Image RightHeatBar;
 	public Text EnergyText;
 	public Text ShieldText;
 	public Text HealthText;
@@ -85,9 +87,14 @@ public class HeadsUpDisplay : MonoBehaviour
 			var healthFraction = PlayerController.Current.VehicleInstance.Killable.Health / PlayerController.Current.VehicleInstance.Killable.MaxHealth;
 			var energyFraction = PlayerController.Current.VehicleInstance.BoostEnergy / PlayerController.Current.VehicleInstance.MaxBoostEnergy;
 
+            var leftHeatFraction = PlayerController.Current.VehicleInstance.PrimaryWeaponInstance.GetHeatFraction();
+            var rightHeatFraction = PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetHeatFraction();
+
 			ShieldBar.fillAmount = shieldFraction;
 			HealthBar.fillAmount = healthFraction;
 			BoostBar.fillAmount = energyFraction;
+            LeftHeatBar.fillAmount = leftHeatFraction;
+            RightHeatBar.fillAmount = rightHeatFraction;
 		}
 		if (_squadronPromptCooldown >= 0f)
 		{
