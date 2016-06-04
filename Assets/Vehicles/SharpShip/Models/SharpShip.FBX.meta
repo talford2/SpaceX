@@ -13,6 +13,7 @@ ModelImporter:
     100010: Box002
     100012: SharpShip
     100014: SharpShipHigh
+    100016: SharpShipHi
     400000: //RootNode
     400002: ShootFrontLeft
     400004: ShootFrontRight
@@ -21,6 +22,7 @@ ModelImporter:
     400010: Box002
     400012: SharpShip
     400014: SharpShipHigh
+    400016: SharpShipHi
     2300000: //RootNode
     2300002: SharpShip
     2300004: SharpShipHigh
