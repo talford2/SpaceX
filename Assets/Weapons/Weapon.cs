@@ -32,6 +32,7 @@ public class Weapon : MonoBehaviour
     public float OverheatValue;
     public float OverheatDelay;
     public float CoolingRate;
+    public float CoolDelay = 0.5f;
 
     public AudioClip LockSound;
 
@@ -61,6 +62,7 @@ public class Weapon : MonoBehaviour
     private float heatValue;
     private float heatCooldown;
     private bool isCoolingDown;
+    private float coolDelayCooldown;
 
     public void Initialize(GameObject owner, List<ShootPoint> shootPoints, VelocityReference velocityReference, Team ownerTeam)
     {
@@ -93,6 +95,17 @@ public class Weapon : MonoBehaviour
             {
                 isCoolingDown = true;
                 isOverheated = false;
+            }
+        }
+        else
+        {
+            if (coolDelayCooldown >= 0f)
+            {
+                coolDelayCooldown -= Time.deltaTime;
+                if (coolDelayCooldown < 0f)
+                {
+                    isCoolingDown = true;
+                }
             }
         }
 
@@ -164,9 +177,14 @@ public class Weapon : MonoBehaviour
         if (IsOverheat)
         {
             heatValue += HeatPerMissile;
+            isCoolingDown = false;
             if (heatValue >= OverheatValue)
             {
                 heatCooldown = OverheatDelay;
+            }
+            else
+            {
+                coolDelayCooldown = CoolDelay;
             }
         }
 
