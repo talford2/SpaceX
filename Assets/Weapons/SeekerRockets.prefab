@@ -158,9 +158,13 @@ MonoBehaviour:
   IsTargetLocking: 1
   TargetLockTime: 0.5
   TargetLockingMaxDistance: 1000
+  IsOverheat: 1
+  HeatPerMissile: 50
+  OverheatValue: 100
+  OverheatDelay: 5
+  CoolingRate: 50
   LockSound: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
   IsTriggered: 0
-  MissilePoolCount: 20
 --- !u!114 &11442032
 MonoBehaviour:
   m_ObjectHideFlags: 1
