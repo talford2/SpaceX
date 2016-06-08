@@ -505,6 +505,8 @@ public class Vehicle : MonoBehaviour
             {
                 rBody.velocity = GetVelocity();
                 rBody.AddExplosionForce(ExplosiveForce, transform.position, 20f, 0f, ForceMode.Impulse);
+                var shiftable = rBody.GetComponent<Shiftable>();
+                shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(rBody.position));
             }
         }
     }

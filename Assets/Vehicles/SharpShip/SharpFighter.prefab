@@ -574,12 +574,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 30
-  MaxHealth: 30
-  Shield: 40
-  MaxShield: 40
+  Health: 20
+  MaxHealth: 20
+  Shield: 20
+  MaxShield: 20
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+  DieEffect: {fileID: 127098, guid: 2bfd289939e87ac4fa9e386a7c77f839, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
   DestroyOnDie: 1
 --- !u!114 &11422892
