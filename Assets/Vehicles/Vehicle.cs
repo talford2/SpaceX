@@ -77,7 +77,7 @@ public class Vehicle : MonoBehaviour
 	public List<ShootPoint> SecondaryShootPoints;
 
     [Header("Death")]
-    public GameObject CorpsePrefab;
+    public GameObject DebrisPrefab;
     public float ExplosiveForce;
 
 	[Header("Other")]
@@ -497,9 +497,9 @@ public class Vehicle : MonoBehaviour
     private void VehicleDie(Killable sender)
     {
         _killable.OnDie -= VehicleDie;
-        if (CorpsePrefab != null)
+        if (DebrisPrefab != null)
         {
-            var corpseInstance = (GameObject)Instantiate(CorpsePrefab, transform.position, transform.rotation);
+            var corpseInstance = (GameObject)Instantiate(DebrisPrefab, transform.position, transform.rotation);
             var rBodies = corpseInstance.GetComponentsInChildren<Rigidbody>();
             foreach (var rBody in rBodies)
             {

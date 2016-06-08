@@ -769,7 +769,7 @@ MonoBehaviour:
   SecondaryShootPoints:
   - {fileID: 11492394}
   - {fileID: 11457852}
-  CorpsePrefab: {fileID: 119188, guid: eff4975c6c67cc74aa5d24825cd8a0d1, type: 2}
+  DebrisPrefab: {fileID: 119188, guid: eff4975c6c67cc74aa5d24825cd8a0d1, type: 2}
   ExplosiveForce: 50
   Thrusters:
   - {fileID: 11404102}
