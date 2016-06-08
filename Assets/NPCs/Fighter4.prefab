@@ -42,9 +42,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CallSign: 
-  TotalPower: 13
+  TotalPower: 8
   Weapons: 1
-  Shields: 6
+  Shields: 1
   Special: 6
   PrimaryWeapon: {fileID: 0}
   SecondaryWeapon: {fileID: 0}
@@ -81,7 +81,7 @@ MonoBehaviour:
   BurstWaitTime: 0.7
   ExrapolationTimeError: 0.2
   MinAimOffsetRadius: 0.5
-  MaxAimOffsetRadius: 4
+  MaxAimOffsetRadius: 8
   EvadeDistance: 400
   TurnAroundDistance: 250
   AcclerateDistance: 100
