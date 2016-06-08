@@ -729,7 +729,7 @@ MonoBehaviour:
   PreviewPrefab: {fileID: 0}
   MeshTransform: {fileID: 425688}
   IdleSpeed: 10
-  MaxSpeed: 20
+  MaxSpeed: 60
   MinSpeed: 3
   Acceleration: 5
   Brake: 7
