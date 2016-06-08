@@ -66,6 +66,9 @@ public class Laser : Missile
                                 HeadsUpDisplay.Current.TriggerCrosshairPulse();
                             _killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
                         }
+                        var rBody = missileHit.collider.GetComponentInParent<Rigidbody>();
+                        if (rBody != null)
+                            rBody.AddForceAtPosition(MissileForce * missileRay.direction, missileHit.point, ForceMode.Impulse);
 						_hasHit = true;
 						_hitPosition = missileHit.point;
 						PlaceHitEffects(missileHit.point, missileHit.normal, missileHit.collider.gameObject.transform);

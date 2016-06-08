@@ -73,7 +73,10 @@ public class Beam : Missile
 			{
 				killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
 			}
-			_length = missileHit.distance;
+            var rBody = missileHit.collider.GetComponentInParent<Rigidbody>();
+            if (rBody != null)
+                rBody.AddForceAtPosition(MissileForce * shootRay.direction, missileHit.point, ForceMode.Impulse);
+            _length = missileHit.distance;
 			PlaceHitEffects(missileHit.point, missileHit.normal, missileHit.collider.gameObject.transform);
 		}
 		UpdateLineRenderer();
