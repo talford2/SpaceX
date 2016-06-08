@@ -76,6 +76,10 @@ public class Vehicle : MonoBehaviour
 
 	public List<ShootPoint> SecondaryShootPoints;
 
+    [Header("Death")]
+    public GameObject CorpsePrefab;
+    public float ExplosiveForce;
+
 	[Header("Other")]
 	public List<Thruster> Thrusters;
 
@@ -168,6 +172,7 @@ public class Vehicle : MonoBehaviour
 		_velocityReference = new VelocityReference(_velocity);
 
 		_killable = GetComponent<Killable>();
+        _killable.OnDie += VehicleDie;
 
 		_allowBoost = true;
 
@@ -488,6 +493,21 @@ public class Vehicle : MonoBehaviour
 	{
 		return _velocity;
 	}
+
+    private void VehicleDie(Killable sender)
+    {
+        _killable.OnDie -= VehicleDie;
+        if (CorpsePrefab != null)
+        {
+            var corpseInstance = (GameObject)Instantiate(CorpsePrefab, transform.position, transform.rotation);
+            var rBodies = corpseInstance.GetComponentsInChildren<Rigidbody>();
+            foreach (var rBody in rBodies)
+            {
+                rBody.velocity = GetVelocity();
+                rBody.AddExplosionForce(ExplosiveForce, transform.position, 20f, 0f, ForceMode.Impulse);
+            }
+        }
+    }
 
 	private void OnDrawGizmos()
 	{
