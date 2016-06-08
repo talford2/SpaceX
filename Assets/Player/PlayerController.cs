@@ -301,6 +301,11 @@ public class PlayerController : MonoBehaviour
 					_playVehicleInstance.TriggerBoost = true;
 				}
 
+                if (Input.GetKeyUp(KeyCode.G))
+                {
+                    _playVehicleInstance.Killable.MaxHealth = 10000f;
+                    _playVehicleInstance.Killable.Health = _playVehicleInstance.Killable.MaxHealth;
+                }
 				_droneHive = _playVehicleInstance.GetComponent<DroneHive>();
 				if (_droneHive != null)
 				{
