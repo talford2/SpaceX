@@ -1223,7 +1223,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110190}
   serializedVersion: 2
-  lengthInSec: 2
+  lengthInSec: 3
   startDelay:
     scalar: 0
     maxCurve:
@@ -1326,7 +1326,7 @@ ParticleSystem:
           rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 16777215
         key2:
           serializedVersion: 2
           rgba: 0
@@ -1412,7 +1412,7 @@ ParticleSystem:
       maxColor:
         serializedVersion: 2
         rgba: 4294967295
-      minMaxState: 0
+      minMaxState: 1
     startSize:
       scalar: 7
       maxCurve:
@@ -2672,7 +2672,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176604}
   serializedVersion: 2
-  lengthInSec: 1
+  lengthInSec: 3
   startDelay:
     scalar: 0
     maxCurve:
@@ -2775,7 +2775,7 @@ ParticleSystem:
           rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 16777215
         key2:
           serializedVersion: 2
           rgba: 0
@@ -2861,7 +2861,7 @@ ParticleSystem:
       maxColor:
         serializedVersion: 2
         rgba: 4294967295
-      minMaxState: 0
+      minMaxState: 1
     startSize:
       scalar: 7
       maxCurve:
@@ -4121,7 +4121,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194642}
   serializedVersion: 2
-  lengthInSec: 2
+  lengthInSec: 3
   startDelay:
     scalar: 0
     maxCurve:
@@ -4224,7 +4224,7 @@ ParticleSystem:
           rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 16777215
         key2:
           serializedVersion: 2
           rgba: 0
@@ -4310,7 +4310,7 @@ ParticleSystem:
       maxColor:
         serializedVersion: 2
         rgba: 4294967295
-      minMaxState: 0
+      minMaxState: 1
     startSize:
       scalar: 7
       maxCurve:
@@ -5570,7 +5570,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138796}
   serializedVersion: 2
-  lengthInSec: 2
+  lengthInSec: 3
   startDelay:
     scalar: 0
     maxCurve:
@@ -5673,7 +5673,7 @@ ParticleSystem:
           rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 16777215
         key2:
           serializedVersion: 2
           rgba: 0
@@ -5759,7 +5759,7 @@ ParticleSystem:
       maxColor:
         serializedVersion: 2
         rgba: 4294967295
-      minMaxState: 0
+      minMaxState: 1
     startSize:
       scalar: 7
       maxCurve:
@@ -7019,7 +7019,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159788}
   serializedVersion: 2
-  lengthInSec: 2
+  lengthInSec: 3
   startDelay:
     scalar: 0
     maxCurve:
@@ -7122,7 +7122,7 @@ ParticleSystem:
           rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 16777215
         key2:
           serializedVersion: 2
           rgba: 0
@@ -7208,7 +7208,7 @@ ParticleSystem:
       maxColor:
         serializedVersion: 2
         rgba: 4294967295
-      minMaxState: 0
+      minMaxState: 1
     startSize:
       scalar: 7
       maxCurve:
@@ -8468,7 +8468,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153820}
   serializedVersion: 2
-  lengthInSec: 2
+  lengthInSec: 3
   startDelay:
     scalar: 0
     maxCurve:
@@ -8571,7 +8571,7 @@ ParticleSystem:
           rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 16777215
         key2:
           serializedVersion: 2
           rgba: 0
@@ -8657,7 +8657,7 @@ ParticleSystem:
       maxColor:
         serializedVersion: 2
         rgba: 4294967295
-      minMaxState: 0
+      minMaxState: 1
     startSize:
       scalar: 7
       maxCurve:
