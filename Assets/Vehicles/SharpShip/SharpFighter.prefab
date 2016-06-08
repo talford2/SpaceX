@@ -764,7 +764,7 @@ MonoBehaviour:
   PrimaryShootPoints:
   - {fileID: 11427292}
   - {fileID: 11485262}
-  SecondaryWeaponPrefab: {fileID: 11451118, guid: 578e28cbf04200247b2ca20b4f60e91c,
+  SecondaryWeaponPrefab: {fileID: 11413680, guid: b52259048008cdf479d85f09ee6d8529,
     type: 2}
   SecondaryShootPoints:
   - {fileID: 11492394}
