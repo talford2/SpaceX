@@ -8,6 +8,7 @@ public abstract class Missile : MonoBehaviour
 
 	[Header("Missile")]
 	public float MissileSpeed = 150f;
+    public float MissileForce = 50f;
 	public Transform FromReference;
 
 	public GameObject HitEffectPrefab;

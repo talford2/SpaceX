@@ -233,7 +233,10 @@ public class SeekingRocket : Missile
 				var damage = Mathf.Round(100f * GetDamageFraction(_detectable.transform.position, transform.position, 5f, 15f));
 				_killable.Damage(damage, transform.position, Vector3.up, Owner);
 			}
-		}
+            var rBody = _damageColliders[i].GetComponentInParent<Rigidbody>();
+            if (rBody != null)
+                rBody.AddExplosionForce(MissileForce, transform.position, 15f, 0f, ForceMode.Impulse);
+        }
 
 		Stop();
 	}
