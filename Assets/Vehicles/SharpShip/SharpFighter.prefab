@@ -748,7 +748,7 @@ MonoBehaviour:
   BoostEnergy: 100
   BoostCost: 50
   BoostEnergyRegenerateDelay: 2
-  BoostEnergyRegenerateRate: 10
+  BoostEnergyRegenerateRate: 50
   Controller: {fileID: 0}
   TriggerAccelerate: 0
   TriggerBrake: 0

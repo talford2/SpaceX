@@ -248,6 +248,7 @@ Transform:
   m_LocalRotation: {x: -1, y: 0, z: 0, w: -0.00000016292068}
   m_LocalPosition: {x: 0.026900053, y: 0.019000107, z: 0.3299997}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 458250}
   m_RootOrder: 0
@@ -260,6 +261,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 458250}
   m_RootOrder: 1
@@ -272,6 +274,7 @@ Transform:
   m_LocalRotation: {x: 1, y: 0, z: 0, w: -0.00000014106499}
   m_LocalPosition: {x: 1.0269165, y: 0.018997053, z: -3.1799927}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 497732}
   - {fileID: 460784}
@@ -287,6 +290,7 @@ Transform:
   m_LocalRotation: {x: -0.000000021855694, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.84002686, y: -0.38000473, z: 3.399994}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 461976}
   m_RootOrder: 3
@@ -299,6 +303,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 422464}
   m_RootOrder: 2
@@ -311,6 +316,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 458250}
   m_RootOrder: 2
@@ -323,6 +329,7 @@ Transform:
   m_LocalRotation: {x: 1, y: 0, z: 0, w: -0.00000014106499}
   m_LocalPosition: {x: -1.0269165, y: 0.018997053, z: -3.1799927}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 400808}
   - {fileID: 413396}
@@ -338,6 +345,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 422464}
   m_RootOrder: 1
@@ -350,6 +358,7 @@ Transform:
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 498982}
   - {fileID: 485528}
@@ -368,6 +377,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 461976}
   m_Father: {fileID: 0}
@@ -381,6 +391,7 @@ Transform:
   m_LocalRotation: {x: -0.000000021855694, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.84002686, y: -0.38000473, z: 3.399994}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 461976}
   m_RootOrder: 2
@@ -393,6 +404,7 @@ Transform:
   m_LocalRotation: {x: -0.000000021855694, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 461976}
   m_RootOrder: 1
@@ -405,6 +417,7 @@ Transform:
   m_LocalRotation: {x: -1, y: 0, z: 0, w: -0.00000016292068}
   m_LocalPosition: {x: -0.026900053, y: 0.019000107, z: 0.3299997}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 422464}
   m_RootOrder: 0
@@ -417,6 +430,7 @@ Transform:
   m_LocalRotation: {x: -0.000000021855694, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 461976}
   m_RootOrder: 0
@@ -741,7 +755,7 @@ MonoBehaviour:
   BoostEnergy: 100
   BoostCost: 50
   BoostEnergyRegenerateDelay: 2
-  BoostEnergyRegenerateRate: 10
+  BoostEnergyRegenerateRate: 50
   Controller: {fileID: 0}
   TriggerAccelerate: 0
   TriggerBrake: 0
@@ -749,6 +763,9 @@ MonoBehaviour:
   YawThrottle: 0
   PitchThotttle: 0
   RollThrottle: 0
+  CameraDistance: 15
+  UTurnPath: {fileID: 0}
+  UTurnDuration: 0
   PrimaryWeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93,
     type: 2}
   PrimaryShootPoints:
@@ -759,6 +776,9 @@ MonoBehaviour:
   SecondaryShootPoints:
   - {fileID: 11475328}
   - {fileID: 11448042}
+  CorpsePrefab: {fileID: 0}
+  DebrisPrefab: {fileID: 0}
+  ExplosiveForce: 0
   Thrusters:
   - {fileID: 11402046}
   - {fileID: 11443486}

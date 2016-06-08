@@ -1212,7 +1212,7 @@ MonoBehaviour:
   BoostEnergy: 100
   BoostCost: 50
   BoostEnergyRegenerateDelay: 5
-  BoostEnergyRegenerateRate: 10
+  BoostEnergyRegenerateRate: 50
   Controller: {fileID: 0}
   TriggerAccelerate: 0
   TriggerBrake: 0
@@ -1233,6 +1233,9 @@ MonoBehaviour:
   SecondaryShootPoints:
   - {fileID: 11461974}
   - {fileID: 11498294}
+  CorpsePrefab: {fileID: 0}
+  DebrisPrefab: {fileID: 0}
+  ExplosiveForce: 0
   Thrusters:
   - {fileID: 11401048}
   - {fileID: 11480860}
