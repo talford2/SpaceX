@@ -77,6 +77,7 @@ public class Vehicle : MonoBehaviour
 	public List<ShootPoint> SecondaryShootPoints;
 
     [Header("Death")]
+    public GameObject CorpsePrefab;
     public GameObject DebrisPrefab;
     public float ExplosiveForce;
 
@@ -497,16 +498,33 @@ public class Vehicle : MonoBehaviour
     private void VehicleDie(Killable sender)
     {
         _killable.OnDie -= VehicleDie;
-        if (DebrisPrefab != null)
+
+        if (Random.Range(0, 1f) > 0.5f)
         {
-            var corpseInstance = (GameObject)Instantiate(DebrisPrefab, transform.position, transform.rotation);
-            var rBodies = corpseInstance.GetComponentsInChildren<Rigidbody>();
-            foreach (var rBody in rBodies)
+            if (CorpsePrefab != null)
             {
+                var corpseInstance = (GameObject)Instantiate(CorpsePrefab, transform.position, transform.rotation);
+                var rBody = corpseInstance.GetComponent<Rigidbody>();
                 rBody.velocity = GetVelocity();
-                rBody.AddExplosionForce(ExplosiveForce, transform.position, 20f, 0f, ForceMode.Impulse);
-                var shiftable = rBody.GetComponent<Shiftable>();
+                rBody.AddForce(_velocity.normalized * 5000f, ForceMode.Impulse);
+                rBody.AddRelativeTorque(new Vector3(0f, 0f, 50000f), ForceMode.Impulse);
+                var shiftable = corpseInstance.GetComponentInParent<Shiftable>();
                 shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(rBody.position));
+            }
+        }
+        else
+        {
+            if (DebrisPrefab != null)
+            {
+                var debrisInstance = (GameObject)Instantiate(DebrisPrefab, transform.position, transform.rotation);
+                var rBodies = debrisInstance.GetComponentsInChildren<Rigidbody>();
+                foreach (var rBody in rBodies)
+                {
+                    rBody.velocity = GetVelocity();
+                    rBody.AddExplosionForce(ExplosiveForce, transform.position, 20f, 0f, ForceMode.Impulse);
+                    var shiftable = rBody.GetComponent<Shiftable>();
+                    shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(rBody.position));
+                }
             }
         }
     }
