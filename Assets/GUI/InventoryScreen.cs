@@ -34,9 +34,17 @@ public class InventoryScreen : MonoBehaviour
 
     [Header("Secondary Panel")]
     public CanvasGroup SecondaryPanel;
+
+    public Text SecondaryDamageCostText;
     public Text SecondaryDamageValueText;
+
+    public Text SecondaryFireRateCostText;
     public Text SecondaryFireRateValueText;
+
+    public Text SecondaryCoolingRateCostText;
     public Text SecondaryCoolingRateValueText;
+
+    public Text SecondaryHeatCapacityCostText;
     public Text SecondaryHeatCapacityValueText;
 
     [Header("Inventory Panel")]
@@ -326,9 +334,16 @@ public class InventoryScreen : MonoBehaviour
     {
         var secondaryWeapon = focusVehicle.SecondaryWeaponInstance;
         ItemNameText.text = secondaryWeapon.Name;
+        SecondaryDamageCostText.text = GetCostString(100f);
         SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.MissileDamage);
+
+        SecondaryCoolingRateCostText.text = GetCostString(100f);
         SecondaryFireRateValueText.text = string.Format("{0:f1}/s", 1f / secondaryWeapon.FireRate);
+
+        SecondaryCoolingRateCostText.text = GetCostString(100f);
         SecondaryCoolingRateValueText.text = string.Format("{0:f1}/s", secondaryWeapon.CoolingRate);
+
+        SecondaryHeatCapacityCostText.text = GetCostString(100f);
         SecondaryHeatCapacityValueText.text = string.Format("{0:f1}", secondaryWeapon.OverheatValue);
 
         var inventoryItem = secondaryWeapon.GetComponent<InventoryItem>();
