@@ -20,9 +20,16 @@ public class InventoryScreen : MonoBehaviour
 
     [Header("Primary Panel")]
     public CanvasGroup PrimaryPanel;
+    public Text PrimaryDamageCostText;
     public Text PrimaryDamageValueText;
+
+    public Text PrimaryFireRateCostText;
     public Text PrimaryFireRateValueText;
+
+    public Text PrimaryCoolingRateCostText;
     public Text PrimaryCoolingRateValueText;
+
+    public Text PrimaryHeatCapacityCostText;
     public Text PrimaryHeatCapacityValueText;
 
     [Header("Secondary Panel")]
@@ -213,41 +220,44 @@ public class InventoryScreen : MonoBehaviour
             {
                 if (focusVehicle != null)
                 {
-                    var selectedInvenotyItem = PlayerController.Current.GetInventoryItem(index).GetComponent<InventoryItem>();
-                    Debug.Log("DOUBLE CLICK!");
-                    Debug.Log("ITEM: " + selectedInvenotyItem.name + " TYPE: " + selectedInvenotyItem.Type);
-
-                    // Primary Weapon
-                    if (selectedInvenotyItem.Type == ItemType.PrimaryWeapon)
+                    if (PlayerController.Current.GetInventoryItem(index) != null)
                     {
-                        var equippedItemIndex = focusVehicle.PrimaryWeaponInstance.LootIndex;
-                        var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
+                        var selectedInvenotyItem = PlayerController.Current.GetInventoryItem(index).GetComponent<InventoryItem>();
+                        Debug.Log("DOUBLE CLICK!");
+                        Debug.Log("ITEM: " + selectedInvenotyItem.name + " TYPE: " + selectedInvenotyItem.Type);
 
-                        PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+                        // Primary Weapon
+                        if (selectedInvenotyItem.Type == ItemType.PrimaryWeapon)
+                        {
+                            var equippedItemIndex = focusVehicle.PrimaryWeaponInstance.LootIndex;
+                            var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
 
-                        focusVehicle.Controller.GetComponent<ShipProfile>().PrimaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
-                        focusVehicle.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex]);
+                            PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
 
-                        var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
-                        ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+                            focusVehicle.Controller.GetComponent<ShipProfile>().PrimaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
+                            focusVehicle.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex]);
 
-                        PopulatePrimary();
-                    }
-                    // Secondary Weapon
-                    if (selectedInvenotyItem.Type == ItemType.SecondaryWeapon)
-                    {
-                        var equippedItemIndex = focusVehicle.SecondaryWeaponInstance.LootIndex;
-                        var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
+                            var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
+                            ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
 
-                        PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+                            PopulatePrimary();
+                        }
+                        // Secondary Weapon
+                        if (selectedInvenotyItem.Type == ItemType.SecondaryWeapon)
+                        {
+                            var equippedItemIndex = focusVehicle.SecondaryWeaponInstance.LootIndex;
+                            var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
 
-                        focusVehicle.Controller.GetComponent<ShipProfile>().SecondaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
-                        focusVehicle.SetSecondaryWeapon(LootManager.Current.Items[equipItemIndex]);
+                            PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
 
-                        var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
-                        ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+                            focusVehicle.Controller.GetComponent<ShipProfile>().SecondaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
+                            focusVehicle.SetSecondaryWeapon(LootManager.Current.Items[equipItemIndex]);
 
-                        PopulateSecondary();
+                            var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
+                            ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+
+                            PopulateSecondary();
+                        }
                     }
                 }
             }
@@ -276,8 +286,17 @@ public class InventoryScreen : MonoBehaviour
     {
         var primaryWeapon = focusVehicle.PrimaryWeaponInstance;
         ItemNameText.text = primaryWeapon.Name;
+        PrimaryDamageCostText.text = GetCostString(100f);
         PrimaryDamageValueText.text = string.Format("{0:f1}", primaryWeapon.MissileDamage);
-        PrimaryFireRateValueText.text = string.Format("{0:f1}", primaryWeapon.FireRate);
+
+        PrimaryFireRateCostText.text = GetCostString(100f);
+        PrimaryFireRateValueText.text = string.Format("{0:f1}/s", 1f / primaryWeapon.FireRate);
+
+        PrimaryCoolingRateCostText.text = GetCostString(100f);
+        PrimaryCoolingRateValueText.text = string.Format("{0:f1}/s", primaryWeapon.CoolingRate);
+
+        PrimaryHeatCapacityCostText.text = GetCostString(100f);
+        PrimaryHeatCapacityValueText.text = string.Format("{0:f1}", primaryWeapon.OverheatValue);
 
         var inventoryItem = primaryWeapon.GetComponent<InventoryItem>();
         if (inventoryItem != null)
@@ -291,12 +310,26 @@ public class InventoryScreen : MonoBehaviour
         PrimaryButton.enabled = false;
     }
 
+    private string GetCostString(float value)
+    {
+        if (PlayerController.Current.SpaceJunkCount >= value)
+            return string.Format("<color=\"#0f0\">{0:f0}c</color>", value);
+        return string.Format("<color=\"#f00\">{0:f0}c</color>", value);
+    }
+
+    public void AddDamagePoints()
+    {
+        Debug.Log("ADD: " + _equippedContext + ", Damage");
+    }
+
     public void PopulateSecondary()
     {
         var secondaryWeapon = focusVehicle.SecondaryWeaponInstance;
         ItemNameText.text = secondaryWeapon.Name;
         SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.MissileDamage);
-        SecondaryFireRateValueText.text = string.Format("{0:f1}", secondaryWeapon.FireRate);
+        SecondaryFireRateValueText.text = string.Format("{0:f1}/s", 1f / secondaryWeapon.FireRate);
+        SecondaryCoolingRateValueText.text = string.Format("{0:f1}/s", secondaryWeapon.CoolingRate);
+        SecondaryHeatCapacityValueText.text = string.Format("{0:f1}", secondaryWeapon.OverheatValue);
 
         var inventoryItem = secondaryWeapon.GetComponent<InventoryItem>();
         if (inventoryItem != null)
@@ -348,11 +381,19 @@ public class InventoryScreen : MonoBehaviour
         Populate(_currentIndex);
     }
 
-    private enum Equippedcontext
+    public enum Equippedcontext
     {
         Primary,
         Secondary,
         Shield,
         Engine
+    }
+
+    public enum PointsProperty
+    {
+        Damage,
+        FireRate,
+        CoolingRate,
+        HeatCapacity
     }
 }
