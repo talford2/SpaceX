@@ -66,21 +66,6 @@ public class FlakBomb : Missile
 
     public override void LiveUpdate()
     {
-        if (_delayTargetCooldown >= 0f)
-        {
-            _delayTargetCooldown -= Time.deltaTime;
-        }
-
-        if (_delayTargetCooldown < 0f)
-        {
-            var count = Physics.OverlapSphereNonAlloc(transform.position, MinExplodeRadius, _damageColliders, _detectableMask);
-            if (count > 0)
-            {
-                Explode();
-                return;
-            }
-        }
-
         if (_noTargetCooldown >= 0f)
         {
             _noTargetCooldown -= Time.deltaTime;
@@ -90,7 +75,7 @@ public class FlakBomb : Missile
             }
         }
 
-        _velocity = _offsetVelocity + transform.forward * MissileSpeed;
+        _velocity = _initVelocity + _offsetVelocity + transform.forward * MissileSpeed;
 
         var displacement = _velocity * Time.deltaTime;
 
@@ -129,6 +114,22 @@ public class FlakBomb : Missile
             if (toOberverSquared > _stopDistanceSquared)
             {
                 Stop();
+            }
+        }
+
+        if (_delayTargetCooldown >= 0f)
+            _delayTargetCooldown -= Time.deltaTime;
+
+        if (!_hasHit)
+        {
+            if (_delayTargetCooldown < 0f)
+            {
+                var count = Physics.OverlapSphereNonAlloc(transform.position, MinExplodeRadius, _damageColliders, _detectableMask);
+                if (count > 0)
+                {
+                    Explode();
+                    return;
+                }
             }
         }
 
