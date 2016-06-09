@@ -44,6 +44,8 @@ public class VehicleCamera : UniverseCamera
     private float _amplitudeFrac;
     private float _shakeTime;
 
+    private Vector3 _momentVelocity;
+
     private void Start()
 	{
 		_springDistance = 1f;
@@ -55,48 +57,56 @@ public class VehicleCamera : UniverseCamera
 
 	public override void Move()
 	{
-	    if (Target != null)
-	    {
-	        var targetSpringDistance = 1f;
-	        _targetFov = 60f;
-	        if (Target.IsBoosting)
-	        {
-	            targetSpringDistance = SpringBoostExpansion;
-	            _targetFov = 100f;
-	        }
-	        else
-	        {
-	            if (Target.IsAccelerating)
-	            {
-	                targetSpringDistance = SpringExpansion;
-	            }
-	            else
-	            {
-	                if (Target.IsBraking)
-	                {
-	                    targetSpringDistance = SpringCompression;
-	                }
-	            }
-	        }
-
-	        _springDistance = Mathf.Lerp(_springDistance, targetSpringDistance, SpringCatchup*Time.deltaTime);
-
-	        _offsetAngle = Quaternion.Lerp(_offsetAngle, Target.transform.rotation, RotationCatchup*Time.deltaTime);
-	        _offset = Vector3.Lerp(_offset, _offsetAngle*new Vector3(0f, VerticalDistance, -DistanceBehind)*_springDistance, OffsetCatchup*Time.deltaTime);
-
-	        if (Target.PrimaryWeaponInstance != null)
-	        {
-	            _shiftable.Translate(Target.PrimaryWeaponInstance.GetShootPointCentre() + _offset - transform.position);
-	        }
-	        else
-	        {
-	            _shiftable.Translate(Target.transform.position + _offset - transform.position);
+        if (Target != null)
+        {
+            var targetSpringDistance = 1f;
+            _targetFov = 60f;
+            if (Target.IsBoosting)
+            {
+                targetSpringDistance = SpringBoostExpansion;
+                _targetFov = 100f;
+            }
+            else
+            {
+                if (Target.IsAccelerating)
+                {
+                    targetSpringDistance = SpringExpansion;
+                }
+                else
+                {
+                    if (Target.IsBraking)
+                    {
+                        targetSpringDistance = SpringCompression;
+                    }
+                }
             }
 
-            _targetUp = Vector3.Lerp(_targetUp, Target.transform.up, 5f*Time.deltaTime);
+            _springDistance = Mathf.Lerp(_springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);
+
+            _offsetAngle = Quaternion.Lerp(_offsetAngle, Target.transform.rotation, RotationCatchup * Time.deltaTime);
+            _offset = Vector3.Lerp(_offset, _offsetAngle * new Vector3(0f, VerticalDistance, -DistanceBehind) * _springDistance, OffsetCatchup * Time.deltaTime);
+
+            Vector3 displacement;
+            if (Target.PrimaryWeaponInstance != null)
+            {
+                displacement = Target.PrimaryWeaponInstance.GetShootPointCentre() + _offset - transform.position;
+            }
+            else
+            {
+                displacement = Target.transform.position + _offset - transform.position;
+            }
+            _shiftable.Translate(displacement);
+            _momentVelocity = displacement;
+
+            _targetUp = Vector3.Lerp(_targetUp, Target.transform.up, 5f * Time.deltaTime);
 
             transform.LookAt(Target.GetAimPosition(), _targetUp);
-	    }
+        }
+        else
+        {
+            _momentVelocity = Vector3.Lerp(_momentVelocity, Vector3.zero, Time.deltaTime);
+            _shiftable.Translate(_momentVelocity);
+        }
 
 	    BackgroundTransform.transform.position = transform.position;
 
