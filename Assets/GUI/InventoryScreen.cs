@@ -358,24 +358,29 @@ public class InventoryScreen : MonoBehaviour
         SecondaryPanel.gameObject.SetActive(false);
     }
 
+    private float GetPointBarFraction(int points)
+    {
+        return Mathf.Clamp01(points / 10f);
+    }
+
     public void PopulatePrimary()
     {
         var primaryWeapon = focusVehicle.PrimaryWeaponInstance;
         ItemNameText.text = primaryWeapon.Name;
         PrimaryDamageCostText.text = GetCostString(100f);
-        PrimaryDamageBar.fillAmount = Mathf.Clamp01(primaryWeapon.DamagePoints / 10f);
+        PrimaryDamageBar.fillAmount = GetPointBarFraction(primaryWeapon.DamagePoints);
         PrimaryDamageValueText.text = string.Format("{0:f1}", primaryWeapon.MissileDamage);
 
         PrimaryFireRateCostText.text = GetCostString(100f);
-        PrimaryFireRateBar.fillAmount = Mathf.Clamp01(primaryWeapon.FireRatePoints / 10f);
+        PrimaryFireRateBar.fillAmount = GetPointBarFraction(primaryWeapon.FireRatePoints);
         PrimaryFireRateValueText.text = string.Format("{0:f1}/s", 1f / primaryWeapon.FireRate);
 
         PrimaryCoolingRateCostText.text = GetCostString(100f);
-        PrimaryCoolingRateBar.fillAmount = Mathf.Clamp01(primaryWeapon.CoolingRatePoints / 10f);
+        PrimaryCoolingRateBar.fillAmount = GetPointBarFraction(primaryWeapon.CoolingRatePoints);
         PrimaryCoolingRateValueText.text = string.Format("{0:f1}/s", primaryWeapon.CoolingRate);
 
         PrimaryHeatCapacityCostText.text = GetCostString(100f);
-        PrimaryHeatCapacityBar.fillAmount = Mathf.Clamp01(primaryWeapon.HeatCapacityPoints / 10f);
+        PrimaryHeatCapacityBar.fillAmount = GetPointBarFraction(primaryWeapon.HeatCapacityPoints);
         PrimaryHeatCapacityValueText.text = string.Format("{0:f1}", primaryWeapon.OverheatValue);
 
         var inventoryItem = primaryWeapon.GetComponent<InventoryItem>();
@@ -463,19 +468,19 @@ public class InventoryScreen : MonoBehaviour
         ItemNameText.text = secondaryWeapon.Name;
 
         SecondaryDamageCostText.text = GetCostString(100f);
-        SecondaryDamageBar.fillAmount = Mathf.Clamp01(secondaryWeapon.DamagePoints / 10f);
+        SecondaryDamageBar.fillAmount = GetPointBarFraction(secondaryWeapon.DamagePoints);
         SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.MissileDamage);
 
         SecondaryFireRateCostText.text = GetCostString(100f);
-        SecondaryFireRateBar.fillAmount = Mathf.Clamp01(secondaryWeapon.FireRatePoints / 10f);
+        SecondaryFireRateBar.fillAmount = GetPointBarFraction(secondaryWeapon.FireRatePoints);
         SecondaryFireRateValueText.text = string.Format("{0:f1}/s", 1f / secondaryWeapon.FireRate);
 
         SecondaryCoolingRateCostText.text = GetCostString(100f);
-        SecondaryCoolingRateBar.fillAmount = Mathf.Clamp01(secondaryWeapon.CoolingRatePoints / 10f);
+        SecondaryCoolingRateBar.fillAmount = GetPointBarFraction(secondaryWeapon.CoolingRatePoints);
         SecondaryCoolingRateValueText.text = string.Format("{0:f1}/s", secondaryWeapon.CoolingRate);
 
         SecondaryHeatCapacityCostText.text = GetCostString(100f);
-        SecondaryHeatCapacityBar.fillAmount = Mathf.Clamp01(secondaryWeapon.HeatCapacityPoints / 10f);
+        SecondaryHeatCapacityBar.fillAmount = GetPointBarFraction(secondaryWeapon.HeatCapacityPoints);
         SecondaryHeatCapacityValueText.text = string.Format("{0:f1}", secondaryWeapon.OverheatValue);
 
         var inventoryItem = secondaryWeapon.GetComponent<InventoryItem>();
