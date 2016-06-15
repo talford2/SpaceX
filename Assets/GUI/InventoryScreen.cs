@@ -21,15 +21,19 @@ public class InventoryScreen : MonoBehaviour
     [Header("Primary Panel")]
     public CanvasGroup PrimaryPanel;
     public Text PrimaryDamageCostText;
+    public Image PrimaryDamageBar;
     public Text PrimaryDamageValueText;
 
     public Text PrimaryFireRateCostText;
+    public Image PrimaryFireRateBar;
     public Text PrimaryFireRateValueText;
 
     public Text PrimaryCoolingRateCostText;
+    public Image PrimaryCoolingRateBar;
     public Text PrimaryCoolingRateValueText;
 
     public Text PrimaryHeatCapacityCostText;
+    public Image PrimaryHeatCapacityBar;
     public Text PrimaryHeatCapacityValueText;
 
     [Header("Secondary Panel")]
@@ -388,6 +392,7 @@ public class InventoryScreen : MonoBehaviour
     public void AddDamagePoints()
     {
         Debug.Log("ADD: " + _equippedContext + ", Damage");
+        PrimaryDamageBar.fillAmount = Mathf.Clamp01(PrimaryDamageBar.fillAmount + 0.1f);
     }
 
     public void PopulateSecondary()
