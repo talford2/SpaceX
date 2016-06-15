@@ -40,15 +40,19 @@ public class InventoryScreen : MonoBehaviour
     public CanvasGroup SecondaryPanel;
 
     public Text SecondaryDamageCostText;
+    public Image SecondaryDamageBar;
     public Text SecondaryDamageValueText;
 
     public Text SecondaryFireRateCostText;
+    public Image SecondaryFireRateBar;
     public Text SecondaryFireRateValueText;
 
     public Text SecondaryCoolingRateCostText;
+    public Image SecondaryCoolingRateBar;
     public Text SecondaryCoolingRateValueText;
 
     public Text SecondaryHeatCapacityCostText;
+    public Image SecondaryHeatCapacityBar;
     public Text SecondaryHeatCapacityValueText;
 
     [Header("Inventory Panel")]
@@ -61,7 +65,7 @@ public class InventoryScreen : MonoBehaviour
     private bool _isVisible;
     private int _currentIndex;
 
-    private Equippedcontext _equippedContext;
+    private EquippedContext _equippedContext;
 
     // Mouse Swivel
     private Vehicle focusVehicle;
@@ -228,13 +232,13 @@ public class InventoryScreen : MonoBehaviour
             PrimaryButton.image.sprite = primaryItem != null ? primaryItem.InventorySprite : null;
             SecondaryButton.image.sprite = secondaryItem != null ? secondaryItem.InventorySprite : null;
 
-            if (_equippedContext == Equippedcontext.Primary)
+            if (_equippedContext == EquippedContext.Primary)
                 PopulatePrimary();
-            if (_equippedContext == Equippedcontext.Secondary)
+            if (_equippedContext == EquippedContext.Secondary)
                 PopulateSecondary();
-            if (_equippedContext == Equippedcontext.Shield)
+            if (_equippedContext == EquippedContext.Shield)
                 PopulateShield();
-            if (_equippedContext == Equippedcontext.Engine)
+            if (_equippedContext == EquippedContext.Engine)
                 PopulateEngine();
         }
         else
@@ -377,7 +381,7 @@ public class InventoryScreen : MonoBehaviour
         HideItemPanels();
         PrimaryPanel.gameObject.SetActive(true);
 
-        _equippedContext = Equippedcontext.Primary;
+        _equippedContext = EquippedContext.Primary;
         EnableEquippedButtons();
         PrimaryButton.enabled = false;
     }
@@ -392,7 +396,53 @@ public class InventoryScreen : MonoBehaviour
     public void AddDamagePoints()
     {
         Debug.Log("ADD: " + _equippedContext + ", Damage");
-        PrimaryDamageBar.fillAmount = Mathf.Clamp01(PrimaryDamageBar.fillAmount + 0.1f);
+        if (_equippedContext == EquippedContext.Primary)
+        {
+            PrimaryDamageBar.fillAmount = Mathf.Clamp01(PrimaryDamageBar.fillAmount + 0.1f);
+        }
+        else
+        {
+            SecondaryDamageBar.fillAmount = Mathf.Clamp01(SecondaryDamageBar.fillAmount + 0.1f);
+        }
+    }
+
+    public void AddFireRatePoints()
+    {
+        Debug.Log("ADD: " + _equippedContext + ", Fire Rate");
+        if (_equippedContext == EquippedContext.Primary)
+        {
+            PrimaryFireRateBar.fillAmount = Mathf.Clamp01(PrimaryFireRateBar.fillAmount + 0.1f);
+        }
+        else
+        {
+            SecondaryFireRateBar.fillAmount = Mathf.Clamp01(SecondaryFireRateBar.fillAmount + 0.1f);
+        }
+    }
+
+    public void AddCoolingRatePoints()
+    {
+        Debug.Log("ADD: " + _equippedContext + ", Cooling Rate");
+        if (_equippedContext == EquippedContext.Primary)
+        {
+            PrimaryCoolingRateBar.fillAmount = Mathf.Clamp01(PrimaryCoolingRateBar.fillAmount + 0.1f);
+        }
+        else
+        {
+            SecondaryCoolingRateBar.fillAmount = Mathf.Clamp01(SecondaryCoolingRateBar.fillAmount + 0.1f);
+        }
+    }
+
+    public void AddHeatCapacityPoints()
+    {
+        Debug.Log("ADD: " + _equippedContext + ", Heat Capacity");
+        if (_equippedContext == EquippedContext.Primary)
+        {
+            PrimaryHeatCapacityBar.fillAmount = Mathf.Clamp01(PrimaryHeatCapacityBar.fillAmount + 0.1f);
+        }
+        else
+        {
+            SecondaryHeatCapacityBar.fillAmount = Mathf.Clamp01(SecondaryHeatCapacityBar.fillAmount + 0.1f);
+        }
     }
 
     public void PopulateSecondary()
@@ -418,7 +468,7 @@ public class InventoryScreen : MonoBehaviour
         HideItemPanels();
         SecondaryPanel.gameObject.SetActive(true);
 
-        _equippedContext = Equippedcontext.Secondary;
+        _equippedContext = EquippedContext.Secondary;
         EnableEquippedButtons();
         SecondaryButton.enabled = false;
     }
@@ -429,7 +479,7 @@ public class InventoryScreen : MonoBehaviour
 
         HideItemPanels();
 
-        _equippedContext = Equippedcontext.Shield;
+        _equippedContext = EquippedContext.Shield;
         EnableEquippedButtons();
         ShieldButton.enabled = false;
     }
@@ -440,7 +490,7 @@ public class InventoryScreen : MonoBehaviour
 
         HideItemPanels();
 
-        _equippedContext = Equippedcontext.Engine;
+        _equippedContext = EquippedContext.Engine;
         EnableEquippedButtons();
         EngineButton.enabled = false;
     }
@@ -461,7 +511,7 @@ public class InventoryScreen : MonoBehaviour
         Populate(_currentIndex);
     }
 
-    public enum Equippedcontext
+    public enum EquippedContext
     {
         Primary,
         Secondary,

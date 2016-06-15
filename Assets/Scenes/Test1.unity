@@ -1131,7 +1131,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 120844711}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 211712071}
+        m_MethodName: AddFireRatePoints
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &120844711
@@ -1931,12 +1942,16 @@ MonoBehaviour:
   PrimaryHeatCapacityValueText: {fileID: 1688835459}
   SecondaryPanel: {fileID: 1794372746}
   SecondaryDamageCostText: {fileID: 1070953228}
+  SecondaryDamageBar: {fileID: 2134725244}
   SecondaryDamageValueText: {fileID: 1476432731}
   SecondaryFireRateCostText: {fileID: 1007611285}
+  SecondaryFireRateBar: {fileID: 1039721480}
   SecondaryFireRateValueText: {fileID: 1924944854}
   SecondaryCoolingRateCostText: {fileID: 1849019583}
+  SecondaryCoolingRateBar: {fileID: 32165910}
   SecondaryCoolingRateValueText: {fileID: 251238765}
   SecondaryHeatCapacityCostText: {fileID: 365943658}
+  SecondaryHeatCapacityBar: {fileID: 27843200}
   SecondaryHeatCapacityValueText: {fileID: 1302033681}
   ItemButtons:
   - {fileID: 1757790637}
@@ -3285,7 +3300,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 211712071}
-        m_MethodName: AddDamagePoints
+        m_MethodName: AddFireRatePoints
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4083,7 +4098,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 211712071}
-        m_MethodName: AddDamagePoints
+        m_MethodName: AddHeatCapacityPoints
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4487,7 +4502,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 211712071}
-        m_MethodName: AddDamagePoints
+        m_MethodName: AddCoolingRatePoints
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4871,7 +4886,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 472314765}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 211712071}
+        m_MethodName: AddCoolingRatePoints
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &472314765
@@ -6036,7 +6062,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 592508324}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 211712071}
+        m_MethodName: AddHeatCapacityPoints
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &592508324
