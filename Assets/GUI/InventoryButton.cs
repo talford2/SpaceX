@@ -9,20 +9,33 @@ public class InventoryButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public delegate void OnInventoryButtonHoldFinish();
     public OnInventoryButtonHoldFinish OnHoldFinish;
 
+    public Action OnStartHoldAction;
     public Action<float> OnHoldAction;
     public Action OnHoldFinishAction;
+    public Action OnReleaseAction;
 
     private bool _isDown;
     private float _holdCooldown;
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _isDown = true;
+        if (!_isDown)
+        {
+            _isDown = true;
+            _holdCooldown = HoldTime;
+            if (OnStartHoldAction != null)
+                OnStartHoldAction();
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        _isDown = false;
+        if (_isDown)
+        {
+            _isDown = false;
+            if (OnReleaseAction != null)
+                OnReleaseAction();
+        }
     }
 
     private void Update()

@@ -185,6 +185,7 @@ public class InventoryScreen : MonoBehaviour
             ItemButtons[i].onClick.AddListener(() => SelectItem(index));
             ItemButtons[i].GetComponent<InventoryButton>().OnHoldAction = (holdFraction) => { UpdateSalvageItem(index, holdFraction); };
             ItemButtons[i].GetComponent<InventoryButton>().OnHoldFinishAction = () => { SalvageItem(index); };
+            ItemButtons[i].GetComponent<InventoryButton>().OnReleaseAction = () => { SalvageCancel(index); };
             if (items[i] != null)
             {
                 ItemButtons[i].image.sprite = items[i].GetComponent<InventoryItem>().InventorySprite;
@@ -223,11 +224,23 @@ public class InventoryScreen : MonoBehaviour
     private void UpdateSalvageItem(int index, float fraction)
     {
         Debug.LogFormat("SALVAGING: {0:f2}", fraction);
+
+        var itemButton = ItemButtons[index].transform.GetChild(0).GetComponentInChildren<Image>();
+        if (itemButton != null)
+            itemButton.fillAmount = fraction;
     }
 
     private void SalvageItem(int index)
     {
         Debug.Log("SALVAGE ITEM: " + index);
+    }
+
+    private void SalvageCancel(int index)
+    {
+        Debug.Log("SALVAGE CANCEL");
+        var itemButton = ItemButtons[index].transform.GetChild(0).GetComponentInChildren<Image>();
+        if (itemButton != null)
+            itemButton.fillAmount = 0f;
     }
 
     private void SelectItem(int index)
