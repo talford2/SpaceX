@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventorySprite: {fileID: 21300000, guid: 53c8d39213fa7c54fa87b72d2e1ad40e, type: 3}
   Type: 0
+  SalvageValue: 100
 --- !u!114 &11492802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,6 +179,14 @@ MonoBehaviour:
   CoolingRate: 30
   CoolDelay: 0.5
   LockSound: {fileID: 0}
+  DamagePoints: 0
+  FireRatePoints: 0
+  CoolingRatePoints: 0
+  HeatCapacityPoints: 0
+  DamagePerPoint: 0.5
+  FireRatePerPoint: 0.1
+  CoolingRatePerPoint: 2
+  HeatCapacityPerPoint: 5
   IsTriggered: 0
 --- !u!1001 &100100000
 Prefab:

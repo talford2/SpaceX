@@ -4,6 +4,7 @@ using System;
 
 public class InventoryButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    public float DelayTime = 0.5f;
     public float HoldTime = 1f;
 
     public delegate void OnInventoryButtonHoldFinish();
@@ -22,7 +23,7 @@ public class InventoryButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         if (!_isDown)
         {
             _isDown = true;
-            _holdCooldown = HoldTime;
+            _holdCooldown = DelayTime + HoldTime;
             if (OnStartHoldAction != null)
                 OnStartHoldAction();
         }
@@ -56,10 +57,6 @@ public class InventoryButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
                 }
             }
         }
-        else
-        {
-            _holdCooldown = HoldTime;
-        }
     }
 
     public bool GetIsDown()
@@ -69,6 +66,11 @@ public class InventoryButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public float GetHoldFraction()
     {
+        if (_holdCooldown > HoldTime)
+        {
+            Debug.Log("CUNT");
+            return 0f;
+        }
         return Mathf.Clamp01(1f - _holdCooldown / HoldTime);
     }
 }
