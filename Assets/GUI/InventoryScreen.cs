@@ -69,6 +69,9 @@ public class InventoryScreen : MonoBehaviour
     private int _lastClickedIndex;
     private float _doubleClickCooldown;
 
+    // Salvage bars
+    private List<Image> _salvageBars;
+
     private void Awake()
     {
         _current = this;
@@ -178,14 +181,29 @@ public class InventoryScreen : MonoBehaviour
         CreditsText.text = string.Format("{0}c", PlayerController.Current.SpaceJunkCount);
 
         var items = PlayerController.Current.GetInventoryItems();
+
+        _salvageBars = new List<Image>();
+
         for (var i = 0; i < ItemButtons.Count; i++)
         {
             ItemButtons[i].image.sprite = null;
             var index = i + 0;
             ItemButtons[i].onClick.AddListener(() => SelectItem(index));
-            ItemButtons[i].GetComponent<InventoryButton>().OnHoldAction = (holdFraction) => { UpdateSalvageItem(index, holdFraction); };
-            ItemButtons[i].GetComponent<InventoryButton>().OnHoldFinishAction = () => { SalvageItem(index); };
-            ItemButtons[i].GetComponent<InventoryButton>().OnReleaseAction = () => { SalvageCancel(index); };
+
+            var inventButton = ItemButtons[i].GetComponent<InventoryButton>();
+            if (ItemButtons[i].transform.childCount > 0)
+            {
+                var salvageBarTransform = inventButton.transform.GetChild(0);
+                if (salvageBarTransform != null)
+                {
+                    var salvageBarImage = salvageBarTransform.GetComponentInChildren<Image>();
+                    _salvageBars.Add(salvageBarImage);
+                    inventButton.OnHoldAction = (holdFraction) => { UpdateSalvageItem(index, holdFraction); };
+                    inventButton.OnHoldFinishAction = () => { SalvageItem(index); };
+                    inventButton.OnReleaseAction = () => { SalvageCancel(index); };
+                    inventButton.OnReleaseAction();
+                }
+            }
             if (items[i] != null)
             {
                 ItemButtons[i].image.sprite = items[i].GetComponent<InventoryItem>().InventorySprite;
