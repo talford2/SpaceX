@@ -363,15 +363,19 @@ public class InventoryScreen : MonoBehaviour
         var primaryWeapon = focusVehicle.PrimaryWeaponInstance;
         ItemNameText.text = primaryWeapon.Name;
         PrimaryDamageCostText.text = GetCostString(100f);
+        PrimaryDamageBar.fillAmount = Mathf.Clamp01(primaryWeapon.DamagePoints / 10f);
         PrimaryDamageValueText.text = string.Format("{0:f1}", primaryWeapon.MissileDamage);
 
         PrimaryFireRateCostText.text = GetCostString(100f);
+        PrimaryFireRateBar.fillAmount = Mathf.Clamp01(primaryWeapon.FireRatePoints / 10f);
         PrimaryFireRateValueText.text = string.Format("{0:f1}/s", 1f / primaryWeapon.FireRate);
 
         PrimaryCoolingRateCostText.text = GetCostString(100f);
+        PrimaryCoolingRateBar.fillAmount = Mathf.Clamp01(primaryWeapon.CoolingRatePoints / 10f);
         PrimaryCoolingRateValueText.text = string.Format("{0:f1}/s", primaryWeapon.CoolingRate);
 
         PrimaryHeatCapacityCostText.text = GetCostString(100f);
+        PrimaryHeatCapacityBar.fillAmount = Mathf.Clamp01(primaryWeapon.HeatCapacityPoints / 10f);
         PrimaryHeatCapacityValueText.text = string.Format("{0:f1}", primaryWeapon.OverheatValue);
 
         var inventoryItem = primaryWeapon.GetComponent<InventoryItem>();
@@ -398,11 +402,13 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Damage");
         if (_equippedContext == EquippedContext.Primary)
         {
-            PrimaryDamageBar.fillAmount = Mathf.Clamp01(PrimaryDamageBar.fillAmount + 0.1f);
+            focusVehicle.PrimaryWeaponInstance.DamagePoints++;
+            PopulatePrimary();
         }
         else
         {
-            SecondaryDamageBar.fillAmount = Mathf.Clamp01(SecondaryDamageBar.fillAmount + 0.1f);
+            focusVehicle.SecondaryWeaponInstance.DamagePoints++;
+            PopulateSecondary();
         }
     }
 
@@ -411,11 +417,13 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Fire Rate");
         if (_equippedContext == EquippedContext.Primary)
         {
-            PrimaryFireRateBar.fillAmount = Mathf.Clamp01(PrimaryFireRateBar.fillAmount + 0.1f);
+            focusVehicle.PrimaryWeaponInstance.FireRatePoints++;
+            PopulatePrimary();
         }
         else
         {
-            SecondaryFireRateBar.fillAmount = Mathf.Clamp01(SecondaryFireRateBar.fillAmount + 0.1f);
+            focusVehicle.SecondaryWeaponInstance.FireRatePoints++;
+            PopulateSecondary();
         }
     }
 
@@ -424,11 +432,13 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Cooling Rate");
         if (_equippedContext == EquippedContext.Primary)
         {
-            PrimaryCoolingRateBar.fillAmount = Mathf.Clamp01(PrimaryCoolingRateBar.fillAmount + 0.1f);
+            focusVehicle.PrimaryWeaponInstance.CoolingRatePoints++;
+            PopulatePrimary();
         }
         else
         {
-            SecondaryCoolingRateBar.fillAmount = Mathf.Clamp01(SecondaryCoolingRateBar.fillAmount + 0.1f);
+            focusVehicle.SecondaryWeaponInstance.CoolingRatePoints++;
+            PopulateSecondary();
         }
     }
 
@@ -437,11 +447,13 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Heat Capacity");
         if (_equippedContext == EquippedContext.Primary)
         {
-            PrimaryHeatCapacityBar.fillAmount = Mathf.Clamp01(PrimaryHeatCapacityBar.fillAmount + 0.1f);
+            focusVehicle.PrimaryWeaponInstance.HeatCapacityPoints++;
+            PopulatePrimary();
         }
         else
         {
-            SecondaryHeatCapacityBar.fillAmount = Mathf.Clamp01(SecondaryHeatCapacityBar.fillAmount + 0.1f);
+            focusVehicle.SecondaryWeaponInstance.HeatCapacityPoints++;
+            PopulateSecondary();
         }
     }
 
@@ -449,16 +461,21 @@ public class InventoryScreen : MonoBehaviour
     {
         var secondaryWeapon = focusVehicle.SecondaryWeaponInstance;
         ItemNameText.text = secondaryWeapon.Name;
+
         SecondaryDamageCostText.text = GetCostString(100f);
+        SecondaryDamageBar.fillAmount = Mathf.Clamp01(secondaryWeapon.DamagePoints / 10f);
         SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.MissileDamage);
 
         SecondaryFireRateCostText.text = GetCostString(100f);
+        SecondaryFireRateBar.fillAmount = Mathf.Clamp01(secondaryWeapon.FireRatePoints / 10f);
         SecondaryFireRateValueText.text = string.Format("{0:f1}/s", 1f / secondaryWeapon.FireRate);
 
         SecondaryCoolingRateCostText.text = GetCostString(100f);
+        SecondaryCoolingRateBar.fillAmount = Mathf.Clamp01(secondaryWeapon.CoolingRatePoints / 10f);
         SecondaryCoolingRateValueText.text = string.Format("{0:f1}/s", secondaryWeapon.CoolingRate);
 
         SecondaryHeatCapacityCostText.text = GetCostString(100f);
+        SecondaryHeatCapacityBar.fillAmount = Mathf.Clamp01(secondaryWeapon.HeatCapacityPoints / 10f);
         SecondaryHeatCapacityValueText.text = string.Format("{0:f1}", secondaryWeapon.OverheatValue);
 
         var inventoryItem = secondaryWeapon.GetComponent<InventoryItem>();

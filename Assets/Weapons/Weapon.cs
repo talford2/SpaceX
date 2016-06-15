@@ -36,6 +36,18 @@ public class Weapon : MonoBehaviour
 
     public AudioClip LockSound;
 
+    [Header("Upgrade Status")]
+    public int DamagePoints;
+    public int FireRatePoints;
+    public int CoolingRatePoints;
+    public int HeatCapacityPoints;
+
+    [Header("Upgrading")]
+    public float DamagePerPoint;
+    public float FireRatePerPoint;
+    public float CoolingRatePerPoint;
+    public float HeatCapacityPerPoint;
+
     private float _fireCooldown = 0f;
     private List<ShootPoint> _shootPoints;
     private int _shootPointIndex;
