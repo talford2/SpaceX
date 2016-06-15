@@ -59,6 +59,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 408240}
   - 54: {fileID: 5409614}
+  - 114: {fileID: 11483148}
   - 114: {fileID: 11405640}
   - 114: {fileID: 11453042}
   m_Layer: 0
@@ -299,6 +300,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExplosionPrefab: {fileID: 127098, guid: 2bfd289939e87ac4fa9e386a7c77f839, type: 2}
   DebrisPrefab: {fileID: 119188, guid: eff4975c6c67cc74aa5d24825cd8a0d1, type: 2}
+--- !u!114 &11483148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 30
+  MaxHealth: 30
+  Shield: 0
+  MaxShield: 0
+  DamageEffect: {fileID: 0}
+  DieEffect: {fileID: 0}
+  WoundEffect: {fileID: 0}
+  DestroyOnDie: 0
 --- !u!198 &19811578
 ParticleSystem:
   m_ObjectHideFlags: 1

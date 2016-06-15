@@ -1,16 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Killable))]
 public class VehicleCorpse : MonoBehaviour
 {
     public GameObject ExplosionPrefab;
     public GameObject DebrisPrefab;
 
     private Rigidbody rBody;
+    private Killable killable;
 
     private void Awake()
     {
         rBody = GetComponent<Rigidbody>();
+        killable = GetComponent<Killable>();
+
+        killable.OnDie += CorpseExplode;
     }
 
     private void Start()
@@ -21,7 +27,11 @@ public class VehicleCorpse : MonoBehaviour
     private IEnumerator DelayedExplode(float delay)
     {
         yield return new WaitForSeconds(delay);
+        CorpseExplode(null);
+    }
 
+    private void CorpseExplode(Killable sender)
+    {
         if (ExplosionPrefab != null)
         {
             var explodeInstance = ResourcePoolManager.GetAvailable(ExplosionPrefab, rBody.position, rBody.rotation);
