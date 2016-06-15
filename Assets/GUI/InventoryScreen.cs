@@ -452,7 +452,7 @@ public class InventoryScreen : MonoBehaviour
         SecondaryDamageCostText.text = GetCostString(100f);
         SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.MissileDamage);
 
-        SecondaryCoolingRateCostText.text = GetCostString(100f);
+        SecondaryFireRateCostText.text = GetCostString(100f);
         SecondaryFireRateValueText.text = string.Format("{0:f1}/s", 1f / secondaryWeapon.FireRate);
 
         SecondaryCoolingRateCostText.text = GetCostString(100f);
