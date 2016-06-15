@@ -171,6 +171,11 @@ public class InventoryScreen : MonoBehaviour
         HeadsUpDisplay.Current.HideSquadronPrompt();
     }
 
+    private void UpdateCredits()
+    {
+        CreditsText.text = string.Format("{0}c", PlayerController.Current.SpaceJunkCount);
+    }
+
     private void Populate(int squadronIndex)
     {
         var fighters = PlayerController.Current.Squadron.Members;
@@ -178,7 +183,7 @@ public class InventoryScreen : MonoBehaviour
         focusVehicle = fighters[squadronIndex].VehicleInstance;
 
         CallSignText.text = profile.CallSign;
-        CreditsText.text = string.Format("{0}c", PlayerController.Current.SpaceJunkCount);
+        UpdateCredits();
 
         var items = PlayerController.Current.GetInventoryItems();
 
@@ -241,21 +246,33 @@ public class InventoryScreen : MonoBehaviour
 
     private void UpdateSalvageItem(int index, float fraction)
     {
-        Debug.LogFormat("SALVAGING: {0:f2}", fraction);
-
-        var itemButton = ItemButtons[index].transform.GetChild(0).GetComponentInChildren<Image>();
-        if (itemButton != null)
-            itemButton.fillAmount = fraction;
+        if (PlayerController.Current.GetInventoryItem(index) != null)
+        {
+            var itemButton = ItemButtons[index].transform.GetChild(0).GetComponentInChildren<Image>();
+            if (itemButton != null)
+                itemButton.fillAmount = fraction;
+        }
     }
 
     private void SalvageItem(int index)
     {
-        Debug.Log("SALVAGE ITEM: " + index);
+        var salvageItem = PlayerController.Current.GetInventoryItem(index);
+        if (salvageItem != null)
+        {
+            var salvageValue = salvageItem.GetComponent<InventoryItem>().SalvageValue;
+            PlayerController.Current.SpaceJunkCount += salvageValue;
+            PlayerController.Current.RemoveFromInventory(index);
+            HeadsUpDisplay.Current.IncreaseSpaceJunk();
+            UpdateCredits();
+            ItemButtons[index].image.sprite = null;
+            Debug.Log("SALVAGE ITEM: " + index + " FOR: " + salvageValue + "c");
+
+            SalvageCancel(index);
+        }
     }
 
     private void SalvageCancel(int index)
     {
-        Debug.Log("SALVAGE CANCEL");
         var itemButton = ItemButtons[index].transform.GetChild(0).GetComponentInChildren<Image>();
         if (itemButton != null)
             itemButton.fillAmount = 0f;
