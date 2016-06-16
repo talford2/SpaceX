@@ -1933,28 +1933,36 @@ MonoBehaviour:
   PrimaryDamageCostText: {fileID: 1412276753}
   PrimaryDamageBar: {fileID: 555200493}
   PrimaryDamageValueText: {fileID: 693054929}
+  PrimaryAddDamageButton: {fileID: 1070015042}
   PrimaryFireRateCostText: {fileID: 1992978760}
   PrimaryFireRateBar: {fileID: 606953931}
   PrimaryFireRateValueText: {fileID: 1636634869}
+  PrimaryAddFireRateButton: {fileID: 120844710}
   PrimaryCoolingRateCostText: {fileID: 689636169}
   PrimaryCoolingRateBar: {fileID: 1407093941}
   PrimaryCoolingRateValueText: {fileID: 1321195946}
+  PrimaryAddCoolingRateButton: {fileID: 472314764}
   PrimaryHeatCapacityCostText: {fileID: 698920876}
   PrimaryHeatCapacityBar: {fileID: 398196828}
   PrimaryHeatCapacityValueText: {fileID: 1688835459}
+  PrimaryAddHeatCapacityButton: {fileID: 592508323}
   SecondaryPanel: {fileID: 1794372746}
   SecondaryDamageCostText: {fileID: 1070953228}
   SecondaryDamageBar: {fileID: 2134725244}
   SecondaryDamageValueText: {fileID: 1476432731}
+  SecondaryAddDamageButton: {fileID: 1529820005}
   SecondaryFireRateCostText: {fileID: 1007611285}
   SecondaryFireRateBar: {fileID: 1039721480}
   SecondaryFireRateValueText: {fileID: 1924944854}
+  SecondaryAddFireRateButton: {fileID: 315593078}
   SecondaryCoolingRateCostText: {fileID: 1849019583}
   SecondaryCoolingRateBar: {fileID: 32165910}
   SecondaryCoolingRateValueText: {fileID: 251238765}
+  SecondaryAddCoolingRateButton: {fileID: 446120193}
   SecondaryHeatCapacityCostText: {fileID: 365943658}
   SecondaryHeatCapacityBar: {fileID: 27843200}
   SecondaryHeatCapacityValueText: {fileID: 1302033681}
+  SecondaryAddHeatCapacityButton: {fileID: 415293111}
   ItemButtons:
   - {fileID: 1757790637}
   - {fileID: 598838848}

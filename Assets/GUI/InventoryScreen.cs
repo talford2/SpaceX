@@ -23,18 +23,22 @@ public class InventoryScreen : MonoBehaviour
     public Text PrimaryDamageCostText;
     public Image PrimaryDamageBar;
     public Text PrimaryDamageValueText;
+    public Button PrimaryAddDamageButton;
 
     public Text PrimaryFireRateCostText;
     public Image PrimaryFireRateBar;
     public Text PrimaryFireRateValueText;
+    public Button PrimaryAddFireRateButton;
 
     public Text PrimaryCoolingRateCostText;
     public Image PrimaryCoolingRateBar;
     public Text PrimaryCoolingRateValueText;
+    public Button PrimaryAddCoolingRateButton;
 
     public Text PrimaryHeatCapacityCostText;
     public Image PrimaryHeatCapacityBar;
     public Text PrimaryHeatCapacityValueText;
+    public Button PrimaryAddHeatCapacityButton;
 
     [Header("Secondary Panel")]
     public CanvasGroup SecondaryPanel;
@@ -42,18 +46,22 @@ public class InventoryScreen : MonoBehaviour
     public Text SecondaryDamageCostText;
     public Image SecondaryDamageBar;
     public Text SecondaryDamageValueText;
+    public Button SecondaryAddDamageButton;
 
     public Text SecondaryFireRateCostText;
     public Image SecondaryFireRateBar;
     public Text SecondaryFireRateValueText;
+    public Button SecondaryAddFireRateButton;
 
     public Text SecondaryCoolingRateCostText;
     public Image SecondaryCoolingRateBar;
     public Text SecondaryCoolingRateValueText;
+    public Button SecondaryAddCoolingRateButton;
 
     public Text SecondaryHeatCapacityCostText;
     public Image SecondaryHeatCapacityBar;
     public Text SecondaryHeatCapacityValueText;
+    public Button SecondaryAddHeatCapacityButton;
 
     [Header("Inventory Panel")]
     public List<Button> ItemButtons;
@@ -369,24 +377,37 @@ public class InventoryScreen : MonoBehaviour
         return Mathf.Clamp01(points / 10f);
     }
 
+    private void PopulateWeaponPanel(int cost, int points, Text costText, Image pointsBar, Button addPointsButton)
+    {
+        if (points < 10)
+        {
+            costText.text = GetCostString(cost);
+            costText.enabled = true;
+            addPointsButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            costText.enabled = false;
+            addPointsButton.gameObject.SetActive(false);
+        }
+        pointsBar.fillAmount = GetPointBarFraction(points);
+    }
+
     public void PopulatePrimary()
     {
         var primaryWeapon = focusVehicle.PrimaryWeaponInstance;
         ItemNameText.text = primaryWeapon.Name;
-        PrimaryDamageCostText.text = GetCostString(primaryWeapon.DamagePointCost);
-        PrimaryDamageBar.fillAmount = GetPointBarFraction(primaryWeapon.DamagePoints);
+
+        PopulateWeaponPanel(primaryWeapon.DamagePointCost, primaryWeapon.DamagePoints, PrimaryDamageCostText, PrimaryDamageBar, PrimaryAddDamageButton);
         PrimaryDamageValueText.text = string.Format("{0:f1}", primaryWeapon.Damage);
 
-        PrimaryFireRateCostText.text = GetCostString(primaryWeapon.FireRatePointCost);
-        PrimaryFireRateBar.fillAmount = GetPointBarFraction(primaryWeapon.FireRatePoints);
+        PopulateWeaponPanel(primaryWeapon.FireRatePointCost, primaryWeapon.FireRatePoints, PrimaryFireRateCostText, PrimaryFireRateBar, PrimaryAddFireRateButton);
         PrimaryFireRateValueText.text = string.Format("{0:f1}/s", primaryWeapon.FireRate);
 
-        PrimaryCoolingRateCostText.text = GetCostString(primaryWeapon.CoolingRatePointCost);
-        PrimaryCoolingRateBar.fillAmount = GetPointBarFraction(primaryWeapon.CoolingRatePoints);
+        PopulateWeaponPanel(primaryWeapon.CoolingRatePointCost, primaryWeapon.CoolingRatePoints, PrimaryCoolingRateCostText, PrimaryCoolingRateBar, PrimaryAddCoolingRateButton);
         PrimaryCoolingRateValueText.text = string.Format("{0:f1}/s", primaryWeapon.CoolingRate);
 
-        PrimaryHeatCapacityCostText.text = GetCostString(primaryWeapon.HeatCapacityPointCost);
-        PrimaryHeatCapacityBar.fillAmount = GetPointBarFraction(primaryWeapon.HeatCapacityPoints);
+        PopulateWeaponPanel(primaryWeapon.HeatCapacityPointCost, primaryWeapon.HeatCapacityPoints, PrimaryHeatCapacityCostText, PrimaryHeatCapacityBar, PrimaryAddHeatCapacityButton);
         PrimaryHeatCapacityValueText.text = string.Format("{0:f1}", primaryWeapon.OverheatValue);
 
         var inventoryItem = primaryWeapon.GetComponent<InventoryItem>();
@@ -513,20 +534,16 @@ public class InventoryScreen : MonoBehaviour
         var secondaryWeapon = focusVehicle.SecondaryWeaponInstance;
         ItemNameText.text = secondaryWeapon.Name;
 
-        SecondaryDamageCostText.text = GetCostString(secondaryWeapon.DamagePointCost);
-        SecondaryDamageBar.fillAmount = GetPointBarFraction(secondaryWeapon.DamagePoints);
+        PopulateWeaponPanel(secondaryWeapon.DamagePointCost, secondaryWeapon.DamagePoints, SecondaryDamageCostText, SecondaryDamageBar, SecondaryAddDamageButton);
         SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.Damage);
 
-        SecondaryFireRateCostText.text = GetCostString(secondaryWeapon.FireRatePointCost);
-        SecondaryFireRateBar.fillAmount = GetPointBarFraction(secondaryWeapon.FireRatePoints);
+        PopulateWeaponPanel(secondaryWeapon.FireRatePointCost, secondaryWeapon.FireRatePoints, SecondaryFireRateCostText, SecondaryFireRateBar, SecondaryAddFireRateButton);
         SecondaryFireRateValueText.text = string.Format("{0:f1}/s", secondaryWeapon.FireRate);
 
-        SecondaryCoolingRateCostText.text = GetCostString(secondaryWeapon.CoolingRatePointCost);
-        SecondaryCoolingRateBar.fillAmount = GetPointBarFraction(secondaryWeapon.CoolingRatePoints);
+        PopulateWeaponPanel(secondaryWeapon.CoolingRatePointCost, secondaryWeapon.CoolingRatePoints, SecondaryCoolingRateCostText, SecondaryCoolingRateBar, SecondaryAddCoolingRateButton);
         SecondaryCoolingRateValueText.text = string.Format("{0:f1}/s", secondaryWeapon.CoolingRate);
 
-        SecondaryHeatCapacityCostText.text = GetCostString(secondaryWeapon.HeatCapacityPointCost);
-        SecondaryHeatCapacityBar.fillAmount = GetPointBarFraction(secondaryWeapon.HeatCapacityPoints);
+        PopulateWeaponPanel(secondaryWeapon.HeatCapacityPointCost, secondaryWeapon.HeatCapacityPoints, SecondaryHeatCapacityCostText, SecondaryHeatCapacityBar, SecondaryAddHeatCapacityButton);
         SecondaryHeatCapacityValueText.text = string.Format("{0:f1}", secondaryWeapon.OverheatValue);
 
         var inventoryItem = secondaryWeapon.GetComponent<InventoryItem>();
