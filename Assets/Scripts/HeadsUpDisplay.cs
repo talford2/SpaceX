@@ -201,10 +201,13 @@ public class HeadsUpDisplay : MonoBehaviour
         {
             _messageFadeOutCooldown -= Time.deltaTime;
             var fadeFraction = Mathf.Clamp01(_messageFadeOutCooldown / _messageFadeOutDuration);
-            MessageText.color = Utility.SetColorAlpha(MessageText.color, fadeFraction);
             if (_messageFadeOutCooldown < 0f)
             {
                 MessageText.enabled = false;
+            }
+            else
+            {
+                MessageText.color = Utility.SetColorAlpha(MessageText.color, fadeFraction);
             }
         }
     }
