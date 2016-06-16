@@ -407,13 +407,19 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Damage");
         if (_equippedContext == EquippedContext.Primary)
         {
-            focusVehicle.PrimaryWeaponInstance.DamagePoints++;
-            PopulatePrimary();
+            if (focusVehicle.PrimaryWeaponInstance.DamagePoints < 10)
+            {
+                focusVehicle.PrimaryWeaponInstance.DamagePoints++;
+                PopulatePrimary();
+            }
         }
         else
         {
-            focusVehicle.SecondaryWeaponInstance.DamagePoints++;
-            PopulateSecondary();
+            if (focusVehicle.SecondaryWeaponInstance.DamagePoints < 10)
+            {
+                focusVehicle.SecondaryWeaponInstance.DamagePoints++;
+                PopulateSecondary();
+            }
         }
     }
 
@@ -422,13 +428,19 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Fire Rate");
         if (_equippedContext == EquippedContext.Primary)
         {
-            focusVehicle.PrimaryWeaponInstance.FireRatePoints++;
-            PopulatePrimary();
+            if (focusVehicle.PrimaryWeaponInstance.FireRatePoints < 10)
+            {
+                focusVehicle.PrimaryWeaponInstance.FireRatePoints++;
+                PopulatePrimary();
+            }
         }
         else
         {
-            focusVehicle.SecondaryWeaponInstance.FireRatePoints++;
-            PopulateSecondary();
+            if (focusVehicle.SecondaryWeaponInstance.FireRatePoints < 10)
+            {
+                focusVehicle.SecondaryWeaponInstance.FireRatePoints++;
+                PopulateSecondary();
+            }
         }
     }
 
@@ -437,13 +449,19 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Cooling Rate");
         if (_equippedContext == EquippedContext.Primary)
         {
-            focusVehicle.PrimaryWeaponInstance.CoolingRatePoints++;
-            PopulatePrimary();
+            if (focusVehicle.PrimaryWeaponInstance.CoolingRatePoints < 10)
+            {
+                focusVehicle.PrimaryWeaponInstance.CoolingRatePoints++;
+                PopulatePrimary();
+            }
         }
         else
         {
-            focusVehicle.SecondaryWeaponInstance.CoolingRatePoints++;
-            PopulateSecondary();
+            if (focusVehicle.SecondaryWeaponInstance.CoolingRatePoints < 10)
+            {
+                focusVehicle.SecondaryWeaponInstance.CoolingRatePoints++;
+                PopulateSecondary();
+            }
         }
     }
 
@@ -452,13 +470,19 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Heat Capacity");
         if (_equippedContext == EquippedContext.Primary)
         {
-            focusVehicle.PrimaryWeaponInstance.HeatCapacityPoints++;
-            PopulatePrimary();
+            if (focusVehicle.PrimaryWeaponInstance.HeatCapacityPoints < 10)
+            {
+                focusVehicle.PrimaryWeaponInstance.HeatCapacityPoints++;
+                PopulatePrimary();
+            }
         }
         else
         {
-            focusVehicle.SecondaryWeaponInstance.HeatCapacityPoints++;
-            PopulateSecondary();
+            if (focusVehicle.SecondaryWeaponInstance.HeatCapacityPoints < 10)
+            {
+                focusVehicle.SecondaryWeaponInstance.HeatCapacityPoints++;
+                PopulateSecondary();
+            }
         }
     }
 
