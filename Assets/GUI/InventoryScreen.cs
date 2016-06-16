@@ -202,6 +202,7 @@ public class InventoryScreen : MonoBehaviour
     private void UpdateCredits()
     {
         CreditsText.text = string.Format("{0}c", PlayerController.Current.SpaceJunkCount);
+        HeadsUpDisplay.Current.IncreaseSpaceJunk();
     }
 
     private void Populate(int squadronIndex)
