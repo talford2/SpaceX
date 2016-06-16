@@ -383,7 +383,7 @@ public class InventoryScreen : MonoBehaviour
         {
             costText.text = GetCostString(cost);
             costText.enabled = true;
-            addPointsButton.gameObject.SetActive(true);
+            addPointsButton.gameObject.SetActive(PlayerController.Current.SpaceJunkCount >= cost);
         }
         else
         {
