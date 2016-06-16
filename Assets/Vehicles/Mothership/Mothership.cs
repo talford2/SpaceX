@@ -38,6 +38,7 @@ public class Mothership : MonoBehaviour
         if (_liveCount <= 0)
         {
             Debug.Log("MOTHERSHIP DESTROYED!!!");
+            HeadsUpDisplay.Current.DisplayMessage("MOTHERSHIP NEUTRALIZED", 3f);
             MapPin.SetPinState(MapPin.MapPinState.Inactive);
         }
     }

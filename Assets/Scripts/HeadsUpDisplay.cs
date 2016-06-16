@@ -25,6 +25,7 @@ public class HeadsUpDisplay : MonoBehaviour
 	public Image SquadronIcon;
 
 	public Image HitImage;
+    public Text MessageText;
 
 	private float _squadronPromptCooldown;
 
@@ -59,6 +60,12 @@ public class HeadsUpDisplay : MonoBehaviour
     private float _crosshairPulseDuration = 0.5f;
     private float _crosshairPulseCooldown;
 
+    // Message Prompt
+    private bool _isShowingMessage;
+    private float _messageCooldown;
+    private float _messageFadeOutDuration = 1f;
+    private float _messageFadeOutCooldown;
+
 	private float _healthOpacity;
 	private float _shieldOpacity;
 	private float _boostOpacity;
@@ -73,96 +80,98 @@ public class HeadsUpDisplay : MonoBehaviour
 		_healthOpacity = HealthBar.color.a;
 		_shieldOpacity = ShieldBar.color.a;
 		_boostOpacity = BoostBar.color.a;
+
+        MessageText.enabled = false;
 	}
 
-	private void Update()
-	{
-		if (PlayerController.Current.VehicleInstance != null)
-		{
-			EnergyText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.BoostEnergy);
-			ShieldText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Shield);
-			HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Health);
+    private void Update()
+    {
+        if (PlayerController.Current.VehicleInstance != null)
+        {
+            EnergyText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.BoostEnergy);
+            ShieldText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Shield);
+            HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Health);
 
-			var shieldFraction = PlayerController.Current.VehicleInstance.Killable.Shield / PlayerController.Current.VehicleInstance.Killable.MaxShield;
-			var healthFraction = PlayerController.Current.VehicleInstance.Killable.Health / PlayerController.Current.VehicleInstance.Killable.MaxHealth;
-			var energyFraction = PlayerController.Current.VehicleInstance.BoostEnergy / PlayerController.Current.VehicleInstance.MaxBoostEnergy;
+            var shieldFraction = PlayerController.Current.VehicleInstance.Killable.Shield / PlayerController.Current.VehicleInstance.Killable.MaxShield;
+            var healthFraction = PlayerController.Current.VehicleInstance.Killable.Health / PlayerController.Current.VehicleInstance.Killable.MaxHealth;
+            var energyFraction = PlayerController.Current.VehicleInstance.BoostEnergy / PlayerController.Current.VehicleInstance.MaxBoostEnergy;
 
             var leftHeatFraction = PlayerController.Current.VehicleInstance.PrimaryWeaponInstance.GetHeatFraction();
             var rightHeatFraction = PlayerController.Current.VehicleInstance.SecondaryWeaponInstance.GetHeatFraction();
 
-			ShieldBar.fillAmount = shieldFraction;
-			HealthBar.fillAmount = healthFraction;
-			BoostBar.fillAmount = energyFraction;
+            ShieldBar.fillAmount = shieldFraction;
+            HealthBar.fillAmount = healthFraction;
+            BoostBar.fillAmount = energyFraction;
             LeftHeatBar.fillAmount = leftHeatFraction;
             RightHeatBar.fillAmount = rightHeatFraction;
-		}
-		if (_squadronPromptCooldown >= 0f)
-		{
-			_squadronPromptCooldown -= Time.deltaTime;
-			if (_squadronPromptCooldown < 0f)
-			{
-				HideSquadronPrompt();
-			}
-		}
-		HitImage.color = new Color(1, 1, 1, _hitCooldown);
-		_hitCooldown -= Time.deltaTime * HitFadeSpeed;
-		_hitCooldown = Mathf.Max(0, _hitCooldown);
+        }
+        if (_squadronPromptCooldown >= 0f)
+        {
+            _squadronPromptCooldown -= Time.deltaTime;
+            if (_squadronPromptCooldown < 0f)
+            {
+                HideSquadronPrompt();
+            }
+        }
+        HitImage.color = new Color(1, 1, 1, _hitCooldown);
+        _hitCooldown -= Time.deltaTime * HitFadeSpeed;
+        _hitCooldown = Mathf.Max(0, _hitCooldown);
 
-		if (_spaceJunkPulseCooldown >= 0f)
-		{
-			_spaceJunkPulseCooldown -= Time.deltaTime;
-			if (_spaceJunkPulseCooldown < 0f)
-			{
-				SpaceJunkText.fontSize = 30;
-			}
-			else
-			{
-				var pulseFraction = _spaceJunkPulseCooldown / _spaceJunkPulseDuration;
-				SpaceJunkText.fontSize = Mathf.RoundToInt(Mathf.Lerp(50, 30, 1f - pulseFraction));
-			}
-		}
+        if (_spaceJunkPulseCooldown >= 0f)
+        {
+            _spaceJunkPulseCooldown -= Time.deltaTime;
+            if (_spaceJunkPulseCooldown < 0f)
+            {
+                SpaceJunkText.fontSize = 30;
+            }
+            else
+            {
+                var pulseFraction = _spaceJunkPulseCooldown / _spaceJunkPulseDuration;
+                SpaceJunkText.fontSize = Mathf.RoundToInt(Mathf.Lerp(50, 30, 1f - pulseFraction));
+            }
+        }
 
-		if (_shieldHitCooldown >= 0f)
-		{
-			_shieldHitCooldown -= Time.deltaTime;
-			if (_shieldHitCooldown < 0f)
-			{
-				ShieldBar.color = Utility.SetColorAlpha(ShieldBar.color, _shieldOpacity);
-			}
-			else
-			{
-				var pulseFraction = _shieldHitCooldown / _shieldHitDuration;
-				ShieldBar.color = Utility.SetColorAlpha(ShieldBar.color, (1 - _shieldOpacity) * pulseFraction + _shieldOpacity);
-			}
-		}
+        if (_shieldHitCooldown >= 0f)
+        {
+            _shieldHitCooldown -= Time.deltaTime;
+            if (_shieldHitCooldown < 0f)
+            {
+                ShieldBar.color = Utility.SetColorAlpha(ShieldBar.color, _shieldOpacity);
+            }
+            else
+            {
+                var pulseFraction = _shieldHitCooldown / _shieldHitDuration;
+                ShieldBar.color = Utility.SetColorAlpha(ShieldBar.color, (1 - _shieldOpacity) * pulseFraction + _shieldOpacity);
+            }
+        }
 
-		if (_healthHitCooldown >= 0f)
-		{
-			_healthHitCooldown -= Time.deltaTime;
-			if (_healthHitCooldown < 0f)
-			{
-				HealthBar.color = Utility.SetColorAlpha(HealthBar.color, _healthOpacity);
-			}
-			else
-			{
-				var pulseFraction = _healthHitCooldown / _healthHitDuration;
-				HealthBar.color = Utility.SetColorAlpha(HealthBar.color, (1 - _healthOpacity) * pulseFraction + _healthOpacity);
-			}
-		}
+        if (_healthHitCooldown >= 0f)
+        {
+            _healthHitCooldown -= Time.deltaTime;
+            if (_healthHitCooldown < 0f)
+            {
+                HealthBar.color = Utility.SetColorAlpha(HealthBar.color, _healthOpacity);
+            }
+            else
+            {
+                var pulseFraction = _healthHitCooldown / _healthHitDuration;
+                HealthBar.color = Utility.SetColorAlpha(HealthBar.color, (1 - _healthOpacity) * pulseFraction + _healthOpacity);
+            }
+        }
 
-		if (_energyRegenCooldown >= 0f)
-		{
-			_energyRegenCooldown -= Time.deltaTime;
-			if (_energyRegenCooldown < 0f)
-			{
-				BoostBar.color = Utility.SetColorAlpha(BoostBar.color, _boostOpacity);
-			}
-			else
-			{
-				var pulseFraction = _energyRegenCooldown / _energyRegenDuration;
-				BoostBar.color = Utility.SetColorAlpha(BoostBar.color, (1 - _boostOpacity) * pulseFraction + _boostOpacity);
-			}
-		}
+        if (_energyRegenCooldown >= 0f)
+        {
+            _energyRegenCooldown -= Time.deltaTime;
+            if (_energyRegenCooldown < 0f)
+            {
+                BoostBar.color = Utility.SetColorAlpha(BoostBar.color, _boostOpacity);
+            }
+            else
+            {
+                var pulseFraction = _energyRegenCooldown / _energyRegenDuration;
+                BoostBar.color = Utility.SetColorAlpha(BoostBar.color, (1 - _boostOpacity) * pulseFraction + _boostOpacity);
+            }
+        }
 
         if (_crosshairPulseCooldown >= 0f)
         {
@@ -177,7 +186,28 @@ public class HeadsUpDisplay : MonoBehaviour
                 _crosshairImage.rectTransform.sizeDelta = Vector2.Lerp(new Vector2(90f, 90f), new Vector2(64f, 64f), 1f - pulseFraction);
             }
         }
-	}
+
+        if (_messageCooldown >= 0f)
+        {
+            _messageCooldown -= Time.deltaTime;
+            if (_messageCooldown < 0f)
+            {
+                _messageFadeOutCooldown = _messageFadeOutDuration;
+
+            }
+        }
+
+        if (_messageFadeOutCooldown >= 0f)
+        {
+            _messageFadeOutCooldown -= Time.deltaTime;
+            var fadeFraction = Mathf.Clamp01(_messageFadeOutCooldown / _messageFadeOutDuration);
+            MessageText.color = Utility.SetColorAlpha(MessageText.color, fadeFraction);
+            if (_messageFadeOutCooldown < 0f)
+            {
+                MessageText.enabled = false;
+            }
+        }
+    }
 
 	public void LazyCreateSquadronIcons()
 	{
@@ -277,5 +307,13 @@ public class HeadsUpDisplay : MonoBehaviour
     {
         _crosshairImage.rectTransform.sizeDelta = new Vector2(90f, 90f);
         _crosshairPulseCooldown = _crosshairPulseDuration;
+    }
+
+    public void DisplayMessage(string message, float time)
+    {
+        MessageText.text = message;
+        MessageText.color = Utility.SetColorAlpha(MessageText.color, 1f);
+        MessageText.enabled = true;
+        _messageCooldown = time;
     }
 }
