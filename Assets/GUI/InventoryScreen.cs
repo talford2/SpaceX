@@ -179,6 +179,18 @@ public class InventoryScreen : MonoBehaviour
         HeadsUpDisplay.Current.HideSquadronPrompt();
     }
 
+    private void PopulateByContext()
+    {
+        if (_equippedContext == EquippedContext.Primary)
+            PopulatePrimary();
+        if (_equippedContext == EquippedContext.Secondary)
+            PopulateSecondary();
+        if (_equippedContext == EquippedContext.Shield)
+            PopulateShield();
+        if (_equippedContext == EquippedContext.Engine)
+            PopulateEngine();
+    }
+
     private void UpdateCredits()
     {
         CreditsText.text = string.Format("{0}c", PlayerController.Current.SpaceJunkCount);
@@ -232,14 +244,7 @@ public class InventoryScreen : MonoBehaviour
             PrimaryButton.image.sprite = primaryItem != null ? primaryItem.InventorySprite : null;
             SecondaryButton.image.sprite = secondaryItem != null ? secondaryItem.InventorySprite : null;
 
-            if (_equippedContext == EquippedContext.Primary)
-                PopulatePrimary();
-            if (_equippedContext == EquippedContext.Secondary)
-                PopulateSecondary();
-            if (_equippedContext == EquippedContext.Shield)
-                PopulateShield();
-            if (_equippedContext == EquippedContext.Engine)
-                PopulateEngine();
+            PopulateByContext();
         }
         else
         {
@@ -271,6 +276,7 @@ public class InventoryScreen : MonoBehaviour
             PlayerController.Current.SpaceJunkCount += salvageValue;
             PlayerController.Current.RemoveFromInventory(index);
             HeadsUpDisplay.Current.IncreaseSpaceJunk();
+            PopulateByContext();
             UpdateCredits();
             ItemButtons[index].image.sprite = null;
             Debug.Log("SALVAGE ITEM: " + index + " FOR: " + salvageValue + "c");
@@ -367,19 +373,19 @@ public class InventoryScreen : MonoBehaviour
     {
         var primaryWeapon = focusVehicle.PrimaryWeaponInstance;
         ItemNameText.text = primaryWeapon.Name;
-        PrimaryDamageCostText.text = GetCostString(100f);
+        PrimaryDamageCostText.text = GetCostString(primaryWeapon.DamagePointCost);
         PrimaryDamageBar.fillAmount = GetPointBarFraction(primaryWeapon.DamagePoints);
         PrimaryDamageValueText.text = string.Format("{0:f1}", primaryWeapon.Damage);
 
-        PrimaryFireRateCostText.text = GetCostString(100f);
+        PrimaryFireRateCostText.text = GetCostString(primaryWeapon.FireRatePointCost);
         PrimaryFireRateBar.fillAmount = GetPointBarFraction(primaryWeapon.FireRatePoints);
         PrimaryFireRateValueText.text = string.Format("{0:f1}/s", primaryWeapon.FireRate);
 
-        PrimaryCoolingRateCostText.text = GetCostString(100f);
+        PrimaryCoolingRateCostText.text = GetCostString(primaryWeapon.CoolingRatePointCost);
         PrimaryCoolingRateBar.fillAmount = GetPointBarFraction(primaryWeapon.CoolingRatePoints);
         PrimaryCoolingRateValueText.text = string.Format("{0:f1}/s", primaryWeapon.CoolingRate);
 
-        PrimaryHeatCapacityCostText.text = GetCostString(100f);
+        PrimaryHeatCapacityCostText.text = GetCostString(primaryWeapon.HeatCapacityPointCost);
         PrimaryHeatCapacityBar.fillAmount = GetPointBarFraction(primaryWeapon.HeatCapacityPoints);
         PrimaryHeatCapacityValueText.text = string.Format("{0:f1}", primaryWeapon.OverheatValue);
 
@@ -395,7 +401,7 @@ public class InventoryScreen : MonoBehaviour
         PrimaryButton.enabled = false;
     }
 
-    private string GetCostString(float value)
+    private string GetCostString(int value)
     {
         if (PlayerController.Current.SpaceJunkCount >= value)
             return string.Format("<color=\"#0f0\">{0:f0}c</color>", value);
@@ -407,18 +413,22 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Damage");
         if (_equippedContext == EquippedContext.Primary)
         {
-            if (focusVehicle.PrimaryWeaponInstance.DamagePoints < 10)
+            if (focusVehicle.PrimaryWeaponInstance.DamagePoints < 10  && PlayerController.Current.SpaceJunkCount > focusVehicle.PrimaryWeaponInstance.DamagePointCost)
             {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.PrimaryWeaponInstance.DamagePointCost;
                 focusVehicle.PrimaryWeaponInstance.DamagePoints++;
                 PopulatePrimary();
+                UpdateCredits();
             }
         }
         else
         {
-            if (focusVehicle.SecondaryWeaponInstance.DamagePoints < 10)
+            if (focusVehicle.SecondaryWeaponInstance.DamagePoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.SecondaryWeaponInstance.DamagePointCost)
             {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.SecondaryWeaponInstance.DamagePointCost;
                 focusVehicle.SecondaryWeaponInstance.DamagePoints++;
                 PopulateSecondary();
+                UpdateCredits();
             }
         }
     }
@@ -428,18 +438,22 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Fire Rate");
         if (_equippedContext == EquippedContext.Primary)
         {
-            if (focusVehicle.PrimaryWeaponInstance.FireRatePoints < 10)
+            if (focusVehicle.PrimaryWeaponInstance.FireRatePoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.PrimaryWeaponInstance.FireRatePointCost)
             {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.PrimaryWeaponInstance.FireRatePointCost;
                 focusVehicle.PrimaryWeaponInstance.FireRatePoints++;
                 PopulatePrimary();
+                UpdateCredits();
             }
         }
         else
         {
-            if (focusVehicle.SecondaryWeaponInstance.FireRatePoints < 10)
+            if (focusVehicle.SecondaryWeaponInstance.FireRatePoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.SecondaryWeaponInstance.FireRatePointCost)
             {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.SecondaryWeaponInstance.FireRatePointCost;
                 focusVehicle.SecondaryWeaponInstance.FireRatePoints++;
                 PopulateSecondary();
+                UpdateCredits();
             }
         }
     }
@@ -449,18 +463,22 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Cooling Rate");
         if (_equippedContext == EquippedContext.Primary)
         {
-            if (focusVehicle.PrimaryWeaponInstance.CoolingRatePoints < 10)
+            if (focusVehicle.PrimaryWeaponInstance.CoolingRatePoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.PrimaryWeaponInstance.CoolingRatePointCost)
             {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.PrimaryWeaponInstance.CoolingRatePointCost;
                 focusVehicle.PrimaryWeaponInstance.CoolingRatePoints++;
                 PopulatePrimary();
+                UpdateCredits();
             }
         }
         else
         {
-            if (focusVehicle.SecondaryWeaponInstance.CoolingRatePoints < 10)
+            if (focusVehicle.SecondaryWeaponInstance.CoolingRatePoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.SecondaryWeaponInstance.CoolingRatePointCost)
             {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.SecondaryWeaponInstance.CoolingRatePointCost;
                 focusVehicle.SecondaryWeaponInstance.CoolingRatePoints++;
                 PopulateSecondary();
+                UpdateCredits();
             }
         }
     }
@@ -470,18 +488,22 @@ public class InventoryScreen : MonoBehaviour
         Debug.Log("ADD: " + _equippedContext + ", Heat Capacity");
         if (_equippedContext == EquippedContext.Primary)
         {
-            if (focusVehicle.PrimaryWeaponInstance.HeatCapacityPoints < 10)
+            if (focusVehicle.PrimaryWeaponInstance.HeatCapacityPoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.PrimaryWeaponInstance.HeatCapacityPointCost)
             {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.PrimaryWeaponInstance.HeatCapacityPointCost;
                 focusVehicle.PrimaryWeaponInstance.HeatCapacityPoints++;
                 PopulatePrimary();
+                UpdateCredits();
             }
         }
         else
         {
-            if (focusVehicle.SecondaryWeaponInstance.HeatCapacityPoints < 10)
+            if (focusVehicle.SecondaryWeaponInstance.HeatCapacityPoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.SecondaryWeaponInstance.HeatCapacityPointCost)
             {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.SecondaryWeaponInstance.HeatCapacityPointCost;
                 focusVehicle.SecondaryWeaponInstance.HeatCapacityPoints++;
                 PopulateSecondary();
+                UpdateCredits();
             }
         }
     }
@@ -491,19 +513,19 @@ public class InventoryScreen : MonoBehaviour
         var secondaryWeapon = focusVehicle.SecondaryWeaponInstance;
         ItemNameText.text = secondaryWeapon.Name;
 
-        SecondaryDamageCostText.text = GetCostString(100f);
+        SecondaryDamageCostText.text = GetCostString(secondaryWeapon.DamagePointCost);
         SecondaryDamageBar.fillAmount = GetPointBarFraction(secondaryWeapon.DamagePoints);
         SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.Damage);
 
-        SecondaryFireRateCostText.text = GetCostString(100f);
+        SecondaryFireRateCostText.text = GetCostString(secondaryWeapon.FireRatePointCost);
         SecondaryFireRateBar.fillAmount = GetPointBarFraction(secondaryWeapon.FireRatePoints);
         SecondaryFireRateValueText.text = string.Format("{0:f1}/s", secondaryWeapon.FireRate);
 
-        SecondaryCoolingRateCostText.text = GetCostString(100f);
+        SecondaryCoolingRateCostText.text = GetCostString(secondaryWeapon.CoolingRatePointCost);
         SecondaryCoolingRateBar.fillAmount = GetPointBarFraction(secondaryWeapon.CoolingRatePoints);
         SecondaryCoolingRateValueText.text = string.Format("{0:f1}/s", secondaryWeapon.CoolingRate);
 
-        SecondaryHeatCapacityCostText.text = GetCostString(100f);
+        SecondaryHeatCapacityCostText.text = GetCostString(secondaryWeapon.HeatCapacityPointCost);
         SecondaryHeatCapacityBar.fillAmount = GetPointBarFraction(secondaryWeapon.HeatCapacityPoints);
         SecondaryHeatCapacityValueText.text = string.Format("{0:f1}", secondaryWeapon.OverheatValue);
 

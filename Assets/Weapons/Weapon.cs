@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour
 
     public float Damage { get { return BaseMissileDamage + DamagePerPoint * DamagePoints; } }
     public float FireRate { get { return BaseFireRate + FireRatePerPoint * FireRatePoints; } }
-    public float CoolingRate { get { return BaseCoolingRate + CoolingRatePerPoint * CoolingRatePoints; }}
+    public float CoolingRate { get { return BaseCoolingRate + CoolingRatePerPoint * CoolingRatePoints; } }
     public float OverheatValue { get { return BaseOverheatValue + HeatCapacityPerPoint * HeatCapacityPoints; } }
 
     [Header("Upgrade Status")]
@@ -54,6 +54,11 @@ public class Weapon : MonoBehaviour
     public float FireRatePerPoint;
     public float CoolingRatePerPoint;
     public float HeatCapacityPerPoint;
+
+    public int DamagePointCost { get { return 100 + 100 * DamagePoints; } }
+    public int FireRatePointCost { get { return 100 + 100 * FireRatePoints; } }
+    public int CoolingRatePointCost { get { return 100 + 100 * CoolingRatePoints; } }
+    public int HeatCapacityPointCost { get { return 100 + 100 * HeatCapacityPoints; } }
 
     private float _fireCooldown = 0f;
     private List<ShootPoint> _shootPoints;
@@ -147,7 +152,7 @@ public class Weapon : MonoBehaviour
                 if (IsTriggered && _fireCooldown < 0)
                 {
                     //Debug.Log("Shoot!");
-                    _fireCooldown = 1f/FireRate;
+                    _fireCooldown = 1f / FireRate;
                     Fire();
                 }
             }
@@ -156,42 +161,42 @@ public class Weapon : MonoBehaviour
                 TargetLocking();
             }
         }
-	}
+    }
 
-	public Vector3 GetShootPointCentre()
-	{
-		return _shootPoints.Aggregate(Vector3.zero, (current, shootPoint) => current + shootPoint.transform.position) / _shootPoints.Count;
-	}
+    public Vector3 GetShootPointCentre()
+    {
+        return _shootPoints.Aggregate(Vector3.zero, (current, shootPoint) => current + shootPoint.transform.position) / _shootPoints.Count;
+    }
 
-	public void SetAimAt(Vector3 aimAt)
-	{
-		_aimAt = aimAt;
-	}
+    public void SetAimAt(Vector3 aimAt)
+    {
+        _aimAt = aimAt;
+    }
 
-	private GameObject _missileInstance;
-	private GameObject GetNextMissile()
-	{
-		_missileInstance = ResourcePoolManager.GetAvailable(MissilePrefab, Vector3.zero, Quaternion.identity);
-		_missileInstance.GetComponent<Missile>().Initialize(_owner, Damage);
-		return _missileInstance;
-	}
+    private GameObject _missileInstance;
+    private GameObject GetNextMissile()
+    {
+        _missileInstance = ResourcePoolManager.GetAvailable(MissilePrefab, Vector3.zero, Quaternion.identity);
+        _missileInstance.GetComponent<Missile>().Initialize(_owner, Damage);
+        return _missileInstance;
+    }
 
-	private ShootPoint _shootPoint;
-	public void FireMissile(GameObject missile)
-	{
-		if (OnShoot != null)
-			OnShoot(_shootPointIndex);
+    private ShootPoint _shootPoint;
+    public void FireMissile(GameObject missile)
+    {
+        if (OnShoot != null)
+            OnShoot(_shootPointIndex);
 
-		_shootPoint = _shootPoints[_shootPointIndex];
+        _shootPoint = _shootPoints[_shootPointIndex];
 
-		var direction = _aimAt - _shootPoint.transform.position;
-		if (!MissilesConverge)
-			direction += _shootPoint.transform.position - GetShootPointCentre();
-		missile.GetComponent<Missile>().FromReference = _shootPoint.transform;
-		missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, Quaternion.Euler(Random.Range(-0.5f * Spread, 0.5f * Spread), Random.Range(-0.5f * Spread, 0.5f * Spread), 0f) * direction, _velocityReference.Value);
+        var direction = _aimAt - _shootPoint.transform.position;
+        if (!MissilesConverge)
+            direction += _shootPoint.transform.position - GetShootPointCentre();
+        missile.GetComponent<Missile>().FromReference = _shootPoint.transform;
+        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, Quaternion.Euler(Random.Range(-0.5f * Spread, 0.5f * Spread), Random.Range(-0.5f * Spread, 0.5f * Spread), 0f) * direction, _velocityReference.Value);
 
-		_shootPoint.Flash();
-		FireSound.Play();
+        _shootPoint.Flash();
+        FireSound.Play();
 
         if (IsOverheat)
         {
@@ -207,138 +212,138 @@ public class Weapon : MonoBehaviour
             }
         }
 
-		_shootPointIndex++;
-		if (_shootPointIndex >= _shootPoints.Count)
-			_shootPointIndex = 0;
-	}
+        _shootPointIndex++;
+        if (_shootPointIndex >= _shootPoints.Count)
+            _shootPointIndex = 0;
+    }
 
-	public void Fire()
-	{
-		for (var i = 0; i < MissilesPerShot; i++)
-		{
-			FireMissile(GetNextMissile());
-		}
-	}
+    public void Fire()
+    {
+        for (var i = 0; i < MissilesPerShot; i++)
+        {
+            FireMissile(GetNextMissile());
+        }
+    }
 
-	public void ClearTargetLock()
-	{
-		_isLocked = false;
-		_lastLockingTarget = null;
-		_lockedTarget = null;
-	}
+    public void ClearTargetLock()
+    {
+        _isLocked = false;
+        _lastLockingTarget = null;
+        _lockedTarget = null;
+    }
 
-	private Vehicle _lockedVehicle;
-	private GameObject _nextMissile;
-	private Targetable _targetable;
+    private Vehicle _lockedVehicle;
+    private GameObject _nextMissile;
+    private Targetable _targetable;
 
-	private void TargetLocking()
-	{
-		var shootPointsCentre = GetShootPointCentre();
-		if (_lockingTarget != null)
-		{
-			var toLockingTarget = _lockingTarget.position - shootPointsCentre;
-			if (toLockingTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
-			{
-				ClearTargetLock();
-			}
-		}
-		else
-		{
-			ClearTargetLock();
-		}
-		if (_lockedTarget != null)
-		{
-			var toLockedTarget = _lockedTarget.position - shootPointsCentre;
-			if (toLockedTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
-			{
-				ClearTargetLock();
-			}
-		}
-		else
-		{
-			ClearTargetLock();
-		}
+    private void TargetLocking()
+    {
+        var shootPointsCentre = GetShootPointCentre();
+        if (_lockingTarget != null)
+        {
+            var toLockingTarget = _lockingTarget.position - shootPointsCentre;
+            if (toLockingTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
+            {
+                ClearTargetLock();
+            }
+        }
+        else
+        {
+            ClearTargetLock();
+        }
+        if (_lockedTarget != null)
+        {
+            var toLockedTarget = _lockedTarget.position - shootPointsCentre;
+            if (toLockedTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
+            {
+                ClearTargetLock();
+            }
+        }
+        else
+        {
+            ClearTargetLock();
+        }
 
-		if (!_isLocked)
-		{
-			_lockingTarget = null;
-			if (IsTriggered)
-			{
-				var targetLockingDir = _aimAt - shootPointsCentre;
-				_lockingTarget = Targeting.FindFacingAngleTeam(_targetTeam, shootPointsCentre, targetLockingDir, TargetLockingMaxDistance);
-				if (_lastLockingTarget == null)
-					_lastLockingTarget = _lockingTarget;
-			}
-			else
-			{
-				_lastLockingTarget = null;
-			}
+        if (!_isLocked)
+        {
+            _lockingTarget = null;
+            if (IsTriggered)
+            {
+                var targetLockingDir = _aimAt - shootPointsCentre;
+                _lockingTarget = Targeting.FindFacingAngleTeam(_targetTeam, shootPointsCentre, targetLockingDir, TargetLockingMaxDistance);
+                if (_lastLockingTarget == null)
+                    _lastLockingTarget = _lockingTarget;
+            }
+            else
+            {
+                _lastLockingTarget = null;
+            }
 
-			if (_lastLockingTarget != null && _lastLockingTarget == _lockingTarget)
-			{
-				_lockingCooldown -= Time.deltaTime;
-				if (_lockingCooldown < 0f)
-				{
-					_lockedTarget = _lockingTarget;
-					_isLocked = true;
-					if (LockSound != null)
-					{
-						Utility.PlayOnTransform(LockSound, _owner.transform);
-					}
-				}
-			}
-			else
-			{
-				_lockingCooldown = TargetLockTime;
-			}
-		}
-		else
-		{
-			if (!IsTriggered)
-			{
-				_lockedVehicle = _lockedTarget.GetComponent<Vehicle>();
-				if (_lockedVehicle != null)
-				{
-					// Rough Extrapolation
-					SetAimAt(Utility.GetVehicleExtrapolatedPosition(_lockedVehicle, this, 0f));
-				}
-				else
-				{
-					SetAimAt(_lockedTarget.position);
-				}
+            if (_lastLockingTarget != null && _lastLockingTarget == _lockingTarget)
+            {
+                _lockingCooldown -= Time.deltaTime;
+                if (_lockingCooldown < 0f)
+                {
+                    _lockedTarget = _lockingTarget;
+                    _isLocked = true;
+                    if (LockSound != null)
+                    {
+                        Utility.PlayOnTransform(LockSound, _owner.transform);
+                    }
+                }
+            }
+            else
+            {
+                _lockingCooldown = TargetLockTime;
+            }
+        }
+        else
+        {
+            if (!IsTriggered)
+            {
+                _lockedVehicle = _lockedTarget.GetComponent<Vehicle>();
+                if (_lockedVehicle != null)
+                {
+                    // Rough Extrapolation
+                    SetAimAt(Utility.GetVehicleExtrapolatedPosition(_lockedVehicle, this, 0f));
+                }
+                else
+                {
+                    SetAimAt(_lockedTarget.position);
+                }
 
-				_targetable = _lockedTarget.GetComponent<Targetable>();
-				if (_targetable != null)
-				{
-					_targetable.LockedOnBy = _owner.transform;
-				}
+                _targetable = _lockedTarget.GetComponent<Targetable>();
+                if (_targetable != null)
+                {
+                    _targetable.LockedOnBy = _owner.transform;
+                }
 
-				SetAimAt(GetShootPointCentre() + _velocityReference.Value);
-				_nextMissile = GetNextMissile();
-				_nextMissile.GetComponent<Missile>().SetTarget(_lockedTarget);
-				FireMissile(_nextMissile);
-				ClearTargetLock();
-			}
-		}
-	}
+                SetAimAt(GetShootPointCentre() + _velocityReference.Value);
+                _nextMissile = GetNextMissile();
+                _nextMissile.GetComponent<Missile>().SetTarget(_lockedTarget);
+                FireMissile(_nextMissile);
+                ClearTargetLock();
+            }
+        }
+    }
 
-	public Transform GetLockingOnTarget()
-	{
-		return _lockingTarget;
-	}
+    public Transform GetLockingOnTarget()
+    {
+        return _lockingTarget;
+    }
 
-	public Transform GetLockedOnTarget()
-	{
-		return _lockedTarget;
-	}
+    public Transform GetLockedOnTarget()
+    {
+        return _lockedTarget;
+    }
 
     public float GetHeatFraction()
     {
         return heatValue / OverheatValue;
     }
 
-	private void OnDestroy()
-	{
-		ClearTargetLock();
-	}
+    private void OnDestroy()
+    {
+        ClearTargetLock();
+    }
 }
