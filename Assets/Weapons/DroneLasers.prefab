@@ -41,6 +41,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 491988}
   m_Father: {fileID: 0}
@@ -54,6 +55,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 490488}
   m_RootOrder: 0
@@ -143,19 +145,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Puny Laser Cannon
+  LootIndex: 0
   MissilePrefab: {fileID: 180512, guid: adb276e13f8472b4ab9d9878efaa0049, type: 2}
   MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
   FireSound: {fileID: 8259540}
-  FireRate: 0.5
   MissilesPerShot: 1
-  MissileDamage: 5
+  Spread: 0
   MissilesConverge: 0
   IsTargetLocking: 0
   TargetLockTime: 1.5
   TargetLockingMaxDistance: 2000
+  IsOverheat: 0
+  HeatPerMissile: 0
+  OverheatDelay: 0
+  CoolDelay: 0.5
   LockSound: {fileID: 0}
+  BaseMissileDamage: 5
+  BaseFireRate: 2
+  BaseCoolingRate: 0
+  BaseOverheatValue: 0
+  DamagePoints: 1
+  FireRatePoints: 1
+  CoolingRatePoints: 0
+  HeatCapacityPoints: 0
+  DamagePerPoint: 0
+  FireRatePerPoint: 0
+  CoolingRatePerPoint: 0
+  HeatCapacityPerPoint: 0
   IsTriggered: 0
-  MissilePoolCount: 50
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

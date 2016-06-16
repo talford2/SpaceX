@@ -15,10 +15,8 @@ public class Weapon : MonoBehaviour
 
     public AudioSource FireSound;
 
-    public float FireRate = 0.2f;
     public int MissilesPerShot = 2;
     public float Spread = 0f;
-    public float MissileDamage;
     public bool MissilesConverge;
 
     // Targeting
@@ -29,12 +27,21 @@ public class Weapon : MonoBehaviour
     // Overheating
     public bool IsOverheat;
     public float HeatPerMissile;
-    public float OverheatValue;
     public float OverheatDelay;
-    public float CoolingRate;
     public float CoolDelay = 0.5f;
 
     public AudioClip LockSound;
+
+    [Header("Base Upgradable Properties")]
+    public float BaseMissileDamage;
+    public float BaseFireRate = 0.2f;
+    public float BaseCoolingRate;
+    public float BaseOverheatValue;
+
+    public float Damage { get { return BaseMissileDamage + DamagePerPoint * DamagePoints; } }
+    public float FireRate { get { return BaseFireRate + FireRatePerPoint * FireRatePoints; } }
+    public float CoolingRate { get { return BaseCoolingRate + CoolingRatePerPoint * CoolingRatePoints; }}
+    public float OverheatValue { get { return BaseOverheatValue + HeatCapacityPerPoint * HeatCapacityPoints; } }
 
     [Header("Upgrade Status")]
     public int DamagePoints;
@@ -140,7 +147,7 @@ public class Weapon : MonoBehaviour
                 if (IsTriggered && _fireCooldown < 0)
                 {
                     //Debug.Log("Shoot!");
-                    _fireCooldown = FireRate;
+                    _fireCooldown = 1f/FireRate;
                     Fire();
                 }
             }
@@ -165,7 +172,7 @@ public class Weapon : MonoBehaviour
 	private GameObject GetNextMissile()
 	{
 		_missileInstance = ResourcePoolManager.GetAvailable(MissilePrefab, Vector3.zero, Quaternion.identity);
-		_missileInstance.GetComponent<Missile>().Initialize(_owner, MissileDamage);
+		_missileInstance.GetComponent<Missile>().Initialize(_owner, Damage);
 		return _missileInstance;
 	}
 

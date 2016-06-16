@@ -369,11 +369,11 @@ public class InventoryScreen : MonoBehaviour
         ItemNameText.text = primaryWeapon.Name;
         PrimaryDamageCostText.text = GetCostString(100f);
         PrimaryDamageBar.fillAmount = GetPointBarFraction(primaryWeapon.DamagePoints);
-        PrimaryDamageValueText.text = string.Format("{0:f1}", primaryWeapon.MissileDamage);
+        PrimaryDamageValueText.text = string.Format("{0:f1}", primaryWeapon.Damage);
 
         PrimaryFireRateCostText.text = GetCostString(100f);
         PrimaryFireRateBar.fillAmount = GetPointBarFraction(primaryWeapon.FireRatePoints);
-        PrimaryFireRateValueText.text = string.Format("{0:f1}/s", 1f / primaryWeapon.FireRate);
+        PrimaryFireRateValueText.text = string.Format("{0:f1}/s", primaryWeapon.FireRate);
 
         PrimaryCoolingRateCostText.text = GetCostString(100f);
         PrimaryCoolingRateBar.fillAmount = GetPointBarFraction(primaryWeapon.CoolingRatePoints);
@@ -469,11 +469,11 @@ public class InventoryScreen : MonoBehaviour
 
         SecondaryDamageCostText.text = GetCostString(100f);
         SecondaryDamageBar.fillAmount = GetPointBarFraction(secondaryWeapon.DamagePoints);
-        SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.MissileDamage);
+        SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.Damage);
 
         SecondaryFireRateCostText.text = GetCostString(100f);
         SecondaryFireRateBar.fillAmount = GetPointBarFraction(secondaryWeapon.FireRatePoints);
-        SecondaryFireRateValueText.text = string.Format("{0:f1}/s", 1f / secondaryWeapon.FireRate);
+        SecondaryFireRateValueText.text = string.Format("{0:f1}/s", secondaryWeapon.FireRate);
 
         SecondaryCoolingRateCostText.text = GetCostString(100f);
         SecondaryCoolingRateBar.fillAmount = GetPointBarFraction(secondaryWeapon.CoolingRatePoints);

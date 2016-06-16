@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventorySprite: {fileID: 21300000, guid: d2fc058ec4f7c8146962d6cf3837254f, type: 3}
   Type: 0
+  SalvageValue: 100
 --- !u!114 &11492802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,21 +164,29 @@ MonoBehaviour:
   MissilePrefab: {fileID: 180512, guid: 39a77c32b5194a6459af7f3fcd94f8af, type: 2}
   MuzzlePrefab: {fileID: 11408760, guid: db0bd28387b791d4ea43fd188b23d353, type: 2}
   FireSound: {fileID: 8259540}
-  FireRate: 0.1
   MissilesPerShot: 1
   Spread: 0
-  MissileDamage: 5.5
   MissilesConverge: 0
   IsTargetLocking: 0
   TargetLockTime: 0.5
   TargetLockingMaxDistance: 2000
   IsOverheat: 1
   HeatPerMissile: 0.8
-  OverheatValue: 100
   OverheatDelay: 2
-  CoolingRate: 30
   CoolDelay: 0.5
   LockSound: {fileID: 0}
+  BaseMissileDamage: 5.5
+  BaseFireRate: 10
+  BaseCoolingRate: 30
+  BaseOverheatValue: 100
+  DamagePoints: 0
+  FireRatePoints: 0
+  CoolingRatePoints: 0
+  HeatCapacityPoints: 0
+  DamagePerPoint: 0.5
+  FireRatePerPoint: 0.5
+  CoolingRatePerPoint: 3
+  HeatCapacityPerPoint: 10
   IsTriggered: 0
 --- !u!1001 &100100000
 Prefab:
