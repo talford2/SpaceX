@@ -44,7 +44,7 @@ public class Mothership : MonoBehaviour
             if (DefeatedSound != null)
             {
                 var sound = ResourcePoolManager.GetAvailable(SoundPrefab, Universe.Current.ViewPort.transform.position, Quaternion.identity).GetComponent<AnonymousSound>();
-                sound.PlayAt(DefeatedSound, Universe.Current.ViewPort.transform.position);
+                sound.PlayAt(DefeatedSound, Universe.Current.ViewPort.transform.position, 1f, false);
             }
             MapPin.SetPinState(MapPin.MapPinState.Inactive);
         }

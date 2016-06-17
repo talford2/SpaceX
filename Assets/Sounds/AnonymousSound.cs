@@ -14,8 +14,9 @@ public class AnonymousSound : MonoBehaviour
         _resourcePoolItem.IsAvailable = true;
     }
 
-    public void PlayAt(AudioClip clip, Vector3 position, float volume = 1f)
+    public void PlayAt(AudioClip clip, Vector3 position, float volume = 1f, bool isSpatial = true)
     {
+        Source.spatialize = isSpatial;
         if (_resourcePoolItem == null)
             _resourcePoolItem = GetComponent<ResourcePoolItem>();
         _resourcePoolItem.IsAvailable = false;
