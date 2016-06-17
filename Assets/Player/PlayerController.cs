@@ -540,6 +540,7 @@ public class PlayerController : MonoBehaviour
 		respawnAt.Spawn();
 		_isAllowRespawn = false;
 		HeadsUpDisplay.Current.RefreshSquadronIcons();
+        HeadsUpDisplay.Current.ShowCrosshair();
 	}
 
 	private string _curCallSlign;
