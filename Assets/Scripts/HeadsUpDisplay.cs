@@ -283,12 +283,16 @@ public class HeadsUpDisplay : MonoBehaviour
         var crosshairImage = Crosshair.GetComponent<Image>();
         crosshairImage.color = Utility.SetColorAlpha(crosshairImage.color, 1f);
         _isCrosshairFadeOut = false;
+        LeftHeatBar.enabled = true;
+        RightHeatBar.enabled = true;
     }
 
     public void HideCrosshair()
 	{
 		Crosshair.SetActive(false);
-	}
+        LeftHeatBar.enabled = false;
+        RightHeatBar.enabled = false;
+    }
 
 	public void ShowSquadronPrompt(string message)
 	{
