@@ -1830,7 +1830,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0.59966964, z: 0, w: -0.80024767}
   m_LocalPosition: {x: 70.28668, y: 6.6, z: 213.11841}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 73.6925, z: 0}
   m_Children:
   - {fileID: 458292}
   - {fileID: 434196}
@@ -1935,7 +1935,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.59966964, z: 0, w: -0.80024767}
   m_LocalPosition: {x: -70.28668, y: 6.6, z: 213.11841}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -73.6925, z: 0}
   m_Children:
   - {fileID: 486784}
   - {fileID: 444864}
@@ -2160,7 +2160,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071066, z: 0, w: -0.70710695}
   m_LocalPosition: {x: -87.4, y: 7.3, z: 13.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_Children:
   - {fileID: 458416}
   - {fileID: 444714}
@@ -2281,7 +2281,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071066, z: 0, w: -0.70710695}
   m_LocalPosition: {x: -87.400024, y: 7.300003, z: -24}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_Children:
   - {fileID: 420494}
   - {fileID: 480368}
@@ -4558,6 +4558,20 @@ MonoBehaviour:
   MapPin: {fileID: 11453700}
   SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
   DefeatedSound: {fileID: 8300000, guid: f7b36ddbeacd38141b2fc0aabea82207, type: 3}
+  FrontLeftBay: {fileID: 11435192}
+  FrontLeftBayShield: {fileID: 2354782}
+  DistantFrontLeftBayShield: {fileID: 2341328}
+  FrontRightBay: {fileID: 11403496}
+  FrontRightBayShield: {fileID: 2375462}
+  DistantFrontRightBayShield: {fileID: 2392342}
+  MidLeftBay: {fileID: 11401320}
+  RearLeftBay: {fileID: 11457458}
+  MidLeftBayShield: {fileID: 2317076}
+  DistantMidLeftBayShield: {fileID: 2390534}
+  MidRightBay: {fileID: 11443084}
+  RearRightBay: {fileID: 11419606}
+  MidRightBayShield: {fileID: 2346746}
+  DistantMidRightBayShield: {fileID: 2399242}
 --- !u!114 &11417570
 MonoBehaviour:
   m_ObjectHideFlags: 1

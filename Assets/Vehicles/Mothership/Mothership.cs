@@ -10,6 +10,25 @@ public class Mothership : MonoBehaviour
     public GameObject SoundPrefab;
     public AudioClip DefeatedSound;
 
+    [Header("Bays/Shields")]
+    public Killable FrontLeftBay;
+    public MeshRenderer FrontLeftBayShield;
+    public MeshRenderer DistantFrontLeftBayShield;
+
+    public Killable FrontRightBay;
+    public MeshRenderer FrontRightBayShield;
+    public MeshRenderer DistantFrontRightBayShield;
+
+    public Killable MidLeftBay;
+    public Killable RearLeftBay;
+    public MeshRenderer MidLeftBayShield;
+    public MeshRenderer DistantMidLeftBayShield;
+
+    public Killable MidRightBay;
+    public Killable RearRightBay;
+    public MeshRenderer MidRightBayShield;
+    public MeshRenderer DistantMidRightBayShield;
+
     private int _liveCount;
     private List<Killable> _killables;
 
@@ -31,6 +50,51 @@ public class Mothership : MonoBehaviour
         {
             killable.OnDie += OnKill;
         }
+
+        FrontLeftBay.OnDie += (sender) =>
+        {
+            FrontLeftBayShield.enabled = false;
+            DistantFrontLeftBayShield.enabled = false;
+        };
+        FrontRightBay.OnDie += (sender) =>
+        {
+            FrontRightBayShield.enabled = false;
+            DistantFrontRightBayShield.enabled = false;
+        };
+
+        MidLeftBay.OnDie += (sender) =>
+        {
+            if (RearLeftBay == null)
+            {
+                MidLeftBayShield.enabled = false;
+                DistantMidLeftBayShield.enabled = false;
+            }
+        };
+        RearLeftBay.OnDie += (sender) =>
+        {
+            if (MidLeftBay == null)
+            {
+                MidLeftBayShield.enabled = false;
+                DistantMidLeftBayShield.enabled = false;
+            }
+        };
+
+        MidRightBay.OnDie += (sender) =>
+        {
+            if (RearRightBay == null)
+            {
+                MidRightBayShield.enabled = false;
+                DistantMidRightBayShield.enabled = false;
+            }
+        };
+        RearRightBay.OnDie += (sender) =>
+        {
+            if (MidRightBay == null)
+            {
+                MidRightBayShield.enabled = false;
+                DistantMidRightBayShield.enabled = false;
+            }
+        };
     }
 
     private void OnKill(Killable sender)
