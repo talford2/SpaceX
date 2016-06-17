@@ -120,6 +120,9 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance.Shiftable.SetShiftPosition(universePosition);
         _playVehicleInstance.GetComponent<Targetable>().Team = Team;
 
+        var member = GetComponent<Fighter>();
+        member.SetVehicleInstance(_playVehicleInstance);
+
         _playVehicleInstance.Initialize();
 
         var playerCurrent = Squadron.GetMember(Squadron.GetCurrentIndex()).GetComponent<ShipProfile>();
