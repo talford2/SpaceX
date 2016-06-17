@@ -4556,6 +4556,7 @@ MonoBehaviour:
   - {fileID: 420066}
   - {fileID: 406548}
   MapPin: {fileID: 11453700}
+  DefeatedSound: {fileID: 8300000, guid: f7b36ddbeacd38141b2fc0aabea82207, type: 3}
 --- !u!114 &11417570
 MonoBehaviour:
   m_ObjectHideFlags: 1

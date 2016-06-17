@@ -7,6 +7,8 @@ public class Mothership : MonoBehaviour
     public List<Transform> TurretTransforms;
     public List<Transform> BayTransforms;
     public MapPin MapPin;
+    public GameObject SoundPrefab;
+    public AudioClip DefeatedSound;
 
     private int _liveCount;
     private List<Killable> _killables;
@@ -39,6 +41,11 @@ public class Mothership : MonoBehaviour
         {
             Debug.Log("MOTHERSHIP DESTROYED!!!");
             HeadsUpDisplay.Current.DisplayMessage("MOTHERSHIP NEUTRALIZED", 3f);
+            if (DefeatedSound != null)
+            {
+                var sound = ResourcePoolManager.GetAvailable(SoundPrefab, Universe.Current.ViewPort.transform.position, Quaternion.identity).GetComponent<AnonymousSound>();
+                sound.PlayAt(DefeatedSound, Universe.Current.ViewPort.transform.position);
+            }
             MapPin.SetPinState(MapPin.MapPinState.Inactive);
         }
     }
