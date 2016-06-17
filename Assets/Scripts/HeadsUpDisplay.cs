@@ -60,6 +60,11 @@ public class HeadsUpDisplay : MonoBehaviour
     private float _crosshairPulseDuration = 0.5f;
     private float _crosshairPulseCooldown;
 
+    // Crosshair fade out
+    private bool _isCrosshairFadeOut;
+    private float _crosshairFadeDuration = 1f;
+    private float _crosshairFadeCooldown;
+
     // Message Prompt
     private bool _isShowingMessage;
     private float _messageCooldown;
@@ -196,7 +201,6 @@ public class HeadsUpDisplay : MonoBehaviour
 
             }
         }
-
         if (_messageFadeOutCooldown >= 0f)
         {
             _messageFadeOutCooldown -= Time.deltaTime;
@@ -208,6 +212,24 @@ public class HeadsUpDisplay : MonoBehaviour
             else
             {
                 MessageText.color = Utility.SetColorAlpha(MessageText.color, fadeFraction);
+            }
+        }
+        if (_isCrosshairFadeOut)
+        {
+            if (_crosshairFadeCooldown >= 0f)
+            {
+                _crosshairFadeCooldown -= Time.deltaTime;
+                if (_crosshairFadeCooldown < 0f)
+                {
+                    HideCrosshair();
+                    _isCrosshairFadeOut = false;
+                }
+                else
+                {
+                    var crosshairImage = Crosshair.GetComponent<Image>();
+                    var fadeFraction = Mathf.Clamp01(_crosshairFadeCooldown / _crosshairFadeDuration);
+                    crosshairImage.color = Utility.SetColorAlpha(crosshairImage.color, fadeFraction);
+                }
             }
         }
     }
@@ -258,9 +280,12 @@ public class HeadsUpDisplay : MonoBehaviour
 	public void ShowCrosshair()
 	{
 		Crosshair.SetActive(true);
-	}
+        var crosshairImage = Crosshair.GetComponent<Image>();
+        crosshairImage.color = Utility.SetColorAlpha(crosshairImage.color, 1f);
+        _isCrosshairFadeOut = false;
+    }
 
-	public void HideCrosshair()
+    public void HideCrosshair()
 	{
 		Crosshair.SetActive(false);
 	}
@@ -310,6 +335,13 @@ public class HeadsUpDisplay : MonoBehaviour
     {
         _crosshairImage.rectTransform.sizeDelta = new Vector2(90f, 90f);
         _crosshairPulseCooldown = _crosshairPulseDuration;
+    }
+
+    public void TriggerCrosshairFadeOut()
+    {
+        ShowCrosshair();
+        _crosshairFadeCooldown = _crosshairFadeDuration;
+        _isCrosshairFadeOut = true;
     }
 
     public void DisplayMessage(string message, float time)

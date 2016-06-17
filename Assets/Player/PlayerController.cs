@@ -613,8 +613,9 @@ public class PlayerController : MonoBehaviour
 			}
 			HeadsUpDisplay.Current.RefreshSquadronIcon(Squadron.GetCurrentIndex());
 			HeadsUpDisplay.Current.RefreshSquadronIcon(oldSquadronIndex);
-		}
-		else
+            HeadsUpDisplay.Current.ShowCrosshair();
+        }
+        else
 		{
 			Debug.Log("ALL DEAD!");
 		}
@@ -680,6 +681,7 @@ public class PlayerController : MonoBehaviour
 		_lastDeathUniversePosition = new UniversePosition(_playVehicleInstance.Shiftable.UniversePosition.CellIndex, _playVehicleInstance.Shiftable.UniversePosition.CellLocalPosition);
 		Debug.Log("PLAYER VEHICLE DESTROYED AT: " + _lastDeathUniversePosition.CellIndex);
 		HeadsUpDisplay.Current.RefreshSquadronIcon(0);
+        HeadsUpDisplay.Current.TriggerCrosshairFadeOut();
 	}
 
 	public void ResetThreatCooldown()
