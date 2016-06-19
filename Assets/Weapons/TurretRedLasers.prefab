@@ -46,6 +46,7 @@ MonoBehaviour:
   MuzzlePrefab: {fileID: 11408760, guid: db0bd28387b791d4ea43fd188b23d353, type: 2}
   SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
   ShootSound: {fileID: 8300000, guid: 9d7af3edaf4d71d49979326cdcb14249, type: 3}
+  SoundVolume: 1
   MissilesPerShot: 1
   Spread: 0
   MissilesConverge: 0

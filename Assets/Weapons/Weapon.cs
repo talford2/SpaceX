@@ -14,8 +14,10 @@ public class Weapon : MonoBehaviour
     public MuzzleFlash MuzzlePrefab;
 
     //public AudioSource FireSound;
+    [Header("Shoot Sound")]
     public GameObject SoundPrefab;
     public AudioClip ShootSound;
+    public float SoundVolume = 1f;
 
     public int MissilesPerShot = 2;
     public float Spread = 0f;
@@ -199,7 +201,7 @@ public class Weapon : MonoBehaviour
         _shootPoint.Flash();
 
         var fireSound = ResourcePoolManager.GetAvailable(SoundPrefab, _shootPoint.transform.position, Quaternion.identity).GetComponent<AnonymousSound>();
-        fireSound.PlayAt(ShootSound, _shootPoint.transform.position);
+        fireSound.PlayAt(ShootSound, _shootPoint.transform.position, SoundVolume);
         //FireSound.Play();
 
         if (IsOverheat)
