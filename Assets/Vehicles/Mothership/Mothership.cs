@@ -12,10 +12,12 @@ public class Mothership : MonoBehaviour
 
     [Header("Bays/Shields")]
     public Killable FrontLeftBay;
+    public MotherhsipBayDoors FrontLeftDoors;
     public MeshRenderer FrontLeftBayShield;
     public MeshRenderer DistantFrontLeftBayShield;
 
     public Killable FrontRightBay;
+    public MotherhsipBayDoors FrontRightDoors;
     public MeshRenderer FrontRightBayShield;
     public MeshRenderer DistantFrontRightBayShield;
 
@@ -55,11 +57,13 @@ public class Mothership : MonoBehaviour
         {
             FrontLeftBayShield.enabled = false;
             DistantFrontLeftBayShield.enabled = false;
+            FrontLeftDoors.TriggerClose();
         };
         FrontRightBay.OnDie += (sender) =>
         {
             FrontRightBayShield.enabled = false;
             DistantFrontRightBayShield.enabled = false;
+            FrontRightDoors.TriggerClose();
         };
 
         MidLeftBay.OnDie += (sender) =>
