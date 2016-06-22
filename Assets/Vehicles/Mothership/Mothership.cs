@@ -22,11 +22,13 @@ public class Mothership : MonoBehaviour
     public MeshRenderer DistantFrontRightBayShield;
 
     public Killable MidLeftBay;
+    public MotherhsipBayDoors MidLeftDoors;
     public Killable RearLeftBay;
     public MeshRenderer MidLeftBayShield;
     public MeshRenderer DistantMidLeftBayShield;
 
     public Killable MidRightBay;
+    public MotherhsipBayDoors MidRightDoors;
     public Killable RearRightBay;
     public MeshRenderer MidRightBayShield;
     public MeshRenderer DistantMidRightBayShield;
@@ -72,6 +74,7 @@ public class Mothership : MonoBehaviour
             {
                 MidLeftBayShield.enabled = false;
                 DistantMidLeftBayShield.enabled = false;
+                MidLeftDoors.TriggerClose();
             }
         };
         RearLeftBay.OnDie += (sender) =>
@@ -80,6 +83,7 @@ public class Mothership : MonoBehaviour
             {
                 MidLeftBayShield.enabled = false;
                 DistantMidLeftBayShield.enabled = false;
+                MidLeftDoors.TriggerClose();
             }
         };
 
@@ -89,6 +93,7 @@ public class Mothership : MonoBehaviour
             {
                 MidRightBayShield.enabled = false;
                 DistantMidRightBayShield.enabled = false;
+                MidRightDoors.TriggerClose();
             }
         };
         RearRightBay.OnDie += (sender) =>
@@ -97,6 +102,7 @@ public class Mothership : MonoBehaviour
             {
                 MidRightBayShield.enabled = false;
                 DistantMidRightBayShield.enabled = false;
+                MidRightDoors.TriggerClose();
             }
         };
     }
