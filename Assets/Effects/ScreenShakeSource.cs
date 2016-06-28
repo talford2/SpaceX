@@ -9,9 +9,22 @@ public class ScreenShakeSource : MonoBehaviour
     public float Frequency = 0.7f;
     public float Duration = 1f;
 
+    private ResourcePoolItem _resourcePoolItem;
+
     private void Start()
     {
-        var amplitude = MaxAmplitude*GetAmplitudeFraction(Universe.Current.ViewPort.transform.position, transform.position, MinDistance, MaxDistance);
+        _resourcePoolItem = GetComponent<ResourcePoolItem>();
+        _resourcePoolItem.OnGetAvaiable = OnGetAvailable;
+    }
+
+    private void OnGetAvailable()
+    {
+        Trigger();
+    }
+
+    public void Trigger()
+    {
+        var amplitude = MaxAmplitude * GetAmplitudeFraction(Universe.Current.ViewPort.transform.position, transform.position, MinDistance, MaxDistance);
         if (amplitude > 0f)
             Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(amplitude, Frequency, Duration);
     }
