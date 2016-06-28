@@ -1727,7 +1727,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 87.40002, y: 7.300003, z: 13.699997}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children:
   - {fileID: 470126}
   - {fileID: 428106}
@@ -1931,7 +1931,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 87.40002, y: 7.300003, z: -24}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children:
   - {fileID: 489698}
   - {fileID: 468494}
@@ -5169,7 +5169,7 @@ MonoBehaviour:
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+  DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11403496
@@ -5188,7 +5188,7 @@ MonoBehaviour:
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+  DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11409756
@@ -5242,6 +5242,7 @@ MonoBehaviour:
   FocusShiftable: {fileID: 11436692}
   LineRendererWidth: 35
   LineRenderers: []
+  ThresholdDistance: 2000
   DistantObject: {fileID: 188430}
   NearObject: {fileID: 150558}
 --- !u!114 &11413218
@@ -5380,7 +5381,7 @@ MonoBehaviour:
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+  DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11422270
@@ -5470,7 +5471,7 @@ MonoBehaviour:
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+  DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11436692
@@ -5547,7 +5548,7 @@ MonoBehaviour:
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+  DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11444570
@@ -5691,7 +5692,7 @@ MonoBehaviour:
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+  DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
   WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11458458
