@@ -57,7 +57,10 @@ public class CollectibleTracker : Tracker
         _trackerPlaneInstance = Instantiate(TrackerPlanePrefab);
         _trackerPlaneRenderer = _trackerPlaneInstance.GetComponent<MeshRenderer>();
 
-        _isVisible = true;
+        _isVisible = false;
+        SetAlpha(0f);
+        _lastDistanceSquared = Mathf.Infinity;
+
         return trackerImg;
     }
 
