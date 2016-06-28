@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class VehicleTracker : Tracker
@@ -46,11 +48,18 @@ public class VehicleTracker : Tracker
 
 	private Targetable _targetable;
     private Killable _killable;
-    private float _maxDistanceSquared;
 	private bool _isLockedOn;
     private bool _oldLockedOn;
 
     protected bool InScreenBounds;
+
+    private bool _isVisible;
+    private bool _isFading;
+
+    private float _fadeStep = 0.02f;
+
+    private float _maxDistanceSquared;
+    private float _lastDistanceSquared;
 
     private void Awake()
 	{
@@ -178,48 +187,46 @@ public class VehicleTracker : Tracker
         if (_trackerPlaneInstance != null)
             _trackerPlaneRenderer.material.color = Utility.SetColorAlpha(_trackerPlaneRenderer.material.color, 0f);
 
-        if (distanceSquared < _maxDistanceSquared)
-        {
-            fadeDirection = 1;
-            fadeCooldown = fadeTime;
-        }
-        else
-        {
-            fadeCooldown = -1f;
-        }
-        lastDistanceSquared = distanceSquared;
+        _isVisible = false;
+        SetAlpha(0f);
+        _lastDistanceSquared = Mathf.Infinity;
 
         return trackerImg;
     }
 
-    private int fadeDirection;
-    private float fadeCooldown;
-    private float fadeTime = 1f;
-    private float lastDistanceSquared;
+    private bool canTransition;
+
+    private void OnDisable()
+    {
+        canTransition = false;
+    }
+
+    private void OnEnable()
+    {
+        canTransition = true;
+    }
 
     public override void UpdateInstance()
     {
         var distanceSquared = (_targetable.transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
-        if (lastDistanceSquared < _maxDistanceSquared)
+        if (canTransition)
         {
-            if (distanceSquared > _maxDistanceSquared)
+            if (_lastDistanceSquared < _maxDistanceSquared)
             {
-                // Trigger Fade Out!
-                fadeDirection = -1;
-                fadeCooldown = fadeTime;
+                if (distanceSquared > _maxDistanceSquared)
+                {
+                    TriggerFadeOut();
+                }
+            }
+
+            if (_lastDistanceSquared > _maxDistanceSquared)
+            {
+                if (distanceSquared < _maxDistanceSquared)
+                {
+                    TriggerFadeIn();
+                }
             }
         }
-
-        if (lastDistanceSquared > _maxDistanceSquared)
-        {
-            if (distanceSquared < _maxDistanceSquared)
-            {
-                // Trigger fade in!
-                fadeDirection = 1;
-                fadeCooldown = fadeTime;
-            }
-        }
-
         if (_trackerPlaneInstance != null)
         {
             var cameraPlane = new Plane(Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.position + 5f * Universe.Current.ViewPort.transform.forward);
@@ -242,32 +249,6 @@ public class VehicleTracker : Tracker
             else
             {
                 _trackerPlaneRenderer.enabled = false;
-            }
-        }
-
-        if (fadeCooldown >= 0f)
-        {
-            fadeCooldown -= Time.deltaTime;
-            var fadeFraction = Mathf.Clamp01(fadeCooldown/fadeTime);
-            if (fadeDirection > 0)
-            {
-                _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 1f - fadeFraction);
-                _shieldBarBackgroundInstance.color = Utility.SetColorAlpha(_shieldBarBackgroundInstance.color, 1f - fadeFraction);
-                _shieldBarInstance.color = Utility.SetColorAlpha(_shieldBarInstance.color, 1f - fadeFraction);
-                _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, 1f - fadeFraction);
-                _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, 1f - fadeFraction);
-                if (_trackerPlaneInstance != null)
-                    _trackerPlaneRenderer.material.color = Utility.SetColorAlpha(_trackerPlaneRenderer.material.color, 1f - fadeFraction);
-            }
-            else
-            {
-                _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, fadeFraction);
-                _shieldBarBackgroundInstance.color = Utility.SetColorAlpha(_shieldBarBackgroundInstance.color, fadeFraction);
-                _shieldBarInstance.color = Utility.SetColorAlpha(_shieldBarInstance.color, fadeFraction);
-                _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, fadeFraction);
-                _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, fadeFraction);
-                if (_trackerPlaneInstance != null)
-                    _trackerPlaneRenderer.material.color = Utility.SetColorAlpha(_trackerPlaneRenderer.material.color, fadeFraction);
             }
         }
 
@@ -408,7 +389,71 @@ public class VehicleTracker : Tracker
             _oldLockedOn = _isLockedOn;
         }
 
-        lastDistanceSquared = distanceSquared;
+        _lastDistanceSquared = distanceSquared;
+    }
+
+    public void TriggerFadeIn(float time = 0.5f)
+    {
+        if (!_isFading && !_isVisible)
+        {
+            StartCoroutine(FadeIn(time));
+        }
+    }
+
+    public void TriggerFadeOut(float time = 0.5f)
+    {
+        if (!_isFading && _isVisible)
+        {
+            StartCoroutine(FadeOut(time));
+        }
+    }
+
+    private IEnumerator FadeOut(float duration)
+    {
+        var start = DateTime.Now;
+        var ii = 0;
+
+        var stepFraction = _fadeStep / duration;
+        for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
+        {
+            //_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, fraction);
+            SetAlpha(fraction);
+
+            ii++;
+            //Debug.Log("Time running: " + DateTime.Now.Subtract(start).TotalSeconds + " (" + ii + ")");
+
+            yield return new WaitForSeconds(_fadeStep);
+        }
+        //_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 0f);
+        SetAlpha(0f);
+        _isVisible = false;
+        _isFading = false;
+    }
+
+    private IEnumerator FadeIn(float duration)
+    {
+        var stepFraction = _fadeStep / duration;
+        for (var fraction = 1f; fraction >= 0f; fraction -= stepFraction)
+        {
+            //_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f - fraction);
+            SetAlpha(1f - fraction);
+            yield return new WaitForSeconds(_fadeStep);
+        }
+        //_imageInstance.color = new Color(TrackerColor.r, TrackerColor.g, TrackerColor.b, 1f);
+        SetAlpha(1f);
+        _isVisible = true;
+        _isFading = false;
+    }
+
+    private void SetAlpha(float alpha)
+    {
+        _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, alpha);
+        _shieldBarBackgroundInstance.color = Utility.SetColorAlpha(_shieldBarBackgroundInstance.color, alpha);
+        _shieldBarInstance.color = Utility.SetColorAlpha(_shieldBarInstance.color, alpha);
+        _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, alpha);
+        _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, alpha);
+        if (_trackerPlaneInstance != null)
+            _trackerPlaneRenderer.material.color = Utility.SetColorAlpha(_trackerPlaneRenderer.material.color, alpha);
     }
 
     private bool IsPlayerWeaponLocking(Weapon weapon)
