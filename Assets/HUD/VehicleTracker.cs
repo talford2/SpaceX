@@ -194,37 +194,22 @@ public class VehicleTracker : Tracker
         return trackerImg;
     }
 
-    private bool canTransition;
-
-    private void OnDisable()
-    {
-        canTransition = false;
-    }
-
-    private void OnEnable()
-    {
-        canTransition = true;
-    }
-
     public override void UpdateInstance()
     {
         var distanceSquared = (_targetable.transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
-        if (canTransition)
+        if (_lastDistanceSquared < _maxDistanceSquared)
         {
-            if (_lastDistanceSquared < _maxDistanceSquared)
+            if (distanceSquared > _maxDistanceSquared)
             {
-                if (distanceSquared > _maxDistanceSquared)
-                {
-                    TriggerFadeOut();
-                }
+                TriggerFadeOut();
             }
+        }
 
-            if (_lastDistanceSquared > _maxDistanceSquared)
+        if (_lastDistanceSquared > _maxDistanceSquared)
+        {
+            if (distanceSquared < _maxDistanceSquared)
             {
-                if (distanceSquared < _maxDistanceSquared)
-                {
-                    TriggerFadeIn();
-                }
+                TriggerFadeIn();
             }
         }
         if (_trackerPlaneInstance != null)
@@ -388,7 +373,6 @@ public class VehicleTracker : Tracker
             }
             _oldLockedOn = _isLockedOn;
         }
-
         _lastDistanceSquared = distanceSquared;
     }
 
@@ -447,11 +431,16 @@ public class VehicleTracker : Tracker
 
     private void SetAlpha(float alpha)
     {
-        _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, alpha);
-        _shieldBarBackgroundInstance.color = Utility.SetColorAlpha(_shieldBarBackgroundInstance.color, alpha);
-        _shieldBarInstance.color = Utility.SetColorAlpha(_shieldBarInstance.color, alpha);
-        _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, alpha);
-        _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, alpha);
+        if (_imageInstance != null)
+            _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, alpha);
+        if (_shieldBarBackgroundInstance != null)
+            _shieldBarBackgroundInstance.color = Utility.SetColorAlpha(_shieldBarBackgroundInstance.color, alpha);
+        if (_shieldBarInstance != null)
+            _shieldBarInstance.color = Utility.SetColorAlpha(_shieldBarInstance.color, alpha);
+        if (_healthBarBackgroundInstance != null)
+            _healthBarBackgroundInstance.color = Utility.SetColorAlpha(_healthBarBackgroundInstance.color, alpha);
+        if (_healthBarInstance != null)
+            _healthBarInstance.color = Utility.SetColorAlpha(_healthBarInstance.color, alpha);
         if (_trackerPlaneInstance != null)
             _trackerPlaneRenderer.material.color = Utility.SetColorAlpha(_trackerPlaneRenderer.material.color, alpha);
     }
