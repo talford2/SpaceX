@@ -198,6 +198,7 @@ GameObject:
   - 114: {fileID: 11408530}
   - 114: {fileID: 11425650}
   - 114: {fileID: 11423764}
+  - 114: {fileID: 11409904}
   m_Layer: 0
   m_Name: AlphaFighter
   m_TagString: Untagged
@@ -682,6 +683,19 @@ MonoBehaviour:
   Killable: {fileID: 0}
   MaxDistance: 3000
   IsDisabled: 0
+--- !u!114 &11409904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa580ff481e147643b1fe4a5017157ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RegenerationRate: 5
+  RegenerationDelay: 5
 --- !u!114 &11423764
 MonoBehaviour:
   m_ObjectHideFlags: 1

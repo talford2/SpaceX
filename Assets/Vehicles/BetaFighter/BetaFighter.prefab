@@ -47,6 +47,7 @@ GameObject:
   - 114: {fileID: 11460988}
   - 114: {fileID: 11436884}
   - 114: {fileID: 11491306}
+  - 114: {fileID: 11401352}
   m_Layer: 0
   m_Name: BetaFighter
   m_TagString: Untagged
@@ -659,6 +660,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd44330a49bb5348bf12e52bb74c3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11401352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa580ff481e147643b1fe4a5017157ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RegenerationRate: 5
+  RegenerationDelay: 5
 --- !u!114 &11422806
 MonoBehaviour:
   m_ObjectHideFlags: 1

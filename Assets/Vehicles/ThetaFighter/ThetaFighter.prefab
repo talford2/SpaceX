@@ -32,6 +32,7 @@ GameObject:
   - 114: {fileID: 11408010}
   - 114: {fileID: 11430434}
   - 114: {fileID: 11406320}
+  - 114: {fileID: 11487556}
   m_Layer: 0
   m_Name: ThetaFighter
   m_TagString: Untagged
@@ -683,6 +684,19 @@ MonoBehaviour:
   - {fileID: 11415998}
   BoostSound: {fileID: 8216614}
   IgnoreCollisions: 0
+--- !u!114 &11487556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa580ff481e147643b1fe4a5017157ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RegenerationRate: 5
+  RegenerationDelay: 5
 --- !u!114 &11493480
 MonoBehaviour:
   m_ObjectHideFlags: 1

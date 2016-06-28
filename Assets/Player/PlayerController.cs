@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
 		_playVehicleInstance.BoostEnergy = _playVehicleInstance.MaxBoostEnergy;
 
-		var shieldRegenerator = _playVehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
+		var shieldRegenerator = _playVehicleInstance.gameObject.GetComponent<ShieldRegenerator>();
 		shieldRegenerator.RegenerationDelay = Squadron.ShieldRegenerateDelay;
 		shieldRegenerator.RegenerationRate = Squadron.ShieldRegenerateRate;
 		shieldRegenerator.OnRegenerate += PlayerController_OnRegenerate;
