@@ -68,7 +68,6 @@ public class InventoryButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         if (_holdCooldown > HoldTime)
         {
-            Debug.Log("CUNT");
             return 0f;
         }
         return Mathf.Clamp01(1f - _holdCooldown / HoldTime);
