@@ -2301,6 +2301,7 @@ MonoBehaviour:
   SecondaryButton: {fileID: 1421555370}
   ShieldButton: {fileID: 451374010}
   EngineButton: {fileID: 690669074}
+  EmptyIcon: {fileID: 21300000, guid: 5eda9f3b476dbf144856bc7ca879e633, type: 3}
   ItemNameText: {fileID: 1017052934}
   PrimaryPanel: {fileID: 494121538}
   PrimaryDamageCostText: {fileID: 1412276753}

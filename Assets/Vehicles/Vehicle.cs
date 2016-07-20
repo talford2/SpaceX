@@ -179,14 +179,16 @@ public class Vehicle : MonoBehaviour
 	{
 		_shiftable = GetComponent<Shiftable>();
 
-		foreach (var shootPoint in PrimaryShootPoints)
-		{
-			shootPoint.Initialize(PrimaryWeaponPrefab.MuzzlePrefab);
-		}
-		foreach (var shootPoint in SecondaryShootPoints)
-		{
-			shootPoint.Initialize(SecondaryWeaponPrefab.MuzzlePrefab);
-		}
+        foreach (var shootPoint in PrimaryShootPoints)
+        {
+            if (PrimaryWeaponPrefab != null)
+                shootPoint.Initialize(PrimaryWeaponPrefab.MuzzlePrefab);
+        }
+        foreach (var shootPoint in SecondaryShootPoints)
+        {
+            if (SecondaryWeaponPrefab != null)
+                shootPoint.Initialize(SecondaryWeaponPrefab.MuzzlePrefab);
+        }
 
 		_velocityReference = new VelocityReference(_velocity);
 
@@ -204,8 +206,10 @@ public class Vehicle : MonoBehaviour
     {
         _targetable = GetComponent<Targetable>();
 
-        SetPrimaryWeapon(PrimaryWeaponPrefab.gameObject);
-        SetSecondaryWeapon(SecondaryWeaponPrefab.gameObject);
+        if (PrimaryWeaponPrefab != null)
+            SetPrimaryWeapon(PrimaryWeaponPrefab.gameObject);
+        if (SecondaryWeaponPrefab != null)
+            SetSecondaryWeapon(SecondaryWeaponPrefab.gameObject);
         if (ShieldPrefab != null)
             SetShield(ShieldPrefab.gameObject);
         if (EnginePrefab != null)

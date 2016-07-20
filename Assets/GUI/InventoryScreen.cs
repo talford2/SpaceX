@@ -14,6 +14,7 @@ public class InventoryScreen : MonoBehaviour
     public Button SecondaryButton;
     public Button ShieldButton;
     public Button EngineButton;
+    public Sprite EmptyIcon;
 
     [Header("Item Panel")]
     public Text ItemNameText;
@@ -263,15 +264,15 @@ public class InventoryScreen : MonoBehaviour
         if (focusVehicle != null)
         {
             KiaText.enabled = false;
-            var primaryItem = focusVehicle.PrimaryWeaponInstance.GetComponent<InventoryItem>();
-            var secondaryItem = focusVehicle.SecondaryWeaponInstance.GetComponent<InventoryItem>();
+            var primaryItem = focusVehicle.PrimaryWeaponInstance != null ? focusVehicle.PrimaryWeaponInstance.GetComponent<InventoryItem>() : null;
+            var secondaryItem = focusVehicle.SecondaryWeaponInstance != null ? focusVehicle.SecondaryWeaponInstance.GetComponent<InventoryItem>() : null;
             var shieldItem = focusVehicle.ShieldInstance != null ? focusVehicle.ShieldInstance.GetComponent<InventoryItem>() : null;
             var engineItem = focusVehicle.EngineInstance != null ? focusVehicle.EngineInstance.GetComponent<InventoryItem>() : null;
 
-            PrimaryButton.image.sprite = primaryItem != null ? primaryItem.InventorySprite : null;
-            SecondaryButton.image.sprite = secondaryItem != null ? secondaryItem.InventorySprite : null;
-            ShieldButton.image.sprite = shieldItem != null ? shieldItem.InventorySprite : null;
-            EngineButton.image.sprite = engineItem != null ? engineItem.InventorySprite : null;
+            PrimaryButton.image.sprite = primaryItem != null ? primaryItem.InventorySprite : EmptyIcon;
+            SecondaryButton.image.sprite = secondaryItem != null ? secondaryItem.InventorySprite : EmptyIcon;
+            ShieldButton.image.sprite = shieldItem != null ? shieldItem.InventorySprite : EmptyIcon;
+            EngineButton.image.sprite = engineItem != null ? engineItem.InventorySprite : EmptyIcon;
 
             PopulateByContext();
         }
@@ -279,10 +280,10 @@ public class InventoryScreen : MonoBehaviour
         {
             KiaText.enabled = true;
 
-            PrimaryButton.image.sprite = null;
-            SecondaryButton.image.sprite = null;
-            ShieldButton.image.sprite = null;
-            EngineButton.image.sprite = null;
+            PrimaryButton.image.sprite = EmptyIcon;
+            SecondaryButton.image.sprite = EmptyIcon;
+            ShieldButton.image.sprite = EmptyIcon;
+            EngineButton.image.sprite = EmptyIcon;
 
             HideItemPanels();
         }
@@ -342,32 +343,34 @@ public class InventoryScreen : MonoBehaviour
                         // Primary Weapon
                         if (selectedInventoryItem.Type == ItemType.PrimaryWeapon)
                         {
-                            var equippedItemIndex = focusVehicle.PrimaryWeaponInstance.LootIndex;
                             var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
-
-                            PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+                            if (focusVehicle.ShieldInstance != null)
+                            {
+                                var equippedItemIndex = focusVehicle.PrimaryWeaponInstance.LootIndex;
+                                PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+                                var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
+                                ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+                            }
 
                             focusVehicle.Controller.GetComponent<ShipProfile>().PrimaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
                             focusVehicle.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex]);
-
-                            var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
-                            ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
 
                             PopulatePrimary();
                         }
                         // Secondary Weapon
                         if (selectedInventoryItem.Type == ItemType.SecondaryWeapon)
                         {
-                            var equippedItemIndex = focusVehicle.SecondaryWeaponInstance.LootIndex;
                             var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
-
-                            PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+                            if (focusVehicle.ShieldInstance != null)
+                            {
+                                var equippedItemIndex = focusVehicle.SecondaryWeaponInstance.LootIndex;
+                                PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+                                var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
+                                ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+                            }
 
                             focusVehicle.Controller.GetComponent<ShipProfile>().SecondaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
                             focusVehicle.SetSecondaryWeapon(LootManager.Current.Items[equipItemIndex]);
-
-                            var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
-                            ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
 
                             PopulateSecondary();
                         }
