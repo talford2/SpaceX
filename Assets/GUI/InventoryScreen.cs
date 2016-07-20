@@ -63,6 +63,19 @@ public class InventoryScreen : MonoBehaviour
     public Text SecondaryHeatCapacityValueText;
     public Button SecondaryAddHeatCapacityButton;
 
+    [Header("Shield Panel")]
+    public CanvasGroup ShieldPanel;
+
+    public Text ShieldCapacityCostText;
+    public Image ShieldCapacityBar;
+    public Text ShieldCapacityValueText;
+    public Button ShieldAddCapacityButton;
+
+    public Text ShieldRegenerationCostText;
+    public Image ShieldRegenerationBar;
+    public Text ShieldRegenerationValueText;
+    public Button ShieldAddRegenerationButton;
+
     [Header("Inventory Panel")]
     public List<Button> ItemButtons;
 
@@ -249,9 +262,11 @@ public class InventoryScreen : MonoBehaviour
             KiaText.enabled = false;
             var primaryItem = focusVehicle.PrimaryWeaponInstance.GetComponent<InventoryItem>();
             var secondaryItem = focusVehicle.SecondaryWeaponInstance.GetComponent<InventoryItem>();
+            var shieldItem = focusVehicle.ShieldInstance != null ? focusVehicle.ShieldInstance.GetComponent<InventoryItem>() : null;
 
             PrimaryButton.image.sprite = primaryItem != null ? primaryItem.InventorySprite : null;
             SecondaryButton.image.sprite = secondaryItem != null ? secondaryItem.InventorySprite : null;
+            ShieldButton.image.sprite = shieldItem != null ? shieldItem.InventorySprite : null;
 
             PopulateByContext();
         }
@@ -261,6 +276,7 @@ public class InventoryScreen : MonoBehaviour
 
             PrimaryButton.image.sprite = null;
             SecondaryButton.image.sprite = null;
+            ShieldButton.image.sprite = null;
 
             HideItemPanels();
         }
@@ -313,12 +329,12 @@ public class InventoryScreen : MonoBehaviour
                 {
                     if (PlayerController.Current.GetInventoryItem(index) != null)
                     {
-                        var selectedInvenotyItem = PlayerController.Current.GetInventoryItem(index).GetComponent<InventoryItem>();
+                        var selectedInventoryItem = PlayerController.Current.GetInventoryItem(index).GetComponent<InventoryItem>();
                         Debug.Log("DOUBLE CLICK!");
-                        Debug.Log("ITEM: " + selectedInvenotyItem.name + " TYPE: " + selectedInvenotyItem.Type);
+                        Debug.Log("ITEM: " + selectedInventoryItem.name + " TYPE: " + selectedInventoryItem.Type);
 
                         // Primary Weapon
-                        if (selectedInvenotyItem.Type == ItemType.PrimaryWeapon)
+                        if (selectedInventoryItem.Type == ItemType.PrimaryWeapon)
                         {
                             var equippedItemIndex = focusVehicle.PrimaryWeaponInstance.LootIndex;
                             var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
@@ -334,7 +350,7 @@ public class InventoryScreen : MonoBehaviour
                             PopulatePrimary();
                         }
                         // Secondary Weapon
-                        if (selectedInvenotyItem.Type == ItemType.SecondaryWeapon)
+                        if (selectedInventoryItem.Type == ItemType.SecondaryWeapon)
                         {
                             var equippedItemIndex = focusVehicle.SecondaryWeaponInstance.LootIndex;
                             var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Weapon>().LootIndex;
@@ -348,6 +364,23 @@ public class InventoryScreen : MonoBehaviour
                             ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
 
                             PopulateSecondary();
+                        }
+                        // Shield
+                        if (selectedInventoryItem.Type == ItemType.Shield)
+                        {
+                            var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Shield>().LootIndex;
+                            if (focusVehicle.ShieldInstance != null)
+                            {
+                                var equippedItemIndex = focusVehicle.ShieldInstance.LootIndex;
+                                PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+                                var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
+                                ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+                            }
+
+                            focusVehicle.Controller.GetComponent<ShipProfile>().Shield = LootManager.Current.Items[equipItemIndex].GetComponent<Shield>();
+                            focusVehicle.SetShield(LootManager.Current.Items[equipItemIndex]);
+
+                            PopulateShield();
                         }
                     }
                 }
@@ -371,6 +404,8 @@ public class InventoryScreen : MonoBehaviour
         PrimaryPanel.gameObject.SetActive(false);
 
         SecondaryPanel.gameObject.SetActive(false);
+
+        ShieldPanel.gameObject.SetActive(false);
     }
 
     private float GetPointBarFraction(int points)
@@ -561,9 +596,28 @@ public class InventoryScreen : MonoBehaviour
 
     public void PopulateShield()
     {
-        ItemNameText.text = "Shield";
+        var shield = focusVehicle.ShieldInstance;
+        if (shield != null)
+        {
+            ItemNameText.text = shield.Name;
+
+            PopulateWeaponPanel(shield.CapacityPointCost, shield.CapacityPoints, ShieldCapacityCostText, ShieldCapacityBar, ShieldAddCapacityButton);
+            ShieldCapacityValueText.text = string.Format("{0:f1}", shield.Capacity);
+
+            PopulateWeaponPanel(shield.RegenerationPointCost, shield.RegenerationRatePoints, ShieldRegenerationCostText, ShieldRegenerationBar, ShieldAddRegenerationButton);
+            ShieldRegenerationValueText.text = string.Format("{0:f1}/s", shield.RegenerationRate);
+
+            var inventoryItem = shield.GetComponent<InventoryItem>();
+            if (inventoryItem != null)
+                ShieldButton.image.sprite = inventoryItem.InventorySprite;
+        }
+        else
+        {
+            ItemNameText.text = "No Shield Equipped";
+        }
 
         HideItemPanels();
+        ShieldPanel.gameObject.SetActive(true);
 
         _equippedContext = EquippedContext.Shield;
         EnableEquippedButtons();
@@ -572,7 +626,7 @@ public class InventoryScreen : MonoBehaviour
 
     public void PopulateEngine()
     {
-        ItemNameText.text = "Engine";
+        ItemNameText.text = "No Engine Equipped.";
 
         HideItemPanels();
 

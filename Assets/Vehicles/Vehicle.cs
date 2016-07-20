@@ -76,6 +76,9 @@ public class Vehicle : MonoBehaviour
 
 	public List<ShootPoint> SecondaryShootPoints;
 
+    [Header("Shield")]
+    public Shield ShieldPrefab;
+
     [Header("Death")]
     public GameObject CorpsePrefab;
     public GameObject DebrisPrefab;
@@ -90,6 +93,7 @@ public class Vehicle : MonoBehaviour
 
 	private Weapon _primaryWeaponInstance;
 	private Weapon _secondaryWeaponInstance;
+    private Shield _shieldInstance;
 
 	private Vector3 _velocity;
 	private VelocityReference _velocityReference;
@@ -127,6 +131,11 @@ public class Vehicle : MonoBehaviour
 	{
 		get { return _secondaryWeaponInstance; }
 	}
+
+    public Shield ShieldInstance
+    {
+        get { return _shieldInstance; }
+    }
 
 	public bool IgnoreCollisions;
 
@@ -188,6 +197,8 @@ public class Vehicle : MonoBehaviour
 
         SetPrimaryWeapon(PrimaryWeaponPrefab.gameObject);
         SetSecondaryWeapon(SecondaryWeaponPrefab.gameObject);
+        if (ShieldPrefab != null)
+            SetShield(ShieldPrefab.gameObject);
     }
 
     public void SetPrimaryWeapon(GameObject primaryWeapon)
@@ -221,6 +232,24 @@ public class Vehicle : MonoBehaviour
             _secondaryWeaponInstance = Utility.InstantiateInParent(secondaryWeapon.gameObject, transform).GetComponent<Weapon>();
             _secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference, _targetable.Team);
             _secondaryWeaponInstance.OnShoot += OnShoot;
+        }
+    }
+
+    public void SetShield(GameObject shield)
+    {
+        if (_shieldInstance!=null)
+        {
+            Destroy(_shieldInstance.gameObject);
+        }
+        if (shield != null)
+        {
+            _shieldInstance = Utility.InstantiateInParent(shield.gameObject, transform).GetComponent<Shield>();
+            _killable.MaxShield = _shieldInstance.Capacity;
+            if (_killable.Shield > _shieldInstance.Capacity)
+                _killable.Shield = _shieldInstance.Capacity;
+            var regenerator = GetComponent<ShieldRegenerator>();
+            if (regenerator != null)
+                regenerator.RegenerationRate = _shieldInstance.RegenerationRate;
         }
     }
 

@@ -790,6 +790,7 @@ MonoBehaviour:
   SecondaryShootPoints:
   - {fileID: 11475328}
   - {fileID: 11448042}
+  ShieldPrefab: {fileID: 11432386, guid: a8876c617785ce9478a74c3f72561449, type: 2}
   CorpsePrefab: {fileID: 0}
   DebrisPrefab: {fileID: 0}
   ExplosiveForce: 0
@@ -874,8 +875,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 30
   MaxHealth: 30
-  Shield: 50
-  MaxShield: 50
+  Shield: 0
+  MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}

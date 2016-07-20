@@ -762,8 +762,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 30
   MaxHealth: 30
-  Shield: 10
-  MaxShield: 10
+  Shield: 0
+  MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
@@ -848,6 +848,7 @@ MonoBehaviour:
   SecondaryShootPoints:
   - {fileID: 11401126}
   - {fileID: 11498334}
+  ShieldPrefab: {fileID: 0}
   CorpsePrefab: {fileID: 0}
   DebrisPrefab: {fileID: 0}
   ExplosiveForce: 0

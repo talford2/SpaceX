@@ -258,6 +258,8 @@ MonoBehaviour:
   - {fileID: 141952, guid: 7779d0e26da83514f96e8f152bd876e5, type: 2}
   - {fileID: 141952, guid: 62a754571653c324e80e0be47d6b1713, type: 2}
   - {fileID: 141952, guid: 5ee17808ad6ea2b419a2eaad783edf28, type: 2}
+  - {fileID: 141952, guid: 52ca931e993580544ad9b196ab4ec29d, type: 2}
+  - {fileID: 141952, guid: 217bfb65b2bca0c4aa0c9ce0e2a95348, type: 2}
   DropJunk: {fileID: 163398, guid: 816f10aa082864542b4127328f007432, type: 2}
   DropJunkMinCount: 5
   DropJunkMaxCount: 10
