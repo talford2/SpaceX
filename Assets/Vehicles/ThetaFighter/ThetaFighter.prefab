@@ -678,6 +678,7 @@ MonoBehaviour:
   - {fileID: 11493480}
   - {fileID: 11417462}
   ShieldPrefab: {fileID: 11432386, guid: ec198b972797bfe4198bc77d9b933520, type: 2}
+  EnginePrefab: {fileID: 11460812, guid: 5d7105be3dd5b72498d7817054956ba2, type: 2}
   CorpsePrefab: {fileID: 0}
   DebrisPrefab: {fileID: 0}
   ExplosiveForce: 0

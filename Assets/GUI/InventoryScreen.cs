@@ -76,6 +76,9 @@ public class InventoryScreen : MonoBehaviour
     public Text ShieldRegenerationValueText;
     public Button ShieldAddRegenerationButton;
 
+    [Header("Engine Panel")]
+    public CanvasGroup EnginePanel;
+
     [Header("Inventory Panel")]
     public List<Button> ItemButtons;
 
@@ -263,10 +266,12 @@ public class InventoryScreen : MonoBehaviour
             var primaryItem = focusVehicle.PrimaryWeaponInstance.GetComponent<InventoryItem>();
             var secondaryItem = focusVehicle.SecondaryWeaponInstance.GetComponent<InventoryItem>();
             var shieldItem = focusVehicle.ShieldInstance != null ? focusVehicle.ShieldInstance.GetComponent<InventoryItem>() : null;
+            var engineItem = focusVehicle.EngineInstance != null ? focusVehicle.EngineInstance.GetComponent<InventoryItem>() : null;
 
             PrimaryButton.image.sprite = primaryItem != null ? primaryItem.InventorySprite : null;
             SecondaryButton.image.sprite = secondaryItem != null ? secondaryItem.InventorySprite : null;
             ShieldButton.image.sprite = shieldItem != null ? shieldItem.InventorySprite : null;
+            EngineButton.image.sprite = engineItem != null ? engineItem.InventorySprite : null;
 
             PopulateByContext();
         }
@@ -277,6 +282,7 @@ public class InventoryScreen : MonoBehaviour
             PrimaryButton.image.sprite = null;
             SecondaryButton.image.sprite = null;
             ShieldButton.image.sprite = null;
+            EngineButton.image.sprite = null;
 
             HideItemPanels();
         }
@@ -382,6 +388,23 @@ public class InventoryScreen : MonoBehaviour
 
                             PopulateShield();
                         }
+                        // Engine
+                        if (selectedInventoryItem.Type == ItemType.Engine)
+                        {
+                            var equipItemIndex = PlayerController.Current.GetInventoryItem(index).GetComponent<Engine>().LootIndex;
+                            if (focusVehicle.EngineInstance != null)
+                            {
+                                var equippedItemIndex = focusVehicle.EngineInstance.LootIndex;
+                                PlayerController.Current.SetInventoryItem(index, LootManager.Current.Items[equippedItemIndex]);
+                                var inventoryItem = LootManager.Current.Items[equippedItemIndex].GetComponent<InventoryItem>();
+                                ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
+                            }
+
+                            focusVehicle.Controller.GetComponent<ShipProfile>().Engine = LootManager.Current.Items[equipItemIndex].GetComponent<Engine>();
+                            focusVehicle.SetEngine(LootManager.Current.Items[equipItemIndex]);
+
+                            PopulateEngine();
+                        }
                     }
                 }
             }
@@ -402,10 +425,9 @@ public class InventoryScreen : MonoBehaviour
     private void HideItemPanels()
     {
         PrimaryPanel.gameObject.SetActive(false);
-
         SecondaryPanel.gameObject.SetActive(false);
-
         ShieldPanel.gameObject.SetActive(false);
+        EnginePanel.gameObject.SetActive(false);
     }
 
     private float GetPointBarFraction(int points)
@@ -597,6 +619,8 @@ public class InventoryScreen : MonoBehaviour
     public void PopulateShield()
     {
         var shield = focusVehicle.ShieldInstance;
+        HideItemPanels();
+
         if (shield != null)
         {
             ItemNameText.text = shield.Name;
@@ -610,14 +634,13 @@ public class InventoryScreen : MonoBehaviour
             var inventoryItem = shield.GetComponent<InventoryItem>();
             if (inventoryItem != null)
                 ShieldButton.image.sprite = inventoryItem.InventorySprite;
+
+            ShieldPanel.gameObject.SetActive(true);
         }
         else
         {
             ItemNameText.text = "No Shield Equipped";
         }
-
-        HideItemPanels();
-        ShieldPanel.gameObject.SetActive(true);
 
         _equippedContext = EquippedContext.Shield;
         EnableEquippedButtons();
@@ -626,9 +649,23 @@ public class InventoryScreen : MonoBehaviour
 
     public void PopulateEngine()
     {
-        ItemNameText.text = "No Engine Equipped.";
-
+        var engine = focusVehicle.EngineInstance;
         HideItemPanels();
+
+        if (engine != null)
+        {
+            ItemNameText.text = engine.Name;
+
+            var inventoryItem = engine.GetComponent<InventoryItem>();
+            if (inventoryItem != null)
+                EngineButton.image.sprite = inventoryItem.InventorySprite;
+
+            ShieldPanel.gameObject.SetActive(true);
+        }
+        else
+        {
+            ItemNameText.text = "No Engine Equipped.";
+        }
 
         _equippedContext = EquippedContext.Engine;
         EnableEquippedButtons();

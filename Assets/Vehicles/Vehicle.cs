@@ -79,6 +79,9 @@ public class Vehicle : MonoBehaviour
     [Header("Shield")]
     public Shield ShieldPrefab;
 
+    [Header("Engine")]
+    public Engine EnginePrefab;
+
     [Header("Death")]
     public GameObject CorpsePrefab;
     public GameObject DebrisPrefab;
@@ -94,6 +97,7 @@ public class Vehicle : MonoBehaviour
 	private Weapon _primaryWeaponInstance;
 	private Weapon _secondaryWeaponInstance;
     private Shield _shieldInstance;
+    private Engine _engineInstance;
 
 	private Vector3 _velocity;
 	private VelocityReference _velocityReference;
@@ -135,6 +139,11 @@ public class Vehicle : MonoBehaviour
     public Shield ShieldInstance
     {
         get { return _shieldInstance; }
+    }
+
+    public Engine EngineInstance
+    {
+        get { return _engineInstance; }
     }
 
 	public bool IgnoreCollisions;
@@ -199,6 +208,8 @@ public class Vehicle : MonoBehaviour
         SetSecondaryWeapon(SecondaryWeaponPrefab.gameObject);
         if (ShieldPrefab != null)
             SetShield(ShieldPrefab.gameObject);
+        if (EnginePrefab != null)
+            SetEngine(EnginePrefab.gameObject);
     }
 
     public void SetPrimaryWeapon(GameObject primaryWeapon)
@@ -237,7 +248,7 @@ public class Vehicle : MonoBehaviour
 
     public void SetShield(GameObject shield)
     {
-        if (_shieldInstance!=null)
+        if (_shieldInstance != null)
         {
             Destroy(_shieldInstance.gameObject);
         }
@@ -250,6 +261,18 @@ public class Vehicle : MonoBehaviour
             var regenerator = GetComponent<ShieldRegenerator>();
             if (regenerator != null)
                 regenerator.RegenerationRate = _shieldInstance.RegenerationRate;
+        }
+    }
+
+    public void SetEngine(GameObject engine)
+    {
+        if (_engineInstance != null)
+        {
+            Destroy(_engineInstance.gameObject);
+        }
+        if (engine != null)
+        {
+            _engineInstance = Utility.InstantiateInParent(engine.gameObject, transform).GetComponent<Engine>();
         }
     }
 

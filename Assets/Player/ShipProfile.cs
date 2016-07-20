@@ -11,6 +11,7 @@ public class ShipProfile : MonoBehaviour
     public Weapon PrimaryWeapon;
     public Weapon SecondaryWeapon;
     public Shield Shield;
+    public Engine Engine;
 
     public int PowerRemaining { get { return TotalPower - Weapons - Shields - Special; } }
 
