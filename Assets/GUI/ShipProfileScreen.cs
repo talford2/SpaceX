@@ -335,11 +335,11 @@ public class ShipProfileScreen : MonoBehaviour
     private void ApplyPowerProfile(Fighter member, ShipProfile profile)
     {
         member.VehicleInstance.Killable.MaxShield = profile.GetShield();
-        member.VehicleInstance.MaxBoostEnergy = profile.GetBoostEnergy();
+        //member.VehicleInstance.MaxBoostEnergy = profile.GetBoostEnergy();
         if (member.VehicleInstance.Killable.Shield > member.VehicleInstance.Killable.MaxShield)
             member.VehicleInstance.Killable.Shield = member.VehicleInstance.Killable.MaxShield;
-        if (member.VehicleInstance.BoostEnergy > member.VehicleInstance.MaxBoostEnergy)
-            member.VehicleInstance.BoostEnergy = member.VehicleInstance.MaxBoostEnergy;
+        //if (member.VehicleInstance.BoostEnergy > member.VehicleInstance.MaxBoostEnergy)
+        //    member.VehicleInstance.BoostEnergy = member.VehicleInstance.MaxBoostEnergy;
         member.VehicleInstance.TriggerBoostRegeneration();
     }
 

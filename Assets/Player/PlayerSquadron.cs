@@ -107,8 +107,6 @@ public class PlayerSquadron : MonoBehaviour
         // Apply power profile
         member.VehicleInstance.Killable.MaxShield = profile.GetShield();
         member.VehicleInstance.Killable.Shield = member.VehicleInstance.Killable.MaxShield;
-        member.VehicleInstance.MaxBoostEnergy = profile.GetBoostEnergy();
-        member.VehicleInstance.BoostEnergy = member.VehicleInstance.MaxBoostEnergy;
 
         var squadronShieldRegenerator = member.VehicleInstance.gameObject.AddComponent<ShieldRegenerator>();
         squadronShieldRegenerator.RegenerationDelay = ShieldRegenerateDelay;

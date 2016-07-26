@@ -162,8 +162,6 @@ public class PlayerController : MonoBehaviour
 		var powerProfile = GetComponent<ShipProfile>();
 		_playVehicleInstance.Killable.MaxShield = powerProfile.GetShield();
 		_playVehicleInstance.Killable.Shield = _playVehicleInstance.Killable.MaxShield;
-		_playVehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
-		_playVehicleInstance.BoostEnergy = _playVehicleInstance.MaxBoostEnergy;
 
 		var shieldRegenerator = _playVehicleInstance.gameObject.GetComponent<ShieldRegenerator>();
 		shieldRegenerator.RegenerationDelay = Squadron.ShieldRegenerateDelay;

@@ -99,7 +99,7 @@ public class HeadsUpDisplay : MonoBehaviour
 
             var shieldFraction = PlayerController.Current.VehicleInstance.Killable.Shield / PlayerController.Current.VehicleInstance.Killable.MaxShield;
             var healthFraction = PlayerController.Current.VehicleInstance.Killable.Health / PlayerController.Current.VehicleInstance.Killable.MaxHealth;
-            var energyFraction = PlayerController.Current.VehicleInstance.BoostEnergy / PlayerController.Current.VehicleInstance.MaxBoostEnergy;
+            var energyFraction = PlayerController.Current.VehicleInstance.BoostEnergy / PlayerController.Current.VehicleInstance.EngineInstance.BoostEnergy;
 
             var primaryWeaponInstance = PlayerController.Current.VehicleInstance.PrimaryWeaponInstance;
             var secondaryWeaponInstance = PlayerController.Current.VehicleInstance.SecondaryWeaponInstance;

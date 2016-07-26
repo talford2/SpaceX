@@ -140,8 +140,6 @@ public class Fighter : Npc<Fighter>
 		var powerProfile = GetComponent<ShipProfile>();
 		killable.MaxShield = powerProfile.GetShield();
 		killable.Shield = killable.MaxShield;
-		_vehicleInstance.MaxBoostEnergy = powerProfile.GetBoostEnergy();
-		_vehicleInstance.BoostEnergy = _vehicleInstance.MaxBoostEnergy;
 
 		_vehicleInstance.Shiftable.SetShiftPosition(universePosition);
 		_vehicleInstance.transform.position = _vehicleInstance.Shiftable.GetWorldPosition();

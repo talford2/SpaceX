@@ -43,6 +43,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Fast Engine
   LootIndex: 10
+  BaseAcceleration: 30
+  BaseBoostEnergy: 100
+  AccelerationPoints: 0
+  BoostEnergyPoints: 0
+  AccelerationPerPoint: 2.5
+  BoostEnergyPerPoint: 5
 --- !u!114 &11483144
 MonoBehaviour:
   m_ObjectHideFlags: 1

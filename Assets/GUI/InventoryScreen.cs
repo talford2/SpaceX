@@ -80,6 +80,16 @@ public class InventoryScreen : MonoBehaviour
     [Header("Engine Panel")]
     public CanvasGroup EnginePanel;
 
+    public Text AccelerationCostText;
+    public Image AccelerationBar;
+    public Text AcceleratioValueText;
+    public Button AccelerationAddButton;
+
+    public Text BoostEnergyCostText;
+    public Image BoostEnergyBar;
+    public Text BoostEnergyValueText;
+    public Button BoostEnergyAddButton;
+
     [Header("Inventory Panel")]
     public List<Button> ItemButtons;
 
@@ -129,7 +139,7 @@ public class InventoryScreen : MonoBehaviour
                 Hide();
             PreviewMovement();
         }
-        if (_doubleClickCooldown >=0)
+        if (_doubleClickCooldown >= 0)
         {
             _doubleClickCooldown -= Time.deltaTime;
         }
@@ -490,12 +500,14 @@ public class InventoryScreen : MonoBehaviour
         return string.Format("<color=\"#f00\">{0:f0}c</color>", value);
     }
 
+    #region Weapon Upgrades
+
     public void AddDamagePoints()
     {
         Debug.Log("ADD: " + _equippedContext + ", Damage");
         if (_equippedContext == EquippedContext.Primary)
         {
-            if (focusVehicle.PrimaryWeaponInstance.DamagePoints < 10  && PlayerController.Current.SpaceJunkCount > focusVehicle.PrimaryWeaponInstance.DamagePointCost)
+            if (focusVehicle.PrimaryWeaponInstance.DamagePoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.PrimaryWeaponInstance.DamagePointCost)
             {
                 PlayerController.Current.SpaceJunkCount -= focusVehicle.PrimaryWeaponInstance.DamagePointCost;
                 focusVehicle.PrimaryWeaponInstance.DamagePoints++;
@@ -590,6 +602,42 @@ public class InventoryScreen : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Engine Upgrades
+
+    public void AddAccelerationPoints()
+    {
+        Debug.Log("ADD: " + _equippedContext + ", Acceleration");
+        if (_equippedContext == EquippedContext.Engine)
+        {
+            if (focusVehicle.EngineInstance.AccelerationPoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.EngineInstance.AccelerationPointCost)
+            {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.EngineInstance.AccelerationPointCost;
+                focusVehicle.EngineInstance.AccelerationPoints++;
+                PopulateEngine();
+                UpdateCredits();
+            }
+        }
+    }
+
+    public void AddBoostEnergyPoints()
+    {
+        Debug.Log("ADD: " + _equippedContext + ", Boost energy");
+        if (_equippedContext == EquippedContext.Engine)
+        {
+            if (focusVehicle.EngineInstance.BoostEnergyPoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.EngineInstance.BoostEnergyPointCost)
+            {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.EngineInstance.BoostEnergyPointCost;
+                focusVehicle.EngineInstance.BoostEnergyPoints++;
+                PopulateEngine();
+                UpdateCredits();
+            }
+        }
+    }
+
+    #endregion
+
     public void PopulateSecondary()
     {
         var secondaryWeapon = focusVehicle.SecondaryWeaponInstance;
@@ -659,11 +707,17 @@ public class InventoryScreen : MonoBehaviour
         {
             ItemNameText.text = engine.Name;
 
+            PopulateWeaponPanel(engine.AccelerationPointCost, engine.AccelerationPoints, AccelerationCostText, AccelerationBar, AccelerationAddButton);
+            AcceleratioValueText.text = string.Format("{0:f1}", engine.Acceleration);
+
+            PopulateWeaponPanel(engine.BoostEnergyPointCost, engine.BoostEnergyPoints, BoostEnergyCostText, BoostEnergyBar, BoostEnergyAddButton);
+            BoostEnergyValueText.text = string.Format("{0:f0}", engine.BoostEnergy);
+
             var inventoryItem = engine.GetComponent<InventoryItem>();
             if (inventoryItem != null)
                 EngineButton.image.sprite = inventoryItem.InventorySprite;
 
-            ShieldPanel.gameObject.SetActive(true);
+            EnginePanel.gameObject.SetActive(true);
         }
         else
         {

@@ -12,7 +12,7 @@ public class Vehicle : MonoBehaviour
 	public float IdleSpeed = 10f;
 	public float MaxSpeed = 20f;
 	public float MinSpeed = 3f;
-	public float Acceleration = 5f;
+	//public float Acceleration = 5f;
 	public float Brake = 7f;
 	public float MaxBoostSpeed = 500f;
 	public float BoostAcceleration = 500f;
@@ -29,9 +29,9 @@ public class Vehicle : MonoBehaviour
 	public float CollisionRadius = 3f;
 
 	[Header("Boost Energy")]
-	public float MaxBoostEnergy = 100f;
+	//public float MaxBoostEnergy = 100f;
 	public float BoostEnergy = 100f;
-	public float BoostCost = 50f;
+	//public float BoostCost = 50f;
 	public float BoostEnergyRegenerateDelay = 5f;
 	public float BoostEnergyRegenerateRate = 1f;
 
@@ -109,7 +109,8 @@ public class Vehicle : MonoBehaviour
 	private Quaternion _targetRotation;
 	private Quaternion _targetBankRotation;
 
-	// Boost
+    // Boost
+    private float _boostCost = 50f;
 	private float _boostEnergyCooldown;
 	private bool _boostRegenerate;
 	private bool _allowBoost;
@@ -339,8 +340,8 @@ public class Vehicle : MonoBehaviour
             // Accelerating
             if (TriggerAccelerate && CurrentSpeed < MaxSpeed)
             {
-                acceleration = Acceleration;
-                CurrentSpeed += Acceleration * Time.deltaTime;
+                acceleration = _engineInstance.Acceleration;
+                CurrentSpeed += _engineInstance.Acceleration * Time.deltaTime;
                 CurrentSpeed = Mathf.Min(CurrentSpeed, MaxSpeed);
             }
 
@@ -367,11 +368,11 @@ public class Vehicle : MonoBehaviour
 
         if (_boostRegenerate)
         {
-            if (BoostEnergy < MaxBoostEnergy)
+            if (BoostEnergy < _engineInstance.BoostEnergy)
             {
                 BoostEnergy += BoostEnergyRegenerateRate * Time.deltaTime;
-                if (BoostEnergy > MaxBoostEnergy)
-                    BoostEnergy = MaxBoostEnergy;
+                if (BoostEnergy > _engineInstance.BoostEnergy)
+                    BoostEnergy = _engineInstance.BoostEnergy;
             }
         }
 
@@ -386,7 +387,7 @@ public class Vehicle : MonoBehaviour
                     CurrentSpeed += BoostAcceleration * Time.deltaTime;
                     CurrentSpeed = Mathf.Min(CurrentSpeed, MaxBoostSpeed);
                 }
-                BoostEnergy -= BoostCost * Time.deltaTime;
+                BoostEnergy -= _boostCost * Time.deltaTime;
                 if (BoostEnergy < 0f)
                 {
                     BoostEnergy = 0f;
@@ -422,8 +423,8 @@ public class Vehicle : MonoBehaviour
 
             if (CurrentSpeed < IdleSpeed)
             {
-                acceleration = Acceleration;
-                CurrentSpeed += Acceleration * Time.deltaTime;
+                acceleration = _engineInstance.Acceleration;
+                CurrentSpeed += _engineInstance.Acceleration * Time.deltaTime;
                 CurrentSpeed = Mathf.Min(IdleSpeed, CurrentSpeed);
             }
         }
