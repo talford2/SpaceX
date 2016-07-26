@@ -2561,7 +2561,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 211712071}
-        m_MethodName: AddFireRatePoints
+        m_MethodName: AdShieldRegenerationPoints
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8541,7 +8541,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 211712071}
-        m_MethodName: AddDamagePoints
+        m_MethodName: AdShieldCapacityPoints
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

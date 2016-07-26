@@ -604,6 +604,40 @@ public class InventoryScreen : MonoBehaviour
 
     #endregion
 
+    #region Shield Upgrades
+
+    public void AdShieldCapacityPoints()
+    {
+        Debug.Log("ADD: " + _equippedContext + ", Shield Capacity");
+        if (_equippedContext == EquippedContext.Shield)
+        {
+            if (focusVehicle.ShieldInstance.CapacityPoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.ShieldInstance.CapacityPointCost)
+            {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.ShieldInstance.CapacityPointCost;
+                focusVehicle.ShieldInstance.CapacityPoints++;
+                PopulateShield();
+                UpdateCredits();
+            }
+        }
+    }
+
+    public void AdShieldRegenerationPoints()
+    {
+        Debug.Log("ADD: " + _equippedContext + ", Shield Regeneration");
+        if (_equippedContext == EquippedContext.Shield)
+        {
+            if (focusVehicle.ShieldInstance.RegenerationRatePoints < 10 && PlayerController.Current.SpaceJunkCount > focusVehicle.ShieldInstance.RegenerationPointCost)
+            {
+                PlayerController.Current.SpaceJunkCount -= focusVehicle.ShieldInstance.RegenerationPointCost;
+                focusVehicle.ShieldInstance.RegenerationRatePoints++;
+                PopulateShield();
+                UpdateCredits();
+            }
+        }
+    }
+
+    #endregion
+
     #region Engine Upgrades
 
     public void AddAccelerationPoints()
