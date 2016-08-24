@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Vehicle : MonoBehaviour
@@ -577,11 +578,23 @@ public class Vehicle : MonoBehaviour
         }
     }
 
+    private IEnumerator DelayedWoundEffectStop(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(_woundObj);
+    }
+
     private void VehicleDie(Killable sender)
     {
         _killable.OnDie -= VehicleDie;
         if (_woundObj != null)
+        {
             _woundObj.transform.parent = null;
+            var woundParticles = _woundObj.GetComponent<ParticleSystem>();
+            if (woundParticles != null)
+                woundParticles.Stop();
+            StartCoroutine(DelayedWoundEffectStop(woundParticles.duration + 0.5f));
+        }
 
         if (Random.Range(0, 1f) > 0.5f)
         {
