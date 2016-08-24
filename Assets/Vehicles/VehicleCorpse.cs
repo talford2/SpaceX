@@ -7,6 +7,7 @@ public class VehicleCorpse : MonoBehaviour
 {
     public GameObject ExplosionPrefab;
     public GameObject DebrisPrefab;
+    public GameObject SmokeInstance;
 
     private Rigidbody rBody;
     private Killable killable;
@@ -55,6 +56,21 @@ public class VehicleCorpse : MonoBehaviour
             }
         }
 
+        if (SmokeInstance != null)
+        {
+            SmokeInstance.transform.parent = null;
+            var woundParticles = SmokeInstance.GetComponent<ParticleSystem>();
+            if (woundParticles != null)
+                woundParticles.Stop();
+            StartCoroutine(DelayedSmokeDestroy(woundParticles.duration + 0.5f));
+        }
+
         Destroy(gameObject);
+    }
+
+    private IEnumerator DelayedSmokeDestroy(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(SmokeInstance);
     }
 }

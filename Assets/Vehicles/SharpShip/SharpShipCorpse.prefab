@@ -300,6 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExplosionPrefab: {fileID: 127098, guid: 2bfd289939e87ac4fa9e386a7c77f839, type: 2}
   DebrisPrefab: {fileID: 119188, guid: eff4975c6c67cc74aa5d24825cd8a0d1, type: 2}
+  SmokeInstance: {fileID: 118000}
 --- !u!114 &11483148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -317,7 +318,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 0
 --- !u!198 &19811578
 ParticleSystem:
