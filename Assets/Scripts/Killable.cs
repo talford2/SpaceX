@@ -11,9 +11,6 @@ public class Killable : MonoBehaviour
 	public GameObject DamageEffect;
 	public GameObject DieEffect;
 
-	public GameObject WoundEffect;
-	private GameObject _woundObj;
-
 	public delegate void OnDamageEvent(Killable sender, Vector3 position, Vector3 normal, GameObject attacker);
 	public event OnDamageEvent OnDamage;
 
@@ -24,10 +21,10 @@ public class Killable : MonoBehaviour
 
 	public bool IsAlive { get; set; }
 
-	private void Awake()
-	{
-		IsAlive = true;
-	}
+    private void Awake()
+    {
+        IsAlive = true;
+    }
 
     public void Damage(float damage, Vector3 position, Vector3 normal, GameObject attacker)
     {
@@ -49,29 +46,6 @@ public class Killable : MonoBehaviour
                 Instantiate(DamageEffect, position, Quaternion.LookRotation(normal));
             if (Health <= 0f)
                 Die();
-
-            if (Health/MaxHealth < 0.5f)
-            {
-                StartWoundEffect();
-            }
-        }
-    }
-
-    private void StartWoundEffect()
-    {
-        if (_woundObj == null && WoundEffect != null)
-        {
-            _woundObj = Instantiate(WoundEffect);
-            _woundObj.transform.parent = transform;
-            _woundObj.transform.localPosition = Vector3.zero;
-        }
-    }
-
-    public void StopWoundEffect()
-    {
-        if (_woundObj != null)
-        {
-            Destroy(_woundObj);
         }
     }
 

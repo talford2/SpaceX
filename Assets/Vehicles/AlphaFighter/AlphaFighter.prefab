@@ -752,7 +752,6 @@ MonoBehaviour:
   IdleSpeed: 20
   MaxSpeed: 50
   MinSpeed: 3
-  Acceleration: 30
   Brake: 20
   MaxBoostSpeed: 500
   BoostAcceleration: 500
@@ -765,9 +764,7 @@ MonoBehaviour:
   MaxBankingAngle: 60
   CollisionsCentre: {x: 0, y: 0, z: 0}
   CollisionRadius: 3.4
-  MaxBoostEnergy: 100
   BoostEnergy: 100
-  BoostCost: 50
   BoostEnergyRegenerateDelay: 2
   BoostEnergyRegenerateRate: 50
   Controller: {fileID: 0}
@@ -792,6 +789,7 @@ MonoBehaviour:
   - {fileID: 11448042}
   ShieldPrefab: {fileID: 11432386, guid: a8876c617785ce9478a74c3f72561449, type: 2}
   EnginePrefab: {fileID: 11460812, guid: fa31fb1798e114b4c8bdb7b08ce54f5d, type: 2}
+  WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
   CorpsePrefab: {fileID: 0}
   DebrisPrefab: {fileID: 0}
   ExplosiveForce: 0

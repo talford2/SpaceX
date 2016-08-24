@@ -82,6 +82,9 @@ public class Vehicle : MonoBehaviour
     [Header("Engine")]
     public Engine EnginePrefab;
 
+    [Header("Damage")]
+    public GameObject WoundEffect;
+
     [Header("Death")]
     public GameObject CorpsePrefab;
     public GameObject DebrisPrefab;
@@ -126,6 +129,9 @@ public class Vehicle : MonoBehaviour
     private float barrelRollDuration = 0.5f;
     private float barrelStrafeSpeed = 100f;
     private float barrelStrafeVelocity;
+
+    // Wound effect
+    private GameObject _woundObj;
 
     public Weapon PrimaryWeaponInstance
 	{
@@ -194,6 +200,7 @@ public class Vehicle : MonoBehaviour
 		_velocityReference = new VelocityReference(_velocity);
 
 		_killable = GetComponent<Killable>();
+        _killable.OnDamage += VehicleDamage;
         _killable.OnDie += VehicleDie;
 
 		_allowBoost = true;
@@ -552,9 +559,29 @@ public class Vehicle : MonoBehaviour
 		return _velocity;
 	}
 
+    private void VehicleDamage(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
+    {
+        if (sender.Health / sender.MaxHealth < 0.5f)
+        {
+            StartWoundEffect();
+        }
+    }
+
+    private void StartWoundEffect()
+    {
+        if (_woundObj == null && WoundEffect != null)
+        {
+            _woundObj = Instantiate(WoundEffect);
+            _woundObj.transform.parent = transform;
+            _woundObj.transform.localPosition = Vector3.zero;
+        }
+    }
+
     private void VehicleDie(Killable sender)
     {
         _killable.OnDie -= VehicleDie;
+        if (_woundObj != null)
+            _woundObj.transform.parent = null;
 
         if (Random.Range(0, 1f) > 0.5f)
         {

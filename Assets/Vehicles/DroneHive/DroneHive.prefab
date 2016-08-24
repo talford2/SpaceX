@@ -151,6 +151,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: -0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 441548}
   m_RootOrder: 1
@@ -163,6 +164,7 @@ Transform:
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 428512}
   m_RootOrder: 0
@@ -175,6 +177,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
   m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 419586}
   m_Father: {fileID: 441548}
@@ -188,6 +191,7 @@ Transform:
   m_LocalRotation: {x: 0.00000008146034, y: -0.0000001509958, z: 1.23001695e-14, w: 1}
   m_LocalPosition: {x: 0.00000033206274, y: -2.7845256, z: -1.3322347}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 441548}
   m_RootOrder: 4
@@ -200,6 +204,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -69.364624, y: -23.654737, z: -432.17245}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 489776}
   - {fileID: 403274}
@@ -218,6 +223,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: -0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 441548}
   m_RootOrder: 2
@@ -231,6 +237,7 @@ Transform:
     w: 1}
   m_LocalPosition: {x: -0.000000034969112, y: 0.000000034969112, z: -0.79999995}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 441548}
   m_RootOrder: 3
@@ -243,6 +250,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 441548}
   m_RootOrder: 0
@@ -591,13 +599,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerSprite: {fileID: 21300000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
-  FarTrackerSprite: {fileID: 21300000, guid: 9b26117e66080cc41b0d4398dbabb012, type: 3}
-  VeryFarTrackerSprite: {fileID: 21300000, guid: 4652c2f3d26040a44aae2194d83683d4,
-    type: 3}
   TrackerColor: {r: 1, g: 1, b: 1, a: 1}
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
+  TrackerPlanePrefab: {fileID: 0}
+  TrackerPlaneScale: 100
   Targetable: {fileID: 0}
   Killable: {fileID: 0}
   MaxDistance: 3000
@@ -635,7 +641,6 @@ MonoBehaviour:
   IdleSpeed: 5
   MaxSpeed: 20
   MinSpeed: 3
-  Acceleration: 5
   Brake: 7
   MaxBoostSpeed: 500
   BoostAcceleration: 500
@@ -648,9 +653,7 @@ MonoBehaviour:
   MaxBankingAngle: 60
   CollisionsCentre: {x: 0, y: 0, z: 2}
   CollisionRadius: 5
-  MaxBoostEnergy: 100
   BoostEnergy: 100
-  BoostCost: 50
   BoostEnergyRegenerateDelay: 5
   BoostEnergyRegenerateRate: 1
   Controller: {fileID: 0}
@@ -660,10 +663,19 @@ MonoBehaviour:
   YawThrottle: 0
   PitchThotttle: 0
   RollThrottle: 0
+  CameraDistance: 15
+  UTurnPath: {fileID: 0}
+  UTurnDuration: 0
   PrimaryWeaponPrefab: {fileID: 0}
   PrimaryShootPoints: []
   SecondaryWeaponPrefab: {fileID: 0}
   SecondaryShootPoints: []
+  ShieldPrefab: {fileID: 0}
+  EnginePrefab: {fileID: 0}
+  WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
+  CorpsePrefab: {fileID: 0}
+  DebrisPrefab: {fileID: 0}
+  ExplosiveForce: 0
   Thrusters: []
   BoostSound: {fileID: 8255922}
   IgnoreCollisions: 0
