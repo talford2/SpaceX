@@ -50,7 +50,7 @@ public class VehicleCorpse : MonoBehaviour
             foreach (var debrisrBody in rBodies)
             {
                 debrisrBody.velocity = rBody.velocity;
-                debrisrBody.AddExplosionForce(50f, transform.position, 20f, 0f, ForceMode.Impulse);
+                debrisrBody.AddExplosionForce(200f, transform.position, 20f, 0f, ForceMode.Impulse);
                 var debrisShiftable = debrisrBody.GetComponent<Shiftable>();
                 debrisShiftable.SetShiftPosition(Universe.Current.GetUniversePosition(debrisrBody.position));
             }

@@ -341,13 +341,15 @@ public class PlayerController : MonoBehaviour
 			{
 				if ((Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0)
 				{
-					Respawn();
+                    //Respawn();
+                    CycleSquadron(1);
 				}
 				if ((Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0)
 				{
-					Respawn();
-				}
-				if (Squadron.GetLiveCount() == 0)
+					//Respawn();
+                    CycleSquadron(-1);
+                }
+                if (Squadron.GetLiveCount() == 0)
 				{
 					if (Input.GetButtonUp("SquadronNext"))
 					{
