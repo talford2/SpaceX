@@ -339,16 +339,7 @@ public class PlayerController : MonoBehaviour
 
 			if (_isAllowRespawn)
 			{
-				if ((Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0)
-				{
-                    //Respawn();
-                    CycleSquadron(1);
-				}
-				if ((Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0)
-				{
-					//Respawn();
-                    CycleSquadron(-1);
-                }
+				
                 if (Squadron.GetLiveCount() == 0)
 				{
 					if (Input.GetButtonUp("SquadronNext"))
@@ -359,7 +350,27 @@ public class PlayerController : MonoBehaviour
 					{
 						Respawn();
 					}
-				}
+
+                    if ((Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0)
+                    {
+                        Respawn();
+                    }
+                    if ((Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0)
+                    {
+                        Respawn();
+                    }
+                }
+                else
+                {
+                    if ((Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0)
+                    {
+                        CycleSquadron(1);
+                    }
+                    if ((Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0)
+                    {
+                        CycleSquadron(-1);
+                    }
+                }
 			}
 
 			if (Input.GetKeyUp(KeyCode.R))
