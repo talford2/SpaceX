@@ -17,6 +17,9 @@ public class Spawner : MonoBehaviour
 
 	private bool _hasSpawned = false;
 
+    public delegate void OnSpawnerSpawn(GameObject spawnedObject);
+    public OnSpawnerSpawn OnSpawn;
+
 	private void Awake()
 	{
 		if (SpawnOnAwake)
@@ -69,6 +72,8 @@ public class Spawner : MonoBehaviour
 			_hasSpawned = true;
 			if (callback != null)
 				callback();
+            if (OnSpawn != null)
+                OnSpawn(_fighterInst.gameObject);
 		}
 	}
 }

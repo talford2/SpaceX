@@ -22,6 +22,8 @@ public class Universe : MonoBehaviour
 		get { return _current; }
 	}
 
+    public bool AllowEvents = true;
+
 	public List<UniverseEvent> UniverseEvents
 	{
 		get
