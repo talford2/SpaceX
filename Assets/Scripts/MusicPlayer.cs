@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
 {
-    public List<AudioSource> MusicList;
+    public AudioSource Source;
+    public List<AudioClip> MusicClips;
     private int _currentIndex = 0;
 
     void Start()
     {
-        MusicList.First().Play();
         _currentIndex = 0;
+        Source.clip = MusicClips[_currentIndex];
+        Source.Play();
     }
 
     void Update()
     {
-        if (!MusicList[_currentIndex].isPlaying)
+        if (!Source.isPlaying)
         {
             _currentIndex++;
-            if (_currentIndex >= MusicList.Count)
+            if (_currentIndex >= MusicClips.Count)
             {
                 _currentIndex = 0;
             }
-            MusicList[_currentIndex].Play();
+            Source.clip = MusicClips[_currentIndex];
+            Source.Play();
         }
     }
 }
