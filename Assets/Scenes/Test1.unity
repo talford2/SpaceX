@@ -1149,6 +1149,7 @@ MonoBehaviour:
   PlayerSpawnPosition: {fileID: 624703671}
   ViewPort: {fileID: 128853637}
   ShiftableItems: []
+  AllowEvents: 1
 --- !u!114 &109838679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14238,7 +14239,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 36ed4b7c12b6ce2478867662776645ad, type: 3}
+  m_audioClip: {fileID: 8300000, guid: eb810d0fb95636549abb327dff91bb8a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1
