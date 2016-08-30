@@ -137,7 +137,6 @@ public class ShipGenerator : MonoBehaviour
             }
         }
 
-        /*
         var positionSum = Vector3.zero;
         foreach (var partInstance in partInstances)
         {
@@ -146,9 +145,8 @@ public class ShipGenerator : MonoBehaviour
         var offset = positionSum / partInstances.Count;
         foreach (var partInstance in partInstances)
         {
-            partInstance.transform.position -= offset;
+            partInstance.transform.localPosition -= offset;
         }
-        */
         //generatedParent.position -= positionSum / partInstances.Count;
 
         var nearInstance = Instantiate(generatedParent.gameObject);
