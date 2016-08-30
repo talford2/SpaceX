@@ -3080,6 +3080,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: 5457520db37ae264d9d4f9b6dc1bc37c, type: 2}
+  - {fileID: 2100000, guid: 41dbd13185da1844aae0cf3d8cdc02c5, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -3340,6 +3341,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: 98ecec1e4be5f704ea8338db95bd241d, type: 2}
+  - {fileID: 2100000, guid: 41dbd13185da1844aae0cf3d8cdc02c5, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -3964,6 +3966,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: 5457520db37ae264d9d4f9b6dc1bc37c, type: 2}
+  - {fileID: 2100000, guid: 41dbd13185da1844aae0cf3d8cdc02c5, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -5170,7 +5173,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11403496
 MonoBehaviour:
@@ -5189,7 +5191,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11409756
 MonoBehaviour:
@@ -5245,6 +5246,12 @@ MonoBehaviour:
   ThresholdDistance: 2000
   DistantObject: {fileID: 188430}
   NearObject: {fileID: 150558}
+  FogParts:
+  - {fileID: 2317334}
+  - {fileID: 2300062}
+  - {fileID: 2374006}
+  MinFogDistance: 2000
+  MaxFogDistance: 10000
 --- !u!114 &11413218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5382,7 +5389,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11422270
 MonoBehaviour:
@@ -5472,7 +5478,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11436692
 MonoBehaviour:
@@ -5549,7 +5554,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11444570
 MonoBehaviour:
@@ -5693,7 +5697,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11458458
 MonoBehaviour:
