@@ -2551,7 +2551,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11423174
 MonoBehaviour:
@@ -2570,7 +2569,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11429846
 MonoBehaviour:
@@ -2589,7 +2587,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11430210
 MonoBehaviour:
@@ -2608,7 +2605,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11435996
 MonoBehaviour:
@@ -2703,7 +2699,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11444578
 MonoBehaviour:
@@ -2722,7 +2717,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11448424
 MonoBehaviour:
@@ -2741,7 +2735,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11459232
 MonoBehaviour:
@@ -2760,7 +2753,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11465312
 MonoBehaviour:
@@ -2776,8 +2768,12 @@ MonoBehaviour:
   FocusShiftable: {fileID: 11483582}
   LineRendererWidth: 35
   LineRenderers: []
+  ThresholdDistance: 2000
   DistantObject: {fileID: 100102}
   NearObject: {fileID: 149728}
+  FogParts: []
+  MinFogDistance: 2000
+  MaxFogDistance: 20000
 --- !u!114 &11467462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2811,7 +2807,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11478150
 MonoBehaviour:
@@ -2830,7 +2825,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11478782
 MonoBehaviour:
@@ -2849,7 +2843,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11480200
 MonoBehaviour:
@@ -2868,7 +2861,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11483582
 MonoBehaviour:
@@ -2903,7 +2895,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11489568
 MonoBehaviour:
@@ -2918,8 +2909,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shiftable: {fileID: 11483582}
   Speed: 10
+  IsReposition: 1
   DestroyOverDistance: 1
-  DestroyDistance: 20000
+  DestroyDistance: 12000
 --- !u!114 &11497734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2937,7 +2929,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 0}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!1001 &100100000
 Prefab:
