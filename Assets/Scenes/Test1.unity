@@ -15188,7 +15188,7 @@ MonoBehaviour:
   - Prefab: {fileID: 184406, guid: 72068408bf421da45bf7793c91df7b5c, type: 2}
     Count: 5
   - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
-    Count: 8
+    Count: 0
   - Prefab: {fileID: 174836, guid: bb620ed8ba7745c4e8c09cfb8f6c219d, type: 2}
     Count: 120
   - Prefab: {fileID: 174836, guid: bb620ed8ba7745c4e8c09cfb8f6c219d, type: 2}
@@ -15207,6 +15207,8 @@ MonoBehaviour:
     Count: 20
   - Prefab: {fileID: 145142, guid: 9a605769420d6ae4987fb273fa318c14, type: 2}
     Count: 200
+  - Prefab: {fileID: 196708, guid: 7aefaac605ed7e846919a756b158ea2e, type: 2}
+    Count: 15
   CellRadius: 10
 --- !u!1 &1201959929
 GameObject:
