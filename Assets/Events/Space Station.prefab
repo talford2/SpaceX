@@ -201,7 +201,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.661737, y: -1.3910313, z: -0.46310568}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -318,6 +318,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: 5457520db37ae264d9d4f9b6dc1bc37c, type: 2}
+  - {fileID: 2100000, guid: 41dbd13185da1844aae0cf3d8cdc02c5, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -459,8 +460,13 @@ MonoBehaviour:
   FocusShiftable: {fileID: 0}
   LineRendererWidth: 35
   LineRenderers: []
+  ThresholdDistance: 2000
   DistantObject: {fileID: 0}
   NearObject: {fileID: 0}
+  FogParts:
+  - {fileID: 2308274}
+  MinFogDistance: 2000
+  MaxFogDistance: 10000
 --- !u!114 &11405748
 MonoBehaviour:
   m_ObjectHideFlags: 1
