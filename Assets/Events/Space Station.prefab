@@ -457,12 +457,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7806c2c78bc2bb444bf4fc12544f4df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FocusShiftable: {fileID: 0}
+  FocusShiftable: {fileID: 11405748}
   LineRendererWidth: 35
   LineRenderers: []
   ThresholdDistance: 2000
-  DistantObject: {fileID: 0}
-  NearObject: {fileID: 0}
+  DistantObject: {fileID: 152278}
+  NearObject: {fileID: 130336}
   FogParts:
   - {fileID: 2308274}
   MinFogDistance: 2000
