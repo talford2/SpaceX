@@ -1,4 +1,6 @@
-﻿// Version of the additive shader without soft particles, stops close mesh from being visible through it
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Version of the additive shader without soft particles, stops close mesh from being visible through it
 
 Shader "Custom/ExpandUi"
 {
@@ -47,7 +49,7 @@ Category {
 				vertexOutput vert(vertexInput v)
 				{
 					vertexOutput o;
-					o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+					o.vertex = UnityObjectToClipPos(v.vertex);
 					o.color = v.color;
 					_Expand = 1 - _Expand;
 					v.texcoord -= fixed2(_Expand, 0 - _Expand);

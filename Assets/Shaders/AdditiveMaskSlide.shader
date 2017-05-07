@@ -1,4 +1,6 @@
-﻿Shader "Custom/AdditiveMaskSlide"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/AdditiveMaskSlide"
 {
 	Properties{
 		_Color("Tint Color", Color) = (0.5,0.5,0.5,0.5)
@@ -50,7 +52,7 @@
 					fixed xScrollValue = _ScrollXSpeed * _Time;
 
 					vertexOutput o;
-					o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+					o.vertex = UnityObjectToClipPos(v.vertex);
 					o.color = v.color * _Color;
 
 					//fixed flameOsselate = 50 * _Time;

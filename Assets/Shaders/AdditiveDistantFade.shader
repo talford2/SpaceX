@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Custom/AdditiveDistantFade" {
 	Properties{
 		_Color("Tint Color", Color) = (0.5,0.5,0.5,0.5)
@@ -49,7 +51,7 @@ Shader "Custom/AdditiveDistantFade" {
 
 			fragInput vert(vertInput v) {
 				fragInput o;
-				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.pos = UnityObjectToClipPos(v.vertex);
 
 				o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
 

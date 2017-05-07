@@ -1,4 +1,6 @@
-﻿// Version of the additive shader without soft particles, stops close mesh from being visible through it
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Version of the additive shader without soft particles, stops close mesh from being visible through it
 
 Shader "Custom/ThrusterSlide"
 {
@@ -58,7 +60,7 @@ Shader "Custom/ThrusterSlide"
 						fixed xScrollValue = _ScrollXSpeed * _Time;
 
 						vertexOutput o;
-						o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+						o.vertex = UnityObjectToClipPos(v.vertex);
 						o.color = v.color;
 
 						//fixed flameOsselate = 50 * _Time;

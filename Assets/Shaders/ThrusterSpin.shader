@@ -1,4 +1,6 @@
-﻿Shader "Custom/ThrusterSpin"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/ThrusterSpin"
 {
 	Properties{
 		_Color("Tint Color", Color) = (0.5,0.5,0.5,0.5)
@@ -46,7 +48,7 @@
 				vertexOutput vert(vertexInput v)
 				{
 					vertexOutput o;
-					o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+					o.vertex = UnityObjectToClipPos(v.vertex);
 					o.color = v.color * _Color;
 
 					fixed spin = _SpinSpeed * _Time;

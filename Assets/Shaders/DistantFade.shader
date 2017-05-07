@@ -1,4 +1,6 @@
-﻿Shader "Custom/DistantFade" {
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/DistantFade" {
 	Properties{
 		_Color("Color", Color) = (1,1,1,1)
 		_MainTex("Albedo (RGB)", 2D) = "white" {}
@@ -42,7 +44,7 @@
 			vertexOutput vert(vertexInput input)
 			{
 				vertexOutput output;
-				output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
+				output.pos = UnityObjectToClipPos(input.vertex);
 				output.uv = TRANSFORM_TEX(input.uv, _MainTex);
 
 				//output.normal = input.normal;

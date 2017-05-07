@@ -182,7 +182,7 @@ public class UniverseGenerator : MonoBehaviour
 		renderTexture.antiAliasing = 2;
 		renderTexture.anisoLevel = 9;
 		renderTexture.filterMode = FilterMode.Trilinear;
-		renderTexture.generateMips = false;
+		renderTexture.autoGenerateMips = false;
 		renderTexture.isCubemap = true;
 
 		_mat = new Material(CubemapShader);

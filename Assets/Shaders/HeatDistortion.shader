@@ -1,4 +1,6 @@
-﻿Shader "Custom/HeatDistortion" {
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/HeatDistortion" {
 Properties {
 	_BumpAmt  ("Distortion", range (0,128)) = 10
 	_BumpMap ("Normalmap", 2D) = "bump" {}
@@ -60,7 +62,7 @@ v2f vert (appdata_t v)
 	fixed yScrollValue = _ScrollYSpeed * _Time;
 
 	v2f o;
-	o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+	o.vertex = UnityObjectToClipPos(v.vertex);
 	#if UNITY_UV_STARTS_AT_TOP
 	float scale = -1.0;
 	#else

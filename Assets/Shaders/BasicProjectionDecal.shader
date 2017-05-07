@@ -1,4 +1,8 @@
-﻿Shader "Custom/BasicProjectionDecal" {
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced '_Projector' with 'unity_Projector'
+
+Shader "Custom/BasicProjectionDecal" {
 	Properties{
 		_ShadowTex("Projected Image", 2D) = "white" {}
 		_Alpha("Alpha", Range(0,1)) = 1.0
@@ -30,7 +34,7 @@
 			uniform sampler2D _ShadowTex;
 
 		// Projector-specific uniforms
-		uniform float4x4 _Projector; // transformation matrix 
+		uniform float4x4 unity_Projector; // transformation matrix 
 									 // from object space to projector space 
 
 		struct vertexInput {
@@ -47,8 +51,8 @@
 		{
 			vertexOutput output;
 
-			output.posProj = mul(_Projector, input.vertex);
-			output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
+			output.posProj = mul(unity_Projector, input.vertex);
+			output.pos = UnityObjectToClipPos(input.vertex);
 			return output;
 		}
 
