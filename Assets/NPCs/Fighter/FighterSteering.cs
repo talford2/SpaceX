@@ -30,7 +30,6 @@ public class FighterSteering : NpcSteering<Fighter>
 		_avoidSum = Vector3.zero;
 		if (Npc.VehicleInstance != null && neighbors != null)
 		{
-			//Debug.Log("NEIGHBORS: " + neighbors.Count);
 			foreach (var neighbor in neighbors)
 			{
 				// Note this doesn't work for neighbors inside your position!
