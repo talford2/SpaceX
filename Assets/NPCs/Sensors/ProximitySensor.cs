@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ProximitySensor : MonoBehaviour
 {
-
 	public float Radius;
 
 	private int _detectableMask;

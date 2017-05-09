@@ -66,7 +66,12 @@ public class Fighter : Npc<Fighter>
 	public FighterEvade Evade;
 	public FighterPath Path;
 
-	private void Awake()
+    // Neighbour Detection
+    private float _neighborDetectInterval = 0.2f;
+    private float _neighborDetectCooldown;
+    public List<Transform> Neighbours;
+
+    private void Awake()
 	{
 		//_vehicleInstance = Utility.InstantiateInParent(VehiclePrefab.gameObject, transform).GetComponent<Vehicle>();
 
@@ -171,7 +176,32 @@ public class Fighter : Npc<Fighter>
         Target = target;
     }
 
-	private void OnVehicleDamaged(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
+    private void DetectNeighbor(Transform neighbour)
+    {
+        if (neighbour != VehicleInstance.transform)
+        {
+            if (!Neighbours.Contains(neighbour))
+            {
+                Neighbours.Add(neighbour);
+            }
+        }
+    }
+
+    public void CheckSensors()
+    {
+        if (_neighborDetectCooldown >= 0f)
+        {
+            Neighbours = new List<Transform>();
+            _neighborDetectCooldown -= Time.deltaTime;
+            if (_neighborDetectCooldown < 0f)
+            {
+                ProximitySensor.Detect(DetectNeighbor);
+                _neighborDetectCooldown = _neighborDetectInterval;
+            }
+        }
+    }
+
+    private void OnVehicleDamaged(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
 	{
 		if (attacker != null)
 		{

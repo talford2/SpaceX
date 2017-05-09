@@ -3,11 +3,6 @@ using UnityEngine;
 
 public class FighterChase : NpcState<Fighter>
 {
-    // Neighbors
-    private float _neighborDetectInterval = 0.2f;
-    private float _neighborDetectCooldown;
-    private List<Transform> _neighbors;
-
     // Target Reconsider
     private float _reconsiderTargetCooldown;
     private float _reconsiderTargetInterval = 3f;
@@ -21,25 +16,11 @@ public class FighterChase : NpcState<Fighter>
         Npc.OnVehicleDamage = OnVehicleDamage;
     }
 
-    private void CheckSensors()
-    {
-        if (_neighborDetectCooldown >= 0f)
-        {
-            _neighbors = new List<Transform>();
-            _neighborDetectCooldown -= Time.deltaTime;
-            if (_neighborDetectCooldown < 0f)
-            {
-                Npc.ProximitySensor.Detect(DetectNeighbor);
-                _neighborDetectCooldown = _neighborDetectInterval;
-            }
-        }
-    }
-
     public Vector3 GetSteerForce(Vector3 targetDestination)
     {
         var steerForce = Vector3.zero;
 
-        steerForce += 0.8f * Npc.Steering.GetSeparationForce(_neighbors);
+        steerForce += 0.8f * Npc.Steering.GetSeparationForce(Npc.Neighbours);
         if (steerForce.sqrMagnitude > 1f)
             return steerForce.normalized;
 
@@ -57,7 +38,8 @@ public class FighterChase : NpcState<Fighter>
             Npc.SetState(Npc.Idle);
             return;
         }
-        CheckSensors();
+
+        Npc.CheckSensors();
 
         var toTarget = Npc.Target.position - Npc.VehicleInstance.transform.position;
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
@@ -116,17 +98,6 @@ public class FighterChase : NpcState<Fighter>
                         Npc.SetState(Npc.Evade);
                     }
                 }
-            }
-        }
-    }
-
-    private void DetectNeighbor(Transform neighbor)
-    {
-        if (neighbor != Npc.VehicleInstance.transform)
-        {
-            if (!_neighbors.Contains(neighbor))
-            {
-                _neighbors.Add(neighbor);
             }
         }
     }

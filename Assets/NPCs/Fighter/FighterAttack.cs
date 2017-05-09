@@ -3,11 +3,6 @@ using UnityEngine;
 
 public class FighterAttack : NpcState<Fighter>
 {
-	// Neighbors
-	private float _neighborDetectInterval = 0.2f;
-	private float _neighborDetectCooldown;
-	private List<Transform> _neighbors;
-
 	private bool _allowShoot;
 	private float _burstCooldown;
 	private float _burstAmount;
@@ -23,26 +18,12 @@ public class FighterAttack : NpcState<Fighter>
         _allowShoot = true;
     }
 
-    private void CheckSensors()
-	{
-		if (_neighborDetectCooldown >= 0f)
-		{
-			_neighbors = new List<Transform>();
-			_neighborDetectCooldown -= Time.deltaTime;
-			if (_neighborDetectCooldown < 0f)
-			{
-				Npc.ProximitySensor.Detect(DetectNeighbor);
-				_neighborDetectCooldown = _neighborDetectInterval;
-			}
-		}
-	}
-
 	private Vector3 _steerForce;
 	public Vector3 GetSteerForce(Vector3 targetDestination)
 	{
 		_steerForce = Vector3.zero;
 
-		_steerForce += 0.8f * Npc.Steering.GetSeparationForce(_neighbors);
+		_steerForce += 0.8f * Npc.Steering.GetSeparationForce(Npc.Neighbours);
 		if (_steerForce.sqrMagnitude > 1f)
 			return _steerForce.normalized;
 
@@ -81,7 +62,7 @@ public class FighterAttack : NpcState<Fighter>
 			return;
 		}
 
-		CheckSensors();
+		Npc.CheckSensors();
 
 		_dotTarget = Vector3.Dot(_toTarget, Npc.VehicleInstance.transform.forward);
 
@@ -176,17 +157,6 @@ public class FighterAttack : NpcState<Fighter>
 			if (_dotTarget < 0f)
 			{
 				Npc.SetState(Npc.Evade);
-			}
-		}
-	}
-
-	private void DetectNeighbor(Transform neighbor)
-	{
-		if (neighbor != Npc.VehicleInstance.transform)
-		{
-			if (!_neighbors.Contains(neighbor))
-			{
-				_neighbors.Add(neighbor);
 			}
 		}
 	}

@@ -6,11 +6,6 @@ public class FighterIdle : NpcState<Fighter>
     private float _targetSearchInterval = 3f;
     private float _targetSearchCooldown;
 
-    // Neighbors
-    private float _neighborDetectInterval = 0.2f;
-    private float _neighborDetectCooldown;
-    private List<Transform> _neighbors;
-
     public FighterIdle(Fighter npc) : base(npc) { }
 
     public override void Initialize()
@@ -19,23 +14,9 @@ public class FighterIdle : NpcState<Fighter>
         Npc.OnVehicleDamage = OnVehicleDamage;
     }
 
-    private void CheckSensors()
-    {
-        if (_neighborDetectCooldown >= 0f)
-        {
-            _neighbors = new List<Transform>();
-            _neighborDetectCooldown -= Time.deltaTime;
-            if (_neighborDetectCooldown < 0f)
-            {
-                Npc.ProximitySensor.Detect(DetectNeighbor);
-                _neighborDetectCooldown = _neighborDetectInterval;
-            }
-        }
-    }
-
     public override void Update()
     {
-        CheckSensors();
+        Npc.CheckSensors();
 
         Npc.VehicleInstance.RollThrottle = 0f;
 
@@ -70,7 +51,7 @@ public class FighterIdle : NpcState<Fighter>
         }
 
         // Steering stuff
-        var immediateDestination = Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward * 5f + Npc.Steering.GetSeparationForce(_neighbors);
+        var immediateDestination = Npc.VehicleInstance.transform.position + Npc.VehicleInstance.transform.forward * 5f + Npc.Steering.GetSeparationForce(Npc.Neighbours);
         if (Npc.IsFollowIdleDestination)
         {
             //Debug.Log("FOLLOWING FORMATION!");
@@ -143,17 +124,6 @@ public class FighterIdle : NpcState<Fighter>
     private float GetSlowdownDistance2(float currentSpeedSquared, float destinationSpeed, float deceleration)
     {
         return (currentSpeedSquared - destinationSpeed * destinationSpeed) / (2f * deceleration);
-    }
-
-    private void DetectNeighbor(Transform neighbor)
-    {
-        if (neighbor != Npc.VehicleInstance.transform)
-        {
-            if (!_neighbors.Contains(neighbor))
-            {
-                _neighbors.Add(neighbor);
-            }
-        }
     }
 
     private void OnVehicleDamage(Transform attacker)

@@ -10,11 +10,6 @@ public class FighterEvade : NpcState<Fighter>
     private float _dodgeCooldown;
     private Vector3 _dodgeOffset;
 
-    // Neighbors
-    private float _neighborDetectInterval = 0.2f;
-    private float _neighborDetectCooldown;
-    private List<Transform> _neighbors;
-
     // Target Reconsider
     private float _reconsiderTargetCooldown;
     private float _reconsiderTargetInterval = 3f;
@@ -34,25 +29,11 @@ public class FighterEvade : NpcState<Fighter>
         return Quaternion.Euler(Random.Range(-halfAngle, halfAngle), Random.Range(-halfAngle, halfAngle), Random.Range(-halfAngle, halfAngle));
     }
 
-    private void CheckSensors()
-    {
-        if (_neighborDetectCooldown >= 0f)
-        {
-            _neighbors = new List<Transform>();
-            _neighborDetectCooldown -= Time.deltaTime;
-            if (_neighborDetectCooldown < 0f)
-            {
-                Npc.ProximitySensor.Detect(DetectNeighbor);
-                _neighborDetectCooldown = _neighborDetectInterval;
-            }
-        }
-    }
-
     public Vector3 GetSteerForce(Vector3 targetDestination)
     {
         var steerForce = Vector3.zero;
 
-        steerForce += 0.8f * Npc.Steering.GetSeparationForce(_neighbors);
+        steerForce += 0.8f * Npc.Steering.GetSeparationForce(Npc.Neighbours);
         if (steerForce.sqrMagnitude > 1f)
             return steerForce.normalized;
 
@@ -82,7 +63,7 @@ public class FighterEvade : NpcState<Fighter>
             }
         }
 
-        CheckSensors();
+        Npc.CheckSensors();
 
         var dotTarget = Vector3.Dot(toTarget, Npc.VehicleInstance.transform.forward);
 
@@ -142,17 +123,6 @@ public class FighterEvade : NpcState<Fighter>
                     return;
                 }
                 Npc.Target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Npc.Team), Npc.VehicleInstance.transform.position, -Npc.VehicleInstance.transform.forward, Npc.MaxTargetDistance);
-            }
-        }
-    }
-
-    private void DetectNeighbor(Transform neighbor)
-    {
-        if (neighbor != Npc.VehicleInstance.transform)
-        {
-            if (!_neighbors.Contains(neighbor))
-            {
-                _neighbors.Add(neighbor);
             }
         }
     }
