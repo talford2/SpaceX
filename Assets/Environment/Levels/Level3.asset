@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddca141d18aaa604f94025fd458d904e, type: 3}
+  m_Name: Level3
+  m_EditorClassIdentifier: 
+  Background: {fileID: 8900000, guid: 5efd03d61d9f03240914ecde44fd5adf, type: 3}
+  LighColour: {r: 0.68235296, g: 1, b: 0.92941177, a: 1}
+  LightDirection: {x: 0.5, y: 44, z: 24.09}
+  SystemName: Psi Leto
+  SlipGateLevelIndex: 3
+  UniverseEvents:
+  - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
+    Count: 90
+  - Prefab: {fileID: 184406, guid: 72068408bf421da45bf7793c91df7b5c, type: 2}
+    Count: 5
+  - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
+    Count: 8
+  - Prefab: {fileID: 165154, guid: 41b92538d3829bf458b16c1a01d0c9ff, type: 2}
+    Count: 120
+  - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
+    Count: 250
+  - Prefab: {fileID: 169094, guid: 495b3be0ae38dea4da8f84a5e915e065, type: 2}
+    Count: 1
+  - Prefab: {fileID: 177598, guid: 403d1749b7521ff4a91ca598f46fca10, type: 2}
+    Count: 8
+  - Prefab: {fileID: 171458, guid: 9c89b4a47868dce4f9b2c24c321570d6, type: 2}
+    Count: 120
+  - Prefab: {fileID: 132262, guid: 5f1525592c4034c40884035c33ef9350, type: 2}
+    Count: 50
+  - Prefab: {fileID: 120712, guid: 88624c7de30b80a46a9fd5fc2131be98, type: 2}
+    Count: 80
+  - Prefab: {fileID: 181714, guid: 075a14e6623618140bb749bc25ab34b0, type: 2}
+    Count: 20
+  - Prefab: {fileID: 145142, guid: 9a605769420d6ae4987fb273fa318c14, type: 2}
+    Count: 100

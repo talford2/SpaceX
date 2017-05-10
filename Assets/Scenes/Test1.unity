@@ -1140,6 +1140,7 @@ GameObject:
   - component: {fileID: 109838677}
   - component: {fileID: 109838678}
   - component: {fileID: 109838679}
+  - component: {fileID: 109838680}
   m_Layer: 0
   m_Name: Universe
   m_TagString: Untagged
@@ -1189,9 +1190,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DirectionLight: {fileID: 1376424185}
   Levels:
-  - {fileID: 1097665389}
+  - {fileID: 11400000, guid: a5e191cdce0e7b64ab6af555f6bf5aff, type: 2}
+  - {fileID: 11400000, guid: 0aa0ee2428f8e2f4a9740908cbbf7712, type: 2}
+  - {fileID: 11400000, guid: efb0ea42fefb53c468224d771b1d1d62, type: 2}
+  - {fileID: 11400000, guid: 522ed1cbedce2c7499e3e681892b80fe, type: 2}
   NextPortalMaterial: {fileID: 2100000, guid: 5d125a0aee40b984abd9460cd79ff64e, type: 2}
   CubeMapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &109838680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 109838676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CellRadius: 10
 --- !u!1 &116447565
 GameObject:
   m_ObjectHideFlags: 0
@@ -13916,7 +13932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1097665389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13932,6 +13948,7 @@ MonoBehaviour:
   LighColour: {r: 0.8765, g: 0.753, b: 1, a: 1}
   LightDirection: {x: 20.44, y: 322.4, z: 0}
   SystemName: 
+  UniverseEvents: []
 --- !u!4 &1097665390
 Transform:
   m_ObjectHideFlags: 0
@@ -13956,31 +13973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UniverseEvents:
-  - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
-    Count: 90
-  - Prefab: {fileID: 184406, guid: 72068408bf421da45bf7793c91df7b5c, type: 2}
-    Count: 5
-  - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
-    Count: 8
-  - Prefab: {fileID: 165154, guid: 41b92538d3829bf458b16c1a01d0c9ff, type: 2}
-    Count: 120
-  - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
-    Count: 250
-  - Prefab: {fileID: 169094, guid: 495b3be0ae38dea4da8f84a5e915e065, type: 2}
-    Count: 1
-  - Prefab: {fileID: 177598, guid: 403d1749b7521ff4a91ca598f46fca10, type: 2}
-    Count: 8
-  - Prefab: {fileID: 171458, guid: 9c89b4a47868dce4f9b2c24c321570d6, type: 2}
-    Count: 120
-  - Prefab: {fileID: 132262, guid: 5f1525592c4034c40884035c33ef9350, type: 2}
-    Count: 50
-  - Prefab: {fileID: 120712, guid: 88624c7de30b80a46a9fd5fc2131be98, type: 2}
-    Count: 80
-  - Prefab: {fileID: 181714, guid: 075a14e6623618140bb749bc25ab34b0, type: 2}
-    Count: 20
-  - Prefab: {fileID: 145142, guid: 9a605769420d6ae4987fb273fa318c14, type: 2}
-    Count: 200
   CellRadius: 10
 --- !u!1 &1109137749
 GameObject:
@@ -14089,7 +14081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1117886434
 Transform:
   m_ObjectHideFlags: 0
@@ -14118,6 +14110,7 @@ MonoBehaviour:
   LighColour: {r: 1, g: 0.83241177, b: 0.741, a: 1}
   LightDirection: {x: 2.48, y: 206.54, z: 24.09}
   SystemName: 
+  UniverseEvents: []
 --- !u!114 &1117886436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14129,21 +14122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UniverseEvents:
-  - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
-    Count: 180
-  - Prefab: {fileID: 184406, guid: 72068408bf421da45bf7793c91df7b5c, type: 2}
-    Count: 5
-  - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
-    Count: 8
-  - Prefab: {fileID: 165154, guid: 41b92538d3829bf458b16c1a01d0c9ff, type: 2}
-    Count: 150
-  - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
-    Count: 300
-  - Prefab: {fileID: 169094, guid: 495b3be0ae38dea4da8f84a5e915e065, type: 2}
-    Count: 1
-  - Prefab: {fileID: 177598, guid: 403d1749b7521ff4a91ca598f46fca10, type: 2}
-    Count: 8
   CellRadius: 10
 --- !u!1 &1123654777
 GameObject:
@@ -15313,7 +15291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1187840848
 Transform:
   m_ObjectHideFlags: 0
@@ -15342,6 +15320,7 @@ MonoBehaviour:
   LighColour: {r: 0.8765, g: 0.753, b: 1, a: 1}
   LightDirection: {x: 20.44, y: 322.4, z: 0}
   SystemName: 
+  UniverseEvents: []
 --- !u!114 &1187840850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15353,33 +15332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UniverseEvents:
-  - Prefab: {fileID: 174836, guid: bb620ed8ba7745c4e8c09cfb8f6c219d, type: 2}
-    Count: 500
-  - Prefab: {fileID: 184406, guid: 72068408bf421da45bf7793c91df7b5c, type: 2}
-    Count: 5
-  - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
-    Count: 0
-  - Prefab: {fileID: 174836, guid: bb620ed8ba7745c4e8c09cfb8f6c219d, type: 2}
-    Count: 120
-  - Prefab: {fileID: 174836, guid: bb620ed8ba7745c4e8c09cfb8f6c219d, type: 2}
-    Count: 250
-  - Prefab: {fileID: 169094, guid: 495b3be0ae38dea4da8f84a5e915e065, type: 2}
-    Count: 1
-  - Prefab: {fileID: 177598, guid: 403d1749b7521ff4a91ca598f46fca10, type: 2}
-    Count: 8
-  - Prefab: {fileID: 174836, guid: bb620ed8ba7745c4e8c09cfb8f6c219d, type: 2}
-    Count: 120
-  - Prefab: {fileID: 132262, guid: 5f1525592c4034c40884035c33ef9350, type: 2}
-    Count: 50
-  - Prefab: {fileID: 174836, guid: bb620ed8ba7745c4e8c09cfb8f6c219d, type: 2}
-    Count: 80
-  - Prefab: {fileID: 181714, guid: 075a14e6623618140bb749bc25ab34b0, type: 2}
-    Count: 20
-  - Prefab: {fileID: 145142, guid: 9a605769420d6ae4987fb273fa318c14, type: 2}
-    Count: 200
-  - Prefab: {fileID: 196708, guid: 7aefaac605ed7e846919a756b158ea2e, type: 2}
-    Count: 15
   CellRadius: 10
 --- !u!1 &1201959929
 GameObject:
@@ -17915,7 +17867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1408518043
 Transform:
   m_ObjectHideFlags: 0
@@ -17944,6 +17896,7 @@ MonoBehaviour:
   LighColour: {r: 0.8765, g: 0.753, b: 1, a: 1}
   LightDirection: {x: 20.44, y: 322.4, z: 0}
   SystemName: 
+  UniverseEvents: []
 --- !u!114 &1408518045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17955,31 +17908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UniverseEvents:
-  - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
-    Count: 0
-  - Prefab: {fileID: 184406, guid: 72068408bf421da45bf7793c91df7b5c, type: 2}
-    Count: 1
-  - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
-    Count: 1
-  - Prefab: {fileID: 165154, guid: 41b92538d3829bf458b16c1a01d0c9ff, type: 2}
-    Count: 0
-  - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
-    Count: 0
-  - Prefab: {fileID: 169094, guid: 495b3be0ae38dea4da8f84a5e915e065, type: 2}
-    Count: 0
-  - Prefab: {fileID: 177598, guid: 403d1749b7521ff4a91ca598f46fca10, type: 2}
-    Count: 0
-  - Prefab: {fileID: 171458, guid: 9c89b4a47868dce4f9b2c24c321570d6, type: 2}
-    Count: 0
-  - Prefab: {fileID: 132262, guid: 5f1525592c4034c40884035c33ef9350, type: 2}
-    Count: 0
-  - Prefab: {fileID: 120712, guid: 88624c7de30b80a46a9fd5fc2131be98, type: 2}
-    Count: 0
-  - Prefab: {fileID: 181714, guid: 075a14e6623618140bb749bc25ab34b0, type: 2}
-    Count: 0
-  - Prefab: {fileID: 145142, guid: 9a605769420d6ae4987fb273fa318c14, type: 2}
-    Count: 1000
   CellRadius: 5
 --- !u!1 &1412276751
 GameObject:
@@ -22296,7 +22224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1807080964
 Transform:
   m_ObjectHideFlags: 0
@@ -22325,6 +22253,7 @@ MonoBehaviour:
   LighColour: {r: 0.684, g: 1, b: 0.9302941, a: 1}
   LightDirection: {x: 0.5, y: 44, z: 0}
   SystemName: 
+  UniverseEvents: []
 --- !u!114 &1807080966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22336,21 +22265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UniverseEvents:
-  - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
-    Count: 180
-  - Prefab: {fileID: 184406, guid: 72068408bf421da45bf7793c91df7b5c, type: 2}
-    Count: 5
-  - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
-    Count: 8
-  - Prefab: {fileID: 165154, guid: 41b92538d3829bf458b16c1a01d0c9ff, type: 2}
-    Count: 150
-  - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
-    Count: 300
-  - Prefab: {fileID: 169094, guid: 495b3be0ae38dea4da8f84a5e915e065, type: 2}
-    Count: 1
-  - Prefab: {fileID: 177598, guid: 403d1749b7521ff4a91ca598f46fca10, type: 2}
-    Count: 8
   CellRadius: 10
 --- !u!1 &1810241161
 GameObject:
@@ -24127,7 +24041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1985480834
 Transform:
   m_ObjectHideFlags: 0
@@ -24156,6 +24070,7 @@ MonoBehaviour:
   LighColour: {r: 1, g: 0.741, b: 0.9238235, a: 1}
   LightDirection: {x: 46.7, y: 74.4, z: 0}
   SystemName: 
+  UniverseEvents: []
 --- !u!114 &1985480836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24167,21 +24082,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UniverseEvents:
-  - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
-    Count: 180
-  - Prefab: {fileID: 184406, guid: 72068408bf421da45bf7793c91df7b5c, type: 2}
-    Count: 5
-  - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
-    Count: 8
-  - Prefab: {fileID: 165154, guid: 41b92538d3829bf458b16c1a01d0c9ff, type: 2}
-    Count: 150
-  - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
-    Count: 300
-  - Prefab: {fileID: 169094, guid: 495b3be0ae38dea4da8f84a5e915e065, type: 2}
-    Count: 1
-  - Prefab: {fileID: 177598, guid: 403d1749b7521ff4a91ca598f46fca10, type: 2}
-    Count: 8
   CellRadius: 10
 --- !u!1 &1989448615
 GameObject:

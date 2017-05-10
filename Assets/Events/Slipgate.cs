@@ -8,7 +8,12 @@ public class Slipgate : MonoBehaviour
 	private bool _isTriggered = false;
 	private float _lastDotProd;
 
-	void Update()
+    private void Start()
+    {
+        LevelIndex = LevelManager.Current.GetLevel().SlipGateLevelIndex;
+    }
+
+	private void Update()
 	{
 		if (!_isTriggered && PlayerController.Current.VehicleInstance != null)
 		{
@@ -17,7 +22,7 @@ public class Slipgate : MonoBehaviour
 			{
 				if (Mathf.Sign(dotProd) != Mathf.Sign(_lastDotProd))
 				{
-					Debug.Log("WARP!");
+					Debug.LogFormat("WARP TO {0}!", LevelIndex);
 					_isTriggered = true;
 					LevelManager.Current.ChangeLevel(LevelIndex);
 					LevelIndex += 1;

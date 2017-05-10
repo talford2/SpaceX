@@ -132,7 +132,7 @@ public class FighterAttack : NpcState<Fighter>
 
 			if (_toTarget.sqrMagnitude < Npc.OvertakeDistance * Npc.OvertakeDistance)
 			{
-				Debug.Log("OVERTAKE!");
+				//Debug.Log("OVERTAKE!");
 				Npc.VehicleInstance.TriggerAccelerate = true;
 				if (Npc.VehicleInstance.PrimaryWeaponInstance != null)
 					Npc.VehicleInstance.PrimaryWeaponInstance.IsTriggered = false;

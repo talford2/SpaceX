@@ -5,11 +5,13 @@ public class LevelManager : MonoBehaviour
 {
 	public Light DirectionLight;
 
-	public List<Level> Levels;
+	public List<LevelDefinition> Levels;
 
 	public Material NextPortalMaterial;
 
 	public Shader CubeMapShader;
+
+    private EventGenerator _eventGenerator;
 
 	private ReflectionProbe _reflectionProbe;
 
@@ -17,10 +19,14 @@ public class LevelManager : MonoBehaviour
 
 	private static LevelManager _current;
 
-	void Start()
-	{
+    private void Awake()
+    {
 		_current = this;
+        _eventGenerator = GetComponent<EventGenerator>();
+    }
 
+	private void Start()
+	{
 		// Reflection probe
 		var g = new GameObject();
 		g.name = "System Reflection Probe";
@@ -39,7 +45,7 @@ public class LevelManager : MonoBehaviour
 		ChangeLevel(0);
 	}
 
-	void Update()
+	private void Update()
 	{
 		if (Input.GetKeyUp(KeyCode.N))
 		{
@@ -73,9 +79,12 @@ public class LevelManager : MonoBehaviour
 		//DirectionLight.transform.forward = lvl.LightDirection;
 		DirectionLight.transform.rotation = Quaternion.Euler(lvl.LightDirection);
 		_reflectionProbe.RenderProbe();
-	}
+        _eventGenerator.Clear();
+        _eventGenerator.Generate(Levels[index].UniverseEvents, Random.Range(int.MinValue, int.MaxValue));
+        _levelIndex = index;
+    }
 
-    public Level GetLevel()
+    public LevelDefinition GetLevel()
     {
         return Levels[_levelIndex];
     }

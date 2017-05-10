@@ -4,9 +4,9 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Shiftable))]
 public class UniverseEvent : MonoBehaviour
 {
-	public static List<UniverseEvent> UniverseEvents { get; set; }
+    public static List<UniverseEvent> UniverseEvents { get; set; }
 
-	public Shiftable Shiftable { get; set; }
+    public Shiftable Shiftable { get; set; }
 
     public float TriggerRadius;
 
@@ -27,24 +27,24 @@ public class UniverseEvent : MonoBehaviour
     private int _cellRadius;
     private CellIndex _universeCellIndex;
 
-	public virtual void Awake()
-	{
-		if (UniverseEvents == null)
-		{
-			UniverseEvents = new List<UniverseEvent>();
-		}
+    public virtual void Awake()
+    {
+        if (UniverseEvents == null)
+        {
+            UniverseEvents = new List<UniverseEvent>();
+        }
 
-		Shiftable = GetComponent<Shiftable>();
-		Shiftable.OnShift += Shiftable_OnShift;
+        Shiftable = GetComponent<Shiftable>();
+        Shiftable.OnShift += Shiftable_OnShift;
 
-	    _triggerRadiusSquared = TriggerRadius*TriggerRadius;
-	    _trackerRadiusSquared = TrackerRadius*TrackerRadius;
+        _triggerRadiusSquared = TriggerRadius * TriggerRadius;
+        _trackerRadiusSquared = TrackerRadius * TrackerRadius;
 
-		UniverseEvents.Add(this);
+        UniverseEvents.Add(this);
 
-	    _cellRadius = Mathf.CeilToInt(TriggerRadius/Universe.Current.CellSize);
+        _cellRadius = Mathf.CeilToInt(TriggerRadius / Universe.Current.CellSize);
         _universeCellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
-	}
+    }
 
     private bool InRange(Shiftable sender)
     {
@@ -121,22 +121,28 @@ public class UniverseEvent : MonoBehaviour
             _tracker.SelfDestroy();
     }
 
-	//private void OnDrawGizmos()
-	//{
-	//	var children = GetComponentsInChildren<Transform>();
-	//	Gizmos.color = Color.red;
-	//	foreach (var child in children)
-	//	{
-	//		Gizmos.DrawLine(transform.position, child.position);
-	//	}
-	//}
+    //private void OnDrawGizmos()
+    //{
+    //	var children = GetComponentsInChildren<Transform>();
+    //	Gizmos.color = Color.red;
+    //	foreach (var child in children)
+    //	{
+    //		Gizmos.DrawLine(transform.position, child.position);
+    //	}
+    //}
 
-	public virtual void Trigger()
-	{
-		Debug.Log("Event triggered");
+    private void OnDestroy()
+    {
+        OnDisable();
+        Shiftable.OnShift -= Shiftable_OnShift;
+    }
+
+    public virtual void Trigger()
+    {
+        Debug.Log("Event triggered");
         if (_tracker != null)
             _tracker.SelfDestroy();
-	    HasBeenTriggered = true;
-	    enabled = false;
-	}
+        HasBeenTriggered = true;
+        enabled = false;
+    }
 }

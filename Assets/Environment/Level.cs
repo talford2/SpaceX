@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Level : MonoBehaviour
 {
@@ -10,7 +11,9 @@ public class Level : MonoBehaviour
 
     public string SystemName;
 
-	private Material _mat;
+    public List<UniverseEventCount> UniverseEvents;
+
+    private Material _mat;
 
 	public Material Material
 	{

@@ -70,8 +70,10 @@ public class DistantScaling : MonoBehaviour
 
 
             // Fog stuff
+            /* Comment out to avoid index outof range exception
             var frac = 1 - Mathf.Clamp((distance - MinFogDistance) / (MaxFogDistance - MinFogDistance), 0, 1);
             FogParts[0].materials[0].color = Utility.SetColorAlpha(FogParts[0].materials[0].color, frac);
+            */
         }
         else
         {

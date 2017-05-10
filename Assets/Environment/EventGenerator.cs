@@ -3,20 +3,16 @@ using System.Collections.Generic;
 
 public class EventGenerator : MonoBehaviour
 {
-	public List<UniverseEventCount> UniverseEvents;
+	//public List<UniverseEventCount> UniverseEvents;
 
 	public int CellRadius = 10;
 
-	void Start()
+	public void Generate(List<UniverseEventCount> universeEvents, int seed)
 	{
-		Generate();
-	}
-
-	public void Generate()
-	{
+        Random.InitState(seed);
 		var go = new GameObject("UniverseEvents");
 		var parent = go.transform;
-		foreach (var ue in UniverseEvents)
+		foreach (var ue in universeEvents)
 		{
 			for (var i = 0; i < ue.Count; i++)
 			{
@@ -31,12 +27,23 @@ public class EventGenerator : MonoBehaviour
 		}
 	}
 
+    public void Clear()
+    {
+        for (var i = 0; i < Universe.Current.UniverseEvents.Count; i++)
+        {
+            Destroy(Universe.Current.UniverseEvents[i].gameObject);
+        }
+        Universe.Current.UniverseEvents.Clear();
+    }
+
+    /*
     public void Generate(int seed)
     {
         Random.seed = seed;
         Debug.Log("EVENTS FROM SEED: " + Random.seed);
         Generate();
     }
+    */
 }
 
 [System.Serializable]
