@@ -2,6 +2,7 @@
 
 public class FrameRateDisplay : MonoBehaviour
 {
+    public bool DebugBuildOnly = true;
     private float fps;
     private float fpsFrameSum;
     private float fpsTimeSum;
@@ -12,6 +13,11 @@ public class FrameRateDisplay : MonoBehaviour
 
     private void Awake()
     {
+        if (DebugBuildOnly)
+        {
+            if (!Debug.isDebugBuild)
+                Destroy(gameObject);
+        }
         frameRateStyle = new GUIStyle()
         {
             fontSize = 30,
