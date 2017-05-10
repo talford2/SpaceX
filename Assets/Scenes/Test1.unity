@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DirectionLight: {fileID: 1376424185}
   Levels:
-  - {fileID: 1187840849}
+  - {fileID: 1097665389}
   NextPortalMaterial: {fileID: 2100000, guid: 5d125a0aee40b984abd9460cd79ff64e, type: 2}
   CubeMapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &116447565
@@ -3982,6 +3982,7 @@ MonoBehaviour:
   DodgeRadius: 50
   DodgeArcAngle: 180
   SightRange: 50
+  Neighbours: []
 --- !u!4 &290884930
 Transform:
   m_ObjectHideFlags: 0
@@ -12391,6 +12392,7 @@ MonoBehaviour:
   DodgeRadius: 50
   DodgeArcAngle: 180
   SightRange: 50
+  Neighbours: []
 --- !u!4 &989789835
 Transform:
   m_ObjectHideFlags: 0
@@ -13914,7 +13916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1097665389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21285,6 +21287,7 @@ MonoBehaviour:
   DodgeRadius: 50
   DodgeArcAngle: 180
   SightRange: 50
+  Neighbours: []
 --- !u!4 &1739396246
 Transform:
   m_ObjectHideFlags: 0
@@ -22494,6 +22497,7 @@ MonoBehaviour:
   DodgeRadius: 50
   DodgeArcAngle: 180
   SightRange: 50
+  Neighbours: []
 --- !u!4 &1829101716
 Transform:
   m_ObjectHideFlags: 0
