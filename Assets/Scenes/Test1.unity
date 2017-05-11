@@ -4028,7 +4028,7 @@ MonoBehaviour:
   Weapons: 1
   Shields: 6
   Special: 6
-  PrimaryWeapon: {fileID: 0}
+  PrimaryWeapon: {fileID: 11444764, guid: 7566ec183c3fcfb4fbe0397de99578c0, type: 2}
   SecondaryWeapon: {fileID: 0}
   Shield: {fileID: 0}
   Engine: {fileID: 0}
@@ -9018,6 +9018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4d0cf716092b149ac3dd9c8b4ef36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugBuildOnly: 1
 --- !u!4 &662451465
 Transform:
   m_ObjectHideFlags: 0
