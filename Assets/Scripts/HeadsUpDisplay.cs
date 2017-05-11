@@ -244,6 +244,7 @@ public class HeadsUpDisplay : MonoBehaviour
 			var icon = Instantiate(SquadronIcon);
 			icon.transform.SetParent(SquadronIconContainer.transform);
 			icon.rectTransform.localScale = Vector3.one;
+            icon.rectTransform.localPosition = Vector3.zero;
 			_squadronIcons.Add(icon.GetComponent<SquadronIcon>());
 		}
 	}
