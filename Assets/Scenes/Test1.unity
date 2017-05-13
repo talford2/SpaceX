@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 500
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
@@ -7333,7 +7333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &514336049
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9224,7 +9224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &676874515
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13170,6 +13170,7 @@ Transform:
   - {fileID: 2128553696}
   - {fileID: 142243980}
   - {fileID: 877399718}
+  - {fileID: 1989552866}
   - {fileID: 1026771925}
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -13201,7 +13202,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1017839397}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1026771926
 MonoBehaviour:
@@ -24381,6 +24382,48 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1989448615}
+--- !u!1 &1989552865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1989552866}
+  - component: {fileID: 1989552867}
+  m_Layer: 0
+  m_Name: CrateBreak
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1989552866
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1989552865}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1017839397}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1989552867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1989552865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db1a18087195fe4eb0eebbe6c0134a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 1836841212777868, guid: e47568adbc2645740901e1a604ee0572, type: 2}
+  PoolSize: 5
 --- !u!1 &1992978758
 GameObject:
   m_ObjectHideFlags: 0
@@ -25642,6 +25685,8 @@ MonoBehaviour:
   CrosshairHitDuration: 0.5
   LeftHeatBar: {fileID: 676874516}
   RightHeatBar: {fileID: 514336050}
+  PrimaryHeatBar: {fileID: 185197052}
+  SecondaryHeatBar: {fileID: 697064508}
   EnergyText: {fileID: 365263284}
   ShieldText: {fileID: 52839351}
   HealthText: {fileID: 1123654779}
