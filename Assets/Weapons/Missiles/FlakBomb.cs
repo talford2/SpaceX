@@ -12,7 +12,7 @@ public class FlakBomb : Missile
     public float MinExplodeRadius = 8f;
     public float MaxExplodeRadius = 30f;
     public float MaxExplodeDamage = 120f;
-    public ShiftTrail Tracer;
+    public Trail Tracer;
 
     private Shiftable _shiftable;
     private ResourcePoolItem _resourcePoolItem;
@@ -150,7 +150,7 @@ public class FlakBomb : Missile
 
         Rocket.enabled = true;
 
-        Tracer.Initialize(transform.position);
+        Tracer.Reset();
 
         _noTargetCooldown = _noTargetTime;
         _delayTargetCooldown = _delayTargetTime;
@@ -209,7 +209,6 @@ public class FlakBomb : Missile
     {
         base.Stop();
         Rocket.enabled = false;
-        Tracer.Stop();
         if (_resourcePoolItem != null)
             _resourcePoolItem.IsAvailable = true;
     }
