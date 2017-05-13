@@ -207,6 +207,7 @@ public class HeadsUpDisplay : MonoBehaviour
             }
         }
 
+        /*
         if (_crosshairPulseCooldown >= 0f)
         {
             _crosshairPulseCooldown -= Time.deltaTime;
@@ -220,6 +221,7 @@ public class HeadsUpDisplay : MonoBehaviour
                 _crosshairImage.rectTransform.sizeDelta = Vector2.Lerp(_crosshairPuslseScale, _crosshairOriginalScale, 1f - pulseFraction);
             }
         }
+        */
 
         if (_messageCooldown >= 0f)
         {
@@ -367,8 +369,8 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void TriggerCrosshairPulse()
     {
-        _crosshairImage.rectTransform.sizeDelta = _crosshairPuslseScale;
-        _crosshairPulseCooldown = _crosshairPulseDuration;
+        //_crosshairImage.rectTransform.sizeDelta = _crosshairPuslseScale;
+        //_crosshairPulseCooldown = _crosshairPulseDuration;
 
         _crosshairHitCooldown = CrosshairHitDuration;
         CrosshairHit.color = Utility.SetColorAlpha(CrosshairHit.color, Mathf.Clamp01(_crosshairHitCooldown / CrosshairHitDuration));
