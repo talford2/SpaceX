@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a15b4aa32c72584499afce8fea17d584
+timeCreated: 1472835214
+licenseType: Free
+ShaderImporter:
+  defaultTextures:
+  - _Ground2: {fileID: 2800000, guid: b66bceaf0cc0ace4e9bdc92f14bba709, type: 3}
+  - _Ground1: {fileID: 2800000, guid: 69efe6cbea36ef6458cea4e36df6fb79, type: 3}
+  - _Masks: {fileID: 2800000, guid: aa762ee7680f35f4fb9a9210fa94ce61, type: 3}
+  - _Ground3: {fileID: 2800000, guid: cb54d5e817a554b4389d6ef9b504e2b2, type: 3}
+  - _Ground4: {fileID: 2800000, guid: 206b0ac501c505b46b8e981ec357895e, type: 3}
+  - _Ground5: {fileID: 2800000, guid: d9262c051e4665d45babc8ec0c813b59, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
