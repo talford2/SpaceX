@@ -1685,7 +1685,7 @@ MonoBehaviour:
   VerticalDistance: 3.5
   SpringCompression: 0.7
   SpringExpansion: 1.5
-  SpringBoostExpansion: 3
+  SpringBoostExpansion: 1.8
   RotationCatchup: 5
   SpringCatchup: 2
   OffsetCatchup: 5

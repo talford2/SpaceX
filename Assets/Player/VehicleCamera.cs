@@ -16,7 +16,10 @@ public class VehicleCamera : UniverseCamera
 	[Header("Spring")]
 	public float SpringCompression = 0.5f;
 	public float SpringExpansion = 1.5f;
+
+    [Header("Boosting Effect")]
 	public float SpringBoostExpansion = 3f;
+    public float BoostFov = 100f;
 
 	[Header("Lerp Speeds")]
 	public float RotationCatchup = 3f;
@@ -64,7 +67,7 @@ public class VehicleCamera : UniverseCamera
             if (Target.IsBoosting)
             {
                 targetSpringDistance = SpringBoostExpansion;
-                _targetFov = 100f;
+                _targetFov = BoostFov;
             }
             else
             {
