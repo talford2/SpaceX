@@ -38,6 +38,7 @@ public class ResettableEffect : MonoBehaviour
             if (ps != null)
                 ps.Play();
         }
-        Sound.Play();
+        if (Sound != null)
+            Sound.Play();
     }
 }
