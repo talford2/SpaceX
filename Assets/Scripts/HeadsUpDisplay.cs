@@ -5,8 +5,16 @@ using UnityEngine.UI;
 public class HeadsUpDisplay : MonoBehaviour
 {
 	public GameObject Crosshair;
+
+    [Header("Crosshair Hit Response")]
+    public Image CrosshairHit;
+    public float CrosshairHitDuration = 0.5f;
+
+    [Header("Heat Bars")]
     public Image LeftHeatBar;
     public Image RightHeatBar;
+
+    [Header("Text")]
 	public Text EnergyText;
 	public Text ShieldText;
 	public Text HealthText;
@@ -33,6 +41,8 @@ public class HeadsUpDisplay : MonoBehaviour
 
 	public float HitFadeSpeed = 0.5f;
 
+    private float _crosshairHitCooldown;
+    
 	private float _hitCooldown = 0;
 
 	private List<SquadronIcon> _squadronIcons;
@@ -124,6 +134,17 @@ public class HeadsUpDisplay : MonoBehaviour
         HitImage.color = new Color(1, 1, 1, _hitCooldown);
         _hitCooldown -= Time.deltaTime * HitFadeSpeed;
         _hitCooldown = Mathf.Max(0, _hitCooldown);
+
+        if (_crosshairHitCooldown >= 0f)
+        {
+            _crosshairHitCooldown -= Time.deltaTime;
+            var fraction = Mathf.Clamp01(_crosshairHitCooldown / CrosshairHitDuration);
+            if (_crosshairHitCooldown < 0f)
+            {
+                fraction = 0;
+            }
+            CrosshairHit.color = Utility.SetColorAlpha(CrosshairHit.color, fraction);
+        }
 
         if (_spaceJunkPulseCooldown >= 0f)
         {
@@ -343,6 +364,9 @@ public class HeadsUpDisplay : MonoBehaviour
     {
         _crosshairImage.rectTransform.sizeDelta = new Vector2(90f, 90f);
         _crosshairPulseCooldown = _crosshairPulseDuration;
+
+        _crosshairHitCooldown = CrosshairHitDuration;
+        CrosshairHit.color = Utility.SetColorAlpha(CrosshairHit.color, Mathf.Clamp01(_crosshairHitCooldown / CrosshairHitDuration));
     }
 
     public void TriggerCrosshairFadeOut()
