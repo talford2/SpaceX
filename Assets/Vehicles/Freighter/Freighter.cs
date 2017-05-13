@@ -53,6 +53,11 @@ public class Freighter : MonoBehaviour
             turret.Targetable.Team = Team.Neutral;
             turret.transform.SetParent(turretTransform);
             _turrets.Add(turret);
+            var killable = turret.GetComponent<Killable>();
+            if (killable!=null)
+            {
+                killable.OnDamage += OnDamage;
+            }
         }
         // Match Materials
         for (var i = 0; i < Containers.Count; i++)
