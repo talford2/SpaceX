@@ -6649,7 +6649,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c5bf2a361673f074593cebf097ad6321, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad921b9960f6d59479ba6794e2b47737, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16845,7 +16845,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 18b393c943d7bc943beedcd8cf905c19, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3dd2618fd3c141f4ea50b4467035583b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -25500,6 +25500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Crosshair: {fileID: 482252190}
   CrosshairHit: {fileID: 1325334141}
+  CrosshairHitDuration: 0.5
   LeftHeatBar: {fileID: 676874516}
   RightHeatBar: {fileID: 514336050}
   EnergyText: {fileID: 365263284}
