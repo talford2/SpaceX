@@ -14,6 +14,9 @@ public class HeadsUpDisplay : MonoBehaviour
     public Image LeftHeatBar;
     public Image RightHeatBar;
 
+    public Image PrimaryHeatBar;
+    public Image SecondaryHeatBar;
+
     [Header("Text")]
 	public Text EnergyText;
 	public Text ShieldText;
@@ -127,6 +130,9 @@ public class HeadsUpDisplay : MonoBehaviour
             BoostBar.fillAmount = energyFraction;
             LeftHeatBar.fillAmount = leftHeatFraction;
             RightHeatBar.fillAmount = rightHeatFraction;
+
+            PrimaryHeatBar.fillAmount = (120f / 360f) * leftHeatFraction;
+            SecondaryHeatBar.fillAmount = (120f / 360f) * rightHeatFraction;
         }
         if (_squadronPromptCooldown >= 0f)
         {
