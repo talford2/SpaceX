@@ -4028,7 +4028,7 @@ MonoBehaviour:
   Weapons: 1
   Shields: 6
   Special: 6
-  PrimaryWeapon: {fileID: 11444764, guid: 7566ec183c3fcfb4fbe0397de99578c0, type: 2}
+  PrimaryWeapon: {fileID: 0}
   SecondaryWeapon: {fileID: 0}
   Shield: {fileID: 0}
   Engine: {fileID: 0}
@@ -25388,52 +25388,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2090779076}
---- !u!1001 &2104275138
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400000, guid: d16a64126e258094e9c5db8468c9b6d9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -164.1168
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d16a64126e258094e9c5db8468c9b6d9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -122.26814
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d16a64126e258094e9c5db8468c9b6d9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 447.30597
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d16a64126e258094e9c5db8468c9b6d9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.000000021855694
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d16a64126e258094e9c5db8468c9b6d9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d16a64126e258094e9c5db8468c9b6d9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d16a64126e258094e9c5db8468c9b6d9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d16a64126e258094e9c5db8468c9b6d9, type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: d16a64126e258094e9c5db8468c9b6d9, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2bb8615f90eb36c479efa8e6aae7bdea, type: 2}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: d16a64126e258094e9c5db8468c9b6d9, type: 3}
-  m_IsPrefabParent: 0
 --- !u!1 &2108019517
 GameObject:
   m_ObjectHideFlags: 0

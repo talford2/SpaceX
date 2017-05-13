@@ -12,11 +12,12 @@ public class ResettableEffect : MonoBehaviour
 	void Awake()
 	{
 		_shiftable = GetComponent<Shiftable>();
-		foreach (var ps in ShiftParticleSystems)
-		{
-			ps.Stop();
-		}
-	}
+        foreach (var ps in ShiftParticleSystems)
+        {
+            if (ps != null)
+                ps.Stop();
+        }
+    }
 
 	void Start()
 	{
@@ -28,14 +29,15 @@ public class ResettableEffect : MonoBehaviour
 				Reset();
 			};
 		}
-	}
+    }
 
-	public void Reset()
-	{
-		foreach (var ps in ShiftParticleSystems)
-		{
-			ps.Play();
-		}
-		Sound.Play();
-	}
+    public void Reset()
+    {
+        foreach (var ps in ShiftParticleSystems)
+        {
+            if (ps != null)
+                ps.Play();
+        }
+        Sound.Play();
+    }
 }
