@@ -91,9 +91,12 @@ public class Turret : MonoBehaviour
 			_targetSearchCooldown -= Time.deltaTime;
 			if (_targetSearchCooldown < 0f)
 			{
-				_target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Targetable.Team), transform.position, Guns.transform.forward, MaxTargetDistance);
-				if (_target == null)
-					_target = Targeting.FindNearestTeam(Targeting.GetEnemyTeam(Targetable.Team), transform.position, MaxTargetDistance);
+                if (Targetable.Team != Team.Neutral)
+                {
+                    _target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Targetable.Team), transform.position, Guns.transform.forward, MaxTargetDistance);
+                    if (_target == null)
+                        _target = Targeting.FindNearestTeam(Targeting.GetEnemyTeam(Targetable.Team), transform.position, MaxTargetDistance);
+                }
 				_targetSearchCooldown = _targetSearchInterval;
 				_aimCooldown = 0f;
 			}

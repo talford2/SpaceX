@@ -26,6 +26,7 @@ public class Freighter : MonoBehaviour
     public Spawner SpawnerPrefab;
 
     private bool hasBeenShot;
+    private List<Turret> _turrets;
 
     void Start()
     {
@@ -45,10 +46,13 @@ public class Freighter : MonoBehaviour
                 containerRenderer.material = ContainerMaterials[Random.Range(0, ContainerMaterials.Count)];
             }
         }
+        _turrets = new List<Turret>();
         foreach (var turretTransform in TurretTransforms)
         {
-            var turret = Instantiate(TurretPrefab, turretTransform.position, turretTransform.rotation);
+            var turret = Instantiate(TurretPrefab, turretTransform.position, turretTransform.rotation).GetComponent<Turret>();
+            turret.Targetable.Team = Team.Neutral;
             turret.transform.SetParent(turretTransform);
+            _turrets.Add(turret);
         }
         // Match Materials
         for (var i = 0; i < Containers.Count; i++)
@@ -76,6 +80,11 @@ public class Freighter : MonoBehaviour
                     spawner.transform.position = fromPoint + rotFacing * Formations.GetArrowOffset(j, 5f);
                     spawner.Spawn(i * 1.5f + Random.Range(0.2f, 0.5f));
                 }
+            }
+
+            foreach(var turret in _turrets)
+            {
+                turret.Targetable.Team = Team.Bad;
             }
         }
     }
