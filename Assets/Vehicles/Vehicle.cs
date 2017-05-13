@@ -90,6 +90,8 @@ public class Vehicle : MonoBehaviour
     public GameObject CorpsePrefab;
     public GameObject DebrisPrefab;
     public float ExplosiveForce;
+    public GameObject ExplodeDeathExplosion;
+    public GameObject SpinDeathExplosion;
 
 	[Header("Other")]
 	public List<Thruster> Thrusters;
@@ -598,6 +600,7 @@ public class Vehicle : MonoBehaviour
 
         if (Random.Range(0, 1f) > 0.5f)
         {
+            Explode(SpinDeathExplosion);
             if (CorpsePrefab != null)
             {
                 var corpseInstance = (GameObject)Instantiate(CorpsePrefab, transform.position, transform.rotation);
@@ -611,6 +614,7 @@ public class Vehicle : MonoBehaviour
         }
         else
         {
+            Explode(ExplodeDeathExplosion);
             if (DebrisPrefab != null)
             {
                 var debrisInstance = (GameObject)Instantiate(DebrisPrefab, transform.position, transform.rotation);
@@ -623,6 +627,18 @@ public class Vehicle : MonoBehaviour
                     shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(rBody.position));
                 }
             }
+        }
+    }
+
+    private void Explode(GameObject explodePrefab)
+    {
+        if (explodePrefab != null)
+        {
+            var explodeInstance = ResourcePoolManager.GetAvailable(explodePrefab, transform.position, transform.rotation);
+            explodeInstance.transform.localScale = transform.localScale;
+            var explodeShiftable = explodeInstance.GetComponent<Shiftable>();
+            if (explodeShiftable != null)
+                explodeShiftable.SetShiftPosition(Universe.Current.GetUniversePosition(transform.position));
         }
     }
 

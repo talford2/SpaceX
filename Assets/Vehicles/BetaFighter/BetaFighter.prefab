@@ -779,7 +779,7 @@ MonoBehaviour:
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+  DieEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11483882
 MonoBehaviour:
@@ -863,7 +863,10 @@ MonoBehaviour:
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
   CorpsePrefab: {fileID: 113112, guid: ded65249c9889774e8cd5ec1909d91d3, type: 2}
   DebrisPrefab: {fileID: 0}
-  ExplosiveForce: 0
+  ExplosiveForce: 50
+  ExplodeDeathExplosion: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee,
+    type: 2}
+  SpinDeathExplosion: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
   Thrusters:
   - {fileID: 11483882}
   BoostSound: {fileID: 8236044}
