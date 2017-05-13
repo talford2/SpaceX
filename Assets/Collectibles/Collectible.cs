@@ -29,12 +29,6 @@ public class Collectible : MonoBehaviour
     private CollectibleTracker _collectibleTracker;
     private SelfDestructor _destructor;
 
-    private float _followAcceleration = 250f;
-    private float _followSpeed;
-    private Vector3 _lastTo;
-    private float _inheritVelocityFraction;
-    private float _inheritVelocityFractionSpeed = 0.4f;
-
     private float _lifeTimeCooldown = 0;
     private float _fadeCooldown = 0;
 
@@ -55,8 +49,6 @@ public class Collectible : MonoBehaviour
     {
         _isCollected = true;
         _collectorTransform = collector.transform;
-        transform.SetParent(_collectorTransform);
-        //_inheritVelocityFraction = 0.6f;
     }
 
     private bool isFinished = false;
@@ -72,6 +64,7 @@ public class Collectible : MonoBehaviour
         }
         if (_isCollected)
         {
+            _velocity = Vector3.MoveTowards(_velocity, Vector3.zero, 1f * Time.deltaTime);
             transform.position = Vector3.MoveTowards(transform.position, _collectorTransform.position, 150f * Time.deltaTime);
             var delta = transform.position - _collectorTransform.position;
             if (delta.sqrMagnitude < 0.5f)
@@ -83,11 +76,9 @@ public class Collectible : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else
-        {
-            var displacement = _velocity * Time.deltaTime;
-            _shiftable.Translate(displacement);
-        }
+        var displacement = _velocity * Time.deltaTime;
+        _shiftable.Translate(displacement);
+
         transform.rotation *= Quaternion.Euler(_rotateSpeed * Time.deltaTime);
         Fade();
     }
