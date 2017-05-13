@@ -345,7 +345,7 @@ public class Weapon : MonoBehaviour
 
     public float GetHeatFraction()
     {
-        return heatValue / OverheatValue;
+        return Mathf.Clamp01(heatValue / OverheatValue);
     }
 
     private void OnDestroy()
