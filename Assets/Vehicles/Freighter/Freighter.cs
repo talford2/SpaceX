@@ -9,6 +9,10 @@ public class Freighter : MonoBehaviour
     public float ContainerHealth = 50f;
     public List<Material> ContainerMaterials;
 
+    [Header("Turrets")]
+    public GameObject TurretPrefab;
+    public List<Transform> TurretTransforms;
+
     [Header("Container Drop Items")]
     public GameObject DropItemPrefab;
     public int MinDropCount = 3;
@@ -40,6 +44,11 @@ public class Freighter : MonoBehaviour
             {
                 containerRenderer.material = ContainerMaterials[Random.Range(0, ContainerMaterials.Count)];
             }
+        }
+        foreach (var turretTransform in TurretTransforms)
+        {
+            var turret = Instantiate(TurretPrefab, turretTransform.position, turretTransform.rotation);
+            turret.transform.SetParent(turretTransform);
         }
         // Match Materials
         for (var i = 0; i < Containers.Count; i++)
