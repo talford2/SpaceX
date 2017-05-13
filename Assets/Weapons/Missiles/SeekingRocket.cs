@@ -10,7 +10,7 @@ public class SeekingRocket : Missile
     public GameObject ExplodePrefab;
     public MeshRenderer Rocket;
     public MeshRenderer ThrusterMesh;
-    public ShiftTrail Tracer;
+    public Trail Tracer;
     public FlareDistanceBrightness Flare;
 
     private Shiftable _shiftable;
@@ -186,7 +186,8 @@ public class SeekingRocket : Missile
         Rocket.enabled = true;
         ThrusterMesh.enabled = true;
 
-        Tracer.Initialize(transform.position);
+        Tracer.Reset();
+        //Tracer.Initialize(transform.position);
         Flare.SetVisible(true);
 
         _noTargetCooldown = _noTargetTime;
@@ -257,7 +258,7 @@ public class SeekingRocket : Missile
         _target = null;
         Rocket.enabled = false;
         ThrusterMesh.enabled = false;
-        Tracer.Stop();
+        //Tracer.Stop();
         Flare.SetVisible(false);
         if (_resourcePoolItem != null)
             _resourcePoolItem.IsAvailable = true;
