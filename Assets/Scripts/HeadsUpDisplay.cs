@@ -67,6 +67,8 @@ public class HeadsUpDisplay : MonoBehaviour
 
     // Crosshair pulse effct
     private Image _crosshairImage;
+    private Vector2 _crosshairOriginalScale;
+    private Vector2 _crosshairPuslseScale;
     private float _crosshairPulseDuration = 0.5f;
     private float _crosshairPulseCooldown;
 
@@ -92,7 +94,10 @@ public class HeadsUpDisplay : MonoBehaviour
 		_squadronIcons = new List<SquadronIcon>();
         _crosshairImage = Crosshair.GetComponent<Image>();
 
-		_healthOpacity = HealthBar.color.a;
+        _crosshairOriginalScale = _crosshairImage.rectTransform.sizeDelta;
+        _crosshairPuslseScale = 1.5f * _crosshairOriginalScale;
+
+        _healthOpacity = HealthBar.color.a;
 		_shieldOpacity = ShieldBar.color.a;
 		_boostOpacity = BoostBar.color.a;
 
@@ -207,12 +212,12 @@ public class HeadsUpDisplay : MonoBehaviour
             _crosshairPulseCooldown -= Time.deltaTime;
             if (_crosshairPulseCooldown < 0f)
             {
-                _crosshairImage.rectTransform.sizeDelta = new Vector2(64f, 64f);
+                _crosshairImage.rectTransform.sizeDelta = _crosshairOriginalScale;
             }
             else
             {
                 var pulseFraction = _crosshairPulseCooldown / _crosshairPulseDuration;
-                _crosshairImage.rectTransform.sizeDelta = Vector2.Lerp(new Vector2(90f, 90f), new Vector2(64f, 64f), 1f - pulseFraction);
+                _crosshairImage.rectTransform.sizeDelta = Vector2.Lerp(_crosshairPuslseScale, _crosshairOriginalScale, 1f - pulseFraction);
             }
         }
 
@@ -362,7 +367,7 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void TriggerCrosshairPulse()
     {
-        _crosshairImage.rectTransform.sizeDelta = new Vector2(90f, 90f);
+        _crosshairImage.rectTransform.sizeDelta = _crosshairPuslseScale;
         _crosshairPulseCooldown = _crosshairPulseDuration;
 
         _crosshairHitCooldown = CrosshairHitDuration;
