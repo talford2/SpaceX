@@ -5,10 +5,10 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 412660}
-  - 114: {fileID: 11438764}
+  - component: {fileID: 412660}
+  - component: {fileID: 11438764}
   m_Layer: 0
   m_Name: ShootPoint
   m_TagString: Untagged
@@ -21,11 +21,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 454812}
-  - 135: {fileID: 13526182}
-  - 114: {fileID: 11440278}
+  - component: {fileID: 454812}
+  - component: {fileID: 13526182}
+  - component: {fileID: 11440278}
   m_Layer: 11
   m_Name: Detectable
   m_TagString: Untagged
@@ -38,13 +38,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 482974}
-  - 95: {fileID: 9508118}
-  - 114: {fileID: 11466700}
-  - 114: {fileID: 11491946}
-  - 114: {fileID: 11423750}
+  - component: {fileID: 482974}
+  - component: {fileID: 9508118}
+  - component: {fileID: 11466700}
+  - component: {fileID: 11491946}
   m_Layer: 0
   m_Name: LaserTurret
   m_TagString: Untagged
@@ -57,10 +56,10 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 444804}
-  - 65: {fileID: 6549600}
+  - component: {fileID: 444804}
+  - component: {fileID: 6549600}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -73,9 +72,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 402750}
+  - component: {fileID: 402750}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -88,9 +87,9 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 475006}
+  - component: {fileID: 475006}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -103,9 +102,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 491976}
+  - component: {fileID: 491976}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -118,10 +117,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 431424}
-  - 137: {fileID: 13762758}
+  - component: {fileID: 431424}
+  - component: {fileID: 13762758}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -134,9 +133,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 487174}
+  - component: {fileID: 487174}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -149,10 +148,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 418856}
-  - 114: {fileID: 11454338}
+  - component: {fileID: 418856}
+  - component: {fileID: 11454338}
+  - component: {fileID: 114354613596268164}
   m_Layer: 0
   m_Name: Tracker
   m_TagString: Untagged
@@ -174,6 +174,7 @@ Transform:
   - {fileID: 444804}
   m_Father: {fileID: 475006}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &412660
 Transform:
   m_ObjectHideFlags: 1
@@ -186,6 +187,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 491976}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &418856
 Transform:
   m_ObjectHideFlags: 1
@@ -198,6 +200,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 482974}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &431424
 Transform:
   m_ObjectHideFlags: 1
@@ -210,6 +213,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 482974}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &444804
 Transform:
   m_ObjectHideFlags: 1
@@ -222,6 +226,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 402750}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &454812
 Transform:
   m_ObjectHideFlags: 1
@@ -234,6 +239,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 482974}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &475006
 Transform:
   m_ObjectHideFlags: 1
@@ -247,6 +253,7 @@ Transform:
   - {fileID: 402750}
   m_Father: {fileID: 482974}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &482974
 Transform:
   m_ObjectHideFlags: 1
@@ -263,6 +270,7 @@ Transform:
   - {fileID: 454812}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &487174
 Transform:
   m_ObjectHideFlags: 1
@@ -276,6 +284,7 @@ Transform:
   - {fileID: 491976}
   m_Father: {fileID: 402750}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &491976
 Transform:
   m_ObjectHideFlags: 1
@@ -289,6 +298,7 @@ Transform:
   - {fileID: 412660}
   m_Father: {fileID: 487174}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6549600
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -318,19 +328,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11423750
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 126262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Team: 2
-  LockedOnBy: {fileID: 0}
 --- !u!114 &11438764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -371,7 +368,7 @@ MonoBehaviour:
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
   TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
   TrackerPlaneScale: 100
-  Targetable: {fileID: 11423750}
+  Targetable: {fileID: 114354613596268164}
   Killable: {fileID: 11491946}
   MaxDistance: 1000
   IsDisabled: 0
@@ -399,17 +396,20 @@ MonoBehaviour:
   RecoilCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 2
       outSlope: 2
       tangentMode: 0
-    - time: 0.14636365
+    - serializedVersion: 2
+      time: 0.14636365
       value: 0.75643617
       inSlope: 2.9141257
       outSlope: 2.9141257
       tangentMode: 0
-    - time: 0.99667406
+    - serializedVersion: 2
+      time: 0.99667406
       value: 0.001919508
       inSlope: 0
       outSlope: 0
@@ -424,7 +424,7 @@ MonoBehaviour:
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
   AimOffsetRadius: 1
-  Targetable: {fileID: 0}
+  Targetable: {fileID: 114354613596268164}
 --- !u!114 &11491946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -442,7 +442,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!135 &13526182
 SphereCollider:
@@ -465,26 +464,33 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 2
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: e63c6991d2ed32d4ebe5b44897c205ce, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300000, guid: 3827ee7969b561540ba4168de9c40afb, type: 3}
   m_Bones:
   - {fileID: 475006}
@@ -583,3 +589,16 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 126262}
   m_IsPrefabParent: 1
+--- !u!114 &114354613596268164
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Team: 2
+  LockedOnBy: {fileID: 0}
