@@ -13,6 +13,10 @@ public class VehicleTracker : Tracker
 	public Sprite LockingSprite;
 	public Sprite LockedSprite;
 
+    public Color BackgroundColor = new Color(0f, 0f, 0f, 0.5f);
+    public Color ShieldBarColor = new Color(0.6f, 0.6f, 1f, 1f);
+    public Color HealthBarColor = new Color(1f, 1f, 1f, 1f);
+
     public GameObject TrackerPlanePrefab;
     public float TrackerPlaneScale = 100f;
 
@@ -67,9 +71,9 @@ public class VehicleTracker : Tracker
 		var boundaryPadding = 20f;
 		_screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
 
-        _shieldBarTexture = Utility.ColouredTexture(48, 2, new Color(0.6f, 0.6f, 1f, 1f));
-        _healthBarTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 1f));
-		_healthBarBackgroundTexture = Utility.ColouredTexture(48, 2, new Color(1f, 1f, 1f, 0.05f));
+        _shieldBarTexture = Utility.ColouredTexture(48, 2, ShieldBarColor);
+        _healthBarTexture = Utility.ColouredTexture(48, 2, HealthBarColor);
+		_healthBarBackgroundTexture = Utility.ColouredTexture(48, 2, BackgroundColor);
 
 	    _targetable = Targetable ?? GetComponent<Targetable>();
 	    _killable = Killable ?? GetComponent<Killable>();
