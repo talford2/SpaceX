@@ -26,7 +26,7 @@ public class Collectible : MonoBehaviour
     private Vector3 _velocity;
     private Vector3 _rotateSpeed;
 
-    private float _acceleration = 200f;
+    private float _acceleration = 1200f;
     private float _speed;
 
     private CollectibleTracker _collectibleTracker;
