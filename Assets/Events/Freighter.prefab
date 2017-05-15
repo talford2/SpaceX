@@ -1121,7 +1121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -155.9, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 436684}
@@ -2855,7 +2855,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 23f5844ca08658d49b1d9bc9a57892c4, type: 2}
   - {fileID: 2100000, guid: b13dec40cccacb14bb93fe688f9afd51, type: 2}
   - {fileID: 2100000, guid: bee72ced3d5f5bc46b8f7ef0ac87eaee, type: 2}
-  TurretPrefab: {fileID: 126262, guid: 34c7ddf5ad4ced042a2748f17c0f4edb, type: 2}
+  TurretPrefab: {fileID: 126262, guid: d0404ba8ba9ea844c9a258111d736318, type: 2}
   TurretTransforms:
   - {fileID: 4040173280281950}
   - {fileID: 4079831726624640}

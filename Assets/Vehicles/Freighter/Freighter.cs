@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 
 public class Freighter : MonoBehaviour
 {
@@ -89,7 +90,7 @@ public class Freighter : MonoBehaviour
 
             foreach(var turret in _turrets)
             {
-                turret.Targetable.Team = Team.Bad;
+                StartCoroutine(DelayedTeamSet(turret.Targetable, Random.Range(0.1f, 1f)));
             }
         }
     }
@@ -107,5 +108,11 @@ public class Freighter : MonoBehaviour
         }
         var distantHitContainer = DistantContainers.First(c => c.name == sender.name);
         distantHitContainer.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    private IEnumerator DelayedTeamSet(Targetable targetable, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        targetable.Team = Team.Bad;
     }
 }
