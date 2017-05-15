@@ -605,7 +605,7 @@ public class Vehicle : MonoBehaviour
             {
                 var corpseInstance = (GameObject)Instantiate(CorpsePrefab, transform.position, transform.rotation);
                 var rBody = corpseInstance.GetComponent<Rigidbody>();
-                rBody.velocity = GetVelocity();
+                rBody.velocity = _velocity;
                 rBody.AddForce(_velocity.normalized * 5000f, ForceMode.Impulse);
                 rBody.AddRelativeTorque(new Vector3(0f, 0f, 50000f), ForceMode.Impulse);
                 var shiftable = corpseInstance.GetComponentInParent<Shiftable>();

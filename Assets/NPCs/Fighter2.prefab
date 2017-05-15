@@ -68,7 +68,7 @@ MonoBehaviour:
   TurnAroundDistance: 250
   AcclerateDistance: 100
   MinDodgeIntervalTime: 1
-  MaxDodgeIntervalTime: 6
+  MaxDodgeIntervalTime: 4
   DodgeRadius: 50
   DodgeArcAngle: 180
   CanBarrelRoll: 1
