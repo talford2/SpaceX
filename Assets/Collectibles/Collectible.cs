@@ -26,6 +26,9 @@ public class Collectible : MonoBehaviour
     private Vector3 _velocity;
     private Vector3 _rotateSpeed;
 
+    private float _acceleration = 200f;
+    private float _speed;
+
     private CollectibleTracker _collectibleTracker;
     private SelfDestructor _destructor;
 
@@ -49,6 +52,7 @@ public class Collectible : MonoBehaviour
     {
         _isCollected = true;
         _collectorTransform = collector.transform;
+        _speed = 0f;
     }
 
     private bool isFinished = false;
@@ -64,8 +68,9 @@ public class Collectible : MonoBehaviour
         }
         if (_isCollected)
         {
+            _speed += _acceleration * Time.deltaTime;
             _velocity = Vector3.MoveTowards(_velocity, Vector3.zero, 1f * Time.deltaTime);
-            transform.position = Vector3.MoveTowards(transform.position, _collectorTransform.position, 150f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _collectorTransform.position, _speed * Time.deltaTime);
             var delta = transform.position - _collectorTransform.position;
             if (delta.sqrMagnitude < 0.5f)
             {
