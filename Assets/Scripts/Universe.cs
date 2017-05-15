@@ -89,6 +89,11 @@ public class Universe : MonoBehaviour
 		return GetWorldPosition(universePosition.CellIndex, universePosition.CellLocalPosition);
 	}
 
+    public float SquareDistanceFromViewPort(Vector3 worldPosition)
+    {
+        return (ViewPort.Shiftable.GetAbsoluteUniversePosition() - GetAbsoluteUniversePosition(GetUniversePosition(worldPosition))).sqrMagnitude;
+    }
+
 	public UniversePosition GetUniversePosition(Vector3 worldPosition)
 	{
 		return new UniversePosition(CellIndexFromWorldPosition(worldPosition), CellLocalPositionFromWorldPosition(worldPosition));

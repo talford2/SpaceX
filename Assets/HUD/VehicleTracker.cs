@@ -62,11 +62,14 @@ public class VehicleTracker : Tracker
 
     private float _fadeStep = 0.02f;
 
+    private Shiftable _shiftable;
     private float _maxDistanceSquared;
     private float _lastDistanceSquared;
 
     private void Awake()
 	{
+        _shiftable = GetComponentInParent<Shiftable>();
+
 		_screenCentre = new Vector3(0.5f * Screen.width, 0.5f * Screen.height);
 		var boundaryPadding = 20f;
 		_screenBounds = new Rect(boundaryPadding, boundaryPadding, Screen.width - 2f * boundaryPadding, Screen.height - 2f * boundaryPadding);
@@ -181,7 +184,7 @@ public class VehicleTracker : Tracker
         _lockInstance.transform.SetParent(trackerImg.transform);
         _lockInstance.enabled = false;
 
-        var distanceSquared = (_targetable.transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
+        var distanceSquared = Universe.Current.SquareDistanceFromViewPort(_targetable.transform.position);
 
         _imageInstance.color = Utility.SetColorAlpha(_imageInstance.color, 0f);
         _shieldBarBackgroundInstance.color = Utility.SetColorAlpha(_shieldBarBackgroundInstance.color, 0f);
@@ -200,7 +203,7 @@ public class VehicleTracker : Tracker
 
     public override void UpdateInstance()
     {
-        var distanceSquared = (_targetable.transform.position - Universe.Current.ViewPort.transform.position).sqrMagnitude;
+        var distanceSquared = Universe.Current.SquareDistanceFromViewPort(_targetable.transform.position);
         if (_lastDistanceSquared < _maxDistanceSquared)
         {
             if (distanceSquared > _maxDistanceSquared)
