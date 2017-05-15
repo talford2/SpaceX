@@ -49,6 +49,7 @@ public class Fighter : Npc<Fighter>
     public float MaxDodgeIntervalTime = 6f;
     public float DodgeRadius = 50f;
     public float DodgeArcAngle = 180f;
+    public bool CanBarrelRoll = false;
 
     [Header("Chase")]
     public float SightRange = 50f;

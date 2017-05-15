@@ -239,6 +239,11 @@ public class Utility
 		}
 	}
 
+    public static int RandomSign()
+    {
+        return (int)Mathf.Sign(Random.Range(-1, 1));
+    }
+
 	public static Vector3 GetVehicleExtrapolatedPosition(Vehicle vehicle, Weapon shootWeapon, float timeError)
 	{
 		var distance = (vehicle.transform.position - shootWeapon.GetShootPointCentre()).magnitude;

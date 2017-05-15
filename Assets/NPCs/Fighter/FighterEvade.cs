@@ -57,7 +57,17 @@ public class FighterEvade : NpcState<Fighter>
             _dodgeCooldown -= Time.deltaTime;
             if (_dodgeCooldown < 0f)
             {
-                _dodgeOffset = GetRandomArc(Npc.DodgeArcAngle) * -toTarget.normalized * Npc.DodgeRadius;
+                var triggerBarrelRoll = false;
+                if (Npc.CanBarrelRoll)
+                {
+                    triggerBarrelRoll = Random.value > 0.7f;
+                    if (triggerBarrelRoll)
+                        Npc.VehicleInstance.TriggerBarrelRoll(Utility.RandomSign());
+                }
+                if (!triggerBarrelRoll)
+                {
+                    _dodgeOffset = GetRandomArc(Npc.DodgeArcAngle) * -toTarget.normalized * Npc.DodgeRadius;
+                }
                 _dodgeCooldown = Random.Range(Npc.MinDodgeIntervalTime, Npc.MaxDodgeIntervalTime);
             }
         }
