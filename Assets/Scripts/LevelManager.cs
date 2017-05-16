@@ -76,11 +76,11 @@ public class LevelManager : MonoBehaviour
 		}
 
 		DirectionLight.color = lvl.LighColour;
-		//DirectionLight.transform.forward = lvl.LightDirection;
-		DirectionLight.transform.rotation = Quaternion.Euler(lvl.LightDirection);
+		DirectionLight.transform.forward = lvl.LightDirection;
+		//DirectionLight.transform.rotation = Quaternion.Euler(lvl.LightDirection);
 		_reflectionProbe.RenderProbe();
         _eventGenerator.Clear();
-        _eventGenerator.Generate(Levels[index].UniverseEvents, Random.Range(int.MinValue, int.MaxValue));
+        _eventGenerator.Generate(lvl.UniverseEvents, Random.Range(int.MinValue, int.MaxValue));
         _levelIndex = index;
     }
 
