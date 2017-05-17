@@ -12,6 +12,7 @@ public class PirateSquad : UniverseEvent
     public float Radius = 10f;
 
     private int _aliveCount;
+    private List<GameObject> _spawned;
 
     public override void Awake()
     {
@@ -19,6 +20,7 @@ public class PirateSquad : UniverseEvent
         _mapPin = GetComponent<MapPin>();
 
         _aliveCount = 0;
+        _spawned = new List<GameObject>();
         if (Randomize)
         {
             foreach (var s in Spawners)
@@ -52,6 +54,7 @@ public class PirateSquad : UniverseEvent
         {
             _aliveCount++;
             fighter.VehicleInstance.Killable.OnDie += OnSpawnedDie;
+            _spawned.Add(shipObject);
         }
     }
 
@@ -73,5 +76,9 @@ public class PirateSquad : UniverseEvent
     private void OnDestroy()
     {
         StopAllCoroutines();
+        foreach(var spawned in _spawned)
+        {
+            Destroy(spawned);
+        }
     }
 }
