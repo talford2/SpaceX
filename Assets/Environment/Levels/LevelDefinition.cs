@@ -6,9 +6,20 @@ public class LevelDefinition : ScriptableObject
 {
     public Texture Background;
 
-    public Color LighColour = Color.white;
+    public Color LightColour = Color.white;
 
-    public Vector3 LightDirection;
+    public Vector3 LightDirection
+    {
+        get
+        {
+            ReadFile();
+            return _lightDirection;
+        }
+        set
+        {
+            _lightDirection = value;
+        }
+    }
 
     public string SystemName;
 
@@ -17,6 +28,7 @@ public class LevelDefinition : ScriptableObject
     public List<UniverseEventCount> UniverseEvents;
 
     private Material _mat;
+    private Vector3 _lightDirection;
 
     public Material Material
     {
@@ -29,5 +41,21 @@ public class LevelDefinition : ScriptableObject
             }
             return _mat;
         }
+    }
+
+    public void WriteFile(LevelFile levelFile)
+    {
+        levelFile.WriteToFile(FullFilePath());
+    }
+
+    public void ReadFile()
+    {
+        var levelFile = LevelFile.ReadFromFile(FullFilePath());
+        _lightDirection = levelFile.SunDirection;
+    }
+
+    private string FullFilePath()
+    {
+        return string.Format("{0}/Environment/Levels/{1}.xml", Application.dataPath, name);
     }
 }

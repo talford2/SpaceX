@@ -61,6 +61,7 @@ public class LevelManager : MonoBehaviour
     public void ChangeLevel(int index)
     {
         var lvl = Levels[index];
+        lvl.ReadFile();
         RenderSettings.skybox = lvl.Material;
 
         if (NextPortalMaterial != null)
@@ -75,8 +76,8 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        DirectionLight.color = lvl.LighColour;
-        DirectionLight.transform.right = lvl.LightDirection;
+        DirectionLight.color = lvl.LightColour;
+        DirectionLight.transform.forward = lvl.LightDirection;
         Debug.LogFormat("SUN DIR: ({0:f3}, {1:f3}, {2:f3})", lvl.LightDirection.x, lvl.LightDirection.y, lvl.LightDirection.z);
         //DirectionLight.transform.rotation = Quaternion.Euler(lvl.LightDirection);
         _reflectionProbe.RenderProbe();

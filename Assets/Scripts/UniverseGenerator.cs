@@ -133,6 +133,8 @@ public class UniverseGenerator : MonoBehaviour
 
 
             Debug.DrawLine(Vector3.zero, SunDirection * 1000f, Color.magenta, 600);
+
+            Level.WriteFile(new LevelFile { SunDirection = SunDirection });
         }
     }
 
