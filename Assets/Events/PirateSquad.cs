@@ -69,4 +69,9 @@ public class PirateSquad : UniverseEvent
             Universe.Current.AllowEvents = true;
         }
     }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
 }
