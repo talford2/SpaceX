@@ -28,6 +28,10 @@ public class UniverseGenerator : MonoBehaviour
 
 	public string BackgroundLayerName = "BackgroundLayer";
 
+    public int Seed = 32;
+
+    public LevelDefinition Level;
+
 	public int FlatResolution = 2048;
 
 	public Shader BaseShader;
@@ -91,6 +95,7 @@ public class UniverseGenerator : MonoBehaviour
 
 	void Start()
 	{
+        Random.InitState(Seed);
 		if (ScatterObjects == null)
 		{
 			ScatterObjects = new List<ScatterSettings>();
@@ -119,7 +124,9 @@ public class UniverseGenerator : MonoBehaviour
 			Debug.Log("Sun direction = " + SunDirection);
 			Debug.Log(SunDirection);
 			Debug.Log(SunLight.transform.forward);
-		}
+            Debug.LogFormat("SUN DIR: ({0:f3}, {1:f3}, {2:f3})", SunDirection.x, SunDirection.y, SunDirection.z);
+            Debug.DrawLine(Vector3.zero, SunDirection * 1000f, Color.magenta, 600);
+        }
 	}
 
 	#region Public Methods
@@ -132,7 +139,7 @@ public class UniverseGenerator : MonoBehaviour
 
 		// Construct Camera
 		var camObj = new GameObject("BackgroundCamera");
-		camObj.transform.parent = _parent;
+		camObj.transform.SetParent(_parent);
 		_renderCamera = camObj.AddComponent<Camera>();
 		// VERY IMPORTANT - must set clear to color before creating universe, then set to skybox after clearing
 		_renderCamera.clearFlags = CameraClearFlags.Color;
@@ -151,8 +158,8 @@ public class UniverseGenerator : MonoBehaviour
 		sunObj.GetComponent<Renderer>().material = CreateMaterial(SunTexture, Color.white);
 		sunObj.transform.rotation = LookAtWithRandomTwist(sunObj.transform.position, Vector3.zero);
 		SunLight.transform.position = sunObj.transform.position;
-		SunLight.transform.forward = Vector3.zero - sunObj.transform.localPosition;
-		_sunDirection = SunLight.transform.forward;
+		SunLight.transform.forward = Vector3.zero - sunObj.transform.position;
+		_sunDirection = (Vector3.zero - sunObj.transform.position).normalized;
 
 		foreach (var sg in ScatterObjects)
 		{
@@ -269,6 +276,7 @@ public class UniverseGenerator : MonoBehaviour
 		cam.name = "CaptureCam1";
 		//cam.cullingMask = LayerMask.GetMask("Universe Background");
 		cam.fieldOfView = 90;
+        cam.transform.rotation = Quaternion.identity;
 		cam.transform.position = Vector3.zero;
 
 		var cubeMapImage = new Texture2D(faceResolution * 4, faceResolution * 3);
