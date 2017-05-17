@@ -7,4 +7,6 @@ public class LevelFile : DataFile<LevelFile>
     [XmlElement("sundir")]
     public Vector3 SunDirection;
 
+    [XmlElement("light")]
+    public Color LightColor;
 }
