@@ -58,27 +58,28 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public void ChangeLevel(int index)
-	{
-		var lvl = Levels[index];
-		RenderSettings.skybox = lvl.Material;
+    public void ChangeLevel(int index)
+    {
+        var lvl = Levels[index];
+        RenderSettings.skybox = lvl.Material;
 
-		if (NextPortalMaterial != null)
-		{
-			if (index < Levels.Count - 1)
-			{
-				NextPortalMaterial.SetTexture("_Cube", Levels[index + 1].Material.GetTexture("_Tex"));
-			}
-			else
-			{
-				NextPortalMaterial.SetTexture("_Cube", Levels[0].Material.GetTexture("_Tex"));
-			}
-		}
+        if (NextPortalMaterial != null)
+        {
+            if (index < Levels.Count - 1)
+            {
+                NextPortalMaterial.SetTexture("_Cube", Levels[index + 1].Material.GetTexture("_Tex"));
+            }
+            else
+            {
+                NextPortalMaterial.SetTexture("_Cube", Levels[0].Material.GetTexture("_Tex"));
+            }
+        }
 
-		DirectionLight.color = lvl.LighColour;
-		DirectionLight.transform.forward = lvl.LightDirection;
-		//DirectionLight.transform.rotation = Quaternion.Euler(lvl.LightDirection);
-		_reflectionProbe.RenderProbe();
+        DirectionLight.color = lvl.LighColour;
+        DirectionLight.transform.right = lvl.LightDirection;
+        Debug.LogFormat("SUN DIR: ({0:f3}, {1:f3}, {2:f3})", lvl.LightDirection.x, lvl.LightDirection.y, lvl.LightDirection.z);
+        //DirectionLight.transform.rotation = Quaternion.Euler(lvl.LightDirection);
+        _reflectionProbe.RenderProbe();
         _eventGenerator.Clear();
         _eventGenerator.Generate(lvl.UniverseEvents, Random.Range(int.MinValue, int.MaxValue));
         _levelIndex = index;

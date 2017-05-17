@@ -18,8 +18,10 @@ public class UniverseGeneratorEditor : Editor
 
 		if (universeGen != null)
 		{
-			universeGen.BackgroundLayerName = EditorGUILayout.TextField("Layer", universeGen.BackgroundLayerName);
-			universeGen.FlatResolution = EditorExtensions.IntDropdown("Resolution", new List<int> { 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192 }, universeGen.FlatResolution);
+            universeGen.Seed = EditorGUILayout.IntField("Seed", universeGen.Seed);
+            universeGen.BackgroundLayerName = EditorGUILayout.TextField("Layer", universeGen.BackgroundLayerName);
+            universeGen.Level = EditorExtensions.ObjectField<LevelDefinition>("Level", universeGen.Level, false);
+            universeGen.FlatResolution = EditorExtensions.IntDropdown("Resolution", new List<int> { 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192 }, universeGen.FlatResolution);
 
 			universeGen.CubemapShader = EditorExtensions.ObjectField<Shader>("Background Shader", universeGen.CubemapShader, false);
 			universeGen.BaseShader = EditorExtensions.ObjectField<Shader>("Base Shader", universeGen.BaseShader, false);
