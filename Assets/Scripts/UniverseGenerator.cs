@@ -32,8 +32,6 @@ public class UniverseGenerator : MonoBehaviour
 
     public LevelDefinition Level;
 
-    public Color LightColor;
-
     public int FlatResolution = 2048;
 
     public Shader BaseShader;
@@ -136,7 +134,7 @@ public class UniverseGenerator : MonoBehaviour
 
             Debug.DrawLine(Vector3.zero, SunDirection * 1000f, Color.magenta, 600);
 
-            Level.WriteFile(new LevelFile { SunDirection = SunDirection, LightColor = LightColor });
+            Level.WriteFile(new LevelFile { SunDirection = SunDirection, LightColor = SunColour });
         }
     }
 
