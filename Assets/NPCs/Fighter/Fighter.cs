@@ -231,8 +231,6 @@ public class Fighter : Npc<Fighter>
                 dropItem.SetVelocity(VehicleInstance.GetVelocity() + Random.onUnitSphere * 5f);
             }
         }
-        if (!IsSquadronMember)
-            Destroy(gameObject);
     }
 
    // private void OnDrawGizmos()

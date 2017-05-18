@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: TestPlanet
+  m_Name: Pluto2
   m_Shader: {fileID: 4800000, guid: 073afd5a1add0894cb44fca7e7e39052, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -34,7 +34,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Diffuse:
-        m_Texture: {fileID: 2800000, guid: 2d44feab5f3e327448bd161f5afbb6a8, type: 3}
+        m_Texture: {fileID: 2800000, guid: d9262c051e4665d45babc8ec0c813b59, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -58,18 +58,20 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AddMultiply: 0.0327
+    - _AddMultiply: 0.05
+    - _AmplifyColour: 4.5
     - _BlinnPow: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FrenelAmount: 2.47
-    - _FrenelExp: 4.1
+    - _FrenelAmount: 0.67
+    - _FrenelExp: 5
     - _Gloss: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _LightingPow: 0.92
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

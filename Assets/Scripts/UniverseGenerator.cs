@@ -100,6 +100,8 @@ public class UniverseGenerator : MonoBehaviour
         {
             ScatterObjects = new List<ScatterSettings>();
         }
+
+        SunLight.color = SunColour;
         //Generate();
         var s = GetMaterial();
     }
