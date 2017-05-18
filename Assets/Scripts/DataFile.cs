@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Xml.Serialization;
 using System.IO;
+using System.Text;
 
 public abstract class DataFile<T>
 {
@@ -8,18 +9,19 @@ public abstract class DataFile<T>
     {
         var serializer = new XmlSerializer(typeof(T));
         Debug.Log("read: " + filename);
-        using (var fileStream = new FileStream(filename, FileMode.Open))
+        using (StreamReader stream = new StreamReader(filename, Encoding.GetEncoding("UTF-8")))
         {
-            return (T)serializer.Deserialize(fileStream);
+            return (T)serializer.Deserialize(stream);
         }
     }
 
     public void WriteToFile(string filename)
     {
         var serializer = new XmlSerializer(typeof(T));
-        using (var fileStream = new FileStream(filename, FileMode.Create))
+        Debug.Log("write: " + filename);
+        using (StreamWriter stream = new StreamWriter(filename, false, Encoding.GetEncoding("UTF-8")))
         {
-            serializer.Serialize(fileStream, this);
+            serializer.Serialize(stream, this);
         }
     }
 }

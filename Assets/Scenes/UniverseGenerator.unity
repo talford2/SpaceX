@@ -136,6 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundLayerName: Universe Background
+  Seed: 1
+  Level: {fileID: 11400000, guid: a5e191cdce0e7b64ab6af555f6bf5aff, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
@@ -326,6 +328,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundLayerName: Universe Background
+  Seed: 3
+  Level: {fileID: 11400000, guid: efb0ea42fefb53c468224d771b1d1d62, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
@@ -540,6 +544,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundLayerName: Universe Background
+  Seed: 2
+  Level: {fileID: 11400000, guid: 0aa0ee2428f8e2f4a9740908cbbf7712, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
@@ -665,6 +671,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundLayerName: Universe Background
+  Seed: 4
+  Level: {fileID: 11400000, guid: 522ed1cbedce2c7499e3e681892b80fe, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
@@ -789,6 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4d0cf716092b149ac3dd9c8b4ef36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugBuildOnly: 1
 --- !u!4 &1683205092
 Transform:
   m_ObjectHideFlags: 0

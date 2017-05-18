@@ -69,6 +69,7 @@ public class LevelDefinition : ScriptableObject
 
     private string FullFilePath()
     {
-        return string.Format("{0}/Environment/Levels/{1}.xml", Application.dataPath, name);
+        //return string.Format("{0}/Environment/Levels/{1}.xml", Application.dataPath, name);
+        return string.Format("{0}/{1}.xml", Application.persistentDataPath, name);
     }
 }
