@@ -33,8 +33,9 @@ public class UniverseGeneratorEditor : Editor
 			universeGen.SunTexture = EditorExtensions.ObjectField<Texture>("Sun Texture", universeGen.SunTexture, false);
 			universeGen.SunIntensity = EditorGUILayout.FloatField("Intensity", universeGen.SunIntensity);
 			universeGen.SunColour = EditorGUILayout.ColorField("Colour", universeGen.SunColour);
+            universeGen.SunAttachPrefab = EditorExtensions.ObjectField<GameObject>("Sun Attach Prefab", universeGen.SunAttachPrefab, false);
 
-			EditorGUILayout.LabelField(string.Format("Scatter Groups ({0})", universeGen.ScatterObjects.Count), EditorStyles.boldLabel);
+            EditorGUILayout.LabelField(string.Format("Scatter Groups ({0})", universeGen.ScatterObjects.Count), EditorStyles.boldLabel);
 			EditorGUILayout.Separator();
 
 			for (var i = 0; i < universeGen.ScatterObjects.Count; i++)
