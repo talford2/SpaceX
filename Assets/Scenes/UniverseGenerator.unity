@@ -140,13 +140,14 @@ MonoBehaviour:
   Level: {fileID: 11400000, guid: a5e191cdce0e7b64ab6af555f6bf5aff, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
+  GradientShader: {fileID: 4800000, guid: 46359bd39a0011045b440d6f83544b02, type: 3}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
   BackgroundColor: {r: 0.11770889, g: 0.024088217, b: 0.234, a: 1}
   ScatterObjects:
   - Name: Clouds
     IsActive: 1
-    CountMin: 100
-    CountMax: 200
+    CountMin: 50
+    CountMax: 100
     ScaleMin: 100
     ScaleMax: 400
     RadiusMin: 100
@@ -154,10 +155,14 @@ MonoBehaviour:
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
     LookAtCenter: 1
     Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
     Colors:
-    - Color1: {r: 0, g: 0.06591212, b: 0.42799997, a: 0.019607844}
-      Color2: {r: 0.44099998, g: 0, b: 0.420714, a: 0.011764706}
+    - Color1: {r: 0, g: 0.050512094, b: 0.328, a: 0.019607844}
+      Color2: {r: 0.472, g: 0, b: 0.45028824, a: 0.147}
+    - Color1: {r: 0.23531097, g: 0.017470568, b: 0.297, a: 0.028}
+      Color2: {r: 0.3032647, g: 0.491, b: 0.4366215, a: 0.159}
+    - Color1: {r: 0.15339904, g: 0.014176469, b: 0.241, a: 0.009}
+      Color2: {r: 0.15451469, g: 0.47055465, b: 0.553, a: 0.166}
     UseMaterials: 0
     Materials: []
   - Name: Stars
@@ -209,14 +214,18 @@ MonoBehaviour:
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
     LookAtCenter: 1
     Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
     Colors:
-    - Color1: {r: 0.26858783, g: 0, b: 0.809, a: 0.11764706}
-      Color2: {r: 0.7413793, g: 0, b: 0.70727587, a: 0.019607844}
+    - Color1: {r: 0.32917935, g: 0, b: 0.809, a: 0.103}
+      Color2: {r: 0.821, g: 0.92593104, b: 1, a: 0.322}
+    - Color1: {r: 0.23902942, g: 0.24360849, b: 0.903, a: 0.197}
+      Color2: {r: 0.6691177, g: 0.95892507, b: 1, a: 0.503}
+    - Color1: {r: 0.209432, g: 0, b: 0.86764705, a: 0.159}
+      Color2: {r: 1, g: 0.64705884, b: 0.96105456, a: 0.509}
     UseMaterials: 0
     Materials: []
   - Name: Glow
-    IsActive: 1
+    IsActive: 0
     CountMin: 1
     CountMax: 1
     ScaleMin: 1
@@ -236,8 +245,10 @@ MonoBehaviour:
   SunLight: {fileID: 753445325}
   SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
   SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+  SunAttachPrefab: {fileID: 1015725323838100, guid: 02270a2788468a245b499f1e30daed6f,
+    type: 2}
   SunIntensity: 1.2
-  SunColour: {r: 0.71599996, g: 0.8621764, b: 1, a: 1}
+  SunColour: {r: 0.72259593, g: 0.71599996, b: 1, a: 1}
 --- !u!4 &295170072
 Transform:
   m_ObjectHideFlags: 0
@@ -348,6 +359,7 @@ MonoBehaviour:
   Level: {fileID: 11400000, guid: efb0ea42fefb53c468224d771b1d1d62, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
+  GradientShader: {fileID: 0}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
   BackgroundColor: {r: 0, g: 0.228, b: 0.22389603, a: 1}
   ScatterObjects:
@@ -428,6 +440,7 @@ MonoBehaviour:
   SunLight: {fileID: 753445325}
   SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
   SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+  SunAttachPrefab: {fileID: 0}
   SunIntensity: 1.4
   SunColour: {r: 0.50874805, g: 0.772, b: 0.7139297, a: 1}
 --- !u!4 &756983736
@@ -564,6 +577,7 @@ MonoBehaviour:
   Level: {fileID: 11400000, guid: 0aa0ee2428f8e2f4a9740908cbbf7712, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
+  GradientShader: {fileID: 0}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
   BackgroundColor: {r: 0.15294118, g: 0.011764706, b: 0, a: 1}
   ScatterObjects:
@@ -642,6 +656,7 @@ MonoBehaviour:
   SunLight: {fileID: 753445325}
   SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
   SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+  SunAttachPrefab: {fileID: 0}
   SunIntensity: 1.4
   SunColour: {r: 1, g: 0.76145196, b: 0.691, a: 1}
 --- !u!4 &1235866623
@@ -689,6 +704,7 @@ MonoBehaviour:
   Level: {fileID: 11400000, guid: 522ed1cbedce2c7499e3e681892b80fe, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
+  GradientShader: {fileID: 0}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
   BackgroundColor: {r: 0.25862068, g: 0, b: 0.17114602, a: 1}
   ScatterObjects:
@@ -769,6 +785,7 @@ MonoBehaviour:
   SunLight: {fileID: 753445325}
   SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
   SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+  SunAttachPrefab: {fileID: 0}
   SunIntensity: 1.3
   SunColour: {r: 1, g: 0.847, b: 0.96175003, a: 1}
 --- !u!4 &1584961316
