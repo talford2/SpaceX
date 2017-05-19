@@ -16,7 +16,12 @@ public class NavShipController : MonoBehaviour
     {
         _current = this;
         _destination = transform.position;
+    }
+
+    private void Start()
+    {
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void Update()
