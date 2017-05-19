@@ -36,6 +36,8 @@ public class UniverseGenerator : MonoBehaviour
 
     public Shader BaseShader;
 
+    public Shader GradientShader;
+
     public Shader CubemapShader;
 
     public Color BackgroundColor = Color.black;
@@ -180,7 +182,7 @@ public class UniverseGenerator : MonoBehaviour
             attachedPrefab.transform.SetParent(_parent);
             attachedPrefab.layer = LayerMask.NameToLayer(BackgroundLayerName);
             attachedPrefab.transform.position = Vector3.zero;
-            attachedPrefab.transform.localScale = Vector3.one * 300f;
+            attachedPrefab.transform.localScale = Vector3.one;// * 300f;
             attachedPrefab.transform.rotation = sunObj.transform.rotation;
         }
 
@@ -268,8 +270,11 @@ public class UniverseGenerator : MonoBehaviour
                 if (settings.Textures != null && settings.Textures.Any())
                 {
                     var tex = settings.Textures[Random.Range(0, settings.Textures.Count)];
-                    var colr = settings.Colors[Random.Range(0, settings.Colors.Count)].GetRandom();
-                    model.GetComponent<Renderer>().material = CreateMaterial(tex, colr);
+                    //var colr = settings.Colors[Random.Range(0, settings.Colors.Count)].GetRandom();
+                    //model.GetComponent<Renderer>().material = CreateMaterial(tex, colr);
+
+                    var r = settings.Colors[Random.Range(0, settings.Colors.Count)];
+                    model.GetComponent<Renderer>().material = CreateGradientMaterial(tex, r.Color1, r.Color2);
                 }
             }
         }
@@ -278,7 +283,7 @@ public class UniverseGenerator : MonoBehaviour
     private Quaternion LookAtWithRandomTwist(Vector3 positon, Vector3 target)
     {
         var relativeForward = target - positon;
-        var lookat = Quaternion.LookRotation(relativeForward);
+        var lookat = Quaternion.LookRotation(relativeForward, Random.onUnitSphere);
 
         // This isn't right yet
         //lookat = Quaternion.AngleAxis(Random.Range(0f, 360f), forwardS);
@@ -291,6 +296,16 @@ public class UniverseGenerator : MonoBehaviour
         var mat = new Material(BaseShader);
         mat.SetTexture("_MainTex", tex);
         mat.SetColor("_Color", color);
+        return mat;
+    }
+
+    private Material CreateGradientMaterial(Texture tex, Color grey, Color white)
+    {
+        var mat = new Material(GradientShader);
+        mat.SetTexture("_MainTex", tex);
+        mat.SetColor("_Black", Color.black);
+        mat.SetColor("_Grey", grey);
+        mat.SetColor("_White", white);
         return mat;
     }
 
