@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundLayerName: Universe Background
-  Seed: 1
+  Seed: 3
   Level: {fileID: 11400000, guid: a5e191cdce0e7b64ab6af555f6bf5aff, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
@@ -193,13 +193,11 @@ MonoBehaviour:
       Color2: {r: 1, g: 1, b: 1, a: 1}
     UseMaterials: 1
     Materials:
-    - {fileID: 2100000, guid: 600e83dc5ac989b4ba772d3942eb6faa, type: 2}
-    - {fileID: 2100000, guid: db3ff9d7a31efaa4599df592ca4fd892, type: 2}
-    - {fileID: 2100000, guid: f8b5f601b4c405b42ae6b49ba2aa7fe8, type: 2}
-    - {fileID: 2100000, guid: 621619c5b9f03b744a3c0bde134bcfba, type: 2}
-    - {fileID: 2100000, guid: 16f1ca9e95c13b44c8ad1e25e2dc1633, type: 2}
-    - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
-    - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
+    - {fileID: 2100000, guid: a9ea60c2919fbf94ab1c07191c5ad40c, type: 2}
+    - {fileID: 2100000, guid: 5f8785647f5c6c3489ddc8e5d74ad6f8, type: 2}
+    - {fileID: 2100000, guid: beefb719c856e7749a4665f9f62de4ee, type: 2}
+    - {fileID: 2100000, guid: e640fc57a48c1ca4a966aef9e07f59eb, type: 2}
+    - {fileID: 2100000, guid: ccb7f28d44efa1b45a8e3926c5e14522, type: 2}
   - Name: Nebula
     IsActive: 1
     CountMin: 5
@@ -217,6 +215,24 @@ MonoBehaviour:
       Color2: {r: 0.7413793, g: 0, b: 0.70727587, a: 0.019607844}
     UseMaterials: 0
     Materials: []
+  - Name: Glow
+    IsActive: 1
+    CountMin: 1
+    CountMax: 1
+    ScaleMin: 1
+    ScaleMax: 1
+    RadiusMin: 0
+    RadiusMax: 0
+    Model: {fileID: 100000, guid: d02b92b1db28dfc4aa6bdb760aa164f9, type: 3}
+    LookAtCenter: 1
+    Textures:
+    - {fileID: 2800000, guid: b76f629a010bc9f47a4a1a57bb89d022, type: 3}
+    Colors:
+    - Color1: {r: 0.75253534, g: 0.5514706, b: 1, a: 1}
+      Color2: {r: 0.50020313, g: 0.43382353, b: 1, a: 1}
+    UseMaterials: 1
+    Materials:
+    - {fileID: 2100000, guid: b2cc7117383c06147898fe9c7aca64a6, type: 2}
   SunLight: {fileID: 753445325}
   SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
   SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
@@ -601,13 +617,11 @@ MonoBehaviour:
       Color2: {r: 1, g: 1, b: 1, a: 1}
     UseMaterials: 1
     Materials:
-    - {fileID: 2100000, guid: 600e83dc5ac989b4ba772d3942eb6faa, type: 2}
-    - {fileID: 2100000, guid: db3ff9d7a31efaa4599df592ca4fd892, type: 2}
-    - {fileID: 2100000, guid: f8b5f601b4c405b42ae6b49ba2aa7fe8, type: 2}
-    - {fileID: 2100000, guid: 621619c5b9f03b744a3c0bde134bcfba, type: 2}
-    - {fileID: 2100000, guid: 16f1ca9e95c13b44c8ad1e25e2dc1633, type: 2}
-    - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
-    - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
+    - {fileID: 2100000, guid: a9ea60c2919fbf94ab1c07191c5ad40c, type: 2}
+    - {fileID: 2100000, guid: 5f8785647f5c6c3489ddc8e5d74ad6f8, type: 2}
+    - {fileID: 2100000, guid: beefb719c856e7749a4665f9f62de4ee, type: 2}
+    - {fileID: 2100000, guid: e640fc57a48c1ca4a966aef9e07f59eb, type: 2}
+    - {fileID: 2100000, guid: ccb7f28d44efa1b45a8e3926c5e14522, type: 2}
   - Name: Nebula
     IsActive: 1
     CountMin: 5

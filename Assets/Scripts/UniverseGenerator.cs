@@ -161,7 +161,7 @@ public class UniverseGenerator : MonoBehaviour
         _renderCamera.backgroundColor = BackgroundColor;
 
         // Sun
-        var sunObj = Instantiate<GameObject>(SunModel);
+        var sunObj = Instantiate(SunModel);
         sunObj.transform.SetParent(_parent);
         sunObj.layer = LayerMask.NameToLayer(BackgroundLayerName);
         sunObj.transform.position = Random.onUnitSphere * 10000;

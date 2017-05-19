@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <sundir>
+    <x>-0.7984144</x>
+    <y>0.5775394</y>
+    <z>-0.1702429</z>
+  </sundir>
+  <light>
+    <r>1</r>
+    <g>0.76145196</g>
+    <b>0.691</b>
+    <a>1</a>
+  </light>
+</level>
