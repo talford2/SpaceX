@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -233,6 +234,10 @@ public class PlayerController : MonoBehaviour
 		}
 		if (_controlEnabled)
 		{
+            if (Input.GetKeyUp(KeyCode.T))
+            {
+                SceneManager.LoadScene("GalaxyMap");
+            }
 			if (_playVehicleInstance != null)
 			{
 				var mouseHorizontal = Input.GetAxis("MouseHorizontal");
