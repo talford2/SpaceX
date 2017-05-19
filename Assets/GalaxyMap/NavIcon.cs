@@ -3,6 +3,7 @@
 public class NavIcon : MonoBehaviour
 {
     public Transform DestinationPoint;
+    public int LevelIndex;
 
     public void OnClick()
     {

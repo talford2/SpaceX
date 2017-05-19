@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NavShipController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class NavShipController : MonoBehaviour
     private float _acceleration = 30f;
     private float _speed;
     private float _maxSpeed = 30f;
+    private int _levelIndex;
 
     private void Awake()
     {
@@ -35,7 +37,11 @@ public class NavShipController : MonoBehaviour
             {
                 var navIcon = mouseHit.collider.GetComponentInParent<NavIcon>();
                 if (navIcon != null)
+                {
+                    _levelIndex = navIcon.LevelIndex;
+                    Debug.Log("INDEX: " + _levelIndex);
                     navIcon.OnClick();
+                }
             }
         }
 
@@ -55,10 +61,17 @@ public class NavShipController : MonoBehaviour
         }
         if (toDestination.sqrMagnitude > 0.01f)
         {
-
             transform.position = Vector3.MoveTowards(transform.position, _destination, _speed * Time.deltaTime);
             //Vector3.Lerp(transform.position, _destination, 2f * Time.deltaTime);
             transform.forward = Vector3.Lerp(transform.forward, -toDestination.normalized, 10f * Time.deltaTime);
+        }
+        else
+        {
+            if (Input.GetKeyUp(KeyCode.Return))
+            {
+                PlayerContext.Current.LevelIndex = _levelIndex;
+                SceneManager.LoadScene("Test1");
+            }
         }
     }
 
