@@ -123,7 +123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &295170070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,14 +359,14 @@ MonoBehaviour:
   Level: {fileID: 11400000, guid: efb0ea42fefb53c468224d771b1d1d62, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
-  GradientShader: {fileID: 0}
+  GradientShader: {fileID: 4800000, guid: 46359bd39a0011045b440d6f83544b02, type: 3}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
-  BackgroundColor: {r: 0, g: 0.228, b: 0.22389603, a: 1}
+  BackgroundColor: {r: 0, g: 0.14670454, b: 0.15686274, a: 1}
   ScatterObjects:
   - Name: Clouds
     IsActive: 1
-    CountMin: 100
-    CountMax: 200
+    CountMin: 80
+    CountMax: 150
     ScaleMin: 100
     ScaleMax: 400
     RadiusMin: 100
@@ -374,10 +374,16 @@ MonoBehaviour:
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
     LookAtCenter: 1
     Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
+    - {fileID: 2800000, guid: 48b8cbed39e21f54b980880c6f34ae86, type: 3}
+    - {fileID: 2800000, guid: ea5ef42d6a05ec240a1d011e1f79a8a0, type: 3}
     Colors:
     - Color1: {r: 0.15584801, g: 0.322, b: 0.3060494, a: 0.019607844}
-      Color2: {r: 0.17245899, g: 0.347, b: 0.18677136, a: 0.011764706}
+      Color2: {r: 0.346409, g: 0.697, b: 0.6389712, a: 0.047}
+    - Color1: {r: 0.14011765, g: 0.26944467, b: 0.397, a: 0.028}
+      Color2: {r: 0.2855294, g: 0.3757831, b: 0.809, a: 0.047}
+    - Color1: {r: 0.18555364, g: 0.32352942, b: 0.23788932, a: 0.016}
+      Color2: {r: 0.53151774, g: 0.7794118, b: 0.4985943, a: 0.059}
     UseMaterials: 0
     Materials: []
   - Name: Stars
@@ -413,13 +419,11 @@ MonoBehaviour:
       Color2: {r: 1, g: 1, b: 1, a: 1}
     UseMaterials: 1
     Materials:
-    - {fileID: 2100000, guid: 600e83dc5ac989b4ba772d3942eb6faa, type: 2}
-    - {fileID: 2100000, guid: db3ff9d7a31efaa4599df592ca4fd892, type: 2}
-    - {fileID: 2100000, guid: f8b5f601b4c405b42ae6b49ba2aa7fe8, type: 2}
-    - {fileID: 2100000, guid: 621619c5b9f03b744a3c0bde134bcfba, type: 2}
-    - {fileID: 2100000, guid: 16f1ca9e95c13b44c8ad1e25e2dc1633, type: 2}
-    - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
-    - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
+    - {fileID: 2100000, guid: a9ea60c2919fbf94ab1c07191c5ad40c, type: 2}
+    - {fileID: 2100000, guid: 5f8785647f5c6c3489ddc8e5d74ad6f8, type: 2}
+    - {fileID: 2100000, guid: beefb719c856e7749a4665f9f62de4ee, type: 2}
+    - {fileID: 2100000, guid: e640fc57a48c1ca4a966aef9e07f59eb, type: 2}
+    - {fileID: 2100000, guid: ccb7f28d44efa1b45a8e3926c5e14522, type: 2}
   - Name: Nebula
     IsActive: 1
     CountMin: 5
@@ -431,18 +435,25 @@ MonoBehaviour:
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
     LookAtCenter: 1
     Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
+    - {fileID: 2800000, guid: 48b8cbed39e21f54b980880c6f34ae86, type: 3}
+    - {fileID: 2800000, guid: ea5ef42d6a05ec240a1d011e1f79a8a0, type: 3}
     Colors:
-    - Color1: {r: 0.202048, g: 0.49926552, b: 0.616, a: 0.11764706}
-      Color2: {r: 0.7005919, g: 0.791, b: 0.29425198, a: 0.019607844}
+    - Color1: {r: 0.202048, g: 0.49926552, b: 0.616, a: 0.184}
+      Color2: {r: 0.9036471, g: 1, b: 0.4705882, a: 0.497}
+    - Color1: {r: 0.24405278, g: 0.3216129, b: 0.44852942, a: 0.159}
+      Color2: {r: 0.8308824, g: 1, b: 0.93002033, a: 0.447}
+    - Color1: {r: 0.23648356, g: 0.34297666, b: 0.5955882, a: 0.171}
+      Color2: {r: 0.66896546, g: 1, b: 0.625, a: 0.547}
     UseMaterials: 0
     Materials: []
   SunLight: {fileID: 753445325}
   SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
   SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-  SunAttachPrefab: {fileID: 0}
+  SunAttachPrefab: {fileID: 1015725323838100, guid: 02270a2788468a245b499f1e30daed6f,
+    type: 2}
   SunIntensity: 1.4
-  SunColour: {r: 0.50874805, g: 0.772, b: 0.7139297, a: 1}
+  SunColour: {r: 0.596269, g: 0.841, b: 0.8376493, a: 1}
 --- !u!4 &756983736
 Transform:
   m_ObjectHideFlags: 0
@@ -577,14 +588,14 @@ MonoBehaviour:
   Level: {fileID: 11400000, guid: 0aa0ee2428f8e2f4a9740908cbbf7712, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
-  GradientShader: {fileID: 0}
+  GradientShader: {fileID: 4800000, guid: 46359bd39a0011045b440d6f83544b02, type: 3}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
-  BackgroundColor: {r: 0.15294118, g: 0.011764706, b: 0, a: 1}
+  BackgroundColor: {r: 0.09803922, g: 0, b: 0, a: 1}
   ScatterObjects:
   - Name: Clouds
     IsActive: 1
-    CountMin: 100
-    CountMax: 200
+    CountMin: 30
+    CountMax: 50
     ScaleMin: 100
     ScaleMax: 400
     RadiusMin: 100
@@ -592,10 +603,18 @@ MonoBehaviour:
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
     LookAtCenter: 1
     Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
+    - {fileID: 2800000, guid: 48b8cbed39e21f54b980880c6f34ae86, type: 3}
+    - {fileID: 2800000, guid: ea5ef42d6a05ec240a1d011e1f79a8a0, type: 3}
     Colors:
     - Color1: {r: 0.42799997, g: 0.207152, b: 0.30255845, a: 0.019607844}
       Color2: {r: 0.44099998, g: 0.2897167, b: 0.21917698, a: 0.011764706}
+    - Color1: {r: 0.375, g: 0, b: 0, a: 0.022}
+      Color2: {r: 1, g: 0.88793105, b: 0.52205884, a: 0.034}
+    - Color1: {r: 0.66176474, g: 0, b: 0.095841326, a: 0.022}
+      Color2: {r: 1, g: 0.6827586, b: 0, a: 0.034}
+    - Color1: {r: 0.4863083, g: 0, b: 0.5147059, a: 0.047}
+      Color2: {r: 1, g: 0.61764705, b: 0.87870187, a: 0.053}
     UseMaterials: 0
     Materials: []
   - Name: Stars
@@ -647,18 +666,25 @@ MonoBehaviour:
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
     LookAtCenter: 1
     Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
+    - {fileID: 2800000, guid: 48b8cbed39e21f54b980880c6f34ae86, type: 3}
+    - {fileID: 2800000, guid: ea5ef42d6a05ec240a1d011e1f79a8a0, type: 3}
     Colors:
     - Color1: {r: 0.659, g: 0.216152, b: 0.35697737, a: 0.11764706}
-      Color2: {r: 1, g: 0.571704, b: 0.37199998, a: 0.019607844}
+      Color2: {r: 1, g: 0.571704, b: 0.37199998, a: 0.372}
+    - Color1: {r: 0.6985294, g: 0, b: 0.5636407, a: 0.103}
+      Color2: {r: 1, g: 0.58823526, b: 0.8693713, a: 0.422}
+    - Color1: {r: 0.6691177, g: 0, b: 0.31840768, a: 0.147}
+      Color2: {r: 1, g: 0.7794118, b: 0.9756593, a: 0.366}
     UseMaterials: 0
     Materials: []
   SunLight: {fileID: 753445325}
   SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
   SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-  SunAttachPrefab: {fileID: 0}
+  SunAttachPrefab: {fileID: 1015725323838100, guid: 02270a2788468a245b499f1e30daed6f,
+    type: 2}
   SunIntensity: 1.4
-  SunColour: {r: 1, g: 0.76145196, b: 0.691, a: 1}
+  SunColour: {r: 0.913, g: 0.813483, b: 0.813483, a: 1}
 --- !u!4 &1235866623
 Transform:
   m_ObjectHideFlags: 0
@@ -687,7 +713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1584961315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,7 +730,7 @@ MonoBehaviour:
   Level: {fileID: 11400000, guid: 522ed1cbedce2c7499e3e681892b80fe, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
-  GradientShader: {fileID: 0}
+  GradientShader: {fileID: 4800000, guid: 46359bd39a0011045b440d6f83544b02, type: 3}
   CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
   BackgroundColor: {r: 0.25862068, g: 0, b: 0.17114602, a: 1}
   ScatterObjects:
@@ -719,10 +745,14 @@ MonoBehaviour:
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
     LookAtCenter: 1
     Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
+    - {fileID: 2800000, guid: 48b8cbed39e21f54b980880c6f34ae86, type: 3}
+    - {fileID: 2800000, guid: ea5ef42d6a05ec240a1d011e1f79a8a0, type: 3}
     Colors:
     - Color1: {r: 0.24191467, g: 0.15584801, b: 0.322, a: 0.019607844}
-      Color2: {r: 0.347, g: 0.17245899, b: 0.21539614, a: 0.011764706}
+      Color2: {r: 0.347, g: 0.17245899, b: 0.21539614, a: 0.059}
+    - Color1: {r: 0.5872896, g: 0.29476643, b: 0.6911765, a: 0.034}
+      Color2: {r: 0.728, g: 0.273, b: 0.6401378, a: 0.066}
     UseMaterials: 0
     Materials: []
   - Name: Stars
@@ -758,13 +788,11 @@ MonoBehaviour:
       Color2: {r: 1, g: 1, b: 1, a: 1}
     UseMaterials: 1
     Materials:
-    - {fileID: 2100000, guid: 600e83dc5ac989b4ba772d3942eb6faa, type: 2}
-    - {fileID: 2100000, guid: db3ff9d7a31efaa4599df592ca4fd892, type: 2}
-    - {fileID: 2100000, guid: f8b5f601b4c405b42ae6b49ba2aa7fe8, type: 2}
-    - {fileID: 2100000, guid: 621619c5b9f03b744a3c0bde134bcfba, type: 2}
-    - {fileID: 2100000, guid: 16f1ca9e95c13b44c8ad1e25e2dc1633, type: 2}
-    - {fileID: 2100000, guid: a53c9061bcdc2124c954fd1fe8a90fb7, type: 2}
-    - {fileID: 2100000, guid: 25a7fc9900c5b4e44910d978f6ca12a0, type: 2}
+    - {fileID: 2100000, guid: a9ea60c2919fbf94ab1c07191c5ad40c, type: 2}
+    - {fileID: 2100000, guid: 5f8785647f5c6c3489ddc8e5d74ad6f8, type: 2}
+    - {fileID: 2100000, guid: beefb719c856e7749a4665f9f62de4ee, type: 2}
+    - {fileID: 2100000, guid: e640fc57a48c1ca4a966aef9e07f59eb, type: 2}
+    - {fileID: 2100000, guid: ccb7f28d44efa1b45a8e3926c5e14522, type: 2}
   - Name: Nebula
     IsActive: 1
     CountMin: 5
@@ -776,16 +804,23 @@ MonoBehaviour:
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
     LookAtCenter: 1
     Textures:
-    - {fileID: 2800000, guid: 5b8c47d1284fa344ea177eb6cfcd1061, type: 3}
+    - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
+    - {fileID: 2800000, guid: 48b8cbed39e21f54b980880c6f34ae86, type: 3}
+    - {fileID: 2800000, guid: ea5ef42d6a05ec240a1d011e1f79a8a0, type: 3}
     Colors:
-    - Color1: {r: 0.401573, g: 0.202048, b: 0.616, a: 0.11764706}
-      Color2: {r: 0.791, g: 0.29425198, b: 0.35982272, a: 0.019607844}
+    - Color1: {r: 0.202048, g: 0.20807159, b: 0.616, a: 0.216}
+      Color2: {r: 0.791, g: 0.29425198, b: 0.35982272, a: 0.441}
+    - Color1: {r: 0.44284987, g: 0.26157007, b: 0.60294116, a: 0.309}
+      Color2: {r: 1, g: 0.41176468, b: 0.95943236, a: 0.497}
+    - Color1: {r: 0.21443601, g: 0.20344941, b: 0.52205884, a: 0.259}
+      Color2: {r: 0.823732, g: 0.41911763, b: 1, a: 0.478}
     UseMaterials: 0
     Materials: []
   SunLight: {fileID: 753445325}
   SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
   SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
-  SunAttachPrefab: {fileID: 0}
+  SunAttachPrefab: {fileID: 1015725323838100, guid: 02270a2788468a245b499f1e30daed6f,
+    type: 2}
   SunIntensity: 1.3
   SunColour: {r: 1, g: 0.847, b: 0.96175003, a: 1}
 --- !u!4 &1584961316

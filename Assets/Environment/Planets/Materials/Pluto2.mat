@@ -59,7 +59,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AddMultiply: 0.05
-    - _AmplifyColour: 4.5
+    - _AmplifyColour: 2.53
     - _BlinnPow: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
