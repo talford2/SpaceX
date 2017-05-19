@@ -16,6 +16,7 @@ public class NavShipController : MonoBehaviour
     {
         _current = this;
         _destination = transform.position;
+        Cursor.visible = true;
     }
 
     private void Update()
