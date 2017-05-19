@@ -57,6 +57,8 @@ public class UniverseGenerator : MonoBehaviour
 
     public GameObject SunModel;
 
+    public GameObject SunAttachPrefab;
+
     public event System.Action FinishedRendering;
 
     #endregion
@@ -171,6 +173,16 @@ public class UniverseGenerator : MonoBehaviour
         SunLight.transform.position = sunObj.transform.position;
         SunLight.transform.forward = Vector3.zero - sunObj.transform.position;
         _sunDirection = (Vector3.zero - sunObj.transform.position).normalized;
+
+        if (SunAttachPrefab != null)
+        {
+            var attachedPrefab = Instantiate<GameObject>(SunAttachPrefab);
+            attachedPrefab.transform.SetParent(_parent);
+            attachedPrefab.layer = LayerMask.NameToLayer(BackgroundLayerName);
+            attachedPrefab.transform.position = Vector3.zero;
+            attachedPrefab.transform.localScale = Vector3.one * 300f;
+            attachedPrefab.transform.rotation = sunObj.transform.rotation;
+        }
 
         foreach (var sg in ScatterObjects)
         {

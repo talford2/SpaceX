@@ -21,8 +21,14 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-		_current = this;
+        _current = this;
         _eventGenerator = GetComponent<EventGenerator>();
+
+        var context = PlayerContext.Current;
+        if (context != null)
+        {
+            _levelIndex = PlayerContext.Current.LevelIndex;
+        }
     }
 
 	private void Start()
@@ -42,7 +48,7 @@ public class LevelManager : MonoBehaviour
             level.SystemName = NameGenerator.GetRandomSystemName();
         }
 
-		ChangeLevel(0);
+		ChangeLevel(_levelIndex);
 	}
 
 	private void Update()
