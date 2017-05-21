@@ -20,4 +20,9 @@ public class ResourcePoolManager
   //          Debug.LogWarning("Insufficient " + obj.name + "s in resource pool.");
   //      return instance;
     }
+
+    public static void RemoveResourcePool(ResourcePool pool)
+    {
+        _resourcePools.Remove(pool.Prefab);
+    }
 }

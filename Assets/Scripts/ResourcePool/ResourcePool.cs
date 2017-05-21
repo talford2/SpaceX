@@ -64,4 +64,15 @@ public class ResourcePool : MonoBehaviour
 		_poolItems.Add(poolItem);
 		return instance;
 	}
+
+    private void OnDestroy()
+    {
+        ResourcePoolManager.RemoveResourcePool(this);
+        foreach(var instance in _pool)
+        {
+            Destroy(instance);
+        }
+        _pool.Clear();
+        _poolItems.Clear();
+    }
 }
