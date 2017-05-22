@@ -82,6 +82,7 @@ public class Trail : MonoBehaviour
             {
                 _curPositions[i] -= delta;
                 _lineRenderer.SetPosition(i, _curPositions[i]);
+                _oldPositions[i] -= delta;
             }
         }
     }
