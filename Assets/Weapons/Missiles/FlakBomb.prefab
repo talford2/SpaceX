@@ -159,8 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0ae80b99242914ab04b83c1ac9d550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissileSpeed: 150
-  MissileForce: 50
+  MissileSpeed: 400
+  MissileForce: 100
   FromReference: {fileID: 0}
   HitEffectPrefab: {fileID: 0}
   HitDecalPrefab: {fileID: 0}
@@ -300,5 +300,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Interval: 0.1
-  VertextCount: 10
+  VertextCount: 5
   Shiftable: {fileID: 11419154}

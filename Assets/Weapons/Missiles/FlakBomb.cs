@@ -17,6 +17,7 @@ public class FlakBomb : Missile
     private Shiftable _shiftable;
     private ResourcePoolItem _resourcePoolItem;
 
+    private Transform _target;
     private Vector3 _shootFrom;
     private Vector3 _initVelocity;
     private Vector3 _offsetVelocity;
@@ -66,6 +67,15 @@ public class FlakBomb : Missile
 
     public override void LiveUpdate()
     {
+        if (_target != null)
+        {
+            var toTarget = _target.position - transform.position;
+            if (Vector3.Dot(toTarget.normalized, transform.forward) < 0)
+            {
+                _noTargetCooldown = Random.Range(0f, 0.1f);
+            }
+        }
+
         if (_noTargetCooldown >= 0f)
         {
             _noTargetCooldown -= Time.deltaTime;
@@ -100,6 +110,7 @@ public class FlakBomb : Missile
                         var killable = missileHit.collider.GetComponentInParent<Killable>();
                         if (killable != null)
                         {
+                            TriggerPlayerAttackHit();
                             killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
                         }
                         _hasHit = true;
@@ -136,6 +147,16 @@ public class FlakBomb : Missile
         _shiftable.Translate(displacement);
     }
 
+    public override void SetTarget(Transform target)
+    {
+        base.SetTarget(target);
+        _target = target;
+
+        _vehicle = _target.GetComponent<Vehicle>();
+        _isVehicleTarget = _vehicle != null;
+        _resourcePoolItem.IsAvailable = false;
+    }
+
     public override void Shoot(Vector3 shootFrom, Vector3 direction, Vector3 initVelocity)
     {
         base.Shoot(shootFrom, direction, initVelocity);
@@ -145,7 +166,7 @@ public class FlakBomb : Missile
         _velocity = _initVelocity;
 
         transform.position = _shootFrom;
-        transform.forward = direction;
+        transform.forward = FromReference.forward;
         transform.position += initVelocity * Time.deltaTime;
 
         Rocket.enabled = true;
@@ -209,6 +230,7 @@ public class FlakBomb : Missile
     {
         base.Stop();
         Rocket.enabled = false;
+        _target = null;
         if (_resourcePoolItem != null)
             _resourcePoolItem.IsAvailable = true;
     }

@@ -227,7 +227,10 @@ public class Weapon : MonoBehaviour
     {
         for (var i = 0; i < MissilesPerShot; i++)
         {
-            FireMissile(GetNextMissile());
+            var nextMissile = GetNextMissile();
+            if (_lockedTarget != null)
+                nextMissile.GetComponent<Missile>().SetTarget(_lockedTarget);
+            FireMissile(nextMissile);
         }
     }
 
@@ -346,6 +349,11 @@ public class Weapon : MonoBehaviour
     public float GetHeatFraction()
     {
         return Mathf.Clamp01(heatValue / OverheatValue);
+    }
+
+    public void SetMissileTarget(Transform target)
+    {
+        _lockedTarget = target;
     }
 
     private void OnDestroy()

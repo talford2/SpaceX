@@ -77,4 +77,10 @@ public abstract class Missile : MonoBehaviour
 	public virtual void SetTarget(Transform target)
 	{
 	}
+
+    public void TriggerPlayerAttackHit()
+    {
+        if (PlayerController.Current.VehicleInstance != null && Owner == PlayerController.Current.VehicleInstance.gameObject)
+            HeadsUpDisplay.Current.TriggerCrosshairPulse();
+    }
 }

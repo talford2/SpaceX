@@ -161,6 +161,10 @@ public class Turret : MonoBehaviour
 				RaycastHit aimHit;
 				if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance))
 				{
+                    if (aimHit.distance < 5f)
+                    {
+                        dontShoot = true;
+                    }
 					var aimAtTargetable = aimHit.collider.GetComponentInParent<Targetable>();
 					if (aimAtTargetable != null)
 					{
@@ -178,6 +182,7 @@ public class Turret : MonoBehaviour
 						}
 					}
 				}
+                _weaponInstance.SetMissileTarget(_target);
 				_weaponInstance.IsTriggered = !dontShoot;
 			}
 		}
