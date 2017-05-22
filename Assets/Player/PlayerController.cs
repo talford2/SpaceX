@@ -170,6 +170,8 @@ public class PlayerController : MonoBehaviour
 		shieldRegenerator.OnRegenerate += PlayerController_OnRegenerate;
 	}
 
+    private Transform _guessTarget;
+
     private Vector3 GetAimAt()
     {
         var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
@@ -183,10 +185,10 @@ public class PlayerController : MonoBehaviour
         var dotViewPort = VehicleInstance.PrimaryWeaponInstance != null
             ? Vector3.Dot(VehicleInstance.PrimaryWeaponInstance.GetShootPointCentre() - viewPortPos, viewPortForward)
             : Vector3.Dot(VehicleInstance.transform.position - viewPortPos, viewPortForward);
-        var guessTarget = Targeting.FindFacingAngleAny(viewPortPos + dotViewPort * viewPortForward, viewPortForward, MaxAimDistance, 5f);
-        if (guessTarget != null)
+        _guessTarget = Targeting.FindFacingAngleAny(viewPortPos + dotViewPort * viewPortForward, viewPortForward, MaxAimDistance, 5f);
+        if (_guessTarget != null)
         {
-            var toGuessTarget = guessTarget.position - viewPortPos;
+            var toGuessTarget = _guessTarget.position - viewPortPos;
             _aimDistance = Mathf.Clamp(toGuessTarget.magnitude + 0.5f, MinAimDistance, MaxAimDistance);
             return mouseRay.GetPoint(_aimDistance);
         }
@@ -260,10 +262,18 @@ public class PlayerController : MonoBehaviour
 				}
 				_playVehicleInstance.YawThrottle = _pitchYaw.y;
 				_playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
-				if (_playVehicleInstance.PrimaryWeaponInstance != null)
-					_playVehicleInstance.PrimaryWeaponInstance.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
-				if (_playVehicleInstance.SecondaryWeaponInstance != null)
-					_playVehicleInstance.SecondaryWeaponInstance.IsTriggered = (Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0;
+                if (_playVehicleInstance.PrimaryWeaponInstance != null)
+                {
+                    if (!_playVehicleInstance.PrimaryWeaponInstance.IsTargetLocking)
+                        _playVehicleInstance.PrimaryWeaponInstance.SetMissileTarget(_guessTarget);
+                    _playVehicleInstance.PrimaryWeaponInstance.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
+                }
+                if (_playVehicleInstance.SecondaryWeaponInstance != null)
+                {
+                    if (!_playVehicleInstance.SecondaryWeaponInstance.IsTargetLocking)
+                        _playVehicleInstance.SecondaryWeaponInstance.SetMissileTarget(_guessTarget);
+                    _playVehicleInstance.SecondaryWeaponInstance.IsTriggered = (Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0;
+                }
 
 				_playVehicleInstance.SetAimAt(GetAimAt());
 

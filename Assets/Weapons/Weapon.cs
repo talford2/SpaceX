@@ -87,6 +87,8 @@ public class Weapon : MonoBehaviour
     private float _lockingCooldown;
     private bool _isLocked;
 
+    private Transform _missileTarget; // Missile target for non-locking missiles.
+
     private float heatValue;
     private float heatCooldown;
     private bool isCoolingDown;
@@ -228,8 +230,8 @@ public class Weapon : MonoBehaviour
         for (var i = 0; i < MissilesPerShot; i++)
         {
             var nextMissile = GetNextMissile();
-            if (_lockedTarget != null)
-                nextMissile.GetComponent<Missile>().SetTarget(_lockedTarget);
+            if (_missileTarget != null)
+                nextMissile.GetComponent<Missile>().SetTarget(_missileTarget);
             FireMissile(nextMissile);
         }
     }
@@ -353,7 +355,7 @@ public class Weapon : MonoBehaviour
 
     public void SetMissileTarget(Transform target)
     {
-        _lockedTarget = target;
+        _missileTarget = target;
     }
 
     private void OnDestroy()
