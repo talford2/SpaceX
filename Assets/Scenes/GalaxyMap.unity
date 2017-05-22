@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef483b4b0a76e9b48b93ea93db3c7b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnterSystemPanel: {fileID: 0}
+  EnterSystemPanel: {fileID: 1663934499}
 --- !u!4 &140568486
 Transform:
   m_ObjectHideFlags: 0
@@ -1208,7 +1208,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.9191176, g: 0.9933063, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
