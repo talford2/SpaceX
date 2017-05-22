@@ -10,7 +10,7 @@ public class NavShipController : MonoBehaviour
     private float _acceleration = 30f;
     private float _speed;
     private float _maxSpeed = 30f;
-    private int _levelIndex;
+    private int _levelIndex = -1;
 
     private void Awake()
     {
@@ -56,7 +56,7 @@ public class NavShipController : MonoBehaviour
         var dotDest = Vector3.Dot(transform.forward, -toDestination.normalized);
         if (dotDest > 0.8f)
         {
-            if (toDestination.sqrMagnitude > 1.2f*distToStop * distToStop)
+            if (toDestination.sqrMagnitude > 1.2f * distToStop * distToStop)
             {
                 _speed = Mathf.Clamp(_speed + _acceleration * Time.deltaTime, 0f, _maxSpeed);
             }
@@ -67,12 +67,15 @@ public class NavShipController : MonoBehaviour
         }
         if (toDestination.sqrMagnitude > 0.01f)
         {
+            GalaxyMapUi.Current.SetVisibleEnterSystem(false);
             transform.position = Vector3.MoveTowards(transform.position, _destination, _speed * Time.deltaTime);
             //Vector3.Lerp(transform.position, _destination, 2f * Time.deltaTime);
             transform.forward = Vector3.Lerp(transform.forward, -toDestination.normalized, 10f * Time.deltaTime);
         }
         else
         {
+            if (_levelIndex > -1)
+                GalaxyMapUi.Current.SetVisibleEnterSystem(true);
             if (Input.GetKeyUp(KeyCode.Return))
             {
                 PlayerContext.Current.LevelIndex = _levelIndex;
