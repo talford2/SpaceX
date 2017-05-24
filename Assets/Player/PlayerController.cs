@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,6 +28,9 @@ public class PlayerController : MonoBehaviour
 	public bool HideMouse = false;
 
 	public Shiftable RespawnPosition;
+
+    public Shiftable SpawnPathDestination;
+    public float SpawnControlDelay = 2.5f;
 
 	public GameObject PlayerPinPrefab;
 
@@ -106,7 +110,21 @@ public class PlayerController : MonoBehaviour
 
 		CycleSquadron(0);
 
+        SetControlEnabled(false);
+        HeadsUpDisplay.Current.HideCrosshair();
+
+        var curMember = Squadron.GetCurrentMember();
+        curMember.enabled = true;
+        curMember.PathDestination = SpawnPathDestination.UniversePosition;
+        curMember.SetState(curMember.Path);
+        StartCoroutine(DelayedControlEnable(SpawnControlDelay));
+    }
+
+    private IEnumerator DelayedControlEnable(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         SetControlEnabled(true);
+        HeadsUpDisplay.Current.ShowCrosshair();
     }
 
     public void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
