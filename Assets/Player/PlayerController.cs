@@ -128,12 +128,12 @@ public class PlayerController : MonoBehaviour
         HeadsUpDisplay.Current.ShowCrosshair();
     }
 
-    public void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
+    private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
 	{
 		SpawnVehicle(vehiclePrefab, spawner.UniversePosition, spawner.transform.rotation);
 	}
 
-	public void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition, Quaternion rotation)
+	private void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition, Quaternion rotation)
 	{
 		_playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, universePosition.CellLocalPosition, rotation)).GetComponent<Vehicle>();
 		_playVehicleInstance.Controller = gameObject;
@@ -597,7 +597,7 @@ public class PlayerController : MonoBehaviour
 		return _curCallSlign;
 	}
 
-	private void CycleSquadron(int dir)
+	public void CycleSquadron(int dir)
 	{
 		var oldSquadronIndex = Squadron.GetCurrentIndex();
 		var cycleResult = Squadron.CycleSquadronIndex(dir);
@@ -610,16 +610,17 @@ public class PlayerController : MonoBehaviour
 			{
 				// Set previous controlled vehicle to NPC control
 				var oldMember = Squadron.GetMember(oldSquadronIndex);
-				if (_playVehicleInstance != null && oldMember != null)
+                
+				if (oldMember.VehicleInstance != null && oldMember != null)
 				{
-					if (_playVehicleInstance.PrimaryWeaponInstance != null)
-						_playVehicleInstance.PrimaryWeaponInstance.ClearTargetLock();
-					if (_playVehicleInstance.SecondaryWeaponInstance != null)
-						_playVehicleInstance.SecondaryWeaponInstance.ClearTargetLock();
-					_playVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
-					_playVehicleInstance.MeshTransform.gameObject.layer = LayerMask.NameToLayer("Default");
+					if (oldMember.VehicleInstance.PrimaryWeaponInstance != null)
+                        oldMember.VehicleInstance.PrimaryWeaponInstance.ClearTargetLock();
+					if (oldMember.VehicleInstance.SecondaryWeaponInstance != null)
+                        oldMember.VehicleInstance.SecondaryWeaponInstance.ClearTargetLock();
+                    oldMember.VehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
+                    oldMember.VehicleInstance.MeshTransform.gameObject.layer = LayerMask.NameToLayer("Default");
 
-					oldMember.SetVehicleInstance(_playVehicleInstance);
+					oldMember.SetVehicleInstance(oldMember.VehicleInstance);
 					oldMember.enabled = true;
 					oldMember.VehicleInstance.GetComponent<SquadronTracker>().IsDisabled = false;
 
