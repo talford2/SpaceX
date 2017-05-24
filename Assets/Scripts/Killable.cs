@@ -14,6 +14,9 @@ public class Killable : MonoBehaviour
 	public delegate void OnDamageEvent(Killable sender, Vector3 position, Vector3 normal, GameObject attacker);
 	public event OnDamageEvent OnDamage;
 
+    public delegate void OnLostShieldEvent(Killable sender, GameObject attacker);
+    public event OnLostShieldEvent OnLostShield;
+
 	public delegate void OnDieEvent(Killable sender);
 	public event OnDieEvent OnDie;
 
@@ -34,7 +37,11 @@ public class Killable : MonoBehaviour
             {
                 Shield -= damage;
                 if (Shield < 0f)
+                {
+                    if (OnLostShield != null)
+                        OnLostShield(this, attacker);
                     Shield = 0f;
+                }
             }
             else
             {

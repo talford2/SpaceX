@@ -81,4 +81,13 @@ EnemyHate:
 "I hate you very much {0}!",
 "I will kill you!",
 "Time to die!",
-"We've got you now"
+"We've got you now",
+LostShield:
+"Lost shields",
+"Get this guy off me!",
+"I'm in danger!"
+"I could really use some help here!",
+"I'm not sure I can take much more of this!",
+"My shields are out",
+"I'm taking damage!",
+"I'm in real trouble!"
