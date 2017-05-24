@@ -178,8 +178,10 @@ public class PlayerController : MonoBehaviour
 		_playVehicleInstance.Killable.OnDamage += PlayerController_OnDamage;
 		_playVehicleInstance.Killable.OnDie += PlayerController_OnDie;
 
-		// Apply power profile
-		var powerProfile = GetComponent<ShipProfile>();
+        _playerNpc.enabled = false;
+
+        // Apply power profile
+        var powerProfile = GetComponent<ShipProfile>();
 		_playVehicleInstance.Killable.MaxShield = powerProfile.GetShield();
 		_playVehicleInstance.Killable.Shield = _playVehicleInstance.Killable.MaxShield;
 
