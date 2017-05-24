@@ -113,16 +113,16 @@ public class PlayerController : MonoBehaviour
         SetControlEnabled(false);
         HeadsUpDisplay.Current.HideCrosshair();
 
-        var curMember = Squadron.GetCurrentMember();
-        curMember.enabled = true;
-        curMember.PathDestination = SpawnPathDestination.UniversePosition;
-        curMember.SetState(curMember.Path);
+        _playerNpc.enabled = true;
+        _playerNpc.PathDestination = SpawnPathDestination.UniversePosition;
+        _playerNpc.SetState(_playerNpc.Path);
         StartCoroutine(DelayedControlEnable(SpawnControlDelay));
     }
 
     private IEnumerator DelayedControlEnable(float delay)
     {
         yield return new WaitForSeconds(delay);
+        _playerNpc.SetState(_playerNpc.Idle);
         SetControlEnabled(true);
         HeadsUpDisplay.Current.ShowCrosshair();
     }
