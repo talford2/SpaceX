@@ -29,6 +29,7 @@ public class VehicleCamera : UniverseCamera
 	public AnimationCurve ShakeAmplitude = AnimationCurve.Linear(0, 0, 1, 1);
 
 	private float _springDistance;
+    private float _targetSpringDistance;
 	private Quaternion _offsetAngle;
 	private Vector3 _offset;
 
@@ -60,31 +61,33 @@ public class VehicleCamera : UniverseCamera
 
 	public override void Move()
 	{
+        //Debug.LogFormat("CAM STATE: Boost: {0}, Accel: {1}, Brake: {2}", Target.IsBoosting, Target.IsAccelerating, Target.IsBraking);
+        //Debug.LogFormat("CAM STATE: SPRING: {0:f2} TARGET: {1:f2}", _springDistance, _targetSpringDistance);
         if (Target != null)
         {
-            var targetSpringDistance = 1f;
+            _targetSpringDistance = 1f;
             _targetFov = 60f;
             if (Target.IsBoosting)
             {
-                targetSpringDistance = SpringBoostExpansion;
+                _targetSpringDistance = SpringBoostExpansion;
                 _targetFov = BoostFov;
             }
             else
             {
                 if (Target.IsAccelerating)
                 {
-                    targetSpringDistance = SpringExpansion;
+                    _targetSpringDistance = SpringExpansion;
                 }
                 else
                 {
                     if (Target.IsBraking)
                     {
-                        targetSpringDistance = SpringCompression;
+                        _targetSpringDistance = SpringCompression;
                     }
                 }
             }
 
-            _springDistance = Mathf.Lerp(_springDistance, targetSpringDistance, SpringCatchup * Time.deltaTime);
+            _springDistance = Mathf.Lerp(_springDistance, _targetSpringDistance, SpringCatchup * Time.deltaTime);
 
             _offsetAngle = Quaternion.Lerp(_offsetAngle, Target.transform.rotation, RotationCatchup * Time.deltaTime);
             _offset = Vector3.Lerp(_offset, _offsetAngle * new Vector3(0f, VerticalDistance, -DistanceBehind) * _springDistance, OffsetCatchup * Time.deltaTime);
@@ -198,21 +201,16 @@ public class VehicleCamera : UniverseCamera
         _shakeFrequency = frequency;
     }
 
-	public void Reset()
-	{
-		Target = PlayerController.Current.VehicleInstance;
+    public void Reset()
+    {
         _springDistance = 1f;
+
         _offsetAngle = Target.transform.rotation;
-		_targetUp = Target.transform.up;
+        _targetUp = Target.transform.up;
         _offset = _offsetAngle * new Vector3(0f, VerticalDistance, -DistanceBehind) * _springDistance;
 
-		transform.position = Target.transform.position + _offset;
-		transform.LookAt(Target.transform, Target.transform.up);
-		//Debug.Break();
-	}
-
-    public void ResetTarget()
-    {
-		Target = PlayerController.Current.VehicleInstance;
+        transform.position = Target.transform.position + _offset;
+        transform.LookAt(Target.transform, Target.transform.up);
+        //Debug.Break();
     }
 }
