@@ -151,6 +151,7 @@ public class PlayerSquadron : MonoBehaviour
         squadronShieldRegenerator.OnRegenerate += SquadronMember_OnRegenerate;
         var memberKillable = member.VehicleInstance.Killable;
         memberKillable.OnDamage += SquadronMember_OnDamage;
+        memberKillable.OnLostShield += SquadronMember_OnLostShield;
         memberKillable.OnDie += SquadronMember_OnDie;
     }
 
@@ -175,9 +176,31 @@ public class PlayerSquadron : MonoBehaviour
         HeadsUpDisplay.Current.RefreshSquadronIcons();
     }
 
+    private void SquadronMember_OnLostShield(Killable sender, GameObject attacker)
+    {
+        if (Random.value > 0.6f)
+        {
+            var playerVehicle = PlayerController.Current.VehicleInstance;
+            if (playerVehicle != null)
+            {
+                if (attacker != playerVehicle.gameObject)
+                {
+                    var member = sender.GetComponent<Vehicle>().Controller.GetComponent<Fighter>();
+                    var profile = member.GetComponent<ShipProfile>();
+                    CommMessaging.Current.ShowMessage(playerVehicle.gameObject, profile.CallSign, GetLostShieldsMessage());
+                }
+            }
+        }
+    }
+
     private string GetFriendlyFireMessage(string toCallSign, string fromCallSign)
     {
         return Dialogue.GetRandomDialogue("FriendlyFire", toCallSign, fromCallSign);
+    }
+
+    private string GetLostShieldsMessage()
+    {
+        return Dialogue.GetRandomDialogue("LostShield");
     }
 
     private void SquadronMember_OnDie(Killable sender)
@@ -186,6 +209,7 @@ public class PlayerSquadron : MonoBehaviour
         // This should on refresh the current squadron member's icon.
         HeadsUpDisplay.Current.RefreshSquadronIcons();
         sender.OnDamage -= SquadronMember_OnDamage;
+        sender.OnLostShield -= SquadronMember_OnLostShield;
         sender.OnDie -= SquadronMember_OnDie;
         var shieldRegenerator = sender.GetComponent<ShieldRegenerator>();
         if (shieldRegenerator != null)
