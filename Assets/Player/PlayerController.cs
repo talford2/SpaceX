@@ -92,8 +92,6 @@ public class PlayerController : MonoBehaviour
 		_playerNpc.SetVehicleInstance(_playVehicleInstance);
 		_playerNpc.IsFollowIdleDestination = true;
 
-		SetControlEnabled(true);
-
 		_aimMask = ~LayerMask.GetMask("Player", "Detectable", "Distant");
 		_detectableMask = LayerMask.GetMask("Detectable");
 		_collectableMask = LayerMask.GetMask("Collectible");
@@ -107,9 +105,11 @@ public class PlayerController : MonoBehaviour
 		HeadsUpDisplay.Current.RefreshSquadronIcons();
 
 		CycleSquadron(0);
-	}
 
-	public void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
+        SetControlEnabled(true);
+    }
+
+    public void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
 	{
 		SpawnVehicle(vehiclePrefab, spawner.UniversePosition, spawner.transform.rotation);
 	}

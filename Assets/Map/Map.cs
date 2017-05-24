@@ -45,7 +45,7 @@ public class Map : MonoBehaviour
 
 		_scaleDistanceSquared = _scaleDistance * _scaleDistance;
 		_mapMask = LayerMask.GetMask("Map");
-		Hide();
+		Hide(false);
 	}
 
 	private void Start()
@@ -152,20 +152,21 @@ public class Map : MonoBehaviour
 		MapCamera.Current.OnMove += UpdateMap;
 	}
 
-	public void Hide()
-	{
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
-		_mapCamera.enabled = false;
-		PlayerController.Current.SetControlEnabled(true);
-		_mapCanvas.enabled = false;
-		if (TrackerManager.Current != null)
-			TrackerManager.Current.SetTrackersVisibility(true);
+    public void Hide(bool affectPlayerControl = true)
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        _mapCamera.enabled = false;
+        if (affectPlayerControl)
+            PlayerController.Current.SetControlEnabled(true);
+        _mapCanvas.enabled = false;
+        if (TrackerManager.Current != null)
+            TrackerManager.Current.SetTrackersVisibility(true);
 
-		Time.timeScale = 1f;
-		if (MapCamera.Current != null)
-			MapCamera.Current.OnMove -= UpdateMap;
-	}
+        Time.timeScale = 1f;
+        if (MapCamera.Current != null)
+            MapCamera.Current.OnMove -= UpdateMap;
+    }
 
 	public void Toggle()
 	{

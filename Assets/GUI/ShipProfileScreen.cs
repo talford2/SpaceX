@@ -41,7 +41,7 @@ public class ShipProfileScreen : MonoBehaviour
 
     private void Start()
     {
-        Hide();
+        Hide(false);
         _curIndex = 0;
         if (Fighters.Count > 0)
             Populate(_curIndex);
@@ -356,13 +356,14 @@ public class ShipProfileScreen : MonoBehaviour
         _isVisible = true;
     }
 
-    public void Hide()
+    public void Hide(bool affectPlayerControl = true)
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Preview.SetActive(false);
         Canvas.gameObject.SetActive(false);
-        PlayerController.Current.SetControlEnabled(true);
+        if (affectPlayerControl)
+            PlayerController.Current.SetControlEnabled(true);
         //Time.timeScale = 1f;
         HeadsUpDisplay.Current.gameObject.SetActive(true);
         TrackerManager.Current.SetTrackersVisibility(true);

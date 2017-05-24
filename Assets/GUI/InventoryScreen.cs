@@ -122,7 +122,7 @@ public class InventoryScreen : MonoBehaviour
 
     private void Start()
     {
-        Hide();
+        Hide(false);
     }
 
     private void Update()
@@ -199,7 +199,7 @@ public class InventoryScreen : MonoBehaviour
         _isVisible = true;
     }
 
-    public void Hide()
+    public void Hide(bool affectPlayerControl = true)
     {
         Canvas.enabled = false;
         _isVisible = false;
@@ -208,7 +208,8 @@ public class InventoryScreen : MonoBehaviour
         Cursor.visible = false;
         HeadsUpDisplay.Current.gameObject.SetActive(true);
         TrackerManager.Current.SetTrackersVisibility(true);
-        PlayerController.Current.SetControlEnabled(true);
+        if (affectPlayerControl)
+            PlayerController.Current.SetControlEnabled(true);
         Universe.Current.ViewPort.SetFree(false);
 
         HeadsUpDisplay.Current.HideSquadronPrompt();
