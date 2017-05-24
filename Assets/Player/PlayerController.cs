@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         _playerNpc.SetState(_playerNpc.Idle);
+        Universe.Current.ViewPort.GetComponent<VehicleCamera>().ResetTarget();
         SetControlEnabled(true);
         HeadsUpDisplay.Current.ShowCrosshair();
     }

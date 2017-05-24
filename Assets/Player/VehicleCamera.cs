@@ -200,13 +200,19 @@ public class VehicleCamera : UniverseCamera
 
 	public void Reset()
 	{
-		_offsetAngle = Target.transform.rotation;
-		_springDistance = 1f;
-		_offset = _offsetAngle * new Vector3(0f, VerticalDistance, -DistanceBehind) * _springDistance;
+		Target = PlayerController.Current.VehicleInstance;
+        _springDistance = 1f;
+        _offsetAngle = Target.transform.rotation;
 		_targetUp = Target.transform.up;
+        _offset = _offsetAngle * new Vector3(0f, VerticalDistance, -DistanceBehind) * _springDistance;
 
 		transform.position = Target.transform.position + _offset;
 		transform.LookAt(Target.transform, Target.transform.up);
 		//Debug.Break();
 	}
+
+    public void ResetTarget()
+    {
+		Target = PlayerController.Current.VehicleInstance;
+    }
 }
