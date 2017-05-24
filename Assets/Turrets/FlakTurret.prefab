@@ -370,7 +370,7 @@ MonoBehaviour:
   ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
   HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
   TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 100
+  TrackerPlaneScale: 50
   Targetable: {fileID: 114354613596268164}
   Killable: {fileID: 11491946}
   MaxDistance: 1000
