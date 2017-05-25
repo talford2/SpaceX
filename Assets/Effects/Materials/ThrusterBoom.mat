@@ -6,12 +6,12 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ThrusterSide
-  m_Shader: {fileID: 4800000, guid: 8af827baa34151c469f76f8c24b6bb45, type: 3}
+  m_Name: ThrusterBoom
+  m_Shader: {fileID: 4800000, guid: 46359bd39a0011045b440d6f83544b02, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -37,12 +37,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Flames:
-        m_Texture: {fileID: 2800000, guid: 206b0ac501c505b46b8e981ec357895e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: afc41cbfcb978fe428d808bdab326cb9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 18afb273f119b0e4ebfdca893582593b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -57,32 +53,27 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ThrustTex:
-        m_Texture: {fileID: 2800000, guid: e945809859d9d7643a06361236846150, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _A: 0
-    - _B: 30
     - _BumpScale: 1
-    - _C: 200
     - _Cutoff: 0.5
-    - _D: 80
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _GlossMapScale: 1
     - _Glossiness: 0.5
-    - _InvFade: 1
+    - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ScrollXSpeed: 50
-    - _ScrollYSpeed: -9.4
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Bolor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-    - _Color: {r: 1, g: 1, b: 1, a: 0.384}
+    - _Black: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 0.5482758, g: 0.5482758, b: 0.5482758, a: 1}
+    - _Grey: {r: 0.33088237, g: 0.3908724, b: 1, a: 0.5019608}
+    - _White: {r: 0.5294118, g: 0.68843794, b: 1, a: 1}
+    - _node_6946: {r: 1, g: 1, b: 1, a: 1}

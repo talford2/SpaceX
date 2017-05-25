@@ -4,46 +4,46 @@ using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
-	[Header("Description")]
-	public string Name;
-	public GameObject PreviewPrefab;
+    [Header("Description")]
+    public string Name;
+    public GameObject PreviewPrefab;
 
-	[Header("Vehicle Settings")]
-	public Transform MeshTransform;
-	public float IdleSpeed = 10f;
-	public float MaxSpeed = 20f;
-	public float MinSpeed = 3f;
-	//public float Acceleration = 5f;
-	public float Brake = 7f;
-	public float MaxBoostSpeed = 500f;
-	public float BoostAcceleration = 500f;
-	public float BoostBrake = 150f;
-	public float CurrentSpeed = 0f;
-	public float PitchSpeed = 5f;
-	public float YawSpeed = 5f;
-	public float RollAcceleration = 640f;
-	public float MaxRollSpeed = 100f;
-	public float MaxBankingAngle = 60f;
+    [Header("Vehicle Settings")]
+    public Transform MeshTransform;
+    public float IdleSpeed = 10f;
+    public float MaxSpeed = 20f;
+    public float MinSpeed = 3f;
+    //public float Acceleration = 5f;
+    public float Brake = 7f;
+    public float MaxBoostSpeed = 500f;
+    public float BoostAcceleration = 500f;
+    public float BoostBrake = 150f;
+    public float CurrentSpeed = 0f;
+    public float PitchSpeed = 5f;
+    public float YawSpeed = 5f;
+    public float RollAcceleration = 640f;
+    public float MaxRollSpeed = 100f;
+    public float MaxBankingAngle = 60f;
 
-	[Header("Collisions")]
-	public Vector3 CollisionsCentre;
-	public float CollisionRadius = 3f;
+    [Header("Collisions")]
+    public Vector3 CollisionsCentre;
+    public float CollisionRadius = 3f;
 
-	[Header("Boost Energy")]
-	//public float MaxBoostEnergy = 100f;
-	public float BoostEnergy = 100f;
-	//public float BoostCost = 50f;
-	public float BoostEnergyRegenerateDelay = 5f;
-	public float BoostEnergyRegenerateRate = 1f;
+    [Header("Boost Energy")]
+    //public float MaxBoostEnergy = 100f;
+    public float BoostEnergy = 100f;
+    //public float BoostCost = 50f;
+    public float BoostEnergyRegenerateDelay = 5f;
+    public float BoostEnergyRegenerateRate = 1f;
 
-	[Header("Control Settings")]
-	public GameObject Controller;
-	public bool TriggerAccelerate = false;
-	public bool TriggerBrake = false;
-	public bool TriggerBoost = false;
-	public float YawThrottle = 0f;
-	public float PitchThotttle = 0f;
-	public float RollThrottle = 0f;
+    [Header("Control Settings")]
+    public GameObject Controller;
+    public bool TriggerAccelerate = false;
+    public bool TriggerBrake = false;
+    public bool TriggerBoost = false;
+    public float YawThrottle = 0f;
+    public float PitchThotttle = 0f;
+    public float RollThrottle = 0f;
 
     [Header("Camera")]
     public float CameraDistance = 15f;
@@ -52,30 +52,30 @@ public class Vehicle : MonoBehaviour
     public SplinePath UTurnPath;
     public float UTurnDuration;
 
-	public bool IsAccelerating
-	{
-		get { return TriggerAccelerate; }
-	}
+    public bool IsAccelerating
+    {
+        get { return TriggerAccelerate; }
+    }
 
-	public bool IsBraking
-	{
-		get { return TriggerBrake; }
-	}
+    public bool IsBraking
+    {
+        get { return TriggerBrake; }
+    }
 
-	public bool IsBoosting
-	{
-		get { return TriggerBoost && BoostEnergy > 0f && _allowBoost; }
-	}
+    public bool IsBoosting
+    {
+        get { return TriggerBoost && BoostEnergy > 0f && _allowBoost; }
+    }
 
-	[Header("Primary Weapon")]
-	public Weapon PrimaryWeaponPrefab;
+    [Header("Primary Weapon")]
+    public Weapon PrimaryWeaponPrefab;
 
-	public List<ShootPoint> PrimaryShootPoints;
+    public List<ShootPoint> PrimaryShootPoints;
 
-	[Header("Secondary Weapon")]
-	public Weapon SecondaryWeaponPrefab;
+    [Header("Secondary Weapon")]
+    public Weapon SecondaryWeaponPrefab;
 
-	public List<ShootPoint> SecondaryShootPoints;
+    public List<ShootPoint> SecondaryShootPoints;
 
     [Header("Shield")]
     public Shield ShieldPrefab;
@@ -93,37 +93,38 @@ public class Vehicle : MonoBehaviour
     public GameObject ExplodeDeathExplosion;
     public GameObject SpinDeathExplosion;
 
-	[Header("Other")]
-	public List<Thruster> Thrusters;
+    [Header("Other")]
+    public List<Thruster> Thrusters;
 
-	public AudioSource BoostSound;
+    public AudioSource BoostSound;
+    public AudioSource BoostStart;
 
-	private Shiftable _shiftable;
+    private Shiftable _shiftable;
 
-	private Weapon _primaryWeaponInstance;
-	private Weapon _secondaryWeaponInstance;
+    private Weapon _primaryWeaponInstance;
+    private Weapon _secondaryWeaponInstance;
     private Shield _shieldInstance;
     private Engine _engineInstance;
 
-	private Vector3 _velocity;
-	private VelocityReference _velocityReference;
+    private Vector3 _velocity;
+    private VelocityReference _velocityReference;
 
-	private readonly float _aimDistance = 1000f;
+    private readonly float _aimDistance = 1000f;
 
-	// Steering
-	private float _rollSpeed;
-	private Quaternion _targetRotation;
-	private Quaternion _targetBankRotation;
+    // Steering
+    private float _rollSpeed;
+    private Quaternion _targetRotation;
+    private Quaternion _targetBankRotation;
 
     // Boost
     private float _boostCost = 50f;
-	private float _boostEnergyCooldown;
-	private bool _boostRegenerate;
-	private bool _allowBoost;
+    private float _boostEnergyCooldown;
+    private bool _boostRegenerate;
+    private bool _allowBoost;
 
-	private float _maxFlareBrightness = 30f;
+    private float _maxFlareBrightness = 30f;
 
-	private int _environmentMask;
+    private int _environmentMask;
 
     // Barrel Roll
     private bool isBarrelRolling;
@@ -133,18 +134,20 @@ public class Vehicle : MonoBehaviour
     private float barrelStrafeSpeed = 100f;
     private float barrelStrafeVelocity;
 
+    private bool _previousBoost = false;
+
     // Wound effect
     private GameObject _woundObj;
 
     public Weapon PrimaryWeaponInstance
-	{
-		get { return _primaryWeaponInstance; }
-	}
+    {
+        get { return _primaryWeaponInstance; }
+    }
 
-	public Weapon SecondaryWeaponInstance
-	{
-		get { return _secondaryWeaponInstance; }
-	}
+    public Weapon SecondaryWeaponInstance
+    {
+        get { return _secondaryWeaponInstance; }
+    }
 
     public Shield ShieldInstance
     {
@@ -156,38 +159,38 @@ public class Vehicle : MonoBehaviour
         get { return _engineInstance; }
     }
 
-	public bool IgnoreCollisions;
+    public bool IgnoreCollisions;
 
-	public Killable Killable
-	{
-		get { return _killable; }
-	}
+    public Killable Killable
+    {
+        get { return _killable; }
+    }
 
-	private Killable _killable;
+    private Killable _killable;
     private Targetable _targetable;
 
-	public Shiftable Shiftable
-	{
-		get
-		{
-			if (_shiftable == null)
-			{
-				_shiftable = GetComponent<Shiftable>();
-			}
-			return _shiftable;
-		}
-	}
+    public Shiftable Shiftable
+    {
+        get
+        {
+            if (_shiftable == null)
+            {
+                _shiftable = GetComponent<Shiftable>();
+            }
+            return _shiftable;
+        }
+    }
 
-	public Vector3 GetAimPosition()
-	{
-		if (_primaryWeaponInstance != null)
-			return _primaryWeaponInstance.GetShootPointCentre() + _aimDistance * transform.forward;
-		return transform.position + _aimDistance * transform.forward;
-	}
+    public Vector3 GetAimPosition()
+    {
+        if (_primaryWeaponInstance != null)
+            return _primaryWeaponInstance.GetShootPointCentre() + _aimDistance * transform.forward;
+        return transform.position + _aimDistance * transform.forward;
+    }
 
-	private void Awake()
-	{
-		_shiftable = GetComponent<Shiftable>();
+    private void Awake()
+    {
+        _shiftable = GetComponent<Shiftable>();
 
         foreach (var shootPoint in PrimaryShootPoints)
         {
@@ -200,18 +203,18 @@ public class Vehicle : MonoBehaviour
                 shootPoint.Initialize(SecondaryWeaponPrefab.MuzzlePrefab);
         }
 
-		_velocityReference = new VelocityReference(_velocity);
+        _velocityReference = new VelocityReference(_velocity);
 
-		_killable = GetComponent<Killable>();
+        _killable = GetComponent<Killable>();
         _killable.OnDamage += VehicleDamage;
         _killable.OnDie += VehicleDie;
 
-		_allowBoost = true;
+        _allowBoost = true;
 
-		_targetRotation = transform.rotation;
+        _targetRotation = transform.rotation;
 
-		_environmentMask = LayerMask.GetMask("Environment");
-	}
+        _environmentMask = LayerMask.GetMask("Environment");
+    }
 
     public void Initialize()
     {
@@ -292,25 +295,25 @@ public class Vehicle : MonoBehaviour
     }
 
     public void SetTargetRotation(Quaternion rotation)
-	{
-		_targetRotation = rotation;
-	}
+    {
+        _targetRotation = rotation;
+    }
 
-	private void Start()
-	{
-		foreach (var thruster in Thrusters)
-		{
-			thruster.Initialize();
-		}
-	}
+    private void Start()
+    {
+        foreach (var thruster in Thrusters)
+        {
+            thruster.Initialize();
+        }
+    }
 
-	public void SetAimAt(Vector3 aimAt)
-	{
-		if (_primaryWeaponInstance != null)
-			_primaryWeaponInstance.SetAimAt(aimAt);
-		if (_secondaryWeaponInstance != null)
-			_secondaryWeaponInstance.SetAimAt(aimAt);
-	}
+    public void SetAimAt(Vector3 aimAt)
+    {
+        if (_primaryWeaponInstance != null)
+            _primaryWeaponInstance.SetAimAt(aimAt);
+        if (_secondaryWeaponInstance != null)
+            _secondaryWeaponInstance.SetAimAt(aimAt);
+    }
 
     public void TriggerBarrelRoll(int dir)
     {
@@ -337,9 +340,9 @@ public class Vehicle : MonoBehaviour
         }
     }
 
-	private void OnShoot(int shootPointIndex)
-	{
-	}
+    private void OnShoot(int shootPointIndex)
+    {
+    }
 
     private void Update()
     {
@@ -507,6 +510,10 @@ public class Vehicle : MonoBehaviour
         if (IsBoosting)
         {
             thrustAmount = 1f;
+            if (_previousBoost != IsBoosting)
+            {
+                StartBoost();
+            }
         }
         else
         {
@@ -532,35 +539,46 @@ public class Vehicle : MonoBehaviour
 			thruster.UpdateFlare();
 		}
         */
+
+        _previousBoost = IsBoosting;
     }
 
-	public void TriggerBoostRegeneration()
-	{
-		_boostRegenerate = true;
-		if (_boostEnergyCooldown < 0f)
-			_boostEnergyCooldown = BoostEnergyRegenerateDelay;
-	}
+    private void StartBoost()
+    {
+        if (BoostStart != null)
+        {
+            BoostStart.Play();
+        }
+        Thrusters.ForEach(t => t.TriggerBoost());
+    }
 
-	private RaycastHit[] _moveHits = new RaycastHit[20];
+    public void TriggerBoostRegeneration()
+    {
+        _boostRegenerate = true;
+        if (_boostEnergyCooldown < 0f)
+            _boostEnergyCooldown = BoostEnergyRegenerateDelay;
+    }
 
-	private void UpdateVelocityFromCollisions()
-	{
-		var moveRay = new Ray(transform.position + CollisionsCentre, _velocity);
+    private RaycastHit[] _moveHits = new RaycastHit[20];
 
-		var castCount = Physics.SphereCastNonAlloc(moveRay, CollisionRadius, _moveHits, _velocity.magnitude * Time.deltaTime, _environmentMask);
+    private void UpdateVelocityFromCollisions()
+    {
+        var moveRay = new Ray(transform.position + CollisionsCentre, _velocity);
 
-		for (var i = 0; i < castCount; i++)
-		{
-			var projVel = Vector3.Project(_velocity, _moveHits[i].normal);
-			if ((_moveHits[i].point - Vector3.zero).sqrMagnitude > 0.00001f)
-				_velocity -= projVel;
-		}
-	}
+        var castCount = Physics.SphereCastNonAlloc(moveRay, CollisionRadius, _moveHits, _velocity.magnitude * Time.deltaTime, _environmentMask);
 
-	public Vector3 GetVelocity()
-	{
-		return _velocity;
-	}
+        for (var i = 0; i < castCount; i++)
+        {
+            var projVel = Vector3.Project(_velocity, _moveHits[i].normal);
+            if ((_moveHits[i].point - Vector3.zero).sqrMagnitude > 0.00001f)
+                _velocity -= projVel;
+        }
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return _velocity;
+    }
 
     private void VehicleDamage(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
     {
@@ -642,9 +660,9 @@ public class Vehicle : MonoBehaviour
         }
     }
 
-	private void OnDrawGizmos()
-	{
-		Gizmos.color = Color.blue;
-		Gizmos.DrawWireSphere(transform.position + CollisionsCentre, CollisionRadius);
-	}
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position + CollisionsCentre, CollisionRadius);
+    }
 }
