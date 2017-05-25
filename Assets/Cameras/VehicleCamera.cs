@@ -7,12 +7,14 @@ public class VehicleCamera : UniverseCamera
 
 	public Transform BackgroundTransform;
     public float DistanceBehind = 15f;
+    public float VerticalDistance = 3.5f;
 
     public List<Camera> ChildCameras;
     public AnimationCurve ShakeAmplitude = AnimationCurve.Linear(0, 0, 1, 1);
 
     // States
     public VehicleCameraFollow Follow;
+    public VehicleCameraPan Pan;
 
     private VehicleCameraState _state;
 
@@ -31,12 +33,14 @@ public class VehicleCamera : UniverseCamera
     private void Start()
 	{
         Follow = new VehicleCameraFollow(this);
-        SetState(Follow);
+        Pan = new VehicleCameraPan(this);
+        SetState(Pan);
 	}
 
 	public override void Move()
 	{
-        _state.Move();
+        _state.Move(Time.deltaTime);
+        BackgroundTransform.transform.position = transform.position;
         MoveShake();
 	}
 

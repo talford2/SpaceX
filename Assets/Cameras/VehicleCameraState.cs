@@ -16,7 +16,7 @@ public abstract class VehicleCameraState
 
     public abstract void Initialize();
 
-    public abstract void Move();
+    public abstract void Move(float timeStep);
 
     public abstract void Reset();
 }

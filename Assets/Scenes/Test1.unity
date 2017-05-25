@@ -1681,17 +1681,10 @@ MonoBehaviour:
   AttachedCamera: {fileID: 2070423337}
   Target: {fileID: 0}
   BackgroundTransform: {fileID: 1212660695}
-  ChildCameras:
-  - {fileID: 1793718006}
   DistanceBehind: 15
   VerticalDistance: 3.5
-  SpringCompression: 0.7
-  SpringExpansion: 1.5
-  SpringBoostExpansion: 1.8
-  BoostFov: 100
-  RotationCatchup: 5
-  SpringCatchup: 2
-  OffsetCatchup: 5
+  ChildCameras:
+  - {fileID: 1793718006}
   ShakeAmplitude:
     serializedVersion: 2
     m_Curve:
@@ -13580,6 +13573,7 @@ MonoBehaviour:
   HideMouse: 1
   RespawnPosition: {fileID: 761010713}
   SpawnPathDestination: {fileID: 1306207303}
+  SpawnControlDelay: 4
   PlayerPinPrefab: {fileID: 121348, guid: 87d85e49fcb77c546ada889ced089d5c, type: 2}
   MouseMoveClamp: 1
   DefaultAimDistance: 500
