@@ -525,6 +525,11 @@ public class Vehicle : MonoBehaviour
             {
                 thrustAmount = 0f;
             }
+
+            if (_previousBoost != IsBoosting)
+            {
+                StopBoost();
+            }
         }
         if (!IsBoosting && !IsAccelerating && !IsBraking)
         {
@@ -550,6 +555,11 @@ public class Vehicle : MonoBehaviour
             BoostStart.Play();
         }
         Thrusters.ForEach(t => t.TriggerBoost());
+    }
+
+    private void StopBoost()
+    {
+        Thrusters.ForEach(t => t.StopBoost());
     }
 
     public void TriggerBoostRegeneration()
