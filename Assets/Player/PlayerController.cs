@@ -112,7 +112,10 @@ public class PlayerController : MonoBehaviour
 
         SetControlEnabled(false);
         HeadsUpDisplay.Current.HideCrosshair();
-
+        /*
+        var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
+        cam.SetState(cam.Pan);
+        */
         _playerNpc.enabled = true;
         _playerNpc.PathDestination = SpawnPathDestination.UniversePosition;
         _playerNpc.SetState(_playerNpc.Path);
@@ -126,6 +129,9 @@ public class PlayerController : MonoBehaviour
         SetControlEnabled(true);
         _playerNpc.enabled = false;
         HeadsUpDisplay.Current.ShowCrosshair();
+
+        var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
+        cam.SetState(cam.Follow);
     }
 
     private void SpawnVehicle(Vehicle vehiclePrefab, Shiftable spawner)
