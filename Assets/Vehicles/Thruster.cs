@@ -6,9 +6,12 @@ public class Thruster : MonoBehaviour
     public ShiftTrail Trail;
     public ParticleSystem BoomParticles;
     public ParticleSystem ContinousThrust;
+    public AudioSource BoostStartSound;
+    public AudioSource BoostLoopSound;
 
     public void Initialize()
     {
+        Trail.Shiftable = GetComponentInParent<Shiftable>();
         Trail.Initialize(transform.position);
     }
 
@@ -18,9 +21,17 @@ public class Thruster : MonoBehaviour
         {
             BoomParticles.Play();
         }
+        if (BoostStartSound != null)
+        {
+            BoostStartSound.Play();
+        }
         if (ContinousThrust != null && !ContinousThrust.isPlaying)
         {
             ContinousThrust.Play();
+        }
+        if (BoostLoopSound != null)
+        {
+            BoostLoopSound.Play();
         }
     }
 
@@ -29,6 +40,10 @@ public class Thruster : MonoBehaviour
         if (ContinousThrust != null)
         {
             ContinousThrust.Stop();
+        }
+        if (BoostLoopSound != null)
+        {
+            BoostLoopSound.Stop();
         }
     }
 }

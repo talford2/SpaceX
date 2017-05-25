@@ -15,7 +15,6 @@ public class ShiftTrail : MonoBehaviour
 
     private void Awake()
     {
-        Shiftable.OnShift += Shift;
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.useWorldSpace = true;
 
@@ -28,6 +27,8 @@ public class ShiftTrail : MonoBehaviour
 
     public void Initialize(Vector3 position)
     {
+        Shiftable.OnShift += Shift;
+
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.useWorldSpace = true;
 

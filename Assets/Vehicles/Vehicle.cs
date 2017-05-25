@@ -93,11 +93,9 @@ public class Vehicle : MonoBehaviour
     public GameObject ExplodeDeathExplosion;
     public GameObject SpinDeathExplosion;
 
-    [Header("Other")]
-    public List<Thruster> Thrusters;
-
-    public AudioSource BoostSound;
-    public AudioSource BoostStart;
+    [Header("Thrusters")]
+    public GameObject ThrusterPrefab;
+    public List<Transform> ThrusterTransforms;
 
     private Shiftable _shiftable;
 
@@ -135,6 +133,9 @@ public class Vehicle : MonoBehaviour
     private float barrelStrafeVelocity;
 
     private bool _previousBoost = false;
+
+    // Thrusters
+    private List<Thruster> _thrusters;
 
     // Wound effect
     private GameObject _woundObj;
@@ -202,7 +203,19 @@ public class Vehicle : MonoBehaviour
             if (SecondaryWeaponPrefab != null)
                 shootPoint.Initialize(SecondaryWeaponPrefab.MuzzlePrefab);
         }
-
+        _thrusters = new List<Thruster>();
+        if (ThrusterPrefab != null)
+        {
+            foreach (var thrusterTransform in ThrusterTransforms)
+            {
+                var thrusterInstance = Instantiate(ThrusterPrefab).GetComponent<Thruster>();
+                thrusterInstance.transform.SetParent(thrusterTransform);
+                thrusterInstance.transform.localPosition = Vector3.zero;
+                thrusterInstance.transform.localRotation = Quaternion.identity;
+                thrusterInstance.transform.localScale = Vector3.one;
+                _thrusters.Add(thrusterInstance);
+            }
+        }
         _velocityReference = new VelocityReference(_velocity);
 
         _killable = GetComponent<Killable>();
@@ -301,7 +314,7 @@ public class Vehicle : MonoBehaviour
 
     private void Start()
     {
-        foreach (var thruster in Thrusters)
+        foreach (var thruster in _thrusters)
         {
             thruster.Initialize();
         }
@@ -409,10 +422,6 @@ public class Vehicle : MonoBehaviour
                 _boostRegenerate = false;
                 _boostEnergyCooldown = BoostEnergyRegenerateDelay;
             }
-            if (!BoostSound.isPlaying)
-            {
-                BoostSound.Play();
-            }
         }
 
         if (!IsBoosting)
@@ -421,7 +430,6 @@ public class Vehicle : MonoBehaviour
             {
                 CurrentSpeed -= BoostBrake * Time.deltaTime;
             }
-            BoostSound.Stop();
         }
 
         // Idling
@@ -550,16 +558,12 @@ public class Vehicle : MonoBehaviour
 
     private void StartBoost()
     {
-        if (BoostStart != null)
-        {
-            BoostStart.Play();
-        }
-        Thrusters.ForEach(t => t.TriggerBoost());
+        _thrusters.ForEach(t => t.TriggerBoost());
     }
 
     private void StopBoost()
     {
-        Thrusters.ForEach(t => t.StopBoost());
+        _thrusters.ForEach(t => t.StopBoost());
     }
 
     public void TriggerBoostRegeneration()
