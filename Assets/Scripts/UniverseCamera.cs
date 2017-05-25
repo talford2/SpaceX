@@ -17,10 +17,15 @@ public abstract class UniverseCamera : MonoBehaviour
         get { return _shiftable; }
     }
 
-    private void Awake()
+    public void Initialize()
     {
         _shiftable = GetComponent<Shiftable>();
         SetFree(false);
+    }
+
+    private void Awake()
+    {
+        Initialize();
     }
 
     private void LateUpdate()
