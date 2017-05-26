@@ -627,6 +627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c0169a9d6b80e4485076e648903f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Interval: 0.05
-  VertextCount: 20
+  Interval: 0.01
+  VertextCount: 100
   Shiftable: {fileID: 11425134}
