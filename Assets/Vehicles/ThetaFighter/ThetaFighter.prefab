@@ -380,8 +380,8 @@ MonoBehaviour:
   MaxSpeed: 50
   MinSpeed: 3
   Brake: 20
-  MaxBoostSpeed: 500
-  BoostAcceleration: 250
+  MaxBoostSpeed: 130
+  BoostAcceleration: 100
   BoostBrake: 150
   CurrentSpeed: 0
   PitchSpeed: 60
