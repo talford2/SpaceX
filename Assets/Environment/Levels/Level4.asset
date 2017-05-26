@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Name: Level4
   m_EditorClassIdentifier: 
   Background: {fileID: 8900000, guid: acf7baf307716f04e95433e6b7bd65bf, type: 3}
-  LighColour: {r: 1, g: 0.7411765, b: 0.9254902, a: 1}
-  LightDirection: {x: 46.7, y: 74.4, z: 24.09}
   SystemName: 
   SlipGateLevelIndex: 0
   UniverseEvents:
@@ -27,8 +25,6 @@ MonoBehaviour:
     Count: 120
   - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
     Count: 250
-  - Prefab: {fileID: 169094, guid: 495b3be0ae38dea4da8f84a5e915e065, type: 2}
-    Count: 1
   - Prefab: {fileID: 177598, guid: 403d1749b7521ff4a91ca598f46fca10, type: 2}
     Count: 8
   - Prefab: {fileID: 171458, guid: 9c89b4a47868dce4f9b2c24c321570d6, type: 2}

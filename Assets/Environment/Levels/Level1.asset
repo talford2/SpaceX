@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   Background: {fileID: 8900000, guid: f9c7b6888cdb6584d8a70b87fea5b24c, type: 3}
-  LighColour: {r: 0.8784314, g: 0.7529412, b: 1, a: 1}
-  LightDirection: {x: 20.44, y: 322.4, z: 0}
   SystemName: Rho Perseus
   SlipGateLevelIndex: 1
   UniverseEvents:
@@ -27,8 +25,6 @@ MonoBehaviour:
     Count: 120
   - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
     Count: 250
-  - Prefab: {fileID: 169094, guid: 495b3be0ae38dea4da8f84a5e915e065, type: 2}
-    Count: 1
   - Prefab: {fileID: 177598, guid: 403d1749b7521ff4a91ca598f46fca10, type: 2}
     Count: 8
   - Prefab: {fileID: 171458, guid: 9c89b4a47868dce4f9b2c24c321570d6, type: 2}

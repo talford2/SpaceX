@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Name: Level2
   m_EditorClassIdentifier: 
   Background: {fileID: 8900000, guid: 9af2460b756ab914aaebe281fdb4bdfe, type: 3}
-  LighColour: {r: 1, g: 0.83137256, b: 0.7411765, a: 1}
-  LightDirection: {x: 2.48, y: 206.54, z: 24.09}
   SystemName: Eto Song
   SlipGateLevelIndex: 2
   UniverseEvents:
@@ -27,8 +25,6 @@ MonoBehaviour:
     Count: 120
   - Prefab: {fileID: 165154, guid: 5400f287cf0857941930a9f3428caccf, type: 2}
     Count: 250
-  - Prefab: {fileID: 169094, guid: 495b3be0ae38dea4da8f84a5e915e065, type: 2}
-    Count: 1
   - Prefab: {fileID: 177598, guid: 403d1749b7521ff4a91ca598f46fca10, type: 2}
     Count: 8
   - Prefab: {fileID: 171458, guid: 9c89b4a47868dce4f9b2c24c321570d6, type: 2}
