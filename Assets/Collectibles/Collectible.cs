@@ -85,7 +85,6 @@ public class Collectible : MonoBehaviour
         {
             if (_isCollected)
                 _isCollected = false;
-            _velocity = Vector3.MoveTowards(_velocity, Vector3.zero, _acceleration * Time.deltaTime);
         }
         var displacement = _velocity * Time.deltaTime;
         _shiftable.Translate(displacement);
