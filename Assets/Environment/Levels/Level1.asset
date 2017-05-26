@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   Background: {fileID: 8900000, guid: f9c7b6888cdb6584d8a70b87fea5b24c, type: 3}
-  LighColour: {r: 0.8784314, g: 0.7529412, b: 1, a: 1}
-  LightDirection: {x: 20.44, y: 322.4, z: 0}
-  SystemName: Rho Perseus
+  SystemName: Kappa Zule
   SlipGateLevelIndex: 1
   UniverseEvents:
   - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
     Count: 90
   - Prefab: {fileID: 184406, guid: 72068408bf421da45bf7793c91df7b5c, type: 2}
-    Count: 5
+    Count: 0
   - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
     Count: 8
   - Prefab: {fileID: 165154, guid: 41b92538d3829bf458b16c1a01d0c9ff, type: 2}

@@ -10951,6 +10951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 761010714}
   - component: {fileID: 761010713}
+  - component: {fileID: 761010715}
   m_Layer: 0
   m_Name: Respawn Player Start
   m_TagString: Untagged
@@ -10972,8 +10973,8 @@ MonoBehaviour:
   UniverseCellIndex:
     X: 0
     Y: 0
-    Z: 7
-  CellLocalPosition: {x: 0, y: -80, z: 110}
+    Z: 0
+  CellLocalPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &761010714
 Transform:
   m_ObjectHideFlags: 0
@@ -10987,6 +10988,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &761010715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 761010712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e850c08cfddc31345b4bf1cb04b113cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shiftable: {fileID: 761010713}
 --- !u!1 &777671993
 GameObject:
   m_ObjectHideFlags: 0

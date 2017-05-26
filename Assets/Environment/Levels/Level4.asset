@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Name: Level4
   m_EditorClassIdentifier: 
   Background: {fileID: 8900000, guid: acf7baf307716f04e95433e6b7bd65bf, type: 3}
-  LighColour: {r: 1, g: 0.7411765, b: 0.9254902, a: 1}
-  LightDirection: {x: 46.7, y: 74.4, z: 24.09}
-  SystemName: 
+  SystemName: Lambda Sol
   SlipGateLevelIndex: 0
   UniverseEvents:
   - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
     Count: 90
   - Prefab: {fileID: 184406, guid: 72068408bf421da45bf7793c91df7b5c, type: 2}
-    Count: 5
+    Count: 0
   - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
     Count: 8
   - Prefab: {fileID: 165154, guid: 41b92538d3829bf458b16c1a01d0c9ff, type: 2}
