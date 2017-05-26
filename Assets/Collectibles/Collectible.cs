@@ -66,7 +66,7 @@ public class Collectible : MonoBehaviour
                 _destructor.Cooldown = 15f;
             }
         }
-        if (_isCollected)
+        if (_isCollected && _collectorTransform != null)
         {
             _speed += _acceleration * Time.deltaTime;
             _velocity = Vector3.MoveTowards(_velocity, Vector3.zero, 1f * Time.deltaTime);
@@ -80,6 +80,12 @@ public class Collectible : MonoBehaviour
                 Give();
                 Destroy(gameObject);
             }
+        }
+        if (_collectorTransform == null)
+        {
+            if (_isCollected)
+                _isCollected = false;
+            _velocity = Vector3.MoveTowards(_velocity, Vector3.zero, _acceleration * Time.deltaTime);
         }
         var displacement = _velocity * Time.deltaTime;
         _shiftable.Translate(displacement);
