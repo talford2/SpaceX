@@ -417,7 +417,8 @@ MonoBehaviour:
   MaxYawSpeed: 180
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
-  AimOffsetRadius: 1
+  AimOffsetRadius: 10
+  AimDistanceOffsetMultiplier: 0.01
   Targetable: {fileID: 114354613596268164}
 --- !u!114 &11491946
 MonoBehaviour:
