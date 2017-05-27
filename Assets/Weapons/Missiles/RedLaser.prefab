@@ -63,7 +63,7 @@ MonoBehaviour:
   FromReference: {fileID: 0}
   HitEffectPrefab: {fileID: 198982, guid: fb06b7b045476694d8af2bb217b41133, type: 2}
   HitDecalPrefab: {fileID: 121998, guid: 5ca4b0ff81cbb7148a77afcf43fcab11, type: 2}
-  MissileLength: 30
+  MissileLength: 10
   Tracer: {fileID: 12017834}
 --- !u!120 &12017834
 LineRenderer:
@@ -99,7 +99,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 6.19}
+  - {x: 0, y: 0, z: 4}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
