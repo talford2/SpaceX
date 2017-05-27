@@ -5529,18 +5529,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b74261f70d5e1d34e87c6b2482d25f56, type: 2}
   Targetable: {fileID: 11450942}
   Killable: {fileID: 11443084}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11412030
 MonoBehaviour:
@@ -5836,18 +5827,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b74261f70d5e1d34e87c6b2482d25f56, type: 2}
   Targetable: {fileID: 11449178}
   Killable: {fileID: 11401320}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11442272
 MonoBehaviour:
@@ -5860,18 +5842,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b74261f70d5e1d34e87c6b2482d25f56, type: 2}
   Targetable: {fileID: 11424952}
   Killable: {fileID: 11403496}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11443084
 MonoBehaviour:
@@ -5902,18 +5875,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b74261f70d5e1d34e87c6b2482d25f56, type: 2}
   Targetable: {fileID: 11480984}
   Killable: {fileID: 11435192}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11449178
 MonoBehaviour:
@@ -5981,18 +5945,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b74261f70d5e1d34e87c6b2482d25f56, type: 2}
   Targetable: {fileID: 11451026}
   Killable: {fileID: 11419606}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11453700
 MonoBehaviour:
@@ -6085,18 +6040,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b74261f70d5e1d34e87c6b2482d25f56, type: 2}
   Targetable: {fileID: 11414990}
   Killable: {fileID: 11457458}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &11477070
 MonoBehaviour:
