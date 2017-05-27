@@ -36,6 +36,8 @@ public class LevelDefinition : ScriptableObject
 
     public int SlipGateLevelIndex = 0;
 
+	public int CellRadius = 10;
+
     public List<UniverseEventCount> UniverseEvents;
 
     private Material _mat;
@@ -70,6 +72,6 @@ public class LevelDefinition : ScriptableObject
     private string FullFilePath()
     {
         //return string.Format("{0}/Environment/Levels/{1}.xml", Application.dataPath, name);
-        return string.Format("{0}/{1}.xml", Application.persistentDataPath, name);
+        return string.Format("{0}/{1}.xml", Application.persistentDataPath, Background.name);
     }
 }

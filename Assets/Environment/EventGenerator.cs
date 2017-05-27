@@ -3,11 +3,7 @@ using System.Collections.Generic;
 
 public class EventGenerator : MonoBehaviour
 {
-	//public List<UniverseEventCount> UniverseEvents;
-
-	public int CellRadius = 10;
-
-	public void Generate(List<UniverseEventCount> universeEvents, int seed)
+	public void Generate(int cellRadius, List<UniverseEventCount> universeEvents, int seed)
 	{
         Random.InitState(seed);
 		var go = new GameObject("UniverseEvents");
@@ -20,7 +16,7 @@ public class EventGenerator : MonoBehaviour
 				var shifter = eventObj.Shiftable;
 				eventObj.transform.SetParent(parent);
 				eventObj.transform.rotation = Random.rotation;
-				shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * CellRadius);
+				shifter.UniverseCellIndex = new CellIndex(Random.insideUnitSphere * cellRadius);
 			    shifter.CellLocalPosition = Utility.RandomInsideCube*Universe.Current.CellSize - Universe.Current.CellSize*0.5f*Vector3.one;
 				Universe.Current.UniverseEvents.Add(eventObj);
 			}
