@@ -1207,7 +1207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf9a17167b7ddb4bbecc4bff4584045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CellRadius: 2
 --- !u!1 &116447565
 GameObject:
   m_ObjectHideFlags: 0
@@ -8439,7 +8438,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &663547979
 GameObject:
@@ -11141,99 +11140,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 985121381}
---- !u!1 &989789833
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 989789835}
-  - component: {fileID: 989789834}
-  - component: {fileID: 989789836}
-  m_Layer: 0
-  m_Name: Squadron3
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &989789834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 989789833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25cd1b4228c841c45b4e7567573f081d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VehiclePrefab: {fileID: 11490646, guid: 8bbf55beb8aad884c88e0e8d057e3f4f, type: 2}
-  Team: 1
-  IsSquadronMember: 0
-  DropItems: []
-  MaxDropAmount: 5
-  Destination: {x: 0, y: 0, z: 0}
-  Target: {fileID: 0}
-  MaxTargetDistance: 2000
-  SteerMultiplier: 0.3
-  ProximitySensor: {fileID: 0}
-  IsDebugSpawn: 0
-  IsFollowIdleDestination: 0
-  IdleDestination: {x: 0, y: 0, z: 0}
-  IdleUpDestination: {x: 0, y: 0, z: 0}
-  AttackRange: 100
-  ShootAngleTolerance: 5
-  OvertakeDistance: 50
-  BurstTime: 0.5
-  BurstWaitTime: 0.7
-  ExrapolationTimeError: 0.5
-  MinAimOffsetRadius: 5
-  MaxAimOffsetRadius: 20
-  EvadeDistance: 200
-  TurnAroundDistance: 250
-  AcclerateDistance: 100
-  MinDodgeIntervalTime: 1
-  MaxDodgeIntervalTime: 6
-  DodgeRadius: 50
-  DodgeArcAngle: 180
-  CanBarrelRoll: 0
-  SightRange: 50
-  Neighbours: []
---- !u!4 &989789835
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 989789833}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &989789836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 989789833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53151bd6f245ef34d849fbe215ad99f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CallSign: 
-  TotalPower: 8
-  Weapons: 1
-  Shields: 1
-  Special: 6
-  PrimaryWeapon: {fileID: 0}
-  SecondaryWeapon: {fileID: 0}
-  Shield: {fileID: 0}
-  Engine: {fileID: 0}
 --- !u!1 &992918083
 GameObject:
   m_ObjectHideFlags: 0
@@ -11428,7 +11334,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1006759598
 GameObject:
@@ -12173,9 +12079,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Members:
   - {fileID: 290884929}
-  - {fileID: 989789834}
-  - {fileID: 1739396245}
-  - {fileID: 1829101715}
   ShieldRegenerateDelay: 5
   ShieldRegenerateRate: 5
   CollectRadius: 50
@@ -17195,7 +17098,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4553419461249914, guid: a8e651fdd3a6bd345a284accf05cc07b, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8e651fdd3a6bd345a284accf05cc07b, type: 2}
@@ -18197,7 +18100,7 @@ Transform:
   - {fileID: 1638939042}
   - {fileID: 211712070}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1687773509
 GameObject:
@@ -18786,99 +18689,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DelayTime: 0.5
   HoldTime: 1
---- !u!1 &1739396244
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1739396246}
-  - component: {fileID: 1739396245}
-  - component: {fileID: 1739396247}
-  m_Layer: 0
-  m_Name: Squadron4
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1739396245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1739396244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25cd1b4228c841c45b4e7567573f081d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
-  Team: 1
-  IsSquadronMember: 0
-  DropItems: []
-  MaxDropAmount: 5
-  Destination: {x: 0, y: 0, z: 0}
-  Target: {fileID: 0}
-  MaxTargetDistance: 2000
-  SteerMultiplier: 0.3
-  ProximitySensor: {fileID: 0}
-  IsDebugSpawn: 0
-  IsFollowIdleDestination: 0
-  IdleDestination: {x: 0, y: 0, z: 0}
-  IdleUpDestination: {x: 0, y: 0, z: 0}
-  AttackRange: 100
-  ShootAngleTolerance: 5
-  OvertakeDistance: 50
-  BurstTime: 0.5
-  BurstWaitTime: 0.7
-  ExrapolationTimeError: 0.5
-  MinAimOffsetRadius: 5
-  MaxAimOffsetRadius: 20
-  EvadeDistance: 200
-  TurnAroundDistance: 250
-  AcclerateDistance: 100
-  MinDodgeIntervalTime: 1
-  MaxDodgeIntervalTime: 6
-  DodgeRadius: 50
-  DodgeArcAngle: 180
-  CanBarrelRoll: 0
-  SightRange: 50
-  Neighbours: []
---- !u!4 &1739396246
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1739396244}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1739396247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1739396244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53151bd6f245ef34d849fbe215ad99f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CallSign: 
-  TotalPower: 13
-  Weapons: 1
-  Shields: 6
-  Special: 6
-  PrimaryWeapon: {fileID: 0}
-  SecondaryWeapon: {fileID: 0}
-  Shield: {fileID: 0}
-  Engine: {fileID: 0}
 --- !u!1 &1749271274
 GameObject:
   m_ObjectHideFlags: 0
@@ -19889,99 +19699,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1810241161}
---- !u!1 &1829101714
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1829101716}
-  - component: {fileID: 1829101715}
-  - component: {fileID: 1829101717}
-  m_Layer: 0
-  m_Name: Squadron5
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1829101715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1829101714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25cd1b4228c841c45b4e7567573f081d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
-  Team: 1
-  IsSquadronMember: 0
-  DropItems: []
-  MaxDropAmount: 5
-  Destination: {x: 0, y: 0, z: 0}
-  Target: {fileID: 0}
-  MaxTargetDistance: 2000
-  SteerMultiplier: 0.3
-  ProximitySensor: {fileID: 0}
-  IsDebugSpawn: 0
-  IsFollowIdleDestination: 0
-  IdleDestination: {x: 0, y: 0, z: 0}
-  IdleUpDestination: {x: 0, y: 0, z: 0}
-  AttackRange: 100
-  ShootAngleTolerance: 5
-  OvertakeDistance: 50
-  BurstTime: 0.5
-  BurstWaitTime: 0.7
-  ExrapolationTimeError: 0.5
-  MinAimOffsetRadius: 5
-  MaxAimOffsetRadius: 20
-  EvadeDistance: 200
-  TurnAroundDistance: 250
-  AcclerateDistance: 100
-  MinDodgeIntervalTime: 1
-  MaxDodgeIntervalTime: 6
-  DodgeRadius: 50
-  DodgeArcAngle: 180
-  CanBarrelRoll: 0
-  SightRange: 50
-  Neighbours: []
---- !u!4 &1829101716
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1829101714}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1829101717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1829101714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53151bd6f245ef34d849fbe215ad99f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CallSign: 
-  TotalPower: 13
-  Weapons: 1
-  Shields: 6
-  Special: 6
-  PrimaryWeapon: {fileID: 0}
-  SecondaryWeapon: {fileID: 0}
-  Shield: {fileID: 0}
-  Engine: {fileID: 0}
 --- !u!1 &1832622424
 GameObject:
   m_ObjectHideFlags: 0
