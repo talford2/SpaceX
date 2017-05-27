@@ -31,12 +31,15 @@ public class PlayerSquadron : MonoBehaviour
         _collectableMask = LayerMask.GetMask("Collectible");
     }
 
+    public void AddPlayerToSquadron()
+    {
+        Members.Insert(0, PlayerController.Current.GetComponent<Fighter>());
+    }
+
     public void Initialize()
     {
-        var playerVehicleInstance = PlayerController.Current.VehicleInstance;
         var playerNpc = PlayerController.Current.GetComponent<Fighter>();
-
-        Members.Insert(0, playerNpc);
+        var playerVehicleInstance = PlayerController.Current.VehicleInstance;
 
         for (var i = 0; i < Members.Count; i++)
         {
@@ -147,6 +150,7 @@ public class PlayerSquadron : MonoBehaviour
 
     private void BindMemberEvents(Fighter member)
     {
+        Debug.LogFormat("MEMBER: {0}", member.VehicleInstance);
         var squadronShieldRegenerator = member.VehicleInstance.GetComponent<ShieldRegenerator>();
         squadronShieldRegenerator.OnRegenerate += SquadronMember_OnRegenerate;
         var memberKillable = member.VehicleInstance.Killable;
@@ -233,7 +237,7 @@ public class PlayerSquadron : MonoBehaviour
 
     public Fighter GetCurrentMember()
     {
-        return Members[_curSquadronIndex];
+        return GetMember(_curSquadronIndex);
     }
 
     public int GetCurrentIndex()

@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour
 		_playerNpc.GetComponent<ShipProfile>().CallSign = CallSign;
 		_playerNpc.VehiclePrefab = VehiclePrefab;
 		_playerNpc.enabled = false;
+        Squadron.AddPlayerToSquadron();
 		SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
 		_playerNpc.SetVehicleInstance(_playVehicleInstance);
 		_playerNpc.IsFollowIdleDestination = true;
