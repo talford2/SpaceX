@@ -27,6 +27,7 @@ public class Turret : MonoBehaviour
 	public float ExtrapolationTimeError = 0.5f;
     //public float AimOffsetRadius = 5f;
     public float AimDistanceOffsetMultiplier = 0f;
+    public float AimTooCloseDistance = 10f;
     public Targetable Targetable;
 
 	private VelocityReference _velocityReference;
@@ -165,7 +166,7 @@ public class Turret : MonoBehaviour
 				RaycastHit aimHit;
 				if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance))
 				{
-                    if (aimHit.distance < 5f)
+                    if (aimHit.distance < AimTooCloseDistance)
                     {
                         dontShoot = true;
                     }
