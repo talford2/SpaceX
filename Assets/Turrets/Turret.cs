@@ -25,7 +25,9 @@ public class Turret : MonoBehaviour
 	[Header("Aiming")]
 	public float AimTolerance = 5f;
 	public float ExtrapolationTimeError = 0.5f;
-    public float AimOffsetRadius = 5f;
+    //public float AimOffsetRadius = 5f;
+    public float AimDistanceOffsetMultiplier = 0f;
+    public float AimTooCloseDistance = 10f;
     public Targetable Targetable;
 
 	private VelocityReference _velocityReference;
@@ -114,7 +116,10 @@ public class Turret : MonoBehaviour
 					var targetVehicle = _target.GetComponent<Vehicle>();
                     if (targetVehicle != null)
                     {
-                        _aimPosition = Utility.GetVehicleExtrapolatedPosition(targetVehicle, _weaponInstance, 0f) + Random.insideUnitSphere * AimOffsetRadius;
+                        var targetPosition = Utility.GetVehicleExtrapolatedPosition(targetVehicle, _weaponInstance, 0f);
+                        var distance = (targetPosition - transform.position).magnitude;
+                        var offset = Random.insideUnitSphere * distance * AimDistanceOffsetMultiplier;
+                        _aimPosition = targetPosition + offset;
                     }
 
 					_aimCooldown = _aimInterval;
@@ -161,7 +166,7 @@ public class Turret : MonoBehaviour
 				RaycastHit aimHit;
 				if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance))
 				{
-                    if (aimHit.distance < 5f)
+                    if (aimHit.distance < AimTooCloseDistance)
                     {
                         dontShoot = true;
                     }
