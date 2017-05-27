@@ -88,7 +88,7 @@ public class LevelManager : MonoBehaviour
         //DirectionLight.transform.rotation = Quaternion.Euler(lvl.LightDirection);
         _reflectionProbe.RenderProbe();
         _eventGenerator.Clear();
-        _eventGenerator.Generate(lvl.UniverseEvents, Random.Range(int.MinValue, int.MaxValue));
+        _eventGenerator.Generate(lvl.CellRadius, lvl.UniverseEvents, Random.Range(int.MinValue, int.MaxValue));
         _levelIndex = index;
     }
 
