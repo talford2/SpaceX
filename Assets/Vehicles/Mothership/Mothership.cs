@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Mothership : MonoBehaviour
 {
+    public Team Team;
     public GameObject TurretPrefab;
     public List<Transform> TurretTransforms;
     public List<Transform> BayTransforms;
@@ -41,12 +42,15 @@ public class Mothership : MonoBehaviour
         _killables = new List<Killable>();
         foreach (var turretTransform in TurretTransforms)
         {
-            var turret = (GameObject)Instantiate(TurretPrefab, turretTransform.position, turretTransform.rotation);
+            var turret = ((GameObject)Instantiate(TurretPrefab, turretTransform.position, turretTransform.rotation)).GetComponent<Turret>();
+            turret.Targetable.Team = Team;
             turret.transform.SetParent(turretTransform);
             _killables.Add(turret.GetComponent<Killable>());
         }
         foreach (var bayTransform in BayTransforms)
         {
+            var bayTargetable = bayTransform.GetComponent<Targetable>();
+            bayTargetable.Team = Team;
             _killables.Add(bayTransform.GetComponent<Killable>());
         }
         _liveCount = _killables.Count;

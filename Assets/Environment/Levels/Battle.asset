@@ -18,3 +18,5 @@ MonoBehaviour:
   UniverseEvents:
   - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
     Count: 1
+  - Prefab: {fileID: 1817310021557854, guid: d599fce929a09b04b8f1517bd09262b8, type: 2}
+    Count: 1
