@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 11466700}
   - component: {fileID: 11491946}
   m_Layer: 0
-  m_Name: FlakTurret
+  m_Name: FriendlyLaserTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Options: {fileID: 11400000, guid: 7b6a0172a64c4d04b98c2d73e06abfcf, type: 2}
+  Options: {fileID: 11400000, guid: 00e1068987575d0478faa4a9a3b2559e, type: 2}
   Targetable: {fileID: 114354613596268164}
   Killable: {fileID: 11491946}
   IsDisabled: 0
@@ -381,7 +381,7 @@ MonoBehaviour:
   Guns: {fileID: 178440}
   RecoilBarrels:
   - {fileID: 491976}
-  WeaponPrefab: {fileID: 11413680, guid: b52259048008cdf479d85f09ee6d8529, type: 2}
+  WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
   ShootPoints:
   - {fileID: 11438764}
   MaxTargetDistance: 1000
@@ -594,5 +594,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 2
+  Team: 1
   LockedOnBy: {fileID: 0}

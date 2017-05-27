@@ -10,6 +10,8 @@ public class PlayerSquadron : MonoBehaviour
     public float CollectRadius = 50f;
 
     [Header("Trackers")]
+    public VehicleTrackerValues TrackerOptions;
+    /*
     public Sprite ArrowSprite;
     public Sprite TrackerSprite;
     public Sprite FarTrackerSprite;
@@ -17,6 +19,7 @@ public class PlayerSquadron : MonoBehaviour
     public Sprite LockingTrackerSprite;
     public Sprite LockedTrackerSprite;
     public Color TrackerColor = Color.white;
+    */
     public Font SquadronTrackerFont;
     public GameObject TrackerPlanePrefab;
 
@@ -89,16 +92,16 @@ public class PlayerSquadron : MonoBehaviour
             member.VehicleInstance.SetSecondaryWeapon(profile.SecondaryWeapon.gameObject);
         
         var squadronTracker = member.VehicleInstance.gameObject.AddComponent<SquadronTracker>();
-        squadronTracker.ArrowSprite = memberTracker.ArrowSprite;
+        squadronTracker.Options = TrackerOptions;// memberTracker.Options;
         //squadronTracker.TrackerSprite = memberTracker.TrackerSprite;
         //squadronTracker.FarTrackerSprite = memberTracker.FarTrackerSprite;
         //squadronTracker.VeryFarTrackerSprite = memberTracker.VeryFarTrackerSprite;
-        squadronTracker.LockingSprite = memberTracker.LockingSprite;
-        squadronTracker.LockedSprite = memberTracker.LockedSprite;
-        squadronTracker.TrackerPlanePrefab = TrackerPlanePrefab;
+        //squadronTracker.LockingSprite = memberTracker.LockingSprite;
+        //squadronTracker.LockedSprite = memberTracker.LockedSprite;
+        //squadronTracker.TrackerPlanePrefab = TrackerPlanePrefab;
         Destroy(memberTracker);
         squadronTracker.CallSign = profile.CallSign;
-        squadronTracker.TrackerColor = TrackerColor;
+        //squadronTracker.TrackerColor = TrackerColor;
         squadronTracker.LabelFont = SquadronTrackerFont;
         squadronTracker.IsDisabled = false;
         member.IsFollowIdleDestination = true;

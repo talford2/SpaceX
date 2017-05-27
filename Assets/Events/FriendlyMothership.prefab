@@ -2819,7 +2819,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1817310021557854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -299.71893, y: 398.9857, z: -436.79395}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4271430639056788}
@@ -5526,18 +5526,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b41c3c198a986a64781c729b84e14aa5, type: 2}
   Targetable: {fileID: 114609053465017230}
   Killable: {fileID: 114559946460100792}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &114150036988740040
 MonoBehaviour:
@@ -5582,18 +5573,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b41c3c198a986a64781c729b84e14aa5, type: 2}
   Targetable: {fileID: 114622563290184446}
   Killable: {fileID: 114990953884103982}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &114180023588337540
 MonoBehaviour:
@@ -5618,18 +5600,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b41c3c198a986a64781c729b84e14aa5, type: 2}
   Targetable: {fileID: 114804799203331056}
   Killable: {fileID: 114283260240925748}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &114230363556597828
 MonoBehaviour:
@@ -5729,18 +5702,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b41c3c198a986a64781c729b84e14aa5, type: 2}
   Targetable: {fileID: 114240741585903034}
   Killable: {fileID: 114750655499659364}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &114453336212453218
 MonoBehaviour:
@@ -5796,18 +5760,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b41c3c198a986a64781c729b84e14aa5, type: 2}
   Targetable: {fileID: 114453336212453218}
   Killable: {fileID: 114572322135673742}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &114559946460100792
 MonoBehaviour:
@@ -6026,18 +5981,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
-  ShieldBarColor: {r: 0.6, g: 0.6, b: 1, a: 1}
-  HealthBarColor: {r: 1, g: 1, b: 1, a: 1}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
-  TrackerPlaneScale: 50
+  Options: {fileID: 11400000, guid: b41c3c198a986a64781c729b84e14aa5, type: 2}
   Targetable: {fileID: 114944244526518462}
   Killable: {fileID: 114967808702777040}
-  MaxDistance: 1000
   IsDisabled: 0
 --- !u!114 &114917490097385312
 MonoBehaviour:
@@ -6051,7 +5997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Team: 1
-  TurretPrefab: {fileID: 126262, guid: 34c7ddf5ad4ced042a2748f17c0f4edb, type: 2}
+  TurretPrefab: {fileID: 126262, guid: 72c81d0e52135db44bfb5b0c4478e893, type: 2}
   TurretTransforms:
   - {fileID: 4666487266339924}
   - {fileID: 4755210036685252}
