@@ -6,10 +6,12 @@ public class GrandMothership : MonoBehaviour
     public Team Team;
     [Header("Laser Turrets")]
     public GameObject LaserTurretPrefab;
-    public List<Transform> LaserTurretTransforms;
+    public Transform LaserTurretGroupTransform;
+    //public List<Transform> LaserTurretTransforms;
     [Header("Flak Turrets")]
     public GameObject FlakTurretPrefab;
-    public List<Transform> FlakTurretTransforms;
+    public Transform FlakTurretGroupTransform;
+    //public List<Transform> FlakTurretTransforms;
     [Header("Other")]
     public MapPin MapPin;
     public GameObject SoundPrefab;
@@ -21,18 +23,20 @@ public class GrandMothership : MonoBehaviour
     private void Awake()
     {
         _killables = new List<Killable>();
-        foreach (var turretTransform in LaserTurretTransforms)
+        foreach (Transform turretTransform in LaserTurretGroupTransform)
         {
-            var turret = ((GameObject)Instantiate(LaserTurretPrefab, turretTransform.position, turretTransform.rotation)).GetComponent<Turret>();
+            var turret = Instantiate(LaserTurretPrefab, turretTransform.position, turretTransform.rotation).GetComponent<Turret>();
             turret.Targetable.Team = Team;
             turret.transform.SetParent(turretTransform);
+            turret.transform.up = turretTransform.forward;
             _killables.Add(turret.GetComponent<Killable>());
         }
-        foreach (var turretTransform in FlakTurretTransforms)
+        foreach (Transform turretTransform in FlakTurretGroupTransform)
         {
-            var turret = ((GameObject)Instantiate(FlakTurretPrefab, turretTransform.position, turretTransform.rotation)).GetComponent<Turret>();
+            var turret = Instantiate(FlakTurretPrefab, turretTransform.position, turretTransform.rotation).GetComponent<Turret>();
             turret.Targetable.Team = Team;
             turret.transform.SetParent(turretTransform);
+            turret.transform.up = turretTransform.forward;
             _killables.Add(turret.GetComponent<Killable>());
         }
         _liveCount = _killables.Count;
