@@ -15077,9 +15077,11 @@ MonoBehaviour:
   SquadronPromptTime: 1.5
   SquadronIconContainer: {fileID: 1426415431770286}
   SquadronIcon: {fileID: 11436554, guid: 701f0dbd8c76b9a45bdfa879e1c0e90c, type: 2}
+  ShieldHitImage: {fileID: 114209543119761652}
   HitImage: {fileID: 114747569653151966}
   MessageText: {fileID: 114218070840269966}
-  HitFadeSpeed: 1.2
+  HurtFadeSpeed: 0.5
+  ShieldHurtFadeSpeed: 0.5
 --- !u!114 &114683490418434108
 MonoBehaviour:
   m_ObjectHideFlags: 1
