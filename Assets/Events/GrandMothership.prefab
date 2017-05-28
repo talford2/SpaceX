@@ -5349,9 +5349,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Team: 2
   LaserTurretPrefab: {fileID: 126262, guid: 34c7ddf5ad4ced042a2748f17c0f4edb, type: 2}
-  LaserTurretGroupTransform: {fileID: 0}
+  LaserTurretGroupTransform: {fileID: 4146509621553378}
   FlakTurretPrefab: {fileID: 126262, guid: d0404ba8ba9ea844c9a258111d736318, type: 2}
-  FlakTurretGroupTransform: {fileID: 0}
+  FlakTurretGroupTransform: {fileID: 4115276982063498}
   MapPin: {fileID: 114872752592872996}
   SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
   DefeatedSound: {fileID: 8300000, guid: f7b36ddbeacd38141b2fc0aabea82207, type: 3}
