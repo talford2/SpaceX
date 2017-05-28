@@ -219,7 +219,7 @@ public class Fighter : Npc<Fighter>
     private void OnVehicleDestroyed(Killable sender, GameObject attacker)
     {
         Target = null;
-        if (DropItems != null && DropItems.Count > 0)
+        if (Universe.Current.KillDropItems && DropItems != null && DropItems.Count > 0)
         {
             var dropAmount = Random.Range(0, MaxDropAmount + 1);
             for (var i = 0; i < dropAmount; i++)

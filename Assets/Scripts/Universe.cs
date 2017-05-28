@@ -13,6 +13,8 @@ public class Universe : MonoBehaviour
 
 	public List<Shiftable> ShiftableItems;
 
+    public bool KillDropItems = true;
+
 	private static Universe _current;
 
 	private List<UniverseEvent> _universeEvents;
