@@ -721,7 +721,14 @@ public class PlayerController : MonoBehaviour
 
 	private void PlayerController_OnDamage(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
 	{
-		HeadsUpDisplay.Current.Hit();
+        if (sender.Shield > 0f)
+        {
+            HeadsUpDisplay.Current.ShieldHit();
+        }
+        else
+        {
+            HeadsUpDisplay.Current.Hit();
+        }
 		//Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.1f);
 		HeadsUpDisplay.Current.RefreshSquadronIcon(0);
         if (VehicleInstance.Killable.Shield > 0f)

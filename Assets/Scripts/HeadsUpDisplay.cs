@@ -35,6 +35,7 @@ public class HeadsUpDisplay : MonoBehaviour
 	public GameObject SquadronIconContainer;
 	public Image SquadronIcon;
 
+    public Image ShieldHitImage;
 	public Image HitImage;
     public Text MessageText;
 
@@ -42,11 +43,13 @@ public class HeadsUpDisplay : MonoBehaviour
 
 	private static HeadsUpDisplay _current;
 
-	public float HitFadeSpeed = 0.5f;
+	public float HurtFadeSpeed = 0.5f;
+	public float ShieldHurtFadeSpeed = 0.5f;
 
     private float _crosshairHitCooldown;
     
-	private float _hitCooldown = 0;
+	private float _hurtCooldown = 0f;
+    private float _shieldHurtCooldown = 0f;
 
 	private List<SquadronIcon> _squadronIcons;
 
@@ -142,9 +145,13 @@ public class HeadsUpDisplay : MonoBehaviour
                 HideSquadronPrompt();
             }
         }
-        HitImage.color = new Color(1, 1, 1, _hitCooldown);
-        _hitCooldown -= Time.deltaTime * HitFadeSpeed;
-        _hitCooldown = Mathf.Max(0, _hitCooldown);
+        HitImage.color = new Color(1, 1, 1, _hurtCooldown);
+        _hurtCooldown -= Time.deltaTime * HurtFadeSpeed;
+        _hurtCooldown = Mathf.Max(0, _hurtCooldown);
+
+        ShieldHitImage.color = new Color(1, 1, 1, _shieldHurtCooldown);
+        _shieldHurtCooldown -= Time.deltaTime * ShieldHurtFadeSpeed;
+        _shieldHurtCooldown = Mathf.Max(0, _shieldHurtCooldown);
 
         if (_crosshairHitCooldown >= 0f)
         {
@@ -310,9 +317,14 @@ public class HeadsUpDisplay : MonoBehaviour
 		}
 	}
 
+    public void ShieldHit()
+    {
+        _shieldHurtCooldown = 1f;
+    }
+
 	public void Hit()
 	{
-		_hitCooldown = 1f;
+		_hurtCooldown = 1f;
 	}
 
 	public void ShowCrosshair()
