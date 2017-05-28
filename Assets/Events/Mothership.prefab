@@ -1671,7 +1671,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -848.20874, y: 392.70352, z: -636.0623}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 443960}
@@ -5546,8 +5546,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 459032}
 --- !u!114 &11412562
 MonoBehaviour:
@@ -5672,8 +5672,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 440398}
 --- !u!114 &11419120
 MonoBehaviour:
@@ -5779,8 +5779,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 443832}
 --- !u!114 &11435192
 MonoBehaviour:
@@ -5905,8 +5905,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 449742}
 --- !u!114 &11450942
 MonoBehaviour:
@@ -6026,8 +6026,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 487154}
 --- !u!114 &11474308
 MonoBehaviour:
@@ -6088,8 +6088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 461550}
 --- !u!114 &11489946
 MonoBehaviour:

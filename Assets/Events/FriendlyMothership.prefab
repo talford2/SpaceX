@@ -2819,7 +2819,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1817310021557854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -299.71893, y: 398.9857, z: -436.79395}
+  m_LocalPosition: {x: -848.95624, y: 392.22482, z: -631.7236}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4271430639056788}
@@ -5494,8 +5494,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 384234f0c1585ea41ab2a1e5d0a2122f, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 4768879368997386}
 --- !u!114 &114032519836971982
 MonoBehaviour:
@@ -5543,8 +5543,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 384234f0c1585ea41ab2a1e5d0a2122f, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 4077394056822934}
 --- !u!114 &114164764461766902
 MonoBehaviour:
@@ -5559,8 +5559,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 384234f0c1585ea41ab2a1e5d0a2122f, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 4999400441816610}
 --- !u!114 &114168519064024606
 MonoBehaviour:
@@ -5617,8 +5617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 384234f0c1585ea41ab2a1e5d0a2122f, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 4756662964805780}
 --- !u!114 &114240741585903034
 MonoBehaviour:
@@ -5914,8 +5914,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 384234f0c1585ea41ab2a1e5d0a2122f, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 4913053274880554}
 --- !u!114 &114804799203331056
 MonoBehaviour:
@@ -5967,8 +5967,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 384234f0c1585ea41ab2a1e5d0a2122f, type: 2}
   Radius: 2000
-  Interval: 60
-  MaxLiveCount: 2
+  Interval: 30
+  MaxLiveCount: 4
   PathPoint: {fileID: 4994074651816134}
 --- !u!114 &114830903360400686
 MonoBehaviour:
