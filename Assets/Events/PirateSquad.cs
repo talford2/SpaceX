@@ -58,7 +58,7 @@ public class PirateSquad : UniverseEvent
         }
     }
 
-    private void OnSpawnedDie(Killable sender)
+    private void OnSpawnedDie(Killable sender, GameObject attacker)
     {
         _aliveCount--;
         StartCoroutine(DelayedRenableEvents(3f));

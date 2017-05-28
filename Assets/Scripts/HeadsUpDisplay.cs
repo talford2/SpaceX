@@ -93,6 +93,9 @@ public class HeadsUpDisplay : MonoBehaviour
 	private float _shieldOpacity;
 	private float _boostOpacity;
 
+    // Kill counter
+    private Dictionary<Team, int> _killCount;
+
 	private void Awake()
 	{
 		_current = this;

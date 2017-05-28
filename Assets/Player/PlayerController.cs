@@ -442,7 +442,7 @@ public class PlayerController : MonoBehaviour
 			if (Input.GetKeyUp(KeyCode.Z))
 			{
 				if (_playVehicleInstance != null)
-					_playVehicleInstance.Killable.Die();
+					_playVehicleInstance.Killable.Die(gameObject);
 			}
 
 			if (Input.GetButtonUp("SquadronNext"))
@@ -589,7 +589,7 @@ public class PlayerController : MonoBehaviour
 	private void Respawn()
 	{
 		if (_playVehicleInstance != null)
-			_playVehicleInstance.Killable.Die();
+			_playVehicleInstance.Killable.Die(gameObject);
 		Debug.Log("RESPAWN");
 		var respawnAt = SpawnManager.FindNearest(_lastDeathUniversePosition);
 		respawnAt.Spawn();
@@ -741,7 +741,7 @@ public class PlayerController : MonoBehaviour
         }
 	}
 
-	private void PlayerController_OnDie(Killable sender)
+	private void PlayerController_OnDie(Killable sender, GameObject attacker)
 	{
 		_noThreatCooldown = NoThreatTime;
 		_deathCooldown = DeathOptionTime;

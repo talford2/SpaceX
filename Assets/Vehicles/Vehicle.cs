@@ -618,7 +618,7 @@ public class Vehicle : MonoBehaviour
         Destroy(_woundObj);
     }
 
-    private void VehicleDie(Killable sender)
+    private void VehicleDie(Killable sender, GameObject attacker)
     {
         _killable.OnDie -= VehicleDie;
         if (_woundObj != null)

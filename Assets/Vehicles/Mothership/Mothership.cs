@@ -59,20 +59,20 @@ public class Mothership : MonoBehaviour
             killable.OnDie += OnKill;
         }
 
-        FrontLeftBay.OnDie += (sender) =>
+        FrontLeftBay.OnDie += (sender, attacker) =>
         {
             FrontLeftBayShield.enabled = false;
             DistantFrontLeftBayShield.enabled = false;
             FrontLeftDoors.TriggerClose();
         };
-        FrontRightBay.OnDie += (sender) =>
+        FrontRightBay.OnDie += (sender, attacker) =>
         {
             FrontRightBayShield.enabled = false;
             DistantFrontRightBayShield.enabled = false;
             FrontRightDoors.TriggerClose();
         };
 
-        MidLeftBay.OnDie += (sender) =>
+        MidLeftBay.OnDie += (sender, attacker) =>
         {
             if (RearLeftBay == null)
             {
@@ -81,7 +81,7 @@ public class Mothership : MonoBehaviour
                 MidLeftDoors.TriggerClose();
             }
         };
-        RearLeftBay.OnDie += (sender) =>
+        RearLeftBay.OnDie += (sender, attacker) =>
         {
             if (MidLeftBay == null)
             {
@@ -91,7 +91,7 @@ public class Mothership : MonoBehaviour
             }
         };
 
-        MidRightBay.OnDie += (sender) =>
+        MidRightBay.OnDie += (sender, attacker) =>
         {
             if (RearRightBay == null)
             {
@@ -100,7 +100,7 @@ public class Mothership : MonoBehaviour
                 MidRightDoors.TriggerClose();
             }
         };
-        RearRightBay.OnDie += (sender) =>
+        RearRightBay.OnDie += (sender, attacker) =>
         {
             if (MidRightBay == null)
             {
@@ -111,7 +111,7 @@ public class Mothership : MonoBehaviour
         };
     }
 
-    private void OnKill(Killable sender)
+    private void OnKill(Killable sender, GameObject attacker)
     {
         _liveCount--;
         Debug.Log("MOTHERSHIP LIVE COUNT: " + _liveCount);
