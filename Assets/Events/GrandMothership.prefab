@@ -52,6 +52,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4114682551428524}
+  - component: {fileID: 114545729552904808}
   m_Layer: 0
   m_Name: Near
   m_TagString: Untagged
@@ -270,6 +271,25 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1919223142208296}
   m_Mesh: {fileID: 4300000, guid: a09542a512cfa904d84297ba8fd7573b, type: 3}
+--- !u!114 &114545729552904808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1512213178835256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1904dec2ccf72144a982f0f6e86646fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Team: 2
+  LaserTurretPrefab: {fileID: 126262, guid: 34c7ddf5ad4ced042a2748f17c0f4edb, type: 2}
+  LaserTurretTransforms: []
+  FlakTurretPrefab: {fileID: 126262, guid: d0404ba8ba9ea844c9a258111d736318, type: 2}
+  FlakTurretTransforms: []
+  MapPin: {fileID: 114872752592872996}
+  SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
+  DefeatedSound: {fileID: 8300000, guid: f7b36ddbeacd38141b2fc0aabea82207, type: 3}
 --- !u!114 &114713500042478934
 MonoBehaviour:
   m_ObjectHideFlags: 1
