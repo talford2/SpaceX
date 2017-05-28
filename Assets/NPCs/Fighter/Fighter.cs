@@ -231,6 +231,9 @@ public class Fighter : Npc<Fighter>
                 dropItem.SetVelocity(VehicleInstance.GetVelocity() + Random.onUnitSphere * 5f);
             }
         }
+        var attackerTargetable = attacker.GetComponent<Targetable>();
+        if (attackerTargetable != null)
+            HeadsUpDisplay.Current.RecordKill(attackerTargetable.Team);
     }
 
    // private void OnDrawGizmos()

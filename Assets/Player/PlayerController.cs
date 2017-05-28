@@ -749,7 +749,11 @@ public class PlayerController : MonoBehaviour
 		Debug.Log("PLAYER VEHICLE DESTROYED AT: " + _lastDeathUniversePosition.CellIndex);
 		HeadsUpDisplay.Current.RefreshSquadronIcon(0);
         HeadsUpDisplay.Current.TriggerCrosshairFadeOut();
-	}
+
+        var attackerTargetable = attacker.GetComponent<Targetable>();
+        if (attackerTargetable != null)
+            HeadsUpDisplay.Current.RecordKill(attackerTargetable.Team);
+    }
 
 	public void ResetThreatCooldown()
 	{
