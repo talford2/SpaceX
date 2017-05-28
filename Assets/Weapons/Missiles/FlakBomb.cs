@@ -136,7 +136,16 @@ public class FlakBomb : Missile
             if (_delayTargetCooldown < 0f)
             {
                 var count = Physics.OverlapSphereNonAlloc(transform.position, MinExplodeRadius, _damageColliders, _detectableMask);
-                if (count > 0)
+                bool isExplode = false;
+                for (var i = 0; i < count; i++)
+                {
+                    var killable = _damageColliders[i].GetComponentInParent<Killable>();
+                    if (killable != null)
+                    {
+                        isExplode = true;
+                    }
+                }
+                if (isExplode)
                 {
                     Explode();
                     return;

@@ -47,6 +47,8 @@ public class Turret : MonoBehaviour
 	private List<float> _recoilCooldowns;
 	private List<Vector3> _barrelOffsets;
 
+    private int _hitMask;
+
 	private void Awake()
 	{
 		foreach (var shootPoint in ShootPoints)
@@ -74,6 +76,8 @@ public class Turret : MonoBehaviour
 		{
 			_recoilCooldowns[shootPointIndex] = RecoilTime;
 		};
+
+        _hitMask = ~LayerMask.GetMask("Distant", "Universe Background", "Detectable");
 
         var killable = GetComponent<Killable>();
         killable.OnDie += OnKilled;
@@ -167,7 +171,7 @@ public class Turret : MonoBehaviour
 			{
 				_weaponInstance.SetAimAt(shootPointsCentre + Guns.transform.forward * MaxTargetDistance);
 				RaycastHit aimHit;
-				if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance))
+				if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance, _hitMask))
 				{
                     if (aimHit.distance < AimTooCloseDistance)
                     {
