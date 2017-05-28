@@ -36,6 +36,10 @@ ModelImporter:
     100056: Flak02
     100058: Flak03
     100060: Flak04
+    100062: Turrets
+    100064: FlakTurrets
+    100066: LaserTurrets
+    100068: Shields
     400000: //RootNode
     400002: Box001
     400004: PanelMetal
@@ -67,6 +71,10 @@ ModelImporter:
     400056: Flak02
     400058: Flak03
     400060: Flak04
+    400062: Turrets
+    400064: FlakTurrets
+    400066: LaserTurrets
+    400068: Shields
     2300000: //RootNode
     2300002: Box001
     2300004: PanelMetal
@@ -98,6 +106,7 @@ ModelImporter:
     2300056: Flak02
     2300058: Flak03
     2300060: Flak04
+    2300062: Shields
     3300000: //RootNode
     3300002: Box001
     3300004: PanelMetal
@@ -129,6 +138,7 @@ ModelImporter:
     3300056: Flak02
     3300058: Flak03
     3300060: Flak04
+    3300062: Shields
     4300000: PanelMetal
     4300002: Box001
     4300004: Box015
@@ -159,6 +169,7 @@ ModelImporter:
     4300054: Flak03
     4300056: Flak02
     4300058: Flak01
+    4300060: Shields
   materials:
     importMaterials: 1
     materialName: 0
