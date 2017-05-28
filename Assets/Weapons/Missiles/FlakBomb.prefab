@@ -300,5 +300,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Interval: 0.1
-  VertextCount: 5
+  VertextCount: 2
   Shiftable: {fileID: 11419154}
