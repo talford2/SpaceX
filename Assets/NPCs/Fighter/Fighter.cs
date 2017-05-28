@@ -70,7 +70,7 @@ public class Fighter : Npc<Fighter>
     // Neighbour Detection
     private float _neighborDetectInterval = 0.2f;
     private float _neighborDetectCooldown;
-    public List<Transform> Neighbours;
+    public List<Detectable> Neighbours;
 
     private void Awake()
     {
@@ -177,7 +177,7 @@ public class Fighter : Npc<Fighter>
         Target = target;
     }
 
-    private void DetectNeighbor(Transform neighbour)
+    private void DetectNeighbor(Detectable neighbour)
     {
         if (neighbour != VehicleInstance.transform)
         {
@@ -192,7 +192,7 @@ public class Fighter : Npc<Fighter>
     {
         if (_neighborDetectCooldown >= 0f)
         {
-            Neighbours = new List<Transform>();
+            Neighbours = new List<Detectable>();
             _neighborDetectCooldown -= Time.deltaTime;
             if (_neighborDetectCooldown < 0f)
             {

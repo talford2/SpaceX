@@ -16,14 +16,14 @@ public class ProximitySensor : MonoBehaviour
         _detectables = new Collider[_detectableMaxBuffer];
     }
 
-    public void Detect(Action<Transform> action)
+    public void Detect(Action<Detectable> action)
     {
         var detectableCount = Physics.OverlapSphereNonAlloc(transform.position, Radius, _detectables, _detectableMask);
         for (var i = 0; i < detectableCount; i++)
         {
             _curDetectable = _detectables[i].GetComponent<Detectable>();
             if (_curDetectable != null)
-                action(_curDetectable.TargetTransform);
+                action(_curDetectable);
         }
     }
 }
