@@ -83,7 +83,7 @@ public class FighterIdle : NpcState<Fighter>
         }
         else
         {
-            immediateDestination = Universe.Current.ViewPort.Shiftable.GetWorldPosition();
+            //immediateDestination = Universe.Current.ViewPort.Shiftable.GetWorldPosition();
         }
 
         var dotDestination = Vector3.Dot(Npc.IdleDestination - Npc.VehicleInstance.transform.position, Npc.VehicleInstance.transform.forward);
