@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Name: Battle
   m_EditorClassIdentifier: 
   Background: {fileID: 8900000, guid: f9c7b6888cdb6584d8a70b87fea5b24c, type: 3}
-  SystemName: Mu Vitro
+  SystemName: Tau Ursa
   SlipGateLevelIndex: 0
   CellRadius: 2
   UniverseEvents:
-  - Prefab: {fileID: 194116, guid: 44eab957088feb740b64e96ce4cc9fb7, type: 2}
-    Count: 1
   - Prefab: {fileID: 1817310021557854, guid: d599fce929a09b04b8f1517bd09262b8, type: 2}
     Count: 1
   - Prefab: {fileID: 1204344320402506, guid: d35caf222b00b134fb8c10d7a3fee99d, type: 2}
