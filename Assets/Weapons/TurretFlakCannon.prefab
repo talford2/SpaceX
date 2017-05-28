@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &168282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 450098}
+  - component: {fileID: 11413680}
+  - component: {fileID: 11442032}
+  m_Layer: 0
+  m_Name: TurretFlakCannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &450098
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168282}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11413680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Flak Cannon
+  LootIndex: 6
+  MissilePrefab: {fileID: 122516, guid: 895ee3d7b5c719a418999475f9c4cc69, type: 2}
+  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
+  SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
+  ShootSound: {fileID: 8300000, guid: d630152cd1dc3cf4994768f4fbc6eee3, type: 3}
+  SoundVolume: 1
+  MissilesPerShot: 1
+  Spread: 0
+  MissilesConverge: 1
+  IsTargetLocking: 0
+  TargetLockTime: 0
+  TargetLockingMaxDistance: 0
+  IsOverheat: 0
+  HeatPerMissile: 50
+  OverheatDelay: 5
+  CoolDelay: 0.5
+  LockSound: {fileID: 0}
+  BaseMissileDamage: 20
+  BaseFireRate: 2
+  BaseCoolingRate: 50
+  BaseOverheatValue: 100
+  DamagePoints: 0
+  FireRatePoints: 0
+  CoolingRatePoints: 0
+  HeatCapacityPoints: 0
+  DamagePerPoint: 2
+  FireRatePerPoint: 0.2
+  CoolingRatePerPoint: 5
+  HeatCapacityPerPoint: 10
+  IsTriggered: 0
+--- !u!114 &11442032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdbb7f25e717fd499c6f238cf3acb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventorySprite: {fileID: 21300000, guid: a17cfd0612758854395f53981d9b516e, type: 3}
+  Type: 1
+  SalvageValue: 100
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MissileDamage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MissilePoolCount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TargetLockTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: IsTargetLocking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LockSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 078c2c05d965e734aa1e18239490e823, type: 3}
+    - target: {fileID: 0}
+      propertyPath: IsTriggered
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TargetLockingMaxDistance
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Name
+      value: Seeker Rockets
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InventorySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a17cfd0612758854395f53981d9b516e,
+        type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 168282}
+  m_IsPrefabParent: 1

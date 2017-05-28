@@ -351,6 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 482974}
+  Radius: 0
 --- !u!114 &11454338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,7 +382,7 @@ MonoBehaviour:
   Guns: {fileID: 178440}
   RecoilBarrels:
   - {fileID: 491976}
-  WeaponPrefab: {fileID: 11413680, guid: b52259048008cdf479d85f09ee6d8529, type: 2}
+  WeaponPrefab: {fileID: 11413680, guid: 91bc33da79c582047af68b234eece1fc, type: 2}
   ShootPoints:
   - {fileID: 11438764}
   MaxTargetDistance: 2000
