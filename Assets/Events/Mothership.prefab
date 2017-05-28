@@ -1671,7 +1671,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -848.20874, y: 392.70352, z: -636.0623}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 443960}
@@ -5903,7 +5903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d13cc19701ca84cae0379f2a1e18e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Radius: 2000
   Interval: 30
   MaxLiveCount: 4
@@ -6024,7 +6024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d13cc19701ca84cae0379f2a1e18e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
+  FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Radius: 2000
   Interval: 30
   MaxLiveCount: 4

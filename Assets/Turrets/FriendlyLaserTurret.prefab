@@ -384,7 +384,7 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
   ShootPoints:
   - {fileID: 11438764}
-  MaxTargetDistance: 1000
+  MaxTargetDistance: 500
   RecoilDistance: 0.4
   RecoilTime: 0.5
   RecoilCurve:
@@ -418,6 +418,7 @@ MonoBehaviour:
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
   AimDistanceOffsetMultiplier: 0.005
+  AimTooCloseDistance: 10
   Targetable: {fileID: 114354613596268164}
 --- !u!114 &11491946
 MonoBehaviour:
