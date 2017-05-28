@@ -25,7 +25,7 @@ public class Beam : Missile
 		_shiftable.OnShift += Shift;
 		_lineRenderer = GetComponent<LineRenderer>();
 		_length = MissileLength;
-		_hitMask = ~LayerMask.GetMask("Distant", "Universe Background", "Environment");
+		_hitMask = ~LayerMask.GetMask("Distant", "Universe Background", "Environment", "Detectable");
 	}
 
 	public override void Initialize(GameObject owner, float damage)

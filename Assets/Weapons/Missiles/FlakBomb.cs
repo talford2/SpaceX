@@ -52,7 +52,7 @@ public class FlakBomb : Missile
     private void Awake()
     {
         _shiftable = GetComponent<Shiftable>();
-        _mask = ~LayerMask.GetMask("Distant", "Universe Background", "Environment");
+        _mask = ~LayerMask.GetMask("Distant", "Universe Background", "Environment", "Detectable");
         _detectableMask = LayerMask.GetMask("Detectable");
     }
 
