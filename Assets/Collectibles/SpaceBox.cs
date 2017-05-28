@@ -45,7 +45,7 @@ public class SpaceBox : MonoBehaviour
         Shiftable.Translate(displacement);
     }
 
-    private void OnDie(Killable sender)
+    private void OnDie(Killable sender, GameObject attacker)
     {
         Killable.OnDie -= OnDie;
         // Drop valuable

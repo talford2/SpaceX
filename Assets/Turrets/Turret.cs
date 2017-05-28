@@ -74,6 +74,9 @@ public class Turret : MonoBehaviour
 		{
 			_recoilCooldowns[shootPointIndex] = RecoilTime;
 		};
+
+        var killable = GetComponent<Killable>();
+        killable.OnDie += OnKilled;
 	}
 
 	private void Update()
@@ -196,4 +199,11 @@ public class Turret : MonoBehaviour
 			_weaponInstance.IsTriggered = false;
 		}
 	}
+
+    private void OnKilled(Killable sender, GameObject attacker)
+    {
+        var attackerTargetable = attacker.GetComponent<Targetable>();
+        if (attackerTargetable != null)
+            HeadsUpDisplay.Current.RecordKill(attackerTargetable.Team);
+    }
 }

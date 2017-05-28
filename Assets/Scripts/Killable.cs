@@ -17,7 +17,7 @@ public class Killable : MonoBehaviour
     public delegate void OnLostShieldEvent(Killable sender, GameObject attacker);
     public event OnLostShieldEvent OnLostShield;
 
-	public delegate void OnDieEvent(Killable sender);
+	public delegate void OnDieEvent(Killable sender, GameObject attacker);
 	public event OnDieEvent OnDie;
 
 	public bool DestroyOnDie = true;
@@ -52,11 +52,11 @@ public class Killable : MonoBehaviour
             if (DamageEffect != null)
                 Instantiate(DamageEffect, position, Quaternion.LookRotation(normal));
             if (Health <= 0f)
-                Die();
+                Die(attacker);
         }
     }
 
-	public void Die()
+	public void Die(GameObject attacker)
 	{
 		if (DieEffect != null)
 		{
@@ -71,7 +71,7 @@ public class Killable : MonoBehaviour
 
 		IsAlive = false;
 		if (OnDie != null)
-			OnDie(this);
+			OnDie(this, attacker);
 
 		if (DestroyOnDie)
 		{

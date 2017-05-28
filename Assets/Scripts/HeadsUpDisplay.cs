@@ -39,10 +39,15 @@ public class HeadsUpDisplay : MonoBehaviour
 	public Image HitImage;
     public Text MessageText;
 
+    [Header("Team Score")]
+    public Text GoodKills;
+    public Text BadKills;
+
 	private float _squadronPromptCooldown;
 
 	private static HeadsUpDisplay _current;
 
+    [Header("Hurt Screen")]
 	public float HurtFadeSpeed = 0.5f;
 	public float ShieldHurtFadeSpeed = 0.5f;
 
@@ -93,6 +98,9 @@ public class HeadsUpDisplay : MonoBehaviour
 	private float _shieldOpacity;
 	private float _boostOpacity;
 
+    // Kill counter
+    private Dictionary<Team, int> _killCount;
+
 	private void Awake()
 	{
 		_current = this;
@@ -106,6 +114,13 @@ public class HeadsUpDisplay : MonoBehaviour
         _healthOpacity = HealthBar.color.a;
 		_shieldOpacity = ShieldBar.color.a;
 		_boostOpacity = BoostBar.color.a;
+
+        _killCount = new Dictionary<Team, int>();
+        _killCount.Add(Team.Bad, 0);
+        _killCount.Add(Team.Good, 0);
+        _killCount.Add(Team.Neutral, 0);
+
+        UpdateKillsDisplay();
 
         MessageText.enabled = false;
 	}
@@ -399,6 +414,18 @@ public class HeadsUpDisplay : MonoBehaviour
         ShowCrosshair();
         _crosshairFadeCooldown = _crosshairFadeDuration;
         _isCrosshairFadeOut = true;
+    }
+
+    public void RecordKill(Team team)
+    {
+        _killCount[team]++;
+        UpdateKillsDisplay();
+    }
+
+    private void UpdateKillsDisplay()
+    {
+        GoodKills.text = string.Format("{0}", _killCount[Team.Good]);
+        BadKills.text = string.Format("{0}", _killCount[Team.Bad]);
     }
 
     public void DisplayMessage(string message, float time)

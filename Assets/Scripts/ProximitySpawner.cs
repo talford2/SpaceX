@@ -56,7 +56,7 @@ public class ProximitySpawner : MonoBehaviour
         }
     }
 
-    private void OnSpawnedDie(Killable sender)
+    private void OnSpawnedDie(Killable sender, GameObject attacker)
     {
         _liveCount--;
         Debug.Log("SPAWNED DIED!");

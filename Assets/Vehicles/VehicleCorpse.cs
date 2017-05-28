@@ -28,10 +28,10 @@ public class VehicleCorpse : MonoBehaviour
     private IEnumerator DelayedExplode(float delay)
     {
         yield return new WaitForSeconds(delay);
-        CorpseExplode(null);
+        CorpseExplode(null, null);
     }
 
-    private void CorpseExplode(Killable sender)
+    private void CorpseExplode(Killable sender, GameObject attacker)
     {
         if (ExplosionPrefab != null)
         {
