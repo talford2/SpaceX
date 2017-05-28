@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MissileSpeed: 600
-  MissileForce: 50
+  MissileForce: 0
   FromReference: {fileID: 0}
   HitEffectPrefab: {fileID: 198982, guid: 4bb191ad1a7963849a6c492ebb749803, type: 2}
   HitDecalPrefab: {fileID: 121998, guid: 5ca4b0ff81cbb7148a77afcf43fcab11, type: 2}
