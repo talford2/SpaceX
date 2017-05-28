@@ -103,7 +103,7 @@ public class Turret : MonoBehaviour
                         _target = Targeting.FindNearestTeam(Targeting.GetEnemyTeam(Targetable.Team), transform.position, MaxTargetDistance);
                 }
 				_targetSearchCooldown = _targetSearchInterval;
-				_aimCooldown = 0f;
+				_aimCooldown = Random.Range(0, 0.5f);
 			}
 		}
 
