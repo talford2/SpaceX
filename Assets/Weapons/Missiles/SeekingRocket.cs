@@ -232,8 +232,11 @@ public class SeekingRocket : Missile
             if (_detectable != null)
             {
                 _killable = _detectable.TargetTransform.GetComponentInParent<Killable>();
-                var damage = Mathf.Round(100f * GetDamageFraction(_detectable.transform.position, transform.position, 5f, 15f));
-                _killable.Damage(damage, transform.position, Vector3.up, Owner);
+                if (_killable != null)
+                {
+                    var damage = Mathf.Round(100f * GetDamageFraction(_detectable.transform.position, transform.position, 5f, 15f));
+                    _killable.Damage(damage, transform.position, Vector3.up, Owner);
+                }
             }
             var rBody = _damageColliders[i].GetComponentInParent<Rigidbody>();
             if (rBody != null)
