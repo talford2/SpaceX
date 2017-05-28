@@ -61,6 +61,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 28c7aad1372ff114b90d330f8a2dd938, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _node_304:
+        m_Texture: {fileID: 2800000, guid: 28c7aad1372ff114b90d330f8a2dd938, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -75,12 +79,13 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.302
+    - _Speed: 0.094
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
+    - _node_9252: 1.6
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color2: {r: 0.45543855, g: 0.13327205, b: 0.625, a: 1}
+    - _Color2: {r: 0.0134380255, g: 0, b: 0.3897059, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 0.5882353, g: 0.8977687, b: 1, a: 1}
+    - _TintColor: {r: 0.88945246, g: 0.19852942, b: 1, a: 1}
