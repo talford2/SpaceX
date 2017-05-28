@@ -205,8 +205,11 @@ public class FlakBomb : Missile
             if (_detectable != null)
             {
                 _killable = _detectable.TargetTransform.GetComponent<Killable>();
-                var damage = Mathf.Round(MaxExplodeDamage * GetDamageFraction(_detectable.transform.position, transform.position, MinExplodeRadius, MaxExplodeRadius));
-                _killable.Damage(damage, transform.position, Vector3.up, Owner);
+                if (_killable != null)
+                {
+                    var damage = Mathf.Round(MaxExplodeDamage * GetDamageFraction(_detectable.transform.position, transform.position, MinExplodeRadius, MaxExplodeRadius));
+                    _killable.Damage(damage, transform.position, Vector3.up, Owner);
+                }
             }
             var rBody = _damageColliders[i].GetComponentInParent<Rigidbody>();
             if (rBody != null)
