@@ -6,10 +6,19 @@ ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Box001
+    100004: PanelMetal
     400000: //RootNode
+    400002: Box001
+    400004: PanelMetal
     2300000: //RootNode
+    2300002: Box001
+    2300004: PanelMetal
     3300000: //RootNode
+    3300002: Box001
+    3300004: PanelMetal
     4300000: PanelMetal
+    4300002: Box001
   materials:
     importMaterials: 1
     materialName: 0
