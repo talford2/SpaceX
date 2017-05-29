@@ -351,6 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 482974}
+  Radius: 0
 --- !u!114 &11454338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -420,6 +421,8 @@ MonoBehaviour:
   AimDistanceOffsetMultiplier: 0.005
   AimTooCloseDistance: 10
   Targetable: {fileID: 114354613596268164}
+  BurstCount: 12
+  BurstWaitTime: 1.2
 --- !u!114 &11491946
 MonoBehaviour:
   m_ObjectHideFlags: 1
