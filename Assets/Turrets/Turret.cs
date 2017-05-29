@@ -179,8 +179,8 @@ public class Turret : MonoBehaviour
             }
             else
             {
-                var toTarget = _target.position - shootPointsCentre;
-                var angleTo = Vector3.Angle(Guns.transform.forward, toTarget);
+                var toAim = _aimPosition - shootPointsCentre;
+                var angleTo = Vector3.Angle(Guns.transform.forward, toAim);
                 var dontShoot = false;
                 if (Mathf.Abs(angleTo) < AimTolerance)
                 {
