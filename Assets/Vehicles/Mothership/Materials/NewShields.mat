@@ -79,7 +79,7 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.094
+    - _Speed: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
@@ -88,4 +88,4 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color2: {r: 0.0134380255, g: 0, b: 0.3897059, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 0.88945246, g: 0.19852942, b: 1, a: 1}
+    - _TintColor: {r: 0.603, g: 0.11084555, b: 0.2330358, a: 1}
