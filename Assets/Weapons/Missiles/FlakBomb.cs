@@ -20,7 +20,6 @@ public class FlakBomb : Missile
     private Transform _target;
     private Vector3 _shootFrom;
     private Vector3 _initVelocity;
-    private Vector3 _offsetVelocity;
 
     private bool _isVehicleTarget;
     private Vehicle _vehicle;
@@ -85,7 +84,7 @@ public class FlakBomb : Missile
             }
         }
 
-        _velocity = _initVelocity + _offsetVelocity + transform.forward * MissileSpeed;
+        _velocity = _initVelocity + transform.forward * MissileSpeed;
 
         var displacement = _velocity * Time.deltaTime;
 
@@ -175,7 +174,7 @@ public class FlakBomb : Missile
         _velocity = _initVelocity;
 
         transform.position = _shootFrom;
-        transform.forward = FromReference.forward;
+        transform.forward = direction;// FromReference.forward;
         transform.position += initVelocity * Time.deltaTime;
 
         Rocket.enabled = true;

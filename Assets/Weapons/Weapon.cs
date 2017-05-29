@@ -173,6 +173,11 @@ public class Weapon : MonoBehaviour
         return _shootPoints.Aggregate(Vector3.zero, (current, shootPoint) => current + shootPoint.transform.position) / _shootPoints.Count;
     }
 
+    public Vector3 GetShootPointForward()
+    {
+        return _shootPoints.Aggregate(Vector3.zero, (current, shootPoint) => current + shootPoint.transform.forward) / _shootPoints.Count;
+    }
+
     public void SetAimAt(Vector3 aimAt)
     {
         _aimAt = aimAt;
