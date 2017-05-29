@@ -412,15 +412,16 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  MinPitch: 50
-  MaxPitch: 270
-  MaxPitchSpeed: 360
-  MaxYawSpeed: 180
+  MinPitch: -90
+  MaxPitch: 20
+  MaxPitchSpeed: 45
+  MaxYawSpeed: 90
   AimTolerance: 5
   ExtrapolationTimeError: 0.5
-  AimDistanceOffsetMultiplier: 0.05
   AimTooCloseDistance: 30
   Targetable: {fileID: 114354613596268164}
+  BurstCount: 5
+  BurstWaitTime: 1.5
 --- !u!114 &11491946
 MonoBehaviour:
   m_ObjectHideFlags: 1

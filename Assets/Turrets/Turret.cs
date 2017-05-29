@@ -144,27 +144,29 @@ public class Turret : MonoBehaviour
         var targetYaw = GetLocalTargetEuler(Head.transform, _aimPosition).y;
         var targetPitch = GetLocalTargetEuler(Guns.transform, _aimPosition).x;
 
-        Head.transform.localRotation = Quaternion.RotateTowards(Head.transform.localRotation, Quaternion.AngleAxis(targetYaw, Vector3.up), 90f * Time.deltaTime);
-        Guns.transform.localRotation = Quaternion.RotateTowards(Guns.transform.localRotation, Quaternion.AngleAxis(targetPitch, Vector3.right), 45f * Time.deltaTime);
+        Head.transform.localRotation = Quaternion.RotateTowards(Head.transform.localRotation, Quaternion.AngleAxis(targetYaw, Vector3.up), MaxYawSpeed * Time.deltaTime);
+        Guns.transform.localRotation = Quaternion.RotateTowards(Guns.transform.localRotation, Quaternion.AngleAxis(targetPitch, Vector3.right), MaxPitchSpeed * Time.deltaTime);
 
         var angleTo = Vector3.Angle(_weaponInstance.GetShootPointForward(), toAimPosition);
         var dontShoot = false;
-        if (Mathf.Abs(angleTo) < AimTolerance)
+        RaycastHit aimHit;
+        if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance, _hitMask))
         {
-            _weaponInstance.SetAimAt(shootPointsCentre + toAimPosition.normalized * MaxTargetDistance);
-
-            RaycastHit aimHit;
-            if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance, _hitMask))
+            if (aimHit.distance < AimTooCloseDistance)
             {
-                if (aimHit.distance < AimTooCloseDistance)
-                {
-                    dontShoot = true;
-                }
+                dontShoot = true;
             }
         }
-        else
+        if (!dontShoot)
         {
-            dontShoot = true;
+            if (Mathf.Abs(angleTo) < AimTolerance)
+            {
+                _weaponInstance.SetAimAt(shootPointsCentre + toAimPosition.normalized * MaxTargetDistance);
+            }
+            else
+            {
+                dontShoot = true;
+            }
         }
         if (_target != null)
         {
