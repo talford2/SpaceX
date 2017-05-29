@@ -750,9 +750,12 @@ public class PlayerController : MonoBehaviour
 		HeadsUpDisplay.Current.RefreshSquadronIcon(0);
         HeadsUpDisplay.Current.TriggerCrosshairFadeOut();
 
-        var attackerTargetable = attacker.GetComponent<Targetable>();
-        if (attackerTargetable != null)
-            HeadsUpDisplay.Current.RecordKill(attackerTargetable.Team);
+        if (attacker != null)
+        {
+            var attackerTargetable = attacker.GetComponent<Targetable>();
+            if (attackerTargetable != null)
+                HeadsUpDisplay.Current.RecordKill(attackerTargetable.Team);
+        }
     }
 
 	public void ResetThreatCooldown()

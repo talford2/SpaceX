@@ -28,7 +28,7 @@ public class Laser : Missile
 			Tracer.useWorldSpace = true;
 		}
 
-		_mask = ~LayerMask.GetMask("Distant", "Universe Background", "Player", "Environment", "Detectable");
+		_mask = ~LayerMask.GetMask("Distant", "Universe Background", "Environment", "Detectable");
 	}
 
 	public override void Initialize(GameObject owner, float damage)
