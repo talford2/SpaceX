@@ -27,6 +27,10 @@ public class Turret : MonoBehaviour
     public float AimTooCloseDistance = 10f;
     public Targetable Targetable;
 
+    [Header("Targeting")]
+    public float MinTargetSearchInterval = 2f;
+    public float MaxTargetSearchInterval = 2f;
+
     [Header("Burst Firing")]
     public int BurstCount = 5;
     public float BurstWaitTime = 1.5f;
@@ -35,7 +39,6 @@ public class Turret : MonoBehaviour
     private Weapon _weaponInstance;
 
     private Transform _target;
-    private float _targetSearchInterval = 2f;
     private float _targetSearchCooldown;
 
     private float _aimIntervalMin = 0.1f;
@@ -114,7 +117,7 @@ public class Turret : MonoBehaviour
                     if (_target == null)
                         _target = Targeting.FindNearestTeam(Targeting.GetEnemyTeam(Targetable.Team), transform.position, MaxTargetDistance);
                 }
-                _targetSearchCooldown = _targetSearchInterval;
+                _targetSearchCooldown = Random.Range(MinTargetSearchInterval, MaxTargetSearchInterval);
                 _aimCooldown = Random.Range(_aimIntervalMin, _aimIntervalMax);
             }
         }
