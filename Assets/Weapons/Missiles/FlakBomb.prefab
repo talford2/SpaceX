@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseWorldPosition: 0
   UniverseCellIndex:
     X: 0
     Y: 0
@@ -167,6 +168,8 @@ MonoBehaviour:
   MinChaseDistance: 50
   MaxTurnSpeed: 90
   Radius: 0.3
+  LifeTimeMin: 2.5
+  LifeTimeMax: 3.5
   ExplodePrefab: {fileID: 127098, guid: 77b7164c2899d074ab9d571655898043, type: 2}
   Rocket: {fileID: 2343076}
   MinExplodeRadius: 8
