@@ -2605,7 +2605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
-  Team: 0
+  Team: 1
   CallSign: Player
   SpaceJunkCount: 0
   PowerNodeCount: 0

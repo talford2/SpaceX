@@ -419,6 +419,8 @@ MonoBehaviour:
   AimTolerance: 5
   AimTooCloseDistance: 30
   Targetable: {fileID: 114354613596268164}
+  MinTargetSearchInterval: 1
+  MaxTargetSearchInterval: 3
   BurstCount: 5
   BurstWaitTime: 1.5
 --- !u!114 &11491946
