@@ -9,7 +9,6 @@ public class Weapon : MonoBehaviour
     public int LootIndex;
 
     [Header("Weapon Settings")]
-    public GameObject MissilePrefab;
 
     public MuzzleFlash MuzzlePrefab;
 
@@ -18,17 +17,21 @@ public class Weapon : MonoBehaviour
     public GameObject SoundPrefab;
     public AudioClip ShootSound;
     public float SoundVolume = 1f;
+    public float SoundMinDistance = 25;
+    public float SoundMaxDistance = 200f;
 
+    [Header("Missiles")]
+    public GameObject MissilePrefab;
     public int MissilesPerShot = 2;
     public float Spread = 0f;
     public bool MissilesConverge;
 
-    // Targeting
+    [Header("Targeting")]
     public bool IsTargetLocking;
     public float TargetLockTime = 1.5f;
     public float TargetLockingMaxDistance = 2000f;
 
-    // Overheating
+    [Header("Overheating")]
     public bool IsOverheat;
     public float HeatPerMissile;
     public float OverheatDelay;
@@ -208,7 +211,7 @@ public class Weapon : MonoBehaviour
         _shootPoint.Flash();
 
         var fireSound = ResourcePoolManager.GetAvailable(SoundPrefab, _shootPoint.transform.position, Quaternion.identity).GetComponent<AnonymousSound>();
-        fireSound.PlayAt(ShootSound, _shootPoint.transform.position, SoundVolume);
+        fireSound.PlayAt(ShootSound, _shootPoint.transform.position, SoundMinDistance, SoundMaxDistance, SoundVolume);
         //FireSound.Play();
 
         if (IsOverheat)
