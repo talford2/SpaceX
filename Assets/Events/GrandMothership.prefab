@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4729521099560190}
   - component: {fileID: 33172364561652566}
   - component: {fileID: 23190042227704568}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4954204469330100}
   - component: {fileID: 33554543779898984}
   - component: {fileID: 23656285092120492}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box021
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4991382550414516}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LaserTurrets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4094068915987242}
   - component: {fileID: 33731053008234928}
   - component: {fileID: 23746169391526504}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4050820948328786}
   - component: {fileID: 33144408596313622}
   - component: {fileID: 23888874738412810}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 4555074106676680}
   - component: {fileID: 33738701854017668}
   - component: {fileID: 23906426392593864}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flak006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 4196037645231686}
   - component: {fileID: 33930952894625126}
   - component: {fileID: 23960370008353440}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4169886053958990}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FlakTurrets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 4024177847453688}
   - component: {fileID: 33602076922446246}
   - component: {fileID: 23109392258390270}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 4498248707480210}
   - component: {fileID: 33369983606410570}
   - component: {fileID: 23555244798381308}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PanelMetal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 4884967792050226}
   - component: {fileID: 33804742654947284}
   - component: {fileID: 23269817803692746}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4885020511277158}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mothership2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 4695208452527102}
   - component: {fileID: 33308399554665338}
   - component: {fileID: 23647090093394182}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shields
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 4590975619362436}
   - component: {fileID: 33274698780223272}
   - component: {fileID: 23818524011409216}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flak02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 4567535583865936}
   - component: {fileID: 33510604077691984}
   - component: {fileID: 23195381413060168}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 4159120270838160}
   - component: {fileID: 33563977033777992}
   - component: {fileID: 23292175667577602}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flak008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: 4035407976285892}
   - component: {fileID: 33171043732342350}
   - component: {fileID: 23411932254346858}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box022
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 4794575252686544}
   - component: {fileID: 33866408288697234}
   - component: {fileID: 23315191343956958}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,7 +730,7 @@ GameObject:
   - component: {fileID: 4294096775596300}
   - component: {fileID: 33145366538922230}
   - component: {fileID: 23505068127788566}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flak01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -811,7 +811,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4100894192361312}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Distant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +845,7 @@ GameObject:
   - component: {fileID: 4934456432944694}
   - component: {fileID: 33337132686346640}
   - component: {fileID: 23429765564638164}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -879,7 +879,7 @@ GameObject:
   - component: {fileID: 4505695409833838}
   - component: {fileID: 33318599630518550}
   - component: {fileID: 23234251619965298}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,7 +913,7 @@ GameObject:
   - component: {fileID: 4967677665956152}
   - component: {fileID: 33512436645075792}
   - component: {fileID: 23254850040542968}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -930,7 +930,7 @@ GameObject:
   - component: {fileID: 4708136541854808}
   - component: {fileID: 33809003614219152}
   - component: {fileID: 23950089947293550}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box023
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -962,7 +962,7 @@ GameObject:
   - component: {fileID: 4124856028996916}
   - component: {fileID: 33237685645302198}
   - component: {fileID: 23519565195255610}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flak007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1077,7 +1077,7 @@ GameObject:
   - component: {fileID: 4132145339619616}
   - component: {fileID: 33888147912416380}
   - component: {fileID: 23035899561356360}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1128,7 +1128,7 @@ GameObject:
   - component: {fileID: 4216896833923326}
   - component: {fileID: 33934477271567954}
   - component: {fileID: 23577958255660394}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1261,7 +1261,7 @@ GameObject:
   - component: {fileID: 4915948716129492}
   - component: {fileID: 33531880603760350}
   - component: {fileID: 23763886347433062}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1295,7 +1295,7 @@ GameObject:
   - component: {fileID: 4226424292667396}
   - component: {fileID: 33495707567433472}
   - component: {fileID: 23194181077038638}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box024
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1312,7 +1312,7 @@ GameObject:
   - component: {fileID: 4429242030380776}
   - component: {fileID: 33405472611874704}
   - component: {fileID: 23786275439585272}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flak03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1362,7 +1362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4463126404918512}
   - component: {fileID: 114790045151764628}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DistantScaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1447,7 +1447,7 @@ GameObject:
   - component: {fileID: 4328131442875592}
   - component: {fileID: 33272409551021844}
   - component: {fileID: 23940241678161558}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flak005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1481,7 +1481,7 @@ GameObject:
   - component: {fileID: 4711054815193990}
   - component: {fileID: 33196362350577254}
   - component: {fileID: 23787143493772340}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1515,7 +1515,7 @@ GameObject:
   - component: {fileID: 4854304651857074}
   - component: {fileID: 33605918936591076}
   - component: {fileID: 23116788543963136}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flak04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1566,7 +1566,7 @@ GameObject:
   - component: {fileID: 4272197715170220}
   - component: {fileID: 33516902610898878}
   - component: {fileID: 23799212674335110}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5449,6 +5449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseWorldPosition: 0
   UniverseCellIndex:
     X: 0
     Y: 0
