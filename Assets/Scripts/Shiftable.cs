@@ -56,8 +56,8 @@ public class Shiftable : MonoBehaviour
         if (UseWorldPosition)
         {
             var startPosition = Universe.Current.GetUniversePosition(transform.position);
-            Shiftable.UniverseCellIndex = startPosition.CellIndex;
-            Shiftable.CellLocalPosition = startPosition.CellLocalPosition;
+            UniverseCellIndex = startPosition.CellIndex;
+            CellLocalPosition = startPosition.CellLocalPosition;
         }
         transform.position = GetWorldPosition();
 	}
