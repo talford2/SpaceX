@@ -2,6 +2,7 @@
 
 public class Shiftable : MonoBehaviour
 {
+    public bool UseWorldPosition = false;
 	[Tooltip("Cell the object is contained in")]
 	public CellIndex UniverseCellIndex;
 	public Vector3 CellLocalPosition;
@@ -52,7 +53,13 @@ public class Shiftable : MonoBehaviour
 
 	private void Start()
 	{
-		transform.position = GetWorldPosition();
+        if (UseWorldPosition)
+        {
+            var startPosition = Universe.Current.GetUniversePosition(transform.position);
+            Shiftable.UniverseCellIndex = startPosition.CellIndex;
+            Shiftable.CellLocalPosition = startPosition.CellLocalPosition;
+        }
+        transform.position = GetWorldPosition();
 	}
 
 	//private static Vector3 _cellDeltaCalc = Vector3.one * Universe.Current.HalfCellSize;
