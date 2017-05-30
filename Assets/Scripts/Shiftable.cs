@@ -55,12 +55,17 @@ public class Shiftable : MonoBehaviour
 	{
         if (UseWorldPosition)
         {
-            var startPosition = Universe.Current.GetUniversePosition(transform.position);
-            UniverseCellIndex = startPosition.CellIndex;
-            CellLocalPosition = startPosition.CellLocalPosition;
+            ApplyWorldPosition();
         }
         transform.position = GetWorldPosition();
 	}
+
+    public void ApplyWorldPosition()
+    {
+        var startPosition = Universe.Current.GetUniversePosition(transform.position);
+        UniverseCellIndex = startPosition.CellIndex;
+        CellLocalPosition = startPosition.CellLocalPosition;
+    }
 
 	//private static Vector3 _cellDeltaCalc = Vector3.one * Universe.Current.HalfCellSize;
 	private Vector3 _cellZero;
