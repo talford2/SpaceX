@@ -24,9 +24,6 @@ public class Turret : MonoBehaviour
 
     [Header("Aiming")]
     public float AimTolerance = 5f;
-    public float ExtrapolationTimeError = 0.5f;
-    //public float AimOffsetRadius = 5f;
-    //public float AimDistanceOffsetMultiplier = 0f;
     public float AimTooCloseDistance = 10f;
     public Targetable Targetable;
 
@@ -96,6 +93,7 @@ public class Turret : MonoBehaviour
     private void Update()
     {
         var shootPointsCentre = _weaponInstance.GetShootPointCentre();
+        var shootPointsForward = _weaponInstance.GetShootPointForward();
 
         for (var i = 0; i < _recoilCooldowns.Count; i++)
         {
@@ -112,7 +110,7 @@ public class Turret : MonoBehaviour
             {
                 if (Targetable.Team != Team.Neutral)
                 {
-                    _target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Targetable.Team), transform.position, Guns.transform.forward, MaxTargetDistance);
+                    _target = Targeting.FindFacingAngleTeam(Targeting.GetEnemyTeam(Targetable.Team), transform.position, shootPointsForward, MaxTargetDistance);
                     if (_target == null)
                         _target = Targeting.FindNearestTeam(Targeting.GetEnemyTeam(Targetable.Team), transform.position, MaxTargetDistance);
                 }
@@ -154,7 +152,7 @@ public class Turret : MonoBehaviour
         }
         else
         {
-            var shootPointsForward = _weaponInstance.GetShootPointForward();
+            shootPointsForward = _weaponInstance.GetShootPointForward();
             var dontShoot = false;
             RaycastHit aimHit;
             if (Physics.Raycast(new Ray(shootPointsCentre, shootPointsForward), out aimHit, MaxTargetDistance, _hitMask))
@@ -185,106 +183,6 @@ public class Turret : MonoBehaviour
             }
             _weaponInstance.IsTriggered = !dontShoot;
         }
-        /*
-        if (_target != null)
-        {
-            if (_aimCooldown >= 0f)
-            {
-                _aimCooldown -= Time.deltaTime;
-                if (_aimCooldown < 0f)
-                {
-                    _aimPosition = _target.transform.position;
-
-                    var targetVehicle = _target.GetComponent<Vehicle>();
-                    if (targetVehicle != null)
-                    {
-                        var targetPosition = Utility.GetVehicleExtrapolatedPosition(targetVehicle, _weaponInstance, 0f);
-                        var distance = (targetPosition - transform.position).magnitude;
-                        var offset = Random.insideUnitSphere * distance * AimDistanceOffsetMultiplier;
-                        _aimPosition = targetPosition + offset;
-                    }
-
-                    _aimCooldown = _aimInterval;
-                }
-            }
-
-            Head.transform.LookAt(_aimPosition, Vector3.up);
-            var targetYaw = Head.transform.localEulerAngles.y;
-            //var targetYaw = Quaternion.LookRotation(aimPosition - Head.transform.position, Vector3.up).eulerAngles.y; // this is world space not local!
-
-            _yaw = Mathf.MoveTowardsAngle(_yaw, targetYaw, MaxYawSpeed * Time.deltaTime);
-            Head.transform.localRotation = Quaternion.Euler(0, _yaw, 0);
-
-            Guns.transform.LookAt(_aimPosition, Vector3.forward);
-            var targetPitch = Guns.transform.localEulerAngles.x;
-            //var targetPitch = Quaternion.LookRotation(aimPosition - Guns.transform.position, Vector3.forward).eulerAngles.x; // this is world space not local!
-
-            var deltaMin = Mathf.DeltaAngle(targetPitch, MinPitch);
-            var deltaMax = Mathf.DeltaAngle(targetPitch, MaxPitch);
-
-            if (deltaMin < 0f)
-            {
-                // Lower Limit
-                targetPitch = MinPitch;
-            }
-            else
-            {
-                if (deltaMax > 0f)
-                {
-                    // Upper Limit
-                    targetPitch = MaxPitch;
-                }
-            }
-            _pitch = Mathf.MoveTowardsAngle(_pitch, targetPitch, MaxPitchSpeed * Time.deltaTime);
-            Guns.transform.localRotation = Quaternion.Euler(targetPitch, 0, 0);
-
-            // Shooting
-            if (_burstCooldown > 0f)
-            {
-                _burstCooldown -= Time.deltaTime;
-            }
-            else
-            {
-                var toAim = _aimPosition - shootPointsCentre;
-                var angleTo = Vector3.Angle(Guns.transform.forward, toAim);
-                var dontShoot = false;
-                if (Mathf.Abs(angleTo) < AimTolerance)
-                {
-                    _weaponInstance.SetAimAt(shootPointsCentre + Guns.transform.forward * MaxTargetDistance);
-                    RaycastHit aimHit;
-                    if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance, _hitMask))
-                    {
-                        if (aimHit.distance < AimTooCloseDistance)
-                        {
-                            dontShoot = true;
-                        }
-                        var aimAtTargetable = aimHit.collider.GetComponentInParent<Targetable>();
-                        if (aimAtTargetable != null)
-                        {
-                            if (Targetable.Team == aimAtTargetable.Team)
-                            {
-                                dontShoot = true;
-                            }
-                        }
-                        else
-                        {
-                            var mothership = aimHit.collider.GetComponentInParent<Mothership>();
-                            if (mothership != null)
-                            {
-                                dontShoot = true;
-                            }
-                        }
-                    }
-                    _weaponInstance.SetMissileTarget(_target);
-                    _weaponInstance.IsTriggered = !dontShoot;
-                }
-            }
-        }
-        else
-        {
-            _weaponInstance.IsTriggered = false;
-        }
-        */
     }
 
     private Vector3 GetLocalTargetEuler(Transform trans, Vector3 lookAt)
