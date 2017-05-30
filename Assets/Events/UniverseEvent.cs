@@ -6,6 +6,7 @@ public class UniverseEvent : MonoBehaviour
 {
     public static List<UniverseEvent> UniverseEvents { get; set; }
 
+    public bool UseWorldPosition = false;
     public Shiftable Shiftable { get; set; }
 
     public float TriggerRadius;
@@ -41,7 +42,16 @@ public class UniverseEvent : MonoBehaviour
         _trackerRadiusSquared = TrackerRadius * TrackerRadius;
 
         UniverseEvents.Add(this);
+    }
 
+    private void Start()
+    {
+        if (UseWorldPosition)
+        {
+            var startPosition = Universe.Current.GetUniversePosition(transform.position);
+            Shiftable.UniverseCellIndex = startPosition.CellIndex;
+            Shiftable.CellLocalPosition = startPosition.CellLocalPosition;
+        }
         _cellRadius = Mathf.CeilToInt(TriggerRadius / Universe.Current.CellSize);
         _universeCellIndex = Universe.Current.ViewPort.Shiftable.UniverseCellIndex;
     }
