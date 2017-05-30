@@ -39,8 +39,8 @@ public class MuzzleFlash : MonoBehaviour
 			var alpha = AlphaOverTime.Evaluate(frac);
 			MuzzleBase.transform.localScale = Vector3.one * scale;
 
-		    _muzzleBaseRenderer.material.color = Utility.SetColorAlpha(_muzzleBaseRenderer.material.color, alpha);
-		    Line.material.color = Utility.SetColorAlpha(Line.material.color, alpha);
+		    //_muzzleBaseRenderer.material.color = Utility.SetColorAlpha(_muzzleBaseRenderer.material.color, alpha);
+		    //Line.material.color = Utility.SetColorAlpha(Line.material.color, alpha);
 
 			Line.SetPosition(1, Vector3.forward * scale * LineLength);
 
@@ -62,12 +62,12 @@ public class MuzzleFlash : MonoBehaviour
 		MuzzleBase.transform.localScale = Vector3.one * scale;
 	    var alpha = AlphaOverTime.Evaluate(0f);
 
-        _muzzleBaseRenderer.material.color = Utility.SetColorAlpha(_muzzleBaseRenderer.material.color, alpha);
+        //_muzzleBaseRenderer.material.color = Utility.SetColorAlpha(_muzzleBaseRenderer.material.color, alpha);
 
 		Line.enabled = true;
 		Line.SetPosition(0, Vector3.zero);
 		Line.SetPosition(1, Vector3.forward * scale * LineLength);
-		Line.material.color = Utility.SetColorAlpha(Line.material.color, alpha);
+		//Line.material.color = Utility.SetColorAlpha(Line.material.color, alpha);
 
 	    FlashLight.enabled = true;
 
