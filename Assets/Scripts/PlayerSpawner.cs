@@ -11,9 +11,6 @@ public class PlayerSpawner : MonoBehaviour
 
     public void Spawn()
     {
-        if (Shiftable.UseWorldPosition)
-            Shiftable.ApplyWorldPosition();
-
         var localOffset = transform.rotation*transform.localPosition;
         var universePosition = new UniversePosition(Shiftable.UniversePosition.CellIndex, Shiftable.UniversePosition.CellLocalPosition + localOffset);
         Universe.Current.WarpTo(universePosition);

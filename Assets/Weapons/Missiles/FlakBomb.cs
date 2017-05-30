@@ -7,6 +7,7 @@ public class FlakBomb : Missile
     public float MinChaseDistance = 50f;
     public float MaxTurnSpeed = 90f;
     public float Radius = 0.3f;
+    public float LifeTime = 5f;
     public GameObject ExplodePrefab;
     public MeshRenderer Rocket;
     public float MinExplodeRadius = 8f;
@@ -30,7 +31,6 @@ public class FlakBomb : Missile
 
     private float _travelStraightTime = 0.5f;
     private float _travelStraightCooldown;
-    private float _noTargetTime = 5f;
     private float _noTargetCooldown;
     private float _delayTargetTime = 0.5f;
     private float _delayTargetCooldown;
@@ -181,7 +181,7 @@ public class FlakBomb : Missile
 
         Tracer.Reset();
 
-        _noTargetCooldown = _noTargetTime;
+        _noTargetCooldown = LifeTime;
         _delayTargetCooldown = _delayTargetTime;
         _travelStraightCooldown = _travelStraightTime + _turnTime;
         _hasHit = false;
