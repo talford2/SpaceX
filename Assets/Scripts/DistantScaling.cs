@@ -31,6 +31,8 @@ public class DistantScaling : MonoBehaviour
     private void Start()
     {
         Universe.Current.ViewPort.OnMove += UpdatePositionAndScale;
+        _isDistant = true;
+        UpdatePositionAndScale();
     }
 
     private void UpdatePositionAndScale()

@@ -25,6 +25,7 @@ public class GrandMothership : MonoBehaviour
         _killables = new List<Killable>();
         foreach (Transform turretTransform in LaserTurretGroupTransform)
         {
+            Destroy(turretTransform.GetComponent<MeshRenderer>());
             var turret = Instantiate(LaserTurretPrefab, turretTransform.position, turretTransform.rotation).GetComponent<Turret>();
             turret.Targetable.Team = Team;
             turret.transform.SetParent(turretTransform);
@@ -33,6 +34,7 @@ public class GrandMothership : MonoBehaviour
         }
         foreach (Transform turretTransform in FlakTurretGroupTransform)
         {
+            Destroy(turretTransform.GetComponent<MeshRenderer>());
             var turret = Instantiate(FlakTurretPrefab, turretTransform.position, turretTransform.rotation).GetComponent<Turret>();
             turret.Targetable.Team = Team;
             turret.transform.SetParent(turretTransform);

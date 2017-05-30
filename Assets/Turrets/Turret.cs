@@ -147,37 +147,44 @@ public class Turret : MonoBehaviour
         Head.transform.localRotation = Quaternion.RotateTowards(Head.transform.localRotation, Quaternion.AngleAxis(targetYaw, Vector3.up), MaxYawSpeed * Time.deltaTime);
         Guns.transform.localRotation = Quaternion.RotateTowards(Guns.transform.localRotation, Quaternion.AngleAxis(targetPitch, Vector3.right), MaxPitchSpeed * Time.deltaTime);
 
-        var angleTo = Vector3.Angle(_weaponInstance.GetShootPointForward(), toAimPosition);
-        var dontShoot = false;
-        RaycastHit aimHit;
-        if (Physics.Raycast(new Ray(shootPointsCentre, Guns.transform.forward), out aimHit, MaxTargetDistance, _hitMask))
+        if (_burstCooldown >= 0f)
         {
-            if (aimHit.distance < AimTooCloseDistance)
-            {
-                dontShoot = true;
-            }
+            _burstCooldown -= Time.deltaTime;
+            _weaponInstance.IsTriggered = false;
         }
-        if (!dontShoot)
+        else
         {
-            if (Mathf.Abs(angleTo) < AimTolerance)
+            var shootPointsForward = _weaponInstance.GetShootPointForward();
+            var dontShoot = false;
+            RaycastHit aimHit;
+            if (Physics.Raycast(new Ray(shootPointsCentre, shootPointsForward), out aimHit, MaxTargetDistance, _hitMask))
             {
-                _weaponInstance.SetAimAt(shootPointsCentre + toAimPosition.normalized * MaxTargetDistance);
+                if (aimHit.distance < AimTooCloseDistance)
+                {
+                    dontShoot = true;
+                }
+            }
+            if (!dontShoot)
+            {
+                if (Mathf.Abs(Vector3.Angle(shootPointsForward, toAimPosition)) < AimTolerance)
+                {
+                    _weaponInstance.SetAimAt(shootPointsCentre + toAimPosition.normalized * MaxTargetDistance);
+                }
+                else
+                {
+                    dontShoot = true;
+                }
+            }
+            if (_target != null)
+            {
+                _weaponInstance.SetMissileTarget(_target);
             }
             else
             {
                 dontShoot = true;
             }
+            _weaponInstance.IsTriggered = !dontShoot;
         }
-        if (_target != null)
-        {
-            _weaponInstance.SetMissileTarget(_target);
-        }
-        else
-        {
-            dontShoot = true;
-        }
-        _weaponInstance.IsTriggered = !dontShoot;
-
         /*
         if (_target != null)
         {
@@ -288,7 +295,7 @@ public class Turret : MonoBehaviour
     private void OnShoot(int shootPointIndex)
     {
         _fireCount++;
-        if (_fireCount > BurstCount)
+        if (_fireCount >= BurstCount)
         {
             _burstCooldown = BurstWaitTime;
             _weaponInstance.IsTriggered = false;
