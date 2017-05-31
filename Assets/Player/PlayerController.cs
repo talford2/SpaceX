@@ -739,6 +739,7 @@ public class PlayerController : MonoBehaviour
         {
             HeadsUpDisplay.Current.TriggerHealthHit();
         }
+        HeadsUpDisplay.Current.UpdateBars();
 	}
 
 	private void PlayerController_OnDie(Killable sender, GameObject attacker)

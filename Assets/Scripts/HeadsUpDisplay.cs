@@ -125,6 +125,17 @@ public class HeadsUpDisplay : MonoBehaviour
         MessageText.enabled = false;
 	}
 
+    public void UpdateBars()
+    {
+        var shieldFraction = PlayerController.Current.VehicleInstance.Killable.Shield / PlayerController.Current.VehicleInstance.Killable.MaxShield;
+        var healthFraction = PlayerController.Current.VehicleInstance.Killable.Health / PlayerController.Current.VehicleInstance.Killable.MaxHealth;
+        var energyFraction = PlayerController.Current.VehicleInstance.BoostEnergy / PlayerController.Current.VehicleInstance.EngineInstance.BoostEnergy;
+
+        ShieldBar.fillAmount = shieldFraction;
+        HealthBar.fillAmount = healthFraction;
+        BoostBar.fillAmount = energyFraction;
+    }
+
     private void Update()
     {
         if (PlayerController.Current.VehicleInstance != null)
@@ -133,24 +144,19 @@ public class HeadsUpDisplay : MonoBehaviour
             ShieldText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Shield);
             HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Health);
 
-            var shieldFraction = PlayerController.Current.VehicleInstance.Killable.Shield / PlayerController.Current.VehicleInstance.Killable.MaxShield;
-            var healthFraction = PlayerController.Current.VehicleInstance.Killable.Health / PlayerController.Current.VehicleInstance.Killable.MaxHealth;
-            var energyFraction = PlayerController.Current.VehicleInstance.BoostEnergy / PlayerController.Current.VehicleInstance.EngineInstance.BoostEnergy;
-
             var primaryWeaponInstance = PlayerController.Current.VehicleInstance.PrimaryWeaponInstance;
             var secondaryWeaponInstance = PlayerController.Current.VehicleInstance.SecondaryWeaponInstance;
 
             var leftHeatFraction = primaryWeaponInstance != null ? primaryWeaponInstance.GetHeatFraction() : 0f;
             var rightHeatFraction = secondaryWeaponInstance != null ? secondaryWeaponInstance.GetHeatFraction() : 0f;
 
-            ShieldBar.fillAmount = shieldFraction;
-            HealthBar.fillAmount = healthFraction;
-            BoostBar.fillAmount = energyFraction;
             LeftHeatBar.fillAmount = leftHeatFraction;
             RightHeatBar.fillAmount = rightHeatFraction;
 
             PrimaryHeatBar.fillAmount = (120f / 360f) * leftHeatFraction;
             SecondaryHeatBar.fillAmount = (120f / 360f) * rightHeatFraction;
+
+            UpdateBars();
         }
         if (_squadronPromptCooldown >= 0f)
         {
