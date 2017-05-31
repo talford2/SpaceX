@@ -126,4 +126,12 @@ public class Universe : MonoBehaviour
 		_cell = CellIndexFromWorldPosition(worldPosition);
 		return worldPosition - _cell.ToVector3() * CellSize + ViewPort.Shiftable.UniverseCellIndex.ToVector3() * CellSize;
 	}
+
+    public static UniversePosition GetUniversePositionFromZero(Vector3 worldPosition, float cellSize)
+    {
+        var dCellV = (worldPosition - Vector3.one * 0.5f*cellSize) / cellSize;
+        var cellIndex = new CellIndex(Mathf.CeilToInt(dCellV.x), Mathf.CeilToInt(dCellV.y), Mathf.CeilToInt(dCellV.z));
+        var localPosition = worldPosition - cellIndex.ToVector3() * cellSize;
+        return new UniversePosition(cellIndex, localPosition);
+    }
 }

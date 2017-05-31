@@ -204,184 +204,187 @@ public class VehicleTracker : Tracker
 
     public override void UpdateInstance()
     {
-        var distanceSquared = Universe.Current.SquareDistanceFromViewPort(_targetable.transform.position);
-        if (_lastDistanceSquared < _maxDistanceSquared)
+        if (isActiveAndEnabled)
         {
-            if (distanceSquared > _maxDistanceSquared)
+            var distanceSquared = Universe.Current.SquareDistanceFromViewPort(_targetable.transform.position);
+            if (_lastDistanceSquared < _maxDistanceSquared)
             {
-                TriggerFadeOut();
-            }
-        }
-
-        if (_lastDistanceSquared > _maxDistanceSquared)
-        {
-            if (distanceSquared < _maxDistanceSquared)
-            {
-                TriggerFadeIn();
-            }
-        }
-        if (_trackerPlaneInstance != null)
-        {
-            var cameraPlane = new Plane(Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.position + 5f * Universe.Current.ViewPort.transform.forward);
-            float planeDist;
-            var toCamRay = new Ray(_targetable.transform.position, Universe.Current.ViewPort.transform.position - _targetable.transform.position);
-            var dotCam = Vector3.Dot(_targetable.transform.position - Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward);
-            if (dotCam > 0f)
-            {
-                cameraPlane.Raycast(toCamRay, out planeDist);
-                _trackerPlaneInstance.transform.position = toCamRay.GetPoint(planeDist);
-
-                _trackerPlaneInstance.transform.localRotation = Quaternion.LookRotation(-Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.up) * Quaternion.Euler(0, 0, 45f);
-
-                _trackerPlaneRenderer.enabled = true;
-
-                var dist = (Universe.Current.ViewPort.transform.position - _targetable.transform.position).magnitude;
-                var frac = Options.TrackerPlaneScale / dist;
-                _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(frac, 0.18f, 1f));
-            }
-            else
-            {
-                _trackerPlaneRenderer.enabled = false;
-            }
-        }
-
-        InScreenBounds = false;
-        if (IsDisabled)
-        {
-            _imageInstance.enabled = false;
-            _shieldBarBackgroundInstance.enabled = false;
-            _shieldBarInstance.enabled = false;
-            _healthBarBackgroundInstance.enabled = false;
-            _healthBarInstance.enabled = false;
-            if (_trackerPlaneInstance != null)
-                _trackerPlaneRenderer.enabled = false;
-        }
-        else
-        {
-            if (_trackerPlaneInstance != null)
-                _trackerPlaneRenderer.enabled = true;
-            _imageInstance.enabled = true;
-            var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
-            if (screenPosition.z < 0f)
-            {
-                screenPosition *= -1f;
-                screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f)) * Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
-            }
-            screenPosition.z = 0f;
-            InScreenBounds = _screenBounds.Contains(screenPosition);
-            if (InScreenBounds)
-            {
-                //Sprite useSprite = null;// _trackerSprite;
-                if (distanceSquared > 1000f * 1000f)
+                if (distanceSquared > _maxDistanceSquared)
                 {
-                    /*
-                    useSprite = _farTrackerSprite;
-                    if (distanceSquared > 2000f * 2000f)
-                    {
-                        useSprite = _veryFarTrackerSprite;
-                    }
-                    */
-                    _shieldBarBackgroundInstance.enabled = false;
-                    _shieldBarInstance.enabled = false;
-                    _healthBarBackgroundInstance.enabled = false;
-                    _healthBarInstance.enabled = false;
+                    TriggerFadeOut();
+                }
+            }
 
-                    _imageInstance.rectTransform.localRotation = Quaternion.identity;
-                    _imageInstance.rectTransform.sizeDelta = 64f * Vector2.one;
+            if (_lastDistanceSquared > _maxDistanceSquared)
+            {
+                if (distanceSquared < _maxDistanceSquared)
+                {
+                    TriggerFadeIn();
+                }
+            }
+            if (_trackerPlaneInstance != null)
+            {
+                var cameraPlane = new Plane(Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.position + 5f * Universe.Current.ViewPort.transform.forward);
+                float planeDist;
+                var toCamRay = new Ray(_targetable.transform.position, Universe.Current.ViewPort.transform.position - _targetable.transform.position);
+                var dotCam = Vector3.Dot(_targetable.transform.position - Universe.Current.ViewPort.transform.position, Universe.Current.ViewPort.transform.forward);
+                if (dotCam > 0f)
+                {
+                    cameraPlane.Raycast(toCamRay, out planeDist);
+                    _trackerPlaneInstance.transform.position = toCamRay.GetPoint(planeDist);
+
+                    _trackerPlaneInstance.transform.localRotation = Quaternion.LookRotation(-Universe.Current.ViewPort.transform.forward, Universe.Current.ViewPort.transform.up) * Quaternion.Euler(0, 0, 45f);
+
+                    _trackerPlaneRenderer.enabled = true;
+
+                    var dist = (Universe.Current.ViewPort.transform.position - _targetable.transform.position).magnitude;
+                    var frac = Options.TrackerPlaneScale / dist;
+                    _trackerPlaneRenderer.material.SetFloat("_Expand", Mathf.Clamp(frac, 0.18f, 1f));
                 }
                 else
                 {
-                    UpdateHealthBar();
-
-                    //_imageInstance.rectTransform.localRotation = Quaternion.Euler(0, 0, 45f);
-                    //_imageInstance.rectTransform.sizeDelta = Mathf.Clamp(100f / Mathf.Sqrt(distanceSquared), 1f, 10f) * 64f * Vector2.one;
-                    //_imageInstance.color = new Color(0f, 0f, 0f, 0f);
+                    _trackerPlaneRenderer.enabled = false;
                 }
+            }
 
-                // Locking
-                _isLockedOn = false;
-                var playerVehicle = PlayerController.Current.VehicleInstance;
-                if (playerVehicle != null)
-                {
-                    if (playerVehicle.PrimaryWeaponInstance != null)
-                    {
-                        if (IsPlayerWeaponLocking(playerVehicle.PrimaryWeaponInstance))
-                        {
-                            _lockInstance.sprite = _lockingSprite;
-                            _isLockedOn = true;
-                        }
-                        if (IsPlayerWeaponLocked(playerVehicle, playerVehicle.PrimaryWeaponInstance))
-                        {
-                            _lockInstance.sprite = _lockedSprite;
-                            _isLockedOn = true;
-                        }
-                    }
-                    if (playerVehicle.SecondaryWeaponInstance != null)
-                    {
-                        if (IsPlayerWeaponLocking(playerVehicle.SecondaryWeaponInstance))
-                        {
-                            _lockInstance.sprite = _lockingSprite;
-                            _isLockedOn = true;
-                        }
-                        if (IsPlayerWeaponLocked(playerVehicle, playerVehicle.SecondaryWeaponInstance))
-                        {
-                            _lockInstance.sprite = _lockedSprite;
-                            _isLockedOn = true;
-                        }
-                    }
-                }
-
-                if (_oldLockedOn != _isLockedOn)
-                {
-                    _lockInstance.rectTransform.localScale = Vector3.one * 3f;
-                    _lockInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, 180f);
-                }
-
-                var scale = Vector3.one;
-                var rotation = Quaternion.identity;
-                if (_isLockedOn)
-                {
-                    _imageInstance.enabled = false;
-                    _lockInstance.enabled = true;
-                    rotation = Quaternion.RotateTowards(_lockInstance.rectTransform.localRotation, Quaternion.identity, 480f * Time.deltaTime);
-                    scale = Vector3.Lerp(_lockInstance.rectTransform.localScale, Vector3.one, Time.deltaTime * 5f);
-                }
-                else
-                {
-                    _imageInstance.enabled = true;
-                    _lockInstance.enabled = false;
-                }
-
-                //_imageInstance.sprite = useSprite;
+            InScreenBounds = false;
+            if (IsDisabled)
+            {
                 _imageInstance.enabled = false;
-
-                _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
-                _imageInstance.rectTransform.localRotation = Quaternion.identity;
-
-                if (_lockInstance.enabled)
-                {
-                    _lockInstance.rectTransform.localScale = scale;
-                    _lockInstance.rectTransform.localRotation = rotation;
-                }
-            }
-            else
-            {
-                _lockInstance.enabled = false;
-                _imageInstance.enabled = true;
-
-                _imageInstance.sprite = _arrowSprite;
-                _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
-                _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
-                _imageInstance.rectTransform.sizeDelta = 64f * Vector2.one;
-
                 _shieldBarBackgroundInstance.enabled = false;
                 _shieldBarInstance.enabled = false;
                 _healthBarBackgroundInstance.enabled = false;
                 _healthBarInstance.enabled = false;
+                if (_trackerPlaneInstance != null)
+                    _trackerPlaneRenderer.enabled = false;
             }
-            _oldLockedOn = _isLockedOn;
+            else
+            {
+                if (_trackerPlaneInstance != null)
+                    _trackerPlaneRenderer.enabled = true;
+                _imageInstance.enabled = true;
+                var screenPosition = Universe.Current.ViewPort.AttachedCamera.WorldToScreenPoint(transform.position);
+                if (screenPosition.z < 0f)
+                {
+                    screenPosition *= -1f;
+                    screenPosition = (screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f)) * Utility.ProjectOffscreenLength + new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+                }
+                screenPosition.z = 0f;
+                InScreenBounds = _screenBounds.Contains(screenPosition);
+                if (InScreenBounds)
+                {
+                    //Sprite useSprite = null;// _trackerSprite;
+                    if (distanceSquared > 1000f * 1000f)
+                    {
+                        /*
+                        useSprite = _farTrackerSprite;
+                        if (distanceSquared > 2000f * 2000f)
+                        {
+                            useSprite = _veryFarTrackerSprite;
+                        }
+                        */
+                        _shieldBarBackgroundInstance.enabled = false;
+                        _shieldBarInstance.enabled = false;
+                        _healthBarBackgroundInstance.enabled = false;
+                        _healthBarInstance.enabled = false;
+
+                        _imageInstance.rectTransform.localRotation = Quaternion.identity;
+                        _imageInstance.rectTransform.sizeDelta = 64f * Vector2.one;
+                    }
+                    else
+                    {
+                        UpdateHealthBar();
+
+                        //_imageInstance.rectTransform.localRotation = Quaternion.Euler(0, 0, 45f);
+                        //_imageInstance.rectTransform.sizeDelta = Mathf.Clamp(100f / Mathf.Sqrt(distanceSquared), 1f, 10f) * 64f * Vector2.one;
+                        //_imageInstance.color = new Color(0f, 0f, 0f, 0f);
+                    }
+
+                    // Locking
+                    _isLockedOn = false;
+                    var playerVehicle = PlayerController.Current.VehicleInstance;
+                    if (playerVehicle != null)
+                    {
+                        if (playerVehicle.PrimaryWeaponInstance != null)
+                        {
+                            if (IsPlayerWeaponLocking(playerVehicle.PrimaryWeaponInstance))
+                            {
+                                _lockInstance.sprite = _lockingSprite;
+                                _isLockedOn = true;
+                            }
+                            if (IsPlayerWeaponLocked(playerVehicle, playerVehicle.PrimaryWeaponInstance))
+                            {
+                                _lockInstance.sprite = _lockedSprite;
+                                _isLockedOn = true;
+                            }
+                        }
+                        if (playerVehicle.SecondaryWeaponInstance != null)
+                        {
+                            if (IsPlayerWeaponLocking(playerVehicle.SecondaryWeaponInstance))
+                            {
+                                _lockInstance.sprite = _lockingSprite;
+                                _isLockedOn = true;
+                            }
+                            if (IsPlayerWeaponLocked(playerVehicle, playerVehicle.SecondaryWeaponInstance))
+                            {
+                                _lockInstance.sprite = _lockedSprite;
+                                _isLockedOn = true;
+                            }
+                        }
+                    }
+
+                    if (_oldLockedOn != _isLockedOn)
+                    {
+                        _lockInstance.rectTransform.localScale = Vector3.one * 3f;
+                        _lockInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, 180f);
+                    }
+
+                    var scale = Vector3.one;
+                    var rotation = Quaternion.identity;
+                    if (_isLockedOn)
+                    {
+                        _imageInstance.enabled = false;
+                        _lockInstance.enabled = true;
+                        rotation = Quaternion.RotateTowards(_lockInstance.rectTransform.localRotation, Quaternion.identity, 480f * Time.deltaTime);
+                        scale = Vector3.Lerp(_lockInstance.rectTransform.localScale, Vector3.one, Time.deltaTime * 5f);
+                    }
+                    else
+                    {
+                        _imageInstance.enabled = true;
+                        _lockInstance.enabled = false;
+                    }
+
+                    //_imageInstance.sprite = useSprite;
+                    _imageInstance.enabled = false;
+
+                    _imageInstance.rectTransform.localPosition = screenPosition - new Vector3(_screenCentre.x, _screenCentre.y, 0f);
+                    _imageInstance.rectTransform.localRotation = Quaternion.identity;
+
+                    if (_lockInstance.enabled)
+                    {
+                        _lockInstance.rectTransform.localScale = scale;
+                        _lockInstance.rectTransform.localRotation = rotation;
+                    }
+                }
+                else
+                {
+                    _lockInstance.enabled = false;
+                    _imageInstance.enabled = true;
+
+                    _imageInstance.sprite = _arrowSprite;
+                    _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
+                    _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+                    _imageInstance.rectTransform.sizeDelta = 64f * Vector2.one;
+
+                    _shieldBarBackgroundInstance.enabled = false;
+                    _shieldBarInstance.enabled = false;
+                    _healthBarBackgroundInstance.enabled = false;
+                    _healthBarInstance.enabled = false;
+                }
+                _oldLockedOn = _isLockedOn;
+            }
+            _lastDistanceSquared = distanceSquared;
         }
-        _lastDistanceSquared = distanceSquared;
     }
 
     public void TriggerFadeIn(float time = 0.5f)
