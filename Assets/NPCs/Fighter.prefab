@@ -86,9 +86,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CallSign: 
-  TotalPower: 20
+  TotalPower: 8
   Weapons: 1
-  Shields: 6
+  Shields: 1
   Special: 6
   PrimaryWeapon: {fileID: 0}
   SecondaryWeapon: {fileID: 0}
