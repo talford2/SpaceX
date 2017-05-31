@@ -27,7 +27,16 @@ public class SpawnManager
             .ThenBy(s => (s.Shiftable.UniverseCellIndex - universePosition.CellIndex).SquareMagnitude())
             .FirstOrDefault();
 
-        Debug.Log("NEAREST SPAWNER AT: " + nearestSpawner.Shiftable.UniverseCellIndex);
+        Debug.LogFormat(
+            "NEAREST SPAWNER: {0} @ [{1}, {2}, {3}] - ({4:f2}, {5:f2}, {6:f2})",
+            nearestSpawner,
+            nearestSpawner.Shiftable.UniverseCellIndex.X,
+            nearestSpawner.Shiftable.UniverseCellIndex.Y,
+            nearestSpawner.Shiftable.UniverseCellIndex.Z,
+            nearestSpawner.Shiftable.CellLocalPosition.x,
+            nearestSpawner.Shiftable.CellLocalPosition.y,
+            nearestSpawner.Shiftable.CellLocalPosition.z
+            );
         return nearestSpawner;
     }
 }

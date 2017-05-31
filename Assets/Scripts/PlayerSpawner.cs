@@ -12,7 +12,7 @@ public class PlayerSpawner : MonoBehaviour
     public void Spawn()
     {
         var localOffset = transform.rotation*transform.localPosition;
-        var universePosition = new UniversePosition(Shiftable.UniversePosition.CellIndex, Shiftable.UniversePosition.CellLocalPosition + localOffset);
+        var universePosition = new UniversePosition(Shiftable.UniversePosition.CellIndex, Shiftable.UniversePosition.CellLocalPosition);// + localOffset);
         Universe.Current.WarpTo(universePosition);
         PlayerController.Current.Squadron.SpawnSquadronVehicle(PlayerController.Current.Squadron.GetCurrentMember(), universePosition, transform.rotation);
         PlayerController.Current.CycleSquadron(0);
