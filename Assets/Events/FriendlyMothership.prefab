@@ -5784,7 +5784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 2
+  Team: 1
   LockedOnBy: {fileID: 0}
 --- !u!114 &114283260240925748
 MonoBehaviour:
@@ -5816,6 +5816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 4300724038172492}
+  Radius: 0
 --- !u!114 &114345852732246850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5882,7 +5883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 2
+  Team: 1
   LockedOnBy: {fileID: 0}
 --- !u!114 &114463310386092282
 MonoBehaviour:
@@ -5976,7 +5977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 2
+  Team: 1
   LockedOnBy: {fileID: 0}
 --- !u!114 &114621778926081636
 MonoBehaviour:
@@ -5990,6 +5991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 4167236556616766}
+  Radius: 0
 --- !u!114 &114622563290184446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6001,7 +6003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 2
+  Team: 1
   LockedOnBy: {fileID: 0}
 --- !u!114 &114666467371170300
 MonoBehaviour:
@@ -6014,6 +6016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseWorldPosition: 0
   UniverseCellIndex:
     X: 0
     Y: 0
@@ -6031,6 +6034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 4300724038172492}
+  Radius: 0
 --- !u!114 &114699527608181298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6117,7 +6121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 2
+  Team: 1
   LockedOnBy: {fileID: 0}
 --- !u!114 &114821369614128050
 MonoBehaviour:
@@ -6259,7 +6263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 2
+  Team: 1
   LockedOnBy: {fileID: 0}
 --- !u!114 &114967808702777040
 MonoBehaviour:
@@ -6327,6 +6331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 4300724038172492}
+  Radius: 0
 --- !u!135 &135379610278181864
 SphereCollider:
   m_ObjectHideFlags: 1
