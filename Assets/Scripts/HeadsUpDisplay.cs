@@ -391,12 +391,14 @@ public class HeadsUpDisplay : MonoBehaviour
 	public void TriggerShieldHit()
 	{
 		ShieldBar.color = Utility.SetColorAlpha(ShieldBar.color, 1f);
-		_shieldHitCooldown = _shieldHitDuration;
+        HealthBar.color = Utility.SetColorAlpha(HealthBar.color, 0f);
+        _shieldHitCooldown = _shieldHitDuration;
 	}
 
 	public void TriggerHealthHit()
 	{
-		HealthBar.color = Utility.SetColorAlpha(HealthBar.color, 1f);
+		ShieldBar.color = Utility.SetColorAlpha(ShieldBar.color, 0f);
+        HealthBar.color = Utility.SetColorAlpha(HealthBar.color, 1f);
 		_healthHitCooldown = _healthHitDuration;
 	}
 
