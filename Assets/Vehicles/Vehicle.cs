@@ -140,6 +140,10 @@ public class Vehicle : MonoBehaviour
     // Wound effect
     private GameObject _woundObj;
 
+    // Death effect
+    private float _minVelocityMultiplier = 1.5f;
+    private float _maxVelocityMultiplier = 2f;
+
     public Weapon PrimaryWeaponInstance
     {
         get { return _primaryWeaponInstance; }
@@ -637,7 +641,7 @@ public class Vehicle : MonoBehaviour
             {
                 var corpseInstance = (GameObject)Instantiate(CorpsePrefab, transform.position, transform.rotation);
                 var rBody = corpseInstance.GetComponent<Rigidbody>();
-                rBody.velocity = _velocity;
+                rBody.velocity = _velocity * Random.Range(_minVelocityMultiplier, _maxVelocityMultiplier);
                 rBody.AddForce(_velocity.normalized * 5000f, ForceMode.Impulse);
                 rBody.AddRelativeTorque(new Vector3(0f, 0f, 50000f), ForceMode.Impulse);
                 var shiftable = corpseInstance.GetComponentInParent<Shiftable>();
