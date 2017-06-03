@@ -108,6 +108,7 @@ public class PlayerController : MonoBehaviour
 
 		HeadsUpDisplay.Current.LazyCreateSquadronIcons();
 		HeadsUpDisplay.Current.RefreshSquadronIcons();
+        HeadsUpDisplay.Current.ShowAlive();
 
 		CycleSquadron(0);
 
@@ -595,6 +596,7 @@ public class PlayerController : MonoBehaviour
 		respawnAt.Spawn();
 		_isAllowRespawn = false;
 		HeadsUpDisplay.Current.RefreshSquadronIcons();
+        HeadsUpDisplay.Current.ShowAlive();
         HeadsUpDisplay.Current.ShowCrosshair();
 	}
 
@@ -674,6 +676,7 @@ public class PlayerController : MonoBehaviour
 			HeadsUpDisplay.Current.RefreshSquadronIcon(Squadron.GetCurrentIndex());
 			HeadsUpDisplay.Current.RefreshSquadronIcon(oldSquadronIndex);
             HeadsUpDisplay.Current.ShowCrosshair();
+            HeadsUpDisplay.Current.ShowAlive();
         }
         else
 		{
@@ -750,6 +753,7 @@ public class PlayerController : MonoBehaviour
 		Debug.Log("PLAYER VEHICLE DESTROYED AT: " + _lastDeathUniversePosition.CellIndex);
 		HeadsUpDisplay.Current.RefreshSquadronIcon(0);
         HeadsUpDisplay.Current.TriggerCrosshairFadeOut();
+        HeadsUpDisplay.Current.ShowDead();
 
         if (attacker != null)
         {

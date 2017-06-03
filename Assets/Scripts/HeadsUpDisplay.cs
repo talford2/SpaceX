@@ -55,6 +55,7 @@ public class HeadsUpDisplay : MonoBehaviour
     
 	private float _hurtCooldown = 0f;
     private float _shieldHurtCooldown = 0f;
+    private bool _isDead;
 
 	private List<SquadronIcon> _squadronIcons;
 
@@ -120,6 +121,7 @@ public class HeadsUpDisplay : MonoBehaviour
         _killCount.Add(Team.Good, 0);
         _killCount.Add(Team.Neutral, 0);
 
+        _isDead = false;
         UpdateKillsDisplay();
 
         MessageText.enabled = false;
@@ -166,13 +168,23 @@ public class HeadsUpDisplay : MonoBehaviour
                 HideSquadronPrompt();
             }
         }
-        HitImage.color = new Color(1, 1, 1, _hurtCooldown);
-        _hurtCooldown -= Time.deltaTime * HurtFadeSpeed;
-        _hurtCooldown = Mathf.Max(0, _hurtCooldown);
 
-        ShieldHitImage.color = new Color(1, 1, 1, _shieldHurtCooldown);
-        _shieldHurtCooldown -= Time.deltaTime * ShieldHurtFadeSpeed;
-        _shieldHurtCooldown = Mathf.Max(0, _shieldHurtCooldown);
+        if (!_isDead)
+        {
+            HitImage.color = new Color(1, 1, 1, _hurtCooldown);
+            _hurtCooldown -= Time.deltaTime * HurtFadeSpeed;
+            _hurtCooldown = Mathf.Max(0, _hurtCooldown);
+
+            ShieldHitImage.color = new Color(1, 1, 1, _shieldHurtCooldown);
+            _shieldHurtCooldown -= Time.deltaTime * ShieldHurtFadeSpeed;
+            _shieldHurtCooldown = Mathf.Max(0, _shieldHurtCooldown);
+        }
+        else
+        {
+            ShieldHitImage.color = new Color(1f, 1f, 1f, 0f);
+            HitImage.color = new Color(1f, 1f, 1f, 1f);
+
+        }
 
         if (_crosshairHitCooldown >= 0f)
         {
@@ -347,6 +359,20 @@ public class HeadsUpDisplay : MonoBehaviour
 	{
 		_hurtCooldown = 1f;
 	}
+
+    public void ShowDead()
+    {
+        _shieldHurtCooldown = 0f;
+        _hurtCooldown = 0f;
+        _isDead = true;
+    }
+
+    public void ShowAlive()
+    {
+        _shieldHurtCooldown = 0f;
+        _hurtCooldown = 0f;
+        _isDead = false;
+    }
 
 	public void ShowCrosshair()
 	{
