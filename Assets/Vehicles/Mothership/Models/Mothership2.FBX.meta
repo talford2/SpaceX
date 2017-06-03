@@ -40,6 +40,10 @@ ModelImporter:
     100064: FlakTurrets
     100066: LaserTurrets
     100068: Shields
+    100070: DomeHolderRight
+    100072: DomeHolderRight001
+    100074: GasHolderLeft
+    100076: GasHolderRight
     400000: //RootNode
     400002: Box001
     400004: PanelMetal
@@ -75,6 +79,10 @@ ModelImporter:
     400064: FlakTurrets
     400066: LaserTurrets
     400068: Shields
+    400070: DomeHolderRight
+    400072: DomeHolderRight001
+    400074: GasHolderLeft
+    400076: GasHolderRight
     2300000: //RootNode
     2300002: Box001
     2300004: PanelMetal
@@ -107,6 +115,10 @@ ModelImporter:
     2300058: Flak03
     2300060: Flak04
     2300062: Shields
+    2300064: DomeHolderRight
+    2300066: DomeHolderRight001
+    2300068: GasHolderLeft
+    2300070: GasHolderRight
     3300000: //RootNode
     3300002: Box001
     3300004: PanelMetal
@@ -139,6 +151,10 @@ ModelImporter:
     3300058: Flak03
     3300060: Flak04
     3300062: Shields
+    3300064: DomeHolderRight
+    3300066: DomeHolderRight001
+    3300068: GasHolderLeft
+    3300070: GasHolderRight
     4300000: PanelMetal
     4300002: Box001
     4300004: Box015
@@ -170,6 +186,10 @@ ModelImporter:
     4300056: Flak02
     4300058: Flak01
     4300060: Shields
+    4300062: GasHolderRight
+    4300064: GasHolderLeft
+    4300066: DomeHolderRight
+    4300068: DomeHolderRight001
   materials:
     importMaterials: 1
     materialName: 0
