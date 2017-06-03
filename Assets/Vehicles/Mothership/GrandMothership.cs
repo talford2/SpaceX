@@ -12,6 +12,15 @@ public class GrandMothership : MonoBehaviour
     public GameObject FlakTurretPrefab;
     public Transform FlakTurretGroupTransform;
     //public List<Transform> FlakTurretTransforms;
+
+    [Header("Tanks")]
+    public GameObject TankPrefab;
+    public Transform TankGroupTransform;
+
+    [Header("Domes")]
+    public GameObject DomePrefab;
+    public Transform DomeGroupTransform;
+
     [Header("Other")]
     public MapPin MapPin;
     public GameObject SoundPrefab;
@@ -39,6 +48,22 @@ public class GrandMothership : MonoBehaviour
             turret.Targetable.Team = Team;
             turret.transform.SetParent(turretTransform);
             turret.transform.up = turretTransform.forward;
+            _killables.Add(turret.GetComponent<Killable>());
+        }
+        foreach(Transform tankTransform in TankGroupTransform)
+        {
+            Destroy(tankTransform.GetComponent<MeshRenderer>());
+            var turret = Instantiate(TankPrefab, tankTransform.position, tankTransform.rotation);
+            turret.transform.SetParent(tankTransform);
+            turret.transform.up = tankTransform.forward;
+            _killables.Add(turret.GetComponent<Killable>());
+        }
+        foreach (Transform domeTransform in DomeGroupTransform)
+        {
+            Destroy(domeTransform.GetComponent<MeshRenderer>());
+            var turret = Instantiate(TankPrefab, domeTransform.position, domeTransform.rotation);
+            turret.transform.SetParent(domeTransform);
+            turret.transform.up = domeTransform.forward;
             _killables.Add(turret.GetComponent<Killable>());
         }
         _liveCount = _killables.Count;
