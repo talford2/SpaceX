@@ -44,6 +44,9 @@ ModelImporter:
     100072: DomeHolderRight001
     100074: GasHolderLeft
     100076: GasHolderRight
+    100078: DomeHolderLeft
+    100080: Domes
+    100082: Tanks
     400000: //RootNode
     400002: Box001
     400004: PanelMetal
@@ -83,6 +86,9 @@ ModelImporter:
     400072: DomeHolderRight001
     400074: GasHolderLeft
     400076: GasHolderRight
+    400078: DomeHolderLeft
+    400080: Domes
+    400082: Tanks
     2300000: //RootNode
     2300002: Box001
     2300004: PanelMetal
@@ -119,6 +125,7 @@ ModelImporter:
     2300066: DomeHolderRight001
     2300068: GasHolderLeft
     2300070: GasHolderRight
+    2300072: DomeHolderLeft
     3300000: //RootNode
     3300002: Box001
     3300004: PanelMetal
@@ -155,6 +162,7 @@ ModelImporter:
     3300066: DomeHolderRight001
     3300068: GasHolderLeft
     3300070: GasHolderRight
+    3300072: DomeHolderLeft
     4300000: PanelMetal
     4300002: Box001
     4300004: Box015
@@ -190,6 +198,7 @@ ModelImporter:
     4300064: GasHolderLeft
     4300066: DomeHolderRight
     4300068: DomeHolderRight001
+    4300070: DomeHolderLeft
   materials:
     importMaterials: 1
     materialName: 0
