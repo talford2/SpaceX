@@ -9,15 +9,15 @@ public class VehicleCorpse : MonoBehaviour
     public GameObject DebrisPrefab;
     public GameObject SmokeInstance;
 
-    private Rigidbody rBody;
-    private Killable killable;
+    private Rigidbody _rBody;
+    private Killable _killable;
 
     private void Awake()
     {
-        rBody = GetComponent<Rigidbody>();
-        killable = GetComponent<Killable>();
+        _rBody = GetComponent<Rigidbody>();
+        _killable = GetComponent<Killable>();
 
-        killable.OnDie += CorpseExplode;
+        _killable.OnDie += CorpseExplode;
     }
 
     private void Start()
@@ -31,25 +31,30 @@ public class VehicleCorpse : MonoBehaviour
         CorpseExplode(null, null);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        _killable.Damage(0.01f * collision.impulse.magnitude, collision.contacts[0].point, collision.contacts[0].normal, null);
+    }
+
     private void CorpseExplode(Killable sender, GameObject attacker)
     {
         if (ExplosionPrefab != null)
         {
-            var explodeInstance = ResourcePoolManager.GetAvailable(ExplosionPrefab, rBody.position, rBody.rotation);
+            var explodeInstance = ResourcePoolManager.GetAvailable(ExplosionPrefab, _rBody.position, _rBody.rotation);
             explodeInstance.transform.localScale = transform.localScale;
             var explodeShiftable = explodeInstance.GetComponent<Shiftable>();
 
             if (explodeShiftable != null)
-                explodeShiftable.SetShiftPosition(Universe.Current.GetUniversePosition(rBody.position));
+                explodeShiftable.SetShiftPosition(Universe.Current.GetUniversePosition(_rBody.position));
         }
 
         if (DebrisPrefab != null)
         {
-            var debrisInstance = (GameObject)Instantiate(DebrisPrefab, rBody.position, rBody.rotation);
+            var debrisInstance = (GameObject)Instantiate(DebrisPrefab, _rBody.position, _rBody.rotation);
             var rBodies = debrisInstance.GetComponentsInChildren<Rigidbody>();
             foreach (var debrisrBody in rBodies)
             {
-                debrisrBody.velocity = rBody.velocity;
+                debrisrBody.velocity = _rBody.velocity;
                 debrisrBody.AddExplosionForce(200f, transform.position, 20f, 0f, ForceMode.Impulse);
                 var debrisShiftable = debrisrBody.GetComponent<Shiftable>();
                 debrisShiftable.SetShiftPosition(Universe.Current.GetUniversePosition(debrisrBody.position));
