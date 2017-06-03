@@ -93,10 +93,10 @@ public class GrandMothership : MonoBehaviour
         {
             Debug.Log("MOTHERSHIP DESTROYED!!!");
             HeadsUpDisplay.Current.DisplayMessage("MOTHERSHIP NEUTRALIZED", 3f);
-            foreach(var spawner in _spawners)
+            foreach (var spawner in _spawners)
             {
-                spawner.enabled = false;
-                //Destroy(spawner.gameObject);
+                if (spawner != null)
+                    Destroy(spawner.gameObject);
             }
             if (DefeatedSound != null)
             {
