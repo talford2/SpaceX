@@ -233,7 +233,7 @@ public class Fighter : Npc<Fighter>
         }
         if (attacker != null)
         {
-            var attackerTargetable = attacker.GetComponent<Targetable>();
+            var attackerTargetable = attacker.GetComponentInChildren<Targetable>();
             if (attackerTargetable != null)
                 HeadsUpDisplay.Current.RecordKill(attackerTargetable.Team);
         }
