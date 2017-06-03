@@ -53,18 +53,20 @@ public class GrandMothership : MonoBehaviour
         foreach(Transform tankTransform in TankGroupTransform)
         {
             Destroy(tankTransform.GetComponent<MeshRenderer>());
-            var turret = Instantiate(TankPrefab, tankTransform.position, tankTransform.rotation);
-            turret.transform.SetParent(tankTransform);
-            turret.transform.up = tankTransform.forward;
-            _killables.Add(turret.GetComponent<Killable>());
+            var tank = Instantiate(TankPrefab, tankTransform.position, tankTransform.rotation);
+            tank.transform.SetParent(tankTransform);
+            tank.transform.localPosition = Vector3.zero;
+            tank.transform.localRotation = Quaternion.identity;
+            _killables.Add(tank.GetComponent<Killable>());
         }
         foreach (Transform domeTransform in DomeGroupTransform)
         {
             Destroy(domeTransform.GetComponent<MeshRenderer>());
-            var turret = Instantiate(TankPrefab, domeTransform.position, domeTransform.rotation);
-            turret.transform.SetParent(domeTransform);
-            turret.transform.up = domeTransform.forward;
-            _killables.Add(turret.GetComponent<Killable>());
+            var dome = Instantiate(DomePrefab, domeTransform.position, domeTransform.rotation);
+            dome.transform.SetParent(domeTransform);
+            dome.transform.localPosition = Vector3.zero;
+            dome.transform.localRotation = Quaternion.identity;
+            _killables.Add(dome.GetComponent<Killable>());
         }
         _liveCount = _killables.Count;
         foreach (var killable in _killables)
