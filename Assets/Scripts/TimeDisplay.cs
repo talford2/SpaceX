@@ -31,7 +31,7 @@ public class TimeDisplay : MonoBehaviour
     {
         var sceneTime = Time.time - initTime;
         minutes = Mathf.Floor(sceneTime / 60f);
-        seconds = Time.time - (minutes * 60f);
+        seconds = sceneTime - (minutes * 60f);
     }
 
     private void OnGUI()
