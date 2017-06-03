@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ProximitySpawner : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ProximitySpawner : MonoBehaviour
     private float _radiusSquared;
     private float _intervalCooldown;
 
+    private List<Killable> _spawnedKillables;
     private int _liveCount;
 
     private void Awake()
@@ -50,6 +52,7 @@ public class ProximitySpawner : MonoBehaviour
         fighterInst.SpawnVehicle(fighterInst.gameObject, fighterInst.VehiclePrefab, Universe.Current.GetUniversePosition(transform.position), transform.rotation);
         var spawnedKillable = fighterInst.VehicleInstance.GetComponent<Killable>();
         spawnedKillable.OnDie += OnSpawnedDie;
+        _spawnedKillables.Add(spawnedKillable);
         if (PathPoint != null)
         {
             fighterInst.SetPath(Universe.Current.GetUniversePosition(PathPoint.position));
@@ -58,7 +61,16 @@ public class ProximitySpawner : MonoBehaviour
 
     private void OnSpawnedDie(Killable sender, GameObject attacker)
     {
+        _spawnedKillables.Remove(sender);
         _liveCount--;
         Debug.Log("SPAWNED DIED!");
+    }
+
+    private void OnDestroy()
+    {
+        foreach(var spawned in _spawnedKillables)
+        {
+            spawned.OnDie -= OnSpawnedDie;
+        }
     }
 }
