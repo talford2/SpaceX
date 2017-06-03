@@ -30,6 +30,7 @@ public class Weapon : MonoBehaviour
     public bool IsTargetLocking;
     public float TargetLockTime = 1.5f;
     public float TargetLockingMaxDistance = 2000f;
+    public float TargetAngleTolerance = 5f;
 
     [Header("Overheating")]
     public bool IsOverheat;
@@ -289,7 +290,7 @@ public class Weapon : MonoBehaviour
             if (IsTriggered)
             {
                 var targetLockingDir = _aimAt - shootPointsCentre;
-                _lockingTarget = Targeting.FindFacingAngleTeam(_targetTeam, shootPointsCentre, targetLockingDir, TargetLockingMaxDistance);
+                _lockingTarget = Targeting.FindFacingAngleTeam(_targetTeam, shootPointsCentre, targetLockingDir, TargetLockingMaxDistance, TargetAngleTolerance);
                 if (_lastLockingTarget == null)
                     _lastLockingTarget = _lockingTarget;
             }
