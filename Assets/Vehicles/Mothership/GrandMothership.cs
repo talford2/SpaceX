@@ -95,7 +95,8 @@ public class GrandMothership : MonoBehaviour
             HeadsUpDisplay.Current.DisplayMessage("MOTHERSHIP NEUTRALIZED", 3f);
             foreach(var spawner in _spawners)
             {
-                Destroy(spawner.gameObject);
+                spawner.enabled = false;
+                //Destroy(spawner.gameObject);
             }
             if (DefeatedSound != null)
             {
