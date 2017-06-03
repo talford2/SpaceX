@@ -66,12 +66,12 @@ public class Targeting
         return null;
     }
 
-    public static Transform FindFacingAngleTeam(Team team, Vector3 fromPosition, Vector3 facing, float maxDistance)
+    public static Transform FindFacingAngleTeam(Team team, Vector3 fromPosition, Vector3 facing, float maxDistance, float angleTolerance = 90f)
     {
         if (_targetables.ContainsKey(team))
         {
             var targetCandidates = _targetables[team];
-            return FindFacingAngleTarget(targetCandidates, fromPosition, facing, maxDistance, 90f);
+            return FindFacingAngleTarget(targetCandidates, fromPosition, facing, maxDistance, angleTolerance);
         }
         return null;
     }
