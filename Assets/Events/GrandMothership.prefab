@@ -383,6 +383,8 @@ GameObject:
   - component: {fileID: 114841348982771702}
   - component: {fileID: 114713500042478934}
   - component: {fileID: 114872752592872996}
+  - component: {fileID: 114580258512813990}
+  - component: {fileID: 114226656543070000}
   m_Layer: 0
   m_Name: GrandMothership
   m_TagString: Untagged
@@ -5957,6 +5959,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 4773136634499138}
   Radius: 0
+--- !u!114 &114226656543070000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1204344320402506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406b08dc75a95f140aee24a840ce718c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Instance: {fileID: 1005657836574250}
+  PrefabMesh: {fileID: 100000, guid: a09542a512cfa904d84297ba8fd7573b, type: 3}
 --- !u!114 &114279393785838180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6052,6 +6067,19 @@ MonoBehaviour:
   Interval: 20
   MaxLiveCount: 4
   PathPoint: {fileID: 4290886070761080}
+--- !u!114 &114580258512813990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1204344320402506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406b08dc75a95f140aee24a840ce718c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Instance: {fileID: 1035080329257030}
+  PrefabMesh: {fileID: 100000, guid: a09542a512cfa904d84297ba8fd7573b, type: 3}
 --- !u!114 &114628867405121830
 MonoBehaviour:
   m_ObjectHideFlags: 1
