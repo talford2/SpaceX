@@ -6032,6 +6032,7 @@ MonoBehaviour:
   TankGroupTransform: {fileID: 4115943069695820}
   DomePrefab: {fileID: 1393999343897690, guid: 1cb8543f90f8c5e44b3d7ef01a7456c7, type: 2}
   DomeGroupTransform: {fileID: 4101492468036242}
+  SpawnersGroupTransform: {fileID: 4977456467613502}
   MapPin: {fileID: 114872752592872996}
   SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
   DefeatedSound: {fileID: 8300000, guid: f7b36ddbeacd38141b2fc0aabea82207, type: 3}

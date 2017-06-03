@@ -21,6 +21,9 @@ public class GrandMothership : MonoBehaviour
     public GameObject DomePrefab;
     public Transform DomeGroupTransform;
 
+    [Header("Spawners")]
+    public Transform SpawnersGroupTransform;
+
     [Header("Other")]
     public MapPin MapPin;
     public GameObject SoundPrefab;
@@ -28,6 +31,7 @@ public class GrandMothership : MonoBehaviour
 
     private int _liveCount;
     private List<Killable> _killables;
+    private List<ProximitySpawner> _spawners;
 
     private void Awake()
     {
@@ -39,7 +43,7 @@ public class GrandMothership : MonoBehaviour
             turret.Targetable.Team = Team;
             turret.transform.SetParent(turretTransform);
             turret.transform.up = turretTransform.forward;
-            _killables.Add(turret.GetComponent<Killable>());
+            //_killables.Add(turret.GetComponent<Killable>());
         }
         foreach (Transform turretTransform in FlakTurretGroupTransform)
         {
@@ -48,7 +52,7 @@ public class GrandMothership : MonoBehaviour
             turret.Targetable.Team = Team;
             turret.transform.SetParent(turretTransform);
             turret.transform.up = turretTransform.forward;
-            _killables.Add(turret.GetComponent<Killable>());
+            //_killables.Add(turret.GetComponent<Killable>());
         }
         foreach(Transform tankTransform in TankGroupTransform)
         {
@@ -68,6 +72,12 @@ public class GrandMothership : MonoBehaviour
             dome.transform.localRotation = Quaternion.identity;
             _killables.Add(dome.GetComponent<Killable>());
         }
+        _spawners = new List<ProximitySpawner>();
+        foreach(Transform spawnerTransform in SpawnersGroupTransform)
+        {
+            var spawner = spawnerTransform.GetComponentInChildren<ProximitySpawner>();
+            _spawners.Add(spawner);
+        }
         _liveCount = _killables.Count;
         foreach (var killable in _killables)
         {
@@ -83,6 +93,10 @@ public class GrandMothership : MonoBehaviour
         {
             Debug.Log("MOTHERSHIP DESTROYED!!!");
             HeadsUpDisplay.Current.DisplayMessage("MOTHERSHIP NEUTRALIZED", 3f);
+            foreach(var spawner in _spawners)
+            {
+                Destroy(spawner.gameObject);
+            }
             if (DefeatedSound != null)
             {
                 ResourcePoolManager.GetAvailable(SoundPrefab, Universe.Current.ViewPort.transform.position, Quaternion.identity)
