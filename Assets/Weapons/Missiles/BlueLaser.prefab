@@ -9,10 +9,10 @@ GameObject:
   m_Component:
   - component: {fileID: 418090}
   - component: {fileID: 12017834}
-  - component: {fileID: 11498606}
+  - component: {fileID: 11414748}
   - component: {fileID: 11443858}
   m_Layer: 0
-  m_Name: TurretLaser
+  m_Name: BlueLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,6 +31,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11414748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6ab23b8aef1484781c41a246051fc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MissileSpeed: 600
+  MissileForce: 0
+  FromReference: {fileID: 0}
+  HitEffectPrefab: {fileID: 198982, guid: 4bb191ad1a7963849a6c492ebb749803, type: 2}
+  HitDecalPrefab: {fileID: 121998, guid: 5ca4b0ff81cbb7148a77afcf43fcab11, type: 2}
+  MissileLength: 10
+  Tracer: {fileID: 12017834}
 --- !u!114 &11443858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -48,24 +66,6 @@ MonoBehaviour:
     Y: 0
     Z: 0
   CellLocalPosition: {x: 0, y: 0, z: 0}
---- !u!114 &11498606
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a6ab23b8aef1484781c41a246051fc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MissileSpeed: 600
-  MissileForce: 50
-  FromReference: {fileID: 0}
-  HitEffectPrefab: {fileID: 0}
-  HitDecalPrefab: {fileID: 121998, guid: 5ca4b0ff81cbb7148a77afcf43fcab11, type: 2}
-  MissileLength: 30
-  Tracer: {fileID: 12017834}
 --- !u!120 &12017834
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -79,7 +79,7 @@ LineRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: e84054d507aab15479376b98120340a2, type: 2}
+  - {fileID: 2100000, guid: 0e8efb14f31842644aca8cc431fb9877, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,7 +100,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 6.19}
+  - {x: 0, y: 0, z: 4}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1.5
@@ -191,27 +191,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: HitEffectPrefab
       value: 
-      objectReference: {fileID: 103948, guid: d1710e605ce48b640a0fd508d0578edc, type: 2}
+      objectReference: {fileID: 198982, guid: 4bb191ad1a7963849a6c492ebb749803, type: 2}
     - target: {fileID: 0}
       propertyPath: HitDecalPrefab
       value: 
       objectReference: {fileID: 121998, guid: 5ca4b0ff81cbb7148a77afcf43fcab11, type: 2}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: MissileDamage
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Tracer
       value: 

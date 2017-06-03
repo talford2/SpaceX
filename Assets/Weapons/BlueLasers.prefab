@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &187448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 490488}
+  - component: {fileID: 11492802}
+  - component: {fileID: 11418244}
+  m_Layer: 0
+  m_Name: BlueLasers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &490488
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187448}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11418244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdbb7f25e717fd499c6f238cf3acb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventorySprite: {fileID: 21300000, guid: 53c8d39213fa7c54fa87b72d2e1ad40e, type: 3}
+  Type: 0
+  SalvageValue: 100
+--- !u!114 &11492802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Green Laser Cannon
+  LootIndex: 1
+  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
+  SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
+  ShootSound: {fileID: 8300000, guid: b982a86e0d360774394704474402bf73, type: 3}
+  SoundVolume: 0.3
+  SoundMinDistance: 25
+  SoundMaxDistance: 200
+  MissilePrefab: {fileID: 180512, guid: b715e855fc9572c41a789a3cba7318db, type: 2}
+  MissilesPerShot: 2
+  Spread: 0
+  MissilesConverge: 0
+  IsTargetLocking: 0
+  TargetLockTime: 1.5
+  TargetLockingMaxDistance: 2000
+  TargetAngleTolerance: 5
+  IsOverheat: 1
+  HeatPerMissile: 0.8
+  OverheatDelay: 2
+  CoolDelay: 0.5
+  LockSound: {fileID: 0}
+  BaseMissileDamage: 4.5
+  BaseFireRate: 10
+  BaseCoolingRate: 30
+  BaseOverheatValue: 100
+  DamagePoints: 0
+  FireRatePoints: 0
+  CoolingRatePoints: 0
+  HeatCapacityPoints: 0
+  DamagePerPoint: 0.5
+  FireRatePerPoint: 1
+  CoolingRatePerPoint: 2
+  HeatCapacityPerPoint: 5
+  IsTriggered: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Missile
+      value: 
+      objectReference: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: FireRate
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MissilePrefab
+      value: 
+      objectReference: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: MuzzlePrefab
+      value: 
+      objectReference: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MinDistance
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxDistance
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b982a86e0d360774394704474402bf73, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Volume
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MissilePoolCount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MissileDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Name
+      value: Green Laser Cannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InventorySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 53c8d39213fa7c54fa87b72d2e1ad40e,
+        type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 187448}
+  m_IsPrefabParent: 1

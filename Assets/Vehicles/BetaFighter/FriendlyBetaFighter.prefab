@@ -426,6 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseWorldPosition: 0
   UniverseCellIndex:
     X: 0
     Y: 0
@@ -471,6 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 441860}
+  Radius: 0
 --- !u!114 &11475068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -482,8 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 30
-  MaxHealth: 30
+  Health: 60
+  MaxHealth: 60
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
@@ -531,7 +533,7 @@ MonoBehaviour:
   CameraDistance: 15
   UTurnPath: {fileID: 0}
   UTurnDuration: 0
-  PrimaryWeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93,
+  PrimaryWeaponPrefab: {fileID: 11492802, guid: a92acb07074ae114698b3883d13497a0,
     type: 2}
   PrimaryShootPoints:
   - {fileID: 11401126}

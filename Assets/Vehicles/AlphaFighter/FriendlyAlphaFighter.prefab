@@ -427,6 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseWorldPosition: 0
   UniverseCellIndex:
     X: 0
     Y: 0
@@ -454,8 +455,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 30
-  MaxHealth: 30
+  Health: 60
+  MaxHealth: 60
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
@@ -473,6 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 474404}
+  Radius: 0
 --- !u!135 &13556362
 SphereCollider:
   m_ObjectHideFlags: 1
