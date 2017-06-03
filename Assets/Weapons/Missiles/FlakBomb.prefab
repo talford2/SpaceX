@@ -168,13 +168,13 @@ MonoBehaviour:
   MinChaseDistance: 50
   MaxTurnSpeed: 90
   Radius: 0.3
-  LifeTimeMin: 2.5
-  LifeTimeMax: 3.5
+  LifeTimeMin: 1.5
+  LifeTimeMax: 2.5
   ExplodePrefab: {fileID: 127098, guid: 77b7164c2899d074ab9d571655898043, type: 2}
   Rocket: {fileID: 2343076}
   MinExplodeRadius: 8
   MaxExplodeRadius: 30
-  MaxExplodeDamage: 120
+  MaxExplodeDamage: 80
   Tracer: {fileID: 114792166271912478}
 --- !u!120 &12063628
 LineRenderer:
