@@ -20,6 +20,7 @@ public class ProximitySpawner : MonoBehaviour
         _radiusSquared = Radius*Radius;
         _intervalCooldown = Random.Range(0f, Interval);
         _liveCount = 0;
+        _spawnedKillables = new List<Killable>();
     }
 
     private void Update()
