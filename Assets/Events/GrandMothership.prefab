@@ -2252,8 +2252,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1204344320402506}
-  m_LocalRotation: {x: 0.077761576, y: 0.46112618, z: -0.08479776, w: 0.87984383}
-  m_LocalPosition: {x: -708, y: -28, z: 4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4114682551428524}
@@ -6012,6 +6012,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 15
   MaxLiveCount: 4
   PathPoint: {fileID: 4014075759481448}
 --- !u!114 &114509393980929760
@@ -6065,6 +6066,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 15
   MaxLiveCount: 4
   PathPoint: {fileID: 4290886070761080}
 --- !u!114 &114580258512813990
@@ -6094,6 +6096,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 15
   MaxLiveCount: 5
   PathPoint: {fileID: 4551670759124808}
 --- !u!114 &114674944490525752
@@ -6178,6 +6181,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 15
   MaxLiveCount: 5
   PathPoint: {fileID: 4497057253894164}
 --- !u!114 &114867429435382830
@@ -6194,6 +6198,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 15
   MaxLiveCount: 4
   PathPoint: {fileID: 4600215274427608}
 --- !u!114 &114872752592872996
@@ -6265,6 +6270,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 15
   MaxLiveCount: 4
   PathPoint: {fileID: 4909689063409484}
 --- !u!135 &135009428447404054

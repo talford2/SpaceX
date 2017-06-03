@@ -6,6 +6,7 @@ public class ProximitySpawner : MonoBehaviour
     public Fighter FighterPrefab;
     public float Radius = 2000f;
     public float Interval = 20f;
+    public float IntervalIncreasePerKill = 0f;
     public int MaxLiveCount = 2;
     public Transform PathPoint;
 
@@ -64,6 +65,7 @@ public class ProximitySpawner : MonoBehaviour
     {
         _spawnedKillables.Remove(sender);
         _liveCount--;
+        _intervalCooldown += IntervalIncreasePerKill;
         Debug.Log("SPAWNED DIED!");
     }
 
