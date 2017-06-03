@@ -24,6 +24,7 @@ public class Utility
             if (!instanceDictionary.ContainsKey(key))
             {
                 Debug.LogWarningFormat("Source mesh does not contain transform matching key: '{0}'", key);
+                var newMesh = Object.Instantiate(sourcePart.gameObject, instance.transform);
             }
             else
             {
