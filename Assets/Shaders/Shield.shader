@@ -66,11 +66,9 @@ Shader "Custom/Shield" {
                 float node_4333 = (_Speed*node_5075.r);
                 float2 node_1625 = ((0.66*(1.0 - i.uv0))+node_4333*float2(1,1));
                 float4 _MainTex = tex2D(_Texture,TRANSFORM_TEX(node_1625, _Texture));
-                float3 node_1241 = (_Color2.rgb*_MainTex.rgb);
                 float2 node_8045 = (i.uv0+node_4333*float2(1,-1));
                 float4 node_754 = tex2D(_Texture,TRANSFORM_TEX(node_8045, _Texture));
-                float3 node_810 = ((1.0 - node_754.rgb)*_TintColor.rgb);
-                float3 emissive = (node_1241+node_810);
+                float3 emissive = ((_Color2.rgb*_MainTex.rgb)+((1.0 - node_754.rgb)*_TintColor.rgb));
                 float3 finalColor = emissive;
                 fixed4 finalRGBA = fixed4(finalColor,1);
                 UNITY_APPLY_FOG_COLOR(i.fogCoord, finalRGBA, fixed4(0,0,0,1));
