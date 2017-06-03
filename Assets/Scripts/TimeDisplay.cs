@@ -7,6 +7,7 @@ public class TimeDisplay : MonoBehaviour
     public bool DebugBuildOnly = true;
     private GUIStyle displayStyle;
     
+    private float initTime;
     private float minutes;
     private float seconds;
 
@@ -23,11 +24,13 @@ public class TimeDisplay : MonoBehaviour
             alignment = TextAnchor.UpperRight,
             normal = new GUIStyleState { textColor = Color.white }
         };
+        initTime = Time.time;
     }
 
     private void Update()
     {
-        minutes = Mathf.Floor(Time.time / 60f);
+        var sceneTime = Time.time - initTime;
+        minutes = Mathf.Floor(sceneTime / 60f);
         seconds = Time.time - (minutes * 60f);
     }
 
