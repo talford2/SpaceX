@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 23103692320884484}
   - component: {fileID: 64550908631901596}
   - component: {fileID: 114070422258443674}
+  - component: {fileID: 114876972713083964}
+  - component: {fileID: 114553759336141572}
   m_Layer: 0
   m_Name: DestructableDome
   m_TagString: Untagged
@@ -107,10 +109,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 150
-  MaxHealth: 150
+  Health: 500
+  MaxHealth: 500
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   DestroyOnDie: 1
+--- !u!114 &114553759336141572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1393999343897690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Options: {fileID: 11400000, guid: b74261f70d5e1d34e87c6b2482d25f56, type: 2}
+  Targetable: {fileID: 114876972713083964}
+  Killable: {fileID: 114070422258443674}
+  IsDisabled: 0
+--- !u!114 &114876972713083964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1393999343897690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bcff2c151314794f9dac19bcec2d675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Team: 2
+  LockedOnBy: {fileID: 0}
