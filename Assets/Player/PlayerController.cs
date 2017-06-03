@@ -753,6 +753,7 @@ public class PlayerController : MonoBehaviour
 		Debug.Log("PLAYER VEHICLE DESTROYED AT: " + _lastDeathUniversePosition.CellIndex);
 		HeadsUpDisplay.Current.RefreshSquadronIcon(0);
         HeadsUpDisplay.Current.TriggerCrosshairFadeOut();
+        HeadsUpDisplay.Current.HideCrosshair();
         HeadsUpDisplay.Current.ShowDead();
 
         if (attacker != null)
