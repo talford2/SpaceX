@@ -721,7 +721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 127098, guid: 77b7164c2899d074ab9d571655898043, type: 2}
-  PoolSize: 20
+  PoolSize: 50
 --- !u!114 &114875471554009810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -799,7 +799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 122516, guid: 895ee3d7b5c719a418999475f9c4cc69, type: 2}
-  PoolSize: 20
+  PoolSize: 50
 --- !u!114 &114960955242444100
 MonoBehaviour:
   m_ObjectHideFlags: 1
