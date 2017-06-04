@@ -146,6 +146,7 @@ public class GrandMothership : MonoBehaviour
                     .GetComponent<AnonymousSound>()
                     .PlayAt(DefeatedSound, Universe.Current.ViewPort.transform.position, 1f, false);
             }
+            _isExploding = true;
             MapPin.SetPinState(MapPin.MapPinState.Inactive);
         }
     }
