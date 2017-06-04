@@ -762,6 +762,7 @@ public class PlayerController : MonoBehaviour
             if (attackerTargetable != null)
                 HeadsUpDisplay.Current.RecordKill(attackerTargetable.Team);
         }
+        Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.5f);
     }
 
 	public void ResetThreatCooldown()
