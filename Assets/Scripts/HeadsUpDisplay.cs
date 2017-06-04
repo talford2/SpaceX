@@ -28,7 +28,7 @@ public class HeadsUpDisplay : MonoBehaviour
     public float DisplayKillTime = 0.5f;
     public float DisplayKillFadeTime = 0.5f;
     public float DisplayKillZDepth = 40f;
-    public Vector3 _aaaa;
+    public Vector3 _initKillTextPos;
 
     [Header("Bars")]
     public Image ShieldBar;
@@ -135,7 +135,7 @@ public class HeadsUpDisplay : MonoBehaviour
 
         KillText.text = "";
         KillText.color = Utility.SetColorAlpha(KillText.color, 0);
-        _aaaa = KillText.rectTransform.localPosition;
+        _initKillTextPos = KillText.rectTransform.localPosition;
     }
 
     public void ShowKillMessage(string message)
@@ -143,6 +143,7 @@ public class HeadsUpDisplay : MonoBehaviour
         KillText.text = message;
         KillText.color = Utility.SetColorAlpha(KillText.color, 1);
         _killCoolDown = DisplayKillTime + DisplayKillFadeTime;
+        KillText.rectTransform.localPosition = _initKillTextPos;
         Debug.Log("Kill message: " + message);
     }
 
@@ -164,9 +165,9 @@ public class HeadsUpDisplay : MonoBehaviour
             _killCoolDown -= Time.deltaTime;
             if (_killCoolDown < DisplayKillTime)
             {
-                var fade = Mathf.Clamp01(_killCoolDown / (DisplayKillFadeTime - DisplayKillTime));
+                var fade = Mathf.Clamp01(_killCoolDown / DisplayKillFadeTime);
                 KillText.color = Utility.SetColorAlpha(KillText.color, fade);
-                KillText.rectTransform.localPosition = Vector3.Lerp(_aaaa, new Vector3(_aaaa.x, _aaaa.y, DisplayKillZDepth), 1f - fade);
+                KillText.rectTransform.localPosition = Vector3.Lerp(_initKillTextPos, new Vector3(_initKillTextPos.x, _initKillTextPos.y, DisplayKillZDepth), 1f - fade);
             }
         }
 
