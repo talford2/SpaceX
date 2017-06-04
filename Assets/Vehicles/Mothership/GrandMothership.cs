@@ -111,7 +111,7 @@ public class GrandMothership : MonoBehaviour
             var shakeSource = explosion.GetComponent<ScreenShakeSource>();
             if (shakeSource != null)
                 shakeSource.Trigger();
-            SplashDamage.ExplodeAt(castHit.point, 50f, 20f, 200f, 200f, LayerMask.GetMask("Detectable"), null);
+            SplashDamage.ExplodeAt(castHit.point, 100f, 40f, 200f, 200f, LayerMask.GetMask("Detectable"), null);
         }
     }
 
