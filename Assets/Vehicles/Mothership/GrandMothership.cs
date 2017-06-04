@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GrandMothership : MonoBehaviour
@@ -29,9 +30,20 @@ public class GrandMothership : MonoBehaviour
     public GameObject SoundPrefab;
     public AudioClip DefeatedSound;
 
+    [Header("Destroy Explosion")]
+    public bool IsExploding = false;
+    public GameObject ProjectExplosionPrefab;
+    public Transform ProjectExplosionVertex1;
+    public Transform ProjectExplosionVertex2;
+    public float ProjectExplosionRadius;
+
     private int _liveCount;
     private List<Killable> _killables;
     private List<ProximitySpawner> _spawners;
+
+    // Exploding
+    private bool _isExploding;
+    private float _explodeCooldown;
 
     private void Awake()
     {
@@ -83,6 +95,36 @@ public class GrandMothership : MonoBehaviour
         {
             killable.OnDie += OnKill;
         }
+        _isExploding = IsExploding;
+    }
+
+    private void ProjectedExplosion()
+    {
+        var castFrom = Random.onUnitSphere * ProjectExplosionRadius;
+        var castDelta = ProjectExplosionVertex2.position - ProjectExplosionVertex1.position;
+        var castTo = ProjectExplosionVertex1.position + Random.value * castDelta.magnitude * castDelta.normalized;
+        var cast = new Ray(castFrom, castTo - castFrom);
+        RaycastHit castHit;
+        if (Physics.Raycast(cast, out castHit, ProjectExplosionRadius, LayerMask.GetMask("Default")))
+        {
+            var explosion = ResourcePoolManager.GetAvailable(ProjectExplosionPrefab, castHit.point, Quaternion.identity);
+        }
+    }
+
+    private void Update()
+    {
+        if (_isExploding)
+        {
+            if (_explodeCooldown >= 0f)
+            {
+                _explodeCooldown -= Time.deltaTime;
+                if (_explodeCooldown < 0f)
+                {
+                    ProjectedExplosion();
+                    _explodeCooldown = Random.Range(0.005f, 0.01f);
+                }
+            }
+        }
     }
 
     private void OnKill(Killable sender, GameObject attacker)
@@ -106,5 +148,11 @@ public class GrandMothership : MonoBehaviour
             }
             MapPin.SetPinState(MapPin.MapPinState.Inactive);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, ProjectExplosionRadius);
     }
 }
