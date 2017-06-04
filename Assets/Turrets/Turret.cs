@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    [Header("Description")]
+    public string Name;
+
     [Header("Parts")]
     public GameObject Head;
     public GameObject Guns;
