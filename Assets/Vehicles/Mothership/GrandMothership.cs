@@ -108,6 +108,7 @@ public class GrandMothership : MonoBehaviour
         if (Physics.Raycast(cast, out castHit, ProjectExplosionRadius, LayerMask.GetMask("Default")))
         {
             var explosion = ResourcePoolManager.GetAvailable(ProjectExplosionPrefab, castHit.point, Quaternion.identity);
+            SplashDamage.ExplodeAt(castHit.point, 30f, 5f, 150f, 200f, LayerMask.GetMask("Detectable"), null);
         }
     }
 
