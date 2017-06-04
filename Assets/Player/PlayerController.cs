@@ -686,7 +686,15 @@ public class PlayerController : MonoBehaviour
 
     public void OnPlayerKill(Killable victim)
     {
-        HeadsUpDisplay.Current.DisplayMessage("KILL", 2f);
+        var killMessage = string.Empty;
+        var vehicle = victim.GetComponent<Vehicle>();
+        if (vehicle != null)
+            killMessage = string.Format("{0} Destroyed", vehicle.Name);
+        var turret = victim.GetComponent<Turret>();
+        if (turret != null)
+            killMessage = string.Format("{0} Destroyed", turret.Name);
+        if (!string.IsNullOrEmpty(killMessage))
+            HeadsUpDisplay.Current.DisplayMessage(killMessage, 1f);
     }
 
     private PlayerInventory _inventory;

@@ -363,6 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8446123da9e83ef4bb11729d8d637ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Laser Turret
   Head: {fileID: 148000}
   Guns: {fileID: 178440}
   RecoilBarrels:
