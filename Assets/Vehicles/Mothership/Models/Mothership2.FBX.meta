@@ -48,6 +48,7 @@ ModelImporter:
     100080: Domes
     100082: Tanks
     100084: Windows
+    100086: SideRim
     400000: //RootNode
     400002: Box001
     400004: PanelMetal
@@ -91,6 +92,7 @@ ModelImporter:
     400080: Domes
     400082: Tanks
     400084: Windows
+    400086: SideRim
     2300000: //RootNode
     2300002: Box001
     2300004: PanelMetal
@@ -129,6 +131,7 @@ ModelImporter:
     2300070: GasHolderRight
     2300072: DomeHolderLeft
     2300074: Windows
+    2300076: SideRim
     3300000: //RootNode
     3300002: Box001
     3300004: PanelMetal
@@ -167,6 +170,7 @@ ModelImporter:
     3300070: GasHolderRight
     3300072: DomeHolderLeft
     3300074: Windows
+    3300076: SideRim
     4300000: PanelMetal
     4300002: Box001
     4300004: Box015
@@ -204,6 +208,7 @@ ModelImporter:
     4300068: DomeHolderRight001
     4300070: DomeHolderLeft
     4300072: Windows
+    4300074: SideRim
   materials:
     importMaterials: 1
     materialName: 0

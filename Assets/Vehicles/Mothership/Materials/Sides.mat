@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SpaceMetal 1
+  m_Name: Sides
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION
+  m_ShaderKeywords: _EMISSION _NORMALMAP
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_CustomRenderQueue: -1
@@ -18,7 +18,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 243b5afd3770abf48ba246b48001ffba, type: 3}
+        m_Texture: {fileID: 2800000, guid: c3fbb8a43246de543a4df419d2a911c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -35,11 +35,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 2800000, guid: e54a15ad10776f841914bf6bd4e4a1f0, type: 3}
-        m_Scale: {x: 0.34, y: 1}
+        m_Scale: {x: 0.33, y: 1}
         m_Offset: {x: 0.39, y: 0.06}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 148733b98c914d14cae5a0b37ee1dbbf, type: 3}
-        m_Scale: {x: 0.34, y: 1}
+        m_Texture: {fileID: 2800000, guid: d732c54a13f0f174db2017b385146990, type: 3}
+        m_Scale: {x: 0.33, y: 1}
         m_Offset: {x: 0.39, y: 0.06}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -72,6 +72,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 0.27205884, g: 0.5180528, b: 1, a: 1}
+    - _Color: {r: 0.6691177, g: 0.6691177, b: 0.6691177, a: 1}
+    - _EmissionColor: {r: 1, g: 0.1544118, b: 0.4168356, a: 1}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
