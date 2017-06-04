@@ -471,11 +471,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692051f2ff08a2843a755bcb2b8461fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxAmplitude: 0.7
+  MaxAmplitude: 0.5
   MinDistance: 20
-  MaxDistance: 500
+  MaxDistance: 100
   Frequency: 0.7
-  Duration: 0.4
+  Duration: 0.3
 --- !u!114 &11434974
 MonoBehaviour:
   m_ObjectHideFlags: 1

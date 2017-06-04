@@ -475,9 +475,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxAmplitude: 0.7
   MinDistance: 20
-  MaxDistance: 500
+  MaxDistance: 100
   Frequency: 0.7
-  Duration: 0.4
+  Duration: 0.5
 --- !u!114 &11434974
 MonoBehaviour:
   m_ObjectHideFlags: 1

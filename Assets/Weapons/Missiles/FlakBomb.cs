@@ -209,6 +209,10 @@ public class FlakBomb : Missile
             explodeShiftable.SetShiftPosition(univPos);
         }
 
+        var shakeSource = explodeInstance.GetComponent<ScreenShakeSource>();
+        if (shakeSource != null)
+            shakeSource.Trigger();
+
         SplashDamage.ExplodeAt(transform.position, MaxExplodeRadius, MinExplodeRadius, MaxExplodeDamage, MissileForce, _detectableMask, Owner);
 
         Stop();

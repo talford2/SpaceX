@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 114689960116747786}
   - component: {fileID: 114114686997177622}
   - component: {fileID: 114666114100834654}
+  - component: {fileID: 114555352156460534}
   m_Layer: 0
   m_Name: BigBoom
   m_TagString: Untagged
@@ -350,6 +351,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cooldown: 5
+--- !u!114 &114555352156460534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1912717012564314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692051f2ff08a2843a755bcb2b8461fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxAmplitude: 1
+  MinDistance: 50
+  MaxDistance: 200
+  Frequency: 0.7
+  Duration: 0.5
 --- !u!114 &114666114100834654
 MonoBehaviour:
   m_ObjectHideFlags: 1
