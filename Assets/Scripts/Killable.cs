@@ -73,6 +73,15 @@ public class Killable : MonoBehaviour
 		if (OnDie != null)
 			OnDie(this, attacker);
 
+        if (attacker != null && PlayerController.Current != null)
+        {
+            Debug.LogFormat("{0} KILLED BY {1}", gameObject, attacker);
+            if (attacker == PlayerController.Current.VehicleInstance.gameObject)
+            {
+                PlayerController.Current.OnPlayerKill(this);
+            }
+        }
+
 		if (DestroyOnDie)
 		{
 			Destroy(gameObject);

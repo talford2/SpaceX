@@ -684,6 +684,11 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+    public void OnPlayerKill(Killable victim)
+    {
+        HeadsUpDisplay.Current.DisplayMessage("KILL", 2f);
+    }
+
     private PlayerInventory _inventory;
 
     public void Give(GameObject item)

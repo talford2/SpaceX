@@ -107,7 +107,6 @@ public class GrandMothership : MonoBehaviour
         RaycastHit castHit;
         if (Physics.Raycast(cast, out castHit, ProjectExplosionRadius, LayerMask.GetMask("ExplodeCast")))
         {
-            Debug.Log("CAST: " + castHit.collider.name);
             var explosion = ResourcePoolManager.GetAvailable(ProjectExplosionPrefab, castHit.point - castHit.normal, Quaternion.identity);
             var shakeSource = explosion.GetComponent<ScreenShakeSource>();
             if (shakeSource != null)
