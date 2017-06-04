@@ -2437,6 +2437,11 @@ Prefab:
       propertyPath: ShieldHurtFadeSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114417862288806010, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_Text
+      value: Why does this work?
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1859a184329ea54abc5c7bdb9ab22af, type: 2}
   m_IsPrefabParent: 0
