@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CastExploder : MonoBehaviour
 {
@@ -11,18 +9,37 @@ public class CastExploder : MonoBehaviour
     public Transform ProjectExplosionVertex2;
     public float ProjectExplosionRadius;
 
+    public float DestructTime = 30f;
+
+    public delegate void OnCastExploderDestruct();
+    public OnCastExploderDestruct OnDestruct;
+
     private bool _isExploding;
     private float _explodeCooldown;
+    private float _totalDestructCooldown;
 
     private void Awake()
     {
-        _isExploding = IsExploding;
+        if (IsExploding)
+            Trigger();
     }
 
     private void Update()
     {
         if (_isExploding)
         {
+            var fraction = 0f;
+            if (_totalDestructCooldown >=0f)
+            {
+                _totalDestructCooldown -= Time.deltaTime;
+                fraction = Mathf.Clamp01(_totalDestructCooldown / DestructTime);
+                if (_totalDestructCooldown < 0f)
+                {
+                    _isExploding = false;
+                    if (OnDestruct != null)
+                        OnDestruct();
+                }
+            }
             if (_explodeCooldown >= 0f)
             {
                 _explodeCooldown -= Time.deltaTime;
@@ -30,7 +47,7 @@ public class CastExploder : MonoBehaviour
                 {
                     Debug.Log("TRIGGGER BOOM!");
                     ProjectedExplosion();
-                    _explodeCooldown = Random.Range(0.005f, 0.01f);
+                    _explodeCooldown = Random.Range(0.05f * fraction, 0.1f * fraction);
                 }
             }
         }
@@ -56,6 +73,7 @@ public class CastExploder : MonoBehaviour
     public void Trigger()
     {
         _isExploding = true;
+        _totalDestructCooldown = DestructTime;
     }
 
     private void OnDrawGizmos()

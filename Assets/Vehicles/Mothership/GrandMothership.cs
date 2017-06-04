@@ -87,6 +87,11 @@ public class GrandMothership : MonoBehaviour
         {
             killable.OnDie += OnKill;
         }
+        BoomCaster.OnDestruct += () =>
+        {
+            var universeEvent = GetComponentInParent<UniverseEvent>();
+            Destroy(universeEvent.gameObject);
+        };
     }
 
     private void OnKill(Killable sender, GameObject attacker)
