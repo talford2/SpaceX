@@ -32,6 +32,7 @@ public class GrandMothership : MonoBehaviour
 
     [Header("Destruction")]
     public CastExploder BoomCaster;
+    public GameObject SuperNovaPrefab;
 
     private int _liveCount;
     private List<Killable> _killables;
@@ -90,6 +91,7 @@ public class GrandMothership : MonoBehaviour
         BoomCaster.OnDestruct += () =>
         {
             var universeEvent = GetComponentInParent<UniverseEvent>();
+            ResourcePoolManager.GetAvailable(SuperNovaPrefab, transform.position, Quaternion.identity);
             Destroy(universeEvent.gameObject);
         };
     }
