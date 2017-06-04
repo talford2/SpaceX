@@ -11303,7 +11303,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Alpha Fighter Destroyed
+  m_Text: Why does this work?
 --- !u!114 &114418085511886810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15326,7 +15326,9 @@ MonoBehaviour:
   SpaceJunkText: {fileID: 114723110486758874}
   KillText: {fileID: 114417862288806010}
   DisplayKillTime: 0.5
-  DisplayKillFadeTime: 0.5
+  DisplayKillFadeTime: 0.3
+  DisplayKillZDepth: 60
+  _aaaa: {x: 0, y: 0, z: 0}
   ShieldBar: {fileID: 114567630752094070}
   HealthBar: {fileID: 114790922437942790}
   BoostBar: {fileID: 114486707386832944}
