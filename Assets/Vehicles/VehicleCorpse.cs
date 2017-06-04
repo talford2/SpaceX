@@ -9,8 +9,15 @@ public class VehicleCorpse : MonoBehaviour
     public GameObject DebrisPrefab;
     public GameObject SmokeInstance;
 
+    [Header("Explosion")]
+    public float MaxExplodeRadius = 30f;
+    public float MinExplodeRadius = 8f;
+    public float MaxExplodeDamage = 100f;
+    public float ExplodeForce = 100f;
+
     private Rigidbody _rBody;
     private Killable _killable;
+    private int _detectableMask;
 
     private void Awake()
     {
@@ -18,6 +25,7 @@ public class VehicleCorpse : MonoBehaviour
         _killable = GetComponent<Killable>();
 
         _killable.OnDie += CorpseExplode;
+        _detectableMask = LayerMask.GetMask("Detectable");
     }
 
     private void Start()
@@ -69,6 +77,8 @@ public class VehicleCorpse : MonoBehaviour
                 woundParticles.Stop();
             StartCoroutine(DelayedSmokeDestroy(woundParticles.duration + 0.5f));
         }
+
+        SplashDamage.ExplodeAt(transform.position, MaxExplodeRadius, MinExplodeRadius, MaxExplodeDamage, ExplodeForce, _detectableMask, gameObject);
 
         Destroy(gameObject);
     }
