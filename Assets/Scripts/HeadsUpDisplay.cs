@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class HeadsUpDisplay : MonoBehaviour
 {
-	public GameObject Crosshair;
+    public GameObject Crosshair;
 
     [Header("Crosshair Hit Response")]
     public Image CrosshairHit;
@@ -18,64 +18,69 @@ public class HeadsUpDisplay : MonoBehaviour
     public Image SecondaryHeatBar;
 
     [Header("Text")]
-	public Text EnergyText;
-	public Text ShieldText;
-	public Text HealthText;
-	public Text SpaceJunkText;
+    public Text EnergyText;
+    public Text ShieldText;
+    public Text HealthText;
+    public Text SpaceJunkText;
 
-	[Header("Bars")]
-	public Image ShieldBar;
-	public Image HealthBar;
-	public Image BoostBar;
+    public Text KillText;
+    private float _killCoolDown = 0f;
+    public float DisplayKillTime = 0.5f;
+    public float DisplayKillFadeTime = 0.5f;
 
-	[Header("Squadron")]
-	public GameObject SquadronPrompt;
-	public Text SquadronNameText;
-	public float SquadronPromptTime = 1.5f;
-	public GameObject SquadronIconContainer;
-	public Image SquadronIcon;
+    [Header("Bars")]
+    public Image ShieldBar;
+    public Image HealthBar;
+    public Image BoostBar;
+
+    [Header("Squadron")]
+    public GameObject SquadronPrompt;
+    public Text SquadronNameText;
+    public float SquadronPromptTime = 1.5f;
+    public GameObject SquadronIconContainer;
+    public Image SquadronIcon;
 
     public Image ShieldHitImage;
-	public Image HitImage;
+    public Image HitImage;
     public Text MessageText;
 
     [Header("Team Score")]
     public Text GoodKills;
     public Text BadKills;
 
-	private float _squadronPromptCooldown;
+    private float _squadronPromptCooldown;
 
-	private static HeadsUpDisplay _current;
+    private static HeadsUpDisplay _current;
 
     [Header("Hurt Screen")]
-	public float HurtFadeSpeed = 0.5f;
-	public float ShieldHurtFadeSpeed = 0.5f;
+    public float HurtFadeSpeed = 0.5f;
+    public float ShieldHurtFadeSpeed = 0.5f;
 
     private float _crosshairHitCooldown;
-    
-	private float _hurtCooldown = 0f;
+
+    private float _hurtCooldown = 0f;
     private float _shieldHurtCooldown = 0f;
     private bool _isDead;
 
-	private List<SquadronIcon> _squadronIcons;
+    private List<SquadronIcon> _squadronIcons;
 
-	public static HeadsUpDisplay Current { get { return _current; } }
+    public static HeadsUpDisplay Current { get { return _current; } }
 
-	// Space Junk label pulse
-	private float _spaceJunkPulseCooldown;
-	private float _spaceJunkPulseDuration = 0.3f;
+    // Space Junk label pulse
+    private float _spaceJunkPulseCooldown;
+    private float _spaceJunkPulseDuration = 0.3f;
 
-	// Shield hit effect
-	private float _shieldHitDuration = 0.4f;
-	private float _shieldHitCooldown;
+    // Shield hit effect
+    private float _shieldHitDuration = 0.4f;
+    private float _shieldHitCooldown;
 
-	// Health hit effect
-	private float _healthHitDuration = 0.4f;
-	private float _healthHitCooldown;
+    // Health hit effect
+    private float _healthHitDuration = 0.4f;
+    private float _healthHitCooldown;
 
-	// Regenerate Energy effect
-	private float _energyRegenDuration = 0.4f;
-	private float _energyRegenCooldown;
+    // Regenerate Energy effect
+    private float _energyRegenDuration = 0.4f;
+    private float _energyRegenCooldown;
 
     // Crosshair pulse effct
     private Image _crosshairImage;
@@ -95,26 +100,26 @@ public class HeadsUpDisplay : MonoBehaviour
     private float _messageFadeOutDuration = 1f;
     private float _messageFadeOutCooldown;
 
-	private float _healthOpacity;
-	private float _shieldOpacity;
-	private float _boostOpacity;
+    private float _healthOpacity;
+    private float _shieldOpacity;
+    private float _boostOpacity;
 
     // Kill counter
     private Dictionary<Team, int> _killCount;
 
-	private void Awake()
-	{
-		_current = this;
-		HitImage.color = new Color(1, 1, 1, 0);
-		_squadronIcons = new List<SquadronIcon>();
+    private void Awake()
+    {
+        _current = this;
+        HitImage.color = new Color(1, 1, 1, 0);
+        _squadronIcons = new List<SquadronIcon>();
         _crosshairImage = Crosshair.GetComponent<Image>();
 
         _crosshairOriginalScale = _crosshairImage.rectTransform.sizeDelta;
         _crosshairPuslseScale = 1.5f * _crosshairOriginalScale;
 
         _healthOpacity = HealthBar.color.a;
-		_shieldOpacity = ShieldBar.color.a;
-		_boostOpacity = BoostBar.color.a;
+        _shieldOpacity = ShieldBar.color.a;
+        _boostOpacity = BoostBar.color.a;
 
         _killCount = new Dictionary<Team, int>();
         _killCount.Add(Team.Bad, 0);
@@ -125,7 +130,16 @@ public class HeadsUpDisplay : MonoBehaviour
         UpdateKillsDisplay();
 
         MessageText.enabled = false;
-	}
+
+        KillText.text = "";
+        KillText.color = Utility.SetColorAlpha(KillText.color, 0);
+    }
+
+    public void ShowKillMessage(string message)
+    {
+        KillText.color = Utility.SetColorAlpha(KillText.color, 1);
+        _killCoolDown = DisplayKillTime + DisplayKillFadeTime;
+    }
 
     public void UpdateBars()
     {
@@ -140,6 +154,16 @@ public class HeadsUpDisplay : MonoBehaviour
 
     private void Update()
     {
+        if (_killCoolDown > 0)
+        {
+            _killCoolDown -= Time.deltaTime;
+            if (_killCoolDown < DisplayKillTime)
+            {
+                var fade = Mathf.Clamp01(_killCoolDown / DisplayKillFadeTime);
+                KillText.color = Utility.SetColorAlpha(KillText.color, fade);
+            }
+        }
+
         if (PlayerController.Current.VehicleInstance != null)
         {
             EnergyText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.BoostEnergy);
@@ -311,54 +335,54 @@ public class HeadsUpDisplay : MonoBehaviour
         }
     }
 
-	public void LazyCreateSquadronIcons()
-	{
-		while (_squadronIcons.Count < PlayerController.Current.Squadron.GetMemberCount())
-		{
-			var icon = Instantiate(SquadronIcon);
-			icon.transform.SetParent(SquadronIconContainer.transform);
-			icon.rectTransform.localScale = Vector3.one;
+    public void LazyCreateSquadronIcons()
+    {
+        while (_squadronIcons.Count < PlayerController.Current.Squadron.GetMemberCount())
+        {
+            var icon = Instantiate(SquadronIcon);
+            icon.transform.SetParent(SquadronIconContainer.transform);
+            icon.rectTransform.localScale = Vector3.one;
             icon.rectTransform.localPosition = Vector3.zero;
-			_squadronIcons.Add(icon.GetComponent<SquadronIcon>());
-		}
-	}
+            _squadronIcons.Add(icon.GetComponent<SquadronIcon>());
+        }
+    }
 
-	public void RefreshSquadronIcon(int index)
-	{
-		var squadronVehicle = index == PlayerController.Current.Squadron.GetCurrentIndex()
-			? PlayerController.Current.VehicleInstance
-			: PlayerController.Current.Squadron.GetMember(index).VehicleInstance;
+    public void RefreshSquadronIcon(int index)
+    {
+        var squadronVehicle = index == PlayerController.Current.Squadron.GetCurrentIndex()
+            ? PlayerController.Current.VehicleInstance
+            : PlayerController.Current.Squadron.GetMember(index).VehicleInstance;
 
-		var squadronIcon = _squadronIcons[index];
-		squadronIcon.SetCallSign(PlayerController.Current.Squadron.GetMember(index).GetComponent<ShipProfile>().CallSign);
-		if (squadronVehicle != null && squadronVehicle.Killable.IsAlive)
-		{
-			squadronIcon.SetSelected(PlayerController.Current.Squadron.GetCurrentIndex() == index);
-			squadronIcon.SetFractions(squadronVehicle.Killable.Shield / squadronVehicle.Killable.MaxShield, squadronVehicle.Killable.Health / squadronVehicle.Killable.MaxHealth);
-		}
-		else
-		{
-			squadronIcon.SetFractions(0f, 0f);
-		}
-	}
+        var squadronIcon = _squadronIcons[index];
+        squadronIcon.SetCallSign(PlayerController.Current.Squadron.GetMember(index).GetComponent<ShipProfile>().CallSign);
+        if (squadronVehicle != null && squadronVehicle.Killable.IsAlive)
+        {
+            squadronIcon.SetSelected(PlayerController.Current.Squadron.GetCurrentIndex() == index);
+            squadronIcon.SetFractions(squadronVehicle.Killable.Shield / squadronVehicle.Killable.MaxShield, squadronVehicle.Killable.Health / squadronVehicle.Killable.MaxHealth);
+        }
+        else
+        {
+            squadronIcon.SetFractions(0f, 0f);
+        }
+    }
 
-	public void RefreshSquadronIcons()
-	{
-		for (var i = 0; i < PlayerController.Current.Squadron.GetMemberCount(); i++)
-		{
-			RefreshSquadronIcon(i);
-		}
-	}
+    public void RefreshSquadronIcons()
+    {
+        for (var i = 0; i < PlayerController.Current.Squadron.GetMemberCount(); i++)
+        {
+            RefreshSquadronIcon(i);
+        }
+    }
 
     public void ShieldHit()
     {
         _shieldHurtCooldown = 1f;
     }
 
-	public void Hit()
-	{
-		_hurtCooldown = 1f;
-	}
+    public void Hit()
+    {
+        _hurtCooldown = 1f;
+    }
 
     public void ShowDead()
     {
@@ -374,9 +398,9 @@ public class HeadsUpDisplay : MonoBehaviour
         _isDead = false;
     }
 
-	public void ShowCrosshair()
-	{
-		Crosshair.SetActive(true);
+    public void ShowCrosshair()
+    {
+        Crosshair.SetActive(true);
         var crosshairImage = Crosshair.GetComponent<Image>();
         crosshairImage.color = Utility.SetColorAlpha(crosshairImage.color, 1f);
         _isCrosshairFadeOut = false;
@@ -385,58 +409,58 @@ public class HeadsUpDisplay : MonoBehaviour
     }
 
     public void HideCrosshair()
-	{
-		Crosshair.SetActive(false);
+    {
+        Crosshair.SetActive(false);
         LeftHeatBar.enabled = false;
         RightHeatBar.enabled = false;
     }
 
-	public void ShowSquadronPrompt(string message)
-	{
-		SquadronPrompt.SetActive(true);
-		SquadronNameText.text = message;
-		_squadronPromptCooldown = SquadronPromptTime;
-		SquadronPrompt.GetComponent<Image>().CrossFadeAlpha(1f, 0.1f, false);
-		SquadronNameText.CrossFadeAlpha(1f, 0.1f, false);
-	}
+    public void ShowSquadronPrompt(string message)
+    {
+        SquadronPrompt.SetActive(true);
+        SquadronNameText.text = message;
+        _squadronPromptCooldown = SquadronPromptTime;
+        SquadronPrompt.GetComponent<Image>().CrossFadeAlpha(1f, 0.1f, false);
+        SquadronNameText.CrossFadeAlpha(1f, 0.1f, false);
+    }
 
-	public void HideSquadronPrompt()
-	{
-		//SquadronPrompt.SetActive(false);
-		SquadronPrompt.GetComponent<Image>().CrossFadeAlpha(0f, 0.5f, false);
-		SquadronNameText.CrossFadeAlpha(0f, 0.5f, false);
-	}
+    public void HideSquadronPrompt()
+    {
+        //SquadronPrompt.SetActive(false);
+        SquadronPrompt.GetComponent<Image>().CrossFadeAlpha(0f, 0.5f, false);
+        SquadronNameText.CrossFadeAlpha(0f, 0.5f, false);
+    }
 
-	public void IncreaseSpaceJunk()
-	{
-		SpaceJunkText.text = string.Format("{0:f0}", PlayerController.Current.SpaceJunkCount);
-		_spaceJunkPulseCooldown = _spaceJunkPulseDuration;
-		SpaceJunkText.fontSize = 50;
-	}
+    public void IncreaseSpaceJunk()
+    {
+        SpaceJunkText.text = string.Format("{0:f0}", PlayerController.Current.SpaceJunkCount);
+        _spaceJunkPulseCooldown = _spaceJunkPulseDuration;
+        SpaceJunkText.fontSize = 50;
+    }
 
-	public void TriggerShieldHit()
-	{
+    public void TriggerShieldHit()
+    {
         HitImage.color = new Color(1f, 1f, 1f, 0f);
         _healthHitCooldown = 0f;
 
         ShieldBar.color = Utility.SetColorAlpha(ShieldBar.color, 1f);
         _shieldHitCooldown = _shieldHitDuration;
-	}
+    }
 
-	public void TriggerHealthHit()
-	{
+    public void TriggerHealthHit()
+    {
         ShieldHitImage.color = new Color(1f, 1f, 1f, 0f);
         _shieldHitCooldown = 0f;
 
         HealthBar.color = Utility.SetColorAlpha(HealthBar.color, 1f);
-		_healthHitCooldown = _healthHitDuration;
-	}
+        _healthHitCooldown = _healthHitDuration;
+    }
 
-	public void TriggerPuslEnergy()
-	{
-		BoostBar.color = Utility.SetColorAlpha(BoostBar.color, 1f);
-		_energyRegenCooldown = _energyRegenDuration;
-	}
+    public void TriggerPuslEnergy()
+    {
+        BoostBar.color = Utility.SetColorAlpha(BoostBar.color, 1f);
+        _energyRegenCooldown = _energyRegenDuration;
+    }
 
     public void TriggerCrosshairPulse()
     {
