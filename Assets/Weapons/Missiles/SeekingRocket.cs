@@ -225,35 +225,9 @@ public class SeekingRocket : Missile
             explodeShiftable.SetShiftPosition(univPos);
         }
 
-        var count = Physics.OverlapSphereNonAlloc(transform.position, 15f, _damageColliders, _detectableMask);
-        for (var i = 0; i < count; i++)
-        {
-            _detectable = _damageColliders[i].GetComponent<Detectable>();
-            if (_detectable != null)
-            {
-                _killable = _detectable.TargetTransform.GetComponentInParent<Killable>();
-                if (_killable != null)
-                {
-                    var damage = Mathf.Round(100f * GetDamageFraction(_detectable.transform.position, transform.position, 5f, 15f));
-                    _killable.Damage(damage, transform.position, Vector3.up, Owner);
-                }
-            }
-            var rBody = _damageColliders[i].GetComponentInParent<Rigidbody>();
-            if (rBody != null)
-                rBody.AddExplosionForce(MissileForce, transform.position, 15f, 0f, ForceMode.Impulse);
-        }
+        SplashDamage.ExplodeAt(transform.position, 15f, 5f, 100f, MissileForce, _detectableMask, Owner);
 
         Stop();
-    }
-
-    private float GetDamageFraction(Vector3 targetPosition, Vector3 damagePosition, float minDistance, float maxDistance)
-    {
-        var toDamage = targetPosition - damagePosition;
-        if (toDamage.sqrMagnitude < minDistance * minDistance)
-            return 1f;
-        if (toDamage.sqrMagnitude > maxDistance * maxDistance)
-            return 0f;
-        return 1f - Mathf.Clamp((toDamage.magnitude - minDistance) / (maxDistance - minDistance), 0, 1f);
     }
 
     public override void Stop()

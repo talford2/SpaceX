@@ -209,36 +209,12 @@ public class FlakBomb : Missile
             explodeShiftable.SetShiftPosition(univPos);
         }
 
-        var count = Physics.OverlapSphereNonAlloc(transform.position, MaxExplodeRadius, _damageColliders, _detectableMask);
-        for (var i = 0; i < count; i++)
-        {
-            _detectable = _damageColliders[i].GetComponent<Detectable>();
-            if (_detectable != null)
-            {
-                _killable = _detectable.TargetTransform.GetComponent<Killable>();
-                if (_killable != null)
-                {
-                    var damage = Mathf.Round(MaxExplodeDamage * GetDamageFraction(_detectable.transform.position, transform.position, MinExplodeRadius, MaxExplodeRadius));
-                    _killable.Damage(damage, transform.position, Vector3.up, Owner);
-                }
-            }
-            var rBody = _damageColliders[i].GetComponentInParent<Rigidbody>();
-            if (rBody != null)
-                rBody.AddExplosionForce(MissileForce, transform.position, MaxExplodeRadius, 0f, ForceMode.Impulse);
-        }
+        SplashDamage.ExplodeAt(transform.position, MaxExplodeRadius, MinExplodeRadius, MaxExplodeDamage, MissileForce, _detectableMask, Owner);
 
         Stop();
     }
 
-    private float GetDamageFraction(Vector3 targetPosition, Vector3 damagePosition, float minDistance, float maxDistance)
-    {
-        var toDamage = targetPosition - damagePosition;
-        if (toDamage.sqrMagnitude < minDistance * minDistance)
-            return 1f;
-        if (toDamage.sqrMagnitude > maxDistance * maxDistance)
-            return 0f;
-        return 1f - Mathf.Clamp((toDamage.magnitude - minDistance) / (maxDistance - minDistance), 0, 1f);
-    }
+    
 
     public override void Stop()
     {
