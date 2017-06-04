@@ -39,24 +39,17 @@ public class CastExploder : MonoBehaviour
     private void ProjectedExplosion()
     {
         var castFrom = transform.position + Random.onUnitSphere * ProjectExplosionRadius;
-        var castDelta = ProjectExplosionVertex2.position - ProjectExplosionVertex1.position;
-        var castTo = ProjectExplosionVertex1.position + Random.value * castDelta.magnitude * castDelta.normalized;
+        var castTo = Vector3.Lerp(ProjectExplosionVertex1.position, ProjectExplosionVertex2.position, Random.value);
         var cast = new Ray(castFrom, castTo - castFrom);
         RaycastHit castHit;
-
         Debug.DrawLine(castFrom, castTo, Color.yellow, 1f);
-        if (Physics.Raycast(cast, out castHit, ProjectExplosionRadius, LayerMask.GetMask("ExplodeCast", "Distant")))
+        if (Physics.Raycast(cast, out castHit, ProjectExplosionRadius, LayerMask.GetMask("ExplodeCast")))
         {
-            Debug.Log("EXPLODE AT: " + castHit.point);
             var explosion = ResourcePoolManager.GetAvailable(ProjectExplosionPrefab, castHit.point - castHit.normal, Quaternion.identity);
             var shakeSource = explosion.GetComponent<ScreenShakeSource>();
             if (shakeSource != null)
                 shakeSource.Trigger();
             SplashDamage.ExplodeAt(castHit.point, 100f, 40f, 200f, 200f, LayerMask.GetMask("Detectable"), null);
-        }
-        else
-        {
-            Debug.Log("NO CAST HIT");
         }
     }
 
