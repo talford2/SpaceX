@@ -77,6 +77,9 @@ public class Vehicle : MonoBehaviour
 
     public List<ShootPoint> SecondaryShootPoints;
 
+    [Header("Collisions")]
+    public GameObject CollideEffect;
+
     [Header("Shield")]
     public Shield ShieldPrefab;
 
@@ -584,7 +587,14 @@ public class Vehicle : MonoBehaviour
         var moveRay = new Ray(transform.position + CollisionsCentre, _velocity);
 
         var castCount = Physics.SphereCastNonAlloc(moveRay, CollisionRadius, _moveHits, _velocity.magnitude * Time.deltaTime, _environmentMask);
-
+        if (castCount > 0)
+        {
+            if (CollideEffect != null)
+            {
+                ResourcePoolManager.GetAvailable(CollideEffect, _moveHits[0].point, Quaternion.LookRotation(_moveHits[0].normal));
+            }
+            _killable.Damage(_velocity.magnitude * 0.1f, _moveHits[0].point, _moveHits[0].normal, null);
+        }
         for (var i = 0; i < castCount; i++)
         {
             var projVel = Vector3.Project(_velocity, _moveHits[i].normal);
