@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseWorldPosition: 0
   UniverseCellIndex:
     X: 0
     Y: 0
@@ -274,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731465a9807668c4d997095e728426c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissileSpeed: 120
+  MissileSpeed: 150
   MissileForce: 50
   FromReference: {fileID: 0}
   HitEffectPrefab: {fileID: 0}

@@ -484,8 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 60
-  MaxHealth: 60
+  Health: 50
+  MaxHealth: 50
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
@@ -543,6 +543,7 @@ MonoBehaviour:
   SecondaryShootPoints:
   - {fileID: 11401126}
   - {fileID: 11498334}
+  CollideEffect: {fileID: 0}
   ShieldPrefab: {fileID: 11432386, guid: ec198b972797bfe4198bc77d9b933520, type: 2}
   EnginePrefab: {fileID: 11460812, guid: 5d7105be3dd5b72498d7817054956ba2, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}

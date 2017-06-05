@@ -140,7 +140,7 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void ShowKillMessage(string message)
     {
-        KillText.text = message;
+        KillText.text = message.ToUpper();
         KillText.color = Utility.SetColorAlpha(KillText.color, 1);
         _killCoolDown = DisplayKillTime + DisplayKillFadeTime;
         KillText.rectTransform.localPosition = _initKillTextPos;

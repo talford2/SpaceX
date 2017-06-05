@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6ab23b8aef1484781c41a246051fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissileSpeed: 800
+  MissileSpeed: 700
   MissileForce: 0
   FromReference: {fileID: 0}
   HitEffectPrefab: {fileID: 198982, guid: 4bb191ad1a7963849a6c492ebb749803, type: 2}

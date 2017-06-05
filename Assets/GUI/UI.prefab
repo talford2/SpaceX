@@ -11292,7 +11292,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 16
+    m_FontSize: 18
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
@@ -15325,10 +15325,10 @@ MonoBehaviour:
   HealthText: {fileID: 114741640030202744}
   SpaceJunkText: {fileID: 114723110486758874}
   KillText: {fileID: 114417862288806010}
-  DisplayKillTime: 0.5
-  DisplayKillFadeTime: 0.3
-  DisplayKillZDepth: 60
-  _aaaa: {x: 0, y: 0, z: 0}
+  DisplayKillTime: 1.2
+  DisplayKillFadeTime: 0.15
+  DisplayKillZDepth: 40
+  _initKillTextPos: {x: 0, y: 0, z: 0}
   ShieldBar: {fileID: 114567630752094070}
   HealthBar: {fileID: 114790922437942790}
   BoostBar: {fileID: 114486707386832944}

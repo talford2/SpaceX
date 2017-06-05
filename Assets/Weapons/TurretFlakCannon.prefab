@@ -46,8 +46,8 @@ MonoBehaviour:
   MuzzlePrefab: {fileID: 11496450, guid: 2af108f533a9b214ca70f588ecaaf5f7, type: 2}
   SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
   ShootSound: {fileID: 8300000, guid: d630152cd1dc3cf4994768f4fbc6eee3, type: 3}
-  SoundVolume: 1
-  SoundMinDistance: 50
+  SoundVolume: 0.7
+  SoundMinDistance: 70
   SoundMaxDistance: 1500
   MissilePrefab: {fileID: 122516, guid: 895ee3d7b5c719a418999475f9c4cc69, type: 2}
   MissilesPerShot: 1
@@ -56,6 +56,7 @@ MonoBehaviour:
   IsTargetLocking: 0
   TargetLockTime: 0
   TargetLockingMaxDistance: 0
+  TargetAngleTolerance: 5
   IsOverheat: 0
   HeatPerMissile: 50
   OverheatDelay: 5
