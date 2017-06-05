@@ -63,7 +63,7 @@ MonoBehaviour:
   CoolDelay: 0.5
   LockSound: {fileID: 0}
   BaseMissileDamage: 20
-  BaseFireRate: 0.8
+  BaseFireRate: 1
   BaseCoolingRate: 50
   BaseOverheatValue: 100
   DamagePoints: 0
