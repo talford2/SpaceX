@@ -45,7 +45,6 @@ public class CastExploder : MonoBehaviour
                 _explodeCooldown -= Time.deltaTime;
                 if (_explodeCooldown < 0f)
                 {
-                    Debug.Log("TRIGGGER BOOM!");
                     ProjectedExplosion();
                     _explodeCooldown = Random.Range(0.05f * fraction, 0.1f * fraction);
                 }
