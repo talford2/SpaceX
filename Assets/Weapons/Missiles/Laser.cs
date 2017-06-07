@@ -16,8 +16,8 @@ public class Laser : Missile
     private Vector3 _hitPosition;
 
     private Vector3 _observationPosition;
-    private float _rayCheckMaxDistSquared = 25000000f; // 5,000
-    private float _stopDistanceSquared = 100000000f; // 10,000
+    private float _rayCheckMaxDistSquared = 9000000f; // 5,000
+    private float _stopDistanceSquared = 9000000f; // 10,000
 
     private void Awake()
     {
