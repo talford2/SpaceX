@@ -583,7 +583,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -476542410
+  randomSeed: 1708190486
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3606,7 +3606,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1819533101
+  randomSeed: 1027359300
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6642,7 +6642,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 942566966
+  randomSeed: -1504396116
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6732,7 +6732,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.2784314}
+      maxColor: {r: 0.428, g: 0.428, b: 0.428, a: 0.2784314}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9785,7 +9785,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -2086577691
+  randomSeed: 1096417440
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -18932,7 +18932,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 9021748
+  randomSeed: -588980172
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -22003,7 +22003,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 661084713
+  randomSeed: 1049503973
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -25685,14 +25685,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -443232969
+  randomSeed: -1393419709
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -25837,7 +25837,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 80
+      scalar: 120
       minScalar: 0
       maxCurve:
         serializedVersion: 2
