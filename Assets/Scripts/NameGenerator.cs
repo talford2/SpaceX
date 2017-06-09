@@ -48,6 +48,12 @@ public static class NameGenerator
 		return "Unknown";
 	}
 
+    public static string GetRandomSystemName(int seed)
+    {
+        Random.InitState(seed);
+        return GetRandomSystemName();
+    }
+
     public static string GetRandomSystemName()
     {
         if (SystemNames.Any())

@@ -67,7 +67,6 @@ public class LevelManager : MonoBehaviour
     public void ChangeLevel(int index)
     {
         var lvl = Levels[index];
-        lvl.ReadFile();
         RenderSettings.skybox = lvl.Material;
 
         if (NextPortalMaterial != null)
