@@ -11,6 +11,7 @@ public class HeadsUpDisplay : MonoBehaviour
     public float CrosshairHitDuration = 0.5f;
 
     [Header("Heat Bars")]
+    public CanvasGroup HeatBarsContainer;
     public Image LeftHeatBar;
     public Image RightHeatBar;
 
@@ -29,6 +30,7 @@ public class HeadsUpDisplay : MonoBehaviour
     public float DisplayKillFadeTime = 0.5f;
     public float DisplayKillZDepth = 40f;
     public Vector3 _initKillTextPos;
+    public Text KilledText;
 
     [Header("Bars")]
     public Image ShieldBar;
@@ -224,6 +226,7 @@ public class HeadsUpDisplay : MonoBehaviour
             {
                 fraction = 0;
             }
+            HeatBarsContainer.alpha = fraction;
             CrosshairHit.color = Utility.SetColorAlpha(CrosshairHit.color, fraction);
         }
 
@@ -402,6 +405,13 @@ public class HeadsUpDisplay : MonoBehaviour
         _shieldHurtCooldown = 0f;
         _hurtCooldown = 0f;
         _isDead = false;
+        KilledText.color = Utility.SetColorAlpha(KilledText.color, 0f);
+    }
+
+    public void ShowKilledMessage(string message)
+    {
+        KilledText.text = message;
+        KilledText.color = Utility.SetColorAlpha(KilledText.color, 1f);
     }
 
     public void ShowCrosshair()
@@ -410,15 +420,13 @@ public class HeadsUpDisplay : MonoBehaviour
         var crosshairImage = Crosshair.GetComponent<Image>();
         crosshairImage.color = Utility.SetColorAlpha(crosshairImage.color, 1f);
         _isCrosshairFadeOut = false;
-        LeftHeatBar.enabled = true;
-        RightHeatBar.enabled = true;
+        HeatBarsContainer.alpha = 1f;
     }
 
     public void HideCrosshair()
     {
         Crosshair.SetActive(false);
-        LeftHeatBar.enabled = false;
-        RightHeatBar.enabled = false;
+        HeatBarsContainer.alpha = 0f;
     }
 
     public void ShowSquadronPrompt(string message)

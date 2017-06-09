@@ -769,6 +769,13 @@ public class PlayerController : MonoBehaviour
         HeadsUpDisplay.Current.HideCrosshair();
         HeadsUpDisplay.Current.ShowDead();
 
+        var attackerVehicle = attacker.GetComponent<Vehicle>();
+        if (attackerVehicle != null)
+            HeadsUpDisplay.Current.ShowKilledMessage(string.Format("YOU WERE KILLED BY {0}", attackerVehicle.Name).ToUpperInvariant());
+        var attackerTurret = attacker.GetComponent<Turret>();
+        if (attackerTurret != null)
+            HeadsUpDisplay.Current.ShowKilledMessage(string.Format("YOU WERE KILLED BY {0}", attackerTurret.Name).ToUpperInvariant());
+
         if (attacker != null)
         {
             var attackerTargetable = attacker.GetComponentInChildren<Targetable>();

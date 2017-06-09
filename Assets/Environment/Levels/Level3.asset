@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   Background: {fileID: 8900000, guid: 5efd03d61d9f03240914ecde44fd5adf, type: 3}
-  SystemName: Zeta Reticuli
+  LightColour: {r: 0.596269, g: 0.841, b: 0.8376493, a: 1}
+  LightDirection: {x: -0.4760226, y: -0.5843333, z: 0.65723443}
+  SystemName: Phi Crone
   SlipGateLevelIndex: 3
+  CellRadius: 10
   UniverseEvents:
   - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
     Count: 90

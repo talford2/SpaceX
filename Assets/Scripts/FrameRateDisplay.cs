@@ -45,6 +45,6 @@ public class FrameRateDisplay : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(Screen.width - 200, 60f, 180f, 50f), string.Format("{0:f1} FPS", fps), frameRateStyle);
+        GUI.Label(new Rect(Screen.width - 200, 80f, 180f, 50f), string.Format("{0:f1} FPS", fps), frameRateStyle);
     }
 }

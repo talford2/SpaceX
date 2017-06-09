@@ -6,31 +6,9 @@ public class LevelDefinition : ScriptableObject
 {
     public Texture Background;
 
-    public Color LightColour
-    {
-        get
-        {
-            ReadFile();
-            return _lightColor;
-        }
-        set
-        {
-            _lightColor = value;
-        }
-    }
+    public Color LightColour;
 
-    public Vector3 LightDirection
-    {
-        get
-        {
-            ReadFile();
-            return _lightDirection;
-        }
-        set
-        {
-            _lightDirection = value;
-        }
-    }
+    public Vector3 LightDirection;
 
     public string SystemName;
 
@@ -55,23 +33,5 @@ public class LevelDefinition : ScriptableObject
             }
             return _mat;
         }
-    }
-
-    public void WriteFile(LevelFile levelFile)
-    {
-        levelFile.WriteToFile(FullFilePath());
-    }
-
-    public void ReadFile()
-    {
-        var levelFile = LevelFile.ReadFromFile(FullFilePath());
-        _lightColor = levelFile.LightColor;
-        _lightDirection = levelFile.SunDirection;
-    }
-
-    private string FullFilePath()
-    {
-        //return string.Format("{0}/Environment/Levels/{1}.xml", Application.dataPath, name);
-        return string.Format("{0}/{1}.xml", Application.persistentDataPath, Background.name);
     }
 }

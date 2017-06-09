@@ -260,7 +260,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &753445324
 GameObject:
@@ -465,7 +465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1180777673
 GameObject:
@@ -696,7 +696,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1584961314
 GameObject:
@@ -713,7 +713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1584961315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,7 +834,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1683205090
 GameObject:
@@ -875,5 +875,159 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2134924419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2134924421}
+  - component: {fileID: 2134924420}
+  m_Layer: 0
+  m_Name: Battle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2134924420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2134924419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fcc537c0b90f2a4496ecf8f4abcc37c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BackgroundLayerName: Universe Background
+  Seed: 3
+  Level: {fileID: 11400000, guid: cc58cb9e646dba74aa3baf2b45ea24a1, type: 2}
+  FlatResolution: 4096
+  BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
+  GradientShader: {fileID: 4800000, guid: 46359bd39a0011045b440d6f83544b02, type: 3}
+  CubemapShader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
+  BackgroundColor: {r: 0.11770889, g: 0.024088217, b: 0.234, a: 1}
+  ScatterObjects:
+  - Name: Clouds
+    IsActive: 1
+    CountMin: 50
+    CountMax: 100
+    ScaleMin: 100
+    ScaleMax: 400
+    RadiusMin: 100
+    RadiusMax: 100
+    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    LookAtCenter: 1
+    Textures:
+    - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
+    Colors:
+    - Color1: {r: 0, g: 0.050512094, b: 0.328, a: 0.019607844}
+      Color2: {r: 0.472, g: 0, b: 0.45028824, a: 0.147}
+    - Color1: {r: 0.23531097, g: 0.017470568, b: 0.297, a: 0.028}
+      Color2: {r: 0.3032647, g: 0.491, b: 0.4366215, a: 0.159}
+    - Color1: {r: 0.15339904, g: 0.014176469, b: 0.241, a: 0.009}
+      Color2: {r: 0.15451469, g: 0.47055465, b: 0.553, a: 0.166}
+    UseMaterials: 0
+    Materials: []
+  - Name: Stars
+    IsActive: 1
+    CountMin: 20
+    CountMax: 50
+    ScaleMin: 200
+    ScaleMax: 250
+    RadiusMin: 100
+    RadiusMax: 100
+    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    LookAtCenter: 1
+    Textures:
+    - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
+    Colors:
+    - Color1: {r: 0.329, g: 0.329, b: 0.329, a: 1}
+      Color2: {r: 1, g: 1, b: 1, a: 1}
+    UseMaterials: 0
+    Materials: []
+  - Name: Planets
+    IsActive: 1
+    CountMin: 3
+    CountMax: 5
+    ScaleMin: 1
+    ScaleMax: 10
+    RadiusMin: 50
+    RadiusMax: 60
+    Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+    LookAtCenter: 0
+    Textures: []
+    Colors:
+    - Color1: {r: 1, g: 1, b: 1, a: 1}
+      Color2: {r: 1, g: 1, b: 1, a: 1}
+    UseMaterials: 1
+    Materials:
+    - {fileID: 2100000, guid: a9ea60c2919fbf94ab1c07191c5ad40c, type: 2}
+    - {fileID: 2100000, guid: 5f8785647f5c6c3489ddc8e5d74ad6f8, type: 2}
+    - {fileID: 2100000, guid: beefb719c856e7749a4665f9f62de4ee, type: 2}
+    - {fileID: 2100000, guid: e640fc57a48c1ca4a966aef9e07f59eb, type: 2}
+    - {fileID: 2100000, guid: ccb7f28d44efa1b45a8e3926c5e14522, type: 2}
+  - Name: Nebula
+    IsActive: 1
+    CountMin: 5
+    CountMax: 10
+    ScaleMin: 300
+    ScaleMax: 500
+    RadiusMin: 100
+    RadiusMax: 100
+    Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    LookAtCenter: 1
+    Textures:
+    - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
+    Colors:
+    - Color1: {r: 0.32917935, g: 0, b: 0.809, a: 0.103}
+      Color2: {r: 0.821, g: 0.92593104, b: 1, a: 0.322}
+    - Color1: {r: 0.23902942, g: 0.24360849, b: 0.903, a: 0.197}
+      Color2: {r: 0.6691177, g: 0.95892507, b: 1, a: 0.503}
+    - Color1: {r: 0.209432, g: 0, b: 0.86764705, a: 0.159}
+      Color2: {r: 1, g: 0.64705884, b: 0.96105456, a: 0.509}
+    UseMaterials: 0
+    Materials: []
+  - Name: Glow
+    IsActive: 0
+    CountMin: 1
+    CountMax: 1
+    ScaleMin: 1
+    ScaleMax: 1
+    RadiusMin: 0
+    RadiusMax: 0
+    Model: {fileID: 100000, guid: d02b92b1db28dfc4aa6bdb760aa164f9, type: 3}
+    LookAtCenter: 1
+    Textures:
+    - {fileID: 2800000, guid: b76f629a010bc9f47a4a1a57bb89d022, type: 3}
+    Colors:
+    - Color1: {r: 0.75253534, g: 0.5514706, b: 1, a: 1}
+      Color2: {r: 0.50020313, g: 0.43382353, b: 1, a: 1}
+    UseMaterials: 1
+    Materials:
+    - {fileID: 2100000, guid: b2cc7117383c06147898fe9c7aca64a6, type: 2}
+  SunLight: {fileID: 753445325}
+  SunTexture: {fileID: 2800000, guid: cb61116323fcea84193cc39949d17c89, type: 3}
+  SunModel: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+  SunAttachPrefab: {fileID: 1015725323838100, guid: 02270a2788468a245b499f1e30daed6f,
+    type: 2}
+  SunIntensity: 1.2
+  SunColour: {r: 0.72259593, g: 0.71599996, b: 1, a: 1}
+--- !u!4 &2134924421
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2134924419}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

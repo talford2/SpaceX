@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
@@ -137,10 +138,13 @@ public class UniverseGenerator : MonoBehaviour
                 SunLight.transform.eulerAngles.y,
                 SunLight.transform.eulerAngles.z);
 
+            /* Manipulate Scriptable Objects Directly! */
+            Level.SystemName = NameGenerator.GetRandomSystemName(Seed);
+            Level.LightColour = SunColour;
+            Level.LightDirection = SunDirection;
+            EditorUtility.SetDirty(Level);
 
             Debug.DrawLine(Vector3.zero, SunDirection * 1000f, Color.magenta, 600);
-
-            Level.WriteFile(new LevelFile { SunDirection = SunDirection, LightColor = SunColour });
         }
     }
 

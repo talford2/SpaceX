@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Name: Level4
   m_EditorClassIdentifier: 
   Background: {fileID: 8900000, guid: acf7baf307716f04e95433e6b7bd65bf, type: 3}
-  SystemName: Kappa Zule
+  LightColour: {r: 1, g: 0.847, b: 0.96175003, a: 1}
+  LightDirection: {x: -0.4990831, y: -0.6976287, z: -0.5140333}
+  SystemName: Tau Ursa
   SlipGateLevelIndex: 0
+  CellRadius: 10
   UniverseEvents:
   - Prefab: {fileID: 174836, guid: 5b632b817530f2a41992c9ec0587f396, type: 2}
     Count: 90

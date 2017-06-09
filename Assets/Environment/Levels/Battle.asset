@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Name: Battle
   m_EditorClassIdentifier: 
   Background: {fileID: 8900000, guid: f9c7b6888cdb6584d8a70b87fea5b24c, type: 3}
-  SystemName: Psi Leto
+  LightColour: {r: 0.72259593, g: 0.71599996, b: 1, a: 1}
+  LightDirection: {x: -0.4760226, y: -0.5843333, z: 0.65723443}
+  SystemName: Rho Perseus
   SlipGateLevelIndex: 0
   CellRadius: 2
   UniverseEvents: []
