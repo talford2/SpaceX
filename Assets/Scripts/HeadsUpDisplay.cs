@@ -11,6 +11,7 @@ public class HeadsUpDisplay : MonoBehaviour
     public float CrosshairHitDuration = 0.5f;
 
     [Header("Heat Bars")]
+    public CanvasGroup HeatBarsContainer;
     public Image LeftHeatBar;
     public Image RightHeatBar;
 
@@ -225,6 +226,7 @@ public class HeadsUpDisplay : MonoBehaviour
             {
                 fraction = 0;
             }
+            HeatBarsContainer.alpha = fraction;
             CrosshairHit.color = Utility.SetColorAlpha(CrosshairHit.color, fraction);
         }
 
@@ -418,15 +420,13 @@ public class HeadsUpDisplay : MonoBehaviour
         var crosshairImage = Crosshair.GetComponent<Image>();
         crosshairImage.color = Utility.SetColorAlpha(crosshairImage.color, 1f);
         _isCrosshairFadeOut = false;
-        LeftHeatBar.enabled = true;
-        RightHeatBar.enabled = true;
+        HeatBarsContainer.alpha = 1f;
     }
 
     public void HideCrosshair()
     {
         Crosshair.SetActive(false);
-        LeftHeatBar.enabled = false;
-        RightHeatBar.enabled = false;
+        HeatBarsContainer.alpha = 0f;
     }
 
     public void ShowSquadronPrompt(string message)
