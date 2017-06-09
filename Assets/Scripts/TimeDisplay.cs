@@ -36,6 +36,6 @@ public class TimeDisplay : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(Screen.width - 200, 60f, 180f, 50f), string.Format("{0:f0}:{1:00}", minutes, seconds), displayStyle);
+        GUI.Label(new Rect(Screen.width - 200, 120f, 180f, 50f), string.Format("{0:f0}:{1:00}", minutes, seconds), displayStyle);
     }
 }

@@ -29,6 +29,7 @@ public class HeadsUpDisplay : MonoBehaviour
     public float DisplayKillFadeTime = 0.5f;
     public float DisplayKillZDepth = 40f;
     public Vector3 _initKillTextPos;
+    public Text KilledText;
 
     [Header("Bars")]
     public Image ShieldBar;
@@ -402,6 +403,13 @@ public class HeadsUpDisplay : MonoBehaviour
         _shieldHurtCooldown = 0f;
         _hurtCooldown = 0f;
         _isDead = false;
+        KilledText.color = Utility.SetColorAlpha(KilledText.color, 0f);
+    }
+
+    public void ShowKilledMessage(string message)
+    {
+        KilledText.text = message;
+        KilledText.color = Utility.SetColorAlpha(KilledText.color, 1f);
     }
 
     public void ShowCrosshair()
