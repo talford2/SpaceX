@@ -12,6 +12,8 @@ ModelImporter:
     100008: Shootpoint4
     100010: Thruster1
     100012: Thruster2
+    100014: Box001
+    100016: Gunner
     400000: //RootNode
     400002: Shootpoint1
     400004: Shootpoint2
@@ -19,9 +21,16 @@ ModelImporter:
     400008: Shootpoint4
     400010: Thruster1
     400012: Thruster2
+    400014: Box001
+    400016: Gunner
     2300000: //RootNode
+    2300002: Box001
+    2300004: Gunner
     3300000: //RootNode
+    3300002: Box001
+    3300004: Gunner
     4300000: Gunner
+    4300002: Box001
   materials:
     importMaterials: 1
     materialName: 0
