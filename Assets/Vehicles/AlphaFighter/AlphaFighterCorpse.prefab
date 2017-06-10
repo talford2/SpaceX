@@ -484,7 +484,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExplosionPrefab: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
   DebrisPrefab: {fileID: 0}
-  SmokeInstance: {fileID: 1361300539129020}
+  SmokeSystems:
+  - {fileID: 198157596919612736}
+  MaxExplodeRadius: 30
+  MinExplodeRadius: 8
+  MaxExplodeDamage: 100
+  ExplodeForce: 100
 --- !u!198 &198157596919612736
 ParticleSystem:
   m_ObjectHideFlags: 1
