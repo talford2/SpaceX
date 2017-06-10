@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 428646}
-  - 114: {fileID: 11452850}
-  - 114: {fileID: 11431972}
+  - component: {fileID: 428646}
+  - component: {fileID: 11452850}
+  - component: {fileID: 11431972}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -29,6 +29,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11431972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,10 +41,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53151bd6f245ef34d849fbe215ad99f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CallSign: 
   TotalPower: 5
   Weapons: 5
   Shields: 0
   Special: 0
+  PrimaryWeapon: {fileID: 0}
+  SecondaryWeapon: {fileID: 0}
+  Shield: {fileID: 0}
+  Engine: {fileID: 0}
 --- !u!114 &11452850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -58,7 +64,6 @@ MonoBehaviour:
   VehiclePrefab: {fileID: 11433924, guid: 83c398319f072814d820c8dbb6e990f0, type: 2}
   Team: 2
   IsSquadronMember: 0
-  CallSign: 
   DropItems:
   - {fileID: 11400274, guid: 816f10aa082864542b4127328f007432, type: 2}
   MaxDropAmount: 1
@@ -86,7 +91,9 @@ MonoBehaviour:
   MaxDodgeIntervalTime: 6
   DodgeRadius: 50
   DodgeArcAngle: 180
+  CanBarrelRoll: 0
   SightRange: 50
+  Neighbours: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

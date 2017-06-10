@@ -3113,6 +3113,12 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114628867405121830, guid: d35caf222b00b134fb8c10d7a3fee99d,
+        type: 2}
+      propertyPath: FighterPrefab
+      value: 
+      objectReference: {fileID: 11452850, guid: 171c8539c7d10c54c92f8fdba532f57c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d35caf222b00b134fb8c10d7a3fee99d, type: 2}
   m_IsPrefabParent: 0
