@@ -47,6 +47,9 @@ public class TurretTracker : Tracker
     private float _maxDistanceSquared;
     private float _lastDistanceSquared;
 
+    private float _lockingCooldown;
+    private float _lockingDuration;
+
     private void Awake()
     {
         _shiftable = GetComponentInParent<Shiftable>();
@@ -251,6 +254,7 @@ public class TurretTracker : Tracker
                             if (IsPlayerWeaponLocking(playerVehicle.PrimaryWeaponInstance))
                             {
                                 _lockInstance.sprite = _lockingSprite;
+                                _lockingDuration = playerVehicle.PrimaryWeaponInstance.TargetLockTime;
                                 _isLockedOn = true;
                             }
                             if (IsPlayerWeaponLocked(playerVehicle, playerVehicle.PrimaryWeaponInstance))
@@ -264,6 +268,7 @@ public class TurretTracker : Tracker
                             if (IsPlayerWeaponLocking(playerVehicle.SecondaryWeaponInstance))
                             {
                                 _lockInstance.sprite = _lockingSprite;
+                                _lockingDuration = playerVehicle.SecondaryWeaponInstance.TargetLockTime;
                                 _isLockedOn = true;
                             }
                             if (IsPlayerWeaponLocked(playerVehicle, playerVehicle.SecondaryWeaponInstance))
@@ -276,6 +281,7 @@ public class TurretTracker : Tracker
 
                     if (_oldLockedOn != _isLockedOn)
                     {
+                        _lockingCooldown = _lockingDuration;
                         _lockInstance.rectTransform.localScale = Vector3.one * 3f;
                         _lockInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, 180f);
                     }
@@ -286,8 +292,11 @@ public class TurretTracker : Tracker
                     {
                         _imageInstance.enabled = false;
                         _lockInstance.enabled = true;
-                        rotation = Quaternion.RotateTowards(_lockInstance.rectTransform.localRotation, Quaternion.identity, 480f * Time.deltaTime);
-                        scale = Vector3.Lerp(_lockInstance.rectTransform.localScale, Vector3.one, Time.deltaTime * 5f);
+                        if (_lockingCooldown >= 0f)
+                            _lockingCooldown -= Time.deltaTime;
+                        var lockingFraction = 1f - Mathf.Clamp01(_lockingCooldown / _lockingDuration);
+                        rotation = Quaternion.AngleAxis(480f * lockingFraction, Vector3.forward);
+                        scale = Vector3.Lerp(Vector3.one * 3f, Vector3.one, lockingFraction);
                     }
                     else
                     {
