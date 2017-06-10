@@ -23,6 +23,10 @@ public class VehicleCorpse : MonoBehaviour
     private int _detectableMask;
     private int _collisionMask;
 
+    private float _rotationAcceleration = 360f;
+    private float _maxRotationSpeed = 450f;
+    private float _rotationSpeed;
+
     private void Awake()
     {
         GetComponent<Rigidbody>().isKinematic = true;
@@ -43,11 +47,13 @@ public class VehicleCorpse : MonoBehaviour
     public void Initialize(Vector3 initialVelocity)
     {
         _initialVelocity = initialVelocity;
+        _rotationSpeed = 0f;
     }
 
     private void Update()
     {
-        transform.Rotate(Vector3.forward, 360f * Time.deltaTime);
+        _rotationSpeed = Mathf.MoveTowards(_rotationSpeed, _maxRotationSpeed, _rotationAcceleration * Time.deltaTime);
+        transform.Rotate(Vector3.forward, _rotationSpeed * Time.deltaTime);
         if (Physics.SphereCast(new Ray(transform.position, _initialVelocity.normalized), CollisionRadius, (_initialVelocity.magnitude - CollisionRadius) + 0.01f, _collisionMask))
             CorpseExplode(null, null);
         _shiftable.Translate(_initialVelocity * Time.deltaTime);
