@@ -496,7 +496,7 @@ MonoBehaviour:
   CameraDistance: 15
   UTurnPath: {fileID: 0}
   UTurnDuration: 0
-  PrimaryWeaponPrefab: {fileID: 11492802, guid: a92acb07074ae114698b3883d13497a0,
+  PrimaryWeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93,
     type: 2}
   PrimaryShootPoints:
   - {fileID: 114331553133246564}

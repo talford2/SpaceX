@@ -66,10 +66,11 @@ MonoBehaviour:
   MissilePrefab: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
   MissilesPerShot: 1
   Spread: 0
-  MissilesConverge: 0
+  MissilesConverge: 1
   IsTargetLocking: 0
   TargetLockTime: 1.5
   TargetLockingMaxDistance: 2000
+  TargetAngleTolerance: 5
   IsOverheat: 1
   HeatPerMissile: 0.8
   OverheatDelay: 2

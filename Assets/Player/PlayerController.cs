@@ -768,19 +768,27 @@ public class PlayerController : MonoBehaviour
         HeadsUpDisplay.Current.TriggerCrosshairFadeOut();
         HeadsUpDisplay.Current.HideCrosshair();
         HeadsUpDisplay.Current.ShowDead();
-
-        var attackerVehicle = attacker.GetComponent<Vehicle>();
-        if (attackerVehicle != null)
-            HeadsUpDisplay.Current.ShowKilledMessage(string.Format("YOU WERE KILLED BY {0}", attackerVehicle.Name).ToUpperInvariant());
-        var attackerTurret = attacker.GetComponent<Turret>();
-        if (attackerTurret != null)
-            HeadsUpDisplay.Current.ShowKilledMessage(string.Format("YOU WERE KILLED BY {0}", attackerTurret.Name).ToUpperInvariant());
-
         if (attacker != null)
         {
             var attackerTargetable = attacker.GetComponentInChildren<Targetable>();
             if (attackerTargetable != null)
                 HeadsUpDisplay.Current.RecordKill(attackerTargetable.Team);
+
+            var attackerName = string.Empty;
+            var attackerVehicle = attacker.GetComponent<Vehicle>();
+            if (attackerVehicle != null)
+                attackerName = attackerVehicle.Name;
+            var attackerTurret = attacker.GetComponent<Turret>();
+            if (attackerTurret != null)
+                attackerName = attackerTurret.Name;
+            if (!string.IsNullOrEmpty(attackerName))
+            {
+                HeadsUpDisplay.Current.ShowKilledMessage(string.Format("YOU WERE KILLED BY {0}", attackerName).ToUpperInvariant());
+            }
+            else
+            {
+                HeadsUpDisplay.Current.ShowKilledMessage("YOU DIED");
+            }
         }
         Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.5f);
     }
