@@ -531,6 +531,8 @@ MonoBehaviour:
   PitchThotttle: 0
   RollThrottle: 0
   CameraDistance: 15
+  BarrelStrafeSpeed: 100
+  BarrelRollDuration: 0.5
   UTurnPath: {fileID: 0}
   UTurnDuration: 0
   PrimaryWeaponPrefab: {fileID: 11492802, guid: a92acb07074ae114698b3883d13497a0,
@@ -547,6 +549,8 @@ MonoBehaviour:
   ShieldPrefab: {fileID: 11432386, guid: ec198b972797bfe4198bc77d9b933520, type: 2}
   EnginePrefab: {fileID: 11460812, guid: 5d7105be3dd5b72498d7817054956ba2, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
+  WoundEffectTransforms:
+  - {fileID: 443368}
   CorpsePrefab: {fileID: 113112, guid: ded65249c9889774e8cd5ec1909d91d3, type: 2}
   DebrisPrefab: {fileID: 0}
   ExplosiveForce: 50

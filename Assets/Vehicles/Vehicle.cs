@@ -92,6 +92,7 @@ public class Vehicle : MonoBehaviour
 
     [Header("Damage")]
     public GameObject WoundEffect;
+    public List<Transform> WoundEffectTransforms;
 
     [Header("Death")]
     public GameObject CorpsePrefab;
@@ -622,9 +623,13 @@ public class Vehicle : MonoBehaviour
     {
         if (_woundObj == null && WoundEffect != null)
         {
-            _woundObj = Instantiate(WoundEffect);
-            _woundObj.transform.parent = transform;
-            _woundObj.transform.localPosition = Vector3.zero;
+            foreach (var woundEffectTransform in WoundEffectTransforms)
+            {
+                _woundObj = Instantiate(WoundEffect);
+                _woundObj.transform.SetParent(woundEffectTransform);
+                _woundObj.transform.localPosition = Vector3.zero;
+                _woundObj.transform.localRotation = Quaternion.identity;
+            }
         }
     }
 

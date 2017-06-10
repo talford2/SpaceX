@@ -291,6 +291,8 @@ MonoBehaviour:
   PitchThotttle: 0
   RollThrottle: 0
   CameraDistance: 15
+  BarrelStrafeSpeed: 100
+  BarrelRollDuration: 0.5
   UTurnPath: {fileID: 0}
   UTurnDuration: 0
   PrimaryWeaponPrefab: {fileID: 11492802, guid: 971fff9679fe78849859df2f0a199222,
@@ -301,9 +303,12 @@ MonoBehaviour:
     type: 2}
   SecondaryShootPoints:
   - {fileID: 11475328}
+  CollideEffect: {fileID: 0}
   ShieldPrefab: {fileID: 0}
   EnginePrefab: {fileID: 11460812, guid: 5d7105be3dd5b72498d7817054956ba2, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
+  WoundEffectTransforms:
+  - {fileID: 482680}
   CorpsePrefab: {fileID: 0}
   DebrisPrefab: {fileID: 0}
   ExplosiveForce: 0
@@ -325,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6939a39240060ad4a9a8b4a34cdfa0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseWorldPosition: 0
   UniverseCellIndex:
     X: 0
     Y: 0
@@ -371,6 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 474404}
+  Radius: 0
 --- !u!135 &13556362
 SphereCollider:
   m_ObjectHideFlags: 1

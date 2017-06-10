@@ -397,6 +397,9 @@ MonoBehaviour:
   ShieldPrefab: {fileID: 11432386, guid: ec198b972797bfe4198bc77d9b933520, type: 2}
   EnginePrefab: {fileID: 11460812, guid: fa31fb1798e114b4c8bdb7b08ce54f5d, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
+  WoundEffectTransforms:
+  - {fileID: 458250}
+  - {fileID: 422464}
   CorpsePrefab: {fileID: 182838, guid: 0ce194040425fda48b154795fa302bff, type: 2}
   DebrisPrefab: {fileID: 0}
   ExplosiveForce: 50
