@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 11452850}
   - component: {fileID: 11409728}
   m_Layer: 0
-  m_Name: Fighter4
+  m_Name: Fighter5
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cd1b4228c841c45b4e7567573f081d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VehiclePrefab: {fileID: 11498582, guid: a4731165bc86c274086020dcc9fe73d6, type: 2}
+  VehiclePrefab: {fileID: 114646999966712184, guid: 7e51bd4b70487fa4a908a98161fba288,
+    type: 2}
   Team: 2
   IsSquadronMember: 0
   DropItems:

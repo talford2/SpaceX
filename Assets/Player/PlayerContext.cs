@@ -7,6 +7,8 @@ public class PlayerContext : MonoBehaviour
 
     public int LevelIndex;
 
+    public string SceneName;
+
     private void Awake()
     {
         _current = this;

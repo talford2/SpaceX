@@ -9,10 +9,12 @@ public class MainMenu : MonoBehaviour
         switch (command)
         {
             case "Battle":
-                SceneManager.LoadScene("Battle");
+                PlayerContext.Current.SceneName = "Battle";
+                SceneManager.LoadScene("LoadingScene");
                 break;
             case "Campaign":
-                SceneManager.LoadScene("Test1");
+                PlayerContext.Current.SceneName = "Test1";
+                SceneManager.LoadScene("LoadingScene");
                 break;
             case "Exit":
                 Application.Quit();

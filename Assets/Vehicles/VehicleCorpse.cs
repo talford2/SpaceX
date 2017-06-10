@@ -9,6 +9,8 @@ public class VehicleCorpse : MonoBehaviour
     public GameObject DebrisPrefab;
     public List<ParticleSystem> SmokeSystems;
 
+    public float CollisionRadius;
+
     [Header("Explosion")]
     public float MaxExplodeRadius = 30f;
     public float MinExplodeRadius = 8f;
@@ -19,6 +21,7 @@ public class VehicleCorpse : MonoBehaviour
     private Vector3 _initialVelocity;
     private Killable _killable;
     private int _detectableMask;
+    private int _collisionMask;
 
     private void Awake()
     {
@@ -29,6 +32,7 @@ public class VehicleCorpse : MonoBehaviour
 
         _killable.OnDie += CorpseExplode;
         _detectableMask = LayerMask.GetMask("Detectable");
+        _collisionMask = LayerMask.GetMask("Environment", "Default");
     }
 
     private void Start()
@@ -44,6 +48,8 @@ public class VehicleCorpse : MonoBehaviour
     private void Update()
     {
         transform.Rotate(Vector3.forward, 360f * Time.deltaTime);
+        if (Physics.SphereCast(new Ray(transform.position, _initialVelocity.normalized), CollisionRadius, (_initialVelocity.magnitude - CollisionRadius) + 0.01f, _collisionMask))
+            CorpseExplode(null, null);
         _shiftable.Translate(_initialVelocity * Time.deltaTime);
     }
 
@@ -106,5 +112,11 @@ public class VehicleCorpse : MonoBehaviour
         {
             Destroy(smokeSystem.gameObject);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, CollisionRadius);
     }
 }

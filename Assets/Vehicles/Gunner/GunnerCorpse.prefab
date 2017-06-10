@@ -418,6 +418,7 @@ MonoBehaviour:
   SmokeSystems:
   - {fileID: 198318881243539382}
   - {fileID: 198151643697010866}
+  CollisionRadius: 3
   MaxExplodeRadius: 30
   MinExplodeRadius: 8
   MaxExplodeDamage: 100
