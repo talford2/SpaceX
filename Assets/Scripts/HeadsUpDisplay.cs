@@ -226,7 +226,6 @@ public class HeadsUpDisplay : MonoBehaviour
             {
                 fraction = 0;
             }
-            HeatBarsContainer.alpha = fraction;
             CrosshairHit.color = Utility.SetColorAlpha(CrosshairHit.color, fraction);
         }
 
@@ -339,6 +338,7 @@ public class HeadsUpDisplay : MonoBehaviour
                     var crosshairImage = Crosshair.GetComponent<Image>();
                     var fadeFraction = Mathf.Clamp01(_crosshairFadeCooldown / _crosshairFadeDuration);
                     crosshairImage.color = Utility.SetColorAlpha(crosshairImage.color, fadeFraction);
+                    HeatBarsContainer.alpha = fadeFraction;
                 }
             }
         }
