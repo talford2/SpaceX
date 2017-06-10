@@ -23,7 +23,7 @@ public class VehicleCorpse : MonoBehaviour
     private int _detectableMask;
     private int _collisionMask;
 
-    private float _rotationAcceleration = 360f;
+    private float _rotationAcceleration = 600f;
     private float _maxRotationSpeed = 450f;
     private float _rotationSpeed;
 
