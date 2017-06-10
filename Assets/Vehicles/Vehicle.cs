@@ -48,6 +48,10 @@ public class Vehicle : MonoBehaviour
     [Header("Camera")]
     public float CameraDistance = 15f;
 
+    [Header("Barrle Roll")]
+    private float BarrelStrafeSpeed = 100f;
+    private float BarrelRollDuration = 0.5f;
+
     [Header("U-Turn")]
     public SplinePath UTurnPath;
     public float UTurnDuration;
@@ -131,8 +135,6 @@ public class Vehicle : MonoBehaviour
     private bool isBarrelRolling;
     private int barrelRollDir;
     private float barrelRollCooldown;
-    private float barrelRollDuration = 0.5f;
-    private float barrelStrafeSpeed = 100f;
     private float barrelStrafeVelocity;
 
     private bool _previousBoost = false;
@@ -341,7 +343,7 @@ public class Vehicle : MonoBehaviour
         {
             isBarrelRolling = true;
             barrelRollDir = dir;
-            barrelRollCooldown = barrelRollDuration;
+            barrelRollCooldown = BarrelRollDuration;
         }
     }
 
@@ -485,7 +487,7 @@ public class Vehicle : MonoBehaviour
         }
         else
         {
-            var barrelRollFraction = barrelRollCooldown / barrelRollDuration;
+            var barrelRollFraction = barrelRollCooldown / BarrelRollDuration;
             _targetBankRotation = Quaternion.AngleAxis(barrelRollDir * barrelRollFraction * 360f, Vector3.forward);
         }
         MeshTransform.localRotation = Quaternion.Lerp(MeshTransform.localRotation, _targetBankRotation, 5f * Time.deltaTime);
@@ -493,7 +495,7 @@ public class Vehicle : MonoBehaviour
         _velocity = transform.forward * CurrentSpeed;
         var targetBarrelVelocity = 0f;
         if (isBarrelRolling)
-            targetBarrelVelocity = barrelRollDir * barrelStrafeSpeed;
+            targetBarrelVelocity = barrelRollDir * BarrelStrafeSpeed;
         barrelStrafeVelocity = Mathf.Lerp(barrelStrafeVelocity, targetBarrelVelocity, 5f * Time.deltaTime);
         _velocity += transform.right * barrelStrafeVelocity;
 
