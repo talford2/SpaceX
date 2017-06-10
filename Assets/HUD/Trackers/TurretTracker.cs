@@ -295,7 +295,7 @@ public class TurretTracker : Tracker
                         if (_lockingCooldown >= 0f)
                             _lockingCooldown -= Time.deltaTime;
                         var lockingFraction = 1f - Mathf.Clamp01(_lockingCooldown / _lockingDuration);
-                        rotation = Quaternion.AngleAxis(480f * lockingFraction, Vector3.forward);
+                        rotation = Quaternion.AngleAxis(450f * lockingFraction, Vector3.forward);
                         scale = Vector3.Lerp(Vector3.one * 3f, Vector3.one, lockingFraction);
                     }
                     else
