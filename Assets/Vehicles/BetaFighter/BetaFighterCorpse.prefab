@@ -544,6 +544,7 @@ MonoBehaviour:
   DebrisPrefab: {fileID: 0}
   SmokeSystems:
   - {fileID: 198602460666559900}
+  CollisionRadius: 3
   MaxExplodeRadius: 30
   MinExplodeRadius: 8
   MaxExplodeDamage: 100
