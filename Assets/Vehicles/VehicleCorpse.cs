@@ -43,7 +43,7 @@ public class VehicleCorpse : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(_initialVelocity.normalized, 360f * Time.deltaTime);
+        transform.Rotate(Vector3.forward, 360f * Time.deltaTime);
         _shiftable.Translate(_initialVelocity * Time.deltaTime);
     }
 
