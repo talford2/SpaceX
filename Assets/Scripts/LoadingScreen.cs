@@ -14,7 +14,7 @@ public class LoadingScreen : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LoadScene("Test1"));
+        StartCoroutine(LoadScene(PlayerContext.Current.SceneName));
     }
 
     private void Update()
