@@ -48,9 +48,9 @@ public class Vehicle : MonoBehaviour
     [Header("Camera")]
     public float CameraDistance = 15f;
 
-    [Header("Barrle Roll")]
-    private float BarrelStrafeSpeed = 100f;
-    private float BarrelRollDuration = 0.5f;
+    [Header("Barrel Roll")]
+    public float BarrelStrafeSpeed = 100f;
+    public float BarrelRollDuration = 0.5f;
 
     [Header("U-Turn")]
     public SplinePath UTurnPath;

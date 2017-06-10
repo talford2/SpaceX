@@ -494,6 +494,8 @@ MonoBehaviour:
   PitchThotttle: 0
   RollThrottle: 0
   CameraDistance: 15
+  BarrelStrafeSpeed: 50
+  BarrelRollDuration: 0.5
   UTurnPath: {fileID: 0}
   UTurnDuration: 0
   PrimaryWeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93,
