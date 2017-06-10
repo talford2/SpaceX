@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Killable))]
 public class VehicleCorpse : MonoBehaviour
 {
@@ -16,13 +15,16 @@ public class VehicleCorpse : MonoBehaviour
     public float MaxExplodeDamage = 100f;
     public float ExplodeForce = 100f;
 
-    private Rigidbody _rBody;
+    private Shiftable _shiftable;
+    private Vector3 _initialVelocity;
     private Killable _killable;
     private int _detectableMask;
 
     private void Awake()
     {
-        _rBody = GetComponent<Rigidbody>();
+        GetComponent<Rigidbody>().isKinematic = true;
+
+        _shiftable = GetComponent<Shiftable>();
         _killable = GetComponent<Killable>();
 
         _killable.OnDie += CorpseExplode;
@@ -32,6 +34,17 @@ public class VehicleCorpse : MonoBehaviour
     private void Start()
     {
         StartCoroutine(DelayedExplode(Random.Range(2f, 3f)));
+    }
+
+    public void Initialize(Vector3 initialVelocity)
+    {
+        _initialVelocity = initialVelocity;
+    }
+
+    private void Update()
+    {
+        transform.Rotate(_initialVelocity.normalized, 360f * Time.deltaTime);
+        _shiftable.Translate(_initialVelocity * Time.deltaTime);
     }
 
     private IEnumerator DelayedExplode(float delay)
@@ -49,21 +62,21 @@ public class VehicleCorpse : MonoBehaviour
     {
         if (ExplosionPrefab != null)
         {
-            var explodeInstance = ResourcePoolManager.GetAvailable(ExplosionPrefab, _rBody.position, _rBody.rotation);
+            var explodeInstance = ResourcePoolManager.GetAvailable(ExplosionPrefab, transform.position, transform.rotation);
             explodeInstance.transform.localScale = transform.localScale;
             var explodeShiftable = explodeInstance.GetComponent<Shiftable>();
 
             if (explodeShiftable != null)
-                explodeShiftable.SetShiftPosition(Universe.Current.GetUniversePosition(_rBody.position));
+                explodeShiftable.SetShiftPosition(Universe.Current.GetUniversePosition(transform.position));
         }
 
         if (DebrisPrefab != null)
         {
-            var debrisInstance = (GameObject)Instantiate(DebrisPrefab, _rBody.position, _rBody.rotation);
+            var debrisInstance = (GameObject)Instantiate(DebrisPrefab, transform.position, transform.rotation);
             var rBodies = debrisInstance.GetComponentsInChildren<Rigidbody>();
             foreach (var debrisrBody in rBodies)
             {
-                debrisrBody.velocity = _rBody.velocity;
+                debrisrBody.velocity = _initialVelocity;
                 debrisrBody.AddExplosionForce(200f, transform.position, 20f, 0f, ForceMode.Impulse);
                 var debrisShiftable = debrisrBody.GetComponent<Shiftable>();
                 debrisShiftable.SetShiftPosition(Universe.Current.GetUniversePosition(debrisrBody.position));

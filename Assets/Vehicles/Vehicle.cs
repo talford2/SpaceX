@@ -651,13 +651,10 @@ public class Vehicle : MonoBehaviour
             Explode(SpinDeathExplosion);
             if (CorpsePrefab != null)
             {
-                var corpseInstance = (GameObject)Instantiate(CorpsePrefab, transform.position, transform.rotation);
-                var rBody = corpseInstance.GetComponent<Rigidbody>();
-                rBody.velocity = _velocity * Random.Range(_minVelocityMultiplier, _maxVelocityMultiplier);
-                rBody.AddForce(_velocity.normalized * 5000f, ForceMode.Impulse);
-                rBody.AddRelativeTorque(new Vector3(0f, 0f, 50000f), ForceMode.Impulse);
+                var corpseInstance = ((GameObject)Instantiate(CorpsePrefab, transform.position, transform.rotation)).GetComponent<VehicleCorpse>();
+                corpseInstance.Initialize(_velocity);
                 var shiftable = corpseInstance.GetComponentInParent<Shiftable>();
-                shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(rBody.position));
+                shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(corpseInstance.transform.position));
             }
         }
         else
