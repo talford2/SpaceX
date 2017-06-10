@@ -26,6 +26,7 @@ public class VehicleCorpse : MonoBehaviour
     private float _rotationAcceleration = 600f;
     private float _maxRotationSpeed = 450f;
     private float _rotationSpeed;
+    private float _rotateDir;
 
     private void Awake()
     {
@@ -48,12 +49,13 @@ public class VehicleCorpse : MonoBehaviour
     {
         _initialVelocity = initialVelocity;
         _rotationSpeed = 0f;
+        _rotateDir = Utility.RandomSign();
     }
 
     private void Update()
     {
         _rotationSpeed = Mathf.MoveTowards(_rotationSpeed, _maxRotationSpeed, _rotationAcceleration * Time.deltaTime);
-        transform.Rotate(Vector3.forward, _rotationSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.forward, _rotateDir * _rotationSpeed * Time.deltaTime);
         if (Physics.SphereCast(new Ray(transform.position, _initialVelocity.normalized), CollisionRadius, (_initialVelocity.magnitude - CollisionRadius) + 0.01f, _collisionMask))
             CorpseExplode(null, null);
         _shiftable.Translate(_initialVelocity * Time.deltaTime);
