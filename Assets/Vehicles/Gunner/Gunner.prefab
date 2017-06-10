@@ -575,8 +575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c500da126aa939c429ebf252cb7c9d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {fileID: 0}
-  Radius: 0
+  TargetTransform: {fileID: 4401481957374314}
+  Radius: 1
 --- !u!135 &135529599338136432
 SphereCollider:
   m_ObjectHideFlags: 1
