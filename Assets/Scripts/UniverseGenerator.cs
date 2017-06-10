@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
@@ -142,7 +142,7 @@ public class UniverseGenerator : MonoBehaviour
             Level.SystemName = NameGenerator.GetRandomSystemName(Seed);
             Level.LightColour = SunColour;
             Level.LightDirection = SunDirection;
-            EditorUtility.SetDirty(Level);
+            //EditorUtility.SetDirty(Level);
 
             Debug.DrawLine(Vector3.zero, SunDirection * 1000f, Color.magenta, 600);
         }
