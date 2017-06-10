@@ -531,7 +531,7 @@ MonoBehaviour:
   PitchThotttle: 0
   RollThrottle: 0
   CameraDistance: 15
-  BarrelStrafeSpeed: 100
+  BarrelStrafeSpeed: 50
   BarrelRollDuration: 0.5
   UTurnPath: {fileID: 0}
   UTurnDuration: 0
