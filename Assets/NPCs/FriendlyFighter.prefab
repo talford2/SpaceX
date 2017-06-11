@@ -41,8 +41,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cd1b4228c841c45b4e7567573f081d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VehiclePrefab: {fileID: 11433924, guid: 1687e163da945a84cb395d7edadef366, type: 2}
+  VehiclePrefab: {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
   Team: 1
+  TrackerOptions: {fileID: 11400000, guid: 3e7949ecd0c752848b1bb6575480f9d0, type: 2}
   IsSquadronMember: 0
   DropItems:
   - {fileID: 11400274, guid: 816f10aa082864542b4127328f007432, type: 2}

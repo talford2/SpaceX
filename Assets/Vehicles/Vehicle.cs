@@ -177,8 +177,19 @@ public class Vehicle : MonoBehaviour
         get { return _killable; }
     }
 
+    public Targetable Targetable
+    {
+        get { return _targetable; }
+    }
+
+    public VehicleTracker Tracker
+    {
+        get { return _tracker; }
+    }
+
     private Killable _killable;
     private Targetable _targetable;
+    private VehicleTracker _tracker;
 
     public Shiftable Shiftable
     {
@@ -232,6 +243,9 @@ public class Vehicle : MonoBehaviour
         _killable.OnDamage += VehicleDamage;
         _killable.OnDie += VehicleDie;
 
+        _targetable = GetComponent<Targetable>();
+        _tracker = GetComponent<VehicleTracker>();
+
         _allowBoost = true;
 
         _targetRotation = transform.rotation;
@@ -241,8 +255,6 @@ public class Vehicle : MonoBehaviour
 
     public void Initialize()
     {
-        _targetable = GetComponent<Targetable>();
-
         if (PrimaryWeapon != null)
             SetPrimaryWeapon(PrimaryWeapon);
         if (SecondaryWeapon != null)

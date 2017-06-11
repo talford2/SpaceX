@@ -43,6 +43,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VehiclePrefab: {fileID: 11490646, guid: 8bbf55beb8aad884c88e0e8d057e3f4f, type: 2}
   Team: 2
+  TrackerOptions: {fileID: 11400000, guid: 56dfa55042caabe499a2b6ce41376a8c, type: 2}
   IsSquadronMember: 0
   DropItems:
   - {fileID: 11400274, guid: 816f10aa082864542b4127328f007432, type: 2}

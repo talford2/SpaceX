@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
     private void SpawnVehicle(Vehicle vehiclePrefab, UniversePosition universePosition, Quaternion rotation)
     {
-        _playVehicleInstance = ((GameObject)Instantiate(vehiclePrefab.gameObject, universePosition.CellLocalPosition, rotation)).GetComponent<Vehicle>();
+        _playVehicleInstance = Instantiate(vehiclePrefab.gameObject, universePosition.CellLocalPosition, rotation).GetComponent<Vehicle>();
         _playVehicleInstance.Controller = gameObject;
         _playVehicleInstance.Shiftable.SetShiftPosition(universePosition);
         _playVehicleInstance.GetComponent<Targetable>().Team = Team;

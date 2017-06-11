@@ -7,6 +7,7 @@ public class Fighter : Npc<Fighter>
 {
     public Vehicle VehiclePrefab;
     public Team Team;
+    public VehicleTrackerValues TrackerOptions;
     public bool IsSquadronMember;
 
     [Header("Drop Item on Death")]
@@ -135,7 +136,8 @@ public class Fighter : Npc<Fighter>
     public void SpawnVehicle(GameObject controller, Vehicle vehiclePrefab, UniversePosition universePosition, Quaternion rotation)
     {
         _vehicleInstance = Instantiate<Vehicle>(vehiclePrefab);
-        _vehicleInstance.GetComponent<Targetable>().Team = Team;
+        _vehicleInstance.Targetable.Team = Team;
+        _vehicleInstance.Tracker.Options = TrackerOptions;
         var killable = _vehicleInstance.GetComponent<Killable>();
         killable.OnDamage += OnVehicleDamaged;
         killable.OnDie += OnVehicleDestroyed;
