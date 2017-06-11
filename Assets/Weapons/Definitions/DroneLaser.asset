@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2f6e1f64cbe134ba1ec932bb79b453, type: 3}
+  m_Name: DroneLaser
+  m_EditorClassIdentifier: 
+  Name: Puny Laser Cannon
+  MuzzlePrefab: {fileID: 11408760, guid: db0bd28387b791d4ea43fd188b23d353, type: 2}
+  ShootSound: {fileID: 8300000, guid: 6b9b6989687c8414a9348b30afb38ca9, type: 3}
+  SoundVolume: 1
+  SoundMinDistance: 25
+  SoundMaxDistance: 200
+  MissilePrefab: {fileID: 180512, guid: adb276e13f8472b4ab9d9878efaa0049, type: 2}
+  MissilesPerShot: 1
+  Spread: 0
+  MissilesConverge: 1
+  IsTargetLocking: 0
+  TargetLockTime: 1
+  TargetLockingMaxDistance: 2000
+  TargetAngleTolerance: 15
+  LockSound: {fileID: 0}
+  IsOverheat: 0
+  HeatPerMissile: 0.8
+  OverheatDelay: 2
+  CoolDelay: 0.5
+  BaseMissileDamage: 5
+  BaseFireRate: 2
+  BaseCoolingRate: 0
+  BaseHeatCapacity: 0
+  MissileDamagePerPoint: 0
+  FireRatePerPoint: 0
+  CoolingRatePerPoint: 0
+  HeatCapacityPerPoint: 0

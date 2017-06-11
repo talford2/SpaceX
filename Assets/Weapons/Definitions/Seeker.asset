@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2f6e1f64cbe134ba1ec932bb79b453, type: 3}
+  m_Name: Flak
+  m_EditorClassIdentifier: 
+  Name: Flak Cannon
+  MuzzlePrefab: {fileID: 11496450, guid: 2af108f533a9b214ca70f588ecaaf5f7, type: 2}
+  ShootSound: {fileID: 8300000, guid: d630152cd1dc3cf4994768f4fbc6eee3, type: 3}
+  SoundVolume: 0.7
+  SoundMinDistance: 70
+  SoundMaxDistance: 1500
+  MissilePrefab: {fileID: 122516, guid: 895ee3d7b5c719a418999475f9c4cc69, type: 2}
+  MissilesPerShot: 1
+  Spread: 5
+  MissilesConverge: 1
+  IsTargetLocking: 0
+  TargetLockTime: 1.5
+  TargetLockingMaxDistance: 2000
+  TargetAngleTolerance: 15
+  LockSound: {fileID: 0}
+  IsOverheat: 1
+  HeatPerMissile: 50
+  OverheatDelay: 5
+  CoolDelay: 0.5
+  BaseMissileDamage: 20
+  BaseFireRate: 2
+  BaseCoolingRate: 50
+  BaseHeatCapacity: 100
+  MissileDamagePerPoint: 2
+  FireRatePerPoint: 0.2
+  CoolingRatePerPoint: 5
+  HeatCapacityPerPoint: 10

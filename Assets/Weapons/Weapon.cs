@@ -9,7 +9,6 @@ public class Weapon : MonoBehaviour
     public int LootIndex;
 
     [Header("Weapon Settings")]
-
     public MuzzleFlash MuzzlePrefab;
 
     //public AudioSource FireSound;
@@ -31,14 +30,13 @@ public class Weapon : MonoBehaviour
     public float TargetLockTime = 1.5f;
     public float TargetLockingMaxDistance = 2000f;
     public float TargetAngleTolerance = 5f;
+    public AudioClip LockSound;
 
     [Header("Overheating")]
     public bool IsOverheat;
     public float HeatPerMissile;
     public float OverheatDelay;
     public float CoolDelay = 0.5f;
-
-    public AudioClip LockSound;
 
     [Header("Base Upgradable Properties")]
     public float BaseMissileDamage;

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2f6e1f64cbe134ba1ec932bb79b453, type: 3}
+  m_Name: Plasma
+  m_EditorClassIdentifier: 
+  Name: Plasma Cannon
+  MuzzlePrefab: {fileID: 11413894, guid: 0b630620908faae4db51a824d4b1e5e1, type: 2}
+  ShootSound: {fileID: 8300000, guid: 419535f5f3f6e3a498566064510910f1, type: 3}
+  SoundVolume: 0.3
+  SoundMinDistance: 25
+  SoundMaxDistance: 200
+  MissilePrefab: {fileID: 195130, guid: 78bf010bbd3d8d4429e04e9ab9cfb409, type: 2}
+  MissilesPerShot: 1
+  Spread: 0
+  MissilesConverge: 1
+  IsTargetLocking: 0
+  TargetLockTime: 1
+  TargetLockingMaxDistance: 2000
+  TargetAngleTolerance: 15
+  LockSound: {fileID: 0}
+  IsOverheat: 1
+  HeatPerMissile: 8
+  OverheatDelay: 2
+  CoolDelay: 0.5
+  BaseMissileDamage: 20
+  BaseFireRate: 5
+  BaseCoolingRate: 30
+  BaseHeatCapacity: 100
+  MissileDamagePerPoint: 2
+  FireRatePerPoint: 0.5
+  CoolingRatePerPoint: 2
+  HeatCapacityPerPoint: 10
