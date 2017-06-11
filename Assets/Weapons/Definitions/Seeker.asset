@@ -25,7 +25,7 @@ MonoBehaviour:
   TargetLockTime: 0.8
   TargetLockingMaxDistance: 500
   TargetAngleTolerance: 15
-  LockSound: {fileID: 0}
+  LockSound: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
   IsOverheat: 1
   HeatPerMissile: 110
   OverheatDelay: 5
