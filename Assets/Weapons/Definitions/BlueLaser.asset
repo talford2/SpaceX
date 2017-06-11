@@ -17,7 +17,7 @@ MonoBehaviour:
   SoundVolume: 0.3
   SoundMinDistance: 25
   SoundMaxDistance: 200
-  MissilePrefab: {fileID: 180512, guid: 39a77c32b5194a6459af7f3fcd94f8af, type: 2}
+  MissilePrefab: {fileID: 180512, guid: b715e855fc9572c41a789a3cba7318db, type: 2}
   MissilesPerShot: 2
   Spread: 0
   MissilesConverge: 1
@@ -38,3 +38,6 @@ MonoBehaviour:
   FireRatePerPoint: 1
   CoolingRatePerPoint: 2
   HeatCapacityPerPoint: 5
+  InventorySprite: {fileID: 21300000, guid: 53c8d39213fa7c54fa87b72d2e1ad40e, type: 3}
+  Type: 0
+  SalvageValue: 100

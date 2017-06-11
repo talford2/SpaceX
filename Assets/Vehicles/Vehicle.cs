@@ -73,12 +73,14 @@ public class Vehicle : MonoBehaviour
     }
 
     [Header("Primary Weapon")]
-    public Weapon PrimaryWeaponPrefab;
+    //public Weapon PrimaryWeaponPrefab;
+    public WeaponDefinition PrimaryWeapon;
 
     public List<ShootPoint> PrimaryShootPoints;
 
     [Header("Secondary Weapon")]
-    public Weapon SecondaryWeaponPrefab;
+    //public Weapon SecondaryWeaponPrefab;
+    public WeaponDefinition SecondaryWeapon;
 
     public List<ShootPoint> SecondaryShootPoints;
 
@@ -203,13 +205,13 @@ public class Vehicle : MonoBehaviour
 
         foreach (var shootPoint in PrimaryShootPoints)
         {
-            if (PrimaryWeaponPrefab != null)
-                shootPoint.Initialize(PrimaryWeaponPrefab.Definition.MuzzlePrefab);
+            if (PrimaryWeapon != null)
+                shootPoint.Initialize(PrimaryWeapon.MuzzlePrefab);
         }
         foreach (var shootPoint in SecondaryShootPoints)
         {
-            if (SecondaryWeaponPrefab != null)
-                shootPoint.Initialize(SecondaryWeaponPrefab.Definition.MuzzlePrefab);
+            if (SecondaryWeapon != null)
+                shootPoint.Initialize(SecondaryWeapon.MuzzlePrefab);
         }
         _thrusters = new List<Thruster>();
         if (ThrusterPrefab != null)
@@ -241,45 +243,53 @@ public class Vehicle : MonoBehaviour
     {
         _targetable = GetComponent<Targetable>();
 
-        if (PrimaryWeaponPrefab != null)
-            SetPrimaryWeapon(PrimaryWeaponPrefab.gameObject);
-        if (SecondaryWeaponPrefab != null)
-            SetSecondaryWeapon(SecondaryWeaponPrefab.gameObject);
+        if (PrimaryWeapon != null)
+            SetPrimaryWeapon(PrimaryWeapon);
+        if (SecondaryWeapon != null)
+            SetSecondaryWeapon(SecondaryWeapon);
         if (ShieldPrefab != null)
             SetShield(ShieldPrefab.gameObject);
         if (EnginePrefab != null)
             SetEngine(EnginePrefab.gameObject);
     }
 
-    public void SetPrimaryWeapon(GameObject primaryWeapon)
+    public void SetPrimaryWeapon(WeaponDefinition primaryWeapon)
     {
         if (_primaryWeaponInstance != null)
         {
             _primaryWeaponInstance.IsTriggered = false;
             _primaryWeaponInstance.ClearTargetLock();
             _primaryWeaponInstance.OnShoot -= OnShoot;
-            Destroy(_primaryWeaponInstance.gameObject);
+        }
+        else
+        {
+            _primaryWeaponInstance = new GameObject("PrimaryWeaponInstance").AddComponent<Weapon>();
+            _primaryWeaponInstance.transform.SetParent(transform);
         }
         if (primaryWeapon != null)
         {
-            _primaryWeaponInstance = Utility.InstantiateInParent(primaryWeapon.gameObject, transform).GetComponent<Weapon>();
+            _primaryWeaponInstance.Definition = primaryWeapon;
             _primaryWeaponInstance.Initialize(gameObject, PrimaryShootPoints, _velocityReference, _targetable.Team);
             _primaryWeaponInstance.OnShoot += OnShoot;
         }
     }
 
-    public void SetSecondaryWeapon(GameObject secondaryWeapon)
+    public void SetSecondaryWeapon(WeaponDefinition secondaryWeapon)
     {
         if (_secondaryWeaponInstance != null)
         {
             _secondaryWeaponInstance.IsTriggered = false;
             _secondaryWeaponInstance.ClearTargetLock();
             _secondaryWeaponInstance.OnShoot -= OnShoot;
-            Destroy(_secondaryWeaponInstance.gameObject);
+        }
+        else
+        {
+            _secondaryWeaponInstance = new GameObject("PrimaryWeaponInstance").AddComponent<Weapon>();
+            _secondaryWeaponInstance.transform.SetParent(transform);
         }
         if (secondaryWeapon != null)
         {
-            _secondaryWeaponInstance = Utility.InstantiateInParent(secondaryWeapon.gameObject, transform).GetComponent<Weapon>();
+            _secondaryWeaponInstance.Definition = secondaryWeapon;
             _secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference, _targetable.Team);
             _secondaryWeaponInstance.OnShoot += OnShoot;
         }

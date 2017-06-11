@@ -499,15 +499,13 @@ MonoBehaviour:
   BarrelRollDuration: 0.5
   UTurnPath: {fileID: 0}
   UTurnDuration: 0
-  PrimaryWeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93,
-    type: 2}
+  PrimaryWeapon: {fileID: 11400000, guid: 35176b6835ffeb14298aae6956dcded6, type: 2}
   PrimaryShootPoints:
   - {fileID: 114331553133246564}
   - {fileID: 114323501433066782}
   - {fileID: 114808744477889508}
   - {fileID: 114008421811133442}
-  SecondaryWeaponPrefab: {fileID: 11413680, guid: 4063efe36c8729246a44aec50d7e1406,
-    type: 2}
+  SecondaryWeapon: {fileID: 11400000, guid: e0c044cbb38635b439a551988a5d0472, type: 2}
   SecondaryShootPoints:
   - {fileID: 114331553133246564}
   - {fileID: 114323501433066782}

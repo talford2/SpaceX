@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 444346}
-  - 33: {fileID: 3345534}
-  - 23: {fileID: 2309028}
+  - component: {fileID: 444346}
+  - component: {fileID: 3345534}
+  - component: {fileID: 2309028}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -22,15 +22,15 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 416388}
-  - 114: {fileID: 11440818}
-  - 114: {fileID: 11492116}
-  - 114: {fileID: 11483304}
-  - 114: {fileID: 11458936}
-  - 64: {fileID: 6470430}
-  - 54: {fileID: 5436716}
+  - component: {fileID: 416388}
+  - component: {fileID: 11440818}
+  - component: {fileID: 11492116}
+  - component: {fileID: 11483304}
+  - component: {fileID: 11458936}
+  - component: {fileID: 6470430}
+  - component: {fileID: 5436716}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -43,11 +43,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 490360}
-  - 33: {fileID: 3380286}
-  - 23: {fileID: 2380430}
+  - component: {fileID: 490360}
+  - component: {fileID: 3380286}
+  - component: {fileID: 2380430}
   m_Layer: 0
   m_Name: Asteroid2
   m_TagString: Untagged
@@ -60,11 +60,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 425442}
-  - 33: {fileID: 3377704}
-  - 23: {fileID: 2355452}
+  - component: {fileID: 425442}
+  - component: {fileID: 3377704}
+  - component: {fileID: 2355452}
   m_Layer: 0
   m_Name: Asteroid3
   m_TagString: Untagged
@@ -87,6 +87,7 @@ Transform:
   - {fileID: 425442}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &425442
 Transform:
   m_ObjectHideFlags: 1
@@ -99,6 +100,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 416388}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &444346
 Transform:
   m_ObjectHideFlags: 1
@@ -111,6 +113,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 416388}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &490360
 Transform:
   m_ObjectHideFlags: 1
@@ -123,6 +126,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 416388}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2309028
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -132,23 +136,29 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: 4c3a05406169a7c479691723762b8f0b, type: 2}
   - {fileID: 2100000, guid: b64faedd36e5bd14eadd5d1f68328f73, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &2355452
 MeshRenderer:
@@ -159,23 +169,29 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: 4c3a05406169a7c479691723762b8f0b, type: 2}
   - {fileID: 2100000, guid: b64faedd36e5bd14eadd5d1f68328f73, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &2380430
 MeshRenderer:
@@ -186,23 +202,29 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: 4c3a05406169a7c479691723762b8f0b, type: 2}
   - {fileID: 2100000, guid: b64faedd36e5bd14eadd5d1f68328f73, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &3345534
 MeshFilter:
@@ -251,6 +273,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: d84be2b72f0602a4c8770538397e47d2, type: 3}
 --- !u!114 &11440818
 MonoBehaviour:
@@ -265,6 +289,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 50
   MaxHealth: 50
+  Shield: 0
+  MaxShield: 0
   DamageEffect: {fileID: 112780, guid: 0d899d6cd3e67af44abdb41384ecf4e0, type: 2}
   DieEffect: {fileID: 185508, guid: 338533a70f1971a41b1d3b65d718c783, type: 2}
   DestroyOnDie: 0
@@ -274,7 +300,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134030}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b742fa895824afd4bafde164eab23040, type: 3}
   m_Name: 

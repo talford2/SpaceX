@@ -10,9 +10,6 @@ public class Weapon : MonoBehaviour
     [Header("Weapon Settings")]
     public WeaponDefinition Definition;
 
-    [Header("Shoot Sound")]
-    public GameObject SoundPrefab;
-
     public float Damage { get { return Definition.BaseMissileDamage + Definition.MissileDamagePerPoint * DamagePoints; } }
     public float FireRate { get { return Definition.BaseFireRate + Definition.FireRatePerPoint * FireRatePoints; } }
     public float CoolingRate { get { return Definition.BaseCoolingRate + Definition.CoolingRatePerPoint * CoolingRatePoints; } }
@@ -172,7 +169,7 @@ public class Weapon : MonoBehaviour
 
         _shootPoint.Flash();
 
-        var fireSound = ResourcePoolManager.GetAvailable(SoundPrefab, _shootPoint.transform.position, Quaternion.identity).GetComponent<AnonymousSound>();
+        var fireSound = ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, _shootPoint.transform.position, Quaternion.identity).GetComponent<AnonymousSound>();
         fireSound.PlayAt(Definition.ShootSound, _shootPoint.transform.position, Definition.SoundMinDistance, Definition.SoundMaxDistance, Definition.SoundVolume);
         //FireSound.Play();
 

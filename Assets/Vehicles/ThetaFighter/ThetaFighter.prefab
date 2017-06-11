@@ -384,6 +384,7 @@ MonoBehaviour:
   MaxBankingAngle: 60
   CollisionsCentre: {x: 0, y: -0.2, z: 0}
   CollisionRadius: 3
+  CollideEffect: {fileID: 0}
   BoostEnergy: 100
   BoostEnergyRegenerateDelay: 2
   BoostEnergyRegenerateRate: 50
@@ -399,17 +400,14 @@ MonoBehaviour:
   BarrelRollDuration: 0.5
   UTurnPath: {fileID: 0}
   UTurnDuration: 0
-  PrimaryWeaponPrefab: {fileID: 11492802, guid: 72177eff6e428814c941aace35ca0f93,
-    type: 2}
+  PrimaryWeapon: {fileID: 11400000, guid: 35176b6835ffeb14298aae6956dcded6, type: 2}
   PrimaryShootPoints:
   - {fileID: 11493480}
   - {fileID: 11417462}
-  SecondaryWeaponPrefab: {fileID: 11413680, guid: 4063efe36c8729246a44aec50d7e1406,
-    type: 2}
+  SecondaryWeapon: {fileID: 11400000, guid: 743a0c601e54b48479489eef2f1e2cbf, type: 2}
   SecondaryShootPoints:
   - {fileID: 11493480}
   - {fileID: 11417462}
-  CollideEffect: {fileID: 0}
   ShieldPrefab: {fileID: 11432386, guid: ec198b972797bfe4198bc77d9b933520, type: 2}
   EnginePrefab: {fileID: 11460812, guid: 5d7105be3dd5b72498d7817054956ba2, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}

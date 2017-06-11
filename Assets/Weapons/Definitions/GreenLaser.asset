@@ -38,3 +38,6 @@ MonoBehaviour:
   FireRatePerPoint: 1
   CoolingRatePerPoint: 2
   HeatCapacityPerPoint: 5
+  InventorySprite: {fileID: 21300000, guid: d2fc058ec4f7c8146962d6cf3837254f, type: 3}
+  Type: 0
+  SalvageValue: 100

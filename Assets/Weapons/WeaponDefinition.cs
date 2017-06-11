@@ -43,4 +43,9 @@ public class WeaponDefinition : ScriptableObject
     public float FireRatePerPoint;
     public float CoolingRatePerPoint;
     public float HeatCapacityPerPoint;
+
+    [Header("Inventory")]
+    public Sprite InventorySprite;
+    public ItemType Type;
+    public int SalvageValue;
 }

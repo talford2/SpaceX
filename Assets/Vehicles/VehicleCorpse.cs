@@ -37,7 +37,7 @@ public class VehicleCorpse : MonoBehaviour
 
         _killable.OnDie += CorpseExplode;
         _detectableMask = LayerMask.GetMask("Detectable");
-        _collisionMask = LayerMask.GetMask("Environment", "Default");
+        _collisionMask = LayerMask.GetMask("Environment", "Default", "Player");
     }
 
     private void Start()

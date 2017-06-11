@@ -132,8 +132,8 @@ public class ShipProfileScreen : MonoBehaviour
         //ShieldValue.text = string.Format("{0:f0}", vehicleKillable.MaxShield);
         HullValue.text = string.Format("{0:f0}/{1:f0}", vehicleKillable.Health, vehicleKillable.MaxHealth);
 
-        PrimaryWeaponText.text = fighter.VehiclePrefab.PrimaryWeaponPrefab.Definition.Name;
-        SecondaryWeaponText.text = fighter.VehiclePrefab.SecondaryWeaponPrefab.Definition.Name;
+        PrimaryWeaponText.text = fighter.VehiclePrefab.PrimaryWeapon.Name;
+        SecondaryWeaponText.text = fighter.VehiclePrefab.SecondaryWeapon.Name;
 
         Universe.Current.ViewPort.SetFree(true);
         focusVehicle = fighter.VehicleInstance;

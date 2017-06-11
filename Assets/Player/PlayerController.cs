@@ -156,9 +156,9 @@ public class PlayerController : MonoBehaviour
         var playerCurrent = Squadron.GetMember(Squadron.GetCurrentIndex()).GetComponent<ShipProfile>();
 
         if (playerCurrent.PrimaryWeapon != null)
-            _playVehicleInstance.SetPrimaryWeapon(playerCurrent.PrimaryWeapon.gameObject);
+            _playVehicleInstance.SetPrimaryWeapon(playerCurrent.PrimaryWeapon.Definition);
         if (playerCurrent.SecondaryWeapon != null)
-            _playVehicleInstance.SetSecondaryWeapon(playerCurrent.SecondaryWeapon.gameObject);
+            _playVehicleInstance.SetSecondaryWeapon(playerCurrent.SecondaryWeapon.Definition);
 
         _playVehicleInstance.UTurnPath = UTurnPath;
         _playVehicleInstance.UTurnDuration = UTurnDuration;
