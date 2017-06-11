@@ -204,12 +204,12 @@ public class Vehicle : MonoBehaviour
         foreach (var shootPoint in PrimaryShootPoints)
         {
             if (PrimaryWeaponPrefab != null)
-                shootPoint.Initialize(PrimaryWeaponPrefab.MuzzlePrefab);
+                shootPoint.Initialize(PrimaryWeaponPrefab.Definition.MuzzlePrefab);
         }
         foreach (var shootPoint in SecondaryShootPoints)
         {
             if (SecondaryWeaponPrefab != null)
-                shootPoint.Initialize(SecondaryWeaponPrefab.MuzzlePrefab);
+                shootPoint.Initialize(SecondaryWeaponPrefab.Definition.MuzzlePrefab);
         }
         _thrusters = new List<Thruster>();
         if (ThrusterPrefab != null)
