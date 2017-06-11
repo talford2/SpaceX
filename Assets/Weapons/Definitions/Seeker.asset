@@ -13,21 +13,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Flak Cannon
   MuzzlePrefab: {fileID: 11496450, guid: 2af108f533a9b214ca70f588ecaaf5f7, type: 2}
-  ShootSound: {fileID: 8300000, guid: d630152cd1dc3cf4994768f4fbc6eee3, type: 3}
-  SoundVolume: 0.7
-  SoundMinDistance: 70
-  SoundMaxDistance: 1500
-  MissilePrefab: {fileID: 122516, guid: 895ee3d7b5c719a418999475f9c4cc69, type: 2}
+  ShootSound: {fileID: 8300000, guid: 078c2c05d965e734aa1e18239490e823, type: 3}
+  SoundVolume: 1
+  SoundMinDistance: 25
+  SoundMaxDistance: 200
+  MissilePrefab: {fileID: 176048, guid: fea4fea29e620614cab88fa9549f8ae9, type: 2}
   MissilesPerShot: 1
-  Spread: 5
-  MissilesConverge: 1
-  IsTargetLocking: 0
-  TargetLockTime: 1.5
-  TargetLockingMaxDistance: 2000
+  Spread: 0
+  MissilesConverge: 0
+  IsTargetLocking: 1
+  TargetLockTime: 0.8
+  TargetLockingMaxDistance: 500
   TargetAngleTolerance: 15
   LockSound: {fileID: 0}
   IsOverheat: 1
-  HeatPerMissile: 50
+  HeatPerMissile: 110
   OverheatDelay: 5
   CoolDelay: 0.5
   BaseMissileDamage: 20
