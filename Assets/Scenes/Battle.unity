@@ -379,6 +379,46 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 560713151}
   m_Mesh: {fileID: 4300072, guid: a09542a512cfa904d84297ba8fd7573b, type: 3}
+--- !u!1 &601660735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 601660737}
+  - component: {fileID: 601660736}
+  m_Layer: 0
+  m_Name: Mission
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &601660736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 601660735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d9f2c829b9cad642b4baefc011fea53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &601660737
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 601660735}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &624653769
 Prefab:
   m_ObjectHideFlags: 0
@@ -2782,6 +2822,7 @@ MonoBehaviour:
   DefaultAimDistance: 500
   MinAimDistance: 5
   MaxAimDistance: 1000
+  AimCorrectScreenFraction: 0.01
   NoThreatTime: 30
   DeathOptionTime: 1
   UTurnPath: {fileID: 1997133662}
