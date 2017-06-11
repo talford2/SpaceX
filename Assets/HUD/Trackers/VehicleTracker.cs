@@ -313,7 +313,7 @@ public class VehicleTracker : Tracker
                             if (IsPlayerWeaponLocking(playerVehicle.PrimaryWeaponInstance))
                             {
                                 _lockInstance.sprite = _lockingSprite;
-                                _lockingDuration = playerVehicle.PrimaryWeaponInstance.TargetLockTime;
+                                _lockingDuration = playerVehicle.PrimaryWeaponInstance.Definition.TargetLockTime;
                                 _isLockedOn = true;
                             }
                             if (IsPlayerWeaponLocked(playerVehicle, playerVehicle.PrimaryWeaponInstance))
@@ -327,7 +327,7 @@ public class VehicleTracker : Tracker
                             if (IsPlayerWeaponLocking(playerVehicle.SecondaryWeaponInstance))
                             {
                                 _lockInstance.sprite = _lockingSprite;
-                                _lockingDuration = playerVehicle.SecondaryWeaponInstance.TargetLockTime;
+                                _lockingDuration = playerVehicle.SecondaryWeaponInstance.Definition.TargetLockTime;
                                 _isLockedOn = true;
                             }
                             if (IsPlayerWeaponLocked(playerVehicle, playerVehicle.SecondaryWeaponInstance))

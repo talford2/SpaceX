@@ -468,7 +468,7 @@ public class InventoryScreen : MonoBehaviour
     public void PopulatePrimary()
     {
         var primaryWeapon = focusVehicle.PrimaryWeaponInstance;
-        ItemNameText.text = primaryWeapon.Name;
+        ItemNameText.text = primaryWeapon.Definition.Name;
 
         PopulateWeaponPanel(primaryWeapon.DamagePointCost, primaryWeapon.DamagePoints, PrimaryDamageCostText, PrimaryDamageBar, PrimaryAddDamageButton);
         PrimaryDamageValueText.text = string.Format("{0:f1}", primaryWeapon.Damage);
@@ -480,7 +480,7 @@ public class InventoryScreen : MonoBehaviour
         PrimaryCoolingRateValueText.text = string.Format("{0:f1}/s", primaryWeapon.CoolingRate);
 
         PopulateWeaponPanel(primaryWeapon.HeatCapacityPointCost, primaryWeapon.HeatCapacityPoints, PrimaryHeatCapacityCostText, PrimaryHeatCapacityBar, PrimaryAddHeatCapacityButton);
-        PrimaryHeatCapacityValueText.text = string.Format("{0:f1}", primaryWeapon.OverheatValue);
+        PrimaryHeatCapacityValueText.text = string.Format("{0:f1}", primaryWeapon.HeatCapacity);
 
         var inventoryItem = primaryWeapon.GetComponent<InventoryItem>();
         if (inventoryItem != null)
@@ -676,7 +676,7 @@ public class InventoryScreen : MonoBehaviour
     public void PopulateSecondary()
     {
         var secondaryWeapon = focusVehicle.SecondaryWeaponInstance;
-        ItemNameText.text = secondaryWeapon.Name;
+        ItemNameText.text = secondaryWeapon.Definition.Name;
 
         PopulateWeaponPanel(secondaryWeapon.DamagePointCost, secondaryWeapon.DamagePoints, SecondaryDamageCostText, SecondaryDamageBar, SecondaryAddDamageButton);
         SecondaryDamageValueText.text = string.Format("{0:f1}", secondaryWeapon.Damage);
@@ -688,7 +688,7 @@ public class InventoryScreen : MonoBehaviour
         SecondaryCoolingRateValueText.text = string.Format("{0:f1}/s", secondaryWeapon.CoolingRate);
 
         PopulateWeaponPanel(secondaryWeapon.HeatCapacityPointCost, secondaryWeapon.HeatCapacityPoints, SecondaryHeatCapacityCostText, SecondaryHeatCapacityBar, SecondaryAddHeatCapacityButton);
-        SecondaryHeatCapacityValueText.text = string.Format("{0:f1}", secondaryWeapon.OverheatValue);
+        SecondaryHeatCapacityValueText.text = string.Format("{0:f1}", secondaryWeapon.HeatCapacity);
 
         var inventoryItem = secondaryWeapon.GetComponent<InventoryItem>();
         if (inventoryItem != null)

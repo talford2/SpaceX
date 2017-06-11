@@ -294,13 +294,13 @@ public class PlayerController : MonoBehaviour
                 _playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
                 if (_playVehicleInstance.PrimaryWeaponInstance != null)
                 {
-                    if (!_playVehicleInstance.PrimaryWeaponInstance.IsTargetLocking)
+                    if (!_playVehicleInstance.PrimaryWeaponInstance.Definition.IsTargetLocking)
                         _playVehicleInstance.PrimaryWeaponInstance.SetMissileTarget(_guessTarget);
                     _playVehicleInstance.PrimaryWeaponInstance.IsTriggered = (Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0;
                 }
                 if (_playVehicleInstance.SecondaryWeaponInstance != null)
                 {
-                    if (!_playVehicleInstance.SecondaryWeaponInstance.IsTargetLocking)
+                    if (!_playVehicleInstance.SecondaryWeaponInstance.Definition.IsTargetLocking)
                         _playVehicleInstance.SecondaryWeaponInstance.SetMissileTarget(_guessTarget);
                     _playVehicleInstance.SecondaryWeaponInstance.IsTriggered = (Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0;
                 }

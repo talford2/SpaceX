@@ -5,61 +5,24 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [Header("Description")]
-    public string Name;
     public int LootIndex;
 
     [Header("Weapon Settings")]
-    public MuzzleFlash MuzzlePrefab;
+    public WeaponDefinition Definition;
 
-    //public AudioSource FireSound;
     [Header("Shoot Sound")]
     public GameObject SoundPrefab;
-    public AudioClip ShootSound;
-    public float SoundVolume = 1f;
-    public float SoundMinDistance = 25;
-    public float SoundMaxDistance = 200f;
 
-    [Header("Missiles")]
-    public GameObject MissilePrefab;
-    public int MissilesPerShot = 2;
-    public float Spread = 0f;
-    public bool MissilesConverge;
-
-    [Header("Targeting")]
-    public bool IsTargetLocking;
-    public float TargetLockTime = 1.5f;
-    public float TargetLockingMaxDistance = 2000f;
-    public float TargetAngleTolerance = 5f;
-    public AudioClip LockSound;
-
-    [Header("Overheating")]
-    public bool IsOverheat;
-    public float HeatPerMissile;
-    public float OverheatDelay;
-    public float CoolDelay = 0.5f;
-
-    [Header("Base Upgradable Properties")]
-    public float BaseMissileDamage;
-    public float BaseFireRate = 0.2f;
-    public float BaseCoolingRate;
-    public float BaseOverheatValue;
-
-    public float Damage { get { return BaseMissileDamage + DamagePerPoint * DamagePoints; } }
-    public float FireRate { get { return BaseFireRate + FireRatePerPoint * FireRatePoints; } }
-    public float CoolingRate { get { return BaseCoolingRate + CoolingRatePerPoint * CoolingRatePoints; } }
-    public float OverheatValue { get { return BaseOverheatValue + HeatCapacityPerPoint * HeatCapacityPoints; } }
+    public float Damage { get { return Definition.BaseMissileDamage + Definition.MissileDamagePerPoint * DamagePoints; } }
+    public float FireRate { get { return Definition.BaseFireRate + Definition.FireRatePerPoint * FireRatePoints; } }
+    public float CoolingRate { get { return Definition.BaseCoolingRate + Definition.CoolingRatePerPoint * CoolingRatePoints; } }
+    public float HeatCapacity { get { return Definition.BaseHeatCapacity + Definition.HeatCapacityPerPoint * HeatCapacityPoints; } }
 
     [Header("Upgrade Status")]
     public int DamagePoints;
     public int FireRatePoints;
     public int CoolingRatePoints;
     public int HeatCapacityPoints;
-
-    [Header("Upgrading")]
-    public float DamagePerPoint;
-    public float FireRatePerPoint;
-    public float CoolingRatePerPoint;
-    public float HeatCapacityPerPoint;
 
     public int DamagePointCost { get { return 100 + 100 * DamagePoints; } }
     public int FireRatePointCost { get { return 100 + 100 * FireRatePoints; } }
@@ -106,7 +69,7 @@ public class Weapon : MonoBehaviour
         _targetTeam = Targeting.GetEnemyTeam(_ownerTeam);
         foreach (var shootPoint in shootPoints)
         {
-            shootPoint.Initialize(MuzzlePrefab);
+            shootPoint.Initialize(Definition.MuzzlePrefab);
         }
         heatValue = 0f;
         isCoolingDown = false;
@@ -151,9 +114,9 @@ public class Weapon : MonoBehaviour
             }
         }
 
-        if ((IsOverheat && !isOverheated) || !IsOverheat)
+        if ((Definition.IsOverheat && !isOverheated) || !Definition.IsOverheat)
         {
-            if (!IsTargetLocking)
+            if (!Definition.IsTargetLocking)
             {
                 _fireCooldown -= Time.deltaTime;
                 if (IsTriggered && _fireCooldown < 0)
@@ -188,7 +151,7 @@ public class Weapon : MonoBehaviour
     private GameObject _missileInstance;
     private GameObject GetNextMissile()
     {
-        _missileInstance = ResourcePoolManager.GetAvailable(MissilePrefab, Vector3.zero, Quaternion.identity);
+        _missileInstance = ResourcePoolManager.GetAvailable(Definition.MissilePrefab, Vector3.zero, Quaternion.identity);
         _missileInstance.GetComponent<Missile>().Initialize(_owner, Damage);
         return _missileInstance;
     }
@@ -202,28 +165,28 @@ public class Weapon : MonoBehaviour
         _shootPoint = _shootPoints[_shootPointIndex];
 
         var direction = _aimAt - _shootPoint.transform.position;
-        if (!MissilesConverge)
+        if (!Definition.MissilesConverge)
             direction += _shootPoint.transform.position - GetShootPointCentre();
         missile.GetComponent<Missile>().FromReference = _shootPoint.transform;
-        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, Quaternion.Euler(Random.Range(-0.5f * Spread, 0.5f * Spread), Random.Range(-0.5f * Spread, 0.5f * Spread), 0f) * direction, _velocityReference.Value);
+        missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, Quaternion.Euler(Random.Range(-0.5f * Definition.Spread, 0.5f * Definition.Spread), Random.Range(-0.5f * Definition.Spread, 0.5f * Definition.Spread), 0f) * direction, _velocityReference.Value);
 
         _shootPoint.Flash();
 
         var fireSound = ResourcePoolManager.GetAvailable(SoundPrefab, _shootPoint.transform.position, Quaternion.identity).GetComponent<AnonymousSound>();
-        fireSound.PlayAt(ShootSound, _shootPoint.transform.position, SoundMinDistance, SoundMaxDistance, SoundVolume);
+        fireSound.PlayAt(Definition.ShootSound, _shootPoint.transform.position, Definition.SoundMinDistance, Definition.SoundMaxDistance, Definition.SoundVolume);
         //FireSound.Play();
 
-        if (IsOverheat)
+        if (Definition.IsOverheat)
         {
-            heatValue += HeatPerMissile;
+            heatValue += Definition.HeatPerMissile;
             isCoolingDown = false;
-            if (heatValue >= OverheatValue)
+            if (heatValue >= HeatCapacity)
             {
-                heatCooldown = OverheatDelay;
+                heatCooldown = Definition.OverheatDelay;
             }
             else
             {
-                coolDelayCooldown = CoolDelay;
+                coolDelayCooldown = Definition.CoolDelay;
             }
         }
 
@@ -234,7 +197,7 @@ public class Weapon : MonoBehaviour
 
     public void Fire()
     {
-        for (var i = 0; i < MissilesPerShot; i++)
+        for (var i = 0; i < Definition.MissilesPerShot; i++)
         {
             var nextMissile = GetNextMissile();
             if (_missileTarget != null)
@@ -260,7 +223,7 @@ public class Weapon : MonoBehaviour
         if (_lockingTarget != null)
         {
             var toLockingTarget = _lockingTarget.position - shootPointsCentre;
-            if (toLockingTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
+            if (toLockingTarget.sqrMagnitude > Definition.TargetLockingMaxDistance * Definition.TargetLockingMaxDistance)
             {
                 ClearTargetLock();
             }
@@ -272,7 +235,7 @@ public class Weapon : MonoBehaviour
         if (_lockedTarget != null)
         {
             var toLockedTarget = _lockedTarget.position - shootPointsCentre;
-            if (toLockedTarget.sqrMagnitude > TargetLockingMaxDistance * TargetLockingMaxDistance)
+            if (toLockedTarget.sqrMagnitude > Definition.TargetLockingMaxDistance * Definition.TargetLockingMaxDistance)
             {
                 ClearTargetLock();
             }
@@ -288,7 +251,7 @@ public class Weapon : MonoBehaviour
             if (IsTriggered)
             {
                 var targetLockingDir = _aimAt - shootPointsCentre;
-                _lockingTarget = Targeting.FindFacingAngleTeam(_targetTeam, shootPointsCentre, targetLockingDir, TargetLockingMaxDistance, TargetAngleTolerance);
+                _lockingTarget = Targeting.FindFacingAngleTeam(_targetTeam, shootPointsCentre, targetLockingDir, Definition.TargetLockingMaxDistance, Definition.TargetAngleTolerance);
                 if (_lastLockingTarget == null)
                     _lastLockingTarget = _lockingTarget;
             }
@@ -304,15 +267,15 @@ public class Weapon : MonoBehaviour
                 {
                     _lockedTarget = _lockingTarget;
                     _isLocked = true;
-                    if (LockSound != null)
+                    if (Definition.LockSound != null)
                     {
-                        Utility.PlayOnTransform(LockSound, _owner.transform);
+                        Utility.PlayOnTransform(Definition.LockSound, _owner.transform);
                     }
                 }
             }
             else
             {
-                _lockingCooldown = TargetLockTime;
+                _lockingCooldown = Definition.TargetLockTime;
             }
         }
         else
@@ -357,7 +320,7 @@ public class Weapon : MonoBehaviour
 
     public float GetHeatFraction()
     {
-        return Mathf.Clamp01(heatValue / OverheatValue);
+        return Mathf.Clamp01(heatValue / HeatCapacity);
     }
 
     public void SetMissileTarget(Transform target)
