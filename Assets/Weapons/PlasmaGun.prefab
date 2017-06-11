@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 467582}
-  - 114: {fileID: 11444764}
-  - 114: {fileID: 11401400}
+  - component: {fileID: 467582}
+  - component: {fileID: 11444764}
+  - component: {fileID: 11401400}
   m_Layer: 0
   m_Name: PlasmaGun
   m_TagString: Untagged
@@ -26,10 +26,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11401400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,36 +55,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Plasma Cannon
   LootIndex: 2
-  MissilePrefab: {fileID: 195130, guid: 78bf010bbd3d8d4429e04e9ab9cfb409, type: 2}
-  MuzzlePrefab: {fileID: 11413894, guid: 0b630620908faae4db51a824d4b1e5e1, type: 2}
+  Definition: {fileID: 11400000, guid: 32f37dc1b69f5ff44ab2900b25f77d92, type: 2}
   SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
-  ShootSound: {fileID: 8300000, guid: 419535f5f3f6e3a498566064510910f1, type: 3}
-  SoundVolume: 0.3
-  MissilesPerShot: 1
-  Spread: 0
-  MissilesConverge: 0
-  IsTargetLocking: 0
-  TargetLockTime: 1.5
-  TargetLockingMaxDistance: 2000
-  IsOverheat: 1
-  HeatPerMissile: 8
-  OverheatDelay: 2
-  CoolDelay: 0.5
-  LockSound: {fileID: 0}
-  BaseMissileDamage: 20
-  BaseFireRate: 5
-  BaseCoolingRate: 30
-  BaseOverheatValue: 100
   DamagePoints: 0
   FireRatePoints: 0
   CoolingRatePoints: 0
   HeatCapacityPoints: 0
-  DamagePerPoint: 2
-  FireRatePerPoint: 0.5
-  CoolingRatePerPoint: 2
-  HeatCapacityPerPoint: 10
   IsTriggered: 0
 --- !u!1001 &100100000
 Prefab:

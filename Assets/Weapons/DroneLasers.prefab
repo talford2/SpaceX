@@ -5,10 +5,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 490488}
-  - 114: {fileID: 11492802}
+  - component: {fileID: 490488}
+  - component: {fileID: 11492802}
   m_Layer: 0
   m_Name: DroneLasers
   m_TagString: Untagged
@@ -25,10 +25,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11492802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,36 +40,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Puny Laser Cannon
   LootIndex: 0
-  MissilePrefab: {fileID: 180512, guid: adb276e13f8472b4ab9d9878efaa0049, type: 2}
-  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
+  Definition: {fileID: 11400000, guid: dba2e86a9bef2a945ab1dfd768cba7ed, type: 2}
   SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
-  ShootSound: {fileID: 8300000, guid: 6b9b6989687c8414a9348b30afb38ca9, type: 3}
-  SoundVolume: 1
-  MissilesPerShot: 1
-  Spread: 0
-  MissilesConverge: 0
-  IsTargetLocking: 0
-  TargetLockTime: 1.5
-  TargetLockingMaxDistance: 2000
-  IsOverheat: 0
-  HeatPerMissile: 0
-  OverheatDelay: 0
-  CoolDelay: 0.5
-  LockSound: {fileID: 0}
-  BaseMissileDamage: 5
-  BaseFireRate: 2
-  BaseCoolingRate: 0
-  BaseOverheatValue: 0
   DamagePoints: 1
   FireRatePoints: 1
   CoolingRatePoints: 0
   HeatCapacityPoints: 0
-  DamagePerPoint: 0
-  FireRatePerPoint: 0
-  CoolingRatePerPoint: 0
-  HeatCapacityPerPoint: 0
   IsTriggered: 0
 --- !u!1001 &100100000
 Prefab:

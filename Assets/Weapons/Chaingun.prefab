@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 490488}
-  - 114: {fileID: 11492802}
-  - 114: {fileID: 11418244}
+  - component: {fileID: 490488}
+  - component: {fileID: 11492802}
+  - component: {fileID: 11418244}
   m_Layer: 0
   m_Name: Chaingun
   m_TagString: Untagged
@@ -26,10 +26,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11418244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,36 +55,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Chain Gun
   LootIndex: 5
-  MissilePrefab: {fileID: 180512, guid: 486174ed4f2bfaa4ea9633384cc46aaf, type: 2}
-  MuzzlePrefab: {fileID: 11496450, guid: 2af108f533a9b214ca70f588ecaaf5f7, type: 2}
+  Definition: {fileID: 11400000, guid: a4abda5c3d241724b858029e3d79babf, type: 2}
   SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
-  ShootSound: {fileID: 8300000, guid: 9fae0603762a5254db45a42693916559, type: 3}
-  SoundVolume: 0.3
-  MissilesPerShot: 1
-  Spread: 2.2
-  MissilesConverge: 0
-  IsTargetLocking: 0
-  TargetLockTime: 1.5
-  TargetLockingMaxDistance: 2000
-  IsOverheat: 1
-  HeatPerMissile: 0.6
-  OverheatDelay: 4
-  CoolDelay: 0.5
-  LockSound: {fileID: 0}
-  BaseMissileDamage: 3.8
-  BaseFireRate: 30
-  BaseCoolingRate: 25
-  BaseOverheatValue: 100
   DamagePoints: 0
   FireRatePoints: 0
   CoolingRatePoints: 0
   HeatCapacityPoints: 0
-  DamagePerPoint: 0.2
-  FireRatePerPoint: 3
-  CoolingRatePerPoint: 5
-  HeatCapacityPerPoint: 5
   IsTriggered: 0
 --- !u!1001 &100100000
 Prefab:

@@ -41,39 +41,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Seeker Rockets
   LootIndex: 4
-  MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
+  Definition: {fileID: 11400000, guid: e0c044cbb38635b439a551988a5d0472, type: 2}
   SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
-  ShootSound: {fileID: 8300000, guid: 078c2c05d965e734aa1e18239490e823, type: 3}
-  SoundVolume: 1
-  SoundMinDistance: 25
-  SoundMaxDistance: 200
-  MissilePrefab: {fileID: 176048, guid: fea4fea29e620614cab88fa9549f8ae9, type: 2}
-  MissilesPerShot: 2
-  Spread: 0
-  MissilesConverge: 0
-  IsTargetLocking: 1
-  TargetLockTime: 0.8
-  TargetLockingMaxDistance: 500
-  TargetAngleTolerance: 15
-  IsOverheat: 1
-  HeatPerMissile: 110
-  OverheatDelay: 5
-  CoolDelay: 0.5
-  LockSound: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
-  BaseMissileDamage: 20
-  BaseFireRate: 5
-  BaseCoolingRate: 50
-  BaseOverheatValue: 100
   DamagePoints: 0
   FireRatePoints: 0
   CoolingRatePoints: 0
   HeatCapacityPoints: 0
-  DamagePerPoint: 2
-  FireRatePerPoint: 0.5
-  CoolingRatePerPoint: 5
-  HeatCapacityPerPoint: 5
   IsTriggered: 0
 --- !u!114 &11442032
 MonoBehaviour:

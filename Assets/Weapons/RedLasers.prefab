@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 490488}
-  - 114: {fileID: 11492802}
-  - 114: {fileID: 11462616}
+  - component: {fileID: 490488}
+  - component: {fileID: 11492802}
+  - component: {fileID: 11462616}
   m_Layer: 0
   m_Name: RedLasers
   m_TagString: Untagged
@@ -26,10 +26,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11462616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,36 +55,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Red Laser Cannon
   LootIndex: 0
-  MissilePrefab: {fileID: 180512, guid: 39a77c32b5194a6459af7f3fcd94f8af, type: 2}
-  MuzzlePrefab: {fileID: 11408760, guid: db0bd28387b791d4ea43fd188b23d353, type: 2}
+  Definition: {fileID: 11400000, guid: 8eef185abadbd78488e4197c9c9103c4, type: 2}
   SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
-  ShootSound: {fileID: 8300000, guid: 6b9b6989687c8414a9348b30afb38ca9, type: 3}
-  SoundVolume: 0.3
-  MissilesPerShot: 1
-  Spread: 0
-  MissilesConverge: 0
-  IsTargetLocking: 0
-  TargetLockTime: 0.5
-  TargetLockingMaxDistance: 2000
-  IsOverheat: 1
-  HeatPerMissile: 0.8
-  OverheatDelay: 2
-  CoolDelay: 0.5
-  LockSound: {fileID: 0}
-  BaseMissileDamage: 5.5
-  BaseFireRate: 10
-  BaseCoolingRate: 30
-  BaseOverheatValue: 100
   DamagePoints: 0
   FireRatePoints: 0
   CoolingRatePoints: 0
   HeatCapacityPoints: 0
-  DamagePerPoint: 0.5
-  FireRatePerPoint: 0.5
-  CoolingRatePerPoint: 3
-  HeatCapacityPerPoint: 10
   IsTriggered: 0
 --- !u!1001 &100100000
 Prefab:

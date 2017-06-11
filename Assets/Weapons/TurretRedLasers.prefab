@@ -40,39 +40,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292739e8b1348c4fb3ad06526d014e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Red Laser Cannon
   LootIndex: 0
-  MuzzlePrefab: {fileID: 11408760, guid: db0bd28387b791d4ea43fd188b23d353, type: 2}
+  Definition: {fileID: 11400000, guid: 0d962b4475c2f5a4791c6ce2494388de, type: 2}
   SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
-  ShootSound: {fileID: 8300000, guid: 9d7af3edaf4d71d49979326cdcb14249, type: 3}
-  SoundVolume: 1
-  SoundMinDistance: 25
-  SoundMaxDistance: 200
-  MissilePrefab: {fileID: 180512, guid: adb276e13f8472b4ab9d9878efaa0049, type: 2}
-  MissilesPerShot: 1
-  Spread: 0
-  MissilesConverge: 0
-  IsTargetLocking: 0
-  TargetLockTime: 1.5
-  TargetLockingMaxDistance: 2000
-  TargetAngleTolerance: 5
-  IsOverheat: 0
-  HeatPerMissile: 0
-  OverheatDelay: 0
-  CoolDelay: 0.5
-  LockSound: {fileID: 0}
-  BaseMissileDamage: 5
-  BaseFireRate: 1.85
-  BaseCoolingRate: 0
-  BaseOverheatValue: 0
   DamagePoints: 0
   FireRatePoints: 0
   CoolingRatePoints: 0
   HeatCapacityPoints: 0
-  DamagePerPoint: 1
-  FireRatePerPoint: 0.2
-  CoolingRatePerPoint: 0
-  HeatCapacityPerPoint: 0
   IsTriggered: 0
 --- !u!1001 &100100000
 Prefab:
