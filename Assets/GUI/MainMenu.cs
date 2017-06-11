@@ -20,6 +20,9 @@ public class MainMenu : MonoBehaviour
             case "Campaign":
                 LoadWithLoader("Test1");
                 break;
+            case "Hangar":
+                LoadWithLoader("Hangar2");
+                break;
             case "Exit":
                 Application.Quit();
                 break;
