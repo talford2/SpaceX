@@ -28,6 +28,7 @@ public class Vehicle : MonoBehaviour
     [Header("Collisions")]
     public Vector3 CollisionsCentre;
     public float CollisionRadius = 3f;
+    public GameObject CollideEffect;
 
     [Header("Boost Energy")]
     //public float MaxBoostEnergy = 100f;
@@ -80,9 +81,6 @@ public class Vehicle : MonoBehaviour
     public Weapon SecondaryWeaponPrefab;
 
     public List<ShootPoint> SecondaryShootPoints;
-
-    [Header("Collisions")]
-    public GameObject CollideEffect;
 
     [Header("Shield")]
     public Shield ShieldPrefab;

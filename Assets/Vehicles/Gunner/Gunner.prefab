@@ -483,6 +483,7 @@ MonoBehaviour:
   MaxBankingAngle: 60
   CollisionsCentre: {x: 0, y: 0, z: 0}
   CollisionRadius: 3.4
+  CollideEffect: {fileID: 0}
   BoostEnergy: 100
   BoostEnergyRegenerateDelay: 2
   BoostEnergyRegenerateRate: 50
@@ -510,8 +511,6 @@ MonoBehaviour:
   SecondaryShootPoints:
   - {fileID: 114331553133246564}
   - {fileID: 114323501433066782}
-  CollideEffect: {fileID: 1836265664760198, guid: c4964441af89cfe47acc67927b42fefc,
-    type: 2}
   ShieldPrefab: {fileID: 11432386, guid: ec198b972797bfe4198bc77d9b933520, type: 2}
   EnginePrefab: {fileID: 11460812, guid: fa31fb1798e114b4c8bdb7b08ce54f5d, type: 2}
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
