@@ -5,6 +5,11 @@ using System.Text;
 
 public abstract class DataFile<T>
 {
+    public static bool Exists(string filename)
+    {
+        return File.Exists(filename);
+    }
+
     public static T ReadFromFile(string filename)
     {
         var serializer = new XmlSerializer(typeof(T));

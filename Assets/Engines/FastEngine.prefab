@@ -41,14 +41,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc6865f396b75746a1497e3a72e72ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Fast Engine
   LootIndex: 10
-  BaseAcceleration: 30
-  BaseBoostEnergy: 100
+  Definition: {fileID: 11400000, guid: 1967713fce05dc74bb4398558105ca07, type: 2}
   AccelerationPoints: 0
   BoostEnergyPoints: 0
-  AccelerationPerPoint: 2.5
-  BoostEnergyPerPoint: 5
 --- !u!114 &11483144
 MonoBehaviour:
   m_ObjectHideFlags: 1

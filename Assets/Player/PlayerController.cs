@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
     private float lastLeftTime;
     private float lastRightTime;
 
+    private string _playerFilePath;
+
     private void Awake()
     {
         _current = this;
@@ -100,6 +102,9 @@ public class PlayerController : MonoBehaviour
         _aimMask = ~LayerMask.GetMask("Player", "Detectable", "Distant");
         _detectableMask = LayerMask.GetMask("Detectable");
         _collectableMask = LayerMask.GetMask("Collectible");
+
+        _playerFilePath = string.Format("{0}/{1}", Application.persistentDataPath, "player.xml");
+        Load();
     }
 
     private void Start()
@@ -109,6 +114,7 @@ public class PlayerController : MonoBehaviour
         HeadsUpDisplay.Current.LazyCreateSquadronIcons();
         HeadsUpDisplay.Current.RefreshSquadronIcons();
         HeadsUpDisplay.Current.ShowAlive();
+        HeadsUpDisplay.Current.UpdateSpaceJunk();
 
         CycleSquadron(0);
 
@@ -694,7 +700,12 @@ public class PlayerController : MonoBehaviour
         if (turret != null)
             killMessage = string.Format("{0} Destroyed", turret.Name);
         if (!string.IsNullOrEmpty(killMessage))
+        {
+            SpaceJunkCount += 10;
             HeadsUpDisplay.Current.ShowKillMessage(killMessage);
+            Save();
+            HeadsUpDisplay.Current.UpdateSpaceJunk();
+        }
     }
 
     private PlayerInventory _inventory;
@@ -854,6 +865,21 @@ public class PlayerController : MonoBehaviour
     //	GUI.Label(new Rect(30f, 300f, 200f, 25f), string.Format("POWER NODES: {0:f0}", PowerNodeCount), new GUIStyle { normal = { textColor = new Color(0.8f, 0.56f, 1f, 1f) } });
     //	GUI.Label(new Rect(30f, 330f, 200f, 25f), string.Format("SHIFTABLES: {0}", Universe.Current.ShiftableItems.Count));
     //}
+
+    public void Save()
+    {
+        var playerFile = new PlayerFile() { SpaceJunk = SpaceJunkCount };
+        playerFile.WriteToFile(_playerFilePath);
+    }
+
+    public void Load()
+    {
+        if (PlayerFile.Exists(_playerFilePath))
+        {
+            var playerFile = PlayerFile.ReadFromFile(_playerFilePath);
+            SpaceJunkCount = playerFile.SpaceJunk;
+        }
+    }
 
     private void OnDrawGizmos()
     {

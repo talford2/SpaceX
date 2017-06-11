@@ -445,7 +445,7 @@ public class HeadsUpDisplay : MonoBehaviour
         SquadronNameText.CrossFadeAlpha(0f, 0.5f, false);
     }
 
-    public void IncreaseSpaceJunk()
+    public void UpdateSpaceJunk()
     {
         SpaceJunkText.text = string.Format("{0:f0}", PlayerController.Current.SpaceJunkCount);
         _spaceJunkPulseCooldown = _spaceJunkPulseDuration;

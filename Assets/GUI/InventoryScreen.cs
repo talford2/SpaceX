@@ -230,7 +230,7 @@ public class InventoryScreen : MonoBehaviour
     private void UpdateCredits()
     {
         CreditsText.text = string.Format("{0}c", PlayerController.Current.SpaceJunkCount);
-        HeadsUpDisplay.Current.IncreaseSpaceJunk();
+        HeadsUpDisplay.Current.UpdateSpaceJunk();
     }
 
     private void Populate(int squadronIndex)
@@ -318,7 +318,7 @@ public class InventoryScreen : MonoBehaviour
             var salvageValue = salvageItem.GetComponent<InventoryItem>().SalvageValue;
             PlayerController.Current.SpaceJunkCount += salvageValue;
             PlayerController.Current.RemoveFromInventory(index);
-            HeadsUpDisplay.Current.IncreaseSpaceJunk();
+            HeadsUpDisplay.Current.UpdateSpaceJunk();
             PopulateByContext();
             UpdateCredits();
             ItemButtons[index].image.sprite = null;
@@ -740,7 +740,7 @@ public class InventoryScreen : MonoBehaviour
 
         if (engine != null)
         {
-            ItemNameText.text = engine.Name;
+            ItemNameText.text = engine.Definition.Name;
 
             PopulateWeaponPanel(engine.AccelerationPointCost, engine.AccelerationPoints, AccelerationCostText, AccelerationBar, AccelerationAddButton);
             AcceleratioValueText.text = string.Format("{0:f1}", engine.Acceleration);
