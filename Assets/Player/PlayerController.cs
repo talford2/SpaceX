@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     public float DefaultAimDistance = 200f;
     public float MinAimDistance = 10f;
     public float MaxAimDistance = 1000f;
+    public float AimCorrectScreenFraction = 0.01f;
 
     [Header("Other")]
     public float NoThreatTime = 5f;
@@ -210,7 +211,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 GetAimAt()
     {
-        var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        var viewCentre = new Vector3(0.5f, 0.5f, 0f);
+        var mouseRay = Universe.Current.ViewPort.AttachedCamera.ViewportPointToRay(viewCentre);
         RaycastHit aimHit;
         _aimDistance = Mathf.Lerp(_aimDistance, DefaultAimDistance, Time.deltaTime);
         var aimAtPosition = mouseRay.GetPoint(DefaultAimDistance);
@@ -226,6 +228,11 @@ public class PlayerController : MonoBehaviour
         {
             var toGuessTarget = _guessTarget.position - viewPortPos;
             _aimDistance = Mathf.Clamp(toGuessTarget.magnitude + 0.5f, MinAimDistance, MaxAimDistance);
+            var screenPos = Universe.Current.ViewPort.AttachedCamera.WorldToViewportPoint(_guessTarget.position) - viewCentre;
+            var v = new Vector2(screenPos.x, screenPos.y);
+            if (v.sqrMagnitude < AimCorrectScreenFraction * AimCorrectScreenFraction)
+                return _guessTarget.position;
+            //Debug.LogFormat("({0:f3}, {1:f3}) - {2:f3}", v.x, v.y, v.magnitude);
             return mouseRay.GetPoint(_aimDistance);
         }
 
