@@ -4,6 +4,8 @@
 public class WeaponDefinition : ScriptableObject
 {
     public string Name;
+    public string Key { get { return name; } }
+
     [Header("Muzzle")]
     public MuzzleFlash MuzzlePrefab;
 

@@ -8,4 +8,10 @@ public class PlayerFile : DataFile<PlayerFile>
 
     [XmlElement("junk")]
     public int SpaceJunk;
+
+    [XmlElement("primary")]
+    public string PrimaryWeaponKey;
+
+    [XmlElement("secondary")]
+    public string SecondaryWeaponKey;
 }

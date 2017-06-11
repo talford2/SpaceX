@@ -364,7 +364,7 @@ public class InventoryScreen : MonoBehaviour
                                 ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
                             }
 
-                            focusVehicle.Controller.GetComponent<ShipProfile>().PrimaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
+                            focusVehicle.Controller.GetComponent<ShipProfile>().PrimaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>().Definition;
                             focusVehicle.SetPrimaryWeapon(LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>().Definition);
 
                             PopulatePrimary();
@@ -381,7 +381,7 @@ public class InventoryScreen : MonoBehaviour
                                 ItemButtons[index].image.sprite = inventoryItem != null ? inventoryItem.InventorySprite : null;
                             }
 
-                            focusVehicle.Controller.GetComponent<ShipProfile>().SecondaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>();
+                            focusVehicle.Controller.GetComponent<ShipProfile>().SecondaryWeapon = LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>().Definition;
                             focusVehicle.SetSecondaryWeapon(LootManager.Current.Items[equipItemIndex].GetComponent<Weapon>().Definition);
 
                             PopulateSecondary();

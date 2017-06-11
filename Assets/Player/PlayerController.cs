@@ -105,11 +105,11 @@ public class PlayerController : MonoBehaviour
         _collectableMask = LayerMask.GetMask("Collectible");
 
         _playerFilePath = string.Format("{0}/{1}", Application.persistentDataPath, "player.xml");
-        Load();
     }
 
     private void Start()
     {
+        Load();
         Squadron.Initialize();
 
         HeadsUpDisplay.Current.LazyCreateSquadronIcons();
@@ -163,9 +163,9 @@ public class PlayerController : MonoBehaviour
         var playerCurrent = Squadron.GetMember(Squadron.GetCurrentIndex()).GetComponent<ShipProfile>();
 
         if (playerCurrent.PrimaryWeapon != null)
-            _playVehicleInstance.SetPrimaryWeapon(playerCurrent.PrimaryWeapon.Definition);
+            _playVehicleInstance.SetPrimaryWeapon(playerCurrent.PrimaryWeapon);
         if (playerCurrent.SecondaryWeapon != null)
-            _playVehicleInstance.SetSecondaryWeapon(playerCurrent.SecondaryWeapon.Definition);
+            _playVehicleInstance.SetSecondaryWeapon(playerCurrent.SecondaryWeapon);
 
         _playVehicleInstance.UTurnPath = UTurnPath;
         _playVehicleInstance.UTurnDuration = UTurnDuration;
@@ -875,7 +875,12 @@ public class PlayerController : MonoBehaviour
 
     public void Save()
     {
-        var playerFile = new PlayerFile() { SpaceJunk = SpaceJunkCount };
+        var playerFile = new PlayerFile()
+        {
+            SpaceJunk = SpaceJunkCount,
+            PrimaryWeaponKey = VehicleInstance.PrimaryWeapon.Key,
+            SecondaryWeaponKey = VehicleInstance.SecondaryWeapon.Key
+        };
         playerFile.WriteToFile(_playerFilePath);
     }
 
@@ -885,6 +890,10 @@ public class PlayerController : MonoBehaviour
         {
             var playerFile = PlayerFile.ReadFromFile(_playerFilePath);
             SpaceJunkCount = playerFile.SpaceJunk;
+            _profile.PrimaryWeapon = WeaponDefinitionPool.ByKey(playerFile.PrimaryWeaponKey);
+            _profile.SecondaryWeapon = WeaponDefinitionPool.ByKey(playerFile.SecondaryWeaponKey);
+            VehicleInstance.SetPrimaryWeapon(_profile.PrimaryWeapon);
+            VehicleInstance.SetSecondaryWeapon(_profile.SecondaryWeapon);
         }
     }
 

@@ -8,8 +8,8 @@ public class ShipProfile : MonoBehaviour
     public int Shields = 5;
     public int Special = 1;
 
-    public Weapon PrimaryWeapon;
-    public Weapon SecondaryWeapon;
+    public WeaponDefinition PrimaryWeapon;
+    public WeaponDefinition SecondaryWeapon;
     public Shield Shield;
     public Engine Engine;
 
