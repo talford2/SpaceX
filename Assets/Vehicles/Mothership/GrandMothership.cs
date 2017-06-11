@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GrandMothership : MonoBehaviour
@@ -117,6 +116,8 @@ public class GrandMothership : MonoBehaviour
             }
             MapPin.SetPinState(MapPin.MapPinState.Inactive);
             BoomCaster.Trigger();
+
+            Mission.Current.TriggerFinish(15f);
         }
     }
 }
