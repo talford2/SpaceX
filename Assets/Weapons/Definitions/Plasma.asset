@@ -28,7 +28,7 @@ MonoBehaviour:
   LockSound: {fileID: 0}
   IsOverheat: 1
   HeatPerMissile: 8
-  OverheatDelay: 2
+  OverheatDelay: 1
   CoolDelay: 0.5
   BaseMissileDamage: 20
   BaseFireRate: 5
