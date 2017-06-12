@@ -100,6 +100,7 @@ public class Vehicle : MonoBehaviour
     public float ExplosiveForce;
     public GameObject ExplodeDeathExplosion;
     public GameObject SpinDeathExplosion;
+    public float SpinThresholdSpeed = 25f;
 
     [Header("Thrusters")]
     public GameObject ThrusterPrefab;
@@ -671,7 +672,7 @@ public class Vehicle : MonoBehaviour
             StartCoroutine(DelayedWoundEffectStop(woundParticles.duration + 0.5f));
         }
 
-        if (Random.Range(0, 1f) > 0.5f)
+        if (_velocity.sqrMagnitude > SpinThresholdSpeed * SpinThresholdSpeed && Random.Range(0, 1f) > 0.5f)
         {
             Explode(SpinDeathExplosion);
             if (CorpsePrefab != null)
