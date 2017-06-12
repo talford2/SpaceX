@@ -871,12 +871,10 @@ public class PlayerController : MonoBehaviour
 
     public void Save()
     {
-        var playerFile = new PlayerFile()
-        {
-            SpaceJunk = SpaceJunkCount,
-            PrimaryWeaponKey = VehicleInstance.PrimaryWeapon.Key,
-            SecondaryWeaponKey = VehicleInstance.SecondaryWeapon.Key
-        };
+        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        playerFile.SpaceJunk = SpaceJunkCount;
+        playerFile.PrimaryWeaponKey = VehicleInstance.PrimaryWeapon.Key;
+        playerFile.SecondaryWeaponKey = VehicleInstance.SecondaryWeapon.Key;
         playerFile.WriteToFile(PlayerFile.Filename);
     }
 
