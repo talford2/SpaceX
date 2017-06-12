@@ -19,12 +19,4 @@ public class PlayerFile : DataFile<PlayerFile>
     [XmlArray("inventory")]
     [XmlArrayItem("item")]
     public List<string> Inventory;
-
-    /*
-    public class PlayerInventoryItem
-    {
-        [XmlElement("item")]
-        public string Item;
-    }
-    */
 }

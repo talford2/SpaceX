@@ -75,8 +75,6 @@ public class PlayerController : MonoBehaviour
     private float lastLeftTime;
     private float lastRightTime;
 
-    private string _playerFilePath;
-
     private void Awake()
     {
         _current = this;
@@ -103,8 +101,6 @@ public class PlayerController : MonoBehaviour
         _aimMask = ~LayerMask.GetMask("Player", "Detectable", "Distant");
         _detectableMask = LayerMask.GetMask("Detectable");
         _collectableMask = LayerMask.GetMask("Collectible");
-
-        _playerFilePath = string.Format("{0}/{1}", Application.persistentDataPath, "player.xml");
     }
 
     private void Start()
@@ -881,14 +877,14 @@ public class PlayerController : MonoBehaviour
             PrimaryWeaponKey = VehicleInstance.PrimaryWeapon.Key,
             SecondaryWeaponKey = VehicleInstance.SecondaryWeapon.Key
         };
-        playerFile.WriteToFile(_playerFilePath);
+        playerFile.WriteToFile(PlayerFile.Filename);
     }
 
     public void Load()
     {
-        if (PlayerFile.Exists(_playerFilePath))
+        if (PlayerFile.Exists(PlayerFile.Filename))
         {
-            var playerFile = PlayerFile.ReadFromFile(_playerFilePath);
+            var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
             SpaceJunkCount = playerFile.SpaceJunk;
             _profile.PrimaryWeapon = WeaponDefinitionPool.ByKey(playerFile.PrimaryWeaponKey);
             _profile.SecondaryWeapon = WeaponDefinitionPool.ByKey(playerFile.SecondaryWeaponKey);
