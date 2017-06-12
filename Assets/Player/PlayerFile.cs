@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 [XmlRoot("player")]
@@ -14,4 +15,16 @@ public class PlayerFile : DataFile<PlayerFile>
 
     [XmlElement("secondary")]
     public string SecondaryWeaponKey;
+
+    [XmlArray("inventory")]
+    [XmlArrayItem("item")]
+    public List<string> Inventory;
+
+    /*
+    public class PlayerInventoryItem
+    {
+        [XmlElement("item")]
+        public string Item;
+    }
+    */
 }

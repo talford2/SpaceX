@@ -1,12 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HangarScreen : MonoBehaviour
 {
     public Text CreditText;
-    public Text PrimaryWeaponText;
-    public Text SecondaryWeaponText;
+    public Transform LeftPanel;
+    public HangarWeaponButton WeaponButtonPrefab;
+    public Transform RightPanel;
+
+    private List<WeaponDefinition> _inventory;
 
     private void Awake()
     {
@@ -19,6 +24,8 @@ public class HangarScreen : MonoBehaviour
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
         UpdateCredits(playerFile.SpaceJunk);
         UpdateLeftBar(WeaponDefinitionPool.ByKey(playerFile.PrimaryWeaponKey), WeaponDefinitionPool.ByKey(playerFile.SecondaryWeaponKey));
+        _inventory = playerFile.Inventory.Select(i => WeaponDefinitionPool.ByKey(i)).ToList();
+        UpdateRightBar();
     }
 
     private void Update()
@@ -29,8 +36,56 @@ public class HangarScreen : MonoBehaviour
 
     private void UpdateLeftBar(WeaponDefinition primaryWeapon, WeaponDefinition secondaryWeapon)
     {
-        PrimaryWeaponText.text = primaryWeapon.Name;
-        SecondaryWeaponText.text = secondaryWeapon.Name;
+        foreach(Transform item in LeftPanel)
+        {
+            Destroy(item.gameObject);
+        }
+
+        var primaryWeaponButton = Instantiate(WeaponButtonPrefab, LeftPanel);
+        primaryWeaponButton.Bind(primaryWeapon, null);
+
+        var secondaryWeaponButton = Instantiate(WeaponButtonPrefab, LeftPanel);
+        secondaryWeaponButton.Bind(secondaryWeapon, null);
+    }
+
+    private void UpdateRightBar()
+    {
+        foreach (Transform item in RightPanel)
+        {
+            Destroy(item.gameObject);
+        }
+
+        foreach (var item in _inventory)
+        {
+            var itemButton = Instantiate(WeaponButtonPrefab, RightPanel);
+            itemButton.Bind(item, (weapon) =>
+            {
+                AssignWeapon(weapon);
+                UpdateRightBar();
+            });
+        }
+    }
+
+    private void AssignWeapon(WeaponDefinition weapon)
+    {
+        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        if (weapon.Type == ItemType.PrimaryWeapon)
+        {
+            var oldKey = playerFile.PrimaryWeaponKey;
+            playerFile.PrimaryWeaponKey = weapon.Key;
+            _inventory.Remove(weapon);
+            _inventory.Add(WeaponDefinitionPool.ByKey(oldKey));
+        }
+        if (weapon.Type == ItemType.SecondaryWeapon)
+        {
+            var oldKey = playerFile.SecondaryWeaponKey;
+            playerFile.SecondaryWeaponKey = weapon.Key;
+            _inventory.Remove(weapon);
+            _inventory.Add(WeaponDefinitionPool.ByKey(oldKey));
+        }
+        playerFile.Inventory = _inventory.Select(i => i.Key).ToList();
+        playerFile.WriteToFile(PlayerFile.Filename);
+        UpdateLeftBar(WeaponDefinitionPool.ByKey(playerFile.PrimaryWeaponKey), WeaponDefinitionPool.ByKey(playerFile.SecondaryWeaponKey));
     }
 
     private void UpdateCredits(int creditCount)
