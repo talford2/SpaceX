@@ -14,9 +14,9 @@ public class HeadsUpDisplay : MonoBehaviour
     public CanvasGroup HeatBarsContainer;
     public Image LeftHeatBar;
     public Image RightHeatBar;
-
     public Image PrimaryHeatBar;
     public Image SecondaryHeatBar;
+    public Gradient HeatGradient;
 
     [Header("Text")]
     public Text EnergyText;
@@ -36,6 +36,7 @@ public class HeadsUpDisplay : MonoBehaviour
     public Image ShieldBar;
     public Image HealthBar;
     public Image BoostBar;
+    public Gradient HealthGradient;
 
     [Header("Squadron")]
     public GameObject SquadronPrompt;
@@ -157,6 +158,7 @@ public class HeadsUpDisplay : MonoBehaviour
 
         ShieldBar.fillAmount = shieldFraction;
         HealthBar.fillAmount = healthFraction;
+        HealthBar.color = Utility.SetColorAlpha(HealthGradient.Evaluate(1f - healthFraction), HealthBar.color.a);
         BoostBar.fillAmount = energyFraction;
     }
 
@@ -189,7 +191,9 @@ public class HeadsUpDisplay : MonoBehaviour
             RightHeatBar.fillAmount = rightHeatFraction;
 
             PrimaryHeatBar.fillAmount = (120f / 360f) * leftHeatFraction;
+            PrimaryHeatBar.color = HeatGradient.Evaluate(leftHeatFraction);
             SecondaryHeatBar.fillAmount = (120f / 360f) * rightHeatFraction;
+            SecondaryHeatBar.color = HeatGradient.Evaluate(rightHeatFraction);
 
             UpdateBars();
         }

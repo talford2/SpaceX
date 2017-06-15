@@ -2526,6 +2526,126 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 310
       objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.key2.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.key2.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.key2.b
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.ctime1
+      value: 19661
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.ctime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.m_NumColorKeys
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.key3.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.ctime3
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.key3.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.key4.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.ctime4
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HeatGradient.key3.b
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HealthGradient.key2.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HealthGradient.key2.b
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HealthGradient.ctime1
+      value: 19661
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HealthGradient.ctime2
+      value: 52428
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HealthGradient.m_NumColorKeys
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HealthGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HealthGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682979553955696, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: HealthGradient.key2.g
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1859a184329ea54abc5c7bdb9ab22af, type: 2}
   m_IsPrefabParent: 0
