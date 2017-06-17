@@ -34,7 +34,7 @@ public class MissionCompleteScreen : MonoBehaviour
             EarnedCreditsText.enabled = true;
             EarnedCreditsText.text = string.Format("Credits Earned: {0}", Mission.Current.GetEarnedCredits());
         }));
-        delay += 0.5f;
+        delay += 1f;
         StartCoroutine(DelayedAction(delay, () =>
         {
             StartCoroutine(SumCredits(playerKills));
@@ -45,6 +45,8 @@ public class MissionCompleteScreen : MonoBehaviour
     {
         ScreenGroup.alpha = 0;
         KillsText.enabled = false;
+        EarnedCreditsText.enabled = false;
+        TotalCreditsText.enabled = false;
     }
 
     private IEnumerator DelayedAction(float delay, Action action)
