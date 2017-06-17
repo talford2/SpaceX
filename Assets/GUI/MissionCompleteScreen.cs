@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class MissionCompleteScreen : MonoBehaviour
 {
     public CanvasGroup ScreenGroup;
-    public Text TimeText;
     public Text KillsText;
+    public Text CreditsText;
 
     private static MissionCompleteScreen _current;
 
@@ -19,17 +19,30 @@ public class MissionCompleteScreen : MonoBehaviour
         Hide();
     }
 
-    public void Show()
+    public void Show(int playerKills)
     {
         ScreenGroup.alpha = 1f;
-        StartCoroutine(DelayedAction(0.5f, () => { TimeText.enabled = true; }));
-        StartCoroutine(DelayedAction(1f, () => { KillsText.enabled = true; }));
+        var delay = 0.5f;
+        StartCoroutine(DelayedAction(delay, () => {
+            KillsText.enabled = true;
+            KillsText.text = string.Format("Kills: {0}", playerKills);
+        }));
+        delay += 0.5f;
+        StartCoroutine(DelayedAction(delay, () =>
+        {
+            CreditsText.enabled = true;
+            CreditsText.text = string.Format("Credits Earned: {0}", 0);
+        }));
+        delay += 0.5f;
+        StartCoroutine(DelayedAction(delay, () =>
+        {
+            StartCoroutine(SumCredits(playerKills));
+        }));
     }
 
     public void Hide()
     {
         ScreenGroup.alpha = 0;
-        TimeText.enabled = false;
         KillsText.enabled = false;
     }
 
@@ -37,5 +50,20 @@ public class MissionCompleteScreen : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         action();
+    }
+
+    private IEnumerator SumCredits(int playerKills)
+    {
+        var tickTime = 0.1f;
+        var kills = playerKills;
+        var credits = 0;
+        for (var i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(tickTime);
+            kills--;
+            credits += 10;
+            KillsText.text = string.Format("Kills: {0}", kills);
+            CreditsText.text = string.Format("Credits Earned: {0}", credits);
+        }
     }
 }

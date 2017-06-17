@@ -706,6 +706,7 @@ public class PlayerController : MonoBehaviour
         {
             SpaceJunkCount += 10;
             HeadsUpDisplay.Current.ShowKillMessage(killMessage);
+            Mission.Current.IncrementKills(1);
             Save();
             HeadsUpDisplay.Current.UpdateSpaceJunk();
         }
