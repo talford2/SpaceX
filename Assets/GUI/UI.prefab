@@ -17776,7 +17776,7 @@ MonoBehaviour:
   TotalCreditsText: {fileID: 114957841089490028}
   TriggerSound: {fileID: 8300000, guid: f7b36ddbeacd38141b2fc0aabea82207, type: 3}
   TextAppearSound: {fileID: 8300000, guid: be1e84b3c1de85d4ba7564a5a2018048, type: 3}
-  CreditTickSound: {fileID: 8300000, guid: d907565cd89313b479cb08db0f9e6c19, type: 3}
+  CreditTickSound: {fileID: 8300000, guid: 630d9f91de1246146b5dc0f7f6ae74f7, type: 3}
 --- !u!114 &114854866184364688
 MonoBehaviour:
   m_ObjectHideFlags: 1
