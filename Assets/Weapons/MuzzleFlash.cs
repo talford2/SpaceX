@@ -18,9 +18,10 @@ public class MuzzleFlash : MonoBehaviour
 
 	private Renderer _muzzleBaseRenderer;
 
-	private float _effectCooldown;
+    private ResourcePoolItem _resourcePoolItem;
+    private float _effectCooldown;
 
-	void Awake()
+	private void Awake()
 	{
 		_muzzleBaseRenderer = MuzzleBase.GetComponent<Renderer>();
 		_muzzleBaseRenderer.enabled = false;
@@ -28,30 +29,32 @@ public class MuzzleFlash : MonoBehaviour
 	    FlashLight.enabled = false;
 	}
 
-	void Update()
+    private void Start()
+    {
+        Stop();
+    }
+
+	private void Update()
 	{
-		if (_effectCooldown > 0)
-		{
-			_effectCooldown -= Time.deltaTime;
-			var frac = 1 - _effectCooldown / EffectTime;
+        if (_effectCooldown >= 0f)
+        {
+            _effectCooldown -= Time.deltaTime;
+            var frac = 1 - _effectCooldown / EffectTime;
 
-			var scale = ScaleOverTime.Evaluate(frac);
-			var alpha = AlphaOverTime.Evaluate(frac);
-			MuzzleBase.transform.localScale = Vector3.one * scale;
+            var scale = ScaleOverTime.Evaluate(frac);
+            var alpha = AlphaOverTime.Evaluate(frac);
+            MuzzleBase.transform.localScale = Vector3.one * scale;
 
-		    //_muzzleBaseRenderer.material.color = Utility.SetColorAlpha(_muzzleBaseRenderer.material.color, alpha);
-		    //Line.material.color = Utility.SetColorAlpha(Line.material.color, alpha);
+            //_muzzleBaseRenderer.material.color = Utility.SetColorAlpha(_muzzleBaseRenderer.material.color, alpha);
+            //Line.material.color = Utility.SetColorAlpha(Line.material.color, alpha);
 
-			Line.SetPosition(1, Vector3.forward * scale * LineLength);
+            Line.SetPosition(1, Vector3.forward * scale * LineLength);
 
-		    FlashLight.intensity = 5f*frac;
-		}
-		else
-		{
-			_muzzleBaseRenderer.enabled = false;
-			Line.enabled = false;
-		    FlashLight.enabled = false;
-		}
+            FlashLight.intensity = 5f * frac;
+
+            if (_effectCooldown < 0f)
+                Stop();
+        }
 	}
 
 	public void Flash()
@@ -73,5 +76,17 @@ public class MuzzleFlash : MonoBehaviour
 
 		_effectCooldown = EffectTime;
 		MuzzleBase.transform.rotation *= Quaternion.AngleAxis(Random.Range(-180, 180f), Vector3.forward);
+
+        _resourcePoolItem.IsAvailable = false;
 	}
+
+    private void Stop()
+    {
+        _muzzleBaseRenderer.enabled = false;
+        Line.enabled = false;
+        FlashLight.enabled = false;
+        if (_resourcePoolItem == null)
+            _resourcePoolItem = GetComponent<ResourcePoolItem>();
+        _resourcePoolItem.IsAvailable = true;
+    }
 }

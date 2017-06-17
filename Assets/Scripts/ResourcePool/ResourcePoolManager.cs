@@ -17,6 +17,11 @@ public class ResourcePoolManager
         return _resourcePools[obj].GetAvailable(position, rotation);
     }
 
+    public static GameObject GetAvailable(GameObject obj, Transform parentTransform)
+    {
+        return _resourcePools[obj].GetAvailable(parentTransform);
+    }
+
     public static void RemoveResourcePool(ResourcePool pool)
     {
         _resourcePools.Remove(pool.Prefab);
