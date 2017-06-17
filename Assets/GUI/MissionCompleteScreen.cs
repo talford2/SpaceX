@@ -52,7 +52,7 @@ public class MissionCompleteScreen : MonoBehaviour
 
     public void Hide()
     {
-        ScreenGroup.alpha = 0;
+        ScreenGroup.alpha = 0f;
         HeaderText.enabled = false;
         KillsText.enabled = false;
         EarnedCreditsText.enabled = false;
@@ -61,7 +61,6 @@ public class MissionCompleteScreen : MonoBehaviour
 
     private IEnumerator FadeIn(float time)
     {
-        HeaderText.enabled = true;
         var interval = 0.01f;
         for (var t = 0f; t < time; t += interval)
         {
@@ -70,6 +69,7 @@ public class MissionCompleteScreen : MonoBehaviour
             ScreenGroup.alpha = fraction;
         }
         ScreenGroup.alpha = 1f;
+        HeaderText.enabled = true;
     }
 
     private IEnumerator DelayedAction(float delay, Action action)

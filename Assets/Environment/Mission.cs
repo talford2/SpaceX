@@ -16,6 +16,12 @@ public class Mission : MonoBehaviour
         _playerKillCount = 0;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.F))
+            TriggerFinish(0f);
+    }
+
     public void TriggerFinish(float delay)
     {
         StartCoroutine(DelayedFinish(delay));
