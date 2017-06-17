@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -125,5 +126,13 @@ public class MissionCompleteScreen : MonoBehaviour
             TotalCreditsText.text = string.Format("TOTAL CREDITS: {0:N0}", totalCredits);
             PlaySound(CreditTickSound);
         }
+
+        PlayerController.Current.Give(new PlayerFile.InventoryItem() { Key = GetRandomBluePrint().Key });
+    }
+
+    private BluePrint GetRandomBluePrint()
+    {
+        var bluePrints = BluePrintPool.All();
+        return bluePrints[UnityEngine.Random.Range(0, bluePrints.Count)];
     }
 }

@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
 
         _profile = GetComponent<ShipProfile>();
-        _inventory = new PlayerInventory(15);
 
         _screenAspect = (float)Screen.height / (float)Screen.width;
 
@@ -483,10 +482,12 @@ public class PlayerController : MonoBehaviour
             _playVehicleInstance.TriggerUTurn();
         }
 
+        /*
         if (Input.GetKeyUp(KeyCode.I))
         {
             InventoryScreen.Current.Toggle();
         }
+        */
 
         Vehicle leaderVehicle;
         var playerSquadronIndex = Squadron.GetCurrentIndex();
@@ -715,6 +716,12 @@ public class PlayerController : MonoBehaviour
 
     private PlayerInventory _inventory;
 
+    public void Give(PlayerFile.InventoryItem item)
+    {
+        _inventory.AddItem(item);
+    }
+
+    /*
     public void Give(GameObject item)
     {
         _inventory.AddItem(item);
@@ -745,6 +752,7 @@ public class PlayerController : MonoBehaviour
     {
         return _inventory.Items;
     }
+    */
 
     private void PlayerController_OnRegenerate()
     {
@@ -885,6 +893,7 @@ public class PlayerController : MonoBehaviour
         if (PlayerFile.Exists(PlayerFile.Filename))
         {
             var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+            _inventory = new PlayerInventory(playerFile);
             SpaceJunkCount = playerFile.SpaceJunk;
             _profile.PrimaryWeapon = WeaponDefinitionPool.ByKey(playerFile.PrimaryWeaponKey);
             _profile.SecondaryWeapon = WeaponDefinitionPool.ByKey(playerFile.SecondaryWeaponKey);

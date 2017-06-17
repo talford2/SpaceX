@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class PlayerInventory
 {
-
+    /*
     private GameObject[] _items;
 
     public GameObject[] Items { get { return _items; } }
@@ -34,5 +36,31 @@ public class PlayerInventory
     public void RemoveItemAt(int index)
     {
         _items[index] = null;
+    }
+    */
+
+    private List<PlayerFile.InventoryItem> _items;
+
+    public List<PlayerFile.InventoryItem> Items { get { return _items; }  }
+
+    public PlayerInventory(PlayerFile playerFile)
+    {
+        _items = playerFile.Inventory;
+    }
+
+    public void AddItem(PlayerFile.InventoryItem item)
+    {
+        if (_items.Any(i => i.Key == item.Key))
+        {
+            var existingItem = _items.First(i => i.Key == item.Key);
+            existingItem.BluePrintsOwned++;
+        }
+        else
+        {
+            _items.Add(item);
+        }
+        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        playerFile.Inventory = _items;
+        playerFile.WriteToFile(PlayerFile.Filename);
     }
 }

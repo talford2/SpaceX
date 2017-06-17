@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4753221193488398}
   - component: {fileID: 114321033353555352}
+  - component: {fileID: 114691448425577678}
   m_Layer: 0
   m_Name: WeaponDefinitionPool
   m_TagString: Untagged
@@ -60,3 +61,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 32f37dc1b69f5ff44ab2900b25f77d92, type: 2}
   - {fileID: 11400000, guid: 8eef185abadbd78488e4197c9c9103c4, type: 2}
   - {fileID: 11400000, guid: e0c044cbb38635b439a551988a5d0472, type: 2}
+--- !u!114 &114691448425577678
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1540493273576136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13eddf8d440bc3a40b934f7c040d296e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BluePrints:
+  - {fileID: 11400000, guid: 3124189e8b88beb438c2e1ee1521fa94, type: 2}
+  - {fileID: 11400000, guid: 69d7a5ffefa28f84984e5c093bcfd57b, type: 2}
+  - {fileID: 11400000, guid: c777ade9d224d2c4fa213358a4805243, type: 2}

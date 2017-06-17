@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,7 +10,8 @@ public class HangarScreen : MonoBehaviour
     public HangarWeaponButton WeaponButtonPrefab;
     public Transform RightPanel;
 
-    private List<WeaponDefinition> _inventory;
+    private List<PlayerFile.InventoryItem> _inventory;
+    //private List<WeaponDefinition> _inventory;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class HangarScreen : MonoBehaviour
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
         UpdateCredits(playerFile.SpaceJunk);
         UpdateLeftBar(WeaponDefinitionPool.ByKey(playerFile.PrimaryWeaponKey), WeaponDefinitionPool.ByKey(playerFile.SecondaryWeaponKey));
-        _inventory = playerFile.Inventory.Select(i => WeaponDefinitionPool.ByKey(i)).ToList();
+        _inventory = playerFile.Inventory;//.Select(i => WeaponDefinitionPool.ByKey(BluePrintPool.ByKey(i.Key).Weapon.Key)).ToList();
         UpdateRightBar();
     }
 
@@ -55,10 +55,22 @@ public class HangarScreen : MonoBehaviour
             Destroy(item.gameObject);
         }
 
+        /*
         foreach (var item in _inventory)
         {
             var itemButton = Instantiate(WeaponButtonPrefab, RightPanel);
             itemButton.Bind(item, (weapon) =>
+            {
+                AssignWeapon(weapon);
+                UpdateRightBar();
+            });
+        }
+        */
+        foreach(var item in _inventory)
+        {
+            var itemButton = Instantiate(WeaponButtonPrefab, RightPanel);
+            var thing = WeaponDefinitionPool.ByKey(BluePrintPool.ByKey(item.Key).Weapon.Key);
+            itemButton.Bind(thing, (weapon) =>
             {
                 AssignWeapon(weapon);
                 UpdateRightBar();
@@ -73,17 +85,21 @@ public class HangarScreen : MonoBehaviour
         {
             var oldKey = playerFile.PrimaryWeaponKey;
             playerFile.PrimaryWeaponKey = weapon.Key;
+            /*
             _inventory.Remove(weapon);
             _inventory.Add(WeaponDefinitionPool.ByKey(oldKey));
+            */
         }
         if (weapon.Type == ItemType.SecondaryWeapon)
         {
             var oldKey = playerFile.SecondaryWeaponKey;
             playerFile.SecondaryWeaponKey = weapon.Key;
+            /*
             _inventory.Remove(weapon);
             _inventory.Add(WeaponDefinitionPool.ByKey(oldKey));
+            */
         }
-        playerFile.Inventory = _inventory.Select(i => i.Key).ToList();
+        playerFile.Inventory = _inventory;//.Select(i => i.Key).ToList();
         playerFile.WriteToFile(PlayerFile.Filename);
         UpdateLeftBar(WeaponDefinitionPool.ByKey(playerFile.PrimaryWeaponKey), WeaponDefinitionPool.ByKey(playerFile.SecondaryWeaponKey));
     }

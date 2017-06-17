@@ -18,5 +18,13 @@ public class PlayerFile : DataFile<PlayerFile>
 
     [XmlArray("inventory")]
     [XmlArrayItem("item")]
-    public List<string> Inventory;
+    public List<InventoryItem> Inventory;
+
+    public class InventoryItem
+    {
+        [XmlAttribute("key")]
+        public string Key;
+        [XmlElement("owned")]
+        public int BluePrintsOwned;
+    }
 }

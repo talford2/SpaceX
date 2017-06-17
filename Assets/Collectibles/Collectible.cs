@@ -104,8 +104,10 @@ public class Collectible : MonoBehaviour
             }
             if (GiveType == CollectType.PowerNode)
                 PlayerController.Current.PowerNodeCount++;
+            /*
             if (GiveType == CollectType.Other)
                 PlayerController.Current.Give(GiveItem);
+            */
         }
         if (OnCollect != null)
             OnCollect();
