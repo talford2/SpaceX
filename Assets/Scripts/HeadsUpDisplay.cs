@@ -452,7 +452,7 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void UpdateSpaceJunk()
     {
-        SpaceJunkText.text = string.Format("{0:f0}", PlayerController.Current.SpaceJunkCount);
+        SpaceJunkText.text = string.Format("{0:f0}", Mission.Current.GetEarnedCredits());
         _spaceJunkPulseCooldown = _spaceJunkPulseDuration;
         SpaceJunkText.fontSize = 50;
     }

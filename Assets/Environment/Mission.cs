@@ -26,6 +26,11 @@ public class Mission : MonoBehaviour
         _playerKillCount += amount;
     }
 
+    public int GetEarnedCredits()
+    {
+        return 10 * _playerKillCount;
+    }
+
     private IEnumerator DelayedFinish(float delay)
     {
         yield return new WaitForSeconds(delay);

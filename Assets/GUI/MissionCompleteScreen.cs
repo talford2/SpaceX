@@ -7,7 +7,8 @@ public class MissionCompleteScreen : MonoBehaviour
 {
     public CanvasGroup ScreenGroup;
     public Text KillsText;
-    public Text CreditsText;
+    public Text EarnedCreditsText;
+    public Text TotalCreditsText;
 
     private static MissionCompleteScreen _current;
 
@@ -30,8 +31,8 @@ public class MissionCompleteScreen : MonoBehaviour
         delay += 0.5f;
         StartCoroutine(DelayedAction(delay, () =>
         {
-            CreditsText.enabled = true;
-            CreditsText.text = string.Format("Credits Earned: {0}", 0);
+            EarnedCreditsText.enabled = true;
+            EarnedCreditsText.text = string.Format("Credits Earned: {0}", Mission.Current.GetEarnedCredits());
         }));
         delay += 0.5f;
         StartCoroutine(DelayedAction(delay, () =>
@@ -52,18 +53,18 @@ public class MissionCompleteScreen : MonoBehaviour
         action();
     }
 
-    private IEnumerator SumCredits(int playerKills)
+    private IEnumerator SumCredits(int earnedCredits)
     {
         var tickTime = 0.05f;
-        var kills = playerKills;
         var credits = 0;
-        for (var i = 0; i < playerKills; i++)
+        var totalCredits = PlayerController.Current.SpaceJunkCount - earnedCredits;
+        for (var i = 0; i < earnedCredits; i++)
         {
             yield return new WaitForSeconds(tickTime);
-            kills--;
-            credits += 10;
-            KillsText.text = string.Format("Kills: {0}", kills);
-            CreditsText.text = string.Format("Credits Earned: {0}", credits);
+            credits--;
+            totalCredits++;
+            EarnedCreditsText.text = string.Format("Credits Earned: {0}", credits);
+            TotalCreditsText.text = string.Format("TOTAL CREDITS: {0}", totalCredits);
         }
     }
 }
