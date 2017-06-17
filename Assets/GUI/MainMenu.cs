@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
                 LoadWithLoader("Test1");
                 break;
             case "Hangar":
-                LoadWithLoader("Hangar2");
+                SceneManager.LoadScene("Hangar2");
                 break;
             case "Exit":
                 Application.Quit();

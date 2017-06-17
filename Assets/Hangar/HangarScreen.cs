@@ -92,4 +92,14 @@ public class HangarScreen : MonoBehaviour
     {
         CreditText.text = string.Format("{0:N0}c", creditCount);
     }
+
+    public void GotoGalaxyMap()
+    {
+        SceneManager.LoadScene("GalaxyMap");
+    }
+
+    public void Quit()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }

@@ -79,7 +79,7 @@ public class NavShipController : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Return))
             {
                 PlayerContext.Current.LevelIndex = _levelIndex;
-                SceneManager.LoadScene("Test1");
+                LoadWithLoader("Test1");
             }
         }
     }
@@ -87,5 +87,11 @@ public class NavShipController : MonoBehaviour
     public void SetDestination(Vector3 destination)
     {
         _destination = destination;
+    }
+
+    private void LoadWithLoader(string sceneName)
+    {
+        PlayerContext.Current.SceneName = sceneName;
+        SceneManager.LoadScene("LoadingScene");
     }
 }
