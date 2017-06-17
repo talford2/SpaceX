@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MissionCompleteScreen : MonoBehaviour
 {
     public CanvasGroup ScreenGroup;
+    public Text HeaderText;
     public Text KillsText;
     public Text EarnedCreditsText;
     public Text TotalCreditsText;
@@ -24,6 +25,8 @@ public class MissionCompleteScreen : MonoBehaviour
     {
         ScreenGroup.alpha = 1f;
         var delay = 0.5f;
+        StartCoroutine(FadeIn(delay));
+        delay += 0.5f;
         StartCoroutine(DelayedAction(delay, () => {
             KillsText.enabled = true;
             KillsText.text = string.Format("Kills: {0:N0}", playerKills);
@@ -50,9 +53,22 @@ public class MissionCompleteScreen : MonoBehaviour
     public void Hide()
     {
         ScreenGroup.alpha = 0;
+        HeaderText.enabled = false;
         KillsText.enabled = false;
         EarnedCreditsText.enabled = false;
         TotalCreditsText.enabled = false;
+    }
+
+    private IEnumerator FadeIn(float time)
+    {
+        HeaderText.enabled = true;
+        var interval = 0.01f;
+        for (var t = 0f; t < time; time += interval)
+        {
+            yield return new WaitForSeconds(interval);
+            var fraction = Mathf.Clamp01(t / time);
+            ScreenGroup.alpha = fraction;
+        }
     }
 
     private IEnumerator DelayedAction(float delay, Action action)
