@@ -5,6 +5,8 @@ public class SeekingRocket : Missile
 {
     [Header("Seeking Rocket")]
     public float MinChaseDistance = 50f;
+    public float StraightTravelTime = 0.5f;
+    public float MaxTurnTime = 2f;
     public float MaxTurnSpeed = 90f;
     public float Radius = 0.3f;
     public GameObject ExplodePrefab;
@@ -28,12 +30,9 @@ public class SeekingRocket : Missile
 
     private float _explodeDistance = 2f;
 
-    private float _travelStraightTime = 0.5f;
     private float _travelStraightCooldown;
     private float _noTargetTime = 5f;
     private float _noTargetCooldown;
-
-    private float _turnTime = 2f;
 
     // Spherecast hit
     private bool _hasHit;
@@ -93,9 +92,9 @@ public class SeekingRocket : Missile
                 }
             }
 
-            if (_travelStraightCooldown < _turnTime)
+            if (_travelStraightCooldown < MaxTurnTime)
             {
-                var turnFraction = Mathf.Clamp01(1f - _travelStraightCooldown / _turnTime);
+                var turnFraction = Mathf.Clamp01(1f - _travelStraightCooldown / MaxTurnTime);
                 var maxTurn = MaxTurnSpeed * turnFraction;
                 transform.forward = Vector3.RotateTowards(transform.forward, toTarget.normalized, maxTurn * Time.deltaTime, 0f);
             }
@@ -192,7 +191,7 @@ public class SeekingRocket : Missile
         Flare.SetVisible(true);
 
         _noTargetCooldown = _noTargetTime;
-        _travelStraightCooldown = _travelStraightTime + _turnTime;
+        _travelStraightCooldown = StraightTravelTime + MaxTurnTime;
         _hasHit = false;
 
         _resourcePoolItem.IsAvailable = false;
