@@ -148,6 +148,8 @@ public class HeadsUpDisplay : MonoBehaviour
         KillText.color = Utility.SetColorAlpha(KillText.color, 0);
         _initKillTextPos = KillText.rectTransform.localPosition;
 
+        SquadronPanel.gameObject.SetActive(PlayerController.Current.Squadron.Members.Count > 1);
+
         if (StartHidden)
             Hide();
     }
