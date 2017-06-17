@@ -63,8 +63,10 @@ public class MissionCompleteScreen : MonoBehaviour
 
     private IEnumerator SumCredits(int earnedCredits)
     {
-        var tickTime = 0.05f;
+        var totalTime = 1f;
+        var tickTime = totalTime / earnedCredits;
         var credits = earnedCredits;
+
         var totalCredits = PlayerController.Current.SpaceJunkCount - earnedCredits;
         for (var i = 0; i < earnedCredits; i++)
         {

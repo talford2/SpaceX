@@ -35,7 +35,7 @@ public class Mission : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         MissionCompleteScreen.Current.Show(_playerKillCount);
-        StartCoroutine(DelayedSceneLoad(5f));
+        StartCoroutine(DelayedSceneLoad(10f));
     }
 
     private IEnumerator DelayedSceneLoad(float delay)
