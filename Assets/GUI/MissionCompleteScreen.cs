@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MissionCompleteScreen : MonoBehaviour
@@ -15,14 +16,22 @@ public class MissionCompleteScreen : MonoBehaviour
     public AudioClip TextAppearSound;
     public AudioClip CreditTickSound;
 
-    private static MissionCompleteScreen _current;
+    private bool _canEscape;
 
+    private static MissionCompleteScreen _current;
     public static MissionCompleteScreen Current { get { return _current; } }
 
     private void Awake()
     {
         _current = this;
+        _canEscape = false;
         Hide();
+    }
+
+    private void Update()
+    {
+        if (_canEscape && Input.GetKeyUp(KeyCode.Space))
+            SceneManager.LoadScene("Hangar2");
     }
 
     private void PlaySound(AudioClip clip)
@@ -62,6 +71,7 @@ public class MissionCompleteScreen : MonoBehaviour
             TotalCreditsText.enabled = true;
             TotalCreditsText.text = string.Format("TOTAL CREDITS: {0:N0}", PlayerController.Current.SpaceJunkCount - Mission.Current.GetEarnedCredits());
             PlaySound(TextAppearSound);
+            _canEscape = true;
         }));
         delay += 1f;
         StartCoroutine(DelayedAction(delay, () =>
@@ -102,13 +112,11 @@ public class MissionCompleteScreen : MonoBehaviour
     {
         var totalTime = 1f;
         var tickTime = totalTime / earnedCredits;
-        var credits = earnedCredits;
 
         var totalCredits = PlayerController.Current.SpaceJunkCount - earnedCredits;
-        for (var i = 0; i < earnedCredits; i++)
+        for (var credits = earnedCredits; credits > 0; credits--)
         {
             yield return new WaitForSeconds(tickTime);
-            credits--;
             totalCredits++;
             EarnedCreditsText.text = string.Format("Credits Earned: {0:N0}", credits);
             TotalCreditsText.text = string.Format("TOTAL CREDITS: {0:N0}", totalCredits);

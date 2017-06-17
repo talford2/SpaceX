@@ -43,7 +43,7 @@ public class Mission : MonoBehaviour
         HeadsUpDisplay.Current.Hide();
         PlayerController.Current.SetControlEnabled(false);
         MissionCompleteScreen.Current.Show(_playerKillCount);
-        StartCoroutine(DelayedSceneLoad(10f));
+        //StartCoroutine(DelayedSceneLoad(10f));
     }
 
     private IEnumerator DelayedSceneLoad(float delay)
