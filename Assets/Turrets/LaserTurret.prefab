@@ -400,8 +400,8 @@ MonoBehaviour:
     m_RotationOrder: 0
   MinPitch: -90
   MaxPitch: 40
-  MaxPitchSpeed: 45
-  MaxYawSpeed: 90
+  MaxPitchSpeed: 15
+  MaxYawSpeed: 30
   AimTolerance: 5
   AimTooCloseDistance: 10
   Targetable: {fileID: 114354613596268164}

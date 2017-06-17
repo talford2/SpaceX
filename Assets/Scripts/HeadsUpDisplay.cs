@@ -160,6 +160,7 @@ public class HeadsUpDisplay : MonoBehaviour
         HealthBar.fillAmount = healthFraction;
         HealthBar.color = Utility.SetColorAlpha(HealthGradient.Evaluate(1f - healthFraction), HealthBar.color.a);
         BoostBar.fillAmount = energyFraction;
+        BoostBar.color = Utility.SetColorAlpha(HealthGradient.Evaluate(1f - energyFraction), BoostBar.color.a);
     }
 
     private void Update()

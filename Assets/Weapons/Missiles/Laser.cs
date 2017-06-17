@@ -5,6 +5,8 @@ public class Laser : Missile
     [Header("Laser")]
     public float MissileLength = 6f;
 
+    public Gradient Gradient;
+
     public LineRenderer Tracer;
     private Shiftable _shiftable;
     private ResourcePoolItem _resourcePoolItem;
