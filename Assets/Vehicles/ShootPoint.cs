@@ -2,17 +2,16 @@
 
 public class ShootPoint : MonoBehaviour
 {
-    private MuzzleFlash _muzzleInstance;
+    private GameObject _muzzlePrefab;
 
     public void Initialize(MuzzleFlash muzzlePrefab)
     {
-        if (_muzzleInstance != null)
-            Destroy(_muzzleInstance.gameObject);
-        _muzzleInstance = Utility.InstantiateInParent(muzzlePrefab.gameObject, transform).GetComponent<MuzzleFlash>();
+        _muzzlePrefab = muzzlePrefab.gameObject;
     }
 
     public void Flash()
     {
+        var _muzzleInstance = ResourcePoolManager.GetAvailable(_muzzlePrefab, transform).GetComponent<MuzzleFlash>();
         _muzzleInstance.Flash();
     }
 

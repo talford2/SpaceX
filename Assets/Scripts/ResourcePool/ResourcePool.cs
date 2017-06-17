@@ -46,6 +46,16 @@ public class ResourcePool : MonoBehaviour
 		return AddItem(Prefab);
 	}
 
+    public GameObject GetAvailable(Transform parentTransform)
+    {
+        var instance = GetAvailable(parentTransform.position, parentTransform.rotation);
+        instance.transform.SetParent(parentTransform);
+        instance.transform.localPosition = Vector3.zero;
+        instance.transform.localRotation = Quaternion.identity;
+        instance.transform.localScale = Vector3.one;
+        return instance;
+    }
+
 	private GameObject AddItem(GameObject prefab)
 	{
 		var instance = Object.Instantiate(prefab);

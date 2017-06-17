@@ -27,6 +27,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1130710663183316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4175253455903432}
+  - component: {fileID: 114617284606362878}
+  m_Layer: 0
+  m_Name: ChaingunMuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1149701933275144
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +107,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1397282705479626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4337452186120088}
+  - component: {fileID: 114580986987758582}
+  m_Layer: 0
+  m_Name: PlasmaLaserMuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1444423313141736
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,6 +131,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4553419461249914}
+  - component: {fileID: 114570809635504756}
   m_Layer: 0
   m_Name: ResourcePools
   m_TagString: Untagged
@@ -117,6 +150,22 @@ GameObject:
   - component: {fileID: 114262748318478036}
   m_Layer: 0
   m_Name: Plasma
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1536869782894142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4017248105584894}
+  - component: {fileID: 114374218328310284}
+  m_Layer: 0
+  m_Name: GreenLaserMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,6 +203,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1572226621819800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4546920121850622}
+  - component: {fileID: 114412618981853642}
+  m_Layer: 0
+  m_Name: RedLaserMuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1587386912349542
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1660948301411596
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +443,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4017248105584894
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1536869782894142}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4553419461249914}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4025632634180724
 Transform:
   m_ObjectHideFlags: 1
@@ -443,6 +521,19 @@ Transform:
   m_Father: {fileID: 4553419461249914}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4175253455903432
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130710663183316}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4553419461249914}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4198577125659602
 Transform:
   m_ObjectHideFlags: 1
@@ -495,6 +586,19 @@ Transform:
   m_Father: {fileID: 4553419461249914}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4337452186120088
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397282705479626}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4553419461249914}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4385297286030968
 Transform:
   m_ObjectHideFlags: 1
@@ -534,6 +638,19 @@ Transform:
   m_Father: {fileID: 4553419461249914}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4546920121850622
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1572226621819800}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4553419461249914}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4553419461249914
 Transform:
   m_ObjectHideFlags: 1
@@ -566,6 +683,10 @@ Transform:
   - {fileID: 4198577125659602}
   - {fileID: 4868885114377622}
   - {fileID: 4163070353760646}
+  - {fileID: 4175253455903432}
+  - {fileID: 4017248105584894}
+  - {fileID: 4546920121850622}
+  - {fileID: 4337452186120088}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -711,7 +832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1836265664760198, guid: c4964441af89cfe47acc67927b42fefc, type: 2}
-  PoolSize: 50
+  PoolSize: 10
 --- !u!114 &114168319465850974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -763,7 +884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 195130, guid: 78bf010bbd3d8d4429e04e9ab9cfb409, type: 2}
-  PoolSize: 200
+  PoolSize: 50
 --- !u!114 &114329459224723706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -776,7 +897,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1912717012564314, guid: b50d2cb23f1d1b0488ba06cf7baaf709, type: 2}
-  PoolSize: 500
+  PoolSize: 50
+--- !u!114 &114374218328310284
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1536869782894142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db1a18087195fe4eb0eebbe6c0134a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 168048, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
+  PoolSize: 100
+--- !u!114 &114412618981853642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1572226621819800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db1a18087195fe4eb0eebbe6c0134a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 187250, guid: db0bd28387b791d4ea43fd188b23d353, type: 2}
+  PoolSize: 100
 --- !u!114 &114455394763273180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -789,7 +936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 180512, guid: adb276e13f8472b4ab9d9878efaa0049, type: 2}
-  PoolSize: 300
+  PoolSize: 100
 --- !u!114 &114484802032822590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -802,7 +949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
-  PoolSize: 20
+  PoolSize: 10
 --- !u!114 &114564779357295772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -815,7 +962,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 176048, guid: fea4fea29e620614cab88fa9549f8ae9, type: 2}
-  PoolSize: 20
+  PoolSize: 5
+--- !u!114 &114570809635504756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1444423313141736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 060d25f16f165f847b68ee5488f7d1e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnonymousSoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
 --- !u!114 &114571527551389752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -829,6 +988,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 198982, guid: 4bb191ad1a7963849a6c492ebb749803, type: 2}
   PoolSize: 50
+--- !u!114 &114580986987758582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397282705479626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db1a18087195fe4eb0eebbe6c0134a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 133334, guid: 0b630620908faae4db51a824d4b1e5e1, type: 2}
+  PoolSize: 50
+--- !u!114 &114617284606362878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130710663183316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db1a18087195fe4eb0eebbe6c0134a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 168048, guid: 2af108f533a9b214ca70f588ecaaf5f7, type: 2}
+  PoolSize: 100
 --- !u!114 &114630597780201118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -854,7 +1039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 180512, guid: 486174ed4f2bfaa4ea9633384cc46aaf, type: 2}
-  PoolSize: 500
+  PoolSize: 100
 --- !u!114 &114681236517254422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -867,7 +1052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 180512, guid: 5f4b169fb5c5cdf40bad082da2d8859b, type: 2}
-  PoolSize: 1000
+  PoolSize: 100
 --- !u!114 &114718633749288052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -880,7 +1065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 198982, guid: fb06b7b045476694d8af2bb217b41133, type: 2}
-  PoolSize: 50
+  PoolSize: 3
 --- !u!114 &114787597217894404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -893,7 +1078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 127098, guid: 77b7164c2899d074ab9d571655898043, type: 2}
-  PoolSize: 50
+  PoolSize: 30
 --- !u!114 &114875471554009810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -906,7 +1091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 127098, guid: 2bfd289939e87ac4fa9e386a7c77f839, type: 2}
-  PoolSize: 20
+  PoolSize: 10
 --- !u!114 &114877656399013616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -919,7 +1104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 180512, guid: 39a77c32b5194a6459af7f3fcd94f8af, type: 2}
-  PoolSize: 500
+  PoolSize: 100
 --- !u!114 &114891437507005896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -932,7 +1117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 198982, guid: 51ee49bc964e0574e8cde607b3b89e72, type: 2}
-  PoolSize: 500
+  PoolSize: 100
 --- !u!114 &114892036678727206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -958,7 +1143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 198982, guid: da573dd68d650ae449ac24f82b9bf1f8, type: 2}
-  PoolSize: 200
+  PoolSize: 50
 --- !u!114 &114946370151492828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -971,7 +1156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 122516, guid: 895ee3d7b5c719a418999475f9c4cc69, type: 2}
-  PoolSize: 50
+  PoolSize: 15
 --- !u!114 &114960955242444100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -984,4 +1169,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 180512, guid: b715e855fc9572c41a789a3cba7318db, type: 2}
-  PoolSize: 1000
+  PoolSize: 100
