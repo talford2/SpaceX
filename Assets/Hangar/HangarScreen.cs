@@ -8,6 +8,7 @@ public class HangarScreen : MonoBehaviour
     public Text CreditText;
     public Transform LeftPanel;
     public HangarWeaponButton WeaponButtonPrefab;
+    public HangarBluePrintButton BlueprintButtonPrefab;
     public Transform RightPanel;
 
     private List<PlayerFile.InventoryItem> _inventory;
@@ -68,11 +69,10 @@ public class HangarScreen : MonoBehaviour
         */
         foreach(var item in _inventory)
         {
-            var itemButton = Instantiate(WeaponButtonPrefab, RightPanel);
-            var thing = WeaponDefinitionPool.ByKey(BluePrintPool.ByKey(item.Key).Weapon.Key);
-            itemButton.Bind(thing, (weapon) =>
+            var itemButton = Instantiate(BlueprintButtonPrefab, RightPanel);
+            itemButton.Bind(item, (inventoryItem) =>
             {
-                AssignWeapon(weapon);
+                //AssignWeapon(inventoryItem);
                 UpdateRightBar();
             });
         }

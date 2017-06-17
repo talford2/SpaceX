@@ -549,6 +549,8 @@ MonoBehaviour:
   LeftPanel: {fileID: 1048031755}
   WeaponButtonPrefab: {fileID: 114396826501207944, guid: 8ddf83414fc4d28459041f67315fa209,
     type: 2}
+  BlueprintButtonPrefab: {fileID: 114579343017483398, guid: 195fde5031e4a704c9be4b854f2f056c,
+    type: 2}
   RightPanel: {fileID: 196271923}
 --- !u!1 &520354698
 GameObject:

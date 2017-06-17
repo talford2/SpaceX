@@ -482,13 +482,6 @@ public class PlayerController : MonoBehaviour
             _playVehicleInstance.TriggerUTurn();
         }
 
-        /*
-        if (Input.GetKeyUp(KeyCode.I))
-        {
-            InventoryScreen.Current.Toggle();
-        }
-        */
-
         Vehicle leaderVehicle;
         var playerSquadronIndex = Squadron.GetCurrentIndex();
         if (playerSquadronIndex == 0)
@@ -879,6 +872,17 @@ public class PlayerController : MonoBehaviour
     //	GUI.Label(new Rect(30f, 330f, 200f, 25f), string.Format("SHIFTABLES: {0}", Universe.Current.ShiftableItems.Count));
     //}
 
+    public PlayerFile BuildFile()
+    {
+        return new PlayerFile
+        {
+            SpaceJunk = SpaceJunkCount,
+            PrimaryWeaponKey = _profile.PrimaryWeapon != null ? _profile.PrimaryWeapon.Key : VehicleInstance.PrimaryWeapon.Key,
+            SecondaryWeaponKey = _profile.SecondaryWeapon != null ? _profile.SecondaryWeapon.Key : VehicleInstance.SecondaryWeapon.Key,
+            Inventory = _inventory.Items
+        };
+    }
+
     public void Save()
     {
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
@@ -899,6 +903,10 @@ public class PlayerController : MonoBehaviour
             _profile.SecondaryWeapon = WeaponDefinitionPool.ByKey(playerFile.SecondaryWeaponKey);
             VehicleInstance.SetPrimaryWeapon(_profile.PrimaryWeapon);
             VehicleInstance.SetSecondaryWeapon(_profile.SecondaryWeapon);
+        }
+        else
+        {
+            _inventory = new PlayerInventory(new PlayerFile());
         }
     }
 

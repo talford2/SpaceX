@@ -13,6 +13,12 @@ public class MissionCompleteScreen : MonoBehaviour
     public Text EarnedCreditsText;
     public Text TotalCreditsText;
 
+    [Header("Reward Item")]
+    public CanvasGroup ItemPanel;
+    public Image ItemIcon;
+    public Text ItemName;
+
+    [Header("Sounds")]
     public AudioClip TriggerSound;
     public AudioClip TextAppearSound;
     public AudioClip CreditTickSound;
@@ -82,6 +88,17 @@ public class MissionCompleteScreen : MonoBehaviour
         {
             StartCoroutine(SumCredits(Mission.Current.GetEarnedCredits()));
         }));
+        var bluePrint = GetRandomBluePrint();
+        var weapon = WeaponDefinitionPool.ByKey(bluePrint.Weapon.Key);
+        PlayerController.Current.Give(new PlayerFile.InventoryItem() { Key = bluePrint.Key });
+        delay += 0.5f;
+        StartCoroutine(DelayedAction(delay, () =>
+        {
+            ItemPanel.alpha = 1f;
+            ItemIcon.sprite = weapon.InventorySprite;
+            ItemName.text = weapon.Name;
+            PlaySound(TextAppearSound);
+        }));
     }
 
     public void Hide()
@@ -91,6 +108,7 @@ public class MissionCompleteScreen : MonoBehaviour
         KillsText.enabled = false;
         EarnedCreditsText.enabled = false;
         TotalCreditsText.enabled = false;
+        ItemPanel.alpha = 0f;
     }
 
     private IEnumerator FadeIn(float time)
@@ -126,8 +144,6 @@ public class MissionCompleteScreen : MonoBehaviour
             TotalCreditsText.text = string.Format("TOTAL CREDITS: {0:N0}", totalCredits);
             PlaySound(CreditTickSound);
         }
-
-        PlayerController.Current.Give(new PlayerFile.InventoryItem() { Key = GetRandomBluePrint().Key });
     }
 
     private BluePrint GetRandomBluePrint()
