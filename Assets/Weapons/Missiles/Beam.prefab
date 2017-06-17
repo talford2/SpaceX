@@ -77,8 +77,8 @@ LineRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_MotionVectors: 0
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: daefce5a8d3149146a79f0e15ae77e9d, type: 2}
   m_StaticBatchInfo:
