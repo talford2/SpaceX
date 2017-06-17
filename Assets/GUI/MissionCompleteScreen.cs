@@ -26,18 +26,24 @@ public class MissionCompleteScreen : MonoBehaviour
         var delay = 0.5f;
         StartCoroutine(DelayedAction(delay, () => {
             KillsText.enabled = true;
-            KillsText.text = string.Format("Kills: {0}", playerKills);
+            KillsText.text = string.Format("Kills: {0:N0}", playerKills);
         }));
         delay += 0.5f;
         StartCoroutine(DelayedAction(delay, () =>
         {
             EarnedCreditsText.enabled = true;
-            EarnedCreditsText.text = string.Format("Credits Earned: {0}", Mission.Current.GetEarnedCredits());
+            EarnedCreditsText.text = string.Format("Credits Earned: {0:N0}", Mission.Current.GetEarnedCredits());
+        }));
+        delay += 0.5f;
+        StartCoroutine(DelayedAction(delay, () =>
+        {
+            TotalCreditsText.enabled = true;
+            TotalCreditsText.text = string.Format("TOTAL CREDITS: {0:N0}", PlayerController.Current.SpaceJunkCount - Mission.Current.GetEarnedCredits());
         }));
         delay += 1f;
         StartCoroutine(DelayedAction(delay, () =>
         {
-            StartCoroutine(SumCredits(playerKills));
+            StartCoroutine(SumCredits(Mission.Current.GetEarnedCredits()));
         }));
     }
 
@@ -65,8 +71,8 @@ public class MissionCompleteScreen : MonoBehaviour
             yield return new WaitForSeconds(tickTime);
             credits--;
             totalCredits++;
-            EarnedCreditsText.text = string.Format("Credits Earned: {0}", credits);
-            TotalCreditsText.text = string.Format("TOTAL CREDITS: {0}", totalCredits);
+            EarnedCreditsText.text = string.Format("Credits Earned: {0:N0}", credits);
+            TotalCreditsText.text = string.Format("TOTAL CREDITS: {0:N0}", totalCredits);
         }
     }
 }
