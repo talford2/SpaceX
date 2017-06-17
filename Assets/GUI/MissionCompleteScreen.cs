@@ -54,10 +54,10 @@ public class MissionCompleteScreen : MonoBehaviour
 
     private IEnumerator SumCredits(int playerKills)
     {
-        var tickTime = 0.1f;
+        var tickTime = 0.05f;
         var kills = playerKills;
         var credits = 0;
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < playerKills; i++)
         {
             yield return new WaitForSeconds(tickTime);
             kills--;
