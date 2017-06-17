@@ -41,6 +41,6 @@ public class Mission : MonoBehaviour
     private IEnumerator DelayedSceneLoad(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Hangar2");
     }
 }
