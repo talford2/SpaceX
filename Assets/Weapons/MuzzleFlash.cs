@@ -19,6 +19,7 @@ public class MuzzleFlash : MonoBehaviour
 	private Renderer _muzzleBaseRenderer;
 
     private ResourcePoolItem _resourcePoolItem;
+    private Transform _originalParent;
     private float _effectCooldown;
 
 	private void Awake()
@@ -27,6 +28,7 @@ public class MuzzleFlash : MonoBehaviour
 		_muzzleBaseRenderer.enabled = false;
 		Line.enabled = false;
 	    FlashLight.enabled = false;
+        _originalParent = transform.parent;
 	}
 
     private void Start()
@@ -85,6 +87,7 @@ public class MuzzleFlash : MonoBehaviour
         _muzzleBaseRenderer.enabled = false;
         Line.enabled = false;
         FlashLight.enabled = false;
+        transform.SetParent(_originalParent);
         if (_resourcePoolItem == null)
             _resourcePoolItem = GetComponent<ResourcePoolItem>();
         _resourcePoolItem.IsAvailable = true;
