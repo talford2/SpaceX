@@ -21,7 +21,7 @@ public class Mission : MonoBehaviour
     private IEnumerator DelayedFinish(float delay)
     {
         yield return new WaitForSeconds(delay);
-        HeadsUpDisplay.Current.DisplayMessage("MISSION COMPLETE", 5f);
+        MissionCompleteScreen.Current.Show();
         StartCoroutine(DelayedSceneLoad(5f));
     }
 
