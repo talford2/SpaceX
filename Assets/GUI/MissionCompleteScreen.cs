@@ -63,12 +63,13 @@ public class MissionCompleteScreen : MonoBehaviour
     {
         HeaderText.enabled = true;
         var interval = 0.01f;
-        for (var t = 0f; t < time; time += interval)
+        for (var t = 0f; t < time; t += interval)
         {
             yield return new WaitForSeconds(interval);
             var fraction = Mathf.Clamp01(t / time);
             ScreenGroup.alpha = fraction;
         }
+        ScreenGroup.alpha = 1f;
     }
 
     private IEnumerator DelayedAction(float delay, Action action)
