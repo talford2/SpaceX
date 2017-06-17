@@ -30,8 +30,11 @@ public class MissionCompleteScreen : MonoBehaviour
 
     private void Update()
     {
-        if (_canEscape && Input.GetKeyUp(KeyCode.Space))
-            SceneManager.LoadScene("Hangar2");
+        if (_canEscape)
+        {
+            if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Escape) || Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
+                SceneManager.LoadScene("Hangar2");
+        }
     }
 
     private void PlaySound(AudioClip clip)
@@ -114,7 +117,7 @@ public class MissionCompleteScreen : MonoBehaviour
         var tickTime = totalTime / earnedCredits;
 
         var totalCredits = PlayerController.Current.SpaceJunkCount - earnedCredits;
-        for (var credits = earnedCredits; credits > 0; credits--)
+        for (var credits = earnedCredits; credits >= 0; credits--)
         {
             yield return new WaitForSeconds(tickTime);
             totalCredits++;
