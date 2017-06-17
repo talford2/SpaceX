@@ -22,7 +22,7 @@ MonoBehaviour:
   Spread: 0
   MissilesConverge: 0
   IsTargetLocking: 1
-  TargetLockTime: 0.8
+  TargetLockTime: 0.7
   TargetLockingMaxDistance: 500
   TargetAngleTolerance: 15
   LockSound: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
