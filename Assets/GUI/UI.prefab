@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 224127810227445504}
   - component: {fileID: 222986209913931318}
   - component: {fileID: 114723110486758874}
+  - component: {fileID: 225936219168528592}
   m_Layer: 5
   m_Name: SpaceJunk
   m_TagString: Untagged
@@ -1261,6 +1262,7 @@ GameObject:
   - component: {fileID: 224373454537531018}
   - component: {fileID: 222089047515524814}
   - component: {fileID: 114250133043402578}
+  - component: {fileID: 225478050006298942}
   m_Layer: 5
   m_Name: KillCounts
   m_TagString: Untagged
@@ -2463,6 +2465,7 @@ GameObject:
   - component: {fileID: 222345520171158330}
   - component: {fileID: 114866118452175354}
   - component: {fileID: 114768211335058378}
+  - component: {fileID: 225752101145115596}
   m_Layer: 5
   m_Name: Squad Vehicles
   m_TagString: Untagged
@@ -5195,6 +5198,7 @@ GameObject:
   - component: {fileID: 224910310962836564}
   - component: {fileID: 222952556551104948}
   - component: {fileID: 114908624337013288}
+  - component: {fileID: 225998691187045580}
   m_Layer: 5
   m_Name: BoostBar
   m_TagString: Untagged
@@ -5285,6 +5289,7 @@ GameObject:
   - component: {fileID: 224480048277770092}
   - component: {fileID: 222984860658810748}
   - component: {fileID: 114344268195903830}
+  - component: {fileID: 225248490095898444}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -15613,6 +15618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Crosshair: {fileID: 1764639955792750}
+  StartHidden: 1
   CrosshairHit: {fileID: 114436717094141702}
   CrosshairHitDuration: 0.5
   HeatBarsContainer: {fileID: 225744990380407594}
@@ -15659,6 +15665,11 @@ MonoBehaviour:
   DisplayKillZDepth: 40
   _initKillTextPos: {x: 0, y: 0, z: 0}
   KilledText: {fileID: 114218070840269966}
+  SquadronPanel: {fileID: 225752101145115596}
+  KillCountPanel: {fileID: 225478050006298942}
+  SpaceJunkPanel: {fileID: 225936219168528592}
+  HealthShieldPanel: {fileID: 225248490095898444}
+  BoostPanel: {fileID: 225998691187045580}
   ShieldBar: {fileID: 114567630752094070}
   HealthBar: {fileID: 114790922437942790}
   BoostBar: {fileID: 114486707386832944}
@@ -27187,6 +27198,17 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: -71}
   m_SizeDelta: {x: 180, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225248490095898444
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1976746531309036}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!225 &225339987458449900
 CanvasGroup:
   m_ObjectHideFlags: 1
@@ -27209,6 +27231,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!225 &225478050006298942
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1211337630801744}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!225 &225563184915656642
 CanvasGroup:
   m_ObjectHideFlags: 1
@@ -27226,6 +27259,17 @@ CanvasGroup:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1852365182737040}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!225 &225752101145115596
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1426415431770286}
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 0
@@ -27252,4 +27296,26 @@ CanvasGroup:
   m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225936219168528592
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1040289122479156}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!225 &225998691187045580
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1959074072398308}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

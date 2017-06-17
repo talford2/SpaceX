@@ -34,6 +34,7 @@ public class Mission : MonoBehaviour
     private IEnumerator DelayedFinish(float delay)
     {
         yield return new WaitForSeconds(delay);
+        HeadsUpDisplay.Current.Hide();
         PlayerController.Current.SetControlEnabled(false);
         MissionCompleteScreen.Current.Show(_playerKillCount);
         StartCoroutine(DelayedSceneLoad(10f));

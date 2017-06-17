@@ -133,7 +133,8 @@ public class PlayerController : MonoBehaviour
         _playerNpc.SetState(_playerNpc.Idle);
         SetControlEnabled(true);
         _playerNpc.enabled = false;
-        HeadsUpDisplay.Current.ShowCrosshair();
+        HeadsUpDisplay.Current.Show();
+        //HeadsUpDisplay.Current.ShowCrosshair();
 
         var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
         cam.SetState(cam.Follow);

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class HeadsUpDisplay : MonoBehaviour
 {
     public GameObject Crosshair;
+    public bool StartHidden = true;
 
     [Header("Crosshair Hit Response")]
     public Image CrosshairHit;
@@ -31,6 +32,13 @@ public class HeadsUpDisplay : MonoBehaviour
     public float DisplayKillZDepth = 40f;
     public Vector3 _initKillTextPos;
     public Text KilledText;
+
+    [Header("Panels Bar")]
+    public CanvasGroup SquadronPanel;
+    public CanvasGroup KillCountPanel;
+    public CanvasGroup SpaceJunkPanel;
+    public CanvasGroup HealthShieldPanel;
+    public CanvasGroup BoostPanel;
 
     [Header("Bars")]
     public Image ShieldBar;
@@ -139,6 +147,9 @@ public class HeadsUpDisplay : MonoBehaviour
         KillText.text = "";
         KillText.color = Utility.SetColorAlpha(KillText.color, 0);
         _initKillTextPos = KillText.rectTransform.localPosition;
+
+        if (StartHidden)
+            Hide();
     }
 
     public void ShowKillMessage(string message)
@@ -515,5 +526,25 @@ public class HeadsUpDisplay : MonoBehaviour
         MessageText.color = Utility.SetColorAlpha(MessageText.color, 1f);
         MessageText.enabled = true;
         _messageCooldown = time;
+    }
+
+    public void Hide()
+    {
+        HideCrosshair();
+        SquadronPanel.alpha = 0f;
+        KillCountPanel.alpha = 0f;
+        SpaceJunkPanel.alpha = 0f;
+        HealthShieldPanel.alpha = 0f;
+        BoostPanel.alpha = 0;
+    }
+
+    public void Show()
+    {
+        ShowCrosshair();
+        SquadronPanel.alpha = 1f;
+        KillCountPanel.alpha = 1f;
+        SpaceJunkPanel.alpha = 1f;
+        HealthShieldPanel.alpha = 1f;
+        BoostPanel.alpha = 1;
     }
 }

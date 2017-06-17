@@ -90,6 +90,6 @@ public class HangarScreen : MonoBehaviour
 
     private void UpdateCredits(int creditCount)
     {
-        CreditText.text = string.Format("{0}c", creditCount);
+        CreditText.text = string.Format("{0:N0}c", creditCount);
     }
 }
