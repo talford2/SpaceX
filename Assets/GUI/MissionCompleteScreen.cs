@@ -39,6 +39,7 @@ public class MissionCompleteScreen : MonoBehaviour
     public void Show(int playerKills)
     {
         ScreenGroup.alpha = 1f;
+        MusicPlayer.Current.TriggerFadeOut(1f);
         PlaySound(TriggerSound);
         var delay = 0.5f;
         StartCoroutine(FadeIn(delay));
