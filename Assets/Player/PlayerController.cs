@@ -874,6 +874,7 @@ public class PlayerController : MonoBehaviour
 
     private BluePrint BluePrintFromWeapon(WeaponDefinition weapon)
     {
+        Debug.Log("KEY: " + weapon.Key);
         return BluePrintPool.All().First(b => b.Weapon.Key == weapon.Key);
     }
 
