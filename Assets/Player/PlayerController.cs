@@ -724,8 +724,9 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            playerFile.Inventory.Add(new PlayerFile.InventoryItem { Key = item.Key, BluePrintsOwned = 1, EquippedSlot = PlayerFile.EquippedSlot.Inventory, IsOwned = false })
+            playerFile.Inventory.Add(new PlayerFile.InventoryItem { Key = item.Key, BluePrintsOwned = 1, EquippedSlot = PlayerFile.EquippedSlot.Inventory, IsOwned = false });
         }
+        playerFile.WriteToFile(PlayerFile.Filename);
     }
 
     private void PlayerController_OnRegenerate()
