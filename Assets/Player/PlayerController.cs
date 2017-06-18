@@ -907,6 +907,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             _inventory = new PlayerInventory(new PlayerFile());
+            var playerFile = BuildFile();
+            playerFile.WriteToFile(PlayerFile.Filename);
         }
     }
 
