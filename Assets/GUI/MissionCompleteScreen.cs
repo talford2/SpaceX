@@ -63,7 +63,8 @@ public class MissionCompleteScreen : MonoBehaviour
         var delay = 0.5f;
         StartCoroutine(FadeIn(delay));
         delay += 1f;
-        StartCoroutine(DelayedAction(delay, () => {
+        StartCoroutine(DelayedAction(delay, () =>
+        {
             KillsText.enabled = true;
             KillsText.text = string.Format("Kills: {0:N0}", playerKills);
             PlaySound(TextAppearSound);
@@ -90,7 +91,8 @@ public class MissionCompleteScreen : MonoBehaviour
         }));
         var bluePrint = GetRandomBluePrint();
         var weapon = WeaponDefinitionPool.ByKey(bluePrint.Weapon.Key);
-        PlayerController.Current.Give(new PlayerFile.InventoryItem() { Key = bluePrint.Key });
+        if (bluePrint != null)
+            PlayerController.Current.Give(new PlayerFile.InventoryItem() { Key = bluePrint.Key });
         delay += 0.5f;
         StartCoroutine(DelayedAction(delay, () =>
         {
@@ -149,6 +151,13 @@ public class MissionCompleteScreen : MonoBehaviour
     private BluePrint GetRandomBluePrint()
     {
         var bluePrints = BluePrintPool.All();
+        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        foreach (var item in playerFile.Inventory.Where(i => i.BluePrintsOwned == BluePrintPool.ByKey(i.Key).RequiredCount || i.IsOwned))
+        {
+            bluePrints.RemoveAll(b => b.Key == item.Key);
+        }
+        if (!bluePrints.Any())
+            return null;
         return bluePrints[UnityEngine.Random.Range(0, bluePrints.Count)];
     }
 }
