@@ -12,9 +12,6 @@ public class HangarScreen : MonoBehaviour
     public HangarBluePrintButton BlueprintButtonPrefab;
     public Transform RightPanel;
 
-    private List<PlayerFile.InventoryItem> _inventory;
-    //private List<WeaponDefinition> _inventory;
-
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -30,7 +27,6 @@ public class HangarScreen : MonoBehaviour
         var secondaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).Key).Weapon;
 
         UpdateLeftBar(primaryWeapon, secondaryWeapon);
-        _inventory = playerFile.Inventory;//.Select(i => WeaponDefinitionPool.ByKey(BluePrintPool.ByKey(i.Key).Weapon.Key)).ToList();
         UpdateRightBar();
     }
 
@@ -62,7 +58,9 @@ public class HangarScreen : MonoBehaviour
             Destroy(item.gameObject);
         }
 
-        foreach (var item in _inventory)
+        var inventory = PlayerFile.ReadFromFile(PlayerFile.Filename).Inventory;
+
+        foreach (var item in inventory.Where(i=>i.EquippedSlot == PlayerFile.EquippedSlot.Inventory))
         {
             var itemButton = Instantiate(BlueprintButtonPrefab, RightPanel);
             itemButton.Bind(item,
@@ -97,18 +95,17 @@ public class HangarScreen : MonoBehaviour
         {
             playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).EquippedSlot = PlayerFile.EquippedSlot.Inventory;
             item.EquippedSlot = PlayerFile.EquippedSlot.Primary;
-
         }
         if (weapon.Type == ItemType.SecondaryWeapon)
         {
             playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).EquippedSlot = PlayerFile.EquippedSlot.Inventory;
             item.EquippedSlot = PlayerFile.EquippedSlot.Secondary;
         }
-        playerFile.Inventory = _inventory;
         playerFile.WriteToFile(PlayerFile.Filename);
         var primaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).Key).Weapon;
         var secondaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).Key).Weapon;
         UpdateLeftBar(primaryWeapon, secondaryWeapon);
+        UpdateRightBar();
     }
 
     private void UpdateCredits(int creditCount)
