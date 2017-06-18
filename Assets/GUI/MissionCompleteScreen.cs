@@ -40,7 +40,7 @@ public class MissionCompleteScreen : MonoBehaviour
         if (_canEscape)
         {
             if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Escape) || Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
-                SceneManager.LoadScene("Hangar2");
+                SceneManager.LoadScene("GalaxyMap");
         }
     }
 

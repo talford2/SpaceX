@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
         switch (command)
         {
             case "Battle":
-                LoadWithLoader("Battle");
+                LoadWithLoader("GalaxyMap");
                 break;
             case "Campaign":
                 LoadWithLoader("Test1");
