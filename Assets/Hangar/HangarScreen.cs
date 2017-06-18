@@ -58,20 +58,14 @@ public class HangarScreen : MonoBehaviour
             Destroy(item.gameObject);
         }
 
-        foreach(var item in _inventory)
+        foreach (var item in _inventory)
         {
             var itemButton = Instantiate(BlueprintButtonPrefab, RightPanel);
-            itemButton.Bind(item, (button, inventoryItem) =>
-            {
-                var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
-                var bluePrint = BluePrintPool.ByKey(inventoryItem.Key);
-                if (inventoryItem.IsOwned)
+            itemButton.Bind(item,
+                (button, inventoryItem) =>
                 {
-                    AssignWeapon(bluePrint.Weapon);
-                    UpdateRightBar();
-                }
-                else
-                {
+                    var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+                    var bluePrint = BluePrintPool.ByKey(inventoryItem.Key);
                     if (playerFile.SpaceJunk >= bluePrint.Price)
                     {
                         playerFile.Inventory.First(i => i.Key == bluePrint.Key).IsOwned = true;
@@ -79,33 +73,37 @@ public class HangarScreen : MonoBehaviour
                         playerFile.WriteToFile(PlayerFile.Filename);
                         UpdateCredits(playerFile.SpaceJunk);
                         button.SetOwned(item);
-                        UpdateRightBar();
+                        //UpdateRightBar();
                     }
-                }
-            });
+                },
+                (button, inventoryItem) =>
+                {
+                    AssignWeapon(inventoryItem);
+                    UpdateRightBar();
+                });
         }
     }
 
-    private void AssignWeapon(WeaponDefinition weapon)
+    private void AssignWeapon(PlayerFile.InventoryItem item)
     {
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var bluePrint = BluePrintPool.ByKey(item.Key);
+        var weapon = bluePrint.Weapon;
         if (weapon.Type == ItemType.PrimaryWeapon)
         {
             var oldKey = playerFile.PrimaryWeaponKey;
             playerFile.PrimaryWeaponKey = weapon.Key;
-            /*
-            _inventory.Remove(weapon);
-            _inventory.Add(WeaponDefinitionPool.ByKey(oldKey));
-            */
+
+            _inventory.Remove(item);
+            _inventory.Add(new PlayerFile.InventoryItem { Key = weapon.Key, IsOwned = true, BluePrintsOwned = BluePrintPool.ByKey(item.Key).RequiredCount });
         }
         if (weapon.Type == ItemType.SecondaryWeapon)
         {
             var oldKey = playerFile.SecondaryWeaponKey;
             playerFile.SecondaryWeaponKey = weapon.Key;
-            /*
-            _inventory.Remove(weapon);
-            _inventory.Add(WeaponDefinitionPool.ByKey(oldKey));
-            */
+
+            _inventory.Remove(item);
+            _inventory.Add(new PlayerFile.InventoryItem { Key = weapon.Key, IsOwned = true, BluePrintsOwned = BluePrintPool.ByKey(item.Key).RequiredCount });
         }
         playerFile.Inventory = _inventory;//.Select(i => i.Key).ToList();
         playerFile.WriteToFile(PlayerFile.Filename);
