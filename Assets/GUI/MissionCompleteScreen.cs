@@ -90,9 +90,7 @@ public class MissionCompleteScreen : MonoBehaviour
         }));
         var bluePrint = GetRandomBluePrint();
         var weapon = WeaponDefinitionPool.ByKey(bluePrint.Weapon.Key);
-
-        //PlayerController.Current.Give(new PlayerFile.InventoryItem() { Key = bluePrint.Key });
-
+        PlayerController.Current.Give(new PlayerFile.InventoryItem() { Key = bluePrint.Key });
         delay += 0.5f;
         StartCoroutine(DelayedAction(delay, () =>
         {

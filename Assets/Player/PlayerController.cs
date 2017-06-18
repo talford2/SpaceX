@@ -715,12 +715,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*
     public void Give(PlayerFile.InventoryItem item)
     {
-        _inventory.AddItem(item);
+        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        if (playerFile.Inventory.Any(i => i.Key == item.Key))
+        {
+            playerFile.Inventory.First(i => i.Key == item.Key).BluePrintsOwned++;
+        }
+        else
+        {
+            playerFile.Inventory.Add(new PlayerFile.InventoryItem { Key = item.Key, BluePrintsOwned = 1, EquippedSlot = PlayerFile.EquippedSlot.Inventory, IsOwned = false })
+        }
     }
-    */
 
     private void PlayerController_OnRegenerate()
     {
