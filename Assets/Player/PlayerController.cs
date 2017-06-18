@@ -884,10 +884,10 @@ public class PlayerController : MonoBehaviour
     public void Load()
     {
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
-        playerFile.Inventory = new System.Collections.Generic.List<PlayerFile.InventoryItem>();
+        playerFile.Inventory = new List<PlayerFile.InventoryItem>();
         SpaceJunkCount = playerFile.SpaceJunk;
         var primaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
-        var secondaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
+        var secondaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Secondary);
         _profile.PrimaryWeapon = BluePrintPool.ByKey(primaryInventoryItem.Key).Weapon;
         _profile.SecondaryWeapon = BluePrintPool.ByKey(secondaryInventoryItem.Key).Weapon;
         VehicleInstance.SetPrimaryWeapon(_profile.PrimaryWeapon);
