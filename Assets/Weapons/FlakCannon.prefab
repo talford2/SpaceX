@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - component: {fileID: 450098}
   - component: {fileID: 11413680}
-  - component: {fileID: 11442032}
   m_Layer: 0
   m_Name: FlakCannon
   m_TagString: Untagged
@@ -43,26 +42,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LootIndex: 6
   Definition: {fileID: 11400000, guid: 743a0c601e54b48479489eef2f1e2cbf, type: 2}
-  SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
   DamagePoints: 0
   FireRatePoints: 0
   CoolingRatePoints: 0
   HeatCapacityPoints: 0
   IsTriggered: 0
---- !u!114 &11442032
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 168282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbdbb7f25e717fd499c6f238cf3acb2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InventorySprite: {fileID: 21300000, guid: a17cfd0612758854395f53981d9b516e, type: 3}
-  Type: 1
-  SalvageValue: 100
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

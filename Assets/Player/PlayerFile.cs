@@ -38,4 +38,9 @@ public class PlayerFile : DataFile<PlayerFile>
         Secondary,
         Inventory
     }
+
+    public static bool Exists()
+    {
+        return Exists(Filename);
+    }
 }

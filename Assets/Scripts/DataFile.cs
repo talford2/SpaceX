@@ -5,7 +5,7 @@ using System.Text;
 
 public abstract class DataFile<T>
 {
-    public static bool Exists(string filename)
+    protected static bool Exists(string filename)
     {
         return File.Exists(filename);
     }

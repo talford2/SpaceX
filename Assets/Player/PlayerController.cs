@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -104,7 +105,14 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Load();
+        if (PlayerFile.Exists())
+        {
+            Load();
+        }
+        else
+        {
+            BuildFile().WriteToFile(PlayerFile.Filename);
+        }
         Squadron.Initialize();
 
         HeadsUpDisplay.Current.LazyCreateSquadronIcons();
@@ -707,43 +715,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private PlayerInventory _inventory;
-
+    /*
     public void Give(PlayerFile.InventoryItem item)
     {
         _inventory.AddItem(item);
-    }
-
-    /*
-    public void Give(GameObject item)
-    {
-        _inventory.AddItem(item);
-        Debug.Log("COLLECTED: " + item.name);
-    }
-
-    public void SetInventoryItem(int index, GameObject item)
-    {
-        _inventory.AddItemAt(item, index);
-    }
-
-    public void AddToInventory(GameObject item)
-    {
-        _inventory.AddItem(item);
-    }
-
-    public void RemoveFromInventory(int index)
-    {
-        _inventory.RemoveItemAt(index);
-    }
-
-    public GameObject GetInventoryItem(int index)
-    {
-        return _inventory.Items[index];
-    }
-
-    public GameObject[] GetInventoryItems()
-    {
-        return _inventory.Items;
     }
     */
 
@@ -885,16 +860,17 @@ public class PlayerController : MonoBehaviour
         if (_profile.SecondaryWeapon == null)
             _profile.SecondaryWeapon = VehicleInstance.SecondaryWeapon;
 
+        var inventory = new List<PlayerFile.InventoryItem>();
         var primaryBluePrint = BluePrintFromWeapon(_profile.PrimaryWeapon);
-        _inventory.AddItem(new PlayerFile.InventoryItem { Key = primaryBluePrint.Key, BluePrintsOwned = primaryBluePrint.RequiredCount, EquippedSlot = PlayerFile.EquippedSlot.Primary, IsOwned = true });
+        inventory.Add(new PlayerFile.InventoryItem { Key = primaryBluePrint.Key, BluePrintsOwned = primaryBluePrint.RequiredCount, EquippedSlot = PlayerFile.EquippedSlot.Primary, IsOwned = true });
 
         var secondaryBluePrint = BluePrintFromWeapon(_profile.SecondaryWeapon);
-        _inventory.AddItem(new PlayerFile.InventoryItem { Key = secondaryBluePrint.Key, BluePrintsOwned = secondaryBluePrint.RequiredCount, EquippedSlot = PlayerFile.EquippedSlot.Secondary, IsOwned = true });
+        inventory.Add(new PlayerFile.InventoryItem { Key = secondaryBluePrint.Key, BluePrintsOwned = secondaryBluePrint.RequiredCount, EquippedSlot = PlayerFile.EquippedSlot.Secondary, IsOwned = true });
 
         return new PlayerFile
         {
             SpaceJunk = SpaceJunkCount,
-            Inventory = _inventory.Items
+            Inventory = inventory
         };
     }
 
@@ -902,31 +878,20 @@ public class PlayerController : MonoBehaviour
     {
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
         playerFile.SpaceJunk = SpaceJunkCount;
-        playerFile.Inventory = _inventory.Items;
         playerFile.WriteToFile(PlayerFile.Filename);
     }
 
     public void Load()
     {
-        if (PlayerFile.Exists(PlayerFile.Filename))
-        {
-            var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
-            playerFile.Inventory = new System.Collections.Generic.List<PlayerFile.InventoryItem>();
-            _inventory = new PlayerInventory(playerFile);
-            SpaceJunkCount = playerFile.SpaceJunk;
-            var primaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
-            var secondaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
-            _profile.PrimaryWeapon = BluePrintPool.ByKey(primaryInventoryItem.Key).Weapon;
-            _profile.SecondaryWeapon = BluePrintPool.ByKey(secondaryInventoryItem.Key).Weapon;
-            VehicleInstance.SetPrimaryWeapon(_profile.PrimaryWeapon);
-            VehicleInstance.SetSecondaryWeapon(_profile.SecondaryWeapon);
-        }
-        else
-        {
-            _inventory = new PlayerInventory(new PlayerFile());
-            var playerFile = BuildFile();
-            playerFile.WriteToFile(PlayerFile.Filename);
-        }
+        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        playerFile.Inventory = new System.Collections.Generic.List<PlayerFile.InventoryItem>();
+        SpaceJunkCount = playerFile.SpaceJunk;
+        var primaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
+        var secondaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
+        _profile.PrimaryWeapon = BluePrintPool.ByKey(primaryInventoryItem.Key).Weapon;
+        _profile.SecondaryWeapon = BluePrintPool.ByKey(secondaryInventoryItem.Key).Weapon;
+        VehicleInstance.SetPrimaryWeapon(_profile.PrimaryWeapon);
+        VehicleInstance.SetSecondaryWeapon(_profile.SecondaryWeapon);
     }
 
     private void OnDrawGizmos()

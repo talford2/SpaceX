@@ -1,5 +1,4 @@
 ﻿using Effects;
-using System.Collections;
 using UnityEngine;
 
 public class Utility

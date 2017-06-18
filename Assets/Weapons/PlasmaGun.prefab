@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - component: {fileID: 467582}
   - component: {fileID: 11444764}
-  - component: {fileID: 11401400}
   m_Layer: 0
   m_Name: PlasmaGun
   m_TagString: Untagged
@@ -30,20 +29,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &11401400
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 116878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbdbb7f25e717fd499c6f238cf3acb2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InventorySprite: {fileID: 21300000, guid: fc540361f5c44ed4b9d60202e2c60882, type: 3}
-  Type: 0
-  SalvageValue: 100
 --- !u!114 &11444764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -57,7 +42,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LootIndex: 2
   Definition: {fileID: 11400000, guid: 32f37dc1b69f5ff44ab2900b25f77d92, type: 2}
-  SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
   DamagePoints: 0
   FireRatePoints: 0
   CoolingRatePoints: 0

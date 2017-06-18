@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - component: {fileID: 490488}
   - component: {fileID: 11492802}
-  - component: {fileID: 11418244}
   m_Layer: 0
   m_Name: GreenLasers
   m_TagString: Untagged
@@ -30,20 +29,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &11418244
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbdbb7f25e717fd499c6f238cf3acb2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InventorySprite: {fileID: 21300000, guid: 53c8d39213fa7c54fa87b72d2e1ad40e, type: 3}
-  Type: 0
-  SalvageValue: 100
 --- !u!114 &11492802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -57,7 +42,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LootIndex: 1
   Definition: {fileID: 11400000, guid: 35176b6835ffeb14298aae6956dcded6, type: 2}
-  SoundPrefab: {fileID: 132046, guid: f0864c6efef7667458f0eb404cf36cf2, type: 2}
   DamagePoints: 0
   FireRatePoints: 0
   CoolingRatePoints: 0
