@@ -94,12 +94,12 @@ public class HangarScreen : MonoBehaviour
         if (weapon.Type == ItemType.PrimaryWeapon)
         {
             playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).EquippedSlot = PlayerFile.EquippedSlot.Inventory;
-            item.EquippedSlot = PlayerFile.EquippedSlot.Primary;
+            playerFile.GetItemByKey(item.Key).EquippedSlot = PlayerFile.EquippedSlot.Primary;
         }
         if (weapon.Type == ItemType.SecondaryWeapon)
         {
             playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).EquippedSlot = PlayerFile.EquippedSlot.Inventory;
-            item.EquippedSlot = PlayerFile.EquippedSlot.Secondary;
+            playerFile.GetItemByKey(item.Key).EquippedSlot = PlayerFile.EquippedSlot.Secondary;
         }
         playerFile.WriteToFile(PlayerFile.Filename);
         var primaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).Key).Weapon;

@@ -20,6 +20,11 @@ public class PlayerFile : DataFile<PlayerFile>
         return Inventory.First(i => i.EquippedSlot == equippedSlot);
     }
 
+    public InventoryItem GetItemByKey(string key)
+    {
+        return Inventory.First(i => i.Key == key);
+    }
+
     public class InventoryItem
     {
         [XmlAttribute("key")]
