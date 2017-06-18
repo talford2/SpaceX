@@ -5,6 +5,7 @@ public class NavIcon : MonoBehaviour
     public Transform DestinationPoint;
     public Transform Pin;
 
+    public string SceneName;
     public int LevelIndex;
 
     public void OnClick()

@@ -10,6 +10,7 @@ public class NavShipController : MonoBehaviour
     private float _acceleration = 30f;
     private float _speed;
     private float _maxSpeed = 30f;
+    private string _sceneName;
     private int _levelIndex = -1;
 
     private void Awake()
@@ -44,6 +45,7 @@ public class NavShipController : MonoBehaviour
                 var navIcon = mouseHit.collider.GetComponentInParent<NavIcon>();
                 if (navIcon != null)
                 {
+                    _sceneName = navIcon.SceneName;
                     _levelIndex = navIcon.LevelIndex;
                     Debug.Log("INDEX: " + _levelIndex);
                     navIcon.OnClick();
@@ -79,7 +81,7 @@ public class NavShipController : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Return))
             {
                 PlayerContext.Current.LevelIndex = _levelIndex;
-                LoadWithLoader("Test1");
+                LoadWithLoader(_sceneName);
             }
         }
     }
