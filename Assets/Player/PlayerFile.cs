@@ -24,7 +24,9 @@ public class PlayerFile : DataFile<PlayerFile>
     {
         [XmlAttribute("key")]
         public string Key;
-        [XmlElement("owned")]
+        [XmlElement("blueprints")]
         public int BluePrintsOwned;
+        [XmlElement("owned")]
+        public bool IsOwned;
     }
 }

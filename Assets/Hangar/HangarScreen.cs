@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -51,29 +52,36 @@ public class HangarScreen : MonoBehaviour
 
     private void UpdateRightBar()
     {
+        Debug.Log("UPDATE RIGHT BAR!");
         foreach (Transform item in RightPanel)
         {
             Destroy(item.gameObject);
         }
 
-        /*
-        foreach (var item in _inventory)
-        {
-            var itemButton = Instantiate(WeaponButtonPrefab, RightPanel);
-            itemButton.Bind(item, (weapon) =>
-            {
-                AssignWeapon(weapon);
-                UpdateRightBar();
-            });
-        }
-        */
         foreach(var item in _inventory)
         {
             var itemButton = Instantiate(BlueprintButtonPrefab, RightPanel);
-            itemButton.Bind(item, (inventoryItem) =>
+            itemButton.Bind(item, (button, inventoryItem) =>
             {
-                //AssignWeapon(inventoryItem);
-                UpdateRightBar();
+                var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+                var bluePrint = BluePrintPool.ByKey(inventoryItem.Key);
+                if (inventoryItem.IsOwned)
+                {
+                    AssignWeapon(bluePrint.Weapon);
+                    UpdateRightBar();
+                }
+                else
+                {
+                    if (playerFile.SpaceJunk >= bluePrint.Price)
+                    {
+                        playerFile.Inventory.First(i => i.Key == bluePrint.Key).IsOwned = true;
+                        playerFile.SpaceJunk -= bluePrint.Price;
+                        playerFile.WriteToFile(PlayerFile.Filename);
+                        UpdateCredits(playerFile.SpaceJunk);
+                        button.SetOwned(item);
+                        UpdateRightBar();
+                    }
+                }
             });
         }
     }

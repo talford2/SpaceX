@@ -139,10 +139,10 @@ public class MissionCompleteScreen : MonoBehaviour
         for (var credits = earnedCredits; credits >= 0; credits--)
         {
             yield return new WaitForSeconds(tickTime);
-            totalCredits++;
             EarnedCreditsText.text = string.Format("Credits Earned: {0:N0}", credits);
             TotalCreditsText.text = string.Format("TOTAL CREDITS: {0:N0}", totalCredits);
             PlaySound(CreditTickSound);
+            totalCredits++;
         }
     }
 
