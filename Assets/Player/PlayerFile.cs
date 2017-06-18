@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
 
@@ -10,23 +11,31 @@ public class PlayerFile : DataFile<PlayerFile>
     [XmlElement("junk")]
     public int SpaceJunk;
 
-    [XmlElement("primary")]
-    public string PrimaryWeaponKey;
-
-    [XmlElement("secondary")]
-    public string SecondaryWeaponKey;
-
     [XmlArray("inventory")]
     [XmlArrayItem("item")]
     public List<InventoryItem> Inventory;
+
+    public InventoryItem GetItemIn(EquippedSlot equippedSlot)
+    {
+        return Inventory.First(i => i.EquippedSlot == equippedSlot);
+    }
 
     public class InventoryItem
     {
         [XmlAttribute("key")]
         public string Key;
+        [XmlAttribute("equipped")]
+        public EquippedSlot EquippedSlot;
         [XmlElement("blueprints")]
         public int BluePrintsOwned;
         [XmlElement("owned")]
         public bool IsOwned;
+    }
+
+    public enum EquippedSlot
+    {
+        Primary,
+        Secondary,
+        Inventory
     }
 }

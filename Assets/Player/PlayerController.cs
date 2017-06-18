@@ -872,13 +872,27 @@ public class PlayerController : MonoBehaviour
     //	GUI.Label(new Rect(30f, 330f, 200f, 25f), string.Format("SHIFTABLES: {0}", Universe.Current.ShiftableItems.Count));
     //}
 
+    private BluePrint BluePrintFromWeapon(WeaponDefinition weapon)
+    {
+        return BluePrintPool.All().First(b => b.Weapon.Key == weapon.Key);
+    }
+
     public PlayerFile BuildFile()
     {
+        if (_profile.PrimaryWeapon == null)
+            _profile.PrimaryWeapon = VehicleInstance.PrimaryWeapon;
+        if (_profile.SecondaryWeapon == null)
+            _profile.SecondaryWeapon = VehicleInstance.SecondaryWeapon;
+
+        var primaryBluePrint = BluePrintFromWeapon(_profile.PrimaryWeapon);
+        _inventory.AddItem(new PlayerFile.InventoryItem { Key = primaryBluePrint.Key, BluePrintsOwned = primaryBluePrint.RequiredCount, EquippedSlot = PlayerFile.EquippedSlot.Primary, IsOwned = true });
+
+        var secondaryBluePrint = BluePrintFromWeapon(_profile.SecondaryWeapon);
+        _inventory.AddItem(new PlayerFile.InventoryItem { Key = secondaryBluePrint.Key, BluePrintsOwned = secondaryBluePrint.RequiredCount, EquippedSlot = PlayerFile.EquippedSlot.Secondary, IsOwned = true });
+
         return new PlayerFile
         {
             SpaceJunk = SpaceJunkCount,
-            PrimaryWeaponKey = _profile.PrimaryWeapon != null ? _profile.PrimaryWeapon.Key : VehicleInstance.PrimaryWeapon.Key,
-            SecondaryWeaponKey = _profile.SecondaryWeapon != null ? _profile.SecondaryWeapon.Key : VehicleInstance.SecondaryWeapon.Key,
             Inventory = _inventory.Items
         };
     }
@@ -887,8 +901,7 @@ public class PlayerController : MonoBehaviour
     {
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
         playerFile.SpaceJunk = SpaceJunkCount;
-        playerFile.PrimaryWeaponKey = _profile.PrimaryWeapon.Key;
-        playerFile.SecondaryWeaponKey = _profile.SecondaryWeapon.Key;
+        playerFile.Inventory = _inventory.Items;
         playerFile.WriteToFile(PlayerFile.Filename);
     }
 
@@ -897,10 +910,13 @@ public class PlayerController : MonoBehaviour
         if (PlayerFile.Exists(PlayerFile.Filename))
         {
             var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+            playerFile.Inventory = new System.Collections.Generic.List<PlayerFile.InventoryItem>();
             _inventory = new PlayerInventory(playerFile);
             SpaceJunkCount = playerFile.SpaceJunk;
-            _profile.PrimaryWeapon = WeaponDefinitionPool.ByKey(playerFile.PrimaryWeaponKey);
-            _profile.SecondaryWeapon = WeaponDefinitionPool.ByKey(playerFile.SecondaryWeaponKey);
+            var primaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
+            var secondaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
+            _profile.PrimaryWeapon = BluePrintPool.ByKey(primaryInventoryItem.Key).Weapon;
+            _profile.SecondaryWeapon = BluePrintPool.ByKey(secondaryInventoryItem.Key).Weapon;
             VehicleInstance.SetPrimaryWeapon(_profile.PrimaryWeapon);
             VehicleInstance.SetSecondaryWeapon(_profile.SecondaryWeapon);
         }

@@ -25,7 +25,11 @@ public class HangarScreen : MonoBehaviour
     {
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
         UpdateCredits(playerFile.SpaceJunk);
-        UpdateLeftBar(WeaponDefinitionPool.ByKey(playerFile.PrimaryWeaponKey), WeaponDefinitionPool.ByKey(playerFile.SecondaryWeaponKey));
+
+        var primaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).Key).Weapon;
+        var secondaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).Key).Weapon;
+
+        UpdateLeftBar(primaryWeapon, secondaryWeapon);
         _inventory = playerFile.Inventory;//.Select(i => WeaponDefinitionPool.ByKey(BluePrintPool.ByKey(i.Key).Weapon.Key)).ToList();
         UpdateRightBar();
     }
@@ -91,23 +95,20 @@ public class HangarScreen : MonoBehaviour
         var weapon = bluePrint.Weapon;
         if (weapon.Type == ItemType.PrimaryWeapon)
         {
-            var oldKey = playerFile.PrimaryWeaponKey;
-            playerFile.PrimaryWeaponKey = weapon.Key;
+            playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).EquippedSlot = PlayerFile.EquippedSlot.Inventory;
+            item.EquippedSlot = PlayerFile.EquippedSlot.Primary;
 
-            _inventory.Remove(item);
-            _inventory.Add(new PlayerFile.InventoryItem { Key = weapon.Key, IsOwned = true, BluePrintsOwned = BluePrintPool.ByKey(item.Key).RequiredCount });
         }
         if (weapon.Type == ItemType.SecondaryWeapon)
         {
-            var oldKey = playerFile.SecondaryWeaponKey;
-            playerFile.SecondaryWeaponKey = weapon.Key;
-
-            _inventory.Remove(item);
-            _inventory.Add(new PlayerFile.InventoryItem { Key = weapon.Key, IsOwned = true, BluePrintsOwned = BluePrintPool.ByKey(item.Key).RequiredCount });
+            playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).EquippedSlot = PlayerFile.EquippedSlot.Inventory;
+            item.EquippedSlot = PlayerFile.EquippedSlot.Secondary;
         }
-        playerFile.Inventory = _inventory;//.Select(i => i.Key).ToList();
+        playerFile.Inventory = _inventory;
         playerFile.WriteToFile(PlayerFile.Filename);
-        UpdateLeftBar(WeaponDefinitionPool.ByKey(playerFile.PrimaryWeaponKey), WeaponDefinitionPool.ByKey(playerFile.SecondaryWeaponKey));
+        var primaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).Key).Weapon;
+        var secondaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).Key).Weapon;
+        UpdateLeftBar(primaryWeapon, secondaryWeapon);
     }
 
     private void UpdateCredits(int creditCount)
