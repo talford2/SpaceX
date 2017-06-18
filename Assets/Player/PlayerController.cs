@@ -884,7 +884,6 @@ public class PlayerController : MonoBehaviour
     public void Load()
     {
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
-        playerFile.Inventory = new List<PlayerFile.InventoryItem>();
         SpaceJunkCount = playerFile.SpaceJunk;
         var primaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
         var secondaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Secondary);
