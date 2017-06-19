@@ -90,17 +90,19 @@ public class MissionCompleteScreen : MonoBehaviour
             StartCoroutine(SumCredits(Mission.Current.GetEarnedCredits()));
         }));
         var bluePrint = GetRandomBluePrint();
-        var weapon = WeaponDefinitionPool.ByKey(bluePrint.Weapon.Key);
         if (bluePrint != null)
-            PlayerController.Current.Give(new PlayerFile.InventoryItem() { Key = bluePrint.Key });
-        delay += 0.5f;
-        StartCoroutine(DelayedAction(delay, () =>
         {
-            ItemPanel.alpha = 1f;
-            ItemIcon.sprite = weapon.InventorySprite;
-            ItemName.text = weapon.Name;
-            PlaySound(TextAppearSound);
-        }));
+            var weapon = WeaponDefinitionPool.ByKey(bluePrint.Weapon.Key);
+            PlayerController.Current.Give(new PlayerFile.InventoryItem() { Key = bluePrint.Key });
+            delay += 0.5f;
+            StartCoroutine(DelayedAction(delay, () =>
+            {
+                ItemPanel.alpha = 1f;
+                ItemIcon.sprite = weapon.InventorySprite;
+                ItemName.text = weapon.Name;
+                PlaySound(TextAppearSound);
+            }));
+        }
     }
 
     public void Hide()
