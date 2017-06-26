@@ -30,12 +30,18 @@ public class VehicleCameraFollow : VehicleCameraState
 
     public VehicleCameraFollow(VehicleCamera vehicleCamera) : base(vehicleCamera) { }
 
+    private float _lookAtDelay = 1f;
+    private float _lookAtCooldown;
+
     public override void Initialize()
     {
         VehicleCamera.Target = PlayerController.Current.VehicleInstance;
         _springDistance = 1f;
         _offsetAngle = VehicleCamera.Target.transform.rotation;
         _targetUp = VehicleCamera.Target.transform.up;
+
+        _offset = VehicleCamera.transform.position - VehicleCamera.Target.transform.position;
+        _lookAtCooldown = _lookAtDelay;
     }
 
     public override void Move(float timeStep)
@@ -85,7 +91,16 @@ public class VehicleCameraFollow : VehicleCameraState
 
             _targetUp = Vector3.Lerp(_targetUp, VehicleCamera.Target.transform.up, 5f * timeStep);
 
-            VehicleCamera.transform.LookAt(VehicleCamera.Target.GetAimPosition(), _targetUp);
+            if (_lookAtCooldown >= 0f)
+            {
+                _lookAtCooldown -= Time.deltaTime;
+                var _lookAtFraction = 1f - _lookAtCooldown / _lookAtDelay;
+                VehicleCamera.transform.rotation = Quaternion.Lerp(VehicleCamera.transform.rotation, Quaternion.LookRotation(VehicleCamera.Target.GetAimPosition() - VehicleCamera.transform.position, _targetUp), _lookAtFraction);
+            }
+            else
+            {
+                VehicleCamera.transform.LookAt(VehicleCamera.Target.GetAimPosition(), _targetUp);
+            }
         }
         else
         {
