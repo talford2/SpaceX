@@ -79,10 +79,7 @@ public class NavShipController : MonoBehaviour
             if (_levelIndex > -1)
                 GalaxyMapUi.Current.SetVisibleEnterSystem(true);
             if (Input.GetKeyUp(KeyCode.Return))
-            {
-                PlayerContext.Current.LevelIndex = _levelIndex;
-                LoadWithLoader(_sceneName);
-            }
+                LoadWithLoaderAndIndex();
         }
     }
 
@@ -95,5 +92,11 @@ public class NavShipController : MonoBehaviour
     {
         PlayerContext.Current.SceneName = sceneName;
         SceneManager.LoadScene("LoadingScene");
+    }
+
+    public void LoadWithLoaderAndIndex()
+    {
+        PlayerContext.Current.LevelIndex = _levelIndex;
+        LoadWithLoader(_sceneName);
     }
 }
