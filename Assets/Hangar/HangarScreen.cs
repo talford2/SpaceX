@@ -9,7 +9,8 @@ public class HangarScreen : MonoBehaviour
     public Text CreditText;
     public Transform LeftPanel;
     public HangarWeaponButton WeaponButtonPrefab;
-    public HangarBluePrintButton BlueprintButtonPrefab;
+    public HangarBluePrintButton BluePrintButtonPrefab;
+    public HangarOwnedBluePrintButton OwnedBluePrintButtonPrefab;
     public Transform RightPanel;
 
     private void Awake()
@@ -58,32 +59,52 @@ public class HangarScreen : MonoBehaviour
             Destroy(item.gameObject);
         }
 
-        var inventory = PlayerFile.ReadFromFile(PlayerFile.Filename).Inventory;
+        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var sortedInventory = playerFile.Inventory.OrderBy(i => i.SortStatus());
 
-        foreach (var item in inventory.Where(i=>i.EquippedSlot == PlayerFile.EquippedSlot.Inventory))
+        foreach (var item in sortedInventory.Where(i=>i.EquippedSlot == PlayerFile.EquippedSlot.Inventory))
         {
-            var itemButton = Instantiate(BlueprintButtonPrefab, RightPanel);
-            itemButton.Bind(item,
-                (button, inventoryItem) =>
-                {
-                    var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
-                    var bluePrint = BluePrintPool.ByKey(inventoryItem.Key);
-                    if (playerFile.SpaceJunk >= bluePrint.Price)
+            var bluePrint = BluePrintPool.ByKey(item.Key);
+            if (item.IsOwned)
+            {
+                var itemButton = Instantiate(OwnedBluePrintButtonPrefab, RightPanel);
+                itemButton.Bind(item,
+                    (button, inventoryItem) =>
                     {
-                        playerFile.Inventory.First(i => i.Key == bluePrint.Key).IsOwned = true;
-                        playerFile.SpaceJunk -= bluePrint.Price;
-                        playerFile.WriteToFile(PlayerFile.Filename);
-                        UpdateCredits(playerFile.SpaceJunk);
-                        button.SetOwned(item);
-                        //UpdateRightBar();
-                    }
-                },
-                (button, inventoryItem) =>
-                {
-                    AssignWeapon(inventoryItem);
-                    UpdateRightBar();
-                });
+                        AssignWeapon(inventoryItem);
+                        UpdateRightBar();
+                    });
+            }
+            else
+            {
+                var itemButton = Instantiate(BluePrintButtonPrefab, RightPanel);
+                itemButton.Bind(item,
+                    (button, inventoryItem) =>
+                    {
+                        var btnPlayerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+                        var btnBluePrint = BluePrintPool.ByKey(inventoryItem.Key);
+                        if (btnPlayerFile.SpaceJunk >= btnBluePrint.Price)
+                        {
+                            BuyWeapon(btnPlayerFile, btnBluePrint);
+                            UpdateCredits(btnPlayerFile.SpaceJunk);
+                            UpdateRightBar();
+                        }
+                    },
+                    (button, inventoryItem) =>
+                    {
+                        AssignWeapon(inventoryItem);
+                        UpdateRightBar();
+                    });
+                itemButton.SetAffordable(playerFile.SpaceJunk >= bluePrint.Price);
+            }
         }
+    }
+    
+    private void BuyWeapon(PlayerFile playerFile, BluePrint bluePrint)
+    {
+        playerFile.Inventory.First(i => i.Key == bluePrint.Key).IsOwned = true;
+        playerFile.SpaceJunk -= bluePrint.Price;
+        playerFile.WriteToFile(PlayerFile.Filename);
     }
 
     private void AssignWeapon(PlayerFile.InventoryItem item)
@@ -105,7 +126,6 @@ public class HangarScreen : MonoBehaviour
         var primaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).Key).Weapon;
         var secondaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).Key).Weapon;
         UpdateLeftBar(primaryWeapon, secondaryWeapon);
-        UpdateRightBar();
     }
 
     private void UpdateCredits(int creditCount)

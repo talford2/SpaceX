@@ -35,6 +35,15 @@ public class PlayerFile : DataFile<PlayerFile>
         public int BluePrintsOwned;
         [XmlElement("owned")]
         public bool IsOwned;
+
+        public int SortStatus()
+        {
+            if (BluePrintPool.ByKey(Key).RequiredCount > BluePrintsOwned)
+                return 2;
+            if (!IsOwned)
+                return 1;
+            return 0;
+        }
     }
 
     public enum EquippedSlot
