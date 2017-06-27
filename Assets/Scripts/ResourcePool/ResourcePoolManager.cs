@@ -14,6 +14,8 @@ public class ResourcePoolManager
 
     public static GameObject GetAvailable(GameObject obj, Vector3 position, Quaternion rotation)
     {
+        if (!_resourcePools.ContainsKey(obj))
+            Debug.LogWarningFormat("Resource pool for '{0}' does not exist.", obj);
         return _resourcePools[obj].GetAvailable(position, rotation);
     }
 
