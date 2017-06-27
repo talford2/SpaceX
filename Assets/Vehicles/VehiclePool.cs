@@ -16,6 +16,6 @@ public class VehiclePool : MonoBehaviour {
 
     public static Vehicle ByKey(string key)
     {
-        return _current.Vehicles.FirstOrDefault(v => v.name == key);
+        return _current.Vehicles.FirstOrDefault(v => v.Key == key);
     }
 }

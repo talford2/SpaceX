@@ -7,6 +7,7 @@ public class Vehicle : MonoBehaviour
     [Header("Description")]
     public string Name;
     public GameObject PreviewPrefab;
+    public string Key { get { return name; } }
 
     [Header("Vehicle Settings")]
     public Transform MeshTransform;
