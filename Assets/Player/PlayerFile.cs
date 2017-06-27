@@ -8,6 +8,9 @@ public class PlayerFile : DataFile<PlayerFile>
 {
     public static string Filename { get { return string.Format("{0}/{1}", Application.persistentDataPath, "player.xml"); } }
 
+    [XmlElement("ship")]
+    public string Ship;
+
     [XmlElement("junk")]
     public int SpaceJunk;
 

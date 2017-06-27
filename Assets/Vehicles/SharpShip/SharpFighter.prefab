@@ -472,8 +472,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed9b078a58fe604694fff0328ea19ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  PreviewPrefab: {fileID: 0}
+  Name: Sharp Fighter
+  PreviewPrefab: {fileID: 1576103362681830, guid: 2a5eed55e96a68646a601cfe163925c2,
+    type: 2}
   MeshTransform: {fileID: 425688}
   IdleSpeed: 20
   MaxSpeed: 60
@@ -525,6 +526,7 @@ MonoBehaviour:
   ExplodeDeathExplosion: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee,
     type: 2}
   SpinDeathExplosion: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
+  SpinThresholdSpeed: 25
   ThrusterPrefab: {fileID: 1208372660303078, guid: 3220c301aa709834a89891f31efe01c3,
     type: 2}
   ThrusterTransforms:

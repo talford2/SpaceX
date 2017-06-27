@@ -466,7 +466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Gunner
-  PreviewPrefab: {fileID: 190414, guid: 81138525fc3e13f4595aeb007f885cd5, type: 2}
+  PreviewPrefab: {fileID: 1349349856858862, guid: 8b89a47a2e94ee346a742cc6af33ec79,
+    type: 2}
   MeshTransform: {fileID: 4348277284807828}
   IdleSpeed: 20
   MaxSpeed: 50
@@ -522,6 +523,7 @@ MonoBehaviour:
   ExplodeDeathExplosion: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee,
     type: 2}
   SpinDeathExplosion: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
+  SpinThresholdSpeed: 25
   ThrusterPrefab: {fileID: 1208372660303078, guid: 3220c301aa709834a89891f31efe01c3,
     type: 2}
   ThrusterTransforms:

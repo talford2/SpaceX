@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4369542426157776}
   - component: {fileID: 114388633339312190}
   - component: {fileID: 114048567814964510}
+  - component: {fileID: 114185119791909028}
   m_Layer: 0
   m_Name: KeyedPool
   m_TagString: Untagged
@@ -59,6 +60,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d342265bbcbf8534cb05f75efb4db3a1, type: 2}
   - {fileID: 11400000, guid: 6f27b7379ab6b0e48b01549f2032cb0b, type: 2}
   - {fileID: 11400000, guid: 68c80c120baf00f4584816fa0108fca2, type: 2}
+  - {fileID: 11400000, guid: 12c3d3e5ee1333b4b988fb120337eb87, type: 2}
+--- !u!114 &114185119791909028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1078681844641004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a80efc3d3177a44eb587be87b35a7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Vehicles:
+  - {fileID: 11433924, guid: 4cdf1de3b2bff4a488dca50a049eea82, type: 2}
+  - {fileID: 11490646, guid: 8bbf55beb8aad884c88e0e8d057e3f4f, type: 2}
+  - {fileID: 114646999966712184, guid: 7e51bd4b70487fa4a908a98161fba288, type: 2}
+  - {fileID: 11498582, guid: a4731165bc86c274086020dcc9fe73d6, type: 2}
+  - {fileID: 11482724, guid: 4bfc1e3afc5de4149b2892883f0d6da0, type: 2}
 --- !u!114 &114388633339312190
 MonoBehaviour:
   m_ObjectHideFlags: 1

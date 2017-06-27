@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public Vehicle VehiclePrefab;
+    public Vehicle DefaultVehiclePrefab;
     public Team Team;
     public string CallSign;
     public int SpaceJunkCount;
@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public float CollectRadius = 8f;
     public float DoubleTapTime = 0.2f;
 
+    private Vehicle _playerVehiclePrefab;
     private Vehicle _playVehicleInstance;
     private Fighter _playerNpc;
     public Color TrackerColor;
@@ -91,12 +92,14 @@ public class PlayerController : MonoBehaviour
         _playerNpc.Team = Team;
         _playerNpc.IsSquadronMember = true;
         _playerNpc.GetComponent<ShipProfile>().CallSign = CallSign;
-        _playerNpc.VehiclePrefab = VehiclePrefab;
         _playerNpc.enabled = false;
+
         Squadron.AddPlayerToSquadron();
+        /*
         SpawnVehicle(VehiclePrefab, Universe.Current.PlayerSpawnPosition);
         _playerNpc.SetVehicleInstance(_playVehicleInstance);
         _playerNpc.IsFollowIdleDestination = true;
+        */
 
         _aimMask = ~LayerMask.GetMask("Player", "Detectable", "Distant");
         _detectableMask = LayerMask.GetMask("Detectable");
@@ -111,8 +114,15 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            _playerVehiclePrefab = DefaultVehiclePrefab;
+            SpawnVehicle(_playerVehiclePrefab, Universe.Current.PlayerSpawnPosition);
             BuildFile().WriteToFile(PlayerFile.Filename);
         }
+
+        _playerNpc.VehiclePrefab = _playerVehiclePrefab;
+        _playerNpc.SetVehicleInstance(_playVehicleInstance);
+        _playerNpc.IsFollowIdleDestination = true;
+
         Squadron.Initialize();
 
         HeadsUpDisplay.Current.LazyCreateSquadronIcons();
@@ -894,8 +904,12 @@ public class PlayerController : MonoBehaviour
         SpaceJunkCount = playerFile.SpaceJunk;
         var primaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
         var secondaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Secondary);
+
         _profile.PrimaryWeapon = BluePrintPool.ByKey(primaryInventoryItem.Key).Weapon;
         _profile.SecondaryWeapon = BluePrintPool.ByKey(secondaryInventoryItem.Key).Weapon;
+
+        _playerVehiclePrefab = VehiclePool.ByKey(playerFile.Ship);
+        SpawnVehicle(_playerVehiclePrefab, Universe.Current.PlayerSpawnPosition);
         VehicleInstance.SetPrimaryWeapon(_profile.PrimaryWeapon);
         VehicleInstance.SetSecondaryWeapon(_profile.SecondaryWeapon);
     }

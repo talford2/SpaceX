@@ -7,11 +7,21 @@ using UnityEngine.UI;
 public class HangarScreen : MonoBehaviour
 {
     public Text CreditText;
+
+    [Header("Left Panel")]
     public Transform LeftPanel;
     public HangarWeaponButton WeaponButtonPrefab;
+
+    [Header("Vehicle Preview")]
+    public Text VehicleNameText;
+    public Transform VehicleViewTransform;
+
+    [Header("Right Panel")]
+    public Transform RightPanel;
     public HangarBluePrintButton BluePrintButtonPrefab;
     public HangarOwnedBluePrintButton OwnedBluePrintButtonPrefab;
-    public Transform RightPanel;
+
+    private int _vehicleIndex;
 
     private void Awake()
     {
@@ -27,6 +37,9 @@ public class HangarScreen : MonoBehaviour
         var primaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).Key).Weapon;
         var secondaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).Key).Weapon;
 
+        _vehicleIndex = VehiclePool.Current.Vehicles.IndexOf(VehiclePool.ByKey(playerFile.Ship));
+        ShowVehicle(_vehicleIndex);
+
         UpdateLeftBar(primaryWeapon, secondaryWeapon);
         UpdateRightBar();
     }
@@ -35,6 +48,21 @@ public class HangarScreen : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape))
             SceneManager.LoadScene("Menu");
+    }
+
+    private void ShowVehicle(int index)
+    {
+        foreach(Transform t in VehicleViewTransform)
+        {
+            Destroy(t.gameObject);
+        }
+        var vehiclePrefab = VehiclePool.Current.Vehicles[index];
+        var vehiclePreview = Utility.InstantiateInParent(vehiclePrefab.PreviewPrefab, VehicleViewTransform);
+        VehicleNameText.text = vehiclePrefab.Name;
+
+        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        playerFile.Ship = vehiclePrefab.name;
+        playerFile.WriteToFile(PlayerFile.Filename);
     }
 
     private void UpdateLeftBar(WeaponDefinition primaryWeapon, WeaponDefinition secondaryWeapon)
@@ -131,6 +159,22 @@ public class HangarScreen : MonoBehaviour
     private void UpdateCredits(int creditCount)
     {
         CreditText.text = string.Format("{0:N0}c", creditCount);
+    }
+
+    public void NextVehicle()
+    {
+        _vehicleIndex++;
+        if (_vehicleIndex > VehiclePool.Current.Vehicles.Count - 1)
+            _vehicleIndex = 0;
+        ShowVehicle(_vehicleIndex);
+    }
+
+    public void PreviousVehicle()
+    {
+        _vehicleIndex--;
+        if (_vehicleIndex < 0)
+            _vehicleIndex = VehiclePool.Current.Vehicles.Count - 1;
+        ShowVehicle(_vehicleIndex);
     }
 
     public void GotoGalaxyMap()
