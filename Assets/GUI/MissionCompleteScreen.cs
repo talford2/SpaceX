@@ -194,6 +194,10 @@ public class MissionCompleteScreen : MonoBehaviour
         {
             bluePrints.RemoveAll(b => b.Key == item.Key);
         }
+        foreach (var ship in playerFile.Ships.Where(s => s.BluePrintsOwned == BluePrintPool.ByKey(s.Key).RequiredCount || s.IsOwned))
+        {
+            bluePrints.RemoveAll(b => b.Key == ship.Key);
+        }
         if (!bluePrints.Any())
             return null;
         return bluePrints[UnityEngine.Random.Range(0, bluePrints.Count)];
