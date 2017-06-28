@@ -18,26 +18,30 @@ public class HangarOwnedBluePrintButton : MonoBehaviour {
     {
         _item = item;
         var bluePrint = BluePrintPool.ByKey(item.Key);
-        var weaponDefinition = bluePrint.Weapon;
-        NameText.text = weaponDefinition.Name;
-        Icon.sprite = weaponDefinition.InventorySprite;
-        _onEquip = onEquip;
-        Button.onClick.RemoveAllListeners();
-        if (item.BluePrintsOwned >= bluePrint.RequiredCount)
+        var weaponItem = bluePrint.Item as WeaponDefinition;
+        if (weaponItem != null)
         {
-            /*
-            if (item.IsOwned)
+            var weaponDefinition = weaponItem;
+            NameText.text = weaponDefinition.Name;
+            Icon.sprite = weaponDefinition.InventorySprite;
+            _onEquip = onEquip;
+            Button.onClick.RemoveAllListeners();
+            if (item.BluePrintsOwned >= bluePrint.RequiredCount)
             {
-                //ProgressText.text = "OWNED";
+                /*
+                if (item.IsOwned)
+                {
+                    //ProgressText.text = "OWNED";
+                    Button.onClick.AddListener(OnEquip);
+                }
+                else
+                {
+                    //ProgressText.text = string.Format("{0:N0}", bluePrint.Price);
+                    Button.onClick.AddListener(OnBuy);
+                }
+                */
                 Button.onClick.AddListener(OnEquip);
             }
-            else
-            {
-                //ProgressText.text = string.Format("{0:N0}", bluePrint.Price);
-                Button.onClick.AddListener(OnBuy);
-            }
-            */
-            Button.onClick.AddListener(OnEquip);
         }
     }
 

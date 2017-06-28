@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Seeker
   m_EditorClassIdentifier: 
   RequiredCount: 2
-  Weapon: {fileID: 11400000, guid: e0c044cbb38635b439a551988a5d0472, type: 2}
+  Item: {fileID: 11400000, guid: e0c044cbb38635b439a551988a5d0472, type: 2}
   Price: 5000

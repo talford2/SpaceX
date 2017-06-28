@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: GreenLaser
   m_EditorClassIdentifier: 
   RequiredCount: 2
-  Weapon: {fileID: 11400000, guid: 35176b6835ffeb14298aae6956dcded6, type: 2}
+  Item: {fileID: 11400000, guid: 35176b6835ffeb14298aae6956dcded6, type: 2}
   Price: 1000

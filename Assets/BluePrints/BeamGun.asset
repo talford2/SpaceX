@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: BeamGun
   m_EditorClassIdentifier: 
   RequiredCount: 2
-  Weapon: {fileID: 11400000, guid: fe9da37f04cb42b409ae15d8d67d4569, type: 2}
+  Item: {fileID: 11400000, guid: fe9da37f04cb42b409ae15d8d67d4569, type: 2}
   Price: 2000

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Plasma
   m_EditorClassIdentifier: 
   RequiredCount: 2
-  Weapon: {fileID: 11400000, guid: 32f37dc1b69f5ff44ab2900b25f77d92, type: 2}
+  Item: {fileID: 11400000, guid: 32f37dc1b69f5ff44ab2900b25f77d92, type: 2}
   Price: 1500

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: BlueLaser
   m_EditorClassIdentifier: 
   RequiredCount: 2
-  Weapon: {fileID: 11400000, guid: 813c2d6396095f541bde9bde92fc02cb, type: 2}
+  Item: {fileID: 11400000, guid: 813c2d6396095f541bde9bde92fc02cb, type: 2}
   Price: 1000

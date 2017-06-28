@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Chaingun
   m_EditorClassIdentifier: 
   RequiredCount: 2
-  Weapon: {fileID: 11400000, guid: a4abda5c3d241724b858029e3d79babf, type: 2}
+  Item: {fileID: 11400000, guid: a4abda5c3d241724b858029e3d79babf, type: 2}
   Price: 2000

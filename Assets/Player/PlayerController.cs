@@ -867,7 +867,7 @@ public class PlayerController : MonoBehaviour
     private BluePrint BluePrintFromWeapon(WeaponDefinition weapon)
     {
         Debug.Log("KEY: " + weapon.Key);
-        return BluePrintPool.All().First(b => b.Weapon.Key == weapon.Key);
+        return BluePrintPool.All().First(b => ((b.Item) as WeaponDefinition).Key == weapon.Key);
     }
 
     public PlayerFile BuildFile()
@@ -905,8 +905,8 @@ public class PlayerController : MonoBehaviour
         var primaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
         var secondaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Secondary);
 
-        _profile.PrimaryWeapon = BluePrintPool.ByKey(primaryInventoryItem.Key).Weapon;
-        _profile.SecondaryWeapon = BluePrintPool.ByKey(secondaryInventoryItem.Key).Weapon;
+        _profile.PrimaryWeapon = BluePrintPool.ByKey<WeaponDefinition>(primaryInventoryItem.Key).Item as WeaponDefinition;
+        _profile.SecondaryWeapon = BluePrintPool.ByKey<WeaponDefinition>(secondaryInventoryItem.Key).Item as WeaponDefinition;
 
         _playerVehiclePrefab = VehiclePool.ByKey(playerFile.Ship);
         SpawnVehicle(_playerVehiclePrefab, Universe.Current.PlayerSpawnPosition);

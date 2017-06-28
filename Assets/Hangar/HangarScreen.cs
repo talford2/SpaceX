@@ -34,8 +34,8 @@ public class HangarScreen : MonoBehaviour
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
         UpdateCredits(playerFile.SpaceJunk);
 
-        var primaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).Key).Weapon;
-        var secondaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).Key).Weapon;
+        var primaryWeapon = GetEquippedWeapon(playerFile, PlayerFile.EquippedSlot.Primary);
+        var secondaryWeapon = GetEquippedWeapon(playerFile, PlayerFile.EquippedSlot.Secondary);
 
         _vehicleIndex = VehiclePool.Current.Vehicles.IndexOf(VehiclePool.ByKey(playerFile.Ship));
         ShowVehicle(_vehicleIndex);
@@ -139,7 +139,7 @@ public class HangarScreen : MonoBehaviour
     {
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
         var bluePrint = BluePrintPool.ByKey(item.Key);
-        var weapon = bluePrint.Weapon;
+        var weapon = bluePrint.Item as WeaponDefinition;
         if (weapon.Type == ItemType.PrimaryWeapon)
         {
             playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).EquippedSlot = PlayerFile.EquippedSlot.Inventory;
@@ -151,9 +151,14 @@ public class HangarScreen : MonoBehaviour
             playerFile.GetItemByKey(item.Key).EquippedSlot = PlayerFile.EquippedSlot.Secondary;
         }
         playerFile.WriteToFile(PlayerFile.Filename);
-        var primaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Primary).Key).Weapon;
-        var secondaryWeapon = BluePrintPool.ByKey(playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).Key).Weapon;
+        var primaryWeapon = GetEquippedWeapon(playerFile, PlayerFile.EquippedSlot.Primary);
+        var secondaryWeapon = GetEquippedWeapon(playerFile, PlayerFile.EquippedSlot.Secondary);
         UpdateLeftBar(primaryWeapon, secondaryWeapon);
+    }
+
+    private WeaponDefinition GetEquippedWeapon(PlayerFile playerFile, PlayerFile.EquippedSlot slot)
+    {
+        return BluePrintPool.ByKey(playerFile.GetItemIn(slot).Key).Item as WeaponDefinition;
     }
 
     private void UpdateCredits(int creditCount)

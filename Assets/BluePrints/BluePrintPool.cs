@@ -16,7 +16,12 @@ public class BluePrintPool : MonoBehaviour
 
     public static BluePrint ByKey(string key)
     {
-        return _current.BluePrints.FirstOrDefault(w => w.Key == key);
+        return _current.BluePrints.FirstOrDefault(b => b.Key == key);
+    }
+
+    public static BluePrint ByKey<T>(string key) where T : Object
+    {
+        return _current.BluePrints.FirstOrDefault(b => (b.Item as T) != null && b.Key == key);
     }
 
     public static List<BluePrint> All()

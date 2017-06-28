@@ -5,6 +5,6 @@ public class BluePrint : ScriptableObject
 {
     public string Key { get { return name; } }
     public int RequiredCount;
-    public WeaponDefinition Weapon;
+    public Object Item;
     public int Price;
 }

@@ -21,28 +21,32 @@ public class HangarBluePrintButton : MonoBehaviour
     {
         _item = item;
         _bluePrint = BluePrintPool.ByKey(item.Key);
-        var weaponDefinition = _bluePrint.Weapon;
-        NameText.text = weaponDefinition.Name;
-        Icon.sprite = weaponDefinition.InventorySprite;
-        _onBuy = onBuy;
-        _onEquip = onEquip;
-        BuyButton.onClick.RemoveAllListeners();
+        var weaponItem = _bluePrint.Item as WeaponDefinition;
+        if (weaponItem != null)
+        {
+            var weaponDefinition = weaponItem;
+            NameText.text = weaponDefinition.Name;
+            Icon.sprite = weaponDefinition.InventorySprite;
+            _onBuy = onBuy;
+            _onEquip = onEquip;
+            BuyButton.onClick.RemoveAllListeners();
 
-        if (item.BluePrintsOwned >= _bluePrint.RequiredCount)
-        {
-            BuyButtonText.text = string.Format("Buy {0:N0}", _bluePrint.Price);
-            NameText.color = Color.white;
-            Icon.color = Color.white;
-            ProgressText.enabled = false;
-            BuyButton.gameObject.SetActive(true);
-            BuyButton.onClick.AddListener(OnBuy);
-        }
-        else
-        {
-            BuyButton.gameObject.SetActive(false);
-            NameText.color = GreyOut;
-            Icon.color = GreyOut;
-            ProgressText.text = string.Format("{0} / {1}", item.BluePrintsOwned, _bluePrint.RequiredCount);
+            if (item.BluePrintsOwned >= _bluePrint.RequiredCount)
+            {
+                BuyButtonText.text = string.Format("Buy {0:N0}", _bluePrint.Price);
+                NameText.color = Color.white;
+                Icon.color = Color.white;
+                ProgressText.enabled = false;
+                BuyButton.gameObject.SetActive(true);
+                BuyButton.onClick.AddListener(OnBuy);
+            }
+            else
+            {
+                BuyButton.gameObject.SetActive(false);
+                NameText.color = GreyOut;
+                Icon.color = GreyOut;
+                ProgressText.text = string.Format("{0} / {1}", item.BluePrintsOwned, _bluePrint.RequiredCount);
+            }
         }
     }
 
