@@ -189,7 +189,7 @@ public class MissionCompleteScreen : MonoBehaviour
     private BluePrint GetRandomBluePrint()
     {
         var bluePrints = BluePrintPool.All();
-        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var playerFile = PlayerFile.ReadFromFile();
         foreach (var item in playerFile.Inventory.Where(i => i.BluePrintsOwned == BluePrintPool.ByKey(i.Key).RequiredCount || i.IsOwned))
         {
             bluePrints.RemoveAll(b => b.Key == item.Key);

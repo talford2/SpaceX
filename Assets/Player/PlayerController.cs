@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
         {
             _playerVehiclePrefab = DefaultVehiclePrefab;
             SpawnVehicle(_playerVehiclePrefab, Universe.Current.PlayerSpawnPosition);
-            BuildFile().WriteToFile(PlayerFile.Filename);
+            BuildFile().WriteToFile();
         }
 
         _playerNpc.VehiclePrefab = _playerVehiclePrefab;
@@ -727,7 +727,7 @@ public class PlayerController : MonoBehaviour
 
     public void Give(string itemKey)
     {
-        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var playerFile = PlayerFile.ReadFromFile();
         if (playerFile.Inventory.Any(i => i.Key == itemKey))
         {
             playerFile.Inventory.First(i => i.Key == itemKey).BluePrintsOwned++;
@@ -736,12 +736,12 @@ public class PlayerController : MonoBehaviour
         {
             playerFile.Inventory.Add(new PlayerFile.InventoryItem { Key = itemKey, BluePrintsOwned = 1, EquippedSlot = PlayerFile.EquippedSlot.Inventory, IsOwned = false });
         }
-        playerFile.WriteToFile(PlayerFile.Filename);
+        playerFile.WriteToFile();
     }
 
     public void GiveShip(string shipKey)
     {
-        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var playerFile = PlayerFile.ReadFromFile();
         if (playerFile.Ships.Any(s => s.Key == shipKey))
         {
             playerFile.Ships.First(s => s.Key == shipKey).BluePrintsOwned++;
@@ -750,7 +750,7 @@ public class PlayerController : MonoBehaviour
         {
             playerFile.Ships.Add(new PlayerFile.ShipItem { Key = shipKey, BluePrintsOwned = 1, IsOwned = false });
         }
-        playerFile.WriteToFile(PlayerFile.Filename);
+        playerFile.WriteToFile();
     }
 
     private void PlayerController_OnRegenerate()
@@ -912,14 +912,14 @@ public class PlayerController : MonoBehaviour
 
     public void Save()
     {
-        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var playerFile = PlayerFile.ReadFromFile();
         playerFile.SpaceJunk = SpaceJunkCount;
-        playerFile.WriteToFile(PlayerFile.Filename);
+        playerFile.WriteToFile();
     }
 
     public void Load()
     {
-        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var playerFile = PlayerFile.ReadFromFile();
         SpaceJunkCount = playerFile.SpaceJunk;
         var primaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
         var secondaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Secondary);

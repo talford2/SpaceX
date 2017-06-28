@@ -40,7 +40,7 @@ public class MainMenu : MonoBehaviour
 
     private void NewGame()
     {
-        PlayerFile.GameStart().WriteToFile(PlayerFile.Filename);
+        PlayerFile.GameStart().WriteToFile();
     }
 
     private void LoadWithLoader(string sceneName)

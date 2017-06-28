@@ -34,7 +34,7 @@ public class HangarScreen : MonoBehaviour
 
     private void Start()
     {
-        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var playerFile = PlayerFile.ReadFromFile();
         UpdateCredits(playerFile.SpaceJunk);
 
         var primaryWeapon = GetEquippedWeapon(playerFile, PlayerFile.EquippedSlot.Primary);
@@ -83,9 +83,9 @@ public class HangarScreen : MonoBehaviour
         vehiclePreview.transform.localPosition = vehiclePrefab.PreviewPrefab.transform.localPosition;
         VehicleNameText.text = vehiclePrefab.Name;
 
-        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var playerFile = PlayerFile.ReadFromFile();
         playerFile.Ship = vehiclePrefab.name;
-        playerFile.WriteToFile(PlayerFile.Filename);
+        playerFile.WriteToFile();
     }
 
     private void UpdateLeftBar(WeaponDefinition primaryWeapon, WeaponDefinition secondaryWeapon)
@@ -110,7 +110,7 @@ public class HangarScreen : MonoBehaviour
             Destroy(item.gameObject);
         }
 
-        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var playerFile = PlayerFile.ReadFromFile();
         var sortedInventory = playerFile.Inventory.OrderBy(i => i.SortStatus());
 
         foreach (var item in sortedInventory.Where(i => i.EquippedSlot == PlayerFile.EquippedSlot.Inventory))
@@ -132,7 +132,7 @@ public class HangarScreen : MonoBehaviour
                 itemButton.Bind(item,
                     (button, inventoryItem) =>
                     {
-                        var btnPlayerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+                        var btnPlayerFile = PlayerFile.ReadFromFile();
                         var btnBluePrint = BluePrintPool.ByKey(inventoryItem.Key);
                         if (btnPlayerFile.SpaceJunk >= btnBluePrint.Price)
                         {
@@ -155,12 +155,12 @@ public class HangarScreen : MonoBehaviour
     {
         playerFile.Inventory.First(i => i.Key == bluePrint.Key).IsOwned = true;
         playerFile.SpaceJunk -= bluePrint.Price;
-        playerFile.WriteToFile(PlayerFile.Filename);
+        playerFile.WriteToFile();
     }
 
     private void AssignWeapon(PlayerFile.InventoryItem item)
     {
-        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var playerFile = PlayerFile.ReadFromFile();
         var bluePrint = BluePrintPool.ByKey(item.Key);
         var weapon = bluePrint.Item as WeaponDefinition;
         if (weapon.Type == ItemType.PrimaryWeapon)
@@ -173,7 +173,7 @@ public class HangarScreen : MonoBehaviour
             playerFile.GetItemIn(PlayerFile.EquippedSlot.Secondary).EquippedSlot = PlayerFile.EquippedSlot.Inventory;
             playerFile.GetItemByKey(item.Key).EquippedSlot = PlayerFile.EquippedSlot.Secondary;
         }
-        playerFile.WriteToFile(PlayerFile.Filename);
+        playerFile.WriteToFile();
         var primaryWeapon = GetEquippedWeapon(playerFile, PlayerFile.EquippedSlot.Primary);
         var secondaryWeapon = GetEquippedWeapon(playerFile, PlayerFile.EquippedSlot.Secondary);
         UpdateLeftBar(primaryWeapon, secondaryWeapon);
@@ -192,7 +192,7 @@ public class HangarScreen : MonoBehaviour
     private List<Vehicle> GetPlayersVehicles()
     {
         var vehicles = new List<Vehicle>();
-        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        var playerFile = PlayerFile.ReadFromFile();
         playerFile.Ships.ForEach(s => vehicles.Add(VehiclePool.ByKey(s.Key)));
         return vehicles;
     }

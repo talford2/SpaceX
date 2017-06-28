@@ -75,6 +75,16 @@ public class PlayerFile : DataFile<PlayerFile>
         return Exists(Filename);
     }
 
+    public static PlayerFile ReadFromFile()
+    {
+        return ReadFromFile(Filename);
+    }
+
+    public void WriteToFile()
+    {
+        WriteToFile(Filename);
+    }
+
     public static PlayerFile GameStart()
     {
         return new PlayerFile

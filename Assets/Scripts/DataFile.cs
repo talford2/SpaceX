@@ -10,7 +10,7 @@ public abstract class DataFile<T>
         return File.Exists(filename);
     }
 
-    public static T ReadFromFile(string filename)
+    protected static T ReadFromFile(string filename)
     {
         var serializer = new XmlSerializer(typeof(T));
         Debug.Log("read: " + filename);
@@ -20,7 +20,7 @@ public abstract class DataFile<T>
         }
     }
 
-    public void WriteToFile(string filename)
+    protected void WriteToFile(string filename)
     {
         var serializer = new XmlSerializer(typeof(T));
         Debug.Log("write: " + filename);
