@@ -21,6 +21,7 @@ public class HangarScreen : MonoBehaviour
     public HangarBluePrintButton BluePrintButtonPrefab;
     public HangarOwnedBluePrintButton OwnedBluePrintButtonPrefab;
 
+    private List<Vehicle> _vehicles;
     private int _vehicleIndex;
 
     private void Awake()
@@ -37,7 +38,9 @@ public class HangarScreen : MonoBehaviour
         var primaryWeapon = GetEquippedWeapon(playerFile, PlayerFile.EquippedSlot.Primary);
         var secondaryWeapon = GetEquippedWeapon(playerFile, PlayerFile.EquippedSlot.Secondary);
 
-        _vehicleIndex = VehiclePool.Current.Vehicles.IndexOf(VehiclePool.ByKey(playerFile.Ship));
+        _vehicles = GetPlayersVehicles();
+        //_vehicleIndex = _vehicles.Select((vehicle, index) => new { vehicle, index }).First(i => i.vehicle.Key == playerFile.Ship).index;
+        _vehicleIndex = 0; // Not the right index but line above isn't working.
         ShowVehicle(_vehicleIndex);
 
         UpdateLeftBar(primaryWeapon, secondaryWeapon);
@@ -56,7 +59,7 @@ public class HangarScreen : MonoBehaviour
         {
             Destroy(t.gameObject);
         }
-        var vehiclePrefab = VehiclePool.Current.Vehicles[index];
+        var vehiclePrefab = _vehicles[index];
         var vehiclePreview = Utility.InstantiateInParent(vehiclePrefab.PreviewPrefab, VehicleViewTransform);
         VehicleNameText.text = vehiclePrefab.Name;
 
@@ -90,7 +93,7 @@ public class HangarScreen : MonoBehaviour
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
         var sortedInventory = playerFile.Inventory.OrderBy(i => i.SortStatus());
 
-        foreach (var item in sortedInventory.Where(i=>i.EquippedSlot == PlayerFile.EquippedSlot.Inventory))
+        foreach (var item in sortedInventory.Where(i => i.EquippedSlot == PlayerFile.EquippedSlot.Inventory))
         {
             var bluePrint = BluePrintPool.ByKey(item.Key);
             if (item.IsOwned)
@@ -166,10 +169,18 @@ public class HangarScreen : MonoBehaviour
         CreditText.text = string.Format("{0:N0}c", creditCount);
     }
 
+    private List<Vehicle> GetPlayersVehicles()
+    {
+        var vehicles = new List<Vehicle>();
+        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        playerFile.Ships.ForEach(s => vehicles.Add(VehiclePool.ByKey(s.Key)));
+        return vehicles;
+    }
+
     public void NextVehicle()
     {
         _vehicleIndex++;
-        if (_vehicleIndex > VehiclePool.Current.Vehicles.Count - 1)
+        if (_vehicleIndex > _vehicles.Count - 1)
             _vehicleIndex = 0;
         ShowVehicle(_vehicleIndex);
     }
@@ -178,7 +189,7 @@ public class HangarScreen : MonoBehaviour
     {
         _vehicleIndex--;
         if (_vehicleIndex < 0)
-            _vehicleIndex = VehiclePool.Current.Vehicles.Count - 1;
+            _vehicleIndex = _vehicles.Count - 1;
         ShowVehicle(_vehicleIndex);
     }
 

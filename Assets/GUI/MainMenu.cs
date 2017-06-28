@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
@@ -17,6 +18,10 @@ public class MainMenu : MonoBehaviour
             case "Battle":
                 LoadWithLoader("GalaxyMap");
                 break;
+            case "New":
+                NewGame();
+                LoadWithLoader("GalaxyMap");
+                break;
             case "Campaign":
                 LoadWithLoader("Test1");
                 break;
@@ -27,6 +32,12 @@ public class MainMenu : MonoBehaviour
                 Application.Quit();
                 break;
         }
+    }
+
+    private void NewGame()
+    {
+        if (File.Exists(PlayerFile.Filename))
+            File.Delete(PlayerFile.Filename);
     }
 
     private void LoadWithLoader(string sceneName)

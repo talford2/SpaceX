@@ -725,16 +725,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Give(PlayerFile.InventoryItem item)
+    public void Give(string itemKey)
     {
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
-        if (playerFile.Inventory.Any(i => i.Key == item.Key))
+        if (playerFile.Inventory.Any(i => i.Key == itemKey))
         {
-            playerFile.Inventory.First(i => i.Key == item.Key).BluePrintsOwned++;
+            playerFile.Inventory.First(i => i.Key == itemKey).BluePrintsOwned++;
         }
         else
         {
-            playerFile.Inventory.Add(new PlayerFile.InventoryItem { Key = item.Key, BluePrintsOwned = 1, EquippedSlot = PlayerFile.EquippedSlot.Inventory, IsOwned = false });
+            playerFile.Inventory.Add(new PlayerFile.InventoryItem { Key = itemKey, BluePrintsOwned = 1, EquippedSlot = PlayerFile.EquippedSlot.Inventory, IsOwned = false });
+        }
+        playerFile.WriteToFile(PlayerFile.Filename);
+    }
+
+    public void GiveShip(string shipKey)
+    {
+        var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
+        if (playerFile.Ships.Any(s => s.Key == shipKey))
+        {
+            playerFile.Ships.First(s => s.Key == shipKey).BluePrintsOwned++;
+        }
+        else
+        {
+            playerFile.Ships.Add(new PlayerFile.ShipItem { Key = shipKey, BluePrintsOwned = 1, IsOwned = false });
         }
         playerFile.WriteToFile(PlayerFile.Filename);
     }
@@ -867,7 +881,7 @@ public class PlayerController : MonoBehaviour
     private BluePrint BluePrintFromWeapon(WeaponDefinition weapon)
     {
         Debug.Log("KEY: " + weapon.Key);
-        return BluePrintPool.All().First(b => ((b.Item) as WeaponDefinition).Key == weapon.Key);
+        return BluePrintPool.All().First(b => b.ItemAs<WeaponDefinition>().Key == weapon.Key);
     }
 
     public PlayerFile BuildFile()
@@ -876,6 +890,9 @@ public class PlayerController : MonoBehaviour
             _profile.PrimaryWeapon = VehicleInstance.PrimaryWeapon;
         if (_profile.SecondaryWeapon == null)
             _profile.SecondaryWeapon = VehicleInstance.SecondaryWeapon;
+
+        var ships = new List<PlayerFile.ShipItem>();
+        ships.Add(new PlayerFile.ShipItem { Key = _playerVehiclePrefab.Key, IsOwned = true });
 
         var inventory = new List<PlayerFile.InventoryItem>();
         var primaryBluePrint = BluePrintFromWeapon(_profile.PrimaryWeapon);
@@ -886,7 +903,9 @@ public class PlayerController : MonoBehaviour
 
         return new PlayerFile
         {
+            Ship = _playerVehiclePrefab.Key,
             SpaceJunk = SpaceJunkCount,
+            Ships = ships,
             Inventory = inventory
         };
     }

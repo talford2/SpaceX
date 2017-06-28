@@ -94,11 +94,11 @@ public class MissionCompleteScreen : MonoBehaviour
         var bluePrint = GetRandomBluePrint();
         if (bluePrint != null)
         {
-            var weaponItem = bluePrint.Item as WeaponDefinition;
+            var weaponItem = bluePrint.ItemAs<WeaponDefinition>();
             if (weaponItem != null)
             {
                 var weapon = WeaponDefinitionPool.ByKey(weaponItem.Key);
-                PlayerController.Current.Give(new PlayerFile.InventoryItem() { Key = bluePrint.Key });
+                PlayerController.Current.Give(bluePrint.Key);
                 delay += 0.5f;
                 StartCoroutine(DelayedAction(delay, () =>
                 {
@@ -108,10 +108,25 @@ public class MissionCompleteScreen : MonoBehaviour
                     PlaySound(TextAppearSound);
                 }));
             }
+            var gameObjectItem = bluePrint.ItemAs<GameObject>();
+            if (gameObjectItem != null)
+            {
+                var vehicle = gameObjectItem.GetComponent<Vehicle>();
+                if (vehicle != null)
+                {
+                    PlayerController.Current.GiveShip(bluePrint.Key);
+                    delay += 0.5f;
+                    StartCoroutine(DelayedAction(delay, () =>
+                    {
+                        ItemPanel.alpha = 1f;
+                        ItemIcon.sprite = null;
+                        ItemName.text = vehicle.Name;
+                        PlaySound(TextAppearSound);
+                    }));
+                }
+            }
         }
     }
-
-    
 
     public void Hide()
     {

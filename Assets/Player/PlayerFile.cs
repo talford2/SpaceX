@@ -14,6 +14,10 @@ public class PlayerFile : DataFile<PlayerFile>
     [XmlElement("junk")]
     public int SpaceJunk;
 
+    [XmlArray("ships")]
+    [XmlArrayItem("ship")]
+    public List<ShipItem> Ships;
+
     [XmlArray("inventory")]
     [XmlArrayItem("item")]
     public List<InventoryItem> Inventory;
@@ -26,6 +30,16 @@ public class PlayerFile : DataFile<PlayerFile>
     public InventoryItem GetItemByKey(string key)
     {
         return Inventory.First(i => i.Key == key);
+    }
+
+    public class ShipItem
+    {
+        [XmlAttribute("key")]
+        public string Key;
+        [XmlElement("blueprints")]
+        public int BluePrintsOwned;
+        [XmlElement("owned")]
+        public bool IsOwned;
     }
 
     public class InventoryItem
