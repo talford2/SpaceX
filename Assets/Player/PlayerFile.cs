@@ -74,4 +74,20 @@ public class PlayerFile : DataFile<PlayerFile>
     {
         return Exists(Filename);
     }
+
+    public static PlayerFile GameStart()
+    {
+        return new PlayerFile
+        {
+            Ship = "Gunner",
+            SpaceJunk = 0,
+            Ships = new List<ShipItem> {
+                new ShipItem { Key = "Gunner", IsOwned = true }
+            } ,
+            Inventory = new List<InventoryItem> {
+                new InventoryItem { Key = "GreenLaser", EquippedSlot = EquippedSlot.Primary, IsOwned = true },
+                new InventoryItem { Key = "Seeker", EquippedSlot = EquippedSlot.Secondary, IsOwned = true }
+            }
+        };
+    }
 }

@@ -1,13 +1,17 @@
 ﻿using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public Button ContinueButton;
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        ContinueButton.gameObject.SetActive(PlayerFile.Exists());
     }
 
     public void ButtonCommand(string command)
@@ -36,8 +40,7 @@ public class MainMenu : MonoBehaviour
 
     private void NewGame()
     {
-        if (File.Exists(PlayerFile.Filename))
-            File.Delete(PlayerFile.Filename);
+        PlayerFile.GameStart().WriteToFile(PlayerFile.Filename);
     }
 
     private void LoadWithLoader(string sceneName)

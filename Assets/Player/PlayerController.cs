@@ -892,7 +892,7 @@ public class PlayerController : MonoBehaviour
             _profile.SecondaryWeapon = VehicleInstance.SecondaryWeapon;
 
         var ships = new List<PlayerFile.ShipItem>();
-        ships.Add(new PlayerFile.ShipItem { Key = _playerVehiclePrefab.Key, IsOwned = true });
+        ships.Add(new PlayerFile.ShipItem { Key = VehicleInstance.Key, IsOwned = true });
 
         var inventory = new List<PlayerFile.InventoryItem>();
         var primaryBluePrint = BluePrintFromWeapon(_profile.PrimaryWeapon);
@@ -903,7 +903,7 @@ public class PlayerController : MonoBehaviour
 
         return new PlayerFile
         {
-            Ship = _playerVehiclePrefab.Key,
+            Ship = VehicleInstance.Key,
             SpaceJunk = SpaceJunkCount,
             Ships = ships,
             Inventory = inventory
