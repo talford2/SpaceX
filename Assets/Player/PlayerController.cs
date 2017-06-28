@@ -905,8 +905,8 @@ public class PlayerController : MonoBehaviour
         var primaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
         var secondaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Secondary);
 
-        _profile.PrimaryWeapon = BluePrintPool.ByKey<WeaponDefinition>(primaryInventoryItem.Key).Item as WeaponDefinition;
-        _profile.SecondaryWeapon = BluePrintPool.ByKey<WeaponDefinition>(secondaryInventoryItem.Key).Item as WeaponDefinition;
+        _profile.PrimaryWeapon = BluePrintPool.ByKey(primaryInventoryItem.Key).ItemAs<WeaponDefinition>();
+        _profile.SecondaryWeapon = BluePrintPool.ByKey(secondaryInventoryItem.Key).ItemAs<WeaponDefinition>();
 
         _playerVehiclePrefab = VehiclePool.ByKey(playerFile.Ship);
         SpawnVehicle(_playerVehiclePrefab, Universe.Current.PlayerSpawnPosition);

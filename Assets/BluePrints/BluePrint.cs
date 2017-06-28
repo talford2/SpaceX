@@ -7,4 +7,9 @@ public class BluePrint : ScriptableObject
     public int RequiredCount;
     public Object Item;
     public int Price;
+
+    public T ItemAs<T>() where T : Object
+    {
+        return Item as T;
+    }
 }

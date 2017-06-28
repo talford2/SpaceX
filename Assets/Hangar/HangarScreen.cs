@@ -158,7 +158,7 @@ public class HangarScreen : MonoBehaviour
 
     private WeaponDefinition GetEquippedWeapon(PlayerFile playerFile, PlayerFile.EquippedSlot slot)
     {
-        return BluePrintPool.ByKey(playerFile.GetItemIn(slot).Key).Item as WeaponDefinition;
+        return BluePrintPool.ByKey<WeaponDefinition>(playerFile.GetItemIn(slot).Key).Item as WeaponDefinition;
     }
 
     private void UpdateCredits(int creditCount)
