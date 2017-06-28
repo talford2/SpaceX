@@ -80,6 +80,7 @@ public class HangarScreen : MonoBehaviour
         }
         var vehiclePrefab = _vehicles[index];
         var vehiclePreview = Utility.InstantiateInParent(vehiclePrefab.PreviewPrefab, VehicleViewTransform);
+        vehiclePreview.transform.localPosition = vehiclePrefab.PreviewPrefab.transform.localPosition;
         VehicleNameText.text = vehiclePrefab.Name;
 
         var playerFile = PlayerFile.ReadFromFile(PlayerFile.Filename);
