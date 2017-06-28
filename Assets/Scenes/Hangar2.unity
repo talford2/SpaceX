@@ -822,6 +822,8 @@ MonoBehaviour:
   WeaponButtonPrefab: {fileID: 114396826501207944, guid: 8ddf83414fc4d28459041f67315fa209,
     type: 2}
   VehicleNameText: {fileID: 200763816}
+  PreviousButton: {fileID: 277360738}
+  NextButton: {fileID: 287802956}
   VehicleViewTransform: {fileID: 940863289}
   RightPanel: {fileID: 196271923}
   BluePrintButtonPrefab: {fileID: 114579343017483398, guid: 195fde5031e4a704c9be4b854f2f056c,

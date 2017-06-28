@@ -14,6 +14,8 @@ public class HangarScreen : MonoBehaviour
 
     [Header("Vehicle Preview")]
     public Text VehicleNameText;
+    public Button PreviousButton;
+    public Button NextButton;
     public Transform VehicleViewTransform;
 
     [Header("Right Panel")]
@@ -40,11 +42,28 @@ public class HangarScreen : MonoBehaviour
 
         _vehicles = GetPlayersVehicles();
         //_vehicleIndex = _vehicles.Select((vehicle, index) => new { vehicle, index }).First(i => i.vehicle.Key == playerFile.Ship).index;
-        _vehicleIndex = 0; // Not the right index but line above isn't working.
+        _vehicleIndex = GetShipIndex(playerFile.Ship, _vehicles);
+
+        var multipleVehicles = _vehicles.Count > 1;
+        NextButton.gameObject.SetActive(multipleVehicles);
+        PreviousButton.gameObject.SetActive(multipleVehicles);
+
         ShowVehicle(_vehicleIndex);
 
         UpdateLeftBar(primaryWeapon, secondaryWeapon);
         UpdateRightBar();
+    }
+
+    private int GetShipIndex(string shipKey, List<Vehicle> vehicles)
+    {
+        for (var i = 0; i < vehicles.Count; i++)
+        {
+            if (_vehicles[i].Key == shipKey)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     private void Update()
