@@ -17,6 +17,8 @@ public class HangarScreen : MonoBehaviour
     public Button PreviousButton;
     public Button NextButton;
     public Transform VehicleViewTransform;
+    public Color GreyOut;
+    public Text VehicleProgressText;
 
     [Header("Right Panel")]
     public Transform RightPanel;
@@ -84,7 +86,20 @@ public class HangarScreen : MonoBehaviour
         VehicleNameText.text = vehiclePrefab.Name;
 
         var playerFile = PlayerFile.ReadFromFile();
-        playerFile.Ship = vehiclePrefab.name;
+        playerFile.Ship = vehiclePrefab.Key;
+        var playersShip = playerFile.Ships.First(s => s.Key == playerFile.Ship);
+        if (playersShip.IsOwned)
+        {
+            VehicleNameText.color = Color.white;
+            VehicleProgressText.enabled = false;
+        }
+        else
+        {
+            VehicleNameText.color = GreyOut;
+            VehicleProgressText.color = GreyOut;
+            VehicleProgressText.text = string.Format("{0} / {1}", playersShip.BluePrintsOwned, BluePrintPool.ByKey(playerFile.Ship).RequiredCount);
+            VehicleProgressText.enabled = true;
+        }
         playerFile.WriteToFile();
     }
 
@@ -104,7 +119,6 @@ public class HangarScreen : MonoBehaviour
 
     private void UpdateRightBar()
     {
-        Debug.Log("UPDATE RIGHT BAR!");
         foreach (Transform item in RightPanel)
         {
             Destroy(item.gameObject);
