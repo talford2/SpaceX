@@ -66,7 +66,7 @@ public class Weapon : MonoBehaviour
         _targetTeam = Targeting.GetEnemyTeam(_ownerTeam);
         foreach (var shootPoint in shootPoints)
         {
-            shootPoint.Initialize(Definition.MuzzlePrefab);
+            shootPoint.Initialize();
         }
         heatValue = 0f;
         isCoolingDown = false;
@@ -167,7 +167,7 @@ public class Weapon : MonoBehaviour
         missile.GetComponent<Missile>().FromReference = _shootPoint.transform;
         missile.GetComponent<Missile>().Shoot(_shootPoint.transform.position, Quaternion.Euler(Random.Range(-0.5f * Definition.Spread, 0.5f * Definition.Spread), Random.Range(-0.5f * Definition.Spread, 0.5f * Definition.Spread), 0f) * direction, _velocityReference.Value);
 
-        _shootPoint.Flash();
+        _shootPoint.Flash(Definition.MuzzlePrefab);
 
         var fireSound = ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, _shootPoint.transform.position, Quaternion.identity).GetComponent<AnonymousSound>();
         fireSound.PlayAt(Definition.ShootSound, _shootPoint.transform.position, Definition.SoundMinDistance, Definition.SoundMaxDistance, Definition.SoundVolume);

@@ -2,16 +2,11 @@
 
 public class ShootPoint : MonoBehaviour
 {
-    private GameObject _muzzlePrefab;
+    public void Initialize() { }
 
-    public void Initialize(MuzzleFlash muzzlePrefab)
+    public void Flash(MuzzleFlash _muzzlePrefab)
     {
-        _muzzlePrefab = muzzlePrefab.gameObject;
-    }
-
-    public void Flash()
-    {
-        var _muzzleInstance = ResourcePoolManager.GetAvailable(_muzzlePrefab, transform).GetComponent<MuzzleFlash>();
+        var _muzzleInstance = ResourcePoolManager.GetAvailable(_muzzlePrefab.gameObject, transform).GetComponent<MuzzleFlash>();
         _muzzleInstance.Flash();
     }
 
@@ -19,5 +14,6 @@ public class ShootPoint : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.position, 0.05f);
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 1f);
     }
 }
