@@ -140,7 +140,6 @@ public class SeekingRocket : Missile
                         var killable = missileHit.collider.GetComponentInParent<Killable>();
                         if (killable != null)
                         {
-                            TriggerPlayerAttackHit();
                             killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
                         }
                         _hasHit = true;

@@ -63,7 +63,6 @@ public class Laser : Missile
                         _killable = missileHit.collider.GetComponentInParent<Killable>();
                         if (_killable != null)
                         {
-                            TriggerPlayerAttackHit();
                             _killable.Damage(Damage, missileHit.point, missileHit.normal, Owner);
                         }
                         var rBody = missileHit.collider.GetComponentInParent<Rigidbody>();

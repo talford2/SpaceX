@@ -714,6 +714,7 @@ public class PlayerController : MonoBehaviour
     {
         var viewPortPosition = Universe.Current.ViewPort.transform.position;
         ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, viewPortPosition, Quaternion.identity).GetComponent<AnonymousSound>().PlayAt(PlayerHitSound, viewPortPosition);
+        HeadsUpDisplay.Current.TriggerCrosshairPulse();
     }
 
     public void OnPlayerKill(Killable victim)
