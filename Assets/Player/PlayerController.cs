@@ -293,10 +293,6 @@ public class PlayerController : MonoBehaviour
         }
         if (_controlEnabled)
         {
-            if (Input.GetKeyUp(KeyCode.T))
-            {
-                SceneManager.LoadScene("GalaxyMap");
-            }
             if (_playVehicleInstance != null)
             {
                 var mouseHorizontal = Input.GetAxis("MouseHorizontal");
@@ -498,6 +494,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.T))
         {
             _playVehicleInstance.TriggerUTurn();
+        }
+
+        if (Input.GetKeyUp(KeyCode.N))
+        {
+            // No Target mode
+            Targeting.RemoveTargetable(_playVehicleInstance.Targetable.Team, _playVehicleInstance.Targetable.transform);
         }
 
         Vehicle leaderVehicle;
