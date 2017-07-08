@@ -28,6 +28,7 @@ public class Turret : MonoBehaviour
     [Header("Aiming")]
     public float AimTolerance = 5f;
     public float AimTooCloseDistance = 10f;
+    public float AimExtrapolationError = 0f;
     public Targetable Targetable;
 
     [Header("Targeting")]
@@ -136,7 +137,7 @@ public class Turret : MonoBehaviour
                     var targetVehicle = _target.GetComponent<Vehicle>();
                     if (targetVehicle != null)
                     {
-                        _aimPosition = Utility.GetVehicleExtrapolatedPosition(targetVehicle, _weaponInstance, 0f);
+                        _aimPosition = Utility.GetVehicleExtrapolatedPosition(targetVehicle, _weaponInstance, AimExtrapolationError);
                     }
                     _aimCooldown = Random.Range(_aimIntervalMin, _aimIntervalMax);
                 }
