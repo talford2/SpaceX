@@ -47,6 +47,12 @@ public class Killable : MonoBehaviour
             {
                 Health -= damage;
             }
+            if (attacker != null && PlayerController.Current != null)
+            {
+                //Debug.LogFormat("{0} HIT {1}", gameObject, attacker);
+                if (PlayerController.Current.VehicleInstance != null && attacker == PlayerController.Current.VehicleInstance.gameObject)
+                    PlayerController.Current.OnPlayerHit();
+            }
             if (OnDamage != null)
                 OnDamage(this, position, normal, attacker);
             if (DamageEffect != null)

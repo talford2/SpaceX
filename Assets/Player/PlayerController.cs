@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private Fighter _playerNpc;
     public Color TrackerColor;
 
+    public AudioClip PlayerHitSound;
+
     public float ThreatRadius = 2000f;
     public PlayerSquadron Squadron;
 
@@ -706,6 +708,12 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("ALL DEAD!");
         }
+    }
+
+    public void OnPlayerHit()
+    {
+        var viewPortPosition = Universe.Current.ViewPort.transform.position;
+        ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, viewPortPosition, Quaternion.identity).GetComponent<AnonymousSound>().PlayAt(PlayerHitSound, viewPortPosition);
     }
 
     public void OnPlayerKill(Killable victim)
