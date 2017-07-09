@@ -713,7 +713,7 @@ public class PlayerController : MonoBehaviour
     public void OnPlayerHit()
     {
         var viewPortPosition = Universe.Current.ViewPort.transform.position;
-        ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, viewPortPosition, Quaternion.identity).GetComponent<AnonymousSound>().PlayAt(PlayerHitSound, viewPortPosition);
+        ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, viewPortPosition, Quaternion.identity).GetComponent<AnonymousSound>().PlayAt(PlayerHitSound, viewPortPosition, 0.3f, false);
         HeadsUpDisplay.Current.TriggerCrosshairPulse();
     }
 
