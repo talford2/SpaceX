@@ -404,11 +404,12 @@ MonoBehaviour:
   MaxYawSpeed: 30
   AimTolerance: 5
   AimTooCloseDistance: 10
+  AimExtrapolationError: 0.5
   Targetable: {fileID: 114354613596268164}
   MinTargetSearchInterval: 2
   MaxTargetSearchInterval: 2
-  BurstCount: 12
-  BurstWaitTime: 1.2
+  BurstCount: 4
+  BurstWaitTime: 1.4
 --- !u!114 &11491946
 MonoBehaviour:
   m_ObjectHideFlags: 1
