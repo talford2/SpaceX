@@ -11,4 +11,10 @@ public class Detectable : MonoBehaviour
         if (sphereCollider != null)
             Radius = sphereCollider.radius;
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(TargetTransform.position, Radius);
+    }
 }
