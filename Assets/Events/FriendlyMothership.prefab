@@ -2958,15 +2958,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1817310021557854}
-  m_LocalRotation: {x: -0.0041282736, y: 0.04512584, z: 0.091009565, w: 0.99481857}
-  m_LocalPosition: {x: 583, y: 221, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4271430639056788}
   - {fileID: 4737313247733812}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -0.94100004, y: 5.109, z: 10.412001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4862741513835128
 Transform:
   m_ObjectHideFlags: 1
@@ -5663,6 +5663,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 384234f0c1585ea41ab2a1e5d0a2122f, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 0
   MaxLiveCount: 4
   PathPoint: {fileID: 4768879368997386}
 --- !u!114 &114032519836971982
@@ -5697,6 +5698,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 362291e3bed687247acfba6463c5d0d7, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 0
   MaxLiveCount: 4
   PathPoint: {fileID: 4077394056822934}
 --- !u!114 &114164764461766902
@@ -5713,6 +5715,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 384234f0c1585ea41ab2a1e5d0a2122f, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 0
   MaxLiveCount: 4
   PathPoint: {fileID: 4999400441816610}
 --- !u!114 &114180023588337540
@@ -5741,6 +5744,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 384234f0c1585ea41ab2a1e5d0a2122f, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 0
   MaxLiveCount: 4
   PathPoint: {fileID: 4756662964805780}
 --- !u!114 &114238599366230610
@@ -5816,7 +5820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 4300724038172492}
-  Radius: 0
+  Radius: 120
 --- !u!114 &114345852732246850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5991,7 +5995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 4167236556616766}
-  Radius: 0
+  Radius: 120
 --- !u!114 &114622563290184446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6034,7 +6038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 4300724038172492}
-  Radius: 0
+  Radius: 120
 --- !u!114 &114699527608181298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6108,6 +6112,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 384234f0c1585ea41ab2a1e5d0a2122f, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 0
   MaxLiveCount: 4
   PathPoint: {fileID: 4913053274880554}
 --- !u!114 &114759846548687706
@@ -6176,6 +6181,7 @@ MonoBehaviour:
   FighterPrefab: {fileID: 11452850, guid: 362291e3bed687247acfba6463c5d0d7, type: 2}
   Radius: 2000
   Interval: 20
+  IntervalIncreasePerKill: 0
   MaxLiveCount: 4
   PathPoint: {fileID: 4994074651816134}
 --- !u!114 &114917490097385312
@@ -6331,7 +6337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 4300724038172492}
-  Radius: 0
+  Radius: 150
 --- !u!135 &135379610278181864
 SphereCollider:
   m_ObjectHideFlags: 1
