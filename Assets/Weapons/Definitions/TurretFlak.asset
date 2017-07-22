@@ -31,10 +31,13 @@ MonoBehaviour:
   OverheatDelay: 2
   CoolDelay: 0.5
   BaseMissileDamage: 20
-  BaseFireRate: 1
+  BaseFireRate: 0.5
   BaseCoolingRate: 50
   BaseHeatCapacity: 100
   MissileDamagePerPoint: 2
   FireRatePerPoint: 0.2
   CoolingRatePerPoint: 5
   HeatCapacityPerPoint: 10
+  InventorySprite: {fileID: 0}
+  Type: 0
+  SalvageValue: 0

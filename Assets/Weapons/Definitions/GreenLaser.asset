@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Green Laser Cannon
   MuzzlePrefab: {fileID: 11496450, guid: f7c7209a06aca5243b5282561acd3006, type: 2}
-  ShootSound: {fileID: 8300000, guid: b982a86e0d360774394704474402bf73, type: 3}
+  ShootSound: {fileID: 8300000, guid: 419535f5f3f6e3a498566064510910f1, type: 3}
   SoundVolume: 0.3
   SoundMinDistance: 25
   SoundMaxDistance: 200
