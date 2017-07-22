@@ -241,29 +241,31 @@ public class Fighter : Npc<Fighter>
         }
     }
 
-   // private void OnDrawGizmos()
-   // {
-   //     if (VehicleInstance != null)
-   //     {
-   //         var stateColors = new Dictionary<string, Color> {
-   //             { "Idle", Color.white },
-   //             { "Evade", Color.magenta },
-   //             { "Chase", Color.red },
-   //             { "Attack", Color.yellow }
-   //         };
-   //         Gizmos.color = stateColors[State.Name];
+    private void OnDrawGizmos()
+    {
+        if (VehicleInstance != null)
+        {
+            var stateColors = new Dictionary<string, Color> {
+                { "Idle", Color.white },
+                { "Evade", Color.magenta },
+                { "Chase", Color.red },
+                { "Attack", Color.yellow }
+            };
+            Gizmos.color = stateColors[GetState().Name];
 
-   //         Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
-   //         Gizmos.DrawSphere(Destination, 2f);
-   //         /*
-			//Gizmos.color = Color.blue;
-			//Gizmos.DrawWireSphere(VehicleInstance.transform.position, SightRange);
+            /*
+            Gizmos.DrawLine(VehicleInstance.transform.position, Destination);
+            Gizmos.DrawSphere(Destination, 2f);
+            */
+            /*
+			Gizmos.color = Color.blue;
+			Gizmos.DrawWireSphere(VehicleInstance.transform.position, SightRange);
 
-			//Gizmos.color = Color.red;
-			//Gizmos.DrawWireSphere(VehicleInstance.transform.position, AttackRange);
-   //         */
-   //         Gizmos.color = Color.green;
-   //         Gizmos.DrawLine(VehicleInstance.transform.position, VehicleInstance.transform.position + VehicleInstance.transform.forward * 100f);
-   //     }
-   // }
+			Gizmos.color = Color.red;
+			Gizmos.DrawWireSphere(VehicleInstance.transform.position, AttackRange);
+            */
+            //Gizmos.color = Color.green;
+            Gizmos.DrawLine(VehicleInstance.transform.position, VehicleInstance.transform.position + VehicleInstance.transform.forward * 100f);
+        }
+    }
 }
