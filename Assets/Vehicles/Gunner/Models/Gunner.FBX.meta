@@ -3,7 +3,7 @@ guid: 185913d2e94f63a459c9676844ca55f3
 timeCreated: 1497059142
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
     100002: Shootpoint1
@@ -14,6 +14,7 @@ ModelImporter:
     100012: Thruster2
     100014: Box001
     100016: Gunner
+    100018: Gunner_high
     400000: //RootNode
     400002: Shootpoint1
     400004: Shootpoint2
@@ -23,14 +24,18 @@ ModelImporter:
     400012: Thruster2
     400014: Box001
     400016: Gunner
+    400018: Gunner_high
     2300000: //RootNode
     2300002: Box001
     2300004: Gunner
+    2300006: Gunner_high
     3300000: //RootNode
     3300002: Box001
     3300004: Gunner
+    3300006: Gunner_high
     4300000: Gunner
     4300002: Box001
+    4300004: Gunner_high
   materials:
     importMaterials: 1
     materialName: 0
@@ -53,6 +58,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -60,7 +66,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -76,6 +85,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

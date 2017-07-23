@@ -23,22 +23,22 @@ public class FighterSteering : NpcSteering<Fighter>
 
 	// Performance variables
 	private Vector3 _avoidSum;
-	private Vector3 _fromNeighbor;
+	private Vector3 _fromNeighbour;
     private float _distance;
 
-	public Vector3 GetSeparationForce(List<Detectable> neighbors)
+	public Vector3 GetSeparationForce(List<Detectable> neighbours)
 	{
 		_avoidSum = Vector3.zero;
-		if (Npc.VehicleInstance != null && neighbors != null)
+		if (Npc.VehicleInstance != null && neighbours != null)
 		{
-			foreach (var neighbor in neighbors)
+			foreach (var neighbour in neighbours)
 			{
-				// Note this doesn't work for neighbors inside your position!
-				if (neighbor != null)
+				// Note this doesn't work for neighbours inside your position!
+				if (neighbour != null)
 				{
-                    _fromNeighbor = Npc.VehicleInstance.transform.position - neighbor.TargetTransform.position;
-                    _distance = _fromNeighbor.magnitude - neighbor.Radius;
-                    _avoidSum += _fromNeighbor.normalized / Mathf.Max(_distance, 0.1f);
+                    _fromNeighbour = Npc.VehicleInstance.transform.position - neighbour.TargetTransform.position;
+                    _distance = _fromNeighbour.magnitude - neighbour.Radius;
+                    _avoidSum += _fromNeighbour.normalized / Mathf.Max(_distance, 0.1f);
 				}
 			}
 		}
