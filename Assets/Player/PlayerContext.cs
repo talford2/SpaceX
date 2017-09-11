@@ -11,7 +11,15 @@ public class PlayerContext : MonoBehaviour
 
     private void Awake()
     {
-        _current = this;
+        if (_current != null && _current != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            _current = this;
+        }
         DontDestroyOnLoad(this);
     }
 }

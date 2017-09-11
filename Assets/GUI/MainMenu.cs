@@ -21,18 +21,26 @@ public class MainMenu : MonoBehaviour
         {
             case "Battle":
                 LoadWithLoader("GalaxyMap");
+                PersistOnLoad.Current.Destroy();
                 break;
             case "New":
                 NewGame();
                 LoadWithLoader("GalaxyMap");
+                PersistOnLoad.Current.Destroy();
+                break;
+            case "Options":
+                SceneManager.LoadScene("Options");
                 break;
             case "Campaign":
                 LoadWithLoader("Test1");
+                PersistOnLoad.Current.Destroy();
                 break;
             case "Hangar":
                 SceneManager.LoadScene("Hangar2");
+                PersistOnLoad.Current.Destroy();
                 break;
             case "Exit":
+                PersistOnLoad.Current.Destroy();
                 Application.Quit();
                 break;
         }
