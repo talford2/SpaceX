@@ -1,6 +1,7 @@
 ﻿using System.Xml.Serialization;
 using UnityEngine;
 
+[XmlRoot("options")]
 public class OptionsFile : DataFile<OptionsFile>
 {
     public static string Filename { get { return string.Format("{0}/{1}", Application.persistentDataPath, "options.xml"); } }
