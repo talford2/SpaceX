@@ -312,14 +312,8 @@ public class PlayerController : MonoBehaviour
 
                 var _pitchYaw = Vector2.ClampMagnitude(new Vector2(controllerVertical + mouseVertical, controllerHorizontal + mouseHorizontal), MouseMoveClamp);
 
-                if (!InvertY)
-                {
-                    _playVehicleInstance.PitchThotttle = _pitchYaw.x * -1;
-                }
-                else
-                {
-                    _playVehicleInstance.PitchThotttle = _pitchYaw.x;
-                }
+                _playVehicleInstance.PitchThotttle = InvertY ? _pitchYaw.x : _pitchYaw.x * -1;
+
                 _playVehicleInstance.YawThrottle = _pitchYaw.y;
                 _playVehicleInstance.RollThrottle = Input.GetAxis("Roll") + Input.GetAxis("KeyboardRoll");
                 if (_playVehicleInstance.PrimaryWeaponInstance != null)
