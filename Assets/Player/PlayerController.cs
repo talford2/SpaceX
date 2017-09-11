@@ -82,6 +82,11 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _current = this;
+
+        if (OptionsFile.Exists())
+            InvertY = OptionsFile.ReadFromFile().InvertYAxis;
+        Debug.Log("INVERTY: " + InvertY);
+
         Cursor.visible = !HideMouse;
         if (HideMouse)
             Cursor.lockState = CursorLockMode.Locked;
@@ -307,7 +312,7 @@ public class PlayerController : MonoBehaviour
 
                 var _pitchYaw = Vector2.ClampMagnitude(new Vector2(controllerVertical + mouseVertical, controllerHorizontal + mouseHorizontal), MouseMoveClamp);
 
-                if (InvertY)
+                if (!InvertY)
                 {
                     _playVehicleInstance.PitchThotttle = _pitchYaw.x * -1;
                 }
