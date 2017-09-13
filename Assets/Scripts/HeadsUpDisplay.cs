@@ -6,6 +6,8 @@ public class HeadsUpDisplay : MonoBehaviour
 {
     public GameObject Crosshair;
     public bool StartHidden = true;
+    public bool DisplayTeamScore;
+    public bool DisplayCredits;
 
     [Header("Crosshair Hit Response")]
     public Image CrosshairHit;
@@ -247,17 +249,20 @@ public class HeadsUpDisplay : MonoBehaviour
             CrosshairHit.color = Utility.SetColorAlpha(CrosshairHit.color, fraction);
         }
 
-        if (_spaceJunkPulseCooldown >= 0f)
+        if (DisplayCredits)
         {
-            _spaceJunkPulseCooldown -= Time.deltaTime;
-            if (_spaceJunkPulseCooldown < 0f)
+            if (_spaceJunkPulseCooldown >= 0f)
             {
-                SpaceJunkText.fontSize = 30;
-            }
-            else
-            {
-                var pulseFraction = _spaceJunkPulseCooldown / _spaceJunkPulseDuration;
-                SpaceJunkText.fontSize = Mathf.RoundToInt(Mathf.Lerp(50, 30, 1f - pulseFraction));
+                _spaceJunkPulseCooldown -= Time.deltaTime;
+                if (_spaceJunkPulseCooldown < 0f)
+                {
+                    SpaceJunkText.fontSize = 30;
+                }
+                else
+                {
+                    var pulseFraction = _spaceJunkPulseCooldown / _spaceJunkPulseDuration;
+                    SpaceJunkText.fontSize = Mathf.RoundToInt(Mathf.Lerp(50, 30, 1f - pulseFraction));
+                }
             }
         }
 
@@ -465,9 +470,12 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void UpdateSpaceJunk()
     {
-        SpaceJunkText.text = string.Format("{0:N0}", Mission.Current.GetEarnedCredits());
-        _spaceJunkPulseCooldown = _spaceJunkPulseDuration;
-        SpaceJunkText.fontSize = 50;
+        if (DisplayCredits)
+        {
+            SpaceJunkText.text = string.Format("{0:N0}", Mission.Current.GetEarnedCredits());
+            _spaceJunkPulseCooldown = _spaceJunkPulseDuration;
+            SpaceJunkText.fontSize = 50;
+        }
     }
 
     public void TriggerShieldHit()
@@ -518,8 +526,11 @@ public class HeadsUpDisplay : MonoBehaviour
 
     private void UpdateKillsDisplay()
     {
-        GoodKills.text = string.Format("{0}", _killCount[Team.Good]);
-        BadKills.text = string.Format("{0}", _killCount[Team.Bad]);
+        if (DisplayTeamScore)
+        {
+            GoodKills.text = string.Format("{0}", _killCount[Team.Good]);
+            BadKills.text = string.Format("{0}", _killCount[Team.Bad]);
+        }
     }
 
     public void DisplayMessage(string message, float time)
@@ -544,8 +555,10 @@ public class HeadsUpDisplay : MonoBehaviour
     {
         ShowCrosshair();
         SquadronPanel.alpha = 1f;
-        KillCountPanel.alpha = 1f;
-        SpaceJunkPanel.alpha = 1f;
+        if (DisplayTeamScore)
+            KillCountPanel.alpha = 1f;
+        if (DisplayCredits)
+            SpaceJunkPanel.alpha = 1f;
         HealthShieldPanel.alpha = 1f;
         BoostPanel.alpha = 1;
     }
