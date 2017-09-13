@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class TrackerManager : MonoBehaviour {
+public class TrackerManager : MonoBehaviour
+{
     private static TrackerManager _current;
 
     public static TrackerManager Current
