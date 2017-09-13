@@ -268,6 +268,18 @@ public class PlayerController : MonoBehaviour
     public void SetControlEnabled(bool value)
     {
         _controlEnabled = value;
+        if (!value)
+        {
+            _playVehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
+            _playVehicleInstance.PrimaryWeaponInstance.IsTriggered = false;
+            _playVehicleInstance.SetAimAt(_playVehicleInstance.GetAimPosition());
+            _playVehicleInstance.RollThrottle = 0f;
+            _playVehicleInstance.YawThrottle = 0f;
+            _playVehicleInstance.PitchThotttle = 0f;
+            _playVehicleInstance.TriggerBoost = false;
+            _playVehicleInstance.TriggerAccelerate = false;
+            _playVehicleInstance.TriggerBrake = false;
+        }
     }
 
     private CollectibleTrigger _collectible;
