@@ -40,6 +40,7 @@ public class Mission : MonoBehaviour
     private IEnumerator DelayedFinish(float delay)
     {
         yield return new WaitForSeconds(delay);
+        MusicPlayer.Current.TriggerFadeOut(2f);
         HeadsUpDisplay.Current.Hide();
         PlayerController.Current.SetControlEnabled(false);
         MissionCompleteScreen.Current.Show(_playerKillCount);

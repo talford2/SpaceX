@@ -11,6 +11,7 @@ public class MusicPlayer : MonoBehaviour
 
     private int _currentIndex = 0;
 
+    private float _initialVolume;
     private bool _isFadeOut;
     private float _fadeOutDuration;
     private float _fadeOutCooldown;
@@ -45,7 +46,7 @@ public class MusicPlayer : MonoBehaviour
             {
                 _fadeOutCooldown -= Time.deltaTime;
                 var fraction = Mathf.Clamp01(_fadeOutCooldown / _fadeOutDuration);
-                Source.volume = fraction;
+                Source.volume = fraction * _initialVolume;
                 if (_fadeOutCooldown < 0f)
                     Source.Stop();
             }
@@ -56,5 +57,7 @@ public class MusicPlayer : MonoBehaviour
     {
         _fadeOutDuration = time;
         _fadeOutCooldown = _fadeOutDuration;
+        _initialVolume = Source.volume;
+        _isFadeOut = true;
     }
 }
