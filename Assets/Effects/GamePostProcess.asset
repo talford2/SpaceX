@@ -31,7 +31,7 @@ MonoBehaviour:
   antialiasing:
     m_Enabled: 1
     m_Settings:
-      method: 0
+      method: 1
       fxaaSettings:
         preset: 4
       taaSettings:
@@ -107,7 +107,7 @@ MonoBehaviour:
         antiFlicker: 1
       lensDirt:
         texture: {fileID: 2800000, guid: 8f7d5f30ce44f3a4885385c565d9c781, type: 3}
-        intensity: 20
+        intensity: 0
   colorGrading:
     m_Enabled: 1
     m_Settings:
