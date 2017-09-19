@@ -5,13 +5,32 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public CanvasGroup CoverScreen;
     public Button ContinueButton;
+
+    private float coverTime = 1f;
+    private float coverCooldown;
 
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         ContinueButton.gameObject.SetActive(PlayerFile.Exists());
+        CoverScreen.alpha = 1f;
+        coverCooldown = coverTime;
+        Debug.Break();
+    }
+
+    private void Update()
+    {
+        if (coverCooldown >=0f)
+        {
+            coverCooldown -= Time.deltaTime;
+            var fraction = coverCooldown / coverTime;
+            CoverScreen.alpha = fraction;
+            if (coverCooldown < 0f)
+                CoverScreen.alpha = 0f;
+        }
     }
 
     public void ButtonCommand(string command)
