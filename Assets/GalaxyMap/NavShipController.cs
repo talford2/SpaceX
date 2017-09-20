@@ -6,6 +6,8 @@ public class NavShipController : MonoBehaviour
     public static NavShipController Current { get { return _current; } }
     private static NavShipController _current;
 
+    public CoverScreen Cover;
+
     private Vector3 _destination;
     private float _acceleration = 30f;
     private float _speed;
@@ -23,6 +25,7 @@ public class NavShipController : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        Cover.TriggerFadeOut();
     }
 
     private void Update()
@@ -94,9 +97,15 @@ public class NavShipController : MonoBehaviour
         SceneManager.LoadScene("LoadingScene");
     }
 
+    private void LoadWithLoader()
+    {
+        LoadWithLoader(_sceneName);
+    }
+
     public void LoadWithLoaderAndIndex()
     {
         PlayerContext.Current.LevelIndex = _levelIndex;
-        LoadWithLoader(_sceneName);
+        Cover.OnFadeComplete = LoadWithLoader;
+        Cover.TriggerFadeIn();
     }
 }

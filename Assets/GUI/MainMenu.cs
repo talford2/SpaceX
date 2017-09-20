@@ -1,17 +1,11 @@
-﻿using System;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public CanvasGroup CoverScreen;
     public Button ContinueButton;
-
-    private bool isFadeIn;
-    private float coverTime = 0.5f;
-    private float coverCooldown;
+    public CoverScreen Cover;
 
     private string loadSceneOnFadeComplete;
 
@@ -20,27 +14,12 @@ public class MainMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         ContinueButton.gameObject.SetActive(PlayerFile.Exists());
-        isFadeIn = true;
-        loadSceneOnFadeComplete = string.Empty;
-        CoverScreen.alpha = 1f;
-        coverCooldown = coverTime;
         Time.timeScale = 1f;
     }
 
-    private void Update()
+    private void Start()
     {
-        if (coverCooldown >= 0f)
-        {
-            coverCooldown -= Time.deltaTime;
-            var fraction = Mathf.Clamp01(coverCooldown / coverTime);
-            CoverScreen.alpha = isFadeIn ? fraction : 1f - fraction;
-            if (coverCooldown < 0f)
-            {
-                CoverScreen.alpha = isFadeIn ? 0f : 1f;
-                if (!string.IsNullOrEmpty(loadSceneOnFadeComplete))
-                    LoadWithLoader(loadSceneOnFadeComplete);
-            }
-        }
+        Cover.TriggerFadeOut();
     }
 
     public void ButtonCommand(string command)
@@ -85,9 +64,13 @@ public class MainMenu : MonoBehaviour
     private void TriggerFadeAndLoad(string sceneName)
     {
         loadSceneOnFadeComplete = sceneName;
-        CoverScreen.alpha = 0f;
-        isFadeIn = false;
-        coverCooldown = coverTime;
+        Cover.OnFadeComplete = LoadWithLoader;
+        Cover.TriggerFadeIn();
+    }
+
+    private void LoadWithLoader()
+    {
+        LoadWithLoader(loadSceneOnFadeComplete);
     }
 
     private void LoadWithLoader(string sceneName)

@@ -611,8 +611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5800be62843c6a4d972d75cc1a78ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoverScreen: {fileID: 891579943}
   ContinueButton: {fileID: 2028576968}
+  Cover: {fileID: 891579944}
 --- !u!1 &349453474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,6 +1385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 891579940}
   - component: {fileID: 891579942}
+  - component: {fileID: 891579944}
   - component: {fileID: 891579941}
   - component: {fileID: 891579943}
   m_Layer: 5
@@ -1456,6 +1457,18 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &891579944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 891579939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 300d3f10a738d5d4284c06f99ccc36ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoverGroup: {fileID: 891579943}
 --- !u!1 &958599662
 GameObject:
   m_ObjectHideFlags: 0
