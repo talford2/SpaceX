@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,28 +9,36 @@ public class MainMenu : MonoBehaviour
     public CanvasGroup CoverScreen;
     public Button ContinueButton;
 
-    private float coverTime = 1f;
+    private bool isFadeIn;
+    private float coverTime = 0.5f;
     private float coverCooldown;
+
+    private string loadSceneOnFadeComplete;
 
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         ContinueButton.gameObject.SetActive(PlayerFile.Exists());
+        isFadeIn = true;
+        loadSceneOnFadeComplete = string.Empty;
         CoverScreen.alpha = 1f;
         coverCooldown = coverTime;
-        Debug.Break();
     }
 
     private void Update()
     {
-        if (coverCooldown >=0f)
+        if (coverCooldown >= 0f)
         {
             coverCooldown -= Time.deltaTime;
-            var fraction = coverCooldown / coverTime;
-            CoverScreen.alpha = fraction;
+            var fraction = Mathf.Clamp01(coverCooldown / coverTime);
+            CoverScreen.alpha = isFadeIn ? fraction : 1f - fraction;
             if (coverCooldown < 0f)
-                CoverScreen.alpha = 0f;
+            {
+                CoverScreen.alpha = isFadeIn ? 0f : 1f;
+                if (!string.IsNullOrEmpty(loadSceneOnFadeComplete))
+                    LoadWithLoader(loadSceneOnFadeComplete);
+            }
         }
     }
 
@@ -39,12 +48,14 @@ public class MainMenu : MonoBehaviour
         switch (command)
         {
             case "Battle":
-                LoadWithLoader("GalaxyMap");
+                TriggerFadeAndLoad("GalaxyMap");
+                //LoadWithLoader("GalaxyMap");
                 PersistOnLoad.Current.Destroy();
                 break;
             case "New":
                 NewGame();
-                LoadWithLoader("GalaxyMap");
+                TriggerFadeAndLoad("GalaxyMap");
+                //LoadWithLoader("GalaxyMap");
                 PersistOnLoad.Current.Destroy();
                 break;
             case "Options":
@@ -68,6 +79,14 @@ public class MainMenu : MonoBehaviour
     private void NewGame()
     {
         PlayerFile.GameStart().WriteToFile();
+    }
+
+    private void TriggerFadeAndLoad(string sceneName)
+    {
+        loadSceneOnFadeComplete = sceneName;
+        CoverScreen.alpha = 0f;
+        isFadeIn = false;
+        coverCooldown = coverTime;
     }
 
     private void LoadWithLoader(string sceneName)
