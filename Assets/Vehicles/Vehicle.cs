@@ -267,46 +267,35 @@ public class Vehicle : MonoBehaviour
             SetEngine(EnginePrefab.gameObject);
     }
 
-    public void SetPrimaryWeapon(WeaponDefinition primaryWeapon)
+    private void SetWeaponInstance(ref Weapon instance, WeaponDefinition weaponDefinition, List<ShootPoint> shootPoints)
     {
-        if (_primaryWeaponInstance != null)
+        if (instance != null)
         {
-            _primaryWeaponInstance.IsTriggered = false;
-            _primaryWeaponInstance.ClearTargetLock();
-            _primaryWeaponInstance.OnShoot -= OnShoot;
+            instance.IsTriggered = false;
+            instance.ClearTargetLock();
+            instance.OnShoot -= OnShoot;
         }
         else
         {
-            _primaryWeaponInstance = new GameObject("PrimaryWeaponInstance").AddComponent<Weapon>();
-            _primaryWeaponInstance.transform.SetParent(transform);
+            instance = new GameObject("WeaponInstance").AddComponent<Weapon>();
+            instance.transform.SetParent(transform);
         }
-        if (primaryWeapon != null)
+        if (weaponDefinition != null)
         {
-            _primaryWeaponInstance.Definition = primaryWeapon;
-            _primaryWeaponInstance.Initialize(gameObject, PrimaryShootPoints, _velocityReference, _targetable.Team);
-            _primaryWeaponInstance.OnShoot += OnShoot;
+            instance.Definition = weaponDefinition;
+            instance.Initialize(gameObject, shootPoints, _velocityReference, _targetable.Team);
+            instance.OnShoot += OnShoot;
         }
+    }
+
+    public void SetPrimaryWeapon(WeaponDefinition primaryWeapon)
+    {
+        SetWeaponInstance(ref _primaryWeaponInstance, primaryWeapon, PrimaryShootPoints);
     }
 
     public void SetSecondaryWeapon(WeaponDefinition secondaryWeapon)
     {
-        if (_secondaryWeaponInstance != null)
-        {
-            _secondaryWeaponInstance.IsTriggered = false;
-            _secondaryWeaponInstance.ClearTargetLock();
-            _secondaryWeaponInstance.OnShoot -= OnShoot;
-        }
-        else
-        {
-            _secondaryWeaponInstance = new GameObject("PrimaryWeaponInstance").AddComponent<Weapon>();
-            _secondaryWeaponInstance.transform.SetParent(transform);
-        }
-        if (secondaryWeapon != null)
-        {
-            _secondaryWeaponInstance.Definition = secondaryWeapon;
-            _secondaryWeaponInstance.Initialize(gameObject, SecondaryShootPoints, _velocityReference, _targetable.Team);
-            _secondaryWeaponInstance.OnShoot += OnShoot;
-        }
+        SetWeaponInstance(ref _secondaryWeaponInstance, secondaryWeapon, SecondaryShootPoints);
     }
 
     public void SetShield(GameObject shield)
@@ -670,7 +659,7 @@ public class Vehicle : MonoBehaviour
             var woundParticles = _woundObj.GetComponent<ParticleSystem>();
             if (woundParticles != null)
                 woundParticles.Stop();
-            StartCoroutine(DelayedWoundEffectStop(woundParticles.duration + 0.5f));
+            StartCoroutine(DelayedWoundEffectStop(woundParticles.main.duration + 0.5f));
         }
 
         if (_velocity.sqrMagnitude > SpinThresholdSpeed * SpinThresholdSpeed && Random.Range(0, 1f) > 0.5f)
@@ -678,7 +667,7 @@ public class Vehicle : MonoBehaviour
             Explode(SpinDeathExplosion);
             if (CorpsePrefab != null)
             {
-                var corpseInstance = ((GameObject)Instantiate(CorpsePrefab, transform.position, transform.rotation)).GetComponent<VehicleCorpse>();
+                var corpseInstance = Instantiate(CorpsePrefab, transform.position, transform.rotation).GetComponent<VehicleCorpse>();
                 corpseInstance.Initialize(_velocity);
                 var shiftable = corpseInstance.GetComponentInParent<Shiftable>();
                 shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(corpseInstance.transform.position));
