@@ -24,6 +24,7 @@ public class MainMenu : MonoBehaviour
         loadSceneOnFadeComplete = string.Empty;
         CoverScreen.alpha = 1f;
         coverCooldown = coverTime;
+        Time.timeScale = 1f;
     }
 
     private void Update()
