@@ -400,9 +400,10 @@ MonoBehaviour:
   CorpsePrefab: {fileID: 182838, guid: 0ce194040425fda48b154795fa302bff, type: 2}
   DebrisPrefab: {fileID: 0}
   ExplosiveForce: 50
-  ExplodeDeathExplosion: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee,
+  ExplodeDeathExplosion: {fileID: 1124519297851362, guid: 3d2575b16288442499c6366b388a6ea6,
     type: 2}
   SpinDeathExplosion: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
+  SpinThresholdSpeed: 25
   ThrusterPrefab: {fileID: 1208372660303078, guid: 3220c301aa709834a89891f31efe01c3,
     type: 2}
   ThrusterTransforms:
