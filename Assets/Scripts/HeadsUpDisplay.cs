@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class HeadsUpDisplay : MonoBehaviour
 {
+    public CanvasGroup CoverScreen;
     public GameObject Crosshair;
     public bool StartHidden = true;
     public bool DisplayTeamScore;
@@ -122,6 +123,10 @@ public class HeadsUpDisplay : MonoBehaviour
     // Kill counter
     private Dictionary<Team, int> _killCount;
 
+    // Cover Screen
+    private float _coverTime = 0.5f;
+    private float _coverCooldown;
+
     private void Awake()
     {
         _current = this;
@@ -152,6 +157,8 @@ public class HeadsUpDisplay : MonoBehaviour
 
         SquadronPanel.gameObject.SetActive(PlayerController.Current.Squadron.Members.Count > 1);
 
+        _coverCooldown = _coverTime;
+
         if (StartHidden)
             Hide();
     }
@@ -180,6 +187,14 @@ public class HeadsUpDisplay : MonoBehaviour
 
     private void Update()
     {
+        if (_coverCooldown > 0f)
+        {
+            _coverCooldown -= Time.deltaTime;
+            var fraction = Mathf.Abs(_coverCooldown / _coverTime);
+            CoverScreen.alpha = fraction;
+            if (_coverCooldown < 0f)
+                CoverScreen.alpha = 0f;
+        }
         if (_killCoolDown > 0)
         {
             _killCoolDown -= Time.deltaTime;
