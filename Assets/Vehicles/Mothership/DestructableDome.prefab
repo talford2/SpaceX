@@ -114,7 +114,7 @@ MonoBehaviour:
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+  DieEffect: {fileID: 1124519297851362, guid: bde13ad0c24815b45a7b96c3c7091298, type: 2}
   DestroyOnDie: 1
 --- !u!114 &114553759336141572
 MonoBehaviour:
