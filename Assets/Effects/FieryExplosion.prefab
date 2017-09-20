@@ -612,7 +612,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 1946242936
+  randomSeed: 1517652241
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3789,7 +3789,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -1655075589
+  randomSeed: -2089258396
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10224,7 +10224,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1218255472
+  randomSeed: 1278075076
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13419,7 +13419,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -180012907
+  randomSeed: 1359103036
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -16569,7 +16569,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 598199073
+  randomSeed: 1371935613
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -22297,7 +22297,7 @@ ParticleSystem:
     rangeCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -22338,7 +22338,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 10
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -23115,7 +23115,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1738328879
+  randomSeed: 1491759833
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -29536,7 +29536,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 1776451494
+  randomSeed: 994650366
   InitialModule:
     serializedVersion: 3
     enabled: 1
