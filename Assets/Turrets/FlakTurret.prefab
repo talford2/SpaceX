@@ -404,6 +404,7 @@ MonoBehaviour:
   MaxYawSpeed: 90
   AimTolerance: 5
   AimTooCloseDistance: 30
+  AimExtrapolationError: 0
   Targetable: {fileID: 114354613596268164}
   MinTargetSearchInterval: 1
   MaxTargetSearchInterval: 3
@@ -425,7 +426,7 @@ MonoBehaviour:
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
+  DieEffect: {fileID: 1471368607453456, guid: 6685792cd9805f24984737df5eb24120, type: 2}
   DestroyOnDie: 1
 --- !u!135 &13526182
 SphereCollider:

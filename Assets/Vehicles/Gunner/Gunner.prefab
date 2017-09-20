@@ -517,7 +517,8 @@ MonoBehaviour:
   ExplosiveForce: 50
   ExplodeDeathExplosion: {fileID: 1124519297851362, guid: 3d2575b16288442499c6366b388a6ea6,
     type: 2}
-  SpinDeathExplosion: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
+  SpinDeathExplosion: {fileID: 1471368607453456, guid: 6685792cd9805f24984737df5eb24120,
+    type: 2}
   SpinThresholdSpeed: 25
   ThrusterPrefab: {fileID: 1208372660303078, guid: 3220c301aa709834a89891f31efe01c3,
     type: 2}

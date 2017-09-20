@@ -312,6 +312,7 @@ MonoBehaviour:
   ExplosiveForce: 0
   ExplodeDeathExplosion: {fileID: 0}
   SpinDeathExplosion: {fileID: 0}
+  SpinThresholdSpeed: 25
   ThrusterPrefab: {fileID: 1208372660303078, guid: 3220c301aa709834a89891f31efe01c3,
     type: 2}
   ThrusterTransforms:
@@ -361,7 +362,7 @@ MonoBehaviour:
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
-  DieEffect: {fileID: 113586, guid: 6e8ca4dba4c81f64b96853d4fafad6bd, type: 2}
+  DieEffect: {fileID: 1471368607453456, guid: 6685792cd9805f24984737df5eb24120, type: 2}
   DestroyOnDie: 1
 --- !u!114 &11484020
 MonoBehaviour:

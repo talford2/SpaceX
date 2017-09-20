@@ -395,6 +395,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1930212482729166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4270163712839954}
+  - component: {fileID: 114222179905872306}
+  m_Layer: 0
+  m_Name: FierySmallExplosions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1973188597216298
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +618,19 @@ Transform:
   m_Father: {fileID: 4553419461249914}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4270163712839954
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1930212482729166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4553419461249914}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4337452186120088
 Transform:
   m_ObjectHideFlags: 1
@@ -704,6 +733,7 @@ Transform:
   - {fileID: 4546920121850622}
   - {fileID: 4337452186120088}
   - {fileID: 4692728785519970}
+  - {fileID: 4270163712839954}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -876,6 +906,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1402281485440300, guid: e7ccf75f0e340294a90448182cd766a2, type: 2}
   PoolSize: 10
+--- !u!114 &114222179905872306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1930212482729166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db1a18087195fe4eb0eebbe6c0134a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 1471368607453456, guid: 6685792cd9805f24984737df5eb24120, type: 2}
+  PoolSize: 20
 --- !u!114 &114228147882759716
 MonoBehaviour:
   m_ObjectHideFlags: 1
