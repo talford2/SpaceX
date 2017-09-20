@@ -11,6 +11,8 @@ public class MusicPlayer : MonoBehaviour
 
     private int _currentIndex = 0;
 
+    private bool _isMusicOn;
+
     private float _initialVolume;
     private bool _isFadeOut;
     private float _fadeOutDuration;
@@ -19,36 +21,43 @@ public class MusicPlayer : MonoBehaviour
     private void Awake()
     {
         _current = this;
+        _isMusicOn = OptionsFile.Exists() ? OptionsFile.ReadFromFile().IsMusicOn : true;
     }
 
     private void Start()
     {
-        _currentIndex = 0;
-        Source.clip = MusicClips[_currentIndex];
-        Source.Play();
+        if (_isMusicOn)
+        {
+            _currentIndex = 0;
+            Source.clip = MusicClips[_currentIndex];
+            Source.Play();
+        }
     }
 
     private void Update()
     {
-        if (!Source.isPlaying)
+        if (_isMusicOn)
         {
-            _currentIndex++;
-            if (_currentIndex >= MusicClips.Count)
+            if (!Source.isPlaying)
             {
-                _currentIndex = 0;
+                _currentIndex++;
+                if (_currentIndex >= MusicClips.Count)
+                {
+                    _currentIndex = 0;
+                }
+                Source.clip = MusicClips[_currentIndex];
+                Source.Play();
             }
-            Source.clip = MusicClips[_currentIndex];
-            Source.Play();
-        }
-        if (_isFadeOut)
-        {
-            if (_fadeOutCooldown >= 0f)
+            if (_isFadeOut)
             {
-                _fadeOutCooldown -= Time.deltaTime;
-                var fraction = Mathf.Clamp01(_fadeOutCooldown / _fadeOutDuration);
-                Source.volume = fraction * _initialVolume;
-                if (_fadeOutCooldown < 0f)
-                    Source.Stop();
+                if (_fadeOutCooldown >= 0f)
+                {
+                    _fadeOutCooldown -= Time.deltaTime;
+                    var fraction = Mathf.Clamp01(_fadeOutCooldown / _fadeOutDuration);
+                    Source.volume = fraction * _initialVolume;
+                    if (_fadeOutCooldown < 0f)
+                        Source.Stop();
+                }
             }
         }
     }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class HangarScreen : MonoBehaviour
 {
+    public CoverScreen Cover;
     public Text CreditText;
 
     [Header("Left Panel")]
@@ -27,6 +28,8 @@ public class HangarScreen : MonoBehaviour
 
     private List<Vehicle> _vehicles;
     private int _vehicleIndex;
+
+    private string _sceneName;
 
     private void Awake()
     {
@@ -54,6 +57,8 @@ public class HangarScreen : MonoBehaviour
 
         UpdateLeftBar(primaryWeapon, secondaryWeapon);
         UpdateRightBar();
+
+        Cover.TriggerFadeOut();
     }
 
     private int GetShipIndex(string shipKey, List<Vehicle> vehicles)
@@ -235,5 +240,10 @@ public class HangarScreen : MonoBehaviour
     public void Quit()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    private void LoadWithLoader()
+    {
+        SceneManager.LoadScene(_sceneName);
     }
 }

@@ -9,6 +9,9 @@ public class OptionsFile : DataFile<OptionsFile>
     [XmlElement("inverty")]
     public bool InvertYAxis;
 
+    [XmlElement("music")]
+    public bool IsMusicOn;
+
     public static bool Exists()
     {
         return Exists(Filename);
@@ -23,7 +26,7 @@ public class OptionsFile : DataFile<OptionsFile>
     {
         if (Exists())
             return ReadFromFile();
-        return new OptionsFile();
+        return new OptionsFile { InvertYAxis = false, IsMusicOn = true };
     }
 
     public void WriteToFile()

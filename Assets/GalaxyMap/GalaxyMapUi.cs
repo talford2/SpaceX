@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GalaxyMapUi : MonoBehaviour
 {
@@ -8,6 +7,7 @@ public class GalaxyMapUi : MonoBehaviour
     public static GalaxyMapUi Current { get { return _current; } }
 
     public CanvasGroup EnterSystemPanel;
+    public CoverScreen Cover;
 
     private void Awake()
     {

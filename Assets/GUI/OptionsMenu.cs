@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour
 {
     public Toggle YAxisToggle;
+    public Toggle MusicToggle;
 
     private void Awake()
     {
@@ -12,8 +13,10 @@ public class OptionsMenu : MonoBehaviour
         {
             var optionsFile = OptionsFile.ReadFromFile();
             YAxisToggle.isOn = optionsFile.InvertYAxis;
+            MusicToggle.isOn = optionsFile.IsMusicOn;
         }
         YAxisToggle.onValueChanged.AddListener(OnyAxisChange);
+        MusicToggle.onValueChanged.AddListener(OnMusicChange);
     }
 
     public void ReturnToMainMenu()
@@ -25,6 +28,13 @@ public class OptionsMenu : MonoBehaviour
     {
         var optionsFile = OptionsFile.ReadOrNew();
         optionsFile.InvertYAxis = value;
+        optionsFile.WriteToFile();
+    }
+
+    private void OnMusicChange(bool value)
+    {
+        var optionsFile = OptionsFile.ReadOrNew();
+        optionsFile.IsMusicOn = value;
         optionsFile.WriteToFile();
     }
 }
