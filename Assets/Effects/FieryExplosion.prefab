@@ -612,7 +612,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -1713477904
+  randomSeed: 1529002021
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3739,7 +3739,7 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 4
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -3789,7 +3789,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 192538767
+  randomSeed: 1465435016
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10224,7 +10224,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -487131940
+  randomSeed: -1247884033
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13419,7 +13419,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -1028223735
+  randomSeed: 2040263423
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -16569,7 +16569,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -308788553
+  randomSeed: -549030406
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -19848,7 +19848,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -14951162
+  randomSeed: -191024698
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -23115,7 +23115,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 120292105
+  randomSeed: 1699281508
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -29536,7 +29536,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -1233385614
+  randomSeed: -1222122850
   InitialModule:
     serializedVersion: 3
     enabled: 1
