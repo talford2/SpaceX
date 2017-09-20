@@ -42,6 +42,6 @@ public class FighterSteering : NpcSteering<Fighter>
 				}
 			}
 		}
-		return 20f * _avoidSum;
+		return 5f * _avoidSum;
 	}
 }

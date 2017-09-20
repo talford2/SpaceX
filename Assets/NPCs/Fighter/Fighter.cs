@@ -194,10 +194,10 @@ public class Fighter : Npc<Fighter>
     {
         if (_neighborDetectCooldown >= 0f)
         {
-            Neighbours = new List<Detectable>();
             _neighborDetectCooldown -= Time.deltaTime;
             if (_neighborDetectCooldown < 0f)
             {
+                Neighbours = new List<Detectable>();
                 ProximitySensor.Detect(DetectNeighbor);
                 _neighborDetectCooldown = _neighborDetectInterval;
             }
@@ -249,7 +249,8 @@ public class Fighter : Npc<Fighter>
                 { "Idle", Color.white },
                 { "Evade", Color.magenta },
                 { "Chase", Color.red },
-                { "Attack", Color.yellow }
+                { "Attack", Color.yellow },
+                { "Path", Color.cyan }
             };
             Gizmos.color = stateColors[GetState().Name];
 
