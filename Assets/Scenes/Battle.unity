@@ -4788,7 +4788,7 @@ MonoBehaviour:
   MaxAimDistance: 1000
   AimCorrectScreenFraction: 0.01
   NoThreatTime: 30
-  DeathOptionTime: 1
+  DeathOptionTime: 2
   UTurnPath: {fileID: 1997133662}
   UTurnDuration: 5
 --- !u!4 &1064748905
