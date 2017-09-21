@@ -23,6 +23,7 @@ public class WeaponDefinition : ScriptableObject
 
     [Header("Targeting")]
     public bool IsTargetLocking;
+    public bool IsAutoLocking;
     public float TargetLockTime = 1f;
     public float TargetLockingMaxDistance = 2000f;
     public float TargetAngleTolerance = 15f;

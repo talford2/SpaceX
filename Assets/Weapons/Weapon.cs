@@ -125,7 +125,14 @@ public class Weapon : MonoBehaviour
             }
             else
             {
-                TargetLocking();
+                if (Definition.IsAutoLocking)
+                {
+                    AutoTargetLocking();
+                }
+                else
+                {
+                    TargetLocking();
+                }
             }
         }
     }
@@ -278,6 +285,98 @@ public class Weapon : MonoBehaviour
         else
         {
             if (!IsTriggered)
+            {
+                _lockedVehicle = _lockedTarget.GetComponent<Vehicle>();
+                if (_lockedVehicle != null)
+                {
+                    // Rough Extrapolation
+                    SetAimAt(Utility.GetVehicleExtrapolatedPosition(_lockedVehicle, this, 0f));
+                }
+                else
+                {
+                    SetAimAt(_lockedTarget.position);
+                }
+
+                _targetable = _lockedTarget.GetComponent<Targetable>();
+                if (_targetable != null)
+                {
+                    _targetable.LockedOnBy = _owner.transform;
+                }
+
+                SetAimAt(GetShootPointCentre() + _velocityReference.Value);
+                _nextMissile = GetNextMissile();
+                _nextMissile.GetComponent<Missile>().SetTarget(_lockedTarget);
+                FireMissile(_nextMissile);
+                ClearTargetLock();
+            }
+        }
+    }
+
+    private void AutoTargetLocking()
+    {
+        var shootPointsCentre = GetShootPointCentre();
+        if (_lockingTarget != null)
+        {
+            var toLockingTarget = _lockingTarget.position - shootPointsCentre;
+            if (toLockingTarget.sqrMagnitude > Definition.TargetLockingMaxDistance * Definition.TargetLockingMaxDistance)
+            {
+                ClearTargetLock();
+                _lockingCooldown = Definition.TargetLockTime;
+
+            }
+        }
+        else
+        {
+            ClearTargetLock();
+            _lockingCooldown = Definition.TargetLockTime;
+        }
+        if (_lockedTarget != null)
+        {
+            var toLockedTarget = _lockedTarget.position - shootPointsCentre;
+            if (toLockedTarget.sqrMagnitude > Definition.TargetLockingMaxDistance * Definition.TargetLockingMaxDistance)
+            {
+                ClearTargetLock();
+            }
+        }
+        else
+        {
+            ClearTargetLock();
+        }
+
+        var targetLockingDir = _aimAt - shootPointsCentre;
+        _lockingTarget = Targeting.FindFacingAngleTeam(_targetTeam, shootPointsCentre, targetLockingDir, Definition.TargetLockingMaxDistance, Definition.TargetAngleTolerance);
+        if (_lastLockingTarget == null)
+            _lastLockingTarget = _lockingTarget;
+
+        // If still focussing on same target for time period, lock.
+        if (_lastLockingTarget != null && _lastLockingTarget == _lockingTarget)
+        {
+            _lockingCooldown -= Time.deltaTime;
+            if (_lockingCooldown < 0f)
+            {
+                _lockedTarget = _lockingTarget;
+                if (!_isLocked)
+                {
+                    _isLocked = true;
+                    if (Definition.LockSound != null)
+                    {
+                        Utility.PlayOnTransform(Definition.LockSound, _owner.transform);
+                    }
+                }
+            }
+        }
+        else
+        {
+            _isLocked = false;
+            _lockingTarget = null;
+            _lastLockingTarget = null;
+            _lockedTarget = null;
+            _lockingCooldown = Definition.TargetLockTime;
+        }
+
+        if (_isLocked)
+        {
+            if (IsTriggered)
             {
                 _lockedVehicle = _lockedTarget.GetComponent<Vehicle>();
                 if (_lockedVehicle != null)
