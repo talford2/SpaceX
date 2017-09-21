@@ -3,6 +3,7 @@
 [CreateAssetMenu(fileName = "VehicleTracker", menuName = "SpaceX/Tracker", order = 1)]
 public class VehicleTrackerValues : ScriptableObject
 {
+    public bool DisplyOffscreenArrow;
     public Sprite ArrowSprite;
     public Color TrackerColor = Color.white;
     public Sprite LockingSprite;

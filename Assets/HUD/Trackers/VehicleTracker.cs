@@ -378,12 +378,19 @@ public class VehicleTracker : Tracker
                 else
                 {
                     _lockInstance.enabled = false;
-                    _imageInstance.enabled = true;
 
-                    _imageInstance.sprite = _arrowSprite;
-                    _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
-                    _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
-                    _imageInstance.rectTransform.sizeDelta = 64f * Vector2.one;
+                    if (Options.DisplyOffscreenArrow)
+                    {
+                        _imageInstance.enabled = true;
+                        _imageInstance.sprite = _arrowSprite;
+                        _imageInstance.rectTransform.localPosition = Utility.GetBoundsIntersection(screenPosition, _screenBounds);
+                        _imageInstance.rectTransform.localRotation = Quaternion.Euler(0f, 0f, GetScreenAngle(screenPosition));
+                        _imageInstance.rectTransform.sizeDelta = 64f * Vector2.one;
+                    }
+                    else
+                    {
+                        _imageInstance.enabled = false;
+                    }
 
                     _shieldBarBackgroundInstance.enabled = false;
                     _shieldBarInstance.enabled = false;

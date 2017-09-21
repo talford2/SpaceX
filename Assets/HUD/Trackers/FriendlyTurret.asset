@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538a11a48846fb94fbf608d237f21788, type: 3}
   m_Name: FriendlyTurret
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
+  DisplyOffscreenArrow: 0
+  ArrowSprite: {fileID: 0}
   TrackerColor: {r: 0, g: 0.7529412, b: 1, a: 1}
   LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
   LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
