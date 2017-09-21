@@ -22,6 +22,7 @@ MonoBehaviour:
   Spread: 0
   MissilesConverge: 0
   IsTargetLocking: 1
+  IsAutoLocking: 0
   TargetLockTime: 0.7
   TargetLockingMaxDistance: 500
   TargetAngleTolerance: 15
