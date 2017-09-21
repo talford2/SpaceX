@@ -21,6 +21,7 @@ public class HeadsUpDisplay : MonoBehaviour
     public Image PrimaryHeatBar;
     public Image SecondaryHeatBar;
     public Gradient HeatGradient;
+    public CanvasGroup OverheatMessage;
 
     [Header("Text")]
     public Text EnergyText;
@@ -127,6 +128,11 @@ public class HeadsUpDisplay : MonoBehaviour
     private float _coverTime = 0.5f;
     private float _coverCooldown;
 
+    // Heat Message
+    private bool _isOverheated;
+    private float _overheatBlinkCooldown;
+    private float _overheatBlinkTime = 0.5f;
+
     private void Awake()
     {
         _current = this;
@@ -220,6 +226,15 @@ public class HeadsUpDisplay : MonoBehaviour
 
             LeftHeatBar.fillAmount = leftHeatFraction;
             RightHeatBar.fillAmount = rightHeatFraction;
+
+            if (leftHeatFraction == 1f || rightHeatFraction == 1f)
+            {
+                TriggerOverheatMessage();
+            }
+            else
+            {
+                ReleaseOverheatMessage();
+            }
 
             PrimaryHeatBar.fillAmount = (120f / 360f) * leftHeatFraction;
             PrimaryHeatBar.color = HeatGradient.Evaluate(leftHeatFraction);
@@ -321,6 +336,21 @@ public class HeadsUpDisplay : MonoBehaviour
                 var pulseFraction = _energyRegenCooldown / _energyRegenDuration;
                 BoostBar.color = Utility.SetColorAlpha(BoostBar.color, (1 - _boostOpacity) * pulseFraction + _boostOpacity);
             }
+        }
+
+        if (_isOverheated)
+        {
+            _overheatBlinkCooldown -= Time.deltaTime;
+            if (_overheatBlinkCooldown < 0f)
+            {
+                Debug.Log("BLINK!");
+                OverheatMessage.alpha = OverheatMessage.alpha > 0f ? 0f : 1f;
+                _overheatBlinkCooldown = _overheatBlinkTime;
+            }
+        }
+        else
+        {
+            OverheatMessage.alpha = 0f;
         }
 
         /*
@@ -531,6 +561,16 @@ public class HeadsUpDisplay : MonoBehaviour
         ShowCrosshair();
         _crosshairFadeCooldown = _crosshairFadeDuration;
         _isCrosshairFadeOut = true;
+    }
+
+    public void TriggerOverheatMessage()
+    {
+        _isOverheated = true;
+    }
+
+    public void ReleaseOverheatMessage()
+    {
+        _isOverheated = false;
     }
 
     public void RecordKill(Team team)

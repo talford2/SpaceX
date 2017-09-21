@@ -22,17 +22,18 @@ MonoBehaviour:
   Spread: 0
   MissilesConverge: 1
   IsTargetLocking: 0
+  IsAutoLocking: 0
   TargetLockTime: 1
   TargetLockingMaxDistance: 2000
   TargetAngleTolerance: 15
   LockSound: {fileID: 0}
   IsOverheat: 1
   HeatPerMissile: 0.8
-  OverheatDelay: 2
+  OverheatDelay: 3
   CoolDelay: 0.5
   BaseMissileDamage: 4.5
   BaseFireRate: 10
-  BaseCoolingRate: 30
+  BaseCoolingRate: 100
   BaseHeatCapacity: 100
   MissileDamagePerPoint: 0.5
   FireRatePerPoint: 1
