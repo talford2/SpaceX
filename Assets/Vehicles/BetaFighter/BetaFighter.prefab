@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 11436884}
   - component: {fileID: 11491306}
   - component: {fileID: 11401352}
+  - component: {fileID: 114235313745308768}
   m_Layer: 0
   m_Name: BetaFighter
   m_TagString: Untagged
@@ -793,3 +794,16 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 113112}
   m_IsPrefabParent: 1
+--- !u!114 &114235313745308768
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661964a741b486d419f942bfc681493e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxAngle: 15
+  Frequency: 1

@@ -33,7 +33,7 @@ MonoBehaviour:
   CoolDelay: 0.5
   BaseMissileDamage: 20
   BaseFireRate: 2
-  BaseCoolingRate: 50
+  BaseCoolingRate: 150
   BaseHeatCapacity: 100
   MissileDamagePerPoint: 2
   FireRatePerPoint: 0.2

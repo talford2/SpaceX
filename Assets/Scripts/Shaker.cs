@@ -1,13 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Collections;
 using UnityEngine;
 
 public class Shaker : MonoBehaviour
 {
-    public float MaxAngle = 30f;
+    public float MaxAngle = 15f;
     public float Frequency = 1.0f;
 
     private float maxAmplitude;
@@ -58,7 +54,7 @@ public class Shaker : MonoBehaviour
 
         //transform.position += fracVec;
         //transform.position += Mathf.PerlinNoise(x, y)*Vector3.one * amplitudeFraction;
-        applyToTransform.rotation *= Quaternion.Euler(fracVec * MaxAngle);
+        applyToTransform.localRotation *= Quaternion.Euler(fracVec * MaxAngle);
 
     }
 }
