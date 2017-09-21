@@ -54,6 +54,8 @@ public class Vehicle : MonoBehaviour
     public float BarrelStrafeSpeed = 100f;
     public float BarrelRollDuration = 0.5f;
 
+    private Shaker _shaker;
+
     [Header("U-Turn")]
     public SplinePath UTurnPath;
     public float UTurnDuration;
@@ -247,6 +249,8 @@ public class Vehicle : MonoBehaviour
 
         _targetable = GetComponent<Targetable>();
         _tracker = GetComponent<VehicleTracker>();
+
+        _shaker = GetComponent<Shaker>();
 
         _allowBoost = true;
 
@@ -504,6 +508,9 @@ public class Vehicle : MonoBehaviour
         }
         MeshTransform.localRotation = Quaternion.Lerp(MeshTransform.localRotation, _targetBankRotation, 5f * Time.deltaTime);
 
+        if (_shaker != null)
+            _shaker.UpdateShake(MeshTransform);
+
         _velocity = transform.forward * CurrentSpeed;
         var targetBarrelVelocity = 0f;
         if (isBarrelRolling)
@@ -624,6 +631,8 @@ public class Vehicle : MonoBehaviour
 
     private void VehicleDamage(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
     {
+        if (_shaker != null)
+            _shaker.TriggerShake(1f, 0.2f);
         if (sender.Health / sender.MaxHealth < 0.5f)
         {
             StartWoundEffect();
