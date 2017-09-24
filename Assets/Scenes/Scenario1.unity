@@ -1305,6 +1305,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 021b148e7ef85704f86ee1035fd60aaf, type: 3}
   - {fileID: 8300000, guid: ae37cd14a9182a64baeb82a60d8756ff, type: 3}
   - {fileID: 8300000, guid: 7b4c81d9d1efec24184e6dbaa65079bd, type: 3}
+  ShieldGetHitSound:
+  - {fileID: 8300000, guid: fce9a39917ef27e429887d4e85823332, type: 3}
+  - {fileID: 8300000, guid: 6fd50bc6d7b7901419f31c26c2db746f, type: 3}
+  - {fileID: 8300000, guid: 2af441d15283102468ad7d71badc1072, type: 3}
   ThreatRadius: 2000
   Squadron: {fileID: 1064748906}
   InvertY: 1

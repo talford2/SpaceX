@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public AudioClip PlayerHitSound;
     public List<AudioClip> PlayerGetHitSound;
+    public List<AudioClip> ShieldGetHitSound;
 
     public float ThreatRadius = 2000f;
     public PlayerSquadron Squadron;
@@ -793,23 +794,33 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerController_OnDamage(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
     {
+        AudioClip hitSound = null;
+        var hitSoundVolumne = 1f;
         if (sender.Shield > 0f)
         {
             HeadsUpDisplay.Current.ShieldHit();
+            if (ShieldGetHitSound != null && ShieldGetHitSound.Any())
+            {
+                hitSound = ShieldGetHitSound[Random.Range(0, ShieldGetHitSound.Count + 1)];
+                hitSoundVolumne = 0.2f;
+            }
         }
         else
         {
             HeadsUpDisplay.Current.Hit();
-
+            if (PlayerGetHitSound != null && PlayerGetHitSound.Any())
+            {
+                hitSound = PlayerGetHitSound[Random.Range(0, PlayerGetHitSound.Count + 1)];
+                hitSoundVolumne = 0.8f;
+            }
         }
 
-        if (PlayerGetHitSound != null && PlayerGetHitSound.Any())
+        if (hitSound != null)
         {
-            var s = PlayerGetHitSound[Random.Range(0, PlayerGetHitSound.Count + 1)];
             var viewPortPosition = Universe.Current.ViewPort.transform.position;
-            ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, viewPortPosition, Quaternion.identity).GetComponent<AnonymousSound>().PlayAt(s, viewPortPosition, 0.7f, false);
+            ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, viewPortPosition, Quaternion.identity).GetComponent<AnonymousSound>().PlayAt(hitSound, viewPortPosition, hitSoundVolumne, false);
         }
-
+        
         //Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.1f);
         HeadsUpDisplay.Current.RefreshSquadronIcon(0);
         if (VehicleInstance.Killable.Shield > 0f)
