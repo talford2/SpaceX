@@ -96,6 +96,8 @@ public class Vehicle : MonoBehaviour
     [Header("Damage")]
     public GameObject WoundEffect;
     public List<Transform> WoundEffectTransforms;
+    public float ShieldShakeAmplitude = 0.5f;
+    public float HullShakeAmplitude = 1f;
 
     [Header("Death")]
     public GameObject CorpsePrefab;
@@ -632,7 +634,10 @@ public class Vehicle : MonoBehaviour
     private void VehicleDamage(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
     {
         if (_shaker != null)
-            _shaker.TriggerShake(1f, 0.2f);
+        {
+            var amplitude = sender.Shield > 0f ? ShieldShakeAmplitude : HullShakeAmplitude;
+            _shaker.TriggerShake(amplitude, 0.2f);
+        }
         if (sender.Health / sender.MaxHealth < 0.5f)
         {
             StartWoundEffect();
