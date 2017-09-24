@@ -26,3 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Hangar2.unity
     guid: 4cdd2201b2e62e947b9f0484feaf5668
+  - enabled: 1
+    path: Assets/Scenes/Scenario1.unity
+    guid: ac214e6f2bd689c4fb41bf719b8ef91c
