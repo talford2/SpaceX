@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 114836916068261012}
   - component: {fileID: 82390874753928354}
   m_Layer: 0
-  m_Name: FieryExplosion
+  m_Name: FieryExplosionHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
