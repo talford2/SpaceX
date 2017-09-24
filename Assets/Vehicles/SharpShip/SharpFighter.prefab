@@ -521,6 +521,8 @@ MonoBehaviour:
   WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
   WoundEffectTransforms:
   - {fileID: 497904}
+  ShieldShakeAmplitude: 0.1
+  HullShakeAmplitude: 1
   CorpsePrefab: {fileID: 160724, guid: 9b4a52019226a8d4db5b6ed34cc36057, type: 2}
   DebrisPrefab: {fileID: 119188, guid: eff4975c6c67cc74aa5d24825cd8a0d1, type: 2}
   ExplosiveForce: 50
