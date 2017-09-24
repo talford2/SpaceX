@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1168889331366924
 GameObject:
   m_ObjectHideFlags: 1
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 114836916068261012}
   - component: {fileID: 82390874753928354}
   m_Layer: 0
-  m_Name: FieryExplosion
+  m_Name: FieryExplosionHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -248,7 +248,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1373114916885406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 387.32306, y: 428.33173, z: 216.36168}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4148900223748878}
@@ -3802,7 +3802,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -359756789
+  randomSeed: -847875157
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6985,7 +6985,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -1349556195
+  randomSeed: 1147518215
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10162,7 +10162,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1380889487
+  randomSeed: -1175413096
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13429,7 +13429,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 530409270
+  randomSeed: -1287123773
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -16708,7 +16708,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 506162682
+  randomSeed: -9483674
   InitialModule:
     serializedVersion: 3
     enabled: 1
