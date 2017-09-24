@@ -210,7 +210,7 @@ public class PlayerSquadron : MonoBehaviour
         return Dialogue.GetRandomDialogue("LostShield");
     }
 
-    private void SquadronMember_OnDie(Killable sender, GameObject attacker)
+    private void SquadronMember_OnDie(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
     {
         PlayerController.Current.ResetThreatCooldown();
         // This should on refresh the current squadron member's icon.

@@ -61,7 +61,7 @@ public class ProximitySpawner : MonoBehaviour
         }
     }
 
-    private void OnSpawnedDie(Killable sender, GameObject attacker)
+    private void OnSpawnedDie(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
     {
         _spawnedKillables.Remove(sender);
         _liveCount--;

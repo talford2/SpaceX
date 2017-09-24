@@ -208,7 +208,7 @@ public class Turret : MonoBehaviour
         }
     }
 
-    private void OnKilled(Killable sender, GameObject attacker)
+    private void OnKilled(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
     {
         if (attacker != null)
         {

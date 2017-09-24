@@ -28,6 +28,9 @@ public class VehicleCorpse : MonoBehaviour
     private float _rotationSpeed;
     private float _rotateDir;
 
+    private bool _isExplosive;
+    private Quaternion _initRotVelocity;
+
     private void Awake()
     {
         GetComponent<Rigidbody>().isKinematic = true;
@@ -45,26 +48,41 @@ public class VehicleCorpse : MonoBehaviour
         StartCoroutine(DelayedExplode(Random.Range(2f, 3f)));
     }
 
-    public void Initialize(Vector3 initialVelocity)
+    public void Initialize(Vector3 initialVelocity, Vector3 hitPosition, bool explosive)
     {
         _initialVelocity = initialVelocity;
         _rotationSpeed = 0f;
         _rotateDir = Utility.RandomSign();
+
+        _isExplosive = explosive;
+        if (explosive)
+        {
+            var delta = hitPosition - transform.position;
+            _initialVelocity = initialVelocity - 20f * delta.normalized;
+            _initRotVelocity = Quaternion.Euler(delta);
+        }
     }
 
     private void Update()
     {
-        _rotationSpeed = Mathf.MoveTowards(_rotationSpeed, _maxRotationSpeed, _rotationAcceleration * Time.deltaTime);
-        transform.Rotate(Vector3.forward, _rotateDir * _rotationSpeed * Time.deltaTime);
+        if (_isExplosive)
+        {
+            transform.Rotate(_initRotVelocity.eulerAngles);
+        }
+        else
+        {
+            _rotationSpeed = Mathf.MoveTowards(_rotationSpeed, _maxRotationSpeed, _rotationAcceleration * Time.deltaTime);
+            transform.Rotate(Vector3.forward, _rotateDir * _rotationSpeed * Time.deltaTime);
+        }
         if (Physics.SphereCast(new Ray(transform.position, _initialVelocity.normalized), CollisionRadius, (_initialVelocity.magnitude - CollisionRadius) + 0.01f, _collisionMask))
-            CorpseExplode(null, null);
+            CorpseExplode(null, Vector3.zero, Vector3.up, null);
         _shiftable.Translate(_initialVelocity * Time.deltaTime);
     }
 
     private IEnumerator DelayedExplode(float delay)
     {
         yield return new WaitForSeconds(delay);
-        CorpseExplode(null, null);
+        CorpseExplode(null, Vector3.zero, Vector3.up, null);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -72,7 +90,7 @@ public class VehicleCorpse : MonoBehaviour
         _killable.Damage(0.01f * collision.impulse.magnitude, collision.contacts[0].point, collision.contacts[0].normal, null);
     }
 
-    private void CorpseExplode(Killable sender, GameObject attacker)
+    private void CorpseExplode(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
     {
         if (ExplosionPrefab != null)
         {

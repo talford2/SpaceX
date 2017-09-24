@@ -60,7 +60,7 @@ public class PirateSquad : UniverseEvent
         }
     }
 
-    private void OnSpawnedDie(Killable sender, GameObject attacker)
+    private void OnSpawnedDie(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
     {
         _aliveCount--;
         if (_aliveCount == 0)

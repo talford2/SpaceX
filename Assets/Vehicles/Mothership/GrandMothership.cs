@@ -95,7 +95,7 @@ public class GrandMothership : MonoBehaviour
         };
     }
 
-    private void OnKill(Killable sender, GameObject attacker)
+    private void OnKill(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
     {
         _liveCount--;
         Debug.Log("MOTHERSHIP LIVE COUNT: " + _liveCount);

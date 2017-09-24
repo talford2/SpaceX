@@ -659,7 +659,7 @@ public class Vehicle : MonoBehaviour
         Destroy(_woundObj);
     }
 
-    private void VehicleDie(Killable sender, GameObject attacker)
+    private void VehicleDie(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
     {
         _killable.OnDie -= VehicleDie;
         if (_woundObj != null)
@@ -671,16 +671,13 @@ public class Vehicle : MonoBehaviour
             StartCoroutine(DelayedWoundEffectStop(woundParticles.main.duration + 0.5f));
         }
 
-        if (_velocity.sqrMagnitude > SpinThresholdSpeed * SpinThresholdSpeed && Random.Range(0, 1f) > 0.5f)
+        if (Random.Range(0, 1f) > 0.5f)
         {
             Explode(SpinDeathExplosion);
-            if (CorpsePrefab != null)
-            {
-                var corpseInstance = Instantiate(CorpsePrefab, transform.position, transform.rotation).GetComponent<VehicleCorpse>();
-                corpseInstance.Initialize(_velocity);
-                var shiftable = corpseInstance.GetComponentInParent<Shiftable>();
-                shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(corpseInstance.transform.position));
-            }
+            var corpseInstance = Instantiate(CorpsePrefab, transform.position, transform.rotation).GetComponent<VehicleCorpse>();
+            corpseInstance.Initialize(_velocity, positon, _velocity.sqrMagnitude > SpinThresholdSpeed * SpinThresholdSpeed);
+            var shiftable = corpseInstance.GetComponentInParent<Shiftable>();
+            shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(corpseInstance.transform.position));
         }
         else
         {

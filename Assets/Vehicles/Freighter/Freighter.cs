@@ -95,7 +95,7 @@ public class Freighter : MonoBehaviour
         }
     }
 
-    private void OnContainerDie(Killable sender, GameObject attacker)
+    private void OnContainerDie(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
     {
         var dropAmount = Random.Range(MinDropCount, MaxDropCount + 1);
         for (var i = 0f; i < dropAmount; i++)

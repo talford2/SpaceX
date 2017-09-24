@@ -59,20 +59,20 @@ public class Mothership : MonoBehaviour
             killable.OnDie += OnKill;
         }
 
-        FrontLeftBay.OnDie += (sender, attacker) =>
+        FrontLeftBay.OnDie += (sender, positon, normal, attacker) =>
         {
             FrontLeftBayShield.enabled = false;
             DistantFrontLeftBayShield.enabled = false;
             FrontLeftDoors.TriggerClose();
         };
-        FrontRightBay.OnDie += (sender, attacker) =>
+        FrontRightBay.OnDie += (sender, positon, normal, attacker) =>
         {
             FrontRightBayShield.enabled = false;
             DistantFrontRightBayShield.enabled = false;
             FrontRightDoors.TriggerClose();
         };
 
-        MidLeftBay.OnDie += (sender, attacker) =>
+        MidLeftBay.OnDie += (sender, positon, normal, attacker) =>
         {
             if (RearLeftBay == null)
             {
@@ -81,7 +81,7 @@ public class Mothership : MonoBehaviour
                 MidLeftDoors.TriggerClose();
             }
         };
-        RearLeftBay.OnDie += (sender, attacker) =>
+        RearLeftBay.OnDie += (sender, positon, normal, attacker) =>
         {
             if (MidLeftBay == null)
             {
@@ -91,7 +91,7 @@ public class Mothership : MonoBehaviour
             }
         };
 
-        MidRightBay.OnDie += (sender, attacker) =>
+        MidRightBay.OnDie += (sender, positon, normal, attacker) =>
         {
             if (RearRightBay == null)
             {
@@ -100,7 +100,7 @@ public class Mothership : MonoBehaviour
                 MidRightDoors.TriggerClose();
             }
         };
-        RearRightBay.OnDie += (sender, attacker) =>
+        RearRightBay.OnDie += (sender, positon, normal, attacker) =>
         {
             if (MidRightBay == null)
             {
@@ -111,7 +111,7 @@ public class Mothership : MonoBehaviour
         };
     }
 
-    private void OnKill(Killable sender, GameObject attacker)
+    private void OnKill(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
     {
         _liveCount--;
         Debug.Log("MOTHERSHIP LIVE COUNT: " + _liveCount);

@@ -218,7 +218,7 @@ public class Fighter : Npc<Fighter>
         }
     }
 
-    private void OnVehicleDestroyed(Killable sender, GameObject attacker)
+    private void OnVehicleDestroyed(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
     {
         Target = null;
         if (Universe.Current.KillDropItems && DropItems != null && DropItems.Count > 0)

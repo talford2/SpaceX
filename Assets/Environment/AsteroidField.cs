@@ -59,7 +59,7 @@ public class AsteroidField : MonoBehaviour
 		}
 	}
 
-	private void AsteroidField_OnDie(Killable sender, GameObject attacker)
+	private void AsteroidField_OnDie(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
 	{
 		// TODO: This isn't perfect, whenever an asteroid is destroyed a new one will be respawned,
 		// really the asteroid should just be hidden and reset when it falls out of the range
