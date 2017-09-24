@@ -79,6 +79,8 @@ public class PlayerController : MonoBehaviour
     private float lastLeftTime;
     private float lastRightTime;
 
+    private bool _cursorLocked;
+
     private void Awake()
     {
         _current = this;
@@ -89,7 +91,9 @@ public class PlayerController : MonoBehaviour
 
         Cursor.visible = !HideMouse;
         if (HideMouse)
+        {
             Cursor.lockState = CursorLockMode.Locked;
+        }
 
         _profile = GetComponent<ShipProfile>();
 
@@ -513,6 +517,12 @@ public class PlayerController : MonoBehaviour
         {
             // No Target mode
             Targeting.RemoveTargetable(_playVehicleInstance.Targetable.Team, _playVehicleInstance.Targetable.transform);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Return))
+        {
+            Cursor.lockState = !_cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
+            _cursorLocked = !_cursorLocked;
         }
 
         Vehicle leaderVehicle;

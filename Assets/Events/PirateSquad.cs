@@ -11,6 +11,9 @@ public class PirateSquad : UniverseEvent
     public bool Randomize = false;
     public float Radius = 10f;
 
+    public delegate void OnPirateSquadAllDied();
+    public OnPirateSquadAllDied OnAllDied;
+
     private int _aliveCount;
     private List<GameObject> _spawned;
 
@@ -21,13 +24,12 @@ public class PirateSquad : UniverseEvent
 
         _aliveCount = 0;
         _spawned = new List<GameObject>();
-        if (Randomize)
+
+        foreach (var s in Spawners)
         {
-            foreach (var s in Spawners)
-            {
+            if (Randomize)
                 s.transform.localPosition = Random.insideUnitSphere * Radius;
-                s.OnSpawn += OnSpawnShip;
-            }
+            s.OnSpawn += OnSpawnShip;
         }
     }
 
@@ -61,6 +63,11 @@ public class PirateSquad : UniverseEvent
     private void OnSpawnedDie(Killable sender, GameObject attacker)
     {
         _aliveCount--;
+        if (_aliveCount == 0)
+        {
+            if (OnAllDied != null)
+                OnAllDied();
+        }
         StartCoroutine(DelayedRenableEvents(3f));
     }
 

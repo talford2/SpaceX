@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddca141d18aaa604f94025fd458d904e, type: 3}
+  m_Name: Scenario1
+  m_EditorClassIdentifier: 
+  Background: {fileID: 8900000, guid: 9af2460b756ab914aaebe281fdb4bdfe, type: 3}
+  LightColour: {r: 0.9137255, g: 0.8117647, b: 0.8117647, a: 1}
+  LightDirection: {x: -0.7984144, y: 0.5775394, z: -0.1702429}
+  SystemName: Rho Perseus
+  SlipGateLevelIndex: 0
+  CellRadius: 2
+  UniverseEvents: []
