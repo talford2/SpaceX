@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public Color TrackerColor;
 
     public AudioClip PlayerHitSound;
+    public AudioClip PlayerGetHitSound;
 
     public float ThreatRadius = 2000f;
     public PlayerSquadron Squadron;
@@ -799,7 +800,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             HeadsUpDisplay.Current.Hit();
+
         }
+
+        if (PlayerGetHitSound != null)
+        {
+            var viewPortPosition = Universe.Current.ViewPort.transform.position;
+            ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, viewPortPosition, Quaternion.identity).GetComponent<AnonymousSound>().PlayAt(PlayerGetHitSound, viewPortPosition, 0.7f, false);
+        }
+
         //Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.1f);
         HeadsUpDisplay.Current.RefreshSquadronIcon(0);
         if (VehicleInstance.Killable.Shield > 0f)
