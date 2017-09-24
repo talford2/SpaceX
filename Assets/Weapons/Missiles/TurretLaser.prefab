@@ -62,7 +62,8 @@ MonoBehaviour:
   MissileSpeed: 600
   MissileForce: 50
   FromReference: {fileID: 0}
-  HitEffectPrefab: {fileID: 0}
+  HitEffectPrefab: {fileID: 1373114916885406, guid: 6287f972de9cc3d43928f0bfb28e49d9,
+    type: 2}
   HitDecalPrefab: {fileID: 0}
   MissileLength: 30
   Tracer: {fileID: 12017834}
