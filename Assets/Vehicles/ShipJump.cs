@@ -6,10 +6,13 @@ public class ShipJump : MonoBehaviour
     private float jumpCooldown;
     private float jumpDistance = 500f;
 
+    private float idleSpeed = 10f;
+
     private Vector3 originalScale;
     private Vector3 jumpFrom;
     private Vector3 originalPosition;
     private Vector3 originalForward;
+    private bool hasJumped;
 
     private void Awake()
     {
@@ -43,7 +46,13 @@ public class ShipJump : MonoBehaviour
             {
                 transform.localScale = originalScale;
                 transform.position = originalPosition;
+                hasJumped = true;
             }
+        }
+
+        if (hasJumped)
+        {
+            transform.position += originalForward * idleSpeed * Time.deltaTime;
         }
     }
 
