@@ -14,7 +14,7 @@ public class ShipJump : MonoBehaviour
 
     private float idleSpeed = 5f;
 
-    private Renderer meshRenderer;
+    private Renderer[] meshRenderers;
 
     private Vector3 originalScale;
     private Vector3 jumpFrom;
@@ -28,8 +28,8 @@ public class ShipJump : MonoBehaviour
         originalForward = transform.forward;
         originalPosition = transform.position;
 
-        meshRenderer = GetComponentInChildren<MeshRenderer>();
-        meshRenderer.enabled = false;
+        meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        SetRenderersEmabled(false);
         SetTrailsVisible(false);
 
         StartCoroutine(DelayedJump(2f));
@@ -76,13 +76,21 @@ public class ShipJump : MonoBehaviour
         transform.localScale = 0.001f * originalScale;
         transform.position = jumpFrom;
 
-        meshRenderer.enabled = true;
+        SetRenderersEmabled(true);
         SetTrailsVisible(true);
 
         hasJumped = false;
         jumpCooldown = jumpTime;
 
         //Debug.Break();
+    }
+
+    private void SetRenderersEmabled(bool value)
+    {
+        foreach(var meshRenderer in meshRenderers)
+        {
+            meshRenderer.enabled = value;
+        }
     }
 
     private void SetTrailsVisible(bool value)
