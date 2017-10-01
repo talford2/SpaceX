@@ -384,6 +384,18 @@ public class Vehicle : MonoBehaviour
     {
     }
 
+    private void SpendEnergy(float rate)
+    {
+        BoostEnergy -= rate * Time.deltaTime;
+        if (BoostEnergy < 0f)
+        {
+            BoostEnergy = 0f;
+            _allowBoost = false;
+        }
+        _boostRegenerate = false;
+        _boostEnergyCooldown = BoostEnergyRegenerateDelay;
+    }
+
     private void Update()
     {
         var acceleration = 0f;
@@ -399,11 +411,13 @@ public class Vehicle : MonoBehaviour
             }
 
             // Braking
-            if (TriggerBrake && CurrentSpeed > MinSpeed)
+            if (TriggerBrake && CurrentSpeed > MinSpeed && BoostEnergy > 0f)
             {
                 acceleration = -Brake;
                 CurrentSpeed -= Brake * Time.deltaTime;
                 CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
+
+                SpendEnergy(_boostCost);
             }
 
             _allowBoost = true;
@@ -440,14 +454,8 @@ public class Vehicle : MonoBehaviour
                     CurrentSpeed += BoostAcceleration * Time.deltaTime;
                     CurrentSpeed = Mathf.Min(CurrentSpeed, MaxBoostSpeed);
                 }
-                BoostEnergy -= _boostCost * Time.deltaTime;
-                if (BoostEnergy < 0f)
-                {
-                    BoostEnergy = 0f;
-                    _allowBoost = false;
-                }
-                _boostRegenerate = false;
-                _boostEnergyCooldown = BoostEnergyRegenerateDelay;
+
+                SpendEnergy(_boostCost);
             }
         }
 
@@ -479,7 +487,7 @@ public class Vehicle : MonoBehaviour
 
         _rollSpeed += RollAcceleration * Mathf.Clamp(RollThrottle, -1, 1) * Time.deltaTime;
 
-        if (Mathf.Abs(RollThrottle) < 0.01f)
+        if (Mathf.Abs(RollThrottle) < 0.01f || BoostEnergy <= 0f)
         {
             _rollSpeed = Mathf.Lerp(_rollSpeed, 0f, 10f * Time.deltaTime);
         }
@@ -493,8 +501,10 @@ public class Vehicle : MonoBehaviour
 
         if (isBarrelRolling)
         {
+            SpendEnergy(_boostCost);
+
             barrelRollCooldown -= Time.deltaTime;
-            if (barrelRollCooldown < 0f)
+            if (barrelRollCooldown < 0f || BoostEnergy <= 0f)
                 isBarrelRolling = false;
         }
 
@@ -507,6 +517,7 @@ public class Vehicle : MonoBehaviour
         {
             var barrelRollFraction = barrelRollCooldown / BarrelRollDuration;
             _targetBankRotation = Quaternion.AngleAxis(barrelRollDir * barrelRollFraction * 360f, Vector3.forward);
+
         }
         MeshTransform.localRotation = Quaternion.Lerp(MeshTransform.localRotation, _targetBankRotation, 5f * Time.deltaTime);
 
@@ -563,7 +574,6 @@ public class Vehicle : MonoBehaviour
             {
                 thrustAmount = 0f;
             }
-
             if (_previousBoost != IsBoosting)
             {
                 StopBoost();
