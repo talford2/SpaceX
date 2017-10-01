@@ -12,7 +12,7 @@ public class ShipJump : MonoBehaviour
     private float jumpCooldown;
     private float jumpDistance = 500f;
 
-    private float idleSpeed = 5f;
+    private float idleSpeed = 10f;
 
     private Renderer[] meshRenderers;
 
