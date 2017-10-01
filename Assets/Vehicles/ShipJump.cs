@@ -2,11 +2,13 @@
 
 public class ShipJump : MonoBehaviour
 {
+    public AnimationCurve JumpSpeedCurve;
+
     private float jumpTime = 0.5f;
     private float jumpCooldown;
     private float jumpDistance = 500f;
 
-    private float idleSpeed = 10f;
+    private float idleSpeed = 5f;
 
     private Vector3 originalScale;
     private Vector3 jumpFrom;
@@ -37,10 +39,8 @@ public class ShipJump : MonoBehaviour
             jumpCooldown -= Time.deltaTime;
             var fraction = Mathf.Clamp01(1f - jumpCooldown / jumpTime);
 
-            transform.localScale = originalScale * fraction;
-            Debug.Log("FRACTION: " + fraction);
-            transform.position = jumpFrom + fraction * originalForward * jumpDistance;
-            //fraction * originalForward * jumpDistance;
+            transform.localScale = originalScale * JumpSpeedCurve.Evaluate(fraction);
+            transform.position = jumpFrom + JumpSpeedCurve.Evaluate(fraction) * originalForward * jumpDistance;
 
             if (jumpCooldown < 0f)
             {
