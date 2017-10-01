@@ -6,10 +6,30 @@ ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Turret1
+    100004: Turret2
+    100006: Turret3
+    100008: Turret4
     400000: //RootNode
+    400002: Turret1
+    400004: Turret2
+    400006: Turret3
+    400008: Turret4
     2300000: //RootNode
+    2300002: Turret1
+    2300004: Turret2
+    2300006: Turret3
+    2300008: Turret4
     3300000: //RootNode
+    3300002: Turret1
+    3300004: Turret2
+    3300006: Turret3
+    3300008: Turret4
     4300000: Heavy
+    4300002: Turret2
+    4300004: Turret1
+    4300006: Turret4
+    4300008: Turret3
   materials:
     importMaterials: 1
     materialName: 0
