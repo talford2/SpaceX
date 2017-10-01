@@ -411,15 +411,18 @@ public class Vehicle : MonoBehaviour
             }
 
             // Braking
-            if (TriggerBrake && CurrentSpeed > MinSpeed && BoostEnergy > 0f)
+            if (BoostEnergy > 0f)
             {
-                acceleration = -Brake;
-                CurrentSpeed -= Brake * Time.deltaTime;
-                CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
+                if (TriggerBrake && CurrentSpeed > MinSpeed)
+                {
+                    Debug.Log("BRAKING!");
+                    acceleration = -Brake;
+                    CurrentSpeed -= Brake * Time.deltaTime;
+                    CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);
 
-                SpendEnergy(_boostCost);
+                    SpendEnergy(_boostCost);
+                }
             }
-
             _allowBoost = true;
         }
 
