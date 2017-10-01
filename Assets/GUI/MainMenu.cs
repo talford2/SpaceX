@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public Button ContinueButton;
     public CoverScreen Cover;
+    public Transform VehiclePreviewTransform;
 
     private string loadSceneOnFadeComplete;
 
@@ -15,6 +16,16 @@ public class MainMenu : MonoBehaviour
         Cursor.visible = true;
         ContinueButton.gameObject.SetActive(PlayerFile.Exists());
         Time.timeScale = 1f;
+
+        var playerFile = PlayerFile.ReadFromFile();
+        var vehicle = playerFile != null && !string.IsNullOrEmpty(playerFile.Ship)
+            ? VehiclePool.ByKey(playerFile.Ship)
+            : VehiclePool.ByKey("Gunner");
+        var preview = Instantiate(vehicle.PreviewPrefab);
+        preview.transform.SetParent(VehiclePreviewTransform);
+        preview.transform.localPosition = Vector3.zero;
+        preview.transform.localRotation = Quaternion.identity;
+        preview.transform.localScale = Vector3.one;
     }
 
     private void Start()
