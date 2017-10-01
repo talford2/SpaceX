@@ -801,7 +801,7 @@ public class PlayerController : MonoBehaviour
             HeadsUpDisplay.Current.ShieldHit();
             if (ShieldGetHitSound != null && ShieldGetHitSound.Any())
             {
-                hitSound = ShieldGetHitSound[Random.Range(0, ShieldGetHitSound.Count + 1)];
+                hitSound = ShieldGetHitSound[Random.Range(0, ShieldGetHitSound.Count)];
                 hitSoundVolumne = 0.2f;
             }
         }
@@ -810,7 +810,7 @@ public class PlayerController : MonoBehaviour
             HeadsUpDisplay.Current.Hit();
             if (PlayerGetHitSound != null && PlayerGetHitSound.Any())
             {
-                hitSound = PlayerGetHitSound[Random.Range(0, PlayerGetHitSound.Count + 1)];
+                hitSound = PlayerGetHitSound[Random.Range(0, PlayerGetHitSound.Count)];
                 hitSoundVolumne = 0.8f;
             }
         }
