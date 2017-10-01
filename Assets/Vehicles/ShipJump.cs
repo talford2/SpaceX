@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ShipJump : MonoBehaviour
 {
     public AnimationCurve JumpSpeedCurve;
 
-    private float jumpTime = 0.5f;
+    private float jumpTime = 0.3f;
     private float jumpCooldown;
     private float jumpDistance = 500f;
 
     private float idleSpeed = 5f;
 
+    private Renderer meshRenderer;
     private Vector3 originalScale;
     private Vector3 jumpFrom;
     private Vector3 originalPosition;
@@ -22,14 +24,11 @@ public class ShipJump : MonoBehaviour
         originalForward = transform.forward;
         originalPosition = transform.position;
 
-        jumpFrom = originalPosition - originalForward * jumpDistance;
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
+        meshRenderer.enabled = false;
 
-        transform.localScale = 0.001f * originalScale;
-        transform.position = jumpFrom;
-
-        jumpCooldown = jumpTime;
-
-        //Debug.Break();
+        StartCoroutine(DelayedJump(2f));
+        //TriggerJump();
     }
 
     private void Update()
@@ -54,6 +53,25 @@ public class ShipJump : MonoBehaviour
         {
             transform.position += originalForward * idleSpeed * Time.deltaTime;
         }
+    }
+
+    private IEnumerator DelayedJump(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        TriggerJump();
+    }
+
+    private void TriggerJump()
+    {
+        meshRenderer.enabled = true;
+
+        jumpFrom = originalPosition - originalForward * jumpDistance;
+
+        transform.localScale = 0.001f * originalScale;
+        transform.position = jumpFrom;
+
+        hasJumped = false;
+        jumpCooldown = jumpTime;
     }
 
     private void OnDrawGizmos()
