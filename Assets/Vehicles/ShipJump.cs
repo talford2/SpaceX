@@ -1,9 +1,11 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipJump : MonoBehaviour
 {
-    public AnimationCurve JumpSpeedCurve;
+    public AnimationCurve DisplacementCurve;
+    public List<TrailRenderer> Trails;
 
     private float jumpTime = 0.3f;
     private float jumpCooldown;
@@ -12,6 +14,7 @@ public class ShipJump : MonoBehaviour
     private float idleSpeed = 5f;
 
     private Renderer meshRenderer;
+
     private Vector3 originalScale;
     private Vector3 jumpFrom;
     private Vector3 originalPosition;
@@ -26,6 +29,7 @@ public class ShipJump : MonoBehaviour
 
         meshRenderer = GetComponentInChildren<MeshRenderer>();
         meshRenderer.enabled = false;
+        SetTrailsVisible(false);
 
         StartCoroutine(DelayedJump(2f));
         //TriggerJump();
@@ -38,8 +42,8 @@ public class ShipJump : MonoBehaviour
             jumpCooldown -= Time.deltaTime;
             var fraction = Mathf.Clamp01(1f - jumpCooldown / jumpTime);
 
-            transform.localScale = originalScale * JumpSpeedCurve.Evaluate(fraction);
-            transform.position = jumpFrom + JumpSpeedCurve.Evaluate(fraction) * originalForward * jumpDistance;
+            transform.localScale = originalScale * DisplacementCurve.Evaluate(fraction);
+            transform.position = jumpFrom + DisplacementCurve.Evaluate(fraction) * originalForward * jumpDistance;
 
             if (jumpCooldown < 0f)
             {
@@ -63,15 +67,26 @@ public class ShipJump : MonoBehaviour
 
     private void TriggerJump()
     {
-        meshRenderer.enabled = true;
-
         jumpFrom = originalPosition - originalForward * jumpDistance;
 
         transform.localScale = 0.001f * originalScale;
         transform.position = jumpFrom;
 
+        meshRenderer.enabled = true;
+        SetTrailsVisible(true);
+
         hasJumped = false;
         jumpCooldown = jumpTime;
+
+        //Debug.Break();
+    }
+
+    private void SetTrailsVisible(bool value)
+    {
+        foreach(var trail in Trails)
+        {
+            trail.enabled = value;
+        }
     }
 
     private void OnDrawGizmos()
