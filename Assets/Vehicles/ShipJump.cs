@@ -8,7 +8,7 @@ public class ShipJump : MonoBehaviour
     public List<TrailRenderer> Trails;
     public ParticleSystem Flash;
 
-    private float jumpTime = 0.3f;
+    private float jumpTime = 0.4f;
     private float jumpCooldown;
     private float jumpDistance = 500f;
 
