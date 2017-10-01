@@ -6,6 +6,7 @@ public class ShipJump : MonoBehaviour
 {
     public AnimationCurve DisplacementCurve;
     public List<TrailRenderer> Trails;
+    public ParticleSystem Flash;
 
     private float jumpTime = 0.3f;
     private float jumpCooldown;
@@ -68,6 +69,9 @@ public class ShipJump : MonoBehaviour
     private void TriggerJump()
     {
         jumpFrom = originalPosition - originalForward * jumpDistance;
+
+        Flash.transform.position = jumpFrom;
+        Flash.Play();
 
         transform.localScale = 0.001f * originalScale;
         transform.position = jumpFrom;
