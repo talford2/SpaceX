@@ -50,9 +50,7 @@ public class MissionCompleteScreen : MonoBehaviour
         if (clip != null)
         {
             var viewPort = Universe.Current.ViewPort.transform;
-            ResourcePoolManager
-                .GetAvailable(ResourcePoolIndex.AnonymousSound, viewPort.position, Quaternion.identity)
-                .GetComponent<AnonymousSound>().PlayAt(clip, viewPort.position, 1f, false);
+            ResourcePoolIndex.PlayAnonymousSound(clip, viewPort.position, 1f, false);
         }
     }
 

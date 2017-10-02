@@ -343,7 +343,6 @@ public class HeadsUpDisplay : MonoBehaviour
             _overheatBlinkCooldown -= Time.deltaTime;
             if (_overheatBlinkCooldown < 0f)
             {
-                Debug.Log("BLINK!");
                 OverheatMessage.alpha = OverheatMessage.alpha > 0f ? 0f : 1f;
                 _overheatBlinkCooldown = _overheatBlinkTime;
             }

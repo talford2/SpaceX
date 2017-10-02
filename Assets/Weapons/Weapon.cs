@@ -176,9 +176,7 @@ public class Weapon : MonoBehaviour
 
         _shootPoint.Flash(Definition.MuzzlePrefab);
 
-        var fireSound = ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, _shootPoint.transform.position, Quaternion.identity).GetComponent<AnonymousSound>();
-        fireSound.PlayAt(Definition.ShootSound, _shootPoint.transform.position, Definition.SoundMinDistance, Definition.SoundMaxDistance, Definition.SoundVolume);
-        //FireSound.Play();
+        ResourcePoolIndex.PlayAnonymousSound(Definition.ShootSound, _shootPoint.transform.position, Definition.SoundMinDistance, Definition.SoundMaxDistance, Definition.SoundVolume);
 
         if (Definition.IsOverheat)
         {

@@ -736,7 +736,7 @@ public class PlayerController : MonoBehaviour
     public void OnPlayerHit()
     {
         var viewPortPosition = Universe.Current.ViewPort.transform.position;
-        ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, viewPortPosition, Quaternion.identity).GetComponent<AnonymousSound>().PlayAt(PlayerHitSound, viewPortPosition, 0.3f, false);
+        ResourcePoolIndex.PlayAnonymousSound(PlayerHitSound, viewPortPosition, 0.3f, false);
         HeadsUpDisplay.Current.TriggerCrosshairPulse();
     }
 
@@ -818,7 +818,7 @@ public class PlayerController : MonoBehaviour
         if (hitSound != null)
         {
             var viewPortPosition = Universe.Current.ViewPort.transform.position;
-            ResourcePoolManager.GetAvailable(ResourcePoolIndex.AnonymousSound, viewPortPosition, Quaternion.identity).GetComponent<AnonymousSound>().PlayAt(hitSound, viewPortPosition, hitSoundVolumne, false);
+            ResourcePoolIndex.PlayAnonymousSound(hitSound, viewPortPosition, hitSoundVolumne, false);
         }
         
         //Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f, 0.1f);

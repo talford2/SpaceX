@@ -24,6 +24,11 @@ public class ResourcePoolManager
         return _resourcePools[obj].GetAvailable(parentTransform);
     }
 
+    public static T GetAvailable<T>(GameObject obj, Vector3 position, Quaternion rotation) where T:  MonoBehaviour
+    {
+        return GetAvailable(obj, position, rotation).GetComponent<T>();
+    }
+
     public static void RemoveResourcePool(ResourcePool pool)
     {
         _resourcePools.Remove(pool.Prefab);
