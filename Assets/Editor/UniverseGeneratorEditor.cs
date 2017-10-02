@@ -67,14 +67,11 @@ public class UniverseGeneratorEditor : Editor
 
     private ScatterSettings ScatterGUI(ScatterSettings so)
     {
-        EditorGUILayout.BeginHorizontal();
-        so.IsActive = GUILayout.Toggle(so.IsActive, "", GUILayout.Width(10));
-        EditorGUILayout.LabelField(so.Name, EditorStyles.boldLabel);
-        EditorGUILayout.EndHorizontal();
+        so.IsActive = EditorGUILayout.BeginToggleGroup(so.Name, so.IsActive);
 
         so.Name = EditorGUILayout.TextField("Name", so.Name);
 
-        so.Model = EditorExtensions.ObjectField<GameObject>("Model", so.Model, false);
+        so.Model = EditorExtensions.ObjectField("Model", so.Model, false);
 
         // Radius
         var radius = EditorExtensions.FloatRange("Radius", so.RadiusMin, so.RadiusMax);
@@ -93,7 +90,7 @@ public class UniverseGeneratorEditor : Editor
 
         so.LookAtCenter = GUILayout.Toggle(so.LookAtCenter, "Look at Centre");
 
-        so.UseClustering = GUILayout.Toggle(so.UseClustering, "Use Clustering");
+        so.UseClustering = GUILayout.Toggle(so.UseClustering, "Use clustering");
         if (so.UseClustering)
         {
             var clusterCount = EditorExtensions.IntRange("Cluster Count", so.ClusterCountMin, so.ClusterCountMax);
@@ -107,6 +104,7 @@ public class UniverseGeneratorEditor : Editor
         if (so.UseMaterials)
         {
             so.Materials = EditorExtensions.GameObjectList<Material>("Materials", so.Materials, false);
+            EditorGUILayout.Separator();
         }
         else
         {
@@ -142,7 +140,7 @@ public class UniverseGeneratorEditor : Editor
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndVertical();
         }
-
+        EditorGUILayout.EndToggleGroup();
         return so;
     }
 }
