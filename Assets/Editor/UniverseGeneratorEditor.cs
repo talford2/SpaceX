@@ -127,7 +127,7 @@ public class UniverseGeneratorEditor : Editor
                 EditorGUILayout.BeginHorizontal();
                 clr.Color1 = EditorGUILayout.ColorField(clr.Color1);
                 clr.Color2 = EditorGUILayout.ColorField(clr.Color2);
-                if (GUILayout.Button("X"))
+                if (GUILayout.Button("Remove"))
                 {
                     so.Colors.RemoveAt(j);
                 }
