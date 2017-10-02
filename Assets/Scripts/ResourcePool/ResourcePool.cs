@@ -6,14 +6,27 @@ public class ResourcePool : MonoBehaviour
 	public GameObject Prefab;
 	public int PoolSize;
 
+    private bool _isInitialized;
 	private List<GameObject> _pool;
 	private List<ResourcePoolItem> _poolItems;
 
-	private void Awake()
-	{
-		CreatePool(Prefab, PoolSize);
-		ResourcePoolManager.AddResourcePool(this);
-	}
+    private void Awake()
+    {
+        if (Prefab != null && PoolSize > 0)
+            Initialize(Prefab, PoolSize);
+    }
+
+    public void Initialize(GameObject prefab, int poolSize)
+    {
+        if (!_isInitialized)
+        {
+            Prefab = prefab;
+            PoolSize = poolSize;
+            CreatePool(prefab, poolSize);
+            ResourcePoolManager.AddResourcePool(this);
+            _isInitialized = true;
+        }
+    }
 
 	public void CreatePool(GameObject prefab, int count)
 	{

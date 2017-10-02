@@ -9379,7 +9379,7 @@ Prefab:
     - target: {fileID: 224860449716758550, guid: a1859a184329ea54abc5c7bdb9ab22af,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224860449716758550, guid: a1859a184329ea54abc5c7bdb9ab22af,
         type: 2}
@@ -9389,7 +9389,7 @@ Prefab:
     - target: {fileID: 224860449716758550, guid: a1859a184329ea54abc5c7bdb9ab22af,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224564040307993542, guid: a1859a184329ea54abc5c7bdb9ab22af,
         type: 2}
@@ -9409,7 +9409,7 @@ Prefab:
     - target: {fileID: 224564040307993542, guid: a1859a184329ea54abc5c7bdb9ab22af,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224564040307993542, guid: a1859a184329ea54abc5c7bdb9ab22af,
         type: 2}
@@ -9419,7 +9419,7 @@ Prefab:
     - target: {fileID: 224564040307993542, guid: a1859a184329ea54abc5c7bdb9ab22af,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1859a184329ea54abc5c7bdb9ab22af, type: 2}
