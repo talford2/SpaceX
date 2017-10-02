@@ -15,23 +15,26 @@ public class ResourcePoolCollectionEditor : Editor
         GUILayout.Label("Pool Size");
         EditorGUILayout.EndHorizontal();
 
+        var resources = resourcePoolCollection.Resources;
+
         GUILayout.BeginVertical(GUILayout.ExpandWidth(true));
-        foreach (var resource in resourcePoolCollection.Resources.OrderBy(r => r.Prefab.name))
+        if (resources.Any())
         {
-            EditorGUILayout.BeginHorizontal();
-            resource.Prefab = (GameObject)EditorGUILayout.ObjectField(resource.Prefab, typeof(GameObject), false);
-            resource.PoolSize = EditorGUILayout.IntField(resource.PoolSize);
-
-            if (GUILayout.Button("Remove", GUILayout.Width(60)))
+            foreach (var resource in resources)
             {
-                resourcePoolCollection.Resources.Remove(resource);
+                EditorGUILayout.BeginHorizontal();
+                resource.Prefab = (GameObject)EditorGUILayout.ObjectField(resource.Prefab, typeof(GameObject), false);
+                resource.PoolSize = EditorGUILayout.IntField(resource.PoolSize);
+                if (GUILayout.Button("Remove", GUILayout.Width(60)))
+                {
+                    resources.Remove(resource);
+                }
+                EditorGUILayout.EndHorizontal();
             }
-
-            EditorGUILayout.EndHorizontal();
         }
         if (GUILayout.Button("Add"))
         {
-            resourcePoolCollection.Resources.Add(null);
+            resources.Add(null);
         }
         GUILayout.EndVertical();
 
