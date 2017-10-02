@@ -28,6 +28,8 @@ public class UniverseGeneratorEditor : Editor
             universeGen.BackgroundColor = EditorGUILayout.ColorField("Background Color", universeGen.BackgroundColor);
 
             // Sun
+            EditorGUILayout.Separator();
+            GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(2));
             EditorGUILayout.LabelField("Sun", EditorStyles.boldLabel);
             universeGen.SunLight = EditorExtensions.ObjectField<Light>("Sun Light", universeGen.SunLight, true);
             universeGen.SunModel = EditorExtensions.ObjectField<GameObject>("Sun Model", universeGen.SunModel, false);
@@ -36,8 +38,9 @@ public class UniverseGeneratorEditor : Editor
             universeGen.SunColour = EditorGUILayout.ColorField("Colour", universeGen.SunColour);
             universeGen.SunAttachPrefab = EditorExtensions.ObjectField<GameObject>("Sun Attach Prefab", universeGen.SunAttachPrefab, false);
 
-            EditorGUILayout.LabelField(string.Format("Scatter Groups ({0})", universeGen.ScatterObjects.Count), EditorStyles.boldLabel);
             EditorGUILayout.Separator();
+            GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(2));
+            EditorGUILayout.LabelField(string.Format("Scatter Groups ({0})", universeGen.ScatterObjects.Count), EditorStyles.boldLabel);
 
             for (var i = 0; i < universeGen.ScatterObjects.Count; i++)
             {
@@ -48,6 +51,8 @@ public class UniverseGeneratorEditor : Editor
                 {
                     universeGen.ScatterObjects.RemoveAt(i);
                 }
+                EditorGUILayout.Separator();
+                GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(2));
             }
 
             EditorGUILayout.Separator();
@@ -87,6 +92,15 @@ public class UniverseGeneratorEditor : Editor
         so.ScaleMax = scale.Max;
 
         so.LookAtCenter = GUILayout.Toggle(so.LookAtCenter, "Look at Centre");
+
+        so.UseClustering = GUILayout.Toggle(so.UseClustering, "Use Clustering");
+        if (so.UseClustering)
+        {
+            var clusterCount = EditorExtensions.IntRange("Cluster Count", so.ClusterCountMin, so.ClusterCountMax);
+            so.ClusterCountMin = clusterCount.Min;
+            so.ClusterCountMax = clusterCount.Max;
+            so.ClusterScatter = EditorGUILayout.FloatField("Cluster Scatter", so.ClusterScatter);
+        }
 
         // Materials
         so.UseMaterials = GUILayout.Toggle(so.UseMaterials, "Use materials");

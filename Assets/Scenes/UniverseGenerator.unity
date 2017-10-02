@@ -38,11 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028377, g: 0.22571409, b: 0.30692285, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 11
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 8
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_ShadowMaskMode: 2
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -153,6 +153,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 1
+    ClusterCountMin: 5
+    ClusterCountMax: 9
+    ClusterScatter: 5
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
@@ -174,6 +178,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
@@ -191,6 +199,10 @@ MonoBehaviour:
     RadiusMin: 50
     RadiusMax: 60
     Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 0
     Textures: []
     Colors:
@@ -212,6 +224,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 1
+    ClusterCountMin: 2
+    ClusterCountMax: 5
+    ClusterScatter: 5
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
@@ -233,6 +249,10 @@ MonoBehaviour:
     RadiusMin: 0
     RadiusMax: 0
     Model: {fileID: 100000, guid: d02b92b1db28dfc4aa6bdb760aa164f9, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: b76f629a010bc9f47a4a1a57bb89d022, type: 3}
@@ -372,6 +392,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 1
+    ClusterCountMin: 4
+    ClusterCountMax: 9
+    ClusterScatter: 5
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
@@ -395,6 +419,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
@@ -412,6 +440,10 @@ MonoBehaviour:
     RadiusMin: 50
     RadiusMax: 60
     Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 0
     Textures: []
     Colors:
@@ -433,6 +465,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 1
+    ClusterCountMin: 2
+    ClusterCountMax: 5
+    ClusterScatter: 5
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
@@ -601,6 +637,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 1
+    ClusterCountMin: 4
+    ClusterCountMax: 9
+    ClusterScatter: 5
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
@@ -626,6 +666,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
@@ -643,6 +687,10 @@ MonoBehaviour:
     RadiusMin: 50
     RadiusMax: 60
     Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 0
     Textures: []
     Colors:
@@ -664,6 +712,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 1
+    ClusterCountMin: 2
+    ClusterCountMax: 5
+    ClusterScatter: 5
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
@@ -713,7 +765,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1584961315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,6 +795,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 1
+    ClusterCountMin: 4
+    ClusterCountMax: 9
+    ClusterScatter: 5
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
@@ -764,6 +820,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
@@ -781,6 +841,10 @@ MonoBehaviour:
     RadiusMin: 50
     RadiusMax: 60
     Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 0
     Textures: []
     Colors:
@@ -802,6 +866,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 1
+    ClusterCountMin: 2
+    ClusterCountMax: 5
+    ClusterScatter: 5
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
@@ -892,7 +960,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2134924420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,7 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundLayerName: Universe Background
-  Seed: 3
+  Seed: 4
   Level: {fileID: 11400000, guid: cc58cb9e646dba74aa3baf2b45ea24a1, type: 2}
   FlatResolution: 4096
   BaseShader: {fileID: 4800000, guid: 93d806ecefaed5e46b3abde12270a666, type: 3}
@@ -922,6 +990,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 1
+    ClusterCountMin: 5
+    ClusterCountMax: 9
+    ClusterScatter: 5
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
@@ -943,6 +1015,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 10e8814a733a5db47a1b7283f9d88618, type: 3}
@@ -960,6 +1036,10 @@ MonoBehaviour:
     RadiusMin: 50
     RadiusMax: 60
     Model: {fileID: 100000, guid: 621440c03cb610f4f9a9eb535ae0e6e5, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 0
     Textures: []
     Colors:
@@ -981,6 +1061,10 @@ MonoBehaviour:
     RadiusMin: 100
     RadiusMax: 100
     Model: {fileID: 100000, guid: af087255608d0e44ca16dd46a9525b2f, type: 3}
+    UseClustering: 1
+    ClusterCountMin: 2
+    ClusterCountMax: 5
+    ClusterScatter: 5
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: 98ae41dc2a1ce7a41a5962cf7f624add, type: 3}
@@ -1002,6 +1086,10 @@ MonoBehaviour:
     RadiusMin: 0
     RadiusMax: 0
     Model: {fileID: 100000, guid: d02b92b1db28dfc4aa6bdb760aa164f9, type: 3}
+    UseClustering: 0
+    ClusterCountMin: 0
+    ClusterCountMax: 0
+    ClusterScatter: 0
     LookAtCenter: 1
     Textures:
     - {fileID: 2800000, guid: b76f629a010bc9f47a4a1a57bb89d022, type: 3}

@@ -27,7 +27,7 @@ public class UniverseGenerator : MonoBehaviour
 
     #region Public Variables
 
-    public string BackgroundLayerName = "BackgroundLayer";
+    public string BackgroundLayerName = "Universe Background";
 
     public int Seed = 32;
 
@@ -235,10 +235,23 @@ public class UniverseGenerator : MonoBehaviour
 
     #region Private Methods
 
+    private Quaternion RandomEuler(float variation)
+    {
+        return Quaternion.Euler(Random.Range(-variation, variation), Random.Range(-variation, variation), Random.Range(-variation, variation));
+    }
+
     private void Scatter(ScatterSettings settings)
     {
-        var count = Random.Range(settings.CountMin, settings.CountMax);
-        for (var i = 0; i < count; i++)
+        var clusters = new List<Vector3>();
+        if (settings.UseClustering)
+        {
+            for (var i = 0; i < Random.Range(settings.ClusterCountMin, settings.ClusterCountMax); i++)
+            {
+                clusters.Add(Random.onUnitSphere);
+            }
+        }
+
+        for (var i = 0; i < Random.Range(settings.CountMin, settings.CountMax); i++)
         {
             var model = Instantiate<GameObject>(settings.Model);
             model.layer = LayerMask.NameToLayer(BackgroundLayerName);
@@ -250,7 +263,15 @@ public class UniverseGenerator : MonoBehaviour
             }
             else
             {
-                model.transform.position = Random.onUnitSphere * Random.Range(settings.RadiusMin, settings.RadiusMax);
+                if (settings.UseClustering)
+                {
+                    var clusterCentre = clusters[Random.Range(0, clusters.Count)];
+                    model.transform.position = RandomEuler(settings.ClusterScatter) * clusterCentre * Random.Range(settings.RadiusMin, settings.RadiusMax);
+                }
+                else
+                {
+                    model.transform.position = Random.onUnitSphere * Random.Range(settings.RadiusMin, settings.RadiusMax);
+                }
 
                 if (settings.LookAtCenter)
                 {
@@ -385,6 +406,14 @@ public class ScatterSettings
     public float RadiusMax;
 
     public GameObject Model;
+
+    public bool UseClustering;
+
+    public int ClusterCountMin;
+
+    public int ClusterCountMax;
+
+    public float ClusterScatter;
 
     public bool LookAtCenter;
 
