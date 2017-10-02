@@ -34,11 +34,15 @@ public class ShiftableEditor : Editor
 
         shiftable.CellLocalPosition = EditorGUILayout.Vector3Field("Cell Local Position", shiftable.CellLocalPosition);
 
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.PrefixLabel(" ");
         if (GUILayout.Button("Calculate UniversePosition"))
         {
             var universePosition = Universe.GetUniversePositionFromZero(shiftable.transform.position, 1000f);
             shiftable.SetShiftPosition(universePosition);
         }
+        EditorGUILayout.EndHorizontal();
+
         EditorGUI.EndDisabledGroup();
     }
 }
