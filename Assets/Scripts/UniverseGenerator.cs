@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-//using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
@@ -23,11 +22,15 @@ public class UniverseGenerator : MonoBehaviour
 
     private bool _hasStartedGenerating = false;
 
+    private int _backgroundLayer;
+
+    private int _backgroundLayerMask;
+
     #endregion
 
     #region Public Variables
 
-    public string BackgroundLayerName = "Universe Background";
+    public int BackgroundLayer;
 
     public int Seed = 32;
 
@@ -45,13 +48,7 @@ public class UniverseGenerator : MonoBehaviour
 
     public List<ScatterSettings> ScatterObjects;
 
-    public bool HasGenerated
-    {
-        get
-        {
-            return _hasGenerated;
-        }
-    }
+    public bool HasGenerated { get { return _hasGenerated; } }
 
     // Sun
     public Light SunLight;
@@ -68,21 +65,9 @@ public class UniverseGenerator : MonoBehaviour
 
     #region Public Properties
 
-    public Material Background
-    {
-        get
-        {
-            return _mat;
-        }
-    }
+    public Material Background { get { return _mat; } }
 
-    public Vector3 SunDirection
-    {
-        get
-        {
-            return _sunDirection;
-        }
-    }
+    public Vector3 SunDirection { get { return _sunDirection; } }
 
     public float SunIntensity;
 
@@ -98,7 +83,13 @@ public class UniverseGenerator : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Awake()
+    {
+        _backgroundLayer = BackgroundLayer;
+        _backgroundLayerMask = LayerMask.GetMask(LayerMask.LayerToName(_backgroundLayer));
+    }
+
+    private void Start()
     {
         Random.InitState(Seed);
         if (ScatterObjects == null)
@@ -111,7 +102,7 @@ public class UniverseGenerator : MonoBehaviour
         var s = GetMaterial();
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         if (_hasStartedGenerating)
         {
@@ -165,13 +156,13 @@ public class UniverseGenerator : MonoBehaviour
         _renderCamera.renderingPath = RenderingPath.DeferredShading;
         _renderCamera.hdr = true;
         _renderCamera.farClipPlane = 20000;
-        _renderCamera.cullingMask = LayerMask.GetMask(BackgroundLayerName);
+        _renderCamera.cullingMask = _backgroundLayerMask;
         _renderCamera.backgroundColor = BackgroundColor;
 
         // Sun
         var sunObj = Instantiate(SunModel);
         sunObj.transform.SetParent(_parent);
-        sunObj.layer = LayerMask.NameToLayer(BackgroundLayerName);
+        sunObj.layer = _backgroundLayer;
         sunObj.transform.position = Random.onUnitSphere * 10000;
         sunObj.transform.localScale = Vector3.one * 2000;
         sunObj.GetComponent<Renderer>().material = CreateMaterial(SunTexture, Color.white);
@@ -184,7 +175,7 @@ public class UniverseGenerator : MonoBehaviour
         {
             var attachedPrefab = Instantiate<GameObject>(SunAttachPrefab);
             attachedPrefab.transform.SetParent(_parent);
-            attachedPrefab.layer = LayerMask.NameToLayer(BackgroundLayerName);
+            attachedPrefab.layer = _backgroundLayer;
             attachedPrefab.transform.position = Vector3.zero;
             attachedPrefab.transform.localScale = Vector3.one;// * 300f;
             attachedPrefab.transform.rotation = sunObj.transform.rotation;
@@ -254,7 +245,7 @@ public class UniverseGenerator : MonoBehaviour
         for (var i = 0; i < Random.Range(settings.CountMin, settings.CountMax); i++)
         {
             var model = Instantiate<GameObject>(settings.Model);
-            model.layer = LayerMask.NameToLayer(BackgroundLayerName);
+            model.layer = _backgroundLayer;
 
             if (settings.RadiusMax == 0 && settings.RadiusMin == 0)
             {

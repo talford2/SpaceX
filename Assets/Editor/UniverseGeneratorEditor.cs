@@ -18,7 +18,7 @@ public class UniverseGeneratorEditor : Editor
         if (universeGen != null)
         {
             universeGen.Seed = EditorGUILayout.IntField("Seed", universeGen.Seed);
-            universeGen.BackgroundLayerName = EditorGUILayout.TextField("Layer", universeGen.BackgroundLayerName);
+            universeGen.BackgroundLayer = EditorGUILayout.LayerField("Layer", universeGen.BackgroundLayer);
             universeGen.Level = EditorExtensions.ObjectField<LevelDefinition>("Level", universeGen.Level, false);
             universeGen.FlatResolution = EditorExtensions.IntDropdown("Resolution", new List<int> { 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192 }, universeGen.FlatResolution);
 
@@ -46,8 +46,8 @@ public class UniverseGeneratorEditor : Editor
             {
                 var so = universeGen.ScatterObjects[i];
                 so = ScatterGUI(so);
-
-                if (GUILayout.Button("Remove"))
+                EditorGUILayout.Separator();
+                if (GUILayout.Button("Remove Scatter Group"))
                 {
                     universeGen.ScatterObjects.RemoveAt(i);
                 }
@@ -112,17 +112,21 @@ public class UniverseGeneratorEditor : Editor
         {
             // Textures
             so.Textures = EditorExtensions.GameObjectList<Texture>("Textures", so.Textures, false);
+            EditorGUILayout.Separator();
 
             // Colours
             if (so.Colors == null)
             {
                 so.Colors = new List<ColorRange>();
             }
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.PrefixLabel("Colors");
+
+            EditorGUILayout.BeginVertical();
             for (var j = 0; j < so.Colors.Count; j++)
             {
                 var clr = so.Colors[j];
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.PrefixLabel("Color");
                 clr.Color1 = EditorGUILayout.ColorField(clr.Color1);
                 clr.Color2 = EditorGUILayout.ColorField(clr.Color2);
                 if (GUILayout.Button("X"))
@@ -131,10 +135,12 @@ public class UniverseGeneratorEditor : Editor
                 }
                 EditorGUILayout.EndHorizontal();
             }
-            if (GUILayout.Button("Add Color"))
+            if (GUILayout.Button("Add"))
             {
                 so.Colors.Add(new ColorRange());
             }
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndVertical();
         }
 
         return so;
