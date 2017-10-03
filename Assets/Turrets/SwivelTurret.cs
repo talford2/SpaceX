@@ -155,7 +155,7 @@ public class SwivelTurret : MonoBehaviour
 
         var toAimPosition = _aimPosition - shootPointsCentre;
 
-        var targetYaw = GetLocalTargetEuler(Head.transform, _aimPosition).y;
+        var targetYaw = Mathf.Clamp(GetLocalTargetEuler(Head.transform, _aimPosition).y % 360f, 180f, 360f); // This is actually more like pitch
         var targetPitch = GetLocalTargetEuler(Head.transform, _aimPosition).x;
 
         Head.transform.localRotation = Quaternion.RotateTowards(Head.transform.localRotation, Quaternion.AngleAxis(targetYaw, Vector3.up) * Quaternion.AngleAxis(targetPitch, Vector3.right), MaxYawSpeed * Time.deltaTime);
