@@ -255,7 +255,7 @@ Transform:
   - {fileID: 4807196091652802}
   m_Father: {fileID: 4510156656940096}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
 --- !u!4 &4248132145179264
 Transform:
   m_ObjectHideFlags: 1
@@ -659,8 +659,8 @@ MonoBehaviour:
   - {fileID: 114013468793034348}
   - {fileID: 114771332784620566}
   MaxTargetDistance: 1000
-  MinPitch: -90
-  MaxPitch: 90
+  MinPitch: 180
+  MaxPitch: 360
   MaxPitchSpeed: 90
   MaxYawSpeed: 90
   AimTolerance: 5
@@ -702,8 +702,8 @@ MonoBehaviour:
   - {fileID: 114498000916750494}
   - {fileID: 114928457793588776}
   MaxTargetDistance: 1000
-  MinPitch: -90
-  MaxPitch: 90
+  MinPitch: 180
+  MaxPitch: 360
   MaxPitchSpeed: 90
   MaxYawSpeed: 90
   AimTolerance: 5
@@ -745,8 +745,8 @@ MonoBehaviour:
   - {fileID: 114757083368165000}
   - {fileID: 114514295803187422}
   MaxTargetDistance: 1000
-  MinPitch: -90
-  MaxPitch: 90
+  MinPitch: 0
+  MaxPitch: 180
   MaxPitchSpeed: 90
   MaxYawSpeed: 90
   AimTolerance: 5
@@ -890,8 +890,8 @@ MonoBehaviour:
   - {fileID: 114840578365007146}
   - {fileID: 114873826971985230}
   MaxTargetDistance: 1000
-  MinPitch: -90
-  MaxPitch: 90
+  MinPitch: 0
+  MaxPitch: 180
   MaxPitchSpeed: 90
   MaxYawSpeed: 90
   AimTolerance: 5
