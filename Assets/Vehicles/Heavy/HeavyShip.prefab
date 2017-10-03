@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 114811967176775688}
   - component: {fileID: 114547444917082040}
   - component: {fileID: 135424621398927104}
+  - component: {fileID: 114202805689094320}
   m_Layer: 0
   m_Name: Turret3
   m_TagString: Untagged
@@ -91,6 +92,7 @@ GameObject:
   - component: {fileID: 33390883466717650}
   - component: {fileID: 23840835810797968}
   - component: {fileID: 114723217399197212}
+  - component: {fileID: 64857728548755008}
   m_Layer: 0
   m_Name: HeavyShip
   m_TagString: Untagged
@@ -128,6 +130,7 @@ GameObject:
   - component: {fileID: 114222204929673072}
   - component: {fileID: 114634497987542722}
   - component: {fileID: 135783704336435722}
+  - component: {fileID: 114196447189330400}
   m_Layer: 0
   m_Name: Turret2
   m_TagString: Untagged
@@ -213,6 +216,7 @@ GameObject:
   - component: {fileID: 114395031246649018}
   - component: {fileID: 114514983894447768}
   - component: {fileID: 135030941434924962}
+  - component: {fileID: 114260127162092654}
   m_Layer: 0
   m_Name: Turret1
   m_TagString: Untagged
@@ -234,6 +238,7 @@ GameObject:
   - component: {fileID: 114495188741576282}
   - component: {fileID: 114880186712042990}
   - component: {fileID: 135125756278158952}
+  - component: {fileID: 114282923542055850}
   m_Layer: 0
   m_Name: Turret4
   m_TagString: Untagged
@@ -617,6 +622,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1283999121105926}
   m_Mesh: {fileID: 4300000, guid: 23038a11e58eec246a62172d3e3c7fe4, type: 3}
+--- !u!64 &64857728548755008
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1283999121105926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 23038a11e58eec246a62172d3e3c7fe4, type: 3}
 --- !u!114 &114005881075428792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -641,6 +660,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd44330a49bb5348bf12e52bb74c3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114196447189330400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420526191286230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2228cded089ed1b42ac1ccb587e5e381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Options: {fileID: 11400000, guid: 7b6a0172a64c4d04b98c2d73e06abfcf, type: 2}
+  Targetable: {fileID: 114356129964780720}
+  Killable: {fileID: 114634497987542722}
+  IsDisabled: 0
+--- !u!114 &114202805689094320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1078287113162786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2228cded089ed1b42ac1ccb587e5e381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Options: {fileID: 11400000, guid: 7b6a0172a64c4d04b98c2d73e06abfcf, type: 2}
+  Targetable: {fileID: 114430633503607046}
+  Killable: {fileID: 114547444917082040}
+  IsDisabled: 0
 --- !u!114 &114222204929673072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -671,6 +720,36 @@ MonoBehaviour:
   MaxTargetSearchInterval: 2
   BurstCount: 5
   BurstWaitTime: 1.5
+--- !u!114 &114260127162092654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1913247639685768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2228cded089ed1b42ac1ccb587e5e381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Options: {fileID: 11400000, guid: 7b6a0172a64c4d04b98c2d73e06abfcf, type: 2}
+  Targetable: {fileID: 0}
+  Killable: {fileID: 114514983894447768}
+  IsDisabled: 0
+--- !u!114 &114282923542055850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1951076874287346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2228cded089ed1b42ac1ccb587e5e381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Options: {fileID: 11400000, guid: 7b6a0172a64c4d04b98c2d73e06abfcf, type: 2}
+  Targetable: {fileID: 114005881075428792}
+  Killable: {fileID: 114880186712042990}
+  IsDisabled: 0
 --- !u!114 &114356129964780720
 MonoBehaviour:
   m_ObjectHideFlags: 1
