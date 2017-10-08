@@ -39,6 +39,9 @@ public class Turret : MonoBehaviour
     public int BurstCount = 5;
     public float BurstWaitTime = 1.5f;
 
+    [Header("Death")]
+    public GameObject CorpsePrefab;
+
     private VelocityReference _velocityReference;
     private Weapon _weaponInstance;
 
@@ -215,6 +218,10 @@ public class Turret : MonoBehaviour
             var attackerTargetable = attacker.GetComponentInChildren<Targetable>();
             if (attackerTargetable != null)
                 HeadsUpDisplay.Current.RecordKill(attackerTargetable.Team);
+        }
+        if (CorpsePrefab!=null)
+        {
+            var corpseInstance = Instantiate(CorpsePrefab, transform.position, transform.rotation);
         }
     }
 }
