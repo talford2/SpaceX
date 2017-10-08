@@ -737,7 +737,7 @@ MonoBehaviour:
   Targetable: {fileID: 114449334121661374}
   MinTargetSearchInterval: 1
   MaxTargetSearchInterval: 3
-  BurstCount: 5
+  BurstCount: 4
   BurstWaitTime: 1.5
   CorpsePrefab: {fileID: 1110616470272176, guid: e81fe1f7505cb2e459d257ea17224532,
     type: 2}
@@ -776,8 +776,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 80
-  MaxHealth: 80
+  Health: 150
+  MaxHealth: 150
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 0}
