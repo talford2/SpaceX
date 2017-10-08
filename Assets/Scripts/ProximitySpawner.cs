@@ -9,6 +9,7 @@ public class ProximitySpawner : MonoBehaviour
     public float IntervalIncreasePerKill = 0f;
     public int MaxLiveCount = 2;
     public Transform PathPoint;
+    public bool IsTriggered = true;
 
     private float _radiusSquared;
     private float _intervalCooldown;
@@ -26,23 +27,26 @@ public class ProximitySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerController.Current != null && PlayerController.Current.VehicleInstance != null)
+        if (IsTriggered)
         {
-            if (_intervalCooldown >= 0f)
+            if (PlayerController.Current != null && PlayerController.Current.VehicleInstance != null)
             {
-                _intervalCooldown -= Time.deltaTime;
-                if (_intervalCooldown < 0f)
+                if (_intervalCooldown >= 0f)
                 {
-                    var toPlayer = PlayerController.Current.VehicleInstance.transform.position - transform.position;
-                    if (toPlayer.sqrMagnitude < _radiusSquared)
+                    _intervalCooldown -= Time.deltaTime;
+                    if (_intervalCooldown < 0f)
                     {
-                        if (_liveCount < MaxLiveCount)
+                        var toPlayer = PlayerController.Current.VehicleInstance.transform.position - transform.position;
+                        if (toPlayer.sqrMagnitude < _radiusSquared)
                         {
-                            _liveCount++;
-                            Spawn();
+                            if (_liveCount < MaxLiveCount)
+                            {
+                                _liveCount++;
+                                Spawn();
+                            }
                         }
+                        _intervalCooldown = Interval;
                     }
-                    _intervalCooldown = Interval;
                 }
             }
         }

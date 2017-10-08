@@ -36,6 +36,7 @@ public class Mothership : MonoBehaviour
 
     private int _liveCount;
     private List<Killable> _killables;
+    private ProximitySpawner[] _spawners;
 
     private void Start()
     {
@@ -57,6 +58,12 @@ public class Mothership : MonoBehaviour
         foreach (var killable in _killables)
         {
             killable.OnDie += OnKill;
+        }
+
+        _spawners = GetComponentsInChildren<ProximitySpawner>();
+        foreach(var spawner in _spawners)
+        {
+            spawner.IsTriggered = false;
         }
 
         FrontLeftBay.OnDie += (sender, positon, normal, attacker) =>

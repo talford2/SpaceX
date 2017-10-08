@@ -25,7 +25,8 @@ public class DelaySpawnTrigger : Triggerable
     private void OnAllDead()
     {
         TriggerEvent.OnAllDied -= OnAllDead;
-        TriggerOnDefeat.Trigger();
+        if (TriggerOnDefeat != null)
+            TriggerOnDefeat.Trigger();
     }
 
     public override void Trigger(float delay = 0)

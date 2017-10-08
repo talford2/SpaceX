@@ -10,6 +10,7 @@ public class PirateSquad : UniverseEvent
 
     public bool Randomize = false;
     public float Radius = 10f;
+    public bool IgnoreUniverseManagement;
 
     public delegate void OnPirateSquadAllDied();
     public OnPirateSquadAllDied OnAllDied;
@@ -35,9 +36,10 @@ public class PirateSquad : UniverseEvent
 
     public override void Trigger()
     {
-        if (Universe.Current.AllowEvents)
+        if ((!IgnoreUniverseManagement && Universe.Current.AllowEvents) || IgnoreUniverseManagement)
         {
-            Universe.Current.AllowEvents = false;
+            if (!IgnoreUniverseManagement)
+                Universe.Current.AllowEvents = false;
             foreach (var spawner in Spawners)
             {
                 spawner.Spawn(Random.Range(0f, 1f));
