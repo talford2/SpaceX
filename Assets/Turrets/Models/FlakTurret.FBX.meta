@@ -31,7 +31,28 @@ ModelImporter:
     400020: ShootLT
     400022: ShootRB
     400024: ShootRT
+    2300000: Base
+    2300002: GunLB
+    2300004: GunLT
+    2300006: GunRB
+    2300008: GunRT
+    2300010: Guns
+    2300012: Head
+    3300000: Base
+    3300002: GunLB
+    3300004: GunLT
+    3300006: GunRB
+    3300008: GunRT
+    3300010: Guns
+    3300012: Head
     4300000: FlakTurret
+    4300002: Base
+    4300004: Head
+    4300006: Guns
+    4300008: GunRB
+    4300010: GunRT
+    4300012: GunLT
+    4300014: GunLB
     9500000: //RootNode
     13700000: FlakTurret
   materials:
