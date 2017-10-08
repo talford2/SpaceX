@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 469836}
-  - 135: {fileID: 13547558}
-  - 114: {fileID: 11443048}
+  - component: {fileID: 469836}
+  - component: {fileID: 13547558}
+  - component: {fileID: 11443048}
   m_Layer: 11
   m_Name: Detectable
   m_TagString: Untagged
@@ -22,10 +22,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 467760}
-  - 137: {fileID: 13720180}
+  - component: {fileID: 467760}
+  - component: {fileID: 13720180}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -38,10 +38,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 400278}
-  - 114: {fileID: 11479290}
+  - component: {fileID: 400278}
+  - component: {fileID: 11479290}
   m_Layer: 0
   m_Name: Tracker
   m_TagString: Untagged
@@ -54,9 +54,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 404694}
+  - component: {fileID: 404694}
   m_Layer: 0
   m_Name: Guns
   m_TagString: Untagged
@@ -69,10 +69,10 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 402084}
-  - 114: {fileID: 11440442}
+  - component: {fileID: 402084}
+  - component: {fileID: 11440442}
   m_Layer: 0
   m_Name: ShootPointRight
   m_TagString: Untagged
@@ -85,9 +85,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 466886}
+  - component: {fileID: 466886}
   m_Layer: 0
   m_Name: GunRight
   m_TagString: Untagged
@@ -100,10 +100,10 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 458172}
-  - 114: {fileID: 11404266}
+  - component: {fileID: 458172}
+  - component: {fileID: 11404266}
   m_Layer: 0
   m_Name: ShootPointLeft
   m_TagString: Untagged
@@ -116,9 +116,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 407434}
+  - component: {fileID: 407434}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -131,10 +131,10 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 452172}
-  - 136: {fileID: 13670502}
+  - component: {fileID: 452172}
+  - component: {fileID: 13670502}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -147,9 +147,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 439012}
+  - component: {fileID: 439012}
   m_Layer: 0
   m_Name: GunLeft
   m_TagString: Untagged
@@ -162,13 +162,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 405736}
-  - 95: {fileID: 9518466}
-  - 114: {fileID: 11472348}
-  - 114: {fileID: 11454552}
-  - 114: {fileID: 11488622}
+  - component: {fileID: 405736}
+  - component: {fileID: 9518466}
+  - component: {fileID: 11472348}
+  - component: {fileID: 11454552}
+  - component: {fileID: 11488622}
   m_Layer: 0
   m_Name: DualLaserTurret
   m_TagString: Untagged
@@ -181,9 +181,9 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 464986}
+  - component: {fileID: 464986}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -203,6 +203,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 405736}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &402084
 Transform:
   m_ObjectHideFlags: 1
@@ -215,6 +216,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 466886}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &404694
 Transform:
   m_ObjectHideFlags: 1
@@ -229,6 +231,7 @@ Transform:
   - {fileID: 466886}
   m_Father: {fileID: 407434}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &405736
 Transform:
   m_ObjectHideFlags: 1
@@ -245,6 +248,7 @@ Transform:
   - {fileID: 400278}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &407434
 Transform:
   m_ObjectHideFlags: 1
@@ -259,6 +263,7 @@ Transform:
   - {fileID: 404694}
   m_Father: {fileID: 464986}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &439012
 Transform:
   m_ObjectHideFlags: 1
@@ -272,6 +277,7 @@ Transform:
   - {fileID: 458172}
   m_Father: {fileID: 404694}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &452172
 Transform:
   m_ObjectHideFlags: 1
@@ -284,6 +290,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 407434}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &458172
 Transform:
   m_ObjectHideFlags: 1
@@ -296,6 +303,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 439012}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &464986
 Transform:
   m_ObjectHideFlags: 1
@@ -309,6 +317,7 @@ Transform:
   - {fileID: 407434}
   m_Father: {fileID: 405736}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &466886
 Transform:
   m_ObjectHideFlags: 1
@@ -322,6 +331,7 @@ Transform:
   - {fileID: 402084}
   m_Father: {fileID: 404694}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &467760
 Transform:
   m_ObjectHideFlags: 1
@@ -334,6 +344,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 405736}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &469836
 Transform:
   m_ObjectHideFlags: 1
@@ -346,6 +357,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 405736}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9518466
 Animator:
   serializedVersion: 3
@@ -397,6 +409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 405736}
+  Radius: 0
 --- !u!114 &11454552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -414,7 +427,6 @@ MonoBehaviour:
   MaxShield: 0
   DamageEffect: {fileID: 0}
   DieEffect: {fileID: 127098, guid: 6577ef29359673a45ba4de54389402ee, type: 2}
-  WoundEffect: {fileID: 0}
   DestroyOnDie: 1
 --- !u!114 &11472348
 MonoBehaviour:
@@ -427,6 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8446123da9e83ef4bb11729d8d637ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
   Head: {fileID: 173074}
   Guns: {fileID: 136792}
   RecoilBarrels: []
@@ -439,18 +452,46 @@ MonoBehaviour:
   RecoilTime: 0.5
   RecoilCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 13.06101
+      outSlope: 13.06101
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.014485985
+      value: 0.2140851
+      inSlope: 9.903463
+      outSlope: 9.903463
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.30246374
+      value: 0.81455064
+      inSlope: -2.6752539
+      outSlope: -2.6752539
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.99667406
+      value: 0.001919508
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   MinPitch: 25
   MaxPitch: 300
   MaxPitchSpeed: 360
   MaxYawSpeed: 90
   AimTolerance: 5
-  ExtrapolationTimeError: 0.5
-  AimOffsetRadius: 5
+  AimTooCloseDistance: 10
+  AimExtrapolationError: 0
   Targetable: {fileID: 0}
+  MinTargetSearchInterval: 2
+  MaxTargetSearchInterval: 2
+  BurstCount: 5
+  BurstWaitTime: 1.5
 --- !u!114 &11479290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -462,14 +503,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020fc28506c4c2443a1b041d49e7be9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSprite: {fileID: 21300000, guid: ae952759260d4f040a1a103d9c1c83b5, type: 3}
-  TrackerColor: {r: 1, g: 0, b: 0.4, a: 1}
-  LockingSprite: {fileID: 21300000, guid: 716ccc83ade734d4b980a2a509f2d26b, type: 3}
-  LockedSprite: {fileID: 21300000, guid: 98642be69a3157d40847024e876a2ff2, type: 3}
-  TrackerPlanePrefab: {fileID: 118416, guid: cf9db3bc5eecd8845883212bc1cb6aaf, type: 2}
+  Options: {fileID: 0}
   Targetable: {fileID: 11488622}
   Killable: {fileID: 11454552}
-  MaxDistance: 3000
   IsDisabled: 0
 --- !u!114 &11488622
 MonoBehaviour:
@@ -518,26 +554,33 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 5457520db37ae264d9d4f9b6dc1bc37c, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300000, guid: 3344b174d1f7ea44f80d5d927b0096eb, type: 3}
   m_Bones:
   - {fileID: 464986}
