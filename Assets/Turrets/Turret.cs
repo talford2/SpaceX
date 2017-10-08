@@ -219,9 +219,11 @@ public class Turret : MonoBehaviour
             if (attackerTargetable != null)
                 HeadsUpDisplay.Current.RecordKill(attackerTargetable.Team);
         }
-        if (CorpsePrefab!=null)
+        if (CorpsePrefab != null)
         {
             var corpseInstance = Instantiate(CorpsePrefab, transform.position, transform.rotation);
+            var shiftable = corpseInstance.GetComponentInParent<Shiftable>();
+            shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(corpseInstance.transform.position));
         }
     }
 }

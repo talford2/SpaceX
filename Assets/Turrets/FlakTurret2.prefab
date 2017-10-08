@@ -739,6 +739,8 @@ MonoBehaviour:
   MaxTargetSearchInterval: 3
   BurstCount: 5
   BurstWaitTime: 1.5
+  CorpsePrefab: {fileID: 1110616470272176, guid: e81fe1f7505cb2e459d257ea17224532,
+    type: 2}
 --- !u!114 &114449334121661374
 MonoBehaviour:
   m_ObjectHideFlags: 1
