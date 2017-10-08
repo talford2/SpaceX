@@ -22,6 +22,7 @@ MonoBehaviour:
   Spread: 5
   MissilesConverge: 1
   IsTargetLocking: 0
+  IsAutoLocking: 0
   TargetLockTime: 1.5
   TargetLockingMaxDistance: 2000
   TargetAngleTolerance: 15
@@ -31,7 +32,7 @@ MonoBehaviour:
   OverheatDelay: 2
   CoolDelay: 0.5
   BaseMissileDamage: 20
-  BaseFireRate: 0.5
+  BaseFireRate: 2
   BaseCoolingRate: 50
   BaseHeatCapacity: 100
   MissileDamagePerPoint: 2
