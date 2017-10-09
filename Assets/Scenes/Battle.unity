@@ -5691,6 +5691,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1064748905}
+  - component: {fileID: 1064748908}
   - component: {fileID: 1064748904}
   - component: {fileID: 1064748906}
   - component: {fileID: 1064748907}
@@ -5712,41 +5713,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a752b4f4dd3bee74faef179b661f699f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultVehiclePrefab: {fileID: 114646999966712184, guid: 7e51bd4b70487fa4a908a98161fba288,
-    type: 2}
-  Team: 1
-  CallSign: Player
-  SpaceJunkCount: 0
-  PowerNodeCount: 0
-  CollectRadius: 50
-  DoubleTapTime: 0.5
-  TrackerColor: {r: 0, g: 0.7517242, b: 1, a: 1}
-  PlayerHitSound: {fileID: 8300000, guid: 7c7bf10aaa2bddb4d811663bcf6c6620, type: 3}
-  PlayerGetHitSound:
-  - {fileID: 8300000, guid: 021b148e7ef85704f86ee1035fd60aaf, type: 3}
-  - {fileID: 8300000, guid: ae37cd14a9182a64baeb82a60d8756ff, type: 3}
-  - {fileID: 8300000, guid: 7b4c81d9d1efec24184e6dbaa65079bd, type: 3}
-  ShieldGetHitSound:
-  - {fileID: 8300000, guid: fce9a39917ef27e429887d4e85823332, type: 3}
-  - {fileID: 8300000, guid: 6fd50bc6d7b7901419f31c26c2db746f, type: 3}
-  - {fileID: 8300000, guid: 2af441d15283102468ad7d71badc1072, type: 3}
-  ThreatRadius: 2000
-  Squadron: {fileID: 1064748906}
-  InvertY: 1
-  HideMouse: 1
-  RespawnPosition: {fileID: 761010713}
-  SpawnPathDestination: {fileID: 1306207303}
-  SpawnControlDelay: 4
-  PlayerPinPrefab: {fileID: 121348, guid: 87d85e49fcb77c546ada889ced089d5c, type: 2}
+  InvertY: 0
   MouseMoveClamp: 1
+  DoubleTapTime: 0.5
   DefaultAimDistance: 500
   MinAimDistance: 5
   MaxAimDistance: 1000
   AimCorrectScreenFraction: 0.01
-  NoThreatTime: 30
-  DeathOptionTime: 2
-  UTurnPath: {fileID: 1997133662}
-  UTurnDuration: 5
 --- !u!4 &1064748905
 Transform:
   m_ObjectHideFlags: 0
@@ -5801,6 +5774,45 @@ MonoBehaviour:
   SecondaryWeapon: {fileID: 0}
   Shield: {fileID: 0}
   Engine: {fileID: 0}
+--- !u!114 &1064748908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1064748903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96823c601806c44dbe76f1916b17cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultVehiclePrefab: {fileID: 114646999966712184, guid: 7e51bd4b70487fa4a908a98161fba288,
+    type: 2}
+  Team: 1
+  CallSign: Player
+  SpaceJunkCount: 0
+  PowerNodeCount: 0
+  CollectRadius: 50
+  TrackerColor: {r: 0, g: 0.7529412, b: 1, a: 1}
+  PlayerHitSound: {fileID: 8300000, guid: 7c7bf10aaa2bddb4d811663bcf6c6620, type: 3}
+  PlayerGetHitSound:
+  - {fileID: 8300000, guid: 021b148e7ef85704f86ee1035fd60aaf, type: 3}
+  - {fileID: 8300000, guid: ae37cd14a9182a64baeb82a60d8756ff, type: 3}
+  - {fileID: 8300000, guid: 7b4c81d9d1efec24184e6dbaa65079bd, type: 3}
+  ShieldGetHitSound:
+  - {fileID: 8300000, guid: fce9a39917ef27e429887d4e85823332, type: 3}
+  - {fileID: 8300000, guid: 6fd50bc6d7b7901419f31c26c2db746f, type: 3}
+  - {fileID: 8300000, guid: 2af441d15283102468ad7d71badc1072, type: 3}
+  ThreatRadius: 2000
+  Squadron: {fileID: 1064748906}
+  HideMouse: 1
+  RespawnPosition: {fileID: 761010713}
+  SpawnPathDestination: {fileID: 1306207303}
+  SpawnControlDelay: 4
+  PlayerPinPrefab: {fileID: 121348, guid: 87d85e49fcb77c546ada889ced089d5c, type: 2}
+  NoThreatTime: 30
+  DeathOptionTime: 2
+  UTurnPath: {fileID: 1997133662}
+  UTurnDuration: 5
 --- !u!1 &1074876322
 GameObject:
   m_ObjectHideFlags: 0

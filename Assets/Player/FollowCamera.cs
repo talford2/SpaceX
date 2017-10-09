@@ -26,7 +26,7 @@ public class FollowCamera : UniverseCamera
 	private void Start()
 	{
 	    _springDistance = 1f;
-	    Target = PlayerController.Current.VehicleInstance.transform;
+	    Target = Player.Current.VehicleInstance.transform;
 	}
 
 	public override void Move()
@@ -34,13 +34,13 @@ public class FollowCamera : UniverseCamera
         transform.rotation = Quaternion.Lerp(transform.rotation, Target.rotation, RotationCatchup * Time.deltaTime);
 
 	    var targetSpringDistance = 1f;
-	    if (PlayerController.Current.VehicleInstance.IsAccelerating)
+	    if (Player.Current.VehicleInstance.IsAccelerating)
 	    {
 	        targetSpringDistance = SpringExpansion;
 	    }
 	    else
 	    {
-	        if (PlayerController.Current.VehicleInstance.IsBraking)
+	        if (Player.Current.VehicleInstance.IsBraking)
 	        {
                 targetSpringDistance = SpringCompression;
 	        }

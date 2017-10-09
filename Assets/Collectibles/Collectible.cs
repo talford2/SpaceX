@@ -95,15 +95,15 @@ public class Collectible : MonoBehaviour
 
     private void Give()
     {
-        if (PlayerController.Current != null)
+        if (Player.Current != null)
         {
             if (GiveType == CollectType.SpaceJunk)
             {
-                PlayerController.Current.SpaceJunkCount++;
+                Player.Current.SpaceJunkCount++;
                 HeadsUpDisplay.Current.UpdateSpaceJunk();
             }
             if (GiveType == CollectType.PowerNode)
-                PlayerController.Current.PowerNodeCount++;
+                Player.Current.PowerNodeCount++;
             /*
             if (GiveType == CollectType.Other)
                 PlayerController.Current.Give(GiveItem);

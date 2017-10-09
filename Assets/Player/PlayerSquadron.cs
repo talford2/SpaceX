@@ -36,13 +36,13 @@ public class PlayerSquadron : MonoBehaviour
 
     public void AddPlayerToSquadron()
     {
-        Members.Insert(0, PlayerController.Current.GetComponent<Fighter>());
+        Members.Insert(0, Player.Current.GetComponent<Fighter>());
     }
 
     public void Initialize()
     {
-        var playerNpc = PlayerController.Current.GetComponent<Fighter>();
-        var playerVehicleInstance = PlayerController.Current.VehicleInstance;
+        var playerNpc = Player.Current.GetComponent<Fighter>();
+        var playerVehicleInstance = Player.Current.VehicleInstance;
 
         for (var i = 0; i < Members.Count; i++)
         {
@@ -106,7 +106,7 @@ public class PlayerSquadron : MonoBehaviour
         squadronTracker.IsDisabled = false;
         member.IsFollowIdleDestination = true;
         var mapPin = member.VehicleInstance.gameObject.AddComponent<MapPin>();
-        mapPin.ActivePin = PlayerController.Current.PlayerPinPrefab;
+        mapPin.ActivePin = Player.Current.PlayerPinPrefab;
         mapPin.InactivePin = SquadronPinPrefab;
         mapPin.SetPinState(MapPin.MapPinState.Inactive);
 
@@ -170,13 +170,13 @@ public class PlayerSquadron : MonoBehaviour
 
     private void SquadronMember_OnDamage(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
     {
-        if (PlayerController.Current.VehicleInstance != null)
+        if (Player.Current.VehicleInstance != null)
         {
-            if (attacker == PlayerController.Current.VehicleInstance.gameObject)
+            if (attacker == Player.Current.VehicleInstance.gameObject)
             {
                 var member = sender.GetComponent<Vehicle>().Controller.GetComponent<Fighter>();
                 var profile = member.GetComponent<ShipProfile>();
-                CommMessaging.Current.ShowMessage(attacker, profile.CallSign, GetFriendlyFireMessage(PlayerController.Current.GetCallSign(), profile.CallSign));
+                CommMessaging.Current.ShowMessage(attacker, profile.CallSign, GetFriendlyFireMessage(Player.Current.GetCallSign(), profile.CallSign));
             }
         }
         // This should on refresh the current squadron member's icon.
@@ -187,7 +187,7 @@ public class PlayerSquadron : MonoBehaviour
     {
         if (Random.value > 0.6f)
         {
-            var playerVehicle = PlayerController.Current.VehicleInstance;
+            var playerVehicle = Player.Current.VehicleInstance;
             if (playerVehicle != null)
             {
                 if (attacker != playerVehicle.gameObject)
@@ -212,7 +212,7 @@ public class PlayerSquadron : MonoBehaviour
 
     private void SquadronMember_OnDie(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
     {
-        PlayerController.Current.ResetThreatCooldown();
+        Player.Current.ResetThreatCooldown();
         // This should on refresh the current squadron member's icon.
         HeadsUpDisplay.Current.RefreshSquadronIcons();
         sender.OnDamage -= SquadronMember_OnDamage;

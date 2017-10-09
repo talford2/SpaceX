@@ -7,16 +7,16 @@ public class StationTrigger : MonoBehaviour
         var detectable = other.GetComponent<Detectable>();
         if (detectable != null)
         {
-            if (PlayerController.Current.VehicleInstance != null)
+            if (Player.Current.VehicleInstance != null)
             {
-                if (PlayerController.Current.VehicleInstance.transform == detectable.TargetTransform)
+                if (Player.Current.VehicleInstance.transform == detectable.TargetTransform)
                 {
                     ShipProfileScreen.Current.Fighters.Clear();
-                    foreach (var member in PlayerController.Current.Squadron.Members)
+                    foreach (var member in Player.Current.Squadron.Members)
                     {
                         ShipProfileScreen.Current.Fighters.Add(member);
                     }
-                    ShipProfileScreen.Current.Populate(PlayerController.Current.Squadron.GetCurrentIndex());
+                    ShipProfileScreen.Current.Populate(Player.Current.Squadron.GetCurrentIndex());
                     ShipProfileScreen.Current.Show();
                 }
             }

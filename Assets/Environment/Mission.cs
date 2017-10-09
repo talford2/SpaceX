@@ -42,7 +42,7 @@ public class Mission : MonoBehaviour
         yield return new WaitForSeconds(delay);
         MusicPlayer.Current.TriggerFadeOut(2f);
         HeadsUpDisplay.Current.Hide();
-        PlayerController.Current.SetControlEnabled(false);
+        Player.Current.SetControlEnabled(false);
         MissionCompleteScreen.Current.Show(_playerKillCount);
         //StartCoroutine(DelayedSceneLoad(10f));
     }

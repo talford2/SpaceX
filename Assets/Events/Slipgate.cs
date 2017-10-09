@@ -15,10 +15,10 @@ public class Slipgate : MonoBehaviour
 
 	private void Update()
 	{
-		if (!_isTriggered && PlayerController.Current.VehicleInstance != null)
+		if (!_isTriggered && Player.Current.VehicleInstance != null)
 		{
-			var dotProd = Vector3.Dot(PlayerController.Current.VehicleInstance.Shiftable.GetWorldPosition() - transform.position, transform.forward);
-			if ((PlayerController.Current.VehicleInstance.Shiftable.GetWorldPosition() - transform.position).sqrMagnitude < TriggerRadius * TriggerRadius)
+			var dotProd = Vector3.Dot(Player.Current.VehicleInstance.Shiftable.GetWorldPosition() - transform.position, transform.forward);
+			if ((Player.Current.VehicleInstance.Shiftable.GetWorldPosition() - transform.position).sqrMagnitude < TriggerRadius * TriggerRadius)
 			{
 				if (Mathf.Sign(dotProd) != Mathf.Sign(_lastDotProd))
 				{

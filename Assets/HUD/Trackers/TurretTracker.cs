@@ -246,7 +246,7 @@ public class TurretTracker : Tracker
 
                     // Locking
                     _isLockedOn = false;
-                    var playerVehicle = PlayerController.Current.VehicleInstance;
+                    var playerVehicle = Player.Current.VehicleInstance;
                     if (playerVehicle != null)
                     {
                         if (playerVehicle.PrimaryWeaponInstance != null)

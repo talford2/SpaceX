@@ -47,11 +47,11 @@ public class Killable : MonoBehaviour
             {
                 Health -= damage;
             }
-            if (attacker != null && PlayerController.Current != null)
+            if (attacker != null && Player.Current != null)
             {
                 //Debug.LogFormat("{0} HIT {1}", gameObject, attacker);
-                if (PlayerController.Current.VehicleInstance != null && attacker == PlayerController.Current.VehicleInstance.gameObject)
-                    PlayerController.Current.OnPlayerHit();
+                if (Player.Current.VehicleInstance != null && attacker == Player.Current.VehicleInstance.gameObject)
+                    Player.Current.OnPlayerHit();
             }
             if (OnDamage != null)
                 OnDamage(this, position, normal, attacker);
@@ -79,12 +79,12 @@ public class Killable : MonoBehaviour
         if (OnDie != null)
             OnDie(this, position, normal, attacker);
 
-        if (attacker != null && PlayerController.Current != null)
+        if (attacker != null && Player.Current != null)
         {
             Debug.LogFormat("{0} KILLED BY {1}", gameObject, attacker);
-            if (PlayerController.Current.VehicleInstance != null && attacker == PlayerController.Current.VehicleInstance.gameObject)
+            if (Player.Current.VehicleInstance != null && attacker == Player.Current.VehicleInstance.gameObject)
             {
-                PlayerController.Current.OnPlayerKill(this);
+                Player.Current.OnPlayerKill(this);
             }
         }
 

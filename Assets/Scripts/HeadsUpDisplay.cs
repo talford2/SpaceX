@@ -161,7 +161,7 @@ public class HeadsUpDisplay : MonoBehaviour
         KillText.color = Utility.SetColorAlpha(KillText.color, 0);
         _initKillTextPos = KillText.rectTransform.localPosition;
 
-        SquadronPanel.gameObject.SetActive(PlayerController.Current.Squadron.Members.Count > 1);
+        SquadronPanel.gameObject.SetActive(Player.Current.Squadron.Members.Count > 1);
 
         _coverCooldown = _coverTime;
 
@@ -180,9 +180,9 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void UpdateBars()
     {
-        var shieldFraction = PlayerController.Current.VehicleInstance.Killable.Shield / PlayerController.Current.VehicleInstance.Killable.MaxShield;
-        var healthFraction = PlayerController.Current.VehicleInstance.Killable.Health / PlayerController.Current.VehicleInstance.Killable.MaxHealth;
-        var energyFraction = PlayerController.Current.VehicleInstance.BoostEnergy / PlayerController.Current.VehicleInstance.EngineInstance.BoostEnergy;
+        var shieldFraction = Player.Current.VehicleInstance.Killable.Shield / Player.Current.VehicleInstance.Killable.MaxShield;
+        var healthFraction = Player.Current.VehicleInstance.Killable.Health / Player.Current.VehicleInstance.Killable.MaxHealth;
+        var energyFraction = Player.Current.VehicleInstance.BoostEnergy / Player.Current.VehicleInstance.EngineInstance.BoostEnergy;
 
         ShieldBar.fillAmount = shieldFraction;
         HealthBar.fillAmount = healthFraction;
@@ -212,14 +212,14 @@ public class HeadsUpDisplay : MonoBehaviour
             }
         }
 
-        if (PlayerController.Current.VehicleInstance != null)
+        if (Player.Current.VehicleInstance != null)
         {
-            EnergyText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.BoostEnergy);
-            ShieldText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Shield);
-            HealthText.text = string.Format("{0:f0}", PlayerController.Current.VehicleInstance.Killable.Health);
+            EnergyText.text = string.Format("{0:f0}", Player.Current.VehicleInstance.BoostEnergy);
+            ShieldText.text = string.Format("{0:f0}", Player.Current.VehicleInstance.Killable.Shield);
+            HealthText.text = string.Format("{0:f0}", Player.Current.VehicleInstance.Killable.Health);
 
-            var primaryWeaponInstance = PlayerController.Current.VehicleInstance.PrimaryWeaponInstance;
-            var secondaryWeaponInstance = PlayerController.Current.VehicleInstance.SecondaryWeaponInstance;
+            var primaryWeaponInstance = Player.Current.VehicleInstance.PrimaryWeaponInstance;
+            var secondaryWeaponInstance = Player.Current.VehicleInstance.SecondaryWeaponInstance;
 
             var leftHeatFraction = primaryWeaponInstance != null ? primaryWeaponInstance.GetHeatFraction() : 0f;
             var rightHeatFraction = secondaryWeaponInstance != null ? secondaryWeaponInstance.GetHeatFraction() : 0f;
@@ -413,7 +413,7 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void LazyCreateSquadronIcons()
     {
-        while (_squadronIcons.Count < PlayerController.Current.Squadron.GetMemberCount())
+        while (_squadronIcons.Count < Player.Current.Squadron.GetMemberCount())
         {
             var icon = Instantiate(SquadronIcon);
             icon.transform.SetParent(SquadronIconContainer.transform);
@@ -425,15 +425,15 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void RefreshSquadronIcon(int index)
     {
-        var squadronVehicle = index == PlayerController.Current.Squadron.GetCurrentIndex()
-            ? PlayerController.Current.VehicleInstance
-            : PlayerController.Current.Squadron.GetMember(index).VehicleInstance;
+        var squadronVehicle = index == Player.Current.Squadron.GetCurrentIndex()
+            ? Player.Current.VehicleInstance
+            : Player.Current.Squadron.GetMember(index).VehicleInstance;
 
         var squadronIcon = _squadronIcons[index];
-        squadronIcon.SetCallSign(PlayerController.Current.Squadron.GetMember(index).GetComponent<ShipProfile>().CallSign);
+        squadronIcon.SetCallSign(Player.Current.Squadron.GetMember(index).GetComponent<ShipProfile>().CallSign);
         if (squadronVehicle != null && squadronVehicle.Killable.IsAlive)
         {
-            squadronIcon.SetSelected(PlayerController.Current.Squadron.GetCurrentIndex() == index);
+            squadronIcon.SetSelected(Player.Current.Squadron.GetCurrentIndex() == index);
             squadronIcon.SetFractions(squadronVehicle.Killable.Shield / squadronVehicle.Killable.MaxShield, squadronVehicle.Killable.Health / squadronVehicle.Killable.MaxHealth);
         }
         else
@@ -444,7 +444,7 @@ public class HeadsUpDisplay : MonoBehaviour
 
     public void RefreshSquadronIcons()
     {
-        for (var i = 0; i < PlayerController.Current.Squadron.GetMemberCount(); i++)
+        for (var i = 0; i < Player.Current.Squadron.GetMemberCount(); i++)
         {
             RefreshSquadronIcon(i);
         }

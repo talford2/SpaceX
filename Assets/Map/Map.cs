@@ -134,9 +134,9 @@ public class Map : MonoBehaviour
 	public void Show()
 	{
 		Time.timeScale = 0f;
-		PlayerController.Current.SetControlEnabled(false);
+		Player.Current.SetControlEnabled(false);
 
-		var centre = MapScale * PlayerController.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
+		var centre = MapScale * Player.Current.VehicleInstance.Shiftable.GetAbsoluteUniversePosition();
 		MapCamera.Current.SetLookAt(centre);
 
 		_mapCamera.enabled = true;
@@ -158,7 +158,7 @@ public class Map : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _mapCamera.enabled = false;
         if (affectPlayerControl)
-            PlayerController.Current.SetControlEnabled(true);
+            Player.Current.SetControlEnabled(true);
         _mapCanvas.enabled = false;
         if (TrackerManager.Current != null)
             TrackerManager.Current.SetTrackersVisibility(true);

@@ -29,14 +29,14 @@ public class ProximitySpawner : MonoBehaviour
     {
         if (IsTriggered)
         {
-            if (PlayerController.Current != null && PlayerController.Current.VehicleInstance != null)
+            if (Player.Current != null && Player.Current.VehicleInstance != null)
             {
                 if (_intervalCooldown >= 0f)
                 {
                     _intervalCooldown -= Time.deltaTime;
                     if (_intervalCooldown < 0f)
                     {
-                        var toPlayer = PlayerController.Current.VehicleInstance.transform.position - transform.position;
+                        var toPlayer = Player.Current.VehicleInstance.transform.position - transform.position;
                         if (toPlayer.sqrMagnitude < _radiusSquared)
                         {
                             if (_liveCount < MaxLiveCount)

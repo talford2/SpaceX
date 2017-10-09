@@ -14,11 +14,11 @@ public class PlayerSpawner : MonoBehaviour
         var localOffset = transform.rotation*transform.localPosition;
         var universePosition = new UniversePosition(Shiftable.UniversePosition.CellIndex, Shiftable.UniversePosition.CellLocalPosition);// + localOffset);
         Universe.Current.WarpTo(universePosition);
-        PlayerController.Current.Squadron.SpawnSquadronVehicle(PlayerController.Current.Squadron.GetCurrentMember(), universePosition, transform.rotation);
-        PlayerController.Current.CycleSquadron(0);
-        PlayerController.Current.VehicleInstance.transform.position = Universe.Current.GetWorldPosition(universePosition);
+        Player.Current.Squadron.SpawnSquadronVehicle(Player.Current.Squadron.GetCurrentMember(), universePosition, transform.rotation);
+        Player.Current.CycleSquadron(0);
+        Player.Current.VehicleInstance.transform.position = Universe.Current.GetWorldPosition(universePosition);
         var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
-        cam.Target = PlayerController.Current.VehicleInstance;
+        cam.Target = Player.Current.VehicleInstance;
         cam.Reset();
     }
 

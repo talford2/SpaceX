@@ -79,7 +79,7 @@ public class MissionCompleteScreen : MonoBehaviour
         StartCoroutine(DelayedAction(delay, () =>
         {
             TotalCreditsText.enabled = true;
-            TotalCreditsText.text = string.Format("TOTAL CREDITS: {0:N0}", PlayerController.Current.SpaceJunkCount - Mission.Current.GetEarnedCredits());
+            TotalCreditsText.text = string.Format("TOTAL CREDITS: {0:N0}", Player.Current.SpaceJunkCount - Mission.Current.GetEarnedCredits());
             PlaySound(TextAppearSound);
             _canEscape = true;
         }));
@@ -96,7 +96,7 @@ public class MissionCompleteScreen : MonoBehaviour
             if (weaponItem != null)
             {
                 var weapon = WeaponDefinitionPool.ByKey(weaponItem.Key);
-                PlayerController.Current.Give(bluePrint.Key);
+                Player.Current.Give(bluePrint.Key);
                 delay += 0.5f;
                 StartCoroutine(DelayedAction(delay, () =>
                 {
@@ -112,7 +112,7 @@ public class MissionCompleteScreen : MonoBehaviour
                 var vehicle = gameObjectItem.GetComponent<Vehicle>();
                 if (vehicle != null)
                 {
-                    PlayerController.Current.GiveShip(bluePrint.Key);
+                    Player.Current.GiveShip(bluePrint.Key);
                     delay += 0.5f;
                     StartCoroutine(DelayedAction(delay, () =>
                     {
@@ -160,7 +160,7 @@ public class MissionCompleteScreen : MonoBehaviour
         var tickInterval = 0.02f;
         var maxTotalTickTime = 1f;
 
-        float totalCredits = PlayerController.Current.SpaceJunkCount - earnedCredits;
+        float totalCredits = Player.Current.SpaceJunkCount - earnedCredits;
         float credits = earnedCredits;
 
         var creditIncrement = Mathf.Max((earnedCredits * tickInterval / maxTotalTickTime), 1f) / tickInterval;
@@ -181,7 +181,7 @@ public class MissionCompleteScreen : MonoBehaviour
         }
 
         EarnedCreditsText.text = string.Format("Credits Earned: {0:N0}", 0);
-        TotalCreditsText.text = string.Format("TOTAL CREDITS: {0:N0}", PlayerController.Current.SpaceJunkCount);
+        TotalCreditsText.text = string.Format("TOTAL CREDITS: {0:N0}", Player.Current.SpaceJunkCount);
     }
 
     private BluePrint GetRandomBluePrint()

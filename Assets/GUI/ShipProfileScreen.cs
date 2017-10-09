@@ -153,12 +153,12 @@ public class ShipProfileScreen : MonoBehaviour
 
     public void AddPower()
     {
-        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var member = Player.Current.Squadron.Members[_curIndex];
         var powerProfile = member.GetComponent<ShipProfile>();
-        if (PlayerController.Current.PowerNodeCount > 0)
+        if (Player.Current.PowerNodeCount > 0)
         {
             powerProfile.TotalPower++;
-            PlayerController.Current.PowerNodeCount--;
+            Player.Current.PowerNodeCount--;
             PopulatePowerBar(powerProfile);
             ApplyPowerProfile(member, powerProfile);
         }
@@ -166,12 +166,12 @@ public class ShipProfileScreen : MonoBehaviour
 
     public void SubtractPower()
     {
-        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var member = Player.Current.Squadron.Members[_curIndex];
         var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.PowerRemaining > 0)
         {
             powerProfile.TotalPower--;
-            PlayerController.Current.PowerNodeCount++;
+            Player.Current.PowerNodeCount++;
             PopulatePowerBar(powerProfile);
             ApplyPowerProfile(member, powerProfile);
         }
@@ -179,7 +179,7 @@ public class ShipProfileScreen : MonoBehaviour
 
     public void AddWeaponPower()
     {
-        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var member = Player.Current.Squadron.Members[_curIndex];
         var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.PowerRemaining > 0)
         {
@@ -192,7 +192,7 @@ public class ShipProfileScreen : MonoBehaviour
 
     public void SubtractWeaponPower()
     {
-        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var member = Player.Current.Squadron.Members[_curIndex];
         var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.Weapons > 0)
         {
@@ -205,7 +205,7 @@ public class ShipProfileScreen : MonoBehaviour
 
     public void AddShieldPower()
     {
-        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var member = Player.Current.Squadron.Members[_curIndex];
         var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.PowerRemaining > 0)
         {
@@ -218,7 +218,7 @@ public class ShipProfileScreen : MonoBehaviour
 
     public void SubtractShieldPower()
     {
-        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var member = Player.Current.Squadron.Members[_curIndex];
         var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.Shields > 0)
         {
@@ -231,7 +231,7 @@ public class ShipProfileScreen : MonoBehaviour
 
     public void AddSpecialPower()
     {
-        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var member = Player.Current.Squadron.Members[_curIndex];
         var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.PowerRemaining > 0)
         {
@@ -244,7 +244,7 @@ public class ShipProfileScreen : MonoBehaviour
 
     public void SubtractSpecialPower()
     {
-        var member = PlayerController.Current.Squadron.Members[_curIndex];
+        var member = Player.Current.Squadron.Members[_curIndex];
         var powerProfile = member.GetComponent<ShipProfile>();
         if (powerProfile.Special > 0)
         {
@@ -290,9 +290,9 @@ public class ShipProfileScreen : MonoBehaviour
             counterImage.rectTransform.localScale = Vector3.one;
             //counterImage.rectTransform.localRotation = Quaternion.identity;
         }
-        if (PlayerController.Current.PowerNodeCount > 0)
+        if (Player.Current.PowerNodeCount > 0)
         {
-            UnusedPowerNodes.text = string.Format("{0:f0}", PlayerController.Current.PowerNodeCount);
+            UnusedPowerNodes.text = string.Format("{0:f0}", Player.Current.PowerNodeCount);
             UnusedPowerNodes.enabled = true;
         }
         else
@@ -348,7 +348,7 @@ public class ShipProfileScreen : MonoBehaviour
         HeadsUpDisplay.Current.gameObject.SetActive(false);
         TrackerManager.Current.SetTrackersVisibility(false);
         //Time.timeScale = 0f;
-        PlayerController.Current.SetControlEnabled(false);
+        Player.Current.SetControlEnabled(false);
         Canvas.gameObject.SetActive(true);
         Preview.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
@@ -363,7 +363,7 @@ public class ShipProfileScreen : MonoBehaviour
         Preview.SetActive(false);
         Canvas.gameObject.SetActive(false);
         if (affectPlayerControl)
-            PlayerController.Current.SetControlEnabled(true);
+            Player.Current.SetControlEnabled(true);
         //Time.timeScale = 1f;
         HeadsUpDisplay.Current.gameObject.SetActive(true);
         TrackerManager.Current.SetTrackersVisibility(true);

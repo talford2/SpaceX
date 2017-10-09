@@ -48,7 +48,7 @@ public class Universe : MonoBehaviour
 		Debug.Log("Universe start");
 
 		//// Move the player to the start position
-		if (PlayerController.Current != null)
+		if (Player.Current != null)
 		{
 			WarpTo(PlayerSpawnPosition);
 		}

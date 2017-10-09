@@ -35,7 +35,7 @@ public class VehicleCameraFollow : VehicleCameraState
 
     public override void Initialize()
     {
-        VehicleCamera.Target = PlayerController.Current.VehicleInstance;
+        VehicleCamera.Target = Player.Current.VehicleInstance;
         _springDistance = 1f;
         _offsetAngle = VehicleCamera.Target.transform.rotation;
         _targetUp = VehicleCamera.Target.transform.up;

@@ -15,7 +15,7 @@ public class VehicleCameraPan : VehicleCameraState
 
     public override void Initialize()
     {
-        VehicleCamera.Target = PlayerController.Current.VehicleInstance;
+        VehicleCamera.Target = Player.Current.VehicleInstance;
         _initPos = VehicleCamera.Target.transform.position;
         _panDistance = PanMaxDistance;
         _panDir = new Vector3(-1f, 0f, 4f).normalized;

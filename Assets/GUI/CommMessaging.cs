@@ -18,7 +18,7 @@ public class CommMessaging : MonoBehaviour
     {
         _current = this;
 
-        PlayerController.Current.OnChangeSquadronMember += OnChangeSquadronMember;
+        Player.Current.OnChangeSquadronMember += OnChangeSquadronMember;
     }
 
     private void Start()
@@ -28,7 +28,7 @@ public class CommMessaging : MonoBehaviour
 
     public void ShowMessage(GameObject to, string author, string message)
     {
-        if (PlayerController.Current.VehicleInstance != null && PlayerController.Current.VehicleInstance.gameObject == to)
+        if (Player.Current.VehicleInstance != null && Player.Current.VehicleInstance.gameObject == to)
         {
             if (_messageCooldown < 4f)
             {
