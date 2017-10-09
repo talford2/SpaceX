@@ -18,7 +18,7 @@ public class CommMessaging : MonoBehaviour
     {
         _current = this;
 
-        Player.Current.OnChangeSquadronMember += OnChangeSquadronMember;
+        Player.Current.Squadron.OnChangeMember += OnChangeSquadronMember;
     }
 
     private void Start()

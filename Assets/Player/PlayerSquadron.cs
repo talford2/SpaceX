@@ -16,8 +16,11 @@ public class PlayerSquadron : MonoBehaviour
 
     public GameObject SquadronPinPrefab;
 
-    private int _curSquadronIndex;
+    public delegate void OnPlayerSquadronChangeMember(GameObject from, GameObject to);
+    public OnPlayerSquadronChangeMember OnChangeMember;
 
+    // Private Members
+    private int _curSquadronIndex;
     private int _collectableMask;
 
     public void Awake()
@@ -25,9 +28,9 @@ public class PlayerSquadron : MonoBehaviour
         _collectableMask = LayerMask.GetMask("Collectible");
     }
 
-    public void AddPlayerToSquadron()
+    public void AddPlayerToSquadron(Fighter member)
     {
-        Members.Insert(0, Player.Current.GetComponent<Fighter>());
+        Members.Insert(0, member);
     }
 
     public void Initialize()
@@ -73,6 +76,11 @@ public class PlayerSquadron : MonoBehaviour
     public void SpawnSquadronVehicle(Fighter member, UniversePosition position, Quaternion rotation)
     {
         member.SpawnVehicle(member.gameObject, member.VehiclePrefab, position, rotation);
+
+        var player = member.GetComponent<Player>();
+        if (player != null)
+            player.SetVehicleInstance(member.VehicleInstance);
+
         var memberTracker = member.VehicleInstance.GetComponent<VehicleTracker>();
 
         var profile = member.GetComponent<ShipProfile>();
@@ -81,7 +89,7 @@ public class PlayerSquadron : MonoBehaviour
             member.VehicleInstance.SetPrimaryWeapon(profile.PrimaryWeapon);
         if (profile.SecondaryWeapon != null)
             member.VehicleInstance.SetSecondaryWeapon(profile.SecondaryWeapon);
-        
+
         var squadronTracker = member.VehicleInstance.gameObject.AddComponent<SquadronTracker>();
         squadronTracker.Options = TrackerOptions;// memberTracker.Options;
         Destroy(memberTracker);
@@ -230,5 +238,84 @@ public class PlayerSquadron : MonoBehaviour
     public int GetCurrentIndex()
     {
         return _curSquadronIndex;
+    }
+
+    public void Cycle(int dir)
+    {
+        var oldSquadronIndex = GetCurrentIndex();
+        var cycleResult = CycleSquadronIndex(dir);
+
+        Debug.LogFormat("CYCLE {0} => {1}", oldSquadronIndex, GetCurrentIndex());
+
+        if (cycleResult > -1)
+        {
+            if (GetCurrentMember() != null)
+            {
+                // Set previous controlled vehicle to NPC control
+                var oldMember = GetMember(oldSquadronIndex);
+
+                if (oldMember.VehicleInstance != null && oldMember != null)
+                {
+                    if (oldMember.VehicleInstance.PrimaryWeaponInstance != null)
+                        oldMember.VehicleInstance.PrimaryWeaponInstance.ClearTargetLock();
+                    if (oldMember.VehicleInstance.SecondaryWeaponInstance != null)
+                        oldMember.VehicleInstance.SecondaryWeaponInstance.ClearTargetLock();
+                    oldMember.VehicleInstance.gameObject.layer = LayerMask.NameToLayer("Default");
+                    oldMember.VehicleInstance.MeshTransform.gameObject.layer = LayerMask.NameToLayer("Default");
+
+                    oldMember.SetVehicleInstance(oldMember.VehicleInstance);
+                    oldMember.enabled = true;
+                    oldMember.VehicleInstance.GetComponent<SquadronTracker>().IsDisabled = false;
+
+                    oldMember.VehicleInstance.GetComponent<MapPin>().SetPinState(MapPin.MapPinState.Inactive);
+
+                    oldMember.VehicleInstance.Killable.OnDamage -= Player.Current.Player_OnDamage;
+                    oldMember.VehicleInstance.Killable.OnDie -= Player.Current.Player_OnDie;
+                    oldMember.VehicleInstance.GetComponent<ShieldRegenerator>().OnRegenerate -= Player.Current.Player_OnRegenerate;
+                }
+
+                // Disable next vehicle NPC control and apply PlayerController
+                var curMember = GetCurrentMember();
+                if (curMember.VehicleInstance != null)
+                {
+                    var profile = curMember.GetComponent<ShipProfile>();
+                    HeadsUpDisplay.Current.ShowSquadronPrompt(profile.CallSign);
+
+                    var playerVehicleInstance = Player.Current.VehicleInstance;
+
+                    playerVehicleInstance = curMember.VehicleInstance;
+                    playerVehicleInstance.GetComponent<SquadronTracker>().IsDisabled = true;
+                    playerVehicleInstance.gameObject.layer = LayerMask.NameToLayer("Player");
+                    playerVehicleInstance.MeshTransform.gameObject.layer = LayerMask.NameToLayer("Player");
+
+                    playerVehicleInstance.GetComponent<MapPin>().SetPinState(MapPin.MapPinState.Active);
+
+                    playerVehicleInstance.Killable.OnDamage += Player.Current.Player_OnDamage;
+                    playerVehicleInstance.Killable.OnDie += Player.Current.Player_OnDie;
+                    playerVehicleInstance.GetComponent<ShieldRegenerator>().OnRegenerate += Player.Current.Player_OnRegenerate;
+                    playerVehicleInstance.Controller = gameObject;
+
+                    Player.Current.SetCallSign(profile.CallSign);
+                    curMember.enabled = false;
+
+                    Universe.Current.WarpTo(playerVehicleInstance.Shiftable);
+
+                    var cam = Universe.Current.ViewPort.GetComponent<VehicleCamera>();
+                    cam.Target = playerVehicleInstance;
+                    cam.DistanceBehind = playerVehicleInstance.CameraDistance;
+                    cam.Reset();
+                }
+                if (OnChangeMember != null)
+                    OnChangeMember(oldMember.gameObject, gameObject);
+            }
+            HeadsUpDisplay.Current.RefreshSquadronIcon(GetCurrentIndex());
+            HeadsUpDisplay.Current.RefreshSquadronIcon(oldSquadronIndex);
+            HeadsUpDisplay.Current.ShowCrosshair();
+            HeadsUpDisplay.Current.ShowAlive();
+        }
+        else
+        {
+            Debug.Log("ALL DEAD!");
+        }
     }
 }

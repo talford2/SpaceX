@@ -415,7 +415,6 @@ public class Vehicle : MonoBehaviour
             {
                 if (TriggerBrake && CurrentSpeed > MinSpeed)
                 {
-                    Debug.Log("BRAKING!");
                     acceleration = -Brake;
                     CurrentSpeed -= Brake * Time.deltaTime;
                     CurrentSpeed = Mathf.Max(CurrentSpeed, MinSpeed);

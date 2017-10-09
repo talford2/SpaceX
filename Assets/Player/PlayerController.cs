@@ -69,6 +69,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            Player.Current.Respawn();
+        }
+
         if (Input.GetKey(KeyCode.M))
         {
             Universe.Current.ViewPort.GetComponent<VehicleCamera>().TriggerShake(0.3f, 0.7f);
@@ -209,5 +214,56 @@ public class PlayerController : MonoBehaviour
             aimAtPosition = mouseRay.GetPoint(_aimDistance);
         }
         return aimAtPosition;
+    }
+
+    public void ControlSquadron(PlayerSquadron squadron, bool isAllowRespawn)
+    {
+        if (isAllowRespawn)
+        {
+            if (squadron.GetLiveCount() == 0)
+            {
+                if (Input.GetButtonUp("SquadronNext"))
+                {
+                    Player.Current.Respawn();
+                }
+                if (Input.GetButtonUp("SquadronPrevious"))
+                {
+                    Player.Current.Respawn();
+                }
+
+                if ((Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0)
+                {
+                    Player.Current.Respawn();
+                }
+                if ((Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0)
+                {
+                    Player.Current.Respawn();
+                }
+            }
+            else
+            {
+                if ((Input.GetAxis("FireTrigger") + Input.GetAxis("MouseFireTrigger")) > 0)
+                {
+                    squadron.Cycle( 1);
+                }
+                if ((Input.GetAxis("AltFireTrigger") + Input.GetAxis("MouseAltFireTrigger")) > 0)
+                {
+                    squadron.Cycle( -1);
+                }
+            }
+        }
+
+        if (squadron.GetLiveCount() > 0)
+        {
+            if (Input.GetButtonUp("SquadronNext"))
+            {
+                squadron.Cycle( 1);
+            }
+
+            if (Input.GetButtonUp("SquadronPrevious"))
+            {
+                squadron.Cycle( -1);
+            }
+        }
     }
 }
