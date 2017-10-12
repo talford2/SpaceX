@@ -107,7 +107,6 @@ public class GrandMothership : MonoBehaviour
     private IEnumerator DelayedInit(float delay)
     {
         yield return new WaitForSeconds(delay);
-        CommMessaging.Current.ShowMessage(Player.Current.VehicleInstance.gameObject, "Mission Control", "Your first objective is to clear out enemy Flak Turrets.");
         FlakTurretKillTrigger.Initialize();
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 public class MultipleKillTrigger : MonoBehaviour
 {
     public List<Killable> Killables;
+    public Triggerable OnInitializeTrigger;
     public Triggerable OnAllKilledTrigger;
     public VehicleTrackerValues TrackerValues;
 
@@ -12,7 +13,7 @@ public class MultipleKillTrigger : MonoBehaviour
 
     public void Initialize()
     {
-        foreach(var killable in Killables)
+        foreach (var killable in Killables)
         {
             var tracker = killable.gameObject.GetComponentInChildren<TurretTracker>();
             TrackerManager.Current.RemoveTracker(tracker);
@@ -25,6 +26,9 @@ public class MultipleKillTrigger : MonoBehaviour
         }
         _dieCount = 0;
         _triggerDieCount = Killables.Count;
+
+        if (OnInitializeTrigger != null)
+            OnInitializeTrigger.Trigger();
     }
 
     private void OnKillableDie(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
@@ -33,8 +37,8 @@ public class MultipleKillTrigger : MonoBehaviour
         sender.OnDie -= OnKillableDie;
         if (_dieCount == _triggerDieCount)
         {
-            Debug.Log("TRIGGER SOMETHING");
-            OnAllKilledTrigger.Trigger();
+            if (OnAllKilledTrigger != null)
+                OnAllKilledTrigger.Trigger();
         }
     }
 }
