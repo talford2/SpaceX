@@ -142,6 +142,7 @@ public class VehicleTracker : Tracker
         {
             _trackerPlaneInstance = Instantiate(Options.TrackerPlanePrefab);
             _trackerPlaneRenderer = _trackerPlaneInstance.GetComponent<MeshRenderer>();
+            _trackerPlaneRenderer.material.SetColor("TintColor", Options.TrackerColor);
         }
 
         // Healthbar background

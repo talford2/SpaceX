@@ -8159,6 +8159,7 @@ GameObject:
   - component: {fileID: 1397643199}
   - component: {fileID: 1397643198}
   - component: {fileID: 1397643197}
+  - component: {fileID: 1397643200}
   m_Layer: 0
   m_Name: Near
   m_TagString: Untagged
@@ -8199,6 +8200,7 @@ MonoBehaviour:
   FlakTurretPrefab: {fileID: 1072517619568506, guid: 2147a3302e2002b4088843819e2adb41,
     type: 2}
   FlakTurretGroupTransform: {fileID: 1785887035}
+  FlakTurretKillTrigger: {fileID: 1397643200}
   TankPrefab: {fileID: 1321403577917396, guid: 511c575f344aae0469adfd7a32264b24, type: 2}
   TankGroupTransform: {fileID: 2095179653}
   DomePrefab: {fileID: 1393999343897690, guid: 1cb8543f90f8c5e44b3d7ef01a7456c7, type: 2}
@@ -8227,6 +8229,20 @@ Transform:
   m_Father: {fileID: 175112380}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1397643200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1397643196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe95f201663f104682914e92bd74f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Killables: []
+  OnAllKilledTrigger: {fileID: 0}
+  TrackerValues: {fileID: 11400000, guid: 5c53aa995a13e5f48996c16b9ab9a9c7, type: 2}
 --- !u!1 &1415849995
 GameObject:
   m_ObjectHideFlags: 0
