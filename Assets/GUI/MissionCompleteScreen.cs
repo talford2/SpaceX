@@ -10,6 +10,7 @@ public class MissionCompleteScreen : MonoBehaviour
     public CanvasGroup ScreenGroup;
     public Text HeaderText;
     public Text KillsText;
+    public Text TimeText;
     public Text EarnedCreditsText;
     public Text TotalCreditsText;
 
@@ -54,7 +55,7 @@ public class MissionCompleteScreen : MonoBehaviour
         }
     }
 
-    public void Show(int playerKills)
+    public void Show(int playerKills, float completeTime)
     {
         ScreenGroup.alpha = 1f;
         MusicPlayer.Current.TriggerFadeOut(1f);
@@ -66,6 +67,15 @@ public class MissionCompleteScreen : MonoBehaviour
         {
             KillsText.enabled = true;
             KillsText.text = string.Format("Kills: {0:N0}", playerKills);
+            PlaySound(TextAppearSound);
+        }));
+        delay += 0.5f;
+        StartCoroutine(DelayedAction(delay, () =>
+        {
+            TimeText.enabled = true;
+            var mins = Mathf.RoundToInt(completeTime / 60f);
+            var secs = Mathf.RoundToInt(completeTime % 60f);
+            TimeText.text = string.Format("Time: {0:N0}:{1:D2}", mins, secs);
             PlaySound(TextAppearSound);
         }));
         delay += 0.5f;
@@ -131,6 +141,7 @@ public class MissionCompleteScreen : MonoBehaviour
         ScreenGroup.alpha = 0f;
         HeaderText.enabled = false;
         KillsText.enabled = false;
+        TimeText.enabled = false;
         EarnedCreditsText.enabled = false;
         TotalCreditsText.enabled = false;
         ItemPanel.alpha = 0f;

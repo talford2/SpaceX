@@ -43,7 +43,7 @@ public class Mission : MonoBehaviour
         MusicPlayer.Current.TriggerFadeOut(2f);
         HeadsUpDisplay.Current.Hide();
         Player.Current.SetControlEnabled(false);
-        MissionCompleteScreen.Current.Show(_playerKillCount);
+        MissionCompleteScreen.Current.Show(_playerKillCount, Time.timeSinceLevelLoad);
         //StartCoroutine(DelayedSceneLoad(10f));
     }
 
