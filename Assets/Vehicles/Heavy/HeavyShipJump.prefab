@@ -268,15 +268,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1929629619840340}
-  m_LocalRotation: {x: 0, y: 0.17364816, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 280, y: 490, z: 420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4825849546866902}
   - {fileID: 4329503537564916}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 20, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4546752097905776
 Transform:
   m_ObjectHideFlags: 1
@@ -309,8 +309,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1011596871781832}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.055794675, z: 1.7133654}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4653318784091162}
@@ -1008,7 +1008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2c92bcd24125541a5e221b02098104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Delay: 5
   DisplacementCurve:
     serializedVersion: 2
     m_Curve:
@@ -1034,8 +1033,10 @@ MonoBehaviour:
   - {fileID: 96330028535636440}
   - {fileID: 96656830392969988}
   Flash: {fileID: 198874466177339310}
-  SpawnOnFinish: {fileID: 1283999121105926, guid: e5a07ded64b46b942b205a346eb3d2cb,
+  Delay: 6
+  SpawnShipPrefab: {fileID: 1283999121105926, guid: e5a07ded64b46b942b205a346eb3d2cb,
     type: 2}
+  ArriveSound: {fileID: 8300000, guid: ba6f429821860874a9544b8141568f06, type: 3}
 --- !u!114 &114096744728611036
 MonoBehaviour:
   m_ObjectHideFlags: 1
