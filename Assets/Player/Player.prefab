@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1833065084195534}
+  m_IsPrefabParent: 1
+--- !u!1 &1833065084195534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4436349954596544}
+  - component: {fileID: 114578725415081484}
+  - component: {fileID: 114157408621303832}
+  - component: {fileID: 114759185802712566}
+  - component: {fileID: 114310860266072304}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4436349954596544
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1833065084195534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114157408621303832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1833065084195534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a752b4f4dd3bee74faef179b661f699f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InvertY: 0
+  HideMouse: 0
+  MouseMoveClamp: 1
+  DoubleTapTime: 0.5
+  DefaultAimDistance: 500
+  MinAimDistance: 5
+  MaxAimDistance: 1000
+  AimCorrectScreenFraction: 0.01
+--- !u!114 &114310860266072304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1833065084195534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53151bd6f245ef34d849fbe215ad99f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CallSign: 
+  TotalPower: 13
+  Weapons: 1
+  Shields: 6
+  Special: 6
+  PrimaryWeapon: {fileID: 0}
+  SecondaryWeapon: {fileID: 0}
+  Shield: {fileID: 0}
+  Engine: {fileID: 0}
+--- !u!114 &114578725415081484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1833065084195534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96823c601806c44dbe76f1916b17cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultVehiclePrefab: {fileID: 114646999966712184, guid: 7e51bd4b70487fa4a908a98161fba288,
+    type: 2}
+  Team: 1
+  CallSign: Player
+  SpaceJunkCount: 0
+  PowerNodeCount: 0
+  CollectRadius: 50
+  TrackerColor: {r: 0, g: 0.7529412, b: 1, a: 1}
+  PlayerHitSound: {fileID: 8300000, guid: 7c7bf10aaa2bddb4d811663bcf6c6620, type: 3}
+  PlayerGetHitSound:
+  - {fileID: 8300000, guid: 021b148e7ef85704f86ee1035fd60aaf, type: 3}
+  - {fileID: 8300000, guid: ae37cd14a9182a64baeb82a60d8756ff, type: 3}
+  - {fileID: 8300000, guid: 7b4c81d9d1efec24184e6dbaa65079bd, type: 3}
+  ShieldGetHitSound:
+  - {fileID: 8300000, guid: fce9a39917ef27e429887d4e85823332, type: 3}
+  - {fileID: 8300000, guid: 6fd50bc6d7b7901419f31c26c2db746f, type: 3}
+  - {fileID: 8300000, guid: 2af441d15283102468ad7d71badc1072, type: 3}
+  ThreatRadius: 2000
+  Squadron: {fileID: 114759185802712566}
+  RespawnPosition: {fileID: 0}
+  SpawnPathDestination: {fileID: 0}
+  SpawnControlDelay: 4
+  PlayerPinPrefab: {fileID: 121348, guid: 87d85e49fcb77c546ada889ced089d5c, type: 2}
+  NoThreatTime: 30
+  DeathOptionTime: 2
+  UTurnPath: {fileID: 0}
+  UTurnDuration: 5
+--- !u!114 &114759185802712566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1833065084195534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05489e806f73e84795f8ad415503e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Members: []
+  ShieldRegenerateDelay: 5
+  ShieldRegenerateRate: 5
+  CollectRadius: 50
+  TrackerOptions: {fileID: 11400000, guid: 3e7949ecd0c752848b1bb6575480f9d0, type: 2}
+  SquadronTrackerFont: {fileID: 12800000, guid: b130f0032ec522f4b8e060204d5012ba,
+    type: 3}
+  TrackerPlanePrefab: {fileID: 118416, guid: 35c25a75711e3c54e9e5c0892d0c3632, type: 2}
+  SquadronPinPrefab: {fileID: 121348, guid: d86f9b16d8bd65f4582387c06551568e, type: 2}
