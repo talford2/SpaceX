@@ -105,7 +105,7 @@ public class ShipJump : MonoBehaviour
         if (ArriveSound != null)
             ResourcePoolIndex.PlayAnonymousSound(ArriveSound, transform.position, 50f, 1000f, 10f, true);
 
-        DelayedDestroy(2f);
+        StartCoroutine(DelayedDestroy(2f));
     }
 
     private IEnumerator DelayedDestroy(float delay)
