@@ -8,10 +8,12 @@ public class GrandMothership : MonoBehaviour
     public GameObject LaserTurretPrefab;
     public Transform LaserTurretGroupTransform;
     //public List<Transform> LaserTurretTransforms;
+
     [Header("Flak Turrets")]
     public GameObject FlakTurretPrefab;
     public Transform FlakTurretGroupTransform;
     //public List<Transform> FlakTurretTransforms;
+    public MultipleKillTrigger FlakTurretKillTrigger;
 
     [Header("Tanks")]
     public GameObject TankPrefab;
@@ -57,6 +59,7 @@ public class GrandMothership : MonoBehaviour
             turret.transform.SetParent(turretTransform);
             turret.transform.up = turretTransform.forward;
             //_killables.Add(turret.GetComponent<Killable>());
+            FlakTurretKillTrigger.Killables.Add(turret.GetComponent<Killable>());
         }
         foreach(Transform tankTransform in TankGroupTransform)
         {
@@ -93,6 +96,12 @@ public class GrandMothership : MonoBehaviour
             ResourcePoolManager.GetAvailable(SuperNovaPrefab, transform.position, Quaternion.identity);
             Destroy(universeEvent.gameObject);
         };
+    }
+
+    private void Start()
+    {
+        FlakTurretKillTrigger.Initialize();
+
     }
 
     private void OnKill(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
