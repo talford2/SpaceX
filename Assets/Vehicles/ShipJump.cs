@@ -7,6 +7,9 @@ public class ShipJump : MonoBehaviour
     public AnimationCurve DisplacementCurve;
     public List<TrailRenderer> Trails;
     public ParticleSystem Flash;
+    public float Delay = 2f;
+    public GameObject SpawnShipPrefab;
+    public AudioClip ArriveSound;
 
     private float jumpTime = 0.4f;
     private float jumpCooldown;
@@ -17,46 +20,52 @@ public class ShipJump : MonoBehaviour
     private Renderer[] meshRenderers;
 
     private Vector3 originalScale;
-    private Vector3 jumpFrom;
-    private Vector3 originalPosition;
     private Vector3 originalForward;
     private bool hasJumped;
+
+    private bool _isTriggered;
+    private UniversePosition _originalPosition;
+    private Shiftable _shiftable;
 
     private void Awake()
     {
         originalScale = transform.localScale;
         originalForward = transform.forward;
-        originalPosition = transform.position;
+
+        _shiftable = GetComponent<Shiftable>();
+        _originalPosition = _shiftable.UniversePosition;
 
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
         SetRenderersEmabled(false);
         SetTrailsVisible(false);
 
-        StartCoroutine(DelayedJump(2f));
+        StartCoroutine(DelayedJump(Delay));
         //TriggerJump();
     }
 
     private void Update()
     {
-        if (jumpCooldown >= 0f)
+        if (_isTriggered)
         {
-            jumpCooldown -= Time.deltaTime;
-            var fraction = Mathf.Clamp01(1f - jumpCooldown / jumpTime);
-
-            transform.localScale = originalScale * DisplacementCurve.Evaluate(fraction);
-            transform.position = jumpFrom + DisplacementCurve.Evaluate(fraction) * originalForward * jumpDistance;
-
-            if (jumpCooldown < 0f)
+            if (jumpCooldown >= 0f)
             {
-                transform.localScale = originalScale;
-                transform.position = originalPosition;
-                hasJumped = true;
-            }
-        }
+                jumpCooldown -= Time.deltaTime;
+                var fraction = Mathf.Clamp01(1f - jumpCooldown / jumpTime);
 
-        if (hasJumped)
-        {
-            transform.position += originalForward * idleSpeed * Time.deltaTime;
+                transform.localScale = originalScale * DisplacementCurve.Evaluate(fraction);
+                _shiftable.Translate(DisplacementCurve.Evaluate(fraction) * originalForward * jumpDistance);
+
+                if (jumpCooldown < 0f)
+                {
+                    transform.localScale = originalScale;
+                    _shiftable.SetShiftPosition(_originalPosition);
+                    hasJumped = true;
+                    if (SpawnShipPrefab != null)
+                    {
+                        SpawnShip();
+                    }
+                }
+            }
         }
     }
 
@@ -68,13 +77,14 @@ public class ShipJump : MonoBehaviour
 
     private void TriggerJump()
     {
-        jumpFrom = originalPosition - originalForward * jumpDistance;
+       var jumpFrom = Universe.Current.GetWorldPosition(_originalPosition) + originalForward * jumpDistance;
 
         Flash.transform.position = jumpFrom;
         Flash.Play();
 
         transform.localScale = 0.001f * originalScale;
-        transform.position = jumpFrom;
+
+        _shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(jumpFrom));
 
         SetRenderersEmabled(true);
         SetTrailsVisible(true);
@@ -82,7 +92,20 @@ public class ShipJump : MonoBehaviour
         hasJumped = false;
         jumpCooldown = jumpTime;
 
-        //Debug.Break();
+        _isTriggered = true;
+        Debug.Log("JUMP!");
+    }
+
+    private void SpawnShip()
+    {
+        var ship = Instantiate(SpawnShipPrefab, transform.position, transform.rotation);
+        var shipShiftable = ship.GetComponent<Shiftable>();
+        shipShiftable.SetShiftPosition(_shiftable.UniversePosition);
+
+        if (ArriveSound != null)
+            ResourcePoolIndex.PlayAnonymousSound(ArriveSound, transform.position, 50f, 1000f, 10f, true);
+
+        //Destroy(gameObject);
     }
 
     private void SetRenderersEmabled(bool value)

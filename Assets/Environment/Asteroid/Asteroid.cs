@@ -17,7 +17,6 @@ public class Asteroid : MonoBehaviour
 
     private void OnDie(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
     {
-        Debug.Log("DESTROYASTEROID!");
         PlaceEffect(transform.position, normal, null);
         Destroy(gameObject);
     }

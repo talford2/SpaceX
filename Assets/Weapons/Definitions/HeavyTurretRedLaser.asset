@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2f6e1f64cbe134ba1ec932bb79b453, type: 3}
+  m_Name: HeavyTurretRedLaser
+  m_EditorClassIdentifier: 
+  Name: Red Laser Cannon
+  MuzzlePrefab: {fileID: 11408760, guid: db0bd28387b791d4ea43fd188b23d353, type: 2}
+  ShootSound: {fileID: 8300000, guid: d265f25003d0c0d45ab9a638613901f2, type: 3}
+  SoundVolume: 1
+  SoundMinDistance: 25
+  SoundMaxDistance: 200
+  MissilePrefab: {fileID: 180512, guid: adb276e13f8472b4ab9d9878efaa0049, type: 2}
+  MissilesPerShot: 1
+  Spread: 0
+  MissilesConverge: 0
+  IsTargetLocking: 0
+  IsAutoLocking: 0
+  TargetLockTime: 1.5
+  TargetLockingMaxDistance: 2000
+  TargetAngleTolerance: 15
+  LockSound: {fileID: 0}
+  IsOverheat: 0
+  HeatPerMissile: 0.8
+  OverheatDelay: 2
+  CoolDelay: 0.5
+  BaseMissileDamage: 5
+  BaseFireRate: 1
+  BaseCoolingRate: 0
+  BaseHeatCapacity: 0
+  MissileDamagePerPoint: 1
+  FireRatePerPoint: 0.2
+  CoolingRatePerPoint: 0
+  HeatCapacityPerPoint: 0
+  InventorySprite: {fileID: 0}
+  Type: 0
+  SalvageValue: 0
