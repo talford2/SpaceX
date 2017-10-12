@@ -17,24 +17,10 @@ public class MultipleKillTrigger : MonoBehaviour
             var tracker = killable.gameObject.GetComponentInChildren<TurretTracker>();
             TrackerManager.Current.RemoveTracker(tracker);
             tracker.DestroyInstance();
-            //TrackerManager.Current.AddTracker(tracker);
 
             var objectiveTracker = tracker.gameObject.AddComponent<VehicleTracker>();
             objectiveTracker.Options = TrackerValues;
 
-
-            /*
-            if (TrackerValues != null)
-            {
-                var objectiveTracker = killable.gameObject.AddComponent<VehicleTracker>();
-                objectiveTracker.Options = TrackerValues;
-
-                if (killable.gameObject.GetComponentInChildren<Targetable>() == null)
-                    Debug.LogWarning("NO TRACKER FOUND!");
-                objectiveTracker.Targetable = killable.gameObject.GetComponentInChildren<Targetable>();
-                objectiveTracker.Killable = killable;
-            }
-            */
             killable.OnDie += OnKillableDie;
         }
         _dieCount = 0;

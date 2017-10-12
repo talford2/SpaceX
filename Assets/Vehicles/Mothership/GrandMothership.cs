@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GrandMothership : MonoBehaviour
@@ -100,8 +101,14 @@ public class GrandMothership : MonoBehaviour
 
     private void Start()
     {
-        FlakTurretKillTrigger.Initialize();
+        StartCoroutine(DelayedInit(10f));
+    }
 
+    private IEnumerator DelayedInit(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        CommMessaging.Current.ShowMessage(Player.Current.VehicleInstance.gameObject, "Mission Control", "Your first objective is to clear out enemy Flak Turrets.");
+        FlakTurretKillTrigger.Initialize();
     }
 
     private void OnKill(Killable sender, Vector3 positon, Vector3 normal, GameObject attacker)
