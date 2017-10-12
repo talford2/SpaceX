@@ -707,7 +707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Laser Turret
   Head: {fileID: 1420526191286230}
-  WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
+  WeaponPrefab: {fileID: 11492802, guid: c072ecac646a39e488b75cfeb558285b, type: 2}
   ShootPoints:
   - {fileID: 114013468793034348}
   - {fileID: 114771332784620566}
@@ -806,7 +806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Laser Turret
   Head: {fileID: 1913247639685768}
-  WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
+  WeaponPrefab: {fileID: 11492802, guid: c072ecac646a39e488b75cfeb558285b, type: 2}
   ShootPoints:
   - {fileID: 114498000916750494}
   - {fileID: 114928457793588776}
@@ -864,7 +864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Laser Turret
   Head: {fileID: 1951076874287346}
-  WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
+  WeaponPrefab: {fileID: 11492802, guid: c072ecac646a39e488b75cfeb558285b, type: 2}
   ShootPoints:
   - {fileID: 114757083368165000}
   - {fileID: 114514295803187422}
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Laser Turret
   Head: {fileID: 1078287113162786}
-  WeaponPrefab: {fileID: 11492802, guid: a9ae56ebc072787469d269082226caaa, type: 2}
+  WeaponPrefab: {fileID: 11492802, guid: c072ecac646a39e488b75cfeb558285b, type: 2}
   ShootPoints:
   - {fileID: 114840578365007146}
   - {fileID: 114873826971985230}
