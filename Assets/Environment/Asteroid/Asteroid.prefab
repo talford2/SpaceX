@@ -25,6 +25,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 416388}
+  - component: {fileID: 114938771860591032}
   - component: {fileID: 11440818}
   - component: {fileID: 11492116}
   - component: {fileID: 11483304}
@@ -292,8 +293,8 @@ MonoBehaviour:
   Shield: 0
   MaxShield: 0
   DamageEffect: {fileID: 112780, guid: 0d899d6cd3e67af44abdb41384ecf4e0, type: 2}
-  DieEffect: {fileID: 185508, guid: 338533a70f1971a41b1d3b65d718c783, type: 2}
-  DestroyOnDie: 1
+  DieEffect: {fileID: 0}
+  DestroyOnDie: 0
 --- !u!114 &11458936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -604,3 +605,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 134030}
   m_IsPrefabParent: 1
+--- !u!114 &114938771860591032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b7e3973063e2841b3bbe6d9a7a2806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DieEffectPrefab: {fileID: 185508, guid: 338533a70f1971a41b1d3b65d718c783, type: 2}
