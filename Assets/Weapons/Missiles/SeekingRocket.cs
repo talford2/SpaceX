@@ -179,7 +179,7 @@ public class SeekingRocket : Missile
         _velocity = _initVelocity;
 
         transform.position = _shootFrom;
-        transform.forward = FromReference.forward;
+        transform.forward = direction;// FromReference.forward;
         transform.position += initVelocity * Time.deltaTime;
 
         Rocket.enabled = true;
