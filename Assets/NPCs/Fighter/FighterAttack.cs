@@ -41,7 +41,12 @@ public class FighterAttack : NpcState<Fighter>
 	private float _angleToTarget;
 	private float _dotTargetFacing;
 
-	public override void Update()
+    private bool _hasLocked;
+    private float _lockCooldown;
+    private float _secondaryInterval = 5f;
+    private float _secondaryCooldown;
+
+    public override void Update()
 	{
 		if (Npc.Target == null)
 		{
@@ -130,7 +135,40 @@ public class FighterAttack : NpcState<Fighter>
 				}
 			}
 
-			if (_toTarget.sqrMagnitude < Npc.OvertakeDistance * Npc.OvertakeDistance)
+            // Lock and release
+            if (_hasLocked)
+            {
+                if (_lockCooldown >=0f)
+                {
+                    _lockCooldown -= Time.deltaTime;
+                    if (_lockCooldown < 0f)
+                        _hasLocked = false;
+                }
+            }
+
+            if (_secondaryCooldown >= 0f)
+            {
+                _secondaryCooldown -= Time.deltaTime;
+                if (_secondaryCooldown < 0f)
+                {
+                    if (Npc.VehicleInstance.SecondaryWeaponInstance != null && !_hasLocked)
+                    {
+                        if (Npc.VehicleInstance.SecondaryWeaponInstance.Definition.IsTargetLocking)
+                        {
+                            if (Random.value > 0.9f)
+                            {
+                                _hasLocked = true;
+                                _lockCooldown = 0.6f;
+                                Npc.VehicleInstance.SecondaryWeaponInstance.SetMissileTarget(Npc.Target);
+                            }
+                        }
+                        Npc.VehicleInstance.SecondaryWeaponInstance.IsTriggered = _hasLocked;
+                    }
+                    _secondaryCooldown = _secondaryInterval;
+                }
+            }
+
+            if (_toTarget.sqrMagnitude < Npc.OvertakeDistance * Npc.OvertakeDistance)
 			{
 				//Debug.Log("OVERTAKE!");
 				Npc.VehicleInstance.TriggerAccelerate = true;
