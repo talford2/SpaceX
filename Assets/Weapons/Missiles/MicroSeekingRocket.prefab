@@ -293,7 +293,7 @@ MonoBehaviour:
   ThrusterMesh: {fileID: 2390714}
   Tracer: {fileID: 114507211581024262}
   Flare: {fileID: 11468780}
-  SplashMaxRadius: 15
+  SplashMaxRadius: 10
   SplashMinRadius: 5
   SplashMaxDamage: 25
 --- !u!114 &11468780

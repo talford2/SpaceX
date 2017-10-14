@@ -111,7 +111,7 @@ public class SeekingRocket : Missile
             {
                 Explode();
             }
-            _noTargetCooldown = _noTargetTime;
+            _noTargetCooldown = _noTargetTime + Random.Range(-0.5f, 0.5f);
         }
 
         if (_noTargetCooldown >= 0f)
