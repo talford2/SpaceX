@@ -93,4 +93,11 @@ public class Killable : MonoBehaviour
 			Destroy(gameObject);
 		}
 	}
+
+    public void Resurrect()
+    {
+        Shield = MaxShield;
+        Health = MaxHealth;
+        IsAlive = true;
+    }
 }

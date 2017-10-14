@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 458476}
   - component: {fileID: 11425134}
   - component: {fileID: 11449330}
+  - component: {fileID: 114719761762325546}
   m_Layer: 0
   m_Name: MicroSeekingRocket
   m_TagString: Untagged
@@ -62,6 +63,7 @@ GameObject:
   - component: {fileID: 418494}
   - component: {fileID: 3332950}
   - component: {fileID: 2355120}
+  - component: {fileID: 135711938076629096}
   m_Layer: 0
   m_Name: RocketMissile
   m_TagString: Untagged
@@ -291,6 +293,9 @@ MonoBehaviour:
   ThrusterMesh: {fileID: 2390714}
   Tracer: {fileID: 114507211581024262}
   Flare: {fileID: 11468780}
+  SplashMaxRadius: 15
+  SplashMinRadius: 5
+  SplashMaxDamage: 100
 --- !u!114 &11468780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -635,3 +640,33 @@ MonoBehaviour:
   Interval: 0.01
   VertextCount: 100
   Shiftable: {fileID: 11425134}
+--- !u!114 &114719761762325546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b4d5c4768c21c749be5401640b9a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 3
+  MaxHealth: 3
+  Shield: 0
+  MaxShield: 0
+  DamageEffect: {fileID: 0}
+  DieEffect: {fileID: 0}
+  DestroyOnDie: 0
+--- !u!135 &135711938076629096
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}

@@ -15,6 +15,11 @@ public class SeekingRocket : Missile
     public Trail Tracer;
     public FlareDistanceBrightness Flare;
 
+    [Header("Splash Damage")]
+    public float SplashMaxRadius = 15f;
+    public float SplashMinRadius = 5f;
+    public float SplashMaxDamage = 100f;
+
     private Shiftable _shiftable;
     private ResourcePoolItem _resourcePoolItem;
 
@@ -42,14 +47,17 @@ public class SeekingRocket : Missile
     private float _stopDistanceSquared = 100000000f;
 
     private int _mask;
-
     private int _detectableMask;
+    private Killable _killable;
 
     private void Awake()
     {
         _shiftable = GetComponent<Shiftable>();
         _mask = ~LayerMask.GetMask("Distant", "Universe Background", "Environment", "Detectable");
         _detectableMask = LayerMask.GetMask("Detectable");
+        _killable = GetComponent<Killable>();
+        if (_killable != null)
+            _killable.OnDie += RocketDie;
     }
 
     public override void Initialize(GameObject owner, float damage)
@@ -198,7 +206,6 @@ public class SeekingRocket : Missile
 
     private Collider[] _damageColliders = new Collider[10];
     private Detectable _detectable;
-    private Killable _killable;
     private void Explode()
     {
         var explodeInstance = ResourcePoolManager.GetAvailable(ExplodePrefab, transform.position, transform.rotation); //(GameObject)Instantiate(ExplodePrefab, transform.position, transform.rotation);
@@ -223,9 +230,15 @@ public class SeekingRocket : Missile
             explodeShiftable.SetShiftPosition(univPos);
         }
 
-        SplashDamage.ExplodeAt(transform.position, 15f, 5f, 100f, MissileForce, _detectableMask, Owner);
+        SplashDamage.ExplodeAt(transform.position, SplashMaxRadius, SplashMinRadius, SplashMaxDamage, MissileForce, _detectableMask, Owner);
 
         Stop();
+    }
+
+    private void RocketDie(Killable sender, Vector3 position, Vector3 normal, GameObject attacker)
+    {
+        Explode();
+        sender.Resurrect();
     }
 
     public override void Stop()
