@@ -29,6 +29,11 @@ public class WeaponDefinition : ScriptableObject
     public float TargetAngleTolerance = 15f;
     public AudioClip LockSound;
 
+    [Header("Burst Fire")]
+    public bool IsBurstFire;
+    public float BurstInterval;
+    public int BurstShotCount;
+
     [Header("Overheating")]
     public bool IsOverheat;
     public float HeatPerMissile;

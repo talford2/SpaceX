@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -197,7 +198,23 @@ public class Weapon : MonoBehaviour
             _shootPointIndex = 0;
     }
 
-    public void Fire()
+    private IEnumerator FireBurst(Transform missileTarget)
+    {
+        if (Definition.IsBurstFire)
+        {
+            Debug.Log("FIRE BURST!");
+            for (var b = 0; b < Definition.BurstShotCount; b++)
+            {
+                var nextMissile = GetNextMissile();
+                if (missileTarget != null)
+                    nextMissile.GetComponent<Missile>().SetTarget(missileTarget);
+                FireMissile(nextMissile);
+                yield return new WaitForSeconds(Definition.BurstInterval);
+            }
+        }
+    }
+
+    private void Fire()
     {
         for (var i = 0; i < Definition.MissilesPerShot; i++)
         {
@@ -304,7 +321,19 @@ public class Weapon : MonoBehaviour
                 SetAimAt(GetShootPointCentre() + _velocityReference.Value);
                 _nextMissile = GetNextMissile();
                 _nextMissile.GetComponent<Missile>().SetTarget(_lockedTarget);
-                FireMissile(_nextMissile);
+
+                Debug.Log("RELEASE WEAPON: " + Definition.Name);
+                Debug.Log("IS BURST: " + Definition.IsBurstFire);
+
+                if (Definition.IsBurstFire)
+                {
+                    StartCoroutine(FireBurst(_lockedTarget));
+                }
+                else
+                {
+                    FireMissile(_nextMissile);
+                }
+
                 ClearTargetLock();
             }
         }
@@ -396,7 +425,18 @@ public class Weapon : MonoBehaviour
                 SetAimAt(GetShootPointCentre() + _velocityReference.Value);
                 _nextMissile = GetNextMissile();
                 _nextMissile.GetComponent<Missile>().SetTarget(_lockedTarget);
-                FireMissile(_nextMissile);
+
+                Debug.Log("RELEASE WEAPON: " + Definition.Name);
+                Debug.Log("IS BURST: " + Definition.IsBurstFire);
+
+                if (Definition.IsBurstFire)
+                {
+                    StartCoroutine(FireBurst(_lockedTarget));
+                }
+                else
+                {
+                    FireMissile(_nextMissile);
+                }
                 ClearTargetLock();
             }
         }

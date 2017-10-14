@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2f6e1f64cbe134ba1ec932bb79b453, type: 3}
+  m_Name: MultiSeeker
+  m_EditorClassIdentifier: 
+  Name: Multi Seeker Torpedo
+  MuzzlePrefab: {fileID: 11496450, guid: 2af108f533a9b214ca70f588ecaaf5f7, type: 2}
+  ShootSound: {fileID: 8300000, guid: 078c2c05d965e734aa1e18239490e823, type: 3}
+  SoundVolume: 1
+  SoundMinDistance: 25
+  SoundMaxDistance: 200
+  MissilePrefab: {fileID: 176048, guid: f967fac88f1131a46abfcd95e069e563, type: 2}
+  MissilesPerShot: 1
+  Spread: 30
+  MissilesConverge: 0
+  IsTargetLocking: 1
+  IsAutoLocking: 0
+  TargetLockTime: 0.7
+  TargetLockingMaxDistance: 500
+  TargetAngleTolerance: 15
+  LockSound: {fileID: 8300000, guid: 0a035d5da61b84444a96af5e7d0aab14, type: 3}
+  IsBurstFire: 1
+  BurstInterval: 0.1
+  BurstShotCount: 6
+  IsOverheat: 1
+  HeatPerMissile: 110
+  OverheatDelay: 5
+  CoolDelay: 0.5
+  BaseMissileDamage: 5
+  BaseFireRate: 2
+  BaseCoolingRate: 150
+  BaseHeatCapacity: 100
+  MissileDamagePerPoint: 2
+  FireRatePerPoint: 0.2
+  CoolingRatePerPoint: 5
+  HeatCapacityPerPoint: 10
+  InventorySprite: {fileID: 21300000, guid: 4344aa37085ca134ebe9fc56a86bdb11, type: 3}
+  Type: 1
+  SalvageValue: 100

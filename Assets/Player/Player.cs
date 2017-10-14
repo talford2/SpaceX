@@ -654,6 +654,10 @@ public class Player : MonoBehaviour
         var primaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Primary);
         var secondaryInventoryItem = playerFile.Inventory.First(i => i.EquippedSlot == PlayerFile.EquippedSlot.Secondary);
 
+        Debug.Log("EQUIPPED:");
+        Debug.Log("PRIMARY: " + primaryInventoryItem.Key);
+        Debug.Log("SECONDARY: " + secondaryInventoryItem.Key);
+
         _profile.PrimaryWeapon = BluePrintPool.ByKey(primaryInventoryItem.Key).ItemAs<WeaponDefinition>();
         _profile.SecondaryWeapon = BluePrintPool.ByKey(secondaryInventoryItem.Key).ItemAs<WeaponDefinition>();
 

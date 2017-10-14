@@ -66,6 +66,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0a5845ab1b3702c4a80b182b0589c8a7, type: 2}
   - {fileID: 11400000, guid: 18464019f058c0b438a91886911ec913, type: 2}
   - {fileID: 11400000, guid: f2136942d4383664badd66a74cbffdd5, type: 2}
+  - {fileID: 11400000, guid: 2311a2aaa43edc344a74a4b770f2ed6b, type: 2}
 --- !u!114 &114185119791909028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,3 +104,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 32f37dc1b69f5ff44ab2900b25f77d92, type: 2}
   - {fileID: 11400000, guid: 8eef185abadbd78488e4197c9c9103c4, type: 2}
   - {fileID: 11400000, guid: e0c044cbb38635b439a551988a5d0472, type: 2}
+  - {fileID: 11400000, guid: 9775d73b66e27a541a061034def84dfb, type: 2}
