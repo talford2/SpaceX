@@ -295,7 +295,7 @@ MonoBehaviour:
   Flare: {fileID: 11468780}
   SplashMaxRadius: 15
   SplashMinRadius: 5
-  SplashMaxDamage: 100
+  SplashMaxDamage: 25
 --- !u!114 &11468780
 MonoBehaviour:
   m_ObjectHideFlags: 1
