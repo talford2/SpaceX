@@ -2960,7 +2960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 17
+  Interval: 18
   IntervalIncreasePerKill: 10
   MaxLiveCount: 3
   PathPoint: {fileID: 67181814}
@@ -3643,7 +3643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Radius: 2000
-  Interval: 17
+  Interval: 18
   IntervalIncreasePerKill: 10
   MaxLiveCount: 3
   PathPoint: {fileID: 1343783603}
@@ -6258,7 +6258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 171c8539c7d10c54c92f8fdba532f57c, type: 2}
   Radius: 2000
-  Interval: 17
+  Interval: 18
   IntervalIncreasePerKill: 10
   MaxLiveCount: 3
   PathPoint: {fileID: 1787203960}
@@ -8883,7 +8883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Radius: 2000
-  Interval: 17
+  Interval: 18
   IntervalIncreasePerKill: 10
   MaxLiveCount: 3
   PathPoint: {fileID: 927217148}
@@ -10069,7 +10069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: e6ad23df5458d004d873ce3544601982, type: 2}
   Radius: 2000
-  Interval: 17
+  Interval: 18
   IntervalIncreasePerKill: 10
   MaxLiveCount: 3
   PathPoint: {fileID: 621878971}
@@ -10272,6 +10272,66 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 232
+      objectReference: {fileID: 0}
+    - target: {fileID: 224860449716758550, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224860449716758550, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224860449716758550, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 224860449716758550, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -70
+      objectReference: {fileID: 0}
+    - target: {fileID: 224860449716758550, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 224860449716758550, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 224564040307993542, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224564040307993542, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224564040307993542, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 445
+      objectReference: {fileID: 0}
+    - target: {fileID: 224564040307993542, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -70
+      objectReference: {fileID: 0}
+    - target: {fileID: 224564040307993542, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 690
+      objectReference: {fileID: 0}
+    - target: {fileID: 224564040307993542, guid: a1859a184329ea54abc5c7bdb9ab22af,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1859a184329ea54abc5c7bdb9ab22af, type: 2}
@@ -11024,7 +11084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FighterPrefab: {fileID: 11452850, guid: 57ca936adbe72cd4aa8630974d662e95, type: 2}
   Radius: 2000
-  Interval: 17
+  Interval: 18
   IntervalIncreasePerKill: 10
   MaxLiveCount: 3
   PathPoint: {fileID: 880577990}
