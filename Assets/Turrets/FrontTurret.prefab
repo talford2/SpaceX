@@ -427,8 +427,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  MinPitch: -220
-  MaxPitch: 30
+  MinPitch: -90
+  MaxPitch: 20
   MaxPitchSpeed: 45
   MaxYawSpeed: 90
   AimTolerance: 5

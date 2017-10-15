@@ -20,8 +20,14 @@ public class Turret : MonoBehaviour
     public AnimationCurve RecoilCurve;
 
     [Header("Turning")]
+    public bool ClampPitch = true;
     public float MinPitch;
     public float MaxPitch;
+
+    public bool ClampYaw = false;
+    public float MinYaw;
+    public float MaxYaw;
+
     public float MaxPitchSpeed = 90f;
     public float MaxYawSpeed = 90f;
 
@@ -149,8 +155,11 @@ public class Turret : MonoBehaviour
 
         var toAimPosition = _aimPosition - shootPointsCentre;
 
-        var targetYaw = GetLocalTargetEuler(Head.transform, _aimPosition).y;
-        var targetPitch = GetLocalTargetEuler(Guns.transform, _aimPosition).x;
+        var tYaw = GetLocalTargetEuler(Head.transform, _aimPosition).y;
+        var targetYaw = ClampYaw ? Utility.ClampAngle(tYaw, MinYaw, MaxYaw) : tYaw;
+
+        var tPitch = GetLocalTargetEuler(Guns.transform, _aimPosition).x;
+        var targetPitch = ClampPitch ? Utility.ClampAngle(tPitch, MinPitch, MaxPitch) : tPitch;
 
         Head.transform.localRotation = Quaternion.RotateTowards(Head.transform.localRotation, Quaternion.AngleAxis(targetYaw, Vector3.up), MaxYawSpeed * Time.deltaTime);
         Guns.transform.localRotation = Quaternion.RotateTowards(Guns.transform.localRotation, Quaternion.AngleAxis(targetPitch, Vector3.right), MaxPitchSpeed * Time.deltaTime);

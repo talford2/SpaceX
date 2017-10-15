@@ -273,6 +273,24 @@ public class Utility
     {
         return (value - min) / (max - min);
     }
+
+    public static float ClampAngle(float value, float min, float max)
+    {
+        var clampedValue = value % 360f;
+        if (clampedValue < 90f || clampedValue > 270f)
+        {
+            if (clampedValue > 180f)
+                clampedValue -= 360f;
+            if (max > 180f)
+                max -= 360f;
+            if (min > 180f)
+                min -= 360f;
+        }
+        clampedValue = Mathf.Clamp(clampedValue, min, max);
+        if (clampedValue < 0f)
+            clampedValue += 360f;
+        return clampedValue;
+    }
 }
 
 public class HSVColor
