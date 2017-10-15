@@ -408,27 +408,43 @@ MonoBehaviour:
   - {fileID: 114570595856624022}
   MaxTargetDistance: 600
   RecoilDistance: 0.9
-  RecoilTime: 0.5
+  RecoilTime: 0.4
   RecoilCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 5.9265895
-      outSlope: 5.9265895
+      inSlope: 13.06101
+      outSlope: 13.06101
       tangentMode: 0
     - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1.5119327
-      outSlope: -1.5119327
+      time: 0.014485985
+      value: 0.2140851
+      inSlope: 9.903463
+      outSlope: 9.903463
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.30246374
+      value: 0.81455064
+      inSlope: -2.6752539
+      outSlope: -2.6752539
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.99667406
+      value: 0.001919508
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  ClampPitch: 1
   MinPitch: -90
   MaxPitch: 20
+  ClampYaw: 0
+  MinYaw: 0
+  MaxYaw: 0
   MaxPitchSpeed: 45
   MaxYawSpeed: 90
   AimTolerance: 5

@@ -100,6 +100,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4135234045625554}
+  - component: {fileID: 135283065536437782}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -283,27 +284,43 @@ MonoBehaviour:
   - {fileID: 114396704736601346}
   MaxTargetDistance: 500
   RecoilDistance: 0.5
-  RecoilTime: 0.5
+  RecoilTime: 0.4
   RecoilCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 5.9265895
-      outSlope: 5.9265895
+      inSlope: 13.06101
+      outSlope: 13.06101
       tangentMode: 0
     - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1.5119327
-      outSlope: -1.5119327
+      time: 0.014485985
+      value: 0.2140851
+      inSlope: 9.903463
+      outSlope: 9.903463
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.30246374
+      value: 0.81455064
+      inSlope: -2.6752539
+      outSlope: -2.6752539
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.99667406
+      value: 0.001919508
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  ClampPitch: 1
   MinPitch: -50
   MaxPitch: 50
+  ClampYaw: 0
+  MinYaw: 0
+  MaxYaw: 0
   MaxPitchSpeed: 90
   MaxYawSpeed: 90
   AimTolerance: 5
@@ -343,6 +360,18 @@ MonoBehaviour:
   Targetable: {fileID: 114801002775275544}
   Killable: {fileID: 114314555795405538}
   IsDisabled: 0
+--- !u!135 &135283065536437782
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1862247825733602}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137838508754576484
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
