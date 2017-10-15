@@ -406,7 +406,7 @@ MonoBehaviour:
   ShootPoints:
   - {fileID: 114293613187137988}
   - {fileID: 114570595856624022}
-  MaxTargetDistance: 1000
+  MaxTargetDistance: 600
   RecoilDistance: 0.9
   RecoilTime: 0.5
   RecoilCurve:
