@@ -108,7 +108,6 @@ public class NavShipController : MonoBehaviour
     {
         _isLoadTriggered = true;
         GalaxyMapUi.Current.SetVisibleEnterSystem(false);
-        Debug.Break();
         PlayerContext.Current.LevelIndex = _levelIndex;
         Cover.OnFadeComplete = LoadWithLoader;
         Cover.TriggerFadeIn();
