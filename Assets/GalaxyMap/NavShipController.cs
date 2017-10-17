@@ -7,6 +7,7 @@ public class NavShipController : MonoBehaviour
     private static NavShipController _current;
 
     public CoverScreen Cover;
+    public CameraController CameraController;
 
     private Vector3 _destination;
     private float _acceleration = 30f;
@@ -14,6 +15,7 @@ public class NavShipController : MonoBehaviour
     private float _maxSpeed = 30f;
     private string _sceneName;
     private int _levelIndex = -1;
+    private bool _isLoadTriggered;
 
     private void Awake()
     {
@@ -79,7 +81,7 @@ public class NavShipController : MonoBehaviour
         }
         else
         {
-            if (_levelIndex > -1)
+            if (_levelIndex > -1 && !_isLoadTriggered)
                 GalaxyMapUi.Current.SetVisibleEnterSystem(true);
             if (Input.GetKeyUp(KeyCode.Return))
                 LoadWithLoaderAndIndex();
@@ -104,8 +106,12 @@ public class NavShipController : MonoBehaviour
 
     public void LoadWithLoaderAndIndex()
     {
+        _isLoadTriggered = true;
+        GalaxyMapUi.Current.SetVisibleEnterSystem(false);
+        Debug.Break();
         PlayerContext.Current.LevelIndex = _levelIndex;
         Cover.OnFadeComplete = LoadWithLoader;
         Cover.TriggerFadeIn();
+        CameraController.TriggerZoom(_destination - CameraController.transform.forward * 5f);
     }
 }
