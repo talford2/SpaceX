@@ -2920,6 +2920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cover: {fileID: 1926012840}
+  CameraController: {fileID: 1962601823}
 --- !u!4 &2066535740 stripped
 Transform:
   m_PrefabParentObject: {fileID: 429876, guid: b7d68a8d12d24ab4fbb947fce837c799, type: 2}
