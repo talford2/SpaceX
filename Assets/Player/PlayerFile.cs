@@ -55,7 +55,7 @@ public class PlayerFile : DataFile<PlayerFile>
 
         public int SortStatus()
         {
-            if (BluePrintPool.ByKey(Key).RequiredCount > BluePrintsOwned)
+            if (BluePrintPool.ByKey(Key).RequiredCount > BluePrintsOwned && !IsOwned)
                 return 2;
             if (!IsOwned)
                 return 1;

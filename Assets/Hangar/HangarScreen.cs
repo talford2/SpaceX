@@ -81,7 +81,7 @@ public class HangarScreen : MonoBehaviour
 
     private void ShowVehicle(int index)
     {
-        foreach(Transform t in VehicleViewTransform)
+        foreach (Transform t in VehicleViewTransform)
         {
             Destroy(t.gameObject);
         }
@@ -110,7 +110,7 @@ public class HangarScreen : MonoBehaviour
 
     private void UpdateLeftBar(WeaponDefinition primaryWeapon, WeaponDefinition secondaryWeapon)
     {
-        foreach(Transform item in LeftPanel)
+        foreach (Transform item in LeftPanel)
         {
             Destroy(item.gameObject);
         }
@@ -132,8 +132,9 @@ public class HangarScreen : MonoBehaviour
         var playerFile = PlayerFile.ReadFromFile();
         var sortedInventory = playerFile.Inventory.OrderBy(i => i.SortStatus());
 
-        foreach (var item in sortedInventory.Where(i => i.EquippedSlot == PlayerFile.EquippedSlot.Inventory))
+        foreach (var item in sortedInventory.Where(i => i.EquippedSlot == PlayerFile.EquippedSlot.Inventory).OrderBy(i => i.SortStatus()))
         {
+            Debug.LogFormat("Item: {0} ({1})", item.Key, item.SortStatus());
             var bluePrint = BluePrintPool.ByKey(item.Key);
             if (item.IsOwned)
             {
@@ -169,7 +170,7 @@ public class HangarScreen : MonoBehaviour
             }
         }
     }
-    
+
     private void BuyWeapon(PlayerFile playerFile, BluePrint bluePrint)
     {
         playerFile.Inventory.First(i => i.Key == bluePrint.Key).IsOwned = true;
