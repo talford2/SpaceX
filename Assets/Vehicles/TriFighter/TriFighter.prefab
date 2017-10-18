@@ -446,7 +446,6 @@ MonoBehaviour:
     type: 2}
   ThrusterTransforms:
   - {fileID: 4334150266314110}
-  - {fileID: 4943094481388324}
   - {fileID: 4484870664370284}
   IgnoreCollisions: 0
 --- !u!114 &114540832633965402
