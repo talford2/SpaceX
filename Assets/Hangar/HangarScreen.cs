@@ -107,7 +107,7 @@ public class HangarScreen : MonoBehaviour
             VehicleProgressText.enabled = true;
         }
         var vehiclekillable = vehiclePrefab.GetComponent<Killable>();
-        DescriptionText.text = string.Format("Shield: {0:f0}\nHull: {1:f0}\nSpeed: {2:f0}", vehiclePrefab.ShieldPrefab.Capacity, vehiclekillable.MaxHealth, vehiclePrefab.MaxSpeed);
+        DescriptionText.text = string.Format("Shield: {0:f0}\nHull: {1:f0}\nSpeed: {2:f0}\nManeuver: {3:f0}", vehiclePrefab.ShieldPrefab.Capacity, vehiclekillable.MaxHealth, vehiclePrefab.MaxSpeed, vehiclePrefab.YawSpeed);
         playerFile.WriteToFile();
     }
 
