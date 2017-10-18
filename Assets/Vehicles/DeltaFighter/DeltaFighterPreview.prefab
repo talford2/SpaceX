@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33985411958920912}
   - component: {fileID: 23282146280402440}
   m_Layer: 0
-  m_Name: DeltFighterPreview
+  m_Name: DeltaFighterPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
