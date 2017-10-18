@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: DeltaFighter
   m_EditorClassIdentifier: 
   RequiredCount: 5
-  Item: {fileID: 1596033949258282, guid: be558299c369a7d47b96da7c70bd1e3a, type: 2}
+  Item: {fileID: 1873056080358756, guid: be558299c369a7d47b96da7c70bd1e3a, type: 2}
   Price: 10000

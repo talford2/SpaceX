@@ -21,7 +21,7 @@ public class CreateVehicleEditor : Editor
             Transform meshTransform = null;
             List<Transform> thrusterTransforms = new List<Transform>();
             List<ShootPoint> shootPoints = new List<ShootPoint>();
-            foreach(Transform transform in selected.transform)
+            foreach(Transform transform in selected.GetComponentsInChildren<Transform>())
             {
                 var transName = transform.name.ToLowerInvariant();
                 if (transName.EndsWith("mesh"))
