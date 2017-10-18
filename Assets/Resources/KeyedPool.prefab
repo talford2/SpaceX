@@ -67,6 +67,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 18464019f058c0b438a91886911ec913, type: 2}
   - {fileID: 11400000, guid: f2136942d4383664badd66a74cbffdd5, type: 2}
   - {fileID: 11400000, guid: 2311a2aaa43edc344a74a4b770f2ed6b, type: 2}
+  - {fileID: 11400000, guid: 4030af576c067254e82c5a46d49b6953, type: 2}
 --- !u!114 &114185119791909028
 MonoBehaviour:
   m_ObjectHideFlags: 1
