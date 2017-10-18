@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed9b078a58fe604694fff0328ea19ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Alpha Fighter
+  Name: Delta Fighter
   PreviewPrefab: {fileID: 1169375009399422, guid: 63833fb91b160e34283cb7b7771c0ad1,
     type: 2}
   MeshTransform: {fileID: 4913758268367148}
