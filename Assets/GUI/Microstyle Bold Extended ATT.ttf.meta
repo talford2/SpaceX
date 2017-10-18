@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 28c81aab17d7e6e458839ef9951d8957
+timeCreated: 1508260900
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Microstyle Bold Extended ATT
+  fontNames:
+  - Microstyle Bold Extended ATT
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

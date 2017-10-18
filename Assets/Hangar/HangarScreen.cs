@@ -20,6 +20,7 @@ public class HangarScreen : MonoBehaviour
     public Transform VehicleViewTransform;
     public Color GreyOut;
     public Text VehicleProgressText;
+    public Text DescriptionText;
 
     [Header("Right Panel")]
     public Transform RightPanel;
@@ -105,6 +106,8 @@ public class HangarScreen : MonoBehaviour
             VehicleProgressText.text = string.Format("{0} / {1}", playersShip.BluePrintsOwned, BluePrintPool.ByKey(playerFile.Ship).RequiredCount);
             VehicleProgressText.enabled = true;
         }
+        var vehiclekillable = vehiclePrefab.GetComponent<Killable>();
+        DescriptionText.text = string.Format("Shield: {0:f0}\nHull: {1:f0}\nSpeed: {2:f0}", vehiclePrefab.ShieldPrefab.Capacity, vehiclekillable.MaxHealth, vehiclePrefab.MaxSpeed);
         playerFile.WriteToFile();
     }
 
