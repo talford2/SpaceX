@@ -9,7 +9,7 @@ public class VehicleCorpse : MonoBehaviour
     public GameObject DebrisPrefab;
     public List<ParticleSystem> SmokeSystems;
 
-    public float CollisionRadius;
+    public float CollisionRadius = 3f;
 
     [Header("Explosion")]
     public float MaxExplodeRadius = 30f;

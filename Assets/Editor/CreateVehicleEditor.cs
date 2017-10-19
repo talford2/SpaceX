@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public class CreateVehicleEditor : Editor
 {
-    public GameObject prefabModel = null;
-
     [MenuItem("Space X/Build Vehicle")]
     public static void BuildVehicle()
     {

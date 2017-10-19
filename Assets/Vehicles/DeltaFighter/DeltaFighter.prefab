@@ -486,7 +486,8 @@ MonoBehaviour:
   - {fileID: 4941207432567468}
   ShieldShakeAmplitude: 0.1
   HullShakeAmplitude: 1
-  CorpsePrefab: {fileID: 182838, guid: 0ce194040425fda48b154795fa302bff, type: 2}
+  CorpsePrefab: {fileID: 1622019577538048, guid: 22bb2264da4bf1247940f2584f65d603,
+    type: 2}
   DebrisPrefab: {fileID: 0}
   ExplosiveForce: 50
   ExplodeDeathExplosion: {fileID: 1124519297851362, guid: 3d2575b16288442499c6366b388a6ea6,
