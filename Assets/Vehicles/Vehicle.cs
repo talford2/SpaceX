@@ -88,9 +88,11 @@ public class Vehicle : MonoBehaviour
     public List<ShootPoint> SecondaryShootPoints;
 
     [Header("Shield")]
+    [PrefabPath("Assets/Shields")]
     public Shield ShieldPrefab;
 
     [Header("Engine")]
+    [PrefabPath("Assets/Engines")]
     public Engine EnginePrefab;
 
     [Header("Damage")]

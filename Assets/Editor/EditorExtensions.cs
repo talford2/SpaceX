@@ -94,7 +94,7 @@ public static class EditorExtensions
         return Directory.GetFiles(string.Format("{0}/{1}", assetParentPath, path), filter);
     }
 
-    private static List<string> PrefabNamesFromPath(string path, string filter)
+    public static List<string> PrefabNamesFromPath(string path, string filter)
     {
         var prefabFiles = GetPrefabFilenames(path, filter);
         var prefabNames = new List<string>();
@@ -129,7 +129,7 @@ public static class EditorExtensions
         return GetPathDropdownIndexFor(path, assetName, "*.asset");
     }
 
-    private static T FromPathDropdownIndex<T>(string path, int index, string filter) where T : Object
+    public static T FromPathDropdownIndex<T>(string path, int index, string filter) where T : Object
     {
         var prefabFiles = GetPrefabFilenames(path, filter);
         var prefabFilename = new FileInfo(prefabFiles[index]).Name;
