@@ -1,11 +1,19 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class CreateVehicleCorpseEditor : EditorWindow
 {
-    private string renameTo;
+    private GameObject modelPrefab;
+
+    private string prefabName;
+    private float mass;
     private GameObject explosionPrefab;
+    private int explosionIndex;
     private GameObject smokePrefab;
+    private int smokeIndex;
+
+    private string effectsPath = "Assets/Effects";
     private static EditorWindow windowInstance;
 
     [MenuItem("Space X/Vehicles/Build Corpse")]
@@ -14,59 +22,69 @@ public class CreateVehicleCorpseEditor : EditorWindow
         windowInstance = GetWindow(typeof(CreateVehicleCorpseEditor));
     }
 
+    private void Awake()
+    {
+        SetDefaults();
+    }
+
+    private void SetDefaults()
+    {
+        mass = 400f;
+        smokeIndex = EditorExtensions.GetPathDropdownIndexFor("SmokeAndFire", effectsPath);
+        explosionIndex = EditorExtensions.GetPathDropdownIndexFor("FieryExplosion", effectsPath);
+    }
+
     public void BuildCorpse()
     {
-        var selected = Selection.activeGameObject;
-        if (selected != null)
+        var corpseObj = Instantiate(modelPrefab);
+        corpseObj.name = prefabName;
+
+        var rigidBody = corpseObj.AddComponent<Rigidbody>();
+        rigidBody.mass = mass;
+        rigidBody.useGravity = false;
+
+        var killable = corpseObj.AddComponent<Killable>();
+        killable.MaxHealth = 30f;
+        killable.Health = killable.MaxHealth;
+        killable.DestroyOnDie = false;
+
+        corpseObj.AddComponent<Shiftable>();
+        var corpse = corpseObj.AddComponent<VehicleCorpse>();
+        corpse.ExplosionPrefab = explosionPrefab;
+
+        var smokeInstances = new List<ParticleSystem>();
+        foreach (Transform transform in corpseObj.GetComponentsInChildren<Transform>())
         {
-            selected.name = renameTo;
-
-            var rigidBody = selected.AddComponent<Rigidbody>();
-            rigidBody.mass = 400f;
-            rigidBody.useGravity = false;
-
-            var killable = selected.AddComponent<Killable>();
-            killable.MaxHealth = 30f;
-            killable.Health = killable.MaxHealth;
-            killable.DestroyOnDie = false;
-
-            selected.AddComponent<Shiftable>();
-            var corpse = selected.AddComponent<VehicleCorpse>();
-            corpse.ExplosionPrefab = explosionPrefab;
-
-            foreach (Transform transform in selected.GetComponentsInChildren<Transform>())
+            var transName = transform.name.ToLowerInvariant();
+            if (transName.Contains("thruster"))
             {
-                var transName = transform.name.ToLowerInvariant();
-                if (transName.Contains("thruster"))
-                {
-                    var smokeInstance = Instantiate(smokePrefab, transform);
-                    smokeInstance.transform.localPosition = Vector3.zero;
-                    smokeInstance.transform.localRotation = Quaternion.identity;
-                    smokeInstance.transform.localScale = Vector3.one;
-                }
+                var smokeInstance = Instantiate(smokePrefab, transform);
+                smokeInstance.name = smokePrefab.name;
+                smokeInstance.transform.localPosition = Vector3.zero;
+                smokeInstance.transform.localRotation = Quaternion.identity;
+                smokeInstance.transform.localScale = Vector3.one;
+                smokeInstances.Add(smokeInstance.GetComponent<ParticleSystem>());
             }
         }
+        corpse.SmokeSystems = smokeInstances;
     }
 
     private void OnGUI()
     {
-        var selected = Selection.activeGameObject;
-        if (selected)
+        modelPrefab = FieldFor<GameObject>("From model", modelPrefab);
+        if (modelPrefab!=null)
         {
-            EditorGUILayout.PrefixLabel("Selected");
-            var boldText = new GUIStyle();
-            boldText.fontStyle = FontStyle.Bold;
-            EditorGUILayout.LabelField(selected.name, boldText);
-            renameTo = string.Format("{0}Corpse", selected.name);
+            prefabName = string.Format("{0}Corpse", modelPrefab.name);
 
-            EditorGUILayout.PrefixLabel("Rename to");
-            renameTo = EditorGUILayout.TextField(renameTo);
+            mass = FieldFor("Mass", mass);
 
-            EditorGUILayout.PrefixLabel("Explosion Prefab");
-            explosionPrefab = (GameObject)EditorGUILayout.ObjectField(explosionPrefab, typeof(GameObject), false);
-            EditorGUILayout.PrefixLabel("Smoke Prefab");
-            smokePrefab = (GameObject)EditorGUILayout.ObjectField(smokePrefab, typeof(GameObject), false);
-            if (!string.IsNullOrEmpty(renameTo) && explosionPrefab != null && smokePrefab != null)
+            smokeIndex = EditorExtensions.PathDropdown(effectsPath, "Smoke prefab", smokeIndex);
+            smokePrefab = EditorExtensions.FromPathIndex<GameObject>(effectsPath, smokeIndex);
+
+            explosionIndex = EditorExtensions.PathDropdown(effectsPath, "Explosion prefab", explosionIndex);
+            explosionPrefab = EditorExtensions.FromPathIndex<GameObject>(effectsPath, explosionIndex);
+
+            if (IsFormComplete())
             {
                 if (GUILayout.Button("Create"))
                 {
@@ -75,9 +93,30 @@ public class CreateVehicleCorpseEditor : EditorWindow
                 }
             }
         }
-        else
-        {
-            EditorGUILayout.LabelField("Select an object to transform in to corpse.");
-        }
+    }
+
+    private T FieldFor<T>(string label, T value) where T : Object
+    {
+        EditorGUILayout.PrefixLabel(label);
+        return (T)EditorGUILayout.ObjectField(value, typeof(T), false);
+    }
+
+    private string FieldFor(string label, string value)
+    {
+        EditorGUILayout.PrefixLabel(label);
+        return EditorGUILayout.TextField(value);
+    }
+
+    private float FieldFor(string label, float value)
+    {
+        EditorGUILayout.PrefixLabel(label);
+        return EditorGUILayout.FloatField(value);
+    }
+
+    private bool IsFormComplete()
+    {
+        return
+            modelPrefab != null &&
+            !string.IsNullOrEmpty(prefabName);
     }
 }

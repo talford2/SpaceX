@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 114279858060616760}
   - component: {fileID: 114647859935721870}
   m_Layer: 0
-  m_Name: FirerySmallExplosion
+  m_Name: FierySmallExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
