@@ -44,7 +44,7 @@ public class CreateVehicleEditor : EditorWindow
     [MenuItem("Space X/Vehicles/Build Vehicle", priority = 0)]
     public static void ShowWindow()
     {
-        windowInstance = GetWindow(typeof(CreateVehicleEditor));
+        windowInstance = GetWindow<CreateVehicleEditor>();
     }
 
     private void Awake()
@@ -98,6 +98,8 @@ public class CreateVehicleEditor : EditorWindow
                 if (GUILayout.Button("Create"))
                 {
                     BuildVehicle();
+                    if (windowInstance == null)
+                        windowInstance = GetWindow<CreateVehicleEditor>();
                     windowInstance.Close();
                 }
             }

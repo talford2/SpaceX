@@ -19,7 +19,7 @@ public class CreateVehicleCorpseEditor : EditorWindow
     [MenuItem("Space X/Vehicles/Build Corpse", priority = 1)]
     public static void ShowWindow()
     {
-        windowInstance = GetWindow(typeof(CreateVehicleCorpseEditor));
+        windowInstance = GetWindow<CreateVehicleCorpseEditor>();
     }
 
     private void Awake()
@@ -86,6 +86,8 @@ public class CreateVehicleCorpseEditor : EditorWindow
                 if (GUILayout.Button("Create"))
                 {
                     BuildCorpse();
+                    if (windowInstance == null)
+                        windowInstance = GetWindow<CreateVehicleCorpseEditor>();
                     windowInstance.Close();
                 }
             }

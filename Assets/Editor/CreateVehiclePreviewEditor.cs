@@ -11,7 +11,7 @@ public class CreateVehiclePreviewEditor : EditorWindow
     [MenuItem("Space X/Vehicles/Build Preview", priority = 2)]
     public static void ShowWindow()
     {
-        windowInstance = GetWindow(typeof(CreateVehiclePreviewEditor));
+        windowInstance = GetWindow<CreateVehiclePreviewEditor>();
     }
 
     private void BuildPreview()
@@ -35,6 +35,8 @@ public class CreateVehiclePreviewEditor : EditorWindow
                 if (GUILayout.Button("Create"))
                 {
                     BuildPreview();
+                    if (windowInstance == null)
+                        windowInstance = GetWindow<CreateVehiclePreviewEditor>();
                     windowInstance.Close();
                 }
             }
