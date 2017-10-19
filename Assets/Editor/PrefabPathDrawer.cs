@@ -15,7 +15,7 @@ public class PrefabPathDrawer : PropertyDrawer
         var options = new List<GUIContent>();
         foreach (var prefabName in prefabNames)
         {
-            options.Add(new GUIContent(string.Format("{0} ({1})", prefabName, GetTypeName(property.type))));
+            options.Add(new GUIContent(string.Format("{0} ({1})", prefabName, property.objectReferenceValue.GetType())));
         }
 
         EditorGUI.BeginProperty(position, label, property);
@@ -23,10 +23,5 @@ public class PrefabPathDrawer : PropertyDrawer
         index = EditorGUI.Popup(position, label, index, options.ToArray());
         property.objectReferenceValue = EditorExtensions.FromPathDropdownIndex<Object>(path, index, filter);
         EditorGUI.EndProperty();
-    }
-
-    private string GetTypeName(string type)
-    {
-        return type.Substring(6, type.Length - 7);
     }
 }

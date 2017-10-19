@@ -16,19 +16,13 @@ public class AssetPathDrawer : PropertyDrawer
         var options = new List<GUIContent>();
         foreach (var prefabName in prefabNames)
         {
-            options.Add(new GUIContent(string.Format("{0} ({1})", prefabName, GetTypeName(property.type))));
+            options.Add(new GUIContent(string.Format("{0} ({1})", prefabName, property.objectReferenceValue.GetType())));
         }
 
         EditorGUI.BeginProperty(position, label, property);
         var index = EditorExtensions.GetAssetPathIndexFor(path, property.objectReferenceValue.name);
         index = EditorGUI.Popup(position, label, index, options.ToArray());
-        Debug.LogFormat("T: {0}", GetTypeName(property.type));
         property.objectReferenceValue = EditorExtensions.FromPathDropdownIndex<Object>(path, index, filter);
         EditorGUI.EndProperty();
-    }
-
-    private string GetTypeName(string type)
-    {
-        return type.Substring(6, type.Length - 7);
     }
 }
