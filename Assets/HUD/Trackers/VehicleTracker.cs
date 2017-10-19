@@ -19,6 +19,7 @@ public class VehicleTracker : Tracker
 
     //   public GameObject TrackerPlanePrefab;
     //   public float TrackerPlaneScale = 100f;
+    [AssetPath("Assets/HUD/Trackers")]
     public VehicleTrackerValues Options;
 
     public Targetable Targetable;

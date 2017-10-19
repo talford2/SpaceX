@@ -77,12 +77,14 @@ public class Vehicle : MonoBehaviour
 
     [Header("Primary Weapon")]
     //public Weapon PrimaryWeaponPrefab;
+    [AssetPath("Assets/Weapons/Definitions")]
     public WeaponDefinition PrimaryWeapon;
 
     public List<ShootPoint> PrimaryShootPoints;
 
     [Header("Secondary Weapon")]
     //public Weapon SecondaryWeaponPrefab;
+    [AssetPath("Assets/Weapons/Definitions")]
     public WeaponDefinition SecondaryWeapon;
 
     public List<ShootPoint> SecondaryShootPoints;

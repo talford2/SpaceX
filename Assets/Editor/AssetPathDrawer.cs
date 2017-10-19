@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(PrefabPathAttribute))]
-public class PrefabPathDrawer : PropertyDrawer
+[CustomPropertyDrawer(typeof(AssetPathAttribute))]
+public class AssetPathDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        var filter = "*.prefab";
-        var prefabPath = attribute as PrefabPathAttribute;
+        var filter = "*.asset";
+        var prefabPath = attribute as AssetPathAttribute;
         var path = prefabPath.Path;
 
         var prefabNames = EditorExtensions.PrefabNamesFromPath(path, filter);
@@ -19,8 +20,9 @@ public class PrefabPathDrawer : PropertyDrawer
         }
 
         EditorGUI.BeginProperty(position, label, property);
-        var index = EditorExtensions.GetPrefabPathIndexFor(path, property.objectReferenceValue.name);
+        var index = EditorExtensions.GetAssetPathIndexFor(path, property.objectReferenceValue.name);
         index = EditorGUI.Popup(position, label, index, options.ToArray());
+        Debug.LogFormat("T: {0}", GetTypeName(property.type));
         property.objectReferenceValue = EditorExtensions.FromPathDropdownIndex<Object>(path, index, filter);
         EditorGUI.EndProperty();
     }
