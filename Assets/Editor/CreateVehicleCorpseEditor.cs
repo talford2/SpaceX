@@ -73,7 +73,7 @@ public class CreateVehicleCorpseEditor : EditorWindow
     private void OnGUI()
     {
         modelPrefab = FieldFor<GameObject>("From model", modelPrefab);
-        if (modelPrefab!=null)
+        if (modelPrefab != null)
         {
             prefabName = string.Format("{0}Corpse", modelPrefab.name);
 
@@ -118,7 +118,7 @@ public class CreateVehicleCorpseEditor : EditorWindow
 
     private T DropdownPathFieldFor<T>(string label, string path, string filter, ref int index, T value) where T : Object
     {
-        index = EditorExtensions.PathDropdown(effectsPath, label, index);
-        return EditorExtensions.FromPathDropdownIndex<T>(effectsPath, index, filter);
+        index = EditorExtensions.PathDropdown(path, label, index);
+        return EditorExtensions.FromPathDropdownIndex<T>(path, index, filter);
     }
 }
