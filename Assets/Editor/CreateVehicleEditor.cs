@@ -41,7 +41,7 @@ public class CreateVehicleEditor : EditorWindow
 
     private static EditorWindow windowInstance;
 
-    [MenuItem("Space X/Vehicles/Build Vehicle")]
+    [MenuItem("Space X/Vehicles/Build Vehicle", priority = 0)]
     public static void ShowWindow()
     {
         windowInstance = GetWindow(typeof(CreateVehicleEditor));

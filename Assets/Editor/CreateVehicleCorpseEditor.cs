@@ -16,7 +16,7 @@ public class CreateVehicleCorpseEditor : EditorWindow
     private string effectsPath = "Assets/Effects";
     private static EditorWindow windowInstance;
 
-    [MenuItem("Space X/Vehicles/Build Corpse")]
+    [MenuItem("Space X/Vehicles/Build Corpse", priority = 1)]
     public static void ShowWindow()
     {
         windowInstance = GetWindow(typeof(CreateVehicleCorpseEditor));
