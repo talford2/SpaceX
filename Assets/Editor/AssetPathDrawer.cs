@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 [CustomPropertyDrawer(typeof(AssetPathAttribute))]
@@ -13,15 +11,15 @@ public class AssetPathDrawer : PropertyDrawer
         var path = prefabPath.Path;
 
         var prefabNames = EditorExtensions.PrefabNamesFromPath(path, filter);
-        var options = new List<GUIContent>();
-        foreach (var prefabName in prefabNames)
+        var options = new GUIContent[prefabNames.Count];
+        for (var i = 0; i < prefabNames.Count; i++)
         {
-            options.Add(new GUIContent(string.Format("{0} ({1})", prefabName, property.objectReferenceValue.GetType())));
+            options[i] = new GUIContent(string.Format("{0} ({1})", prefabNames[i], property.objectReferenceValue.GetType()));
         }
 
         EditorGUI.BeginProperty(position, label, property);
         var index = EditorExtensions.GetAssetPathIndexFor(path, property.objectReferenceValue.name);
-        index = EditorGUI.Popup(position, label, index, options.ToArray());
+        index = EditorGUI.Popup(position, label, index, options);
         property.objectReferenceValue = EditorExtensions.FromPathDropdownIndex<Object>(path, index, filter);
         EditorGUI.EndProperty();
     }
