@@ -11,19 +11,19 @@ public class Vehicle : MonoBehaviour
 
     [Header("Vehicle Settings")]
     public Transform MeshTransform;
-    public float IdleSpeed = 10f;
-    public float MaxSpeed = 20f;
+    public float IdleSpeed = 20f;
+    public float MaxSpeed = 50f;
     public float MinSpeed = 3f;
     //public float Acceleration = 5f;
-    public float Brake = 7f;
-    public float MaxBoostSpeed = 500f;
-    public float BoostAcceleration = 500f;
+    public float Brake = 20f;
+    public float MaxBoostSpeed = 130f;
+    public float BoostAcceleration = 100f;
     public float BoostBrake = 150f;
     public float CurrentSpeed = 0f;
-    public float PitchSpeed = 5f;
-    public float YawSpeed = 5f;
-    public float RollAcceleration = 640f;
-    public float MaxRollSpeed = 100f;
+    public float PitchSpeed = 120f;
+    public float YawSpeed = 120f;
+    public float RollAcceleration = 840f;
+    public float MaxRollSpeed = 120f;
     public float MaxBankingAngle = 60f;
 
     [Header("Collisions")]
@@ -51,7 +51,7 @@ public class Vehicle : MonoBehaviour
     public float CameraDistance = 15f;
 
     [Header("Barrel Roll")]
-    public float BarrelStrafeSpeed = 100f;
+    public float BarrelStrafeSpeed = 50f;
     public float BarrelRollDuration = 0.5f;
 
     private Shaker _shaker;

@@ -8,7 +8,7 @@ public class CreateVehicleCorpseEditor : EditorWindow
     private GameObject smokePrefab;
     private static EditorWindow windowInstance;
 
-    [MenuItem("Space X/Build Corpse")]
+    [MenuItem("Space X/Vehicles/Build Corpse")]
     public static void ShowWindow()
     {
         windowInstance = GetWindow(typeof(CreateVehicleCorpseEditor));
