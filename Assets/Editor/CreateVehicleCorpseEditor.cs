@@ -31,8 +31,8 @@ public class CreateVehicleCorpseEditor : EditorWindow
     private void SetDefaults()
     {
         mass = 400f;
-        smokeIndex = EditorExtensions.GetPathDropdownIndexFor("SmokeAndFire", effectsPath);
-        explosionIndex = EditorExtensions.GetPathDropdownIndexFor("FieryExplosion", effectsPath);
+        smokeIndex = GetEffectsDropdownIndexFor("SmokeAndFire");
+        explosionIndex = GetEffectsDropdownIndexFor("FieryExplosion");
     }
 
     public void BuildCorpse()
@@ -61,9 +61,7 @@ public class CreateVehicleCorpseEditor : EditorWindow
             {
                 var smokeInstance = Instantiate(smokePrefab, transform);
                 smokeInstance.name = smokePrefab.name;
-                smokeInstance.transform.localPosition = Vector3.zero;
-                smokeInstance.transform.localRotation = Quaternion.identity;
-                smokeInstance.transform.localScale = Vector3.one;
+                Utility.ResetLocalTransform(smokeInstance.transform);
                 smokeInstances.Add(smokeInstance.GetComponent<ParticleSystem>());
             }
         }
@@ -72,16 +70,16 @@ public class CreateVehicleCorpseEditor : EditorWindow
 
     private void OnGUI()
     {
-        modelPrefab = FieldFor<GameObject>("From model", modelPrefab);
+        modelPrefab = EditorExtensions.FieldFor("From model", modelPrefab);
         if (modelPrefab != null)
         {
             prefabName = string.Format("{0}Corpse", modelPrefab.name);
 
-            mass = FieldFor("Mass", mass);
+            mass = EditorExtensions.FieldFor("Mass", mass);
 
-            smokePrefab = DropdownPathFieldFor("Smoke prefab", effectsPath, "*.prefab", ref smokeIndex, smokePrefab);
+            smokePrefab = EffectsDropdownFieldFor("Smoke prefab", ref smokeIndex, smokePrefab);
 
-            explosionPrefab = DropdownPathFieldFor("Explosion prefab", effectsPath, "*.prefab", ref explosionIndex, explosionPrefab);
+            explosionPrefab = EffectsDropdownFieldFor("Explosion prefab", ref explosionIndex, explosionPrefab);
 
             if (IsFormComplete())
             {
@@ -101,24 +99,13 @@ public class CreateVehicleCorpseEditor : EditorWindow
             !string.IsNullOrEmpty(prefabName);
     }
 
-    private T FieldFor<T>(string label, T value) where T : Object
+    private T EffectsDropdownFieldFor<T>(string label, ref int index, T value) where T: Object
     {
-        return (T)EditorGUILayout.ObjectField(label, value, typeof(T), false);
+        return EditorExtensions.PrefabPathFieldFor(label, effectsPath, ref index, value);
     }
 
-    private string FieldFor(string label, string value)
+    private int GetEffectsDropdownIndexFor(string prefabName)
     {
-        return EditorGUILayout.TextField(label, value);
-    }
-
-    private float FieldFor(string label, float value)
-    {
-        return EditorGUILayout.FloatField(label, value);
-    }
-
-    private T DropdownPathFieldFor<T>(string label, string path, string filter, ref int index, T value) where T : Object
-    {
-        index = EditorExtensions.PathDropdown(path, label, index);
-        return EditorExtensions.FromPathDropdownIndex<T>(path, index, filter);
+        return EditorExtensions.GetPrefabPathIndexFor(effectsPath, prefabName);
     }
 }

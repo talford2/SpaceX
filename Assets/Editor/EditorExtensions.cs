@@ -94,7 +94,7 @@ public static class EditorExtensions
         return Directory.GetFiles(string.Format("{0}/{1}", assetParentPath, path), filter);
     }
 
-    private static List<string> PrefabNamesFromPath(string path, string filter = "*.prefab")
+    private static List<string> PrefabNamesFromPath(string path, string filter)
     {
         var prefabFiles = GetPrefabFilenames(path, filter);
         var prefabNames = new List<string>();
@@ -107,7 +107,7 @@ public static class EditorExtensions
         return prefabNames;
     }
 
-    public static int GetPathDropdownIndexFor(string prefabName, string path, string filter = "*.prefab")
+    private static int GetPathDropdownIndexFor(string path, string prefabName, string filter)
     {
         var prefabNames = PrefabNamesFromPath(path, filter).ToArray();
         for (var i = 0; i < prefabNames.Length; i++)
@@ -119,17 +119,59 @@ public static class EditorExtensions
         return -1;
     }
 
-    public static T FromPathDropdownIndex<T>(string path, int index, string filter = "*.prefab") where T : Object
+    public static int GetPrefabPathIndexFor(string path, string prefabName)
+    {
+        return GetPathDropdownIndexFor(path, prefabName, "*.prefab");
+    }
+
+    public static int GetAssetPathIndexFor(string path, string assetName)
+    {
+        return GetPathDropdownIndexFor(path, assetName, "*.asset");
+    }
+
+    private static T FromPathDropdownIndex<T>(string path, int index, string filter) where T : Object
     {
         var prefabFiles = GetPrefabFilenames(path, filter);
         var prefabFilename = new FileInfo(prefabFiles[index]).Name;
         return AssetDatabase.LoadAssetAtPath<T>(string.Format("{0}/{1}", path, prefabFilename));
     }
 
-    public static int PathDropdown(string path, string label, int selectedIndex, string filter = "*.prefab")
+    private static int PathDropdown(string path, string label, int selectedIndex, string filter = "*.prefab")
     {
         var prefabNames = PrefabNamesFromPath(path, filter).ToArray();
         return EditorGUILayout.Popup(label, selectedIndex, prefabNames);
+    }
+
+    // Simple Fields
+    public static T FieldFor<T>(string label, T value) where T : Object
+    {
+        return (T)EditorGUILayout.ObjectField(label, value, typeof(T), false);
+    }
+
+    public static string FieldFor(string label, string value)
+    {
+        return EditorGUILayout.TextField(label, value);
+    }
+
+    public static float FieldFor(string label, float value)
+    {
+        return EditorGUILayout.FloatField(label, value);
+    }
+
+    private static T DropdownPathFieldFor<T>(string label, string path, string filter, ref int index, T value) where T : Object
+    {
+        index = PathDropdown(path, label, index, filter);
+        return FromPathDropdownIndex<T>(path, index, filter);
+    }
+
+    public static T PrefabPathFieldFor<T>(string label, string path, ref int index, T value) where T: Object
+    {
+        return DropdownPathFieldFor(label, path, "*.prefab", ref index, value);
+    }
+
+    public static T AssetPathFieldFor<T>(string label, string path, ref int index, T value) where T : Object
+    {
+        return DropdownPathFieldFor(label, path, "*.asset", ref index, value);
     }
 }
 

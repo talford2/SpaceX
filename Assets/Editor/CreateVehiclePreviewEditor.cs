@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 public class CreateVehiclePreviewEditor : EditorWindow
@@ -27,7 +25,7 @@ public class CreateVehiclePreviewEditor : EditorWindow
 
     private void OnGUI()
     {
-        modelPrefab = FieldFor("From model", modelPrefab);
+        modelPrefab = EditorExtensions.FieldFor("From model", modelPrefab);
         if (modelPrefab != null)
         {
             prefabName = string.Format("{0}Preview", modelPrefab.name);
@@ -48,26 +46,5 @@ public class CreateVehiclePreviewEditor : EditorWindow
         return
             modelPrefab != null &&
             !string.IsNullOrEmpty(prefabName);
-    }
-
-    private T FieldFor<T>(string label, T value) where T : Object
-    {
-        return (T)EditorGUILayout.ObjectField(label, value, typeof(T), false);
-    }
-
-    private string FieldFor(string label, string value)
-    {
-        return EditorGUILayout.TextField(label, value);
-    }
-
-    private float FieldFor(string label, float value)
-    {
-        return EditorGUILayout.FloatField(label, value);
-    }
-
-    private T DropdownPathFieldFor<T>(string label, string path, string filter, ref int index, T value) where T : Object
-    {
-        index = EditorExtensions.PathDropdown(path, label, index);
-        return EditorExtensions.FromPathDropdownIndex<T>(path, index, filter);
     }
 }

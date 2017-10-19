@@ -40,6 +40,13 @@ public class Utility
         modifyTransform.localScale = sourceTransform.localScale;
     }
 
+    public static void ResetLocalTransform(Transform transform)
+    {
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        transform.localScale = Vector3.one;
+    }
+
     private static string GenerateKey(Transform trans, Transform top)
     {
         var key = string.Empty;
