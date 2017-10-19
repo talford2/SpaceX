@@ -25,6 +25,7 @@ public class CreateVehicleCorpseEditor : EditorWindow
     private void Awake()
     {
         SetDefaults();
+        Debug.Log("YAY");
     }
 
     private void SetDefaults()
@@ -78,11 +79,9 @@ public class CreateVehicleCorpseEditor : EditorWindow
 
             mass = FieldFor("Mass", mass);
 
-            smokeIndex = EditorExtensions.PathDropdown(effectsPath, "Smoke prefab", smokeIndex);
-            smokePrefab = EditorExtensions.FromPathIndex<GameObject>(effectsPath, smokeIndex);
+            smokePrefab = DropdownPathFieldFor("Smoke prefab", effectsPath, "*.prefab", ref smokeIndex, smokePrefab);
 
-            explosionIndex = EditorExtensions.PathDropdown(effectsPath, "Explosion prefab", explosionIndex);
-            explosionPrefab = EditorExtensions.FromPathIndex<GameObject>(effectsPath, explosionIndex);
+            explosionPrefab = DropdownPathFieldFor("Explosion prefab", effectsPath, "*.prefab", ref explosionIndex, explosionPrefab);
 
             if (IsFormComplete())
             {
@@ -95,28 +94,31 @@ public class CreateVehicleCorpseEditor : EditorWindow
         }
     }
 
-    private T FieldFor<T>(string label, T value) where T : Object
-    {
-        EditorGUILayout.PrefixLabel(label);
-        return (T)EditorGUILayout.ObjectField(value, typeof(T), false);
-    }
-
-    private string FieldFor(string label, string value)
-    {
-        EditorGUILayout.PrefixLabel(label);
-        return EditorGUILayout.TextField(value);
-    }
-
-    private float FieldFor(string label, float value)
-    {
-        EditorGUILayout.PrefixLabel(label);
-        return EditorGUILayout.FloatField(value);
-    }
-
     private bool IsFormComplete()
     {
         return
             modelPrefab != null &&
             !string.IsNullOrEmpty(prefabName);
+    }
+
+    private T FieldFor<T>(string label, T value) where T : Object
+    {
+        return (T)EditorGUILayout.ObjectField(label, value, typeof(T), false);
+    }
+
+    private string FieldFor(string label, string value)
+    {
+        return EditorGUILayout.TextField(label, value);
+    }
+
+    private float FieldFor(string label, float value)
+    {
+        return EditorGUILayout.FloatField(label, value);
+    }
+
+    private T DropdownPathFieldFor<T>(string label, string path, string filter, ref int index, T value) where T : Object
+    {
+        index = EditorExtensions.PathDropdown(effectsPath, label, index);
+        return EditorExtensions.FromPathDropdownIndex<T>(effectsPath, index, filter);
     }
 }

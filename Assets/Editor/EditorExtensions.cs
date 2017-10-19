@@ -119,7 +119,7 @@ public static class EditorExtensions
         return -1;
     }
 
-    public static T FromPathIndex<T>(string path, int index, string filter = "*.prefab") where T : Object
+    public static T FromPathDropdownIndex<T>(string path, int index, string filter = "*.prefab") where T : Object
     {
         var prefabFiles = GetPrefabFilenames(path, filter);
         var prefabFilename = new FileInfo(prefabFiles[index]).Name;
@@ -128,9 +128,8 @@ public static class EditorExtensions
 
     public static int PathDropdown(string path, string label, int selectedIndex, string filter = "*.prefab")
     {
-        EditorGUILayout.PrefixLabel(label);
         var prefabNames = PrefabNamesFromPath(path, filter).ToArray();
-        return EditorGUILayout.Popup(selectedIndex, prefabNames);
+        return EditorGUILayout.Popup(label, selectedIndex, prefabNames);
     }
 }
 

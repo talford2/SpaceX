@@ -5,6 +5,7 @@ using UnityEngine;
 public class CreateVehicleEditor : EditorWindow
 {
     private string prefabName;
+    private string vehicleName;
     private GameObject modelPrefab;
     private WeaponDefinition primaryWeaponDefinition;
     private int primaryWeaponIndex;
@@ -73,32 +74,34 @@ public class CreateVehicleEditor : EditorWindow
 
             prefabName = FieldFor("Vehicle prefab name", prefabName);
 
+            vehicleName = FieldFor("Vehicle name", vehicleName);
+
             primaryWeaponIndex = EditorExtensions.PathDropdown(weaponsPath, "Primary weapon", primaryWeaponIndex, assetFilter);
-            primaryWeaponDefinition = EditorExtensions.FromPathIndex<WeaponDefinition>(weaponsPath, primaryWeaponIndex, assetFilter);
+            primaryWeaponDefinition = EditorExtensions.FromPathDropdownIndex<WeaponDefinition>(weaponsPath, primaryWeaponIndex, assetFilter);
 
             secondaryWeaponIndex = EditorExtensions.PathDropdown(weaponsPath, "Secondary weapon", secondaryWeaponIndex, assetFilter);
-            secondaryWeaponDefinition = EditorExtensions.FromPathIndex<WeaponDefinition>(weaponsPath, secondaryWeaponIndex, assetFilter);
+            secondaryWeaponDefinition = EditorExtensions.FromPathDropdownIndex<WeaponDefinition>(weaponsPath, secondaryWeaponIndex, assetFilter);
 
             shieldIndex = EditorExtensions.PathDropdown(shieldsPath, "Shield", shieldIndex);
-            shield = EditorExtensions.FromPathIndex<Shield>(shieldsPath, shieldIndex);
+            shield = EditorExtensions.FromPathDropdownIndex<Shield>(shieldsPath, shieldIndex);
 
             engineIndex = EditorExtensions.PathDropdown(enginesPath, "Engine", engineIndex);
-            engine = EditorExtensions.FromPathIndex<Engine>(enginesPath, engineIndex);
+            engine = EditorExtensions.FromPathDropdownIndex<Engine>(enginesPath, engineIndex);
 
             woundEffectIndex = EditorExtensions.PathDropdown(effectsPath, "Wound effect", woundEffectIndex);
-            woundEffect = EditorExtensions.FromPathIndex<GameObject>(effectsPath, woundEffectIndex);
+            woundEffect = EditorExtensions.FromPathDropdownIndex<GameObject>(effectsPath, woundEffectIndex);
 
             deathExplosionIndex = EditorExtensions.PathDropdown(effectsPath, "Explode death explosion", deathExplosionIndex);
-            deathExplosion = EditorExtensions.FromPathIndex<GameObject>(effectsPath, deathExplosionIndex);
+            deathExplosion = EditorExtensions.FromPathDropdownIndex<GameObject>(effectsPath, deathExplosionIndex);
 
             spinDeathExplosionIndex = EditorExtensions.PathDropdown(effectsPath, "Spin death explosion", spinDeathExplosionIndex);
-            spinDeathExplosion = EditorExtensions.FromPathIndex<GameObject>(effectsPath, spinDeathExplosionIndex);
+            spinDeathExplosion = EditorExtensions.FromPathDropdownIndex<GameObject>(effectsPath, spinDeathExplosionIndex);
 
             thrusterPrefabIndex = EditorExtensions.PathDropdown(thrustersPath, "Thruster effect", thrusterPrefabIndex);
-            thrusterPrefab = EditorExtensions.FromPathIndex<GameObject>(thrustersPath, thrusterPrefabIndex);
+            thrusterPrefab = EditorExtensions.FromPathDropdownIndex<GameObject>(thrustersPath, thrusterPrefabIndex);
 
             trackerIndex = EditorExtensions.PathDropdown(trackersPath, "Tracker values", trackerIndex, assetFilter);
-            trackerValues = EditorExtensions.FromPathIndex<VehicleTrackerValues>(trackersPath, trackerIndex, assetFilter);
+            trackerValues = EditorExtensions.FromPathDropdownIndex<VehicleTrackerValues>(trackersPath, trackerIndex, assetFilter);
 
             if (IsFormComplete())
             {
@@ -111,23 +114,12 @@ public class CreateVehicleEditor : EditorWindow
         }
     }
 
-    private T FieldFor<T>(string label, T value) where T : Object
-    {
-        EditorGUILayout.PrefixLabel(label);
-        return (T)EditorGUILayout.ObjectField(value, typeof(T), false);
-    }
-
-    private string FieldFor(string label, string value)
-    {
-        EditorGUILayout.PrefixLabel(label);
-        return EditorGUILayout.TextField(value);
-    }
-
     private bool IsFormComplete()
     {
         return
             modelPrefab != null &&
             !string.IsNullOrEmpty(prefabName) &&
+            !string.IsNullOrEmpty(vehicleName) &&
             primaryWeaponDefinition != null &&
             secondaryWeaponDefinition != null &&
             shield != null &&
@@ -155,6 +147,7 @@ public class CreateVehicleEditor : EditorWindow
         // Vehicle
         var vehicle = vehicleObj.AddComponent<Vehicle>();
         vehicle.MeshTransform = modelInstance.transform;
+        vehicle.Name = vehicleName;
 
         List<Transform> thrusterTransforms = new List<Transform>();
         List<ShootPoint> shootPoints = new List<ShootPoint>();
@@ -224,5 +217,26 @@ public class CreateVehicleEditor : EditorWindow
         detectable.TargetTransform = vehicleObj.transform;
         detectableGo.transform.SetParent(modelInstance.transform);
         ResetLocalTransform(detectableGo.transform);
+    }
+
+    private T FieldFor<T>(string label, T value) where T : Object
+    {
+        return (T)EditorGUILayout.ObjectField(label, value, typeof(T), false);
+    }
+
+    private string FieldFor(string label, string value)
+    {
+        return EditorGUILayout.TextField(label, value);
+    }
+
+    private float FieldFor(string label, float value)
+    {
+        return EditorGUILayout.FloatField(label, value);
+    }
+
+    private T DropdownPathFieldFor<T>(string label, string path, string filter, ref int index, T value) where T : Object
+    {
+        index = EditorExtensions.PathDropdown(effectsPath, label, index);
+        return EditorExtensions.FromPathDropdownIndex<T>(effectsPath, index, filter);
     }
 }
