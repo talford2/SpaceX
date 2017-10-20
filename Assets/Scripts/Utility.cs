@@ -291,6 +291,13 @@ public class Utility
             clampedValue += 360f;
         return clampedValue;
     }
+
+    public static void ResetLocalTransform(Transform transform)
+    {
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        transform.localScale = Vector3.one;
+    }
 }
 
 public class HSVColor

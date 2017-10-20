@@ -709,7 +709,7 @@ public class Vehicle : MonoBehaviour
                 var rBodies = debrisInstance.GetComponentsInChildren<Rigidbody>();
                 foreach (var rBody in rBodies)
                 {
-                    rBody.velocity = GetVelocity();
+                    rBody.velocity = 0.5f*GetVelocity();
                     rBody.AddExplosionForce(ExplosiveForce, transform.position, 20f, 0f, ForceMode.Impulse);
                     var shiftable = rBody.GetComponent<Shiftable>();
                     shiftable.SetShiftPosition(Universe.Current.GetUniversePosition(rBody.position));

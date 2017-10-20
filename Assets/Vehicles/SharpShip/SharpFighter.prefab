@@ -518,14 +518,15 @@ MonoBehaviour:
   - {fileID: 11457852}
   ShieldPrefab: {fileID: 11432386, guid: ec198b972797bfe4198bc77d9b933520, type: 2}
   EnginePrefab: {fileID: 11460812, guid: 5d7105be3dd5b72498d7817054956ba2, type: 2}
-  WoundEffect: {fileID: 103792, guid: d23780bcc73e6c945ad394b025b8d5e9, type: 2}
+  WoundEffect: {fileID: 1797233020657332, guid: 09625d2bc5afece45afe7582e1b068dc,
+    type: 2}
   WoundEffectTransforms:
   - {fileID: 497904}
   ShieldShakeAmplitude: 0.1
   HullShakeAmplitude: 1
   CorpsePrefab: {fileID: 160724, guid: 9b4a52019226a8d4db5b6ed34cc36057, type: 2}
   DebrisPrefab: {fileID: 119188, guid: eff4975c6c67cc74aa5d24825cd8a0d1, type: 2}
-  ExplosiveForce: 50
+  ExplosiveForce: 20
   ExplodeDeathExplosion: {fileID: 1124519297851362, guid: 3d2575b16288442499c6366b388a6ea6,
     type: 2}
   SpinDeathExplosion: {fileID: 1471368607453456, guid: 6685792cd9805f24984737df5eb24120,
